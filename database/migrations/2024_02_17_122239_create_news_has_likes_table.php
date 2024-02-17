@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub__categories', function (Blueprint $table) {
+        Schema::create('news_has_likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->string('name');
+            $table->foreignId('news_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub__categories');
+        Schema::dropIfExists('news_has_likes');
     }
 };

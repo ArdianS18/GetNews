@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sub_Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -34,7 +34,7 @@ class SubCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sub_Category $sub_Category)
+    public function show(SubCategory $subCategory)
     {
         //
     }
@@ -42,7 +42,7 @@ class SubCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sub_Category $sub_Category)
+    public function edit(SubCategory $subCategory)
     {
         //
     }
@@ -50,7 +50,7 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sub_Category $sub_Category)
+    public function update(Request $request, SubCategory $subCategory)
     {
         //
     }
@@ -58,7 +58,7 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sub_Category $sub_Category)
+    public function destroy(SubCategory $subCategory)
     {
         //
     }

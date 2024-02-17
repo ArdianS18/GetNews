@@ -73,6 +73,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
      */
     public function update(mixed $id, array $data): mixed
     {
-        return $this->show($id)->update($data);
+        return $this->model->query()
+            ->findOrFail($id)
+            ->update($data);
     }
 }

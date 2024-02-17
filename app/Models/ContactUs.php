@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sub_Category extends Model
+class ContactUs extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'name'];
-    protected $table = ['sub_category'];
+    protected $fillable = ['user_id', 'message'];
+    protected $table = 'contact_us';
 }
