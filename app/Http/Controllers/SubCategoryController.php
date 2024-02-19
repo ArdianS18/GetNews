@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
+
+    private SubCategoryInterface $subCategori;
+
+    public function __construct(SubCategoryInterface $subCategori)
+    {
+        $this->subCategori = $subCategori;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $subCategoris = $this->subCategori->get();
+        return view('subcategories.index', compact('subCategoris'));
     }
 
     /**

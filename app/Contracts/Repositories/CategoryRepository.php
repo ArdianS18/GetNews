@@ -4,7 +4,6 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Models\Category;
-use App\Models\News;
 use Illuminate\Database\QueryException;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
