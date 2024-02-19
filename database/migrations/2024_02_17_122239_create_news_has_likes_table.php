@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('news_has_likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('news_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignUuid('user_id')->constrained();
             $table->timestamps();
         });
     }
