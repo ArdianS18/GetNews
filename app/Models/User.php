@@ -18,7 +18,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function getIncrementing()
+    {
+        return false;
+    }
+
     protected $fillable = [
+        'id',
         'name',
         'email',
         'password',
