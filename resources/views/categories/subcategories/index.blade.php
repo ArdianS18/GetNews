@@ -18,6 +18,10 @@
 </head>
 <body>
     <div class="container mt-3">
+        <form>
+            <input type="text" name="name" style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" placeholder="Cari Sub Categori">
+            <button type="submit">Cari</button>
+        </form>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah
           </button>

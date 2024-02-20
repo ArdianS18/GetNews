@@ -55,9 +55,16 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
         $subCategory = $category->subCategories;
+
+        if ($request) {
+            $query = $request->input('name');
+            $subCategory = $query ? $this->categori->search($query) : $this->categori->get();
+        return view('categories.subcategories.index', compact('subCategory', 'category'));
+    }
+
         return view('categories.subcategories.index', compact('category','subCategory'));
     }
 

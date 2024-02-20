@@ -7,18 +7,17 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
 
     private SubCategoryInterface $subCategory;
-    private CategoryInterface $category;
 
-    public function __construct(SubCategoryInterface $subCategory, CategoryInterface $category)
+    public function __construct(SubCategoryInterface $subCategory)
     {
         $this->subCategory = $subCategory;
-        $this->category = $category;
     }
 
 
@@ -27,7 +26,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -52,7 +51,7 @@ class SubCategoryController extends Controller
         $this->subCategory->store($data);
 
         return back();
-    }
+}
 
     /**
      * Display the specified resource.

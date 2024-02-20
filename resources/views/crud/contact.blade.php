@@ -14,11 +14,12 @@
 <body>
     <br>
     <div class="container">
-    
+
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
         Tambah Data Contact
     </button>
+
     @foreach($contactUses as $contactUs)
 
     <!-- Modal -->
@@ -35,7 +36,8 @@
                         <div class="mb-3">
                             <label for="user_id" class="form-label">Nama User:</label>
                             <input type="text" id="user_id" name="user_id" placeholder="nama"
-                            value="{{ $contactUs->user->name }}" class="form-control @error('contactUs') is-invalid @enderror">
+                            value="{{ $contactUs->user->id }}" class="form-control @error('contactUs') is-invalid @enderror">
+                            <input type="text" name="" value="{{ $contactUs->user->name }}" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">message Siswa:</label>
@@ -73,7 +75,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $contactUs->user->name }}</td>
-                
+
                 <td>{{ $contactUs->message }}</td>
                 <td>
                   <!-- Edit Modal toggle -->
@@ -139,7 +141,7 @@
             @endforeach
         </tbody>
     </table>
-            
+
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous"></script>
