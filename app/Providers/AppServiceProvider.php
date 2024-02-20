@@ -6,6 +6,11 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\SubCategoryRepository;
+
+use App\Contracts\Interfaces\ContactUsInterface;
+use App\Contracts\Interfaces\FaqInterface;
+use App\Contracts\Repositories\ContactUsRepository;
+use App\Contracts\Repositories\FaqRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
     private array $register = [
         CategoryInterface::class => CategoryRepository::class,
         SubCategoryInterface::class => SubCategoryRepository::class,
+        FaqInterface::class => FaqRepository::class,
+        ContactUsInterface::class => ContactUsRepository::class,
     ];
 
     /**
