@@ -13,6 +13,13 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
         $this->model = $contactUs;
     }
 
+    public function getAllWithUser()
+    {
+        return $this->model->query()
+            ->get();
+    }
+
+
     /**
      * Handle show method and delete data instantly from models.
      *
@@ -36,7 +43,8 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
      */
     public function show(mixed $id): mixed
     {
-
+        return $this->model->query()
+            ->findOrFail($id);
     }
 
     /**

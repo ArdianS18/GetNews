@@ -18,10 +18,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    public function getIncrementing()
-    {
-        return false;
-    }
 
     protected $fillable = [
         'id',
@@ -55,5 +51,5 @@ class User extends Authenticatable
     protected $table = 'users';
 
     public $incrementing = false;
-    public $keyType = 'string';
+    public $keyType = 'char';
 }
