@@ -13,6 +13,11 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
         $this->model = $category;
     }
 
+    public function search(mixed $query): mixed
+    {
+        return $this->model->where('name', 'like', '%'.$query.'%')->get();
+    }
+
     /**
      * Handle show method and delete data instantly from models.
      *

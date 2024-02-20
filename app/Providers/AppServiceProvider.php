@@ -8,9 +8,11 @@ use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\SubCategoryRepository;
 
 use App\Contracts\Interfaces\ContactUsInterface;
+use App\Contracts\Interfaces\SearchInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Repositories\ContactUsRepository;
 use App\Contracts\Repositories\FaqRepository;
+use App\Contracts\Repositories\SearchRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
         SubCategoryInterface::class => SubCategoryRepository::class,
         FaqInterface::class => FaqRepository::class,
         ContactUsInterface::class => ContactUsRepository::class,
+        // SearchInterface::class => SearchRepository::class
     ];
 
     /**

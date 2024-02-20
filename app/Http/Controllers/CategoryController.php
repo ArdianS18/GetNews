@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\CategoryInterface;
-use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use App\Models\SubCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Http\Request;
+use App\Contracts\Interfaces\CategoryInterface;
 
 class CategoryController extends Controller
 {
-
     private CategoryInterface $categori;
+
 
     public function __construct(CategoryInterface $categori)
     {
@@ -22,8 +22,14 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
+        if ($request) {
+                $query = $request->input('query');
+                $categoris = $query ? $this->categori->search($query) : $this->categori->get();
+            return view('categories.index', compact('categoris'));
+        }
+
         $categoris = $this->categori->get();
         return view('categories.index', compact('categoris'));
     }
@@ -66,9 +72,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $categori) : RedirectResponse
+    public function update(CategoryRequest $request, Category $category) : RedirectResponse
     {
-        $this->categori->update($categori->id, $request->validated());
+        $this->categori->update($category->id, $request->validated());
         return redirect()->back();
 
     }
@@ -76,9 +82,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $categori) :  RedirectResponse
+    public function destroy(Category $category) :  RedirectResponse
     {
-        if (!$this->categori->delete($categori->id)) {
+        if (!$this->categori->delete($category->id)) {
             return back();
         }
 
