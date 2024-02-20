@@ -36,7 +36,8 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
      */
     public function show(mixed $id): mixed
     {
-
+        return $this->model->query()
+        ->findOrFail($id);
     }
 
     /**

@@ -47,52 +47,48 @@
                 <th>Name</th>
                 <th>Aksi</th>
             </tr>
-            @foreach ($subcategoris as $subcategoris)
+            @foreach ($subCategory as $sub)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$subcategoris->name}}</td>
+                <td>{{$sub->name}}</td>
                 <td>
                     <ul>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $categori->id }}">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $sub->id }}">
                                 Edit
                               </button>
 
                               <!-- Modal -->
-                              <div class="modal fade" id="editModal{{ $categori->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                              <div class="modal fade" id="editModal{{ $sub->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form action="{{route('', $categori->id )}}" method="POST">
-                                        @method('put')
+                                    <form action="{{route('sub.category.update', ['subcategory' => $sub->id])}}" method="post">
                                         @csrf
                                     <div class="modal-body">
-                                            <label class="form-label mt-2">Kategori</label>
-                                            <input class="form-control" type="text" name="name" value="{{ $categori->name }}">
+                                            <label class="form-label mt-2">Name</label>
+                                            <input class="form-control" type="text" name="name"  value="{{ $sub->name }}">
                                           </div>
                                           <div class="modal-footer">
                                               <button type="submit" class="btn btn-secondary">Edit</button>
                                           </div>
-                                      </form>
-                                  </div>
+                                      </form> </div>
                                 </div>
-                              </div>
-
-                                <div>
-                                    <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
-                                                            <form method="POST" action="{{ route('categoris.destroy', $categori->id) }}"
-                                                        onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
-
-                                                        @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-                                                                Hapus
-                                                            </button>
-                                                        </form>
-                                </div>
-
+                            </div>
+                        </ul>
+                    <ul>
+                            <div>
+                                <form action="{{route('sub.category.destroy', ['subcategory' => $sub->id])}}"
+                                onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline" method="post">
+                                @method('delete')
+                                @csrf
+                                <button class="btn btn-danger" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
                     </ul>
                 </td>
             </tr>
@@ -108,7 +104,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{route('')}}" method="POST">
+        <form action="{{route('sub.category.store', ['category' => $category->id])}}" method="post">
             @csrf
                 <div class="modal-body">
                 <label class="form-label mt-2">Kategori</label>

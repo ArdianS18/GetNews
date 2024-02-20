@@ -47,30 +47,30 @@
                 <th>Kategori</th>
                 <th>Aksi</th>
             </tr>
-            @foreach ($categoris as $categori)
+            @foreach ($categoris as $category)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$categori->name}}</td>
+                <td>{{$category->name}}</td>
                 <td>
                     <ul>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $categori->id }}">
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
                                 Edit
                               </button>
 
                               <!-- Modal -->
-                              <div class="modal fade" id="editModal{{ $categori->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                              <div class="modal fade" id="editModal{{ $category->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                   <div class="modal-content">
                                     <div class="modal-header">
                                       <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form action="{{route('categoris.update', $categori->id )}}" method="POST">
+                                    <form action="{{route('categories.update', $category->id )}}" method="POST">
                                         @method('put')
                                         @csrf
                                     <div class="modal-body">
                                             <label class="form-label mt-2">Kategori</label>
-                                            <input class="form-control" type="text" name="name" value="{{ $categori->name }}">
+                                            <input class="form-control" type="text" name="name" value="{{ $category->name }}">
                                           </div>
                                           <div class="modal-footer">
                                               <button type="submit" class="btn btn-secondary">Edit</button>
@@ -78,12 +78,14 @@
                                       </form>
                                   </div>
                                 </div>
-                              </div>
+                            </div>
+                        </ul>
+                            <ul>
 
-                                <div>
-                                    <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
-                                                            <form method="POST" action="{{ route('categoris.destroy', $categori->id) }}"
-                                                        onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
+                                 <div>
+                                     <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
+                                     <form method="POST" action="{{ route('categories.destroy', $category->id) }}"
+                                        onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
 
                                                         @method('delete')
                                                             @csrf
@@ -91,9 +93,12 @@
                                                                 Hapus
                                                             </button>
                                                         </form>
-                                </div>
+                                                    </div>
+                            </ul>
+                            <ul>
+                                <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn btn-primary">Sub Categori</a>
+                            </ul>
 
-                    </ul>
                 </td>
             </tr>
             @endforeach
@@ -108,7 +113,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="{{route('categoris.store')}}" method="POST">
+        <form action="{{route('categories.store')}}" method="POST">
             @csrf
                 <div class="modal-body">
                 <label class="form-label mt-2">Kategori</label>

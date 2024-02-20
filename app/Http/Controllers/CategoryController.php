@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -50,7 +51,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $subCategory = $category->subCategories;
+        return view('categories.subcategories.index', compact('category','subCategory'));
     }
 
     /**
