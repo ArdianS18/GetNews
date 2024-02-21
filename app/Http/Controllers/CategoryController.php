@@ -3,16 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
+use App\Contracts\Interfaces\CategoryInterface;
 
 class CategoryController extends Controller
 {
+    private CategoryInterface $categori;
+
+
+    public function __construct(CategoryInterface $categori)
+    {
+        $this->categori = $categori;
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
-        //
+        if ($request) {
+                $query = $request->input('query');
+                $categoris = $query ? $this->categori->search($query) : $this->categori->get();
+            return view('categories.index', compact('categoris'));
+        }
+
+        $categoris = $this->categori->get();
+        return view('categories.index', compact('categoris'));
     }
 
     /**
@@ -26,17 +45,27 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request) : RedirectResponse
     {
-        //
+
+        $categori = $this->categori->store($request->validated());
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
-        //
+        $subCategory = $category->subCategories;
+
+        if ($request) {
+            $query = $request->input('name');
+            $subCategory = $query ? $this->categori->search($query) : $this->categori->get();
+        return view('categories.subcategories.index', compact('subCategory', 'category'));
+    }
+
+        return view('categories.subcategories.index', compact('category','subCategory'));
     }
 
     /**
@@ -50,16 +79,23 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category) : RedirectResponse
     {
-        //
+        $this->categori->update($category->id, $request->validated());
+        return redirect()->back();
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category) :  RedirectResponse
     {
-        //
+        if (!$this->categori->delete($category->id)) {
+            return back();
+        }
+
+        return redirect()->back();
+
     }
 }

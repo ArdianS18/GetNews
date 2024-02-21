@@ -13,6 +13,12 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
         $this->model = $subCategory;
     }
 
+    public function search(mixed $query): mixed
+    {
+        return $this->model->where('name', 'like', '%'.$query.'%')->get();
+    }
+
+
     /**
      * Handle show method and delete data instantly from models.
      *

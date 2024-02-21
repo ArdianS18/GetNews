@@ -2,64 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\ContactUsInterface;
+use App\Http\Requests\ContactUsRequest;
 use App\Models\ContactUs;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
 {
+    private ContactUsInterface $contactUs;
+    private User $user;
+
+    public function __construct(ContactUsInterface $contactUs, User $user)
+    {
+        $this->contactUs = $contactUs;
+        // $this->user = $user;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $contactUses = $this->contactUs->get();
+        return view('crud.contact', compact('contactUses'));  
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ContactUsRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ContactUs $contactUs)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ContactUs $contactUs)
-    {
-        //
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        // dd($data);
+        $this->contactUs->store($data);
+        return back()->with('success', 'berhasil menambahkan data');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ContactUs $contactUs)
+    public function update(ContactUs $contact,ContactUsRequest $request)
     {
-        //
+        // dd($contact->message);
+        $this->contactUs->update($contact->id, $request->validated());
+        return back()->with('success', 'berhasil mengupdate data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ContactUs $contactUs)
+    public function destroy(ContactUs $contact)
     {
-        //
+        $this->contactUs->delete($contact->id);
+        
+        return back()->with('success', 'berhasil menghapus data');
     }
 }

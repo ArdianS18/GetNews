@@ -4,7 +4,6 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Models\Category;
-use App\Models\News;
 use Illuminate\Database\QueryException;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
@@ -12,6 +11,11 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function __construct(Category $category)
     {
         $this->model = $category;
+    }
+
+    public function search(mixed $query): mixed
+    {
+        return $this->model->where('name', 'like', '%'.$query.'%')->get();
     }
 
     /**
@@ -37,7 +41,8 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
      */
     public function show(mixed $id): mixed
     {
-
+        return $this->model->query()
+        ->findOrFail($id);
     }
 
     /**
