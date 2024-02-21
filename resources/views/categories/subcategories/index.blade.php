@@ -25,26 +25,11 @@
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah
           </button>
-
-          {{-- @if ($errors->any())
-            @foreach ($errors->all() as $error)
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 20px;">
-                <strong>{{ $error }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endforeach
-          @endif
-
-          @if (session('success'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 50%; float: right; margin-top: 20px;">
-              <strong>{{ session('success') }}</strong>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          @endif --}}
     </div>
 
 
     <div class="container mt-3">
+        
         <table class="table table-success table-striped">
             <tr>
                 <th>No</th>
