@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
         if ($request) {
                 $query = $request->input('query');
                 $categoris = $query ? $this->subCategory->search($query) : $this->subCategory->get();
-            return view('categories.subcategories.index', compact('categoris'));
+            return view('pages.categories.subcategories.index', compact('categoris'));
         }
     }
 

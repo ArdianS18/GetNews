@@ -22,7 +22,7 @@ class FaqController extends Controller
     public function index()
     {
         $faqs = $this->faq->get();
-        return view('pages.crud.faq', compact('faqs'));
+        return view('pages.faq.faq', compact('faqs'));
     }
 
     /**

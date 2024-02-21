@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
     private NewsService $service;
