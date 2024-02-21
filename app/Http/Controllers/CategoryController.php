@@ -25,13 +25,13 @@ class CategoryController extends Controller
     public function index(Request $request): View
     {
         if ($request) {
-                $query = $request->input('query');
-                $categoris = $query ? $this->categori->search($query) : $this->categori->get();
-            return view('categories.index', compact('categoris'));
+            $query = $request->input('query');
+            $categoris = $query ? $this->categori->search($query) : $this->categori->get();
+            return view('pages.categories.index', compact('categoris'));
         }
 
         $categoris = $this->categori->get();
-        return view('categories.index', compact('categoris'));
+        return view('pages.categories.index', compact('categoris'));
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request) : RedirectResponse
+    public function store(CategoryRequest $request): RedirectResponse
     {
 
         $categori = $this->categori->store($request->validated());
@@ -62,10 +62,10 @@ class CategoryController extends Controller
         if ($request) {
             $query = $request->input('name');
             $subCategory = $query ? $this->categori->search($query) : $this->categori->get();
-        return view('categories.subcategories.index', compact('subCategory', 'category'));
-    }
+            return view('categories.subcategories.index', compact('subCategory', 'category'));
+        }
 
-        return view('categories.subcategories.index', compact('category','subCategory'));
+        return view('categories.subcategories.index', compact('category', 'subCategory'));
     }
 
     /**
@@ -79,23 +79,21 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category) : RedirectResponse
+    public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $this->categori->update($category->id, $request->validated());
         return redirect()->back();
-
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category) :  RedirectResponse
+    public function destroy(Category $category): RedirectResponse
     {
         if (!$this->categori->delete($category->id)) {
             return back();
         }
 
         return redirect()->back();
-
     }
 }
