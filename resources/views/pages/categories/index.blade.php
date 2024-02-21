@@ -65,12 +65,12 @@
                                     <form action="{{route('categories.update', $category->id )}}" method="POST">
                                         @method('put')
                                         @csrf
-                                        <div class="modal-body">
+                                        <div class="modal-body text-start">
                                             <label class="form-label mt-2">Kategori</label>
                                             <input class="form-control" type="text" name="name" value="{{ $category->name }}">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="btn btn-secondary">Edit</button>
+                                            <button type="submit" class="btn btn-outline-primary">Edit</button>
                                         </div>
                                     </form>
                                 </div>
