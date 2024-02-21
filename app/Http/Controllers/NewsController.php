@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\NewsRequest;
 use App\Models\News;
-use App\Services\NewsService;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\NewsRequest;
 
 class NewsController extends Controller
 {
-    private $newsService;
-  
-    
     /**
      * Display a listing of the resource.
      */
@@ -23,21 +20,18 @@ class NewsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(NewsRequest $request)
+    public function create( $request)
     {
-        $news = new News();
-        $news->name = $request->input('name');
-        $news->content = $request->input('content');
-
-        $this->newsService->createNews($news);
+  
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        //
+        $request['slug'] = Str::slug($request->title);
+
     }
 
     /**
