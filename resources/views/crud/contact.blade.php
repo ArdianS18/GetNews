@@ -92,17 +92,6 @@
                                     @csrf
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="user_id" class="form-label">Name:</label>
-                                            <input type="text" id="user_id" name="user_id"
-                                                class="form-control @error('user_id') is-invalid @enderror"
-                                                placeholder="user_id" value="{{ old('contactUs', $contactUs->user->name) }}" readonly>
-                                            @error('user_id')
-                                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
                                             <label for="message" class="form-label">message:</label>
                                             <input type="text" id="message" name="message"
                                                 class="form-control @error('message') is-invalid @enderror"
