@@ -19,8 +19,6 @@
         Tambah Data Contact
     </button>
 
-    {{-- @foreach($contactUses as $contactUs) --}}
-
     <!-- Modal -->
     <div class="modal fade" id="tambahdataLabel" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -64,7 +62,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($contactUses as $contactUs)
+            @foreach($contactUs as $contactUs)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $contactUs->user->name }}</td>
@@ -94,7 +92,7 @@
                                             <label for="message" class="form-label">message:</label>
                                             <input type="text" id="message" name="message"
                                                 class="form-control @error('message') is-invalid @enderror"
-                                                placeholder="message" value="{{ old('contactUs', $contactUs->message) }}">
+                                                placeholder="message" value="{{ old('message', $contactUs->message) }}">
                                             @error('message')
                                             <span class="invalid-feedback" role="alert" style="color: red;">
                                                 <strong>{{ $message }}</strong>

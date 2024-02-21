@@ -23,8 +23,8 @@ class ContactUsController extends Controller
      */
     public function index()
     {
-        $contactUses = $this->contactUs->get();
-        return view('pages.crud.contact', compact('contactUses'));
+        $contactUs = $this->contactUs->get();
+        return view('pages.contact.contact', compact('contactUs'));
     }
 
     /**

@@ -18,7 +18,7 @@ class NewsObserver
     public function creating(News $news): void
     {
         $news->id = Uuid::uuid();
-        $news->slug = Str::slug($news->title);
+        $news->slug = Str::slug($news->name);
     }
 
     /**
