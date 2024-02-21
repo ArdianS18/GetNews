@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,110 +17,115 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <form action="{{ route('categories.index') }}" method="GET">
+            <form class="d-flex" action="{{ route('categories.index') }}" method="GET">
                 @csrf
-                <input type="text" name="query" style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" placeholder="Cari...">
-                <button type="submit">Cari</button>
+                <input type="text" name="query" class="form-control" placeholder="Cari...">
+                <button type="submit" class="btn btn-outline-primary" style="margin-left: 10px;">
+                    Cari
+                </button>
             </form>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Tambah
             </button>
         </div>
     </div>
 
 
-    <div class="container mt-3">
-        <table class="table table-success table-striped">
-            <tr>
+    <div class="container">
+        <table class="table mt-3">
+            <thead class="table-primary">
                 <th>No</th>
                 <th>Kategori</th>
                 <th>Aksi</th>
-            </tr>
-            @foreach ($categoris as $category)
-            <tr>
-                <td>{{$loop->iteration}}</td>
-                <td>{{$category->name}}</td>
-                <td>
-                    <ul>
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}">
-                                Edit
-                              </button>
+            </thead>
 
-                              <!-- Modal -->
-                              <div class="modal fade" id="editModal{{ $category->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
+            @foreach ($categoris as $category)
+            <tbody>
+                <tr>
+                    <td class="p-3">{{$loop->iteration}}</td>
+                    <td class="p-3">{{$category->name}}</td>
+                    <td class="d-flex justify-content-header gap-2 p-3">
+
+                        <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 24 24">
+                                <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z" />
+                            </svg>
+                            Edit
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="editModal{{ $category->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
                                     <div class="modal-header">
-                                      <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form action="{{route('categories.update', $category->id )}}" method="POST">
                                         @method('put')
                                         @csrf
-                                    <div class="modal-body">
+                                        <div class="modal-body">
                                             <label class="form-label mt-2">Kategori</label>
                                             <input class="form-control" type="text" name="name" value="{{ $category->name }}">
-                                          </div>
-                                          <div class="modal-footer">
-                                              <button type="submit" class="btn btn-secondary">Edit</button>
-                                          </div>
-                                      </form>
-                                  </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-secondary">Edit</button>
+                                        </div>
+                                        </f orm>
                                 </div>
                             </div>
+                        </div>
                         </ul>
-                            <ul>
 
-                                 <div>
-                                     <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
-                                     <form method="POST" action="{{ route('categories.destroy', $category->id) }}"
-                                        onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
+                        <div>
+                            <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
+                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}" onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
+                                @method('delete')
+                                @csrf
+                                <button class="btn btn-danger" data-modal-target="popup-modal" data-modal-toggle="popup-modal"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 2 24 24">
+                                        <path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" />
+                                    </svg>
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>
 
-                                        @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </div>
-                            </ul>
-                            <ul>
-                                <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn btn-primary">Sub Categori</a>
-                            </ul>
 
-                </td>
-            </tr>
+                        <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn btn-primary">Sub Categori</a>
+
+                    </td>
+                </tr>
+            </tbody>
             @endforeach
         </table>
     </div>
-
     <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form action="{{route('categories.store')}}" method="POST">
-            @csrf
-                <div class="modal-body">
-                <label class="form-label mt-2">Kategori</label>
-                <input class="form-control @error('name') is-invalid @enderror" type="text" name="name">
-                {{-- @error('name')
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{route('categories.store')}}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <label class="form-label mt-2">Kategori</label>
+                        <input class="form-control @error('name') is-invalid @enderror" type="text" name="name">
+                        {{-- @error('name')
                     <span class="invalid-feedback" role="alert" style="color: red;">
                         <strong>{{ $message }}</strong>
-                    </span>
-                @enderror --}}
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-secondary">Buat data baru</button>
+                        </span>
+                        @enderror --}}
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary">Buat data baru</button>
+                        </div>
+                </form>
             </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </body>
+
 </html>
