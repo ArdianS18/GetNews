@@ -33,7 +33,7 @@ class ContactUsController extends Controller
     public function store(ContactUsRequest $request)
     {
         $data = $request->validated();
-        $data['user_id'] = auth()->id();
+        $data['user_id'] = auth()->id();    
         // dd($data);
         $this->contactUs->store($data);
         return back()->with('success', 'berhasil menambahkan data');

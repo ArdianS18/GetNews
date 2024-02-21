@@ -28,11 +28,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 Route::resource('contact', ContactUsController::class)->except('show');
 Route::resource('faq', FaqController::class)->except('show');
 Route::resource('categories', CategoryController::class);
 
-Route::get('subcategories',[SubCategoryController::class,'index'])->name('sub.category');
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
 Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
 Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
