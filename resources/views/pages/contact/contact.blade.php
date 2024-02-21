@@ -33,8 +33,8 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="message" class="form-label">message Siswa:</label>
-                            <input type="text" id="message" name="message" placeholder="message Siswa"
+                            <label for="message" class="form-label">message:</label>
+                            <input type="text" id="message" name="message" placeholder="message"
                                 value="{{ old('message') }}" class="form-control @error('message') is-invalid @enderror">
                             @error('message')
                             <span class="invalid-feedback" role="alert" style="color: red;">

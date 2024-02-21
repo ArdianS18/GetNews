@@ -42,8 +42,8 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="answer" class="form-label">Answer Siswa:</label>
-                            <input type="text" id="answer" name="answer" placeholder="Answer Siswa"
+                            <label for="answer" class="form-label">Answer:</label>
+                            <input type="text" id="answer" name="answer" placeholder="Answer"
                                 value="{{ old('answer') }}" class="form-control @error('answer') is-invalid @enderror">
                             @error('answer')
                             <span class="invalid-feedback" role="alert" style="color: red;">

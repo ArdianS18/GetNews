@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('news', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('name');
             $table->text('photo');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('sinopsis');
             $table->foreignId('sub_categories_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('slug');
-            $table->enum('status', ['active', 'nonactive']);
+            $table->enum('status', ['active', 'nonactive', 'panding'])->default('panding');
             // $table->foreignId('tags_id')->constrained();
             $table->timestamps();
         });

@@ -13,12 +13,6 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
     {
         $this->model = $category;
     }
-    
-    public function search($query)
-    {
-        return SubCategory::where('name', 'like', '%' . $query . '%');
-    }
-    
 
     public function search(mixed $query): mixed
     {
