@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewsRequest;
 use App\Models\News;
+use App\Services\NewsService;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    private $newsService;
+  
+    
     /**
      * Display a listing of the resource.
      */
@@ -18,9 +23,13 @@ class NewsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(NewsRequest $request)
     {
-        //
+        $news = new News();
+        $news->name = $request->input('name');
+        $news->content = $request->input('content');
+
+        $this->newsService->createNews($news);
     }
 
     /**
