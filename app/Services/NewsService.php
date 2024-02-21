@@ -5,12 +5,11 @@ namespace App\Services;
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
 use App\Enums\UploadDiskEnum;
-use App\Http\Requests\Dashboard\Article\StoreRequest;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
-use App\Models\Article;
+use App\Http\Requests\NewsRequest;
 use App\Traits\UploadTrait;
 
-class ArticleService implements ShouldHandleFileUpload, CustomUploadValidation
+class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 {
     use UploadTrait;
 
@@ -36,18 +35,18 @@ class ArticleService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(): array|bool
+    public function store(NewsRequest $request): array|bool
     {
         $data = $request->validated();
 
         return [
             'user_id' => auth()->id(),
-            'article_category_id' => $data['article_category_id'],
             'name' => $data['name'],
-            'description' => $data['description'],
             'photo' => $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')),
             'content' => $data['content'],
-            'tags' => str_replace(', ', ',', $data['tags']),
+            'sinopsis' => $data['sinopsis'],
+            'sub_category_id' => $data['sub_category_id'],
+            'content' => $data['content'],
             'status' => $data['status']
         ];
     }
@@ -60,26 +59,26 @@ class ArticleService implements ShouldHandleFileUpload, CustomUploadValidation
      * @return array|bool
      */
 
-    public function update(UpdateRequest $request, Article $article): array|bool
-    {
-        $data = $request->validated();
+    // public function update(UpdateRequest $request, Article $article): array|bool
+    // {
+    //     $data = $request->validated();
 
-        $old_photo = $article->photo;
+    //     $old_photo = $article->photo;
 
-        if ($request->hasFile('photo')) {
-            $this->remove($old_photo);
-            $old_photo = $this->upload(UploadDiskEnum::ARTICLES->value, $request->file('photo'));
-        }
+    //     if ($request->hasFile('photo')) {
+    //         $this->remove($old_photo);
+    //         $old_photo = $this->upload(UploadDiskEnum::ARTICLES->value, $request->file('photo'));
+    //     }
 
-        return [
-            'article_category_id' => $data['article_category_id'],
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'photo' => $old_photo,
-            'content' => $data['content'],
-            'tags' => str_replace(', ', ',', $data['tags']),
-            'status' => $data['status'],
-            'user_id' => auth()->id()
-        ];
-    }
+    //     return [
+    //         'article_category_id' => $data['article_category_id'],
+    //         'title' => $data['title'],
+    //         'description' => $data['description'],
+    //         'photo' => $old_photo,
+    //         'content' => $data['content'],
+    //         'tags' => str_replace(', ', ',', $data['tags']),
+    //         'status' => $data['status'],
+    //         'user_id' => auth()->id()
+    //     ];
+    // }
 }

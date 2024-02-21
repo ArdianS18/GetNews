@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\News;
 use App\Models\User;
+use App\Observers\NewsObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(UserObserver::class);
+        News::observe(NewsObserver::class);
     }
 
     /**
