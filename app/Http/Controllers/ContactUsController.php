@@ -24,7 +24,7 @@ class ContactUsController extends Controller
     public function index()
     {
         $contactUses = $this->contactUs->get();
-        return view('crud.contact', compact('contactUses'));  
+        return view('pages.crud.contact', compact('contactUses'));
     }
 
     /**
@@ -33,8 +33,7 @@ class ContactUsController extends Controller
     public function store(ContactUsRequest $request)
     {
         $data = $request->validated();
-        $data['user_id'] = auth()->id();    
-        // dd($data);
+        $data['user_id'] = auth()->id();
         $this->contactUs->store($data);
         return back()->with('success', 'berhasil menambahkan data');
     }
@@ -55,7 +54,7 @@ class ContactUsController extends Controller
     public function destroy(ContactUs $contact)
     {
         $this->contactUs->delete($contact->id);
-        
+
         return back()->with('success', 'berhasil menghapus data');
     }
 }

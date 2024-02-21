@@ -20,7 +20,7 @@
         Tambah Data Contact
     </button>
 
-    @foreach($contactUses as $contactUs)
+    {{-- @foreach($contactUses as $contactUs) --}}
 
     <!-- Modal -->
     <div class="modal fade" id="tambahdataLabel" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    @endforeach
+    {{-- @endforeach --}}
 
     <table class="table">
         <thead>

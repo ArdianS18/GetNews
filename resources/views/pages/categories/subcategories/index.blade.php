@@ -56,7 +56,7 @@
                                     </div>
                                     <form action="{{route('sub.category.update', ['subcategory' => $sub->id])}}" method="post">
                                         @csrf
-                                    <div class="modal-body">
+                                        <div class="modal-body">
                                             <label class="form-label mt-2">Name</label>
                                             <input class="form-control" type="text" name="name"  value="{{ $sub->name }}">
                                           </div>

@@ -28,7 +28,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Route::resource('contact', ContactUsController::class)->except('show');
 Route::resource('faq', FaqController::class)->except('show');
 Route::resource('categories', CategoryController::class);
