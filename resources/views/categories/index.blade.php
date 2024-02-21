@@ -19,10 +19,9 @@
 <body>
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <form action="{{ route('categories.index') }}" method="GET">
-                @csrf
+            <form>
                 <input type="text" name="query" style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" placeholder="Cari...">
-                <button type="submit">Cari</button>
+                <button type="submit" class="btn btn-primary">Cari</button>
             </form>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Tambah
