@@ -37,7 +37,7 @@
                             <label for="user_id" class="form-label">Nama User:</label>
                             <input type="text" id="user_id" name="user_id" placeholder="nama"
                             value="{{ $contactUs->user->id }}" class="form-control @error('contactUs') is-invalid @enderror">
-                            <input type="text" name="" value="{{ $contactUs->user->name }}" class="form-control">
+                            <input type="text" name="" value="{{ $contactUs->user->name }}" class="f    orm-control">
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label">message Siswa:</label>
