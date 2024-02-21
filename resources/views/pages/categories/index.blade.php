@@ -18,15 +18,25 @@
 </head>
 <body>
     <div class="container mt-3">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <form>
-                <input type="text" name="query" style="width: 200px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;" placeholder="Cari...">
-                <button type="submit" class="btn btn-primary">Cari</button>
-            </form>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Tambah
-            </button>
-        </div>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Tambah
+          </button>
+
+          {{-- @if ($errors->any())
+            @foreach ($errors->all() as $error)
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 20px;">
+                <strong>{{ $error }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endforeach
+          @endif
+
+          @if (session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 50%; float: right; margin-top: 20px;">
+              <strong>{{ session('success') }}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif --}}
     </div>
 
 
@@ -77,18 +87,16 @@
                                      <form method="POST" action="{{ route('categories.destroy', $category->id) }}"
                                         onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
 
-                                        @method('delete')
-                                            @csrf
-                                            <button class="btn btn-danger" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </div>
+                                                        @method('delete')
+                                                            @csrf
+                                                            <button class="btn btn-danger" data-modal-target="popup-modal" data-modal-toggle="popup-modal">
+                                                                Hapus
+                                                            </button>
+                                                        </form>
+                                                    </div>
                             </ul>
                             <ul>
-                                <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn btn-primary">Sub Categori</a>
-                            </ul>
-
+                                <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn btn-primary">Sub Categori</a> </ul>
                 </td>
             </tr>
             @endforeach
