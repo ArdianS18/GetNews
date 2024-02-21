@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class NewsRequest extends FormRequest
@@ -22,7 +21,6 @@ class NewsRequest extends FormRequest
             'status' => 'required'
         ];
     }
-
 
     public function messages(): array
     {
