@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('photo');
             $table->text('content');
             $table->string('sinopsis');
-            $table->foreignId('sub_categories_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('sub_category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('slug');
             $table->enum('status', ['active', 'nonactive', 'panding'])->default('panding');
             // $table->foreignId('tags_id')->constrained();

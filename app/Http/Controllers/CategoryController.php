@@ -62,17 +62,10 @@ class CategoryController extends Controller
         if ($request) {
             $query = $request->input('name');
             $subCategory = $query ? $this->categori->search($query) : $this->categori->get();
-<<<<<<< Updated upstream
-            return view('pages.categories.subcategories.index', compact('subCategory', 'category'));
-        }
-
-        return view('pages.categories.subcategories.index', compact('category', 'subCategory'));
-=======
-        return view('pages.categories.subcategories.index', compact('subCategory', 'category'));
+        return view('pages.categories.subcategories.index', compact('subCategory', '1category'));
     }
 
         return view('pages.categories.subcategories.index', compact('category','subCategory'));
->>>>>>> Stashed changes
     }
 
     /**

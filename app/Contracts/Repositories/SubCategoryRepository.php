@@ -9,9 +9,9 @@ use Illuminate\Database\QueryException;
 
 class SubCategoryRepository extends BaseRepository implements SubCategoryInterface
 {
-    public function __construct(Category $category)
+    public function __construct(SubCategory $SubCategory)
     {
-        $this->model = $category;
+        $this->model = $SubCategory;
     }
 
     public function search(mixed $query): mixed

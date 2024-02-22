@@ -7,6 +7,7 @@ use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
 use App\Enums\UploadDiskEnum;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
+use App\Models\News;
 use App\Traits\UploadTrait;
 
 class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
@@ -44,6 +45,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'name' => $data['name'],
             'photo' => $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')),
             'content' => $data['content'],
+            'slug' => $data['name'],
             'sinopsis' => $data['sinopsis'],
             'sub_category_id' => $data['sub_category_id'],
             'status' => $data['status']
@@ -58,26 +60,27 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      * @return array|bool
      */
 
-    // public function update(UpdateRequest $request, Article $article): array|bool
-    // {
-    //     $data = $request->validated();
+    public function update(NewsRequest $request, News $news): array|bool
+    {
 
-    //     $old_photo = $article->photo;
+        $data = $request->validated();
 
-    //     if ($request->hasFile('photo')) {
-    //         $this->remove($old_photo);
-    //         $old_photo = $this->upload(UploadDiskEnum::ARTICLES->value, $request->file('photo'));
-    //     }
+        $old_photo = $news->photo;
 
-    //     return [
-    //         'article_category_id' => $data['article_category_id'],
-    //         'title' => $data['title'],
-    //         'description' => $data['description'],
-    //         'photo' => $old_photo,
-    //         'content' => $data['content'],
-    //         'tags' => str_replace(', ', ',', $data['tags']),
-    //         'status' => $data['status'],
-    //         'user_id' => auth()->id()
-    //     ];
-    // }
+        if ($request->hasFile('photo')) {
+            $this->remove($old_photo);
+            $old_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+        }
+
+        return [
+            'user_id' => auth()->id(),
+            'name' => $data['name'],
+            'photo' => $old_photo,
+            'content' => $data['content'],
+            'slug' => $data['name'],
+            'sinopsis' => $data['sinopsis'],
+            'sub_category_id' => $data['sub_category_id'],
+            'status' => $data['status']
+        ];
+    }
 }
