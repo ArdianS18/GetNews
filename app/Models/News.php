@@ -12,6 +12,9 @@ class News extends Model
 
     protected $fillable = ['id', 'user_id', 'name', 'photo', 'content', 'sinopsis', 'sub_category_id', 'slug', 'status'];
     protected $table = 'news';
+    
+    public $incrementing = false;
+    public $keyType = 'char';
 
     public function subCategory(): BelongsTo
     {

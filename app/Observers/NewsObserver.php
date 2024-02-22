@@ -34,7 +34,7 @@ class NewsObserver
      */
     public function updated(News $news): void
     {
-        //
+        $news->slug = Str::slug($news->name);
     }
 
     /**
