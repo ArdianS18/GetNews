@@ -7,6 +7,7 @@ use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
 use App\Enums\UploadDiskEnum;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Traits\UploadTrait;
 
@@ -60,7 +61,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      * @return array|bool
      */
 
-    public function update(NewsRequest $request, News $news): array|bool
+    public function update(NewsUpdateRequest $request, News $news): array|bool
     {
 
         $data = $request->validated();

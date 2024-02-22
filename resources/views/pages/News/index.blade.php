@@ -161,7 +161,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <!-- Modal body -->
-                                <form action="{{ route('news.update', ['news' => $news->id]) }}" method="post">
+                                <form action="{{ route('news.update', ['news' => $news->id]) }}" method="post" enctype="multipart/form-data">
                                     @method('put')
                                     @csrf
                                     <div class="modal-body">
@@ -200,6 +200,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="sinopsis" class="form-label">sinopsis:</label>
+                                            <textarea name="" id="" cols="30" rows="10"></textarea>
                                             <input type="text" id="sinopsis" name="sinopsis"
                                                 class="form-control @error('sinopsis') is-invalid @enderror"
                                                 placeholder="sinopsis" value="{{ old('news', $news->sinopsis) }}">

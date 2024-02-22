@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Enums\UploadDiskEnum;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Services\NewsService;
 use Illuminate\Contracts\View\View;
@@ -89,9 +90,10 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(NewsRequest $request, News $news)
+    public function update(NewsUpdateRequest $request, News $news)
     {
-        $this->NewsService->update($news->id, $request->validated());
+        $data = $this->NewsService->update($request, $news);
+        $this->news->update($news->id, $data);
         return back()->with('success', trans('alert.update_success'));
     }
 
