@@ -2,6 +2,8 @@
 
 namespace App\Contracts\Interfaces\Eloquent;
 
+use Illuminate\Http\Request;
+
 interface SearchInterface
 {
     /**
@@ -12,5 +14,5 @@ interface SearchInterface
      * @return mixed
      */
 
-    public function search($query): mixed;
+    public function search(Request $request): mixed;
 }

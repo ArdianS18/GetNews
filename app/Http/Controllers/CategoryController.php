@@ -8,15 +8,17 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\SubCategoryInterface;
 
 class CategoryController extends Controller
 {
     private CategoryInterface $categori;
+    private SubCategoryInterface $subCategory;
 
-
-    public function __construct(CategoryInterface $categori)
+    public function __construct(CategoryInterface $categori, SubCategoryInterface $subCategory)
     {
         $this->categori = $categori;
+        $this->subCategory = $subCategory;
     }
 
     /**
@@ -57,15 +59,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        $subCategory = $category->subCategories;
-
-        if ($request) {
-            $query = $request->input('name');
-            $subCategory = $query ? $this->categori->search($query) : $this->categori->get();
-        return view('pages.categories.subcategories.index', compact('subCategory', '1category'));
-    }
-
-        return view('pages.categories.subcategories.index', compact('category','subCategory'));
+        $subCategory = $this->subCategory->search($request);
+        return view('pages.categories.subcategories.index', compact('subCategory', 'category'));
     }
 
     /**
