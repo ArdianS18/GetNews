@@ -3,20 +3,27 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\SubCategoryInterface;
-use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class SubCategoryRepository extends BaseRepository implements SubCategoryInterface
 {
-    public function __construct(Category $category)
+    public function __construct(SubCategory $subCategory)
     {
-        $this->model = $category;
+        $this->model = $subCategory;
     }
 
-    public function search(mixed $query): mixed
+    public function search(Request $request): mixed
     {
-        return $this->model->where('name', 'like', '%'.$query.'%')->get();
+        return $this->model->query()
+        ->when($request->name, function($query) use($request){
+            $query->where('name', 'Like', '%'.$request->name.'%');
+        })->when($request->subCategory, function($query) use ($request){
+            $query->whereHas('category', function ($subQuery) use ($request) {
+                $subQuery->where('id', $request->category_id);
+            });
+        })->get();
     }
 
 
