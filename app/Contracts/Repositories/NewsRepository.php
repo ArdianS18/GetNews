@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\NewsInterface;
+use App\Enums\NewsStatusEnum;
 use App\Models\News;
 use Illuminate\Database\QueryException;
 
@@ -38,6 +39,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
 
     }
+
+    public function showWithSlug(string $slug): mixed
+    {
+        return $this->model->query()
+            ->where(['slug' => $slug, 'status' => NewsStatusEnum::PUBLISHED->value])
+            ->with(['category', 'user'])
+            ->firstOrFail();
+    }
+
 
     /**
      * Handle the Get all data event from models.

@@ -21,27 +21,19 @@ class SubCategoryController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request): View
     {
-        //
+        if ($request) {
+                $query = $request->input('query');
+                $categoris = $query ? $this->subCategory->search($query) : $this->subCategory->get();
+            return view('pages.categories.subcategories.index', compact('categoris'));
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Category $category , SubCategoryRequest $request)
     {
+        //
         // $request->merge(['category_id' => $category->id]); // Menggabungkan category_id ke dalam data request
 
         // $subCategories = $this->subCategory->store($request->validated()); // Menyimpan data subkategori dengan category_id yang ditambahkan
@@ -53,27 +45,10 @@ class SubCategoryController extends Controller
         return back();
 }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(SubCategory $subCategory)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(SubCategory $subCategory)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(SubCategoryRequest $request, SubCategory $subcategory)
     {
+        //
         $this->subCategory->update($subcategory->id, $request->validated());
         return back();
     }
@@ -83,6 +58,7 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subcategory)
     {
+        //
         if (!$this->subCategory->delete($subcategory->id)) {
             return back();
         }

@@ -4,6 +4,7 @@ namespace App\Services\Auth;
 
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Validation\ValidationException;
+use SebastianBergmann\Type\VoidType;
 
 class LoginService
 {

@@ -3,11 +3,13 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\NewsController;
 // use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,15 +28,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::resource('contact', ContactUsController::class)->except('show');
-Route::resource('faq', FaqController::class)->except('show');
+// Route::resource('contact', ContactUsController::class)->except('show');
+// Route::resource('faq', FaqController::class)->except('show');
 Route::resource('categories', CategoryController::class);
+Route::resource('news', NewsController::class);
+
 
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
 Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
 Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
+Route::resource('categories', CategoryController::class);
+
+Route::post('contact/{contact}', [ContactUsController::class, 'store'])->name('contact.store');
+Route::post('contact/{contact}', [ContactUsController::class, 'update'])->name('contact.update');
+Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
+
+Route::post('faq/{faq}', [FaqController::class, 'store'])->name('faq.store');
+Route::post('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
+Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
 ?>

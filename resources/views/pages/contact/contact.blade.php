@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Crud Contact</title>
+    <title>Contact</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
@@ -20,8 +19,6 @@
         Tambah Data Contact
     </button>
 
-    @foreach($contactUses as $contactUs)
-
     <!-- Modal -->
     <div class="modal fade" id="tambahdataLabel" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -30,12 +27,12 @@
                     <h5 class="modal-title" id="tambahdataLabel">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('contact.store') }}" method="post">
+                <form  action="{{route('contact.store')}}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="message" class="form-label">message Siswa:</label>
-                            <input type="text" id="message" name="message" placeholder="message Siswa"
+                            <label for="message" class="form-label">message:</label>
+                            <input type="text" id="message" name="message" placeholder="message"
                                 value="{{ old('message') }}" class="form-control @error('message') is-invalid @enderror">
                             @error('message')
                             <span class="invalid-feedback" role="alert" style="color: red;">
@@ -53,7 +50,7 @@
         </div>
     </div>
 
-    @endforeach
+    {{-- @endforeach --}}
 
     <table class="table">
         <thead>
@@ -65,7 +62,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($contactUses as $contactUs)
+            @foreach($contactUs as $contactUs)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $contactUs->user->name }}</td>
@@ -87,7 +84,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <!-- Modal body -->
-                                <form action="{{ route('contact.update', ['contact' => $contactUs->id]) }}" method="post">
+                                <form action="{{route('contact.update', $contactUs->id )}}" method="post">
                                     @method('put')
                                     @csrf
                                     <div class="modal-body">
@@ -95,7 +92,7 @@
                                             <label for="message" class="form-label">message:</label>
                                             <input type="text" id="message" name="message"
                                                 class="form-control @error('message') is-invalid @enderror"
-                                                placeholder="message" value="{{ old('contactUs', $contactUs->message) }}">
+                                                placeholder="message" value="{{ old('message', $contactUs->message) }}">
                                             @error('message')
                                             <span class="invalid-feedback" role="alert" style="color: red;">
                                                 <strong>{{ $message }}</strong>
@@ -112,7 +109,7 @@
                         </div>
                     </div>
 
-                    <form action="/contact/{{ $contactUs->id }}" method="post" onsubmit="return confirm('Yakin Akan menghapus data?')"
+                    <form action="{{ route('contact.destroy', $contactUs->id) }}" method="post" onsubmit="return confirm('Yakin Akan menghapus data?')"
                         class="d-inline">
                         @method('delete')
                         @csrf
