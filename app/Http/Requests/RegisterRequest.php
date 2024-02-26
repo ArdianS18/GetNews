@@ -6,13 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
+  
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +18,10 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'email' => 'required|unique|email',
-            'password' => 'required|max:100'
+            'password' => 'required|min.8|max:100',
+            'password_confirmation' => 'required_with:password|same:password|min:8',
+            'nomor' => 'required|max:15',
+            'alamat' => 'required'
         ];
     }
 
@@ -33,8 +30,11 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required' => 'Nama tidak boleh kosong',
-            'email.required' => 'Hobi tidak boleh kosong',
+            'email.required' => 'Email tidak boleh kosong',
             'password.required' => 'password tidak boleh kosong',
+            'password_confirmation.required_with' => 'konfirmasi password tidak sesuai',
+            'nomor.required' => 'nomor tidak boleh kosong',
+            'alamat.required' => 'alamat tidak boleh kosong'
         ];
     }
 }
