@@ -12,20 +12,19 @@
 </head>
 
 <body>
+    hgc
     <div class="container" style="margin-top: 10%;">
         <section>
             <div class="container-fluid h-custom">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-md-9 col-lg-6 col-xl-5">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                            class="img-fluid" alt="Sample image">
+                    <div class="col-md-12 col-lg-6 col-xl-6">
+                        <img width="500px" src="{{ asset('storage/public/log.png')}}" alt="">
                     </div>
-                    <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                    <div class="col-md-12 col-lg-6 col-xl-4 offset-xl-1">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            <div
-                                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <p class="lead fw-normal mb-0 me-3">Sign in</p>
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                                <h2>Daftar Akun GetMedia.id</h2>
                             </div>
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
@@ -37,8 +36,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-
-
 
                             </div>
 

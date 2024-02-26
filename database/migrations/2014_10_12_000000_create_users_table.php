@@ -15,11 +15,11 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('nomor',15);
-            $table->text('alamat');
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('status', ['panding', 'approved', 'notapproved'])->default('panding');
             $table->string('password');
+            $table->string('nomor');
+            $table->string('alamat');
             $table->rememberToken();
             $table->timestamps();
         });
