@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Http\Requests\SubCategoryRequest;
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -20,31 +21,22 @@ class SubCategoryController extends Controller
     }
 
 
-    public function index(Request $request): View
+    public function index()
     {
-        if ($request) {
-                $query = $request->input('query');
-                $categoris = $query ? $this->subCategory->search($query) : $this->subCategory->get();
-            return view('pages.categories.subcategories.index', compact('categoris'));
-        }
+        //
     }
 
 
-    public function store(SubCategory $SubCategory , SubCategoryRequest $request)
+    public function store(SubCategory $SubCategory , SubCategoryRequest $request , Category $category)
     {
-        //
-        // $request->merge(['category_id' => $category->id]); // Menggabungkan category_id ke dalam data request
-
-        // $subCategories = $this->subCategory->store($request->validated()); // Menyimpan data subkategori dengan category_id yang ditambahkan
-
         $data = $request->validated();
-        $data['category_id'] = $SubCategory->id;
+        $data['category_id'] = $category->id;
         $this->subCategory->store($data);
 
         return back();
-}
+    }
 
-    
+
     public function update(SubCategoryRequest $request, SubCategory $subcategory)
     {
         //

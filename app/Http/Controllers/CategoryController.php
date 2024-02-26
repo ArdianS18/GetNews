@@ -59,6 +59,10 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
+        $request->merge([
+            'category_id' => $category->id
+        ]);
+
         $subCategory = $this->subCategory->search($request);
         return view('pages.categories.subcategories.index', compact('subCategory', 'category'));
     }
