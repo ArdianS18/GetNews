@@ -17,7 +17,7 @@
             <div class="container-fluid h-custom">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-md-12 col-lg-6 col-xl-6">
-                        <img width="500px" src="{{ asset('storage/public/log.png')}}" alt="">
+                        <img width="500px" src="assets/img/log.png" alt="">
                     </div>
                     <div class="col-md-12 col-lg-6 col-xl-4 offset-xl-1">
                         <form method="POST" action="{{ route('login') }}">
