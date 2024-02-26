@@ -84,7 +84,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <!-- Modal body -->
-                                <form action="{{route('contact.update', $contactUs->id )}}" method="post">
+                                <form action="{{route('contact.update', ['contact' => $contactUs->id] )}}" method="post">
                                     @method('put')
                                     @csrf
                                     <div class="modal-body">

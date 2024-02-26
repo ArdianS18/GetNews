@@ -24,4 +24,13 @@ public function category(): BelongsTo
     return $this->belongsTo(Category::class);
 }
 
+    /**
+     * Get all of the comments for the SubCategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class);
+    }
 }

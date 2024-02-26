@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Enums\UploadDiskEnum;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Services\NewsService;
 use Illuminate\Contracts\View\View;
@@ -13,15 +15,15 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
-    private NewsService $service;
-    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $service)
+    private NewsService $NewsService;
+    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService)
     {
         $this->news = $news;
         $this->subCategory = $subCategory;
-        $this->service = $service;
+        $this->NewsService = $NewsService;
+        
     }
 
     /**
@@ -47,9 +49,13 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        $store = $this->service->store($request);
-        $store['user_id'] = auth()->id();
-        $this->news->store($store);
+        // dd($request);
+        // $data['user_id'] = auth()->id();
+        $data = $this->NewsService->store($request);
+
+        $this->news->store($data);
+
+        // $this->news->store($store);
         return to_route('news.index');
     }
 
@@ -66,7 +72,7 @@ class NewsController extends Controller
             'content' => $news->content,
             'sinopsis' => $news->sinopsis,
             'author' => $news->user->name,
-            // 'news' => $news,
+            'news' => $news->news,
             'categories' => $this->news->get()
         ]);
     }
@@ -78,20 +84,17 @@ class NewsController extends Controller
     {
         $news = $this->news->get();
 
-        return view('auth.pages.news.news', compact('categories', 'article'));
+        return view('auth.pages.news.news', compact('news'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(NewsRequest $request, News $news)
+    public function update(NewsUpdateRequest $request, News $news)
     {
-        $store = $this->news->update($request, $news);
-
-        $this->news->update($news->id, $store);
-
-        return to_route('auth.pages.news.news');
-  
+        $data = $this->NewsService->update($request, $news);
+        $this->news->update($news->id, $data);
+        return back()->with('success', trans('alert.update_success'));
     }
 
     /**
@@ -100,7 +103,7 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         $this->news->delete($news->id);
-        $this->service->remove($news->photo);
+        $this->NewsService->remove($news->photo);
 
         return back();
     }

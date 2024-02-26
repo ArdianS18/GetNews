@@ -9,6 +9,22 @@
     <title>Faq</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <style>
+        #icon{
+            width: 30px;
+            cursor: pointer;
+        }
+
+        :root{
+            --primary-color: #edf2fc;
+            --secondary-color: #212121;
+        }
+        .dark-theme{
+            --primary-color: #000106;
+            --secondary-color: #fff;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -60,6 +76,8 @@
             </div>
         </div>
     </div>
+
+    <img width="30px" src="{{ asset('storage/public/moon.png')}}" id="icon">
 
     <table class="table">
         <thead>
@@ -142,6 +160,9 @@
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous"></script>
+    <script>
+        var icon = document.get
+    </script>
 </body>
 
 </html>

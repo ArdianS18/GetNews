@@ -14,10 +14,11 @@ class NewsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'photo' => 'required|max:150|mimes:jpg,png,jpeg',
+            'photo' => 'required|mimes:jpg,png,jpeg',
             'content' => 'required',
             'sinopsis' => 'required',
-            'sub_category_id' => 'required|exists:sub_categories,id',
+            // 'slug' => 'required',
+            'sub_category_id' => 'required',
             'status' => 'required'
         ];
     }
@@ -29,7 +30,8 @@ class NewsRequest extends FormRequest
             'photo.required' => 'Foto tidak boleh kosong',
             'content.required' => 'Konten tidak boleh kosong',
             'sinopsis.required' => 'Sinopsis tidak boleh kosong',
-            'sub_category_id.required' => 'Kategori tidak boleh kosong',
+            // 'slug.required' => 'slug tidak boleh kosong',
+            'sub_category_id.required' => 'sub kategori tidak boleh kosong',
             'status.required' => 'Status tidak boleh kosong',
         ];
     }

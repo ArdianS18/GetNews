@@ -2,28 +2,17 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\SubCategoryInterface;
-use App\Models\SubCategory;
+use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\UserInterface;
+use App\Models\User;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 
-class SubCategoryRepository extends BaseRepository implements SubCategoryInterface
+class UserRepository extends BaseRepository implements UserInterface
 {
-    public function __construct(SubCategory $subCategory)
+    public function __construct(User $user)
     {
-        $this->model = $subCategory;
+        $this->model = $user;
     }
-
-    public function search(Request $request): mixed
-    {
-        return $this->model->query()
-        ->when($request->name, function($query) use($request){
-            $query->where('name', 'Like', '%'.$request->name.'%');
-        })->when($request->category_id, function($query) use ($request){
-            $query->where('category_id',$request->category_id);
-        })->get();
-    }
-
 
     /**
      * Handle show method and delete data instantly from models.
@@ -48,8 +37,7 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
      */
     public function show(mixed $id): mixed
     {
-        return $this->model->query()
-        ->findOrFail($id);
+
     }
 
     /**
