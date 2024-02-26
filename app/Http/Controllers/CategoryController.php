@@ -29,11 +29,11 @@ class CategoryController extends Controller
         if ($request) {
                 $query = $request->input('query');
                 $categoris = $query ? $this->categori->search($query) : $this->categori->get();
-            return view('pages.categories.index', compact('categoris'));
+            return view('pages.admin.categories.index', compact('categoris'));
         }
 
         $categoris = $this->categori->get();
-        return view('pages.categories.index', compact('categoris'));
+        return view('pages.admin.categories.index', compact('categoris'));
     }
 
     /**
@@ -64,7 +64,7 @@ class CategoryController extends Controller
         ]);
 
         $subCategory = $this->subCategory->search($request);
-        return view('pages.categories.subcategories.index', compact('subCategory', 'category'));
+        return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
     }
 
     /**

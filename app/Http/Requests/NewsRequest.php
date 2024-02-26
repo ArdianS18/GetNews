@@ -17,9 +17,7 @@ class NewsRequest extends FormRequest
             'photo' => 'required|mimes:jpg,png,jpeg',
             'content' => 'required',
             'sinopsis' => 'required',
-            // 'slug' => 'required',
             'sub_category_id' => 'required',
-            'status' => 'required'
         ];
     }
 
@@ -30,9 +28,7 @@ class NewsRequest extends FormRequest
             'photo.required' => 'Foto tidak boleh kosong',
             'content.required' => 'Konten tidak boleh kosong',
             'sinopsis.required' => 'Sinopsis tidak boleh kosong',
-            // 'slug.required' => 'slug tidak boleh kosong',
             'sub_category_id.required' => 'sub kategori tidak boleh kosong',
-            'status.required' => 'Status tidak boleh kosong',
         ];
     }
 }

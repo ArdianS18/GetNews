@@ -90,20 +90,6 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="status" class="form-label">status:</label>
-                            <select class="form-select @error('status') is-invalid @enderror" name="status" value="{{ old('status')}}" aria-label="Default select example">
-                                <option selected>pilih sub kategori</option>
-                                    <option value="active">Active</option>
-                                    <option value="nonactive">NonActive</option>
-                                    <option value="panding">Panding</option>
-                            </select>
-                            @error('status')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{$message}}</strong>
-                            </span>
-                            @enderror
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -215,20 +201,6 @@
                                             </span>
                                             @enderror
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="status" class="form-label">status:</label>
-                                            <select class="form-select @error('status') is-invalid @enderror" name="status" value="{{ old('status')}}" aria-label="Default select example">
-                                                <option selected>{{$news->status}}</option>
-                                                <option value="active">Active</option>
-                                                <option value="nonactive">NonActive</option>
-                                                <option value="panding">Panding</option>
-                                            </select>
-                                            @error('status')
-                                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -245,7 +217,6 @@
                         @csrf
                         <button type="submit" class="btn btn-danger">Hapus</button>
                     </form>
-
 
                     <button data-bs-toggle="modal" data-bs-target="#detaildata{{ $news->id }}" class="btn btn-primary">
                         Detail

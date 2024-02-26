@@ -48,6 +48,7 @@ class UserRepository extends BaseRepository implements UserInterface
     public function get(): mixed
     {
         return $this->model->query()
+            ->where('status', 'panding')
             ->get();
     }
 

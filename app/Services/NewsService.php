@@ -49,8 +49,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'sinopsis' => $data['sinopsis'],
-            'sub_category_id' => $data['sub_category_id'],
-            'status' => $data['status']
+            'sub_category_id' => $data['sub_category_id']
         ];
     }
 
@@ -81,8 +80,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'content' => $data['content'],
             'slug' => $data['name'],
             'sinopsis' => $data['sinopsis'],
-            'sub_category_id' => $data['sub_category_id'],
-            'status' => $data['status']
+            'sub_category_id' => $data['sub_category_id']
         ];
     }
 }
