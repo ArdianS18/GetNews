@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('photo');
             $table->text('content');
             $table->string('sinopsis');
+            $table->boolean('is_primary')->default(0);
             $table->foreignId('sub_category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('slug')->unique();
             $table->enum('status', ['active', 'nonactive', 'panding'])->default('panding');

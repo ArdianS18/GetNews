@@ -90,23 +90,6 @@
                             </span>
                             @enderror
                         </div>
-<<<<<<< Updated upstream
-=======
-                        <div class="mb-3">
-                            <label for="status" class="form-label">status:</label>
-                            <select class="form-select @error('status') is-invalid @enderror" name="status" value="{{ old('status')}}" aria-label="Default select example">
-                                <option selected>pilih status</option>
-                                    <option value="active">Active</option>
-                                    <option value="nonactive">NonActive</option>
-                                    <option value="panding">Panding</option>
-                            </select>
-                            @error('status')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{$message}}</strong>
-                            </span>
-                            @enderror
-                        </div>
->>>>>>> Stashed changes
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -207,7 +190,6 @@
                                         <div class="mb-3">
                                             <label for="sub_category_id" class="form-label">sub category:</label>
                                             <select class="form-select @error('sub_category_id') is-invalid @enderror" name="sub_category_id" value="{{ old('sub_categories_id')}}" aria-label="Default select example">
-                                                <option selected>{{$news->subCategory->name}}</option>
                                                 @foreach ($subCategories as $subCategory)
                                                     <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
                                                 @endforeach

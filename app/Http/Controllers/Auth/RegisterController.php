@@ -51,9 +51,19 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'], 
-            'nomor' => ['required', 'numeric', 'min:10'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'nomor' => ['required', 'numeric', 'min:15'],
             'alamat' => ['required', 'string', 'max:255'],
+        ])->messages([
+            'name.required' => 'Nama mohon untuk diisi',
+            'email.required' => 'Email mohon untuk diisi',
+            'email.email' => 'Mohon email berupa Gmail',
+            'password.required' => 'Password mohon untuk diisi',
+            'password.min' => 'Password minimal 8 karakter',
+            'nomor.required' => 'Nomor mohon untuk diisi',
+            'nomor.numeric' => 'Nomor mohon berupa angka',
+            'nomor.min' => 'Nomor minimal 15 karakter',
+            'alamat.required' => 'Alamat mohon untuk diisi'
         ]);
     }
 
