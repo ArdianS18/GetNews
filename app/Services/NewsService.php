@@ -10,6 +10,7 @@ use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Str;
 
 class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 {
@@ -46,7 +47,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'name' => $data['name'],
             'photo' => $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')),
             'content' => $data['content'],
-            'slug' => $data['name'],
+            'slug' => Str::slug($data['name']),
             'sinopsis' => $data['sinopsis'],
             'sub_category_id' => $data['sub_category_id'],
             'status' => $data['status']

@@ -8,6 +8,13 @@
     <title>News</title>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+   
+    <!-- include libraries(jQuery, bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 
 <body>
@@ -62,8 +69,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="sinopsis" class="form-label">sinopsis:</label>
-                            <input type="text" id="sinopsis" name="sinopsis" placeholder="sinopsis"
-                                value="{{ old('sinopsis') }}" class="form-control @error('sinopsis') is-invalid @enderror">
+                            <textarea name="sinopsis" id="sinopsis" cols="30" rows="10"  value="{{ old('sinopsis') }}""></textarea>
                             @error('sinopsis')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
@@ -84,16 +90,6 @@
                             </span>
                             @enderror
                         </div>
-                        {{-- <div class="mb-3">
-                            <label for="slug" class="form-label">slug:</label>
-                            <input type="text" id="slug" name="slug" placeholder="slug"
-                                value="{{ old('slug') }}" class="form-control @error('slug') is-invalid @enderror">
-                            @error('slug')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div> --}}
                         <div class="mb-3">
                             <label for="status" class="form-label">status:</label>
                             <select class="form-select @error('status') is-invalid @enderror" name="status" value="{{ old('status')}}" aria-label="Default select example">
@@ -128,7 +124,6 @@
                 <th>Content</th>
                 <th>Sinopsis</th>
                 <th>Sub Category</th>
-                <th>Slug</th>
                 <th>Status</th>
                 <th>Option</th>
             </tr>
@@ -141,9 +136,8 @@
                 <td>{{ $news->name }}</td>
                 <td><img width="100px" src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}"></td>
                 <td>{{ $news->content }}</td>
-                <td>{{ $news->sinopsis }}</td>
+                <td>{!!$news->sinopsis!!}</td>
                 <td>{{ $news->subCategory->name }}</td>
-                <td>{{ $news->slug }}</td>
                 <td>{{ $news->status }}</td>
                 <td>
                   <!-- Edit Modal toggle -->
@@ -200,10 +194,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="sinopsis" class="form-label">sinopsis:</label>
-                                            <textarea name="" id="" cols="30" rows="10"></textarea>
-                                            <input type="text" id="sinopsis" name="sinopsis"
-                                                class="form-control @error('sinopsis') is-invalid @enderror"
-                                                placeholder="sinopsis" value="{{ old('news', $news->sinopsis) }}">
+                                            <textarea name="sinopsis" id="" cols="30" rows="10" class="sinop form-control @error('sinopsis') is-invalid @enderror" >{!!$news->sinopsis!!}</textarea>                                              
                                             @error('sinopsis')
                                             <span class="invalid-feedback" role="alert" style="color: red;">
                                                 <strong>{{ $message }}</strong>
@@ -255,6 +246,51 @@
                         <button type="submit" class="btn btn-danger">Hapus</button>
                     </form>
 
+                    <button data-bs-toggle="modal" data-bs-target="#detaildata{{ $news->id }}" class="btn btn-primary">
+                        Detail
+                    </button>
+
+                    <div class="modal fade" id="detaildata{{ $news->id }}" tabindex="-1" aria-labelledby="editdata{{ $news->id }}Label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal content -->
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Detail Data News</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <table>
+                                            <div class="md-3">
+                                                <b>Nama User</b><br>
+                                                <p>{{$news->user->name}}</p>
+                                            </div>
+                                            <div class="md-3">
+                                                <b>Nama Berita</b><br>
+                                                <p>{{$news->name}}</p>
+                                            </div>
+                                            <div class="md-3">
+                                                <b>Gambar:</b><br>
+                                                <p><img width="465px" src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}"></p>
+                                            </div>
+                                            <div class="md-3">
+                                                <b>Content</b><br>
+                                                <p>{{$news->content}}</p>
+                                            </div>
+                                            <div class="md-3">
+                                                <b>Sinopsis</b><br>
+                                                <p>{!!$news->sinopsis!!}</p>
+                                            </div>
+                                            <div class="md-3">
+                                                <b>Sub Kategiori</b><br>
+                                                <p>{{$news->subCategory->name}}</p>
+                                            </div>
+                                            <div class="md-3">
+                                                <b>Status</b><br>
+                                                <p>{{$news->status}}</p>
+                                            </div>
+                                        </table>
+                                        
                 </td>
             </tr>
             @endforeach
@@ -263,6 +299,38 @@
 
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#sinopsis').summernote({
+                toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+
+        $(document).ready(function() {
+            $('.sinop').summernote({
+                toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        });
+    </script>
+    <script>
+
+    </script>
 </body>
 
 </html>

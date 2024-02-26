@@ -56,7 +56,7 @@ class NewsController extends Controller
         $this->news->store($data);
 
         // $this->news->store($store);
-        return to_route('news.index');  
+        return to_route('news.index');
     }
 
     /**

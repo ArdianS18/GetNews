@@ -40,9 +40,9 @@ class NewsObserver
     /**
      * Handle the News "deleted" event.
      */
-    public function deleted(News $news): void
+    public function deleting(News $news): void
     {
-        //
+        //untuk menghapus semua postingan user yang dihapus
     }
 
     /**
