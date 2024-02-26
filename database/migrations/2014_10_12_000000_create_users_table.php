@@ -18,8 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('status', ['panding', 'approved', 'notapproved'])->default('panding');
             $table->string('password');
-            $table->string('nomor');
-            $table->string('alamat');
+            $table->text('photo')->nullable();
+            $table->string('phone_number');
+            $table->string('address');
             $table->rememberToken();
             $table->timestamps();
         });

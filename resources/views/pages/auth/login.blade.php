@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    hgc
     <div class="container" style="margin-top: 10%;">
         <section>
             <div class="container-fluid h-custom">

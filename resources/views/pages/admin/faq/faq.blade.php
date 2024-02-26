@@ -75,13 +75,7 @@
                         </button>
 
 
-                        <form action="{{ route('faq.destroy', $faq->id) }}"method="post"
-                            onsubmit="return confirm('Yakin Akan menghapus data?')" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Hapus</button>
-                        </form>
-
+                            <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
                     </td>
                 </tr>
             @endforeach
@@ -133,6 +127,8 @@
             </div>
         </div>
     </div>
+    <x-delete-modal-component />
+
 @endsection
 @section('script')
     <script>
@@ -146,6 +142,13 @@
             $('#form-update').data('id', formData['id'])
             $('#form-update').attr('action', );
             $('#modal-update').modal('show')
+        })
+
+        $('.btn-delete').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `faq/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
         })
     </script>
 @endsection

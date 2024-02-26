@@ -20,8 +20,8 @@ class UserSeeder extends Seeder
                     'id' => Uuid::uuid(),
                     'name' => $role['name'],
                     'email' => str_replace(' ', '', $role['name']) . "@gmail.com",
-                    'nomor' => '-',
-                    'alamat' => '-',
+                    'phone_number' => '08934574332',
+                    'address' => '-',
                     'status' => 'approved',
                     'password' => bcrypt('password'),
                     'email_verified_at' => now()
