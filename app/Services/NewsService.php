@@ -78,7 +78,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'name' => $data['name'],
             'photo' => $old_photo,
             'content' => $data['content'],
-            'slug' => $data['name'],
+            'slug' => Str::slug($data['name']),
             'sinopsis' => $data['sinopsis'],
             'sub_category_id' => $data['sub_category_id']
         ];

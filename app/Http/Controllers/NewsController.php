@@ -23,7 +23,14 @@ class NewsController extends Controller
         $this->news = $news;
         $this->subCategory = $subCategory;
         $this->NewsService = $NewsService;
-        
+
+    }
+
+    public function see()
+    {
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->get();
+        return view('pages.admin.news_admin.index', compact('news','subCategories'));
     }
 
     /**
@@ -41,7 +48,7 @@ class NewsController extends Controller
      */
     public function create(NewsRequest $request)
     {
-
+        //
     }
 
     /**

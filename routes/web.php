@@ -54,6 +54,7 @@ Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
 Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
+Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
