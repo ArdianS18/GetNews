@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between mb-3 mt-2">
         <div>
             <form class="position-relative">
-                <input type="search" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search">
+                <input type="search" name="name" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
             </form>
         </div>
@@ -61,7 +61,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($faqs as $faq)
+            @forelse ($faqs as $faq)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $faq->question }}</td>
@@ -78,7 +78,7 @@
                             <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
                     </td>
                 </tr>
-            @endforeach
+            @endforelse
         </tbody>
     </table>
 

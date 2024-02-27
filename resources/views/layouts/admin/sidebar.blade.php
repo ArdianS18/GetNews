@@ -23,8 +23,8 @@
                 <!-- Dashboard -->
                 <!-- =================== -->
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->routeIs('faq.index' ? 'active' : '') }}"
-                        href="{{ route('faq.index') }}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('home' ? 'active' : '') }}"
+                        href="{{ route('home') }}" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2">
@@ -35,6 +35,14 @@
                             </g>
                         </svg>
                         <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+                <!-- =================== -->
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->routeIs('faq.index' ? 'active' : '') }}"
+                        href="{{ route('faq.index') }}" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M5.5 5.5A1.5 1.5 0 1 1 7 7v1"/><path fill="currentColor" d="M7 9.5a.75.75 0 1 0 .75.75A.76.76 0 0 0 7 9.5Z"/></svg>
+                        <span class="hide-menu">Faq</span>
                     </a>
                 </li>
             </ul>

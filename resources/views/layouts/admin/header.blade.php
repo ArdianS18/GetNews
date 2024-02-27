@@ -45,7 +45,7 @@
                             aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="user-profile-img user-profile">
-                                    <img src="" class="rounded-circle user-profile" style="object-fit: cover"
+                                    <img src="{{ asset('default.png') }}" class="rounded-circle user-profile" style="object-fit: cover"
                                         width="35" height="35" alt="" />
                                 </div>
                             </div>
