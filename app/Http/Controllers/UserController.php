@@ -24,7 +24,7 @@ class UserController extends Controller
     public function index(): View
     {
         $users = $this->user->get();
-        return view('pages.user.index', compact('users'));
+        return view('pages.useraprove.index', compact('users'));
     }
 
     /**

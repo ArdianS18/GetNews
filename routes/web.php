@@ -58,4 +58,11 @@ Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
+Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
+
+Route::get('news-singgle-post', [NewsController::class, 'usernews'])->name('news.user');
+
 ?>

@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nomor' => ['required', 'numeric', 'min:15'],
             'alamat' => ['required', 'string', 'max:255'],
-        ])->messages([
+        ], [
             'name.required' => 'Nama mohon untuk diisi',
             'email.required' => 'Email mohon untuk diisi',
             'email.email' => 'Mohon email berupa Gmail',
