@@ -21,9 +21,11 @@
         }
         .card-dropzone{
         border: 3px dashed #ddd;
-        padding: 20px; 
+        padding: 30px; 
         margin-bottom: 20px;
         border-radius: 10px; 
+        height: 250px;
+
         }
   </style>
 </head>
@@ -48,7 +50,7 @@
                 
                     <div class="col-lg-6 col-md-12 from-outline">
                         <label class="form-label" for="photo">Thumbnail Berita</label>
-                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
+                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="mt-2 text-center form-control @error('photo') is-invalid @enderror">
                         @error('photo')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -146,8 +148,8 @@
                                     <form class="form" action="#" method="post">
                                         <div class="form-group row">
                                            
-                                            <div class="">
-                                                <label class=" col-form-label text-lg" style="color: #697A8D;">Drag and drop your image here</label>
+                                            <div class="mt-4">
+                                                <label class="col-form-label text-lg" style="color: #697A8D;">Drag and drop your image here</label>
                                                 <div class="dropzone dropzone-queue mb-2" id="kt_dropzonejs_example_2">
 
                                                     <span class="form-text text-muted" style="color: #A1ACB8;">or</span>
@@ -197,23 +199,41 @@
                             </div>
 
                         </div>
-                    
-                    </div>
+                        
+                        <div class="d-flex justify-content-between">
 
-                    <div class="justify-content-start mt-2">
-                    <button type="submit" class="btn btn-sm text-white" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                            Kembali
-                        </button>
-                    </div>
 
-                    <div class="justify-content-end mt-2">
-                        <button type="submit" class="btn btn-sm text-white" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
+                            <button type="submit" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
                                 Kembali
                             </button>
+
+                            <div class="">
+                                
+                                <button type="submit" class="btn btn-md text-black m-2 justify-content-end" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
+                                        Ketentuan
+                                </button>
+
+                                <button type="submit" class="btn btn-md text-white m-2 justify-content-end" style="padding-left: 1rem; padding-right: 1rem; background-color: #0F4D8A;">
+                                    Upload
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-2">
+                            
                         </div>
 
+                      
+
+                    {{-- <div class="row"> --}}
+                        {{-- <div class="d-flex justify-content-start mt-2"> --}}
                         
-                        <div class="text-center mt-4 mb-4">
+
+                       
+
+                    {{-- </div> --}}
+
+                 
                         
                 </form>
             </div>
@@ -225,7 +245,7 @@
 <script>
     $(document).ready(function() {
         $('#content').summernote({
-            height: 150,
+            height: 250,
             toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
