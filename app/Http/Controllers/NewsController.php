@@ -45,6 +45,9 @@ class NewsController extends Controller
         return view('pages.admin.news_admin.index', compact('news','subCategories'));
     }
 
+    public function usernews(){
+        return view('pages.user.news.singlepost');
+    }
     /**
      * Display a listing of the resource.
      */

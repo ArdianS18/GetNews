@@ -70,4 +70,9 @@ Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->na
 Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
 
 Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
+Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
+
+Route::get('news-singgle-post', [NewsController::class, 'usernews'])->name('news.user');
 ?>

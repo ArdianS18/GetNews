@@ -44,6 +44,8 @@ class UserController extends Controller
         $data['status'] = UserStatusEnum::REJECT->value;
         $this->user->update($user->id, $data);
         return back();
+        $users = $this->user->get();
+        return view('pages.useraprove.index', compact('users'));
     }
 
     /**
