@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Enums\NewsStatusEnum;
 use App\Models\News;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class NewsRepository extends BaseRepository implements NewsInterface
 {
@@ -28,6 +29,22 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->delete();
     }
 
+    public function search(Request $request): mixed
+    {
+        $query = $this->model->query();
+
+        if ($request->has('name')) {
+            return $query->where('name', 'LIKE', '%'.$request->name.'%')->get();
+        } elseif ($request->has('status')) {
+            return $query->where('status', $request->status)->get();
+        }
+
+        return $query->when($request->sub_category_id, function($query) use ($request){
+            return $query->where('sub_category_id', $request->sub_category_id);
+        })->get();
+    }
+
+
     /**
      * Handle get the specified data by id from models.
      *
@@ -39,6 +56,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
 
     }
+
 
     public function showWithSlug(string $slug): mixed
     {

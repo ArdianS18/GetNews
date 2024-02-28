@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\ContactUs;
 
@@ -33,10 +34,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::resource('contact', ContactUsController::class)->except('show');
-// Route::resource('faq', FaqController::class)->except('show');
 Route::resource('categories', CategoryController::class);
 Route::resource('user', UserController::class);
+
+Route::patch('approved-user/{user}', [UserController::class, 'approved'])->name('user.approved');
+Route::patch('reject-user/{user}', [UserController::class, 'reject'])->name('user.reject');
 
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
 Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
@@ -53,9 +55,19 @@ Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
 Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
 Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
+
+Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
+Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
+
+Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+//trending ke-?
+Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
+Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
+
+Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
 ?>

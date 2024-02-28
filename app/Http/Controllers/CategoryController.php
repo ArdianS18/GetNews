@@ -29,6 +29,11 @@ class CategoryController extends Controller
         if ($request) {
                 $query = $request->input('query');
                 $categoris = $query ? $this->categori->search($query) : $this->categori->get();
+
+                if ($categoris->isEmpty()) {
+                    return view('pages.admin.categories.index', compact('categoris'))->with('message', 'Data tidak ditemukan atau tidak ada');
+                }
+
             return view('pages.admin.categories.index', compact('categoris'));
         }
 
@@ -51,7 +56,7 @@ class CategoryController extends Controller
     {
 
         $categori = $this->categori->store($request->validated());
-        return redirect()->back();
+        return redirect()->back()->with('success', trans('alert.add_success'));
     }
 
     /**
@@ -81,7 +86,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
         $this->categori->update($category->id, $request->validated());
-        return redirect()->back();
+        return redirect()->back()->with('success', trans('alert.update_success'));
     }
 
     /**
@@ -90,9 +95,9 @@ class CategoryController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
         if (!$this->categori->delete($category->id)) {
-            return back();
+            return back()->with('success', trans('alert.delete_success'));
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', trans('alert.delete_success'));
     }
 }

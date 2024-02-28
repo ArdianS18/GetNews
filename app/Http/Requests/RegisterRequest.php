@@ -20,8 +20,8 @@ class RegisterRequest extends FormRequest
             'email' => 'required|unique|email',
             'password' => 'required|min.8|max:100',
             'password_confirmation' => 'required_with:password|same:password|min:8',
-            'phone_number' => 'required|max:15',
-            'address' => 'required'
+            'nomor' => 'required|max:15',
+            'alamat' => 'required'
         ];
     }
 
@@ -31,10 +31,10 @@ class RegisterRequest extends FormRequest
         return [
             'name.required' => 'Nama tidak boleh kosong',
             'email.required' => 'Email tidak boleh kosong',
-            'password.required' => 'Password tidak boleh kosong',
-            'password_confirmation.required_with' => 'Konfirmasi password tidak sesuai',
-            'phone_number.required' => 'Nomor tidak boleh kosong',
-            'address.required' => 'Alamat tidak boleh kosong'
+            'password.required' => 'password tidak boleh kosong',
+            'password_confirmation.required_with' => 'konfirmasi password tidak sesuai',
+            'nomor.required' => 'nomor tidak boleh kosong',
+            'alamat.required' => 'alamat tidak boleh kosong'
         ];
     }
 }

@@ -73,11 +73,10 @@
                             id="btn-edit-{{ $faq->id }}">
                             Edit
                         </button>
-
-
-                            <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
                     </td>
                 </tr>
+                @empty
             @endforelse
         </tbody>
     </table>
@@ -127,6 +126,7 @@
             </div>
         </div>
     </div>
+
     <x-delete-modal-component />
 
 @endsection
@@ -135,7 +135,6 @@
         $('.btn-edit').click(function() {
             const formData = getDataAttributes($(this).attr('id'))
             var actionUrl = `faq/${formData['id']}`;
-            console.log(formData);
             $('#form-update').attr('action', actionUrl);
 
             setFormValues('form-update', formData)

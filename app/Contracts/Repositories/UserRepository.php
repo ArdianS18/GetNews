@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Models\User;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
@@ -48,8 +49,17 @@ class UserRepository extends BaseRepository implements UserInterface
     public function get(): mixed
     {
         return $this->model->query()
-            ->where('status', 'panding')
             ->get();
+    }
+
+    public function search(Request $request): mixed
+    {
+        return $this->model->query()
+        ->when($request->status, function ($query) use ($request) {
+            $query->where('status', $request->status);
+        })->when($request->sub_category_id, function($query) use ($request){
+            $query->where('sub_category_id',$request->sub_category_id);
+        })->get();
     }
 
     /**

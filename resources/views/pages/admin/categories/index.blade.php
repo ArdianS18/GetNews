@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.admin.app')
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Category</title>
+        @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ $error }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endforeach
+        @endif
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
-</head>
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{session('success') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
-<body>
-    <div class="container mt-5">
         <div class="d-flex justify-content-between mb-3">
             <form class="d-flex" action="{{ route('categories.index') }}" method="GET">
                 @csrf
@@ -26,17 +29,24 @@
                 Tambah
             </button>
         </div>
-    </div>
 
-
-    <div class="container mt-3">
         <table class="table text-center">
-            <thead class="table-primary">
+            <thead class="table">
                 <th>No</th>
                 <th>Kategori</th>
                 <th>Aksi</th>
             </thead>
-            @foreach ($categoris as $category)
+
+                @if (isset($message))
+                <td>
+                    <td>
+                        <p>{{ $message }}</p>
+                    </td>
+                </td>
+                @endif
+
+
+            @forelse ($categoris as $category)
             <tbody>
                 <tr>
                     <td>{{$loop->iteration}}</td>
@@ -72,25 +82,15 @@
                         </div>
 
                         <div>
-                            <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
-                            <form method="POST" action="{{ route('categories.destroy', $category->id) }}" onclick="return confirm('Yakin Akan menghapus data?')" class="d-inline">
-
-                                @method('delete')
-                                @csrf
-                                <button class="btn btn-danger" ;" data-modal-target="popup-modal" data-modal-toggle="popup-modal"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 2 24 24">
-                                        <path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" />
-                                    </svg>
-                                    Hapus
-                                </button>
-                            </form>
+                            <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $category->id }}">Hapus</button>
                         </div>
                         <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn btn-primary">Sub Categori</a>
                     </td>
                 </tr>
             </tbody>
-            @endforeach
+            @empty
+            @endforelse
         </table>
-    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,18 +105,25 @@
                     <div class="modal-body">
                         <label class="form-label mt-2">Kategori</label>
                         <input class="form-control @error('name') is-invalid @enderror" type="text" name="name">
-                        {{-- @error('name')
-                    <span class="invalid-feedback" role="alert" style="color: red;">
-                        <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror --}}
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-outline-primary">Buat data baru</button>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-</body>
 
-</html>
+    <x-delete-modal-component />
+
+@endsection
+@section('script')
+    <script>
+        $('.btn-delete').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `categories/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+@endsection
