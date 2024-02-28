@@ -3,10 +3,9 @@
 @section('style')
 <style>
     .news-card-a {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Menambahkan shadow dengan warna dan opasitas tertentu */
-        border: 1px solid #ddd;
-        padding: 30px; /* Memberi ruang di sekitar elemen */
-        margin-bottom: 20px; /* Memberi jarak antara elemen berikutnya */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        border: 1px solid #ddd; /* Memberi ruang di sekitar elemen */
+        margin-bottom: 20px; 
         border-radius: 10px; 
     }
 

@@ -2322,7 +2322,7 @@ select {
   border-radius: 50%;
 }
 .news-card-one .news-card-img img {
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 .news-card-one .news-card-info {
   width: calc(100% - 130px);
@@ -3974,7 +3974,7 @@ select {
 }
 #cmt-form button,
 .contact-form button {
-  padding: 11px 27px 17px;
+  padding: 15px 27px 15px 27px;
 }
 
 #cmt-form .form-group input {
