@@ -67,10 +67,16 @@ class NewsController extends Controller
 
     public function approvedall(Request $request, News $news)
     {
-        $selectedItems = $request->input('checkedIds');
+        $selectedIds = json_decode($request->input('checkedIds'));
 
-        $data['status'] = NewsStatusEnum::ACTIVE->value;
-        $this->news->update($selectedItems, $data);
+        foreach ($selectedIds as $id) {
+            $news = News::find($id);
+
+            if ($news) {
+                $news->status = NewsStatusEnum::ACTIVE->value;
+                $news->save();
+            }
+        }
 
         return back();
     }

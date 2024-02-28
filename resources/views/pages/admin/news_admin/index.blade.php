@@ -20,7 +20,8 @@
             </div>
         </form>
 
-        <form id="approvalForm" action="{{ route('approved-all.news')}}" method="POST">
+        <form id="approvalForm" action="{{ route('approved-all.news')}}" method="post">
+            @method('put')
             @csrf
             <input type="hidden" name="checkedIds" id="checkedIdsInput">
             <button type="submit" class="btn btn-secondary">Approved semua</button>
@@ -31,7 +32,7 @@
         <thead>
             <tr>
                 <th>
-                    <input id="checkAll" type="checkbox" name="selectedItems[]" class="itemCheckbox" style="transform: scale(2);">
+                    <input id="checkAll" type="checkbox" class="itemCheckbox" style="transform: scale(1);">
                 </th>
                 <th>No</th>
                 <th>Penulis</th>
@@ -44,7 +45,7 @@
         <tbody>
             @foreach ($news as $news)
                 <tr class="checkboxRow">
-                    <td><input type="checkbox" name="selectedItems[]" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(2);"></td>
+                    <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(1);"></td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $news->user->name }}</td>
                     <td>{{ $news->name }}</td>
@@ -193,11 +194,15 @@
         document.getElementById('checkedIdsInput').value = JSON.stringify(checkedIds);
     }
 
-    // Tambahkan event listener untuk tombol "Approved semua"
-    document.getElementById('approvalForm').addEventListener('submit', function(event) {
-        sendCheckedIds();
-    });
+    // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
+    var approvalForm = document.getElementById('approvalForm');
+    if (approvalForm) {
+        approvalForm.addEventListener('submit', function(event) {
+            sendCheckedIds();
+        });
+    }
 </script>
+
 
 
 <script>

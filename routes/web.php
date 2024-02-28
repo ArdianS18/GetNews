@@ -13,6 +13,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\ContactUs;
+use App\Models\News;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,7 @@ Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy
 Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
 
 Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
-Route::post('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
+Route::put('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
 
 Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
 
@@ -75,6 +76,9 @@ Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
+
+Route::get('profileupdate', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
+Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
 Route::get('news-singgle-post', [NewsController::class, 'usernews'])->name('news.user');
 ?>

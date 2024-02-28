@@ -126,6 +126,7 @@
                 <td>{{ $news->subCategory->name }}</td>
                 <td>{{ $news->status }}</td>
                 <td>
+
                   <!-- Edit Modal toggle -->
                     <button data-bs-toggle="modal" data-bs-target="#editdata{{ $news->id }}" class="btn btn-warning">
                         Edit

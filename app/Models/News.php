@@ -10,7 +10,7 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'user_id', 'name', 'photo', 'content', 'sinopsis', 'is_primary', 'sub_category_id', 'slug', 'status', 'views'];
+    protected $fillable = ['id', 'user_id', 'name', 'photo', 'content', 'sinopsis', 'upload_date', 'is_primary', 'category_id', 'sub_category_id', 'slug', 'status', 'views', 'tags'];
     protected $table = 'news';
 
     public $incrementing = false;
@@ -24,5 +24,15 @@ class News extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the category that owns the News
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

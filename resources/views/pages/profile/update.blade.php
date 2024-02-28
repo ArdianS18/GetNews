@@ -32,7 +32,7 @@
 
 <div class="container" style="margin-top: 3%;">
 
-    <h2 class="text-center">Tambah Berita</h2>
+    <h2 class="text-center">Update Berita</h2>
         <div class="news-card-a mt-5">
             <div class="container" style="padding: 3%;">
                 <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
