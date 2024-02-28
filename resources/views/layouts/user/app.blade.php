@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}">
     <title>GetMedia</title>
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.webp') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
 
 </head>

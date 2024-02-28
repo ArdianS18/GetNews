@@ -27,7 +27,7 @@ use App\Models\News;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.index');
 });
 
 Auth::routes();
