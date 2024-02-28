@@ -65,6 +65,16 @@ class NewsController extends Controller
         return back();
     }
 
+    public function approvedall(Request $request, News $news)
+    {
+        $selectedItems = $request->input('checkedIds');
+
+        $data['status'] = NewsStatusEnum::ACTIVE->value;
+        $this->news->update($selectedItems, $data);
+
+        return back();
+    }
+
     public function reject(News $news)
     {
         $data['status'] = NewsStatusEnum::NONACTIVE->value;

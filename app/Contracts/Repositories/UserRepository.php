@@ -54,12 +54,12 @@ class UserRepository extends BaseRepository implements UserInterface
 
     public function search(Request $request): mixed
     {
-        return $this->model->query()
-        ->when($request->status, function ($query) use ($request) {
-            $query->where('status', $request->status);
-        })->when($request->sub_category_id, function($query) use ($request){
-            $query->where('sub_category_id',$request->sub_category_id);
-        })->get();
+        $query = $this->model->query();
+        if ($request->has('name')) {
+            return $query->where('name', 'LIKE', '%'.$request->name.'%')->get();
+        } elseif ($request->has('status')) {
+            return $query->where('status', $request->status)->get();
+        }
     }
 
     /**

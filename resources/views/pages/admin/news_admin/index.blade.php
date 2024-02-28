@@ -19,11 +19,20 @@
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
         </form>
+
+        <form id="approvalForm" action="{{ route('approved-all.news')}}" method="POST">
+            @csrf
+            <input type="hidden" name="checkedIds" id="checkedIdsInput">
+            <button type="submit" class="btn btn-secondary">Approved semua</button>
+        </form>
     </div>
 
     <table class="table">
         <thead>
             <tr>
+                <th>
+                    <input id="checkAll" type="checkbox" name="selectedItems[]" class="itemCheckbox" style="transform: scale(2);">
+                </th>
                 <th>No</th>
                 <th>Penulis</th>
                 <th>Judul berita</th>
@@ -34,7 +43,8 @@
         </thead>
         <tbody>
             @foreach ($news as $news)
-                <tr>
+                <tr class="checkboxRow">
+                    <td><input type="checkbox" name="selectedItems[]" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(2);"></td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $news->user->name }}</td>
                     <td>{{ $news->name }}</td>
@@ -68,9 +78,9 @@
                             {{ $news->is_primary ? 'Jangan tampilkan' : 'Tampilkan dihalaman utama'}}
                         </a>
 
-                        </div>
-                    </td>
-                </tr>
+                    </div>
+                </td>
+            </tr>
             @endforeach
         </tbody>
     </table>
@@ -154,6 +164,38 @@
                 ['view', ['fullscreen', 'codeview', 'help']]
             ]
         });
+    });
+</script>
+
+<script>
+    var isCheckedAll = false;
+    function toggleCheckboxes() {
+        var checkboxes = document.querySelectorAll('.itemCheckbox');
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = isCheckedAll;
+        });
+        isCheckedAll = !isCheckedAll;
+    }
+    document.getElementById('checkAll').addEventListener('click', function() {
+        toggleCheckboxes();
+    });
+</script>
+
+<script>
+    // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
+    function sendCheckedIds() {
+        var checkedIds = [];
+        var checkboxes = document.querySelectorAll('.itemCheckbox:checked');
+        checkboxes.forEach(function(checkbox) {
+            checkedIds.push(checkbox.value);
+        });
+        // Setel nilai input tersembunyi dengan ID yang dicentang
+        document.getElementById('checkedIdsInput').value = JSON.stringify(checkedIds);
+    }
+
+    // Tambahkan event listener untuk tombol "Approved semua"
+    document.getElementById('approvalForm').addEventListener('submit', function(event) {
+        sendCheckedIds();
     });
 </script>
 

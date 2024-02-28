@@ -58,6 +58,8 @@ Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy
 Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
 
 Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
+Route::post('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
+
 Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
 
 Route::get('news', [NewsController::class, 'index'])->name('news.index');

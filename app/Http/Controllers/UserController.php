@@ -24,10 +24,6 @@ class UserController extends Controller
      */
     public function index(Request $request, User $user): View
     {
-        $request->merge([
-            'name' => $user->id
-        ]);
-
         $users = $this->user->search($request);
         return view('pages.admin.user.index', compact('users'));
     }

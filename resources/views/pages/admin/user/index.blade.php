@@ -2,14 +2,13 @@
 @section('content')
 
     <div class="d-flex gap-2 mb-3 mt-2">
-        <div>
-            <form class="position-relative">
+        <form class="d-flex gap-2">
+
+            <div class="position-relative">
                 <input type="search" name="name" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-            </form>
-        </div>
+            </div>
 
-        <form>
             <div class="d-flex gap-2">
                 <select name="status" class="form-select">
                     <option>---</option>
