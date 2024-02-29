@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsRequest;
@@ -23,10 +24,12 @@ class ProfileController extends Controller
     private SubCategoryInterface $subCategory;
     private NewsService $NewsService;
     private CategoryInterface $category;
+    private NewsPhotoInterface $newsPhoto;
 
-    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category)
+    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
     {
         $this->news = $news;
+        $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
         $this->category = $category;
         $this->NewsService = $NewsService;
@@ -53,10 +56,17 @@ class ProfileController extends Controller
     public function store(NewsRequest $request)
     {
         // $data['user_id'] = auth()->id();
-        dd($request);
-        $data = $this->NewsService->store($request);
+        // dd($request);
 
-        $this->news->store($data);
+        $data = $this->NewsService->store($request);
+        $newsId = $this->news->store($data)->id;
+
+        foreach ($data['multi_photo'] as $img) {
+            $this->newsPhoto->store([
+                'news_id' => $newsId,
+                'multi_photo' => $img,
+            ]);
+        }
 
         // $this->news->store($store);
         return ResponseHelper::success(null, trans('alert.add_success'));

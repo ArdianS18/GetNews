@@ -189,7 +189,7 @@
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                                 <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
-
+                                <input type="hidden" name="news_id" value="64116f4f-7829-3442-a8c2-045d96fe6d85">
                             </div>
 
                         </div>

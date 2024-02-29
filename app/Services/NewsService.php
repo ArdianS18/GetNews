@@ -12,6 +12,8 @@ use App\Models\News;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
+use function Laravel\Prompts\multisearch;
+
 class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 {
     use UploadTrait;
@@ -43,13 +45,12 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $data = $request->validated();
 
         $multi_photo = [];
-        if ($files = $request->file('multi_photo')) {
-            foreach ($files as $file) {
-                $uploadedFile = $this->upload(UploadDiskEnum::NEWS->value, $file);
-                $multi_photo[] = $uploadedFile;
+        // @dd($multi_photo);
+            foreach ($data['multi_photo'] as $imge) {
+                array_push($multi_photo, $imge->store(UploadDiskEnum::NEWS_PHOTO->value , 'public'));
             }
-        }
 
+        // $data['multi_photo'] = $multi_photo;
         $photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
 
         return [
