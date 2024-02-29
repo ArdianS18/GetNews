@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function index(Request $request, User $user): View
     {
-        $users = $this->user->search($request);
+        $users = $this->user->get();
         return view('pages.admin.user.index', compact('users'));
     }
 
