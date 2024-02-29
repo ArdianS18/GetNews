@@ -34,9 +34,9 @@
                                     placeholder="Enter a valid email address" name="email" value="{{ old('email') }}"
                                     required autocomplete="email" autofocu />
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
 
                             </div>
@@ -50,9 +50,9 @@
                                     placeholder="Enter password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
 
@@ -74,8 +74,12 @@
                                     style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #0F4D8A;">
                                     {{ __('Login') }}
                                 </button>
-                                <p class="small mt-2 pt-1 mb-0">Don't have an account? <a href="{{ route('register') }}"
-                                        class="link-danger">Register</a></p>
+
+                                @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                                @endif
                             </div>
 
                         </form>
@@ -96,10 +100,5 @@
                 <i class="fab fa-linkedin-in"></i>
             </a>
     </div>
-    <!-- Right -->
-    </div>
-    </section>
-    </div>
-</body>
-
-</html>
+</div>
+@endsection
