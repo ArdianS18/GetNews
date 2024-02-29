@@ -19,13 +19,55 @@
         margin-bottom: 20px; /* Memberi jarak antara elemen berikutnya */
         border-radius: 10px;
         }
-        .card-dropzone{
+        /* .card-dropzone{
         border: 3px dashed #ddd;
         padding: 30px;
         margin-bottom: 20px;
         border-radius: 10px;
         height: 250px;
 
+        } */
+
+
+        .dropzone {
+            border: 2px dashed #ccc;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            height: 240px; 
+        }
+
+        .dz-message {
+            font-size: 1.5em;
+            color: #555;
+        }
+
+        /* .dz-message span {
+            display: block;
+            margin-top: 10px;
+            color: #777;
+        } */
+
+        .dz-preview {
+            display: inline-block;
+            margin: 6px;
+            vertical-align: top;
+        }
+
+        .dz-preview .dz-image {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .dz-preview .dz-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .dz-error-message {
+            display: block;
+            color: #ea2121;
+            margin: 0.2em 0;
         }
   </style>
 </head>
@@ -37,7 +79,7 @@
             <div class="container" style="padding: 3%;">
                 <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="row justify-content-between mt-2">
+                    <div class="row justify-content-between">
                     <div class="col-lg-6 col-md-12 from-outline">
                         <label class="form-label" for="nomor">Judul Berita</label>
                         <input type="text" id="name" name="name" placeholder="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
@@ -50,7 +92,7 @@
 
                     <div class="col-lg-6 col-md-12 from-outline">
                         <label class="form-label" for="photo">Thumbnail Berita</label>
-                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="mt-2 text-center form-control @error('photo') is-invalid @enderror">
+                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="text-center form-control @error('photo') is-invalid @enderror">
                         @error('photo')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -147,50 +189,14 @@
                                 <div class="card-dropzone text-center items-center">
                                     <form class="form" action="#" method="post">
                                         <div class="form-group row">
-
-                                            <div class="mt-4">
-                                                <label class="col-form-label text-lg" style="color: #697A8D;">Drag and drop your image here</label>
-                                                <div class="dropzone dropzone-queue mb-2" id="kt_dropzonejs_example_2">
+                                            <div class="mt-2 items-center">
+                                                <div class="dropzone dropzone-queue mb-2" id="dropzonejs">
+                                                    <label class="col-form-label text-lg mt-4" style="color: #697A8D;">Drag and drop your image here</label><br>
 
                                                     <span class="form-text text-muted" style="color: #A1ACB8;">or</span>
-
-                                                    <div class="">
-                                                        <a class="btn btn-sm" style="background-color: #E7E7FF; padding-left: 1rem; padding-right: 1rem;"><span style="color: #696CFF;">Browse Image</span></a>
-                                                    </div>
-                                                    <div class="">
-                                                        {{-- <a class="dropzone-upload btn btn-sm btn-light-primary me-2">Upload All</a>
-                                                        <a class="dropzone-remove-all btn btn-sm btn-light-primary">Remove All</a> --}}
-                                                    </div>
-
-                                                    <div class="dropzone-items wm-200px">
-                                                        <div class="dropzone-item" style="display:none">
-                                                            <div class="dropzone-file">
-                                                                <div class="dropzone-filename" title="some_image_file_name.jpg">
-                                                                    <span data-dz-name>some_image_file_name.jpg</span>
-                                                                    <strong>(<span data-dz-size>340kb</span>)</strong>
-                                                                </div>
-
-                                                                <div class="dropzone-error" data-dz-errormessage></div>
-                                                            </div>
-
-                                                            <div class="dropzone-progress">
-                                                                <div class="progress">
-                                                                    <div
-                                                                        class="progress-bar bg-primary"
-                                                                        role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-dz-uploadprogress>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="dropzone-toolbar">
-                                                                <span class="dropzone-start"><i class="bi bi-play-fill fs-3"></i></span>
-                                                                <span class="dropzone-cancel" data-dz-remove style="display: none;"><i class="bi bi-x fs-3"></i></span>
-                                                                <span class="dropzone-delete" data-dz-remove><i class="bi bi-x fs-1"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {{-- <div class="mt-4 dropzone" id="kt_dropzonejs_example_2">
+                                                    </div> --}}
                                                 </div>
-
                                             </div>
                                         </div>
                                     </form>
@@ -219,22 +225,6 @@
                             </div>
                         </div>
                         </div>
-                        <div class="d-flex justify-content-start mt-2">
-
-                        </div>
-
-
-
-                    {{-- <div class="row"> --}}
-                        {{-- <div class="d-flex justify-content-start mt-2"> --}}
-
-
-
-
-                    {{-- </div> --}}
-
-
-
                 </form>
             </div>
         </div>
@@ -260,86 +250,32 @@
 
 </script>
 
-<script src="assets/plugins/global/plugins.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dropzone/dist/min/dropzone.min.js"></script>
 <script>
-const id = "#kt_dropzonejs_example_2";
-const dropzone = document.querySelector(id);
+    // Dropzone initialization
+    Dropzone.autoDiscover = false;
 
-var previewNode = dropzone.querySelector(".dropzone-item");
-previewNode.id = "";
-var previewTemplate = previewNode.parentNode.innerHTML;
-previewNode.parentNode.removeChild(previewNode);
+    var myDropzone = new Dropzone("#dropzonejs", {
+        url: "/target-url", // Ganti dengan URL upload Anda
+        autoProcessQueue: false,
+        maxFiles: 10,
+        maxFilesize: 10,
+        acceptedFiles: 'image/*',
+        dictDefaultMessage: 'Browse Image',
+        addRemoveLinks: true,
+        parallelUploads: 10,
+        init: function() {
+            // Add event listener for when files are added
+            this.on("addedfile", function(file) {
+                console.log('File added:', file);
+            });
 
-var myDropzone = new Dropzone(id, {
-    url: "https://keenthemes.com/scripts/void.php",
-    parallelUploads: 20,
-    previewTemplate: previewTemplate,
-    maxFilesize: 1,
-    autoQueue: false,
-    previewsContainer: id + " .dropzone-items",
-    clickable: id + " .dropzone-select"
-});
-
-myDropzone.on("addedfile", function (file) {
-    file.previewElement.querySelector(id + " .dropzone-start").onclick = function () { myDropzone.enqueueFile(file); };
-    const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
-    dropzoneItems.forEach(dropzoneItem => {
-        dropzoneItem.style.display = '';
+            // Add event listener for when files are removed
+            this.on("removedfile", function(file) {
+                console.log('File removed:', file);
+            });
+        }
     });
-    dropzone.querySelector('.dropzone-upload').style.display = "inline-block";
-    dropzone.querySelector('.dropzone-remove-all').style.display = "inline-block";
-});
-
-myDropzone.on("totaluploadprogress", function (progress) {
-    const progressBars = dropzone.querySelectorAll('.progress-bar');
-    progressBars.forEach(progressBar => {
-        progressBar.style.width = progress + "%";
-    });
-});
-
-myDropzone.on("sending", function (file) {
-    const progressBars = dropzone.querySelectorAll('.progress-bar');
-    progressBars.forEach(progressBar => {
-        progressBar.style.opacity = "1";
-    });
-    file.previewElement.querySelector(id + " .dropzone-start").setAttribute("disabled", "disabled");
-});
-
-myDropzone.on("complete", function (progress) {
-    const progressBars = dropzone.querySelectorAll('.dz-complete');
-
-    setTimeout(function () {
-        progressBars.forEach(progressBar => {
-            progressBar.querySelector('.progress-bar').style.opacity = "0";
-            progressBar.querySelector('.progress').style.opacity = "0";
-            progressBar.querySelector('.dropzone-start').style.opacity = "0";
-        });
-    }, 300);
-});
-
-dropzone.querySelector(".dropzone-upload").addEventListener('click', function () {
-    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
-});
-
-dropzone.querySelector(".dropzone-remove-all").addEventListener('click', function () {
-    dropzone.querySelector('.dropzone-upload').style.display = "none";
-    dropzone.querySelector('.dropzone-remove-all').style.display = "none";
-    myDropzone.removeAllFiles(true);
-});
-
-myDropzone.on("queuecomplete", function (progress) {
-    const uploadIcons = dropzone.querySelectorAll('.dropzone-upload');
-    uploadIcons.forEach(uploadIcon => {
-        uploadIcon.style.display = "none";
-    });
-});
-
-myDropzone.on("removedfile", function (file) {
-    if (myDropzone.files.length < 1) {
-        dropzone.querySelector('.dropzone-upload').style.display = "none";
-        dropzone.querySelector('.dropzone-remove-all').style.display = "none";
-    }
-});
 </script>
 
 @endsection

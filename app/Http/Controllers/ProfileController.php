@@ -44,6 +44,10 @@ class ProfileController extends Controller
         return view('pages.profile.create', compact('news','subCategories','categories'));
     }
 
+    public function aboutuser(){
+        return view('pages.user.about.index');
+    }
+
     public function store(NewsRequest $request)
     {
         // $data['user_id'] = auth()->id();

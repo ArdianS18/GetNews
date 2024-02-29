@@ -81,4 +81,6 @@ Route::get('profileupdate', [ProfileController::class, 'updateberita'])->name('p
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
 Route::get('news-singgle-post', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
+
 ?>
