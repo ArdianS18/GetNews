@@ -23,4 +23,14 @@ public function subCategories(): HasMany
     return $this->hasMany(SubCategory::class);
 }
 
+/**
+ * Get all of the news for the Category
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+ */
+public function news(): HasMany
+{
+    return $this->hasMany(News::class);
+}
+
 }

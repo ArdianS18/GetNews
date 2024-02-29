@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <form id="form-delete" data-id="" class="modal-content">
+        <form id="form-delete" method="POST" class="modal-content">
             @csrf
             @method('DELETE')
             <div class="modal-header d-flex align-items-center">

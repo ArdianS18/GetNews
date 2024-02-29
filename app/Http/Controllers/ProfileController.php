@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Category;
+use App\Models\News;
 use App\Services\NewsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,10 +22,13 @@ class ProfileController extends Controller
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
     private NewsService $NewsService;
-    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService)
+    private CategoryInterface $category;
+
+    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category)
     {
         $this->news = $news;
         $this->subCategory = $subCategory;
+        $this->category = $category;
         $this->NewsService = $NewsService;
 
     }
@@ -34,19 +41,25 @@ class ProfileController extends Controller
     public function createberita()
     {
         $subCategories = $this->subCategory->get();
+        $categories = $this->category->get();
         $news = $this->news->get();
-        return view('pages.profile.create', compact('news','subCategories'));
+        return view('pages.profile.create', compact('news','subCategories','categories'));
+    }
+
+    public function aboutuser(){
+        return view('pages.user.about.index');
     }
 
     public function store(NewsRequest $request)
     {
         // $data['user_id'] = auth()->id();
+        dd($request);
         $data = $this->NewsService->store($request);
 
         $this->news->store($data);
 
         // $this->news->store($store);
-        return to_route('profile.index');
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
     /**
      * Display the user's profile form.

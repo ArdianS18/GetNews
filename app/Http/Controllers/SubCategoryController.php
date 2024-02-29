@@ -33,7 +33,7 @@ class SubCategoryController extends Controller
         $data['category_id'] = $category->id;
         $this->subCategory->store($data);
 
-        return back();
+        return back()->with('success', trans('alert.add_success'));
     }
 
 
@@ -41,7 +41,7 @@ class SubCategoryController extends Controller
     {
         //
         $this->subCategory->update($subcategory->id, $request->validated());
-        return back();
+        return back()->with('success', trans('alert.update_success'));
     }
 
     /**
@@ -51,9 +51,9 @@ class SubCategoryController extends Controller
     {
         //
         if (!$this->subCategory->delete($subcategory->id)) {
-            return back();
+            return back()->with('success', trans('alert.delete_success'));
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', trans('alert.delete_success'));
     }
 }
