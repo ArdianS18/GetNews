@@ -88,6 +88,23 @@ class NewsController extends Controller
         return back();
     }
 
+    public function rejectall(Request $request, News $news)
+    {
+        $selected = json_decode($request->input('checkedIdss'));
+
+        foreach ($selected as $id) {
+            $news = News::find($id);
+
+            if ($news) {
+                $news->status = NewsStatusEnum::NONACTIVE->value;
+                $news->save();
+            }
+        }
+
+        return back();
+    }
+
+
     public function trending(News $news, Request $request)
     {
         if (!$news->is_primary) {
@@ -119,6 +136,7 @@ class NewsController extends Controller
     {
         // dd($request);
         // $data['user_id'] = auth()->id();
+        dd($request);
         $data = $this->NewsService->store($request);
 
         $this->news->store($data);

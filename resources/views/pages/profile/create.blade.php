@@ -5,6 +5,7 @@
 
 <head>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -34,7 +35,7 @@
             padding: 30px;
             text-align: center;
             border-radius: 10px;
-            height: 240px; 
+            height: 240px;
         }
 
         .dz-message {
@@ -71,6 +72,7 @@
         }
   </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container" style="margin-top: 3%;">
 
@@ -186,21 +188,7 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                <div class="card-dropzone text-center items-center">
-                                    <form class="form" action="#" method="post">
-                                        <div class="form-group row">
-                                            <div class="mt-2 items-center">
-                                                <div class="dropzone dropzone-queue mb-2" id="dropzonejs">
-                                                    <label class="col-form-label text-lg mt-4" style="color: #697A8D;">Drag and drop your image here</label><br>
-
-                                                    <span class="form-text text-muted" style="color: #A1ACB8;">or</span>
-                                                    {{-- <div class="mt-4 dropzone" id="kt_dropzonejs_example_2">
-                                                    </div> --}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
 
                             </div>
 
@@ -250,32 +238,14 @@
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/dropzone/dist/min/dropzone.min.js"></script>
+<script src="{{ asset('assets/dist/imageuploadify.min.js')}}"></script>
+
 <script>
-    // Dropzone initialization
-    Dropzone.autoDiscover = false;
+    $(document).ready(function() {
+        $('#image-uploadify').imageuploadify();
+    })
+   </script>
 
-    var myDropzone = new Dropzone("#dropzonejs", {
-        url: "/target-url", // Ganti dengan URL upload Anda
-        autoProcessQueue: false,
-        maxFiles: 10,
-        maxFilesize: 10,
-        acceptedFiles: 'image/*',
-        dictDefaultMessage: 'Browse Image',
-        addRemoveLinks: true,
-        parallelUploads: 10,
-        init: function() {
-            // Add event listener for when files are added
-            this.on("addedfile", function(file) {
-                console.log('File added:', file);
-            });
 
-            // Add event listener for when files are removed
-            this.on("removedfile", function(file) {
-                console.log('File removed:', file);
-            });
-        }
-    });
-</script>
 
 @endsection

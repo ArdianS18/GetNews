@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Category;
+use App\Models\News;
 use App\Services\NewsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -51,12 +53,13 @@ class ProfileController extends Controller
     public function store(NewsRequest $request)
     {
         // $data['user_id'] = auth()->id();
+        dd($request);
         $data = $this->NewsService->store($request);
 
         $this->news->store($data);
 
         // $this->news->store($store);
-        return to_route('profile.index');
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
     /**
      * Display the user's profile form.

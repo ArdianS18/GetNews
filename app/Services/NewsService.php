@@ -38,21 +38,32 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(NewsRequest $request): array|bool
+    public function store(NewsRequest $request)
     {
         $data = $request->validated();
+
+        $multi_photo = [];
+        if ($files = $request->file('multi_photo')) {
+            foreach ($files as $file) {
+                $uploadedFile = $this->upload(UploadDiskEnum::NEWS->value, $file);
+                $multi_photo[] = $uploadedFile;
+            }
+        }
+
+        $photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
 
         return [
             'user_id' => auth()->id(),
             'name' => $data['name'],
-            'photo' => $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')),
+            'photo' => $photo,
+            'multi_photo' => $multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'sinopsis' => $data['sinopsis'],
             'category_id' => $data['category_id'],
             'tags' => $data['tags'],
             'upload_date' => $data['upload_date'],
-            'sub_category_id' => $data['sub_category_id']
+            'sub_category_id' => $data['sub_category_id'],
         ];
     }
 

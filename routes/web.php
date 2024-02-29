@@ -62,6 +62,7 @@ Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name(
 Route::put('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
 
 Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
+Route::put('reject-all', [NewsController::class, 'rejectall'])->name('reject-all.news');
 
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');

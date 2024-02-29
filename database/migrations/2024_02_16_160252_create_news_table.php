@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('name');
             $table->text('photo');
+            $table->text('multi_photo');
             $table->text('content');
             $table->string('sinopsis');
             $table->date('upload_date');

@@ -26,6 +26,13 @@
             <input type="hidden" name="checkedIds" id="checkedIdsInput">
             <button type="submit" class="btn btn-secondary">Approved semua</button>
         </form>
+
+        <form id="rejectForm" action="{{ route('reject-all.news') }}" method="post">
+            @method('put')
+            @csrf
+            <input type="hidden" name="checkedIdss" id="checkedIdssInput">
+            <button type="submit" class="btn btn-danger">Reject semua</button>
+        </form>
     </div>
 
     <table class="table">
@@ -196,6 +203,27 @@
 
     // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
     var approvalForm = document.getElementById('approvalForm');
+    if (approvalForm) {
+        approvalForm.addEventListener('submit', function(event) {
+            sendCheckedIds();
+        });
+    }
+</script>
+
+<script>
+    // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
+    function sendCheckedIds() {
+        var checkedIds = [];
+        var checkboxes = document.querySelectorAll('.itemCheckbox:checked');
+        checkboxes.forEach(function(checkbox) {
+            checkedIds.push(checkbox.value);
+        });
+        // Setel nilai input tersembunyi dengan ID yang dicentang
+        document.getElementById('checkedIdssInput').value = JSON.stringify(checkedIds);
+    }
+
+    // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
+    var approvalForm = document.getElementById('rejectForm');
     if (approvalForm) {
         approvalForm.addEventListener('submit', function(event) {
             sendCheckedIds();
