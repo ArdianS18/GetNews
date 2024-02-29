@@ -11,6 +11,7 @@ use App\Http\Requests\NewsRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\SubCategory;
 use App\Services\NewsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +39,9 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('pages.profile.index');
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->get();
+        return view('pages.profile.index', compact('news', 'subCategories'));
     }
 
     public function createberita()
@@ -79,6 +82,11 @@ class ProfileController extends Controller
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+
+    public function editnews()
+    {
+        //
     }
 
     /**

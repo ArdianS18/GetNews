@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('news_photos', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('news_id')->constrained();
-            $table->text('multi_photo');
+            $table->text('multi_photo')->nullable();
             $table->timestamps();
         });
     }

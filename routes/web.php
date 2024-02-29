@@ -66,7 +66,6 @@ Route::put('reject-all', [NewsController::class, 'rejectall'])->name('reject-all
 
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
-Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
 //trending ke-?
@@ -77,6 +76,9 @@ Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
+
+Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
+Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
 
 Route::get('profileupdate', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');

@@ -46,8 +46,12 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
         $multi_photo = [];
         // @dd($multi_photo);
-            foreach ($data['multi_photo'] as $imge) {
-                array_push($multi_photo, $imge->store(UploadDiskEnum::NEWS_PHOTO->value , 'public'));
+
+            if ($request->hasFile('multi_photo')) {
+                foreach ($request->file('multi_photo') as $image) {
+                    $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
+                    $multi_photo[] = $stored_image;
+                }
             }
 
         // $data['multi_photo'] = $multi_photo;

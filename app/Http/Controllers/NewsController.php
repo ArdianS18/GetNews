@@ -40,6 +40,7 @@ class NewsController extends Controller
         $request->merge([
             'sub_category_id' => $news->id
         ]);
+        
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);
         return view('pages.admin.news_admin.index', compact('news','subCategories'));
