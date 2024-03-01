@@ -91,9 +91,9 @@ Route::delete('delete-news-profile/{news}', [ProfileController::class, 'deletene
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
 
-Route::get('news-singgle-post',function(){
-    return view('pages.user.news.singlepost');
-})->name('news.user');
+// Route::get('news-singgle-post',function(){
+//     return view('pages.user.news.singlepost');
+// })->name('news.user');
 
 Route::get('aboutnews', function(){
     return view('pages.user.about.index');
