@@ -31,17 +31,31 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function search(Request $request): mixed
     {
-        $query = $this->model->query();
+        // $query = $this->model->query();
 
-        if ($request->has('name')) {
-            return $query->where('name', 'LIKE', '%'.$request->name.'%')->get();
-        } elseif ($request->has('status')) {
-            return $query->where('status', $request->status)->get();
-        }
+        // if ($request->has('search')) {
+        //     return $query->where('name', 'LIKE', '%'.$request->search.'%')->get();
+        // }
 
-        return $query->when($request->sub_category_id, function($query) use ($request){
-            return $query->where('sub_category_id', $request->sub_category_id);
-        })->get();
+        // if ($request->has('stat')) {
+        //     return $query->where('status', 'LIKE', '%'.$request->stat. '%')->get();
+        // }
+
+        // return $query->when($request->sub_category_id, function($query) use ($request){
+        //     $query->where('sub_category_id', $request->sub_category_id);
+        // })->get();
+
+        return $this->model->query()
+            ->when($request->search,function($query) use ($request){
+                $query->where('name','LIKE', '%'.$request->search.'%');
+            })->when($request->status,function($query) use($request){
+                $query->where('status','LIKE', '%'.$request->status.'%');
+            })->when($request->category_id,function($query) use($request){
+                $query->where('category_id',$request->category_id);
+            })->when($request->sub_category_id,function($query) use($request){
+                $query->where('sub_category_id',$request->sub_category_id);
+            })->get();
+
     }
 
 
@@ -54,7 +68,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
      */
     public function show(mixed $id): mixed
     {
-
+        //
     }
 
 
@@ -89,6 +103,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->create($data);
+    }
+
+    public function where(mixed $id): mixed
+    {
+        return $this->model->query()
+            ->findOrFail($id);
     }
 
     /**

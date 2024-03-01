@@ -11,13 +11,14 @@
 
             <div class="d-flex gap-2">
                 <select name="status" class="form-select">
-                    <option>---</option>
+                    <option value="">Pilih Status</option>
                     <option value="panding">Panding</option>
                     <option value="approved">Approved</option>
                     <option value="notapproved">Reject</option>
                 </select>
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
+
         </form>
     </div>
 

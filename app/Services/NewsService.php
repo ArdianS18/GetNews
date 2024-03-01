@@ -9,6 +9,7 @@ use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
+use App\Models\NewsPhoto;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
@@ -80,12 +81,27 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      * @return array|bool
      */
 
-    public function update(NewsUpdateRequest $request, News $news): array|bool
+    public function update(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto): array|bool
     {
 
         $data = $request->validated();
 
         $old_photo = $news->photo;
+        $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
+        $new_multi_photo = [];
+
+        if ($request->hasFile('multi_photo')) {
+            foreach ($request->file('multi_photo') as $image) {
+                $this->remove($image);
+                $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
+                $old_multi_photo[] = $stored_image;
+            }
+        }
+
+        // $photos_to_delete = array_diff($old_multi_photo, $new_multi_photo);
+        // foreach ($photos_to_delete as $photo) {
+        //     $this->remove($photo);
+        // }
 
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
@@ -96,10 +112,14 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => auth()->id(),
             'name' => $data['name'],
             'photo' => $old_photo,
+            'multi_photo' => $new_multi_photo ?: $old_multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'sinopsis' => $data['sinopsis'],
-            'sub_category_id' => $data['sub_category_id']
+            'category_id' => $data['category_id'],
+            'tags' => $data['tags'],
+            'upload_date' => $data['upload_date'],
+            'sub_category_id' => $data['sub_category_id'],
         ];
     }
 }

@@ -8,9 +8,11 @@ use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\NewsUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\NewsPhoto;
 use App\Models\SubCategory;
 use App\Services\NewsService;
 use Illuminate\Http\RedirectResponse;
@@ -58,9 +60,6 @@ class ProfileController extends Controller
 
     public function store(NewsRequest $request)
     {
-        // $data['user_id'] = auth()->id();
-        // dd($request);
-
         $data = $this->NewsService->store($request);
         $newsId = $this->news->store($data)->id;
 
@@ -71,9 +70,29 @@ class ProfileController extends Controller
             ]);
         }
 
-        // $this->news->store($store);
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
+
+    public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto)
+    {
+        $data = $this->NewsService->update($request, $news, $newsPhoto);
+        $this->news->update($news->id, $data);
+
+        if ($request->hasFile('multi_photo')) {
+
+            $newsPhoto->where('news_id', $news->id)->delete();
+
+            foreach ($data['multi_photo'] as $photo) {
+                $newsPhoto->create([
+                    'news_id' => $news->id,
+                    'multi_photo' => $photo,
+                ]);
+            }
+        }
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
+    }
+
     /**
      * Display the user's profile form.
      */
@@ -84,9 +103,15 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function editnews()
+    public function editnews($newsId)
     {
-        //
+        $news = $this->news->where($newsId);
+
+        $subCategories = $this->subCategory->get();
+        $categories = $this->category->get();
+        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+
+        return view('pages.profile.update', compact('news','subCategories','categories','newsPhoto'));
     }
 
     /**
@@ -124,5 +149,10 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function deletenews()
+    {
+
     }
 }

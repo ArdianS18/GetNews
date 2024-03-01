@@ -9,6 +9,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
@@ -74,16 +75,21 @@ Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.f
 
 Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+
 Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
 
 Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
-Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
+Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
+// Route::put('update-news-profile/{news}', [ProfileController::class, 'updatenews'])->name('profile.news.update');
+Route::delete('delete-news-profile/{news}', [ProfileController::class, 'deletenews'])->name('profile.news.delete');
 
-Route::get('profileupdate', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
-Route::get('news-singgle-post', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
 Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
+
+//comment
+Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 ?>

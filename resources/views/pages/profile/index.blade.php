@@ -20,7 +20,7 @@
             <div class="img-profile"></div><img src="assets/img/news/trending-3.webp" alt="Profile Image" width="80px" style="border-radius: 50%;" />
         </div>
         <div style="margin-left: 2%;">
-            <h4 class="mb-0">Hi, Daffa Prasetya</h4>
+            <h4 class="mb-0">{{ Auth::user()->name }}</h4>
             <div class="text-center" style="margin-top: 2%">
                 <button class="text-white btn btn-sm" style="background-color: #0F4D8A; border-radius: 10px; padding-left: 3rem; padding-right: 3rem;">
                     Edit Profile
@@ -270,9 +270,17 @@
                                 </div>
                                 <div class="d-flex justify-content-end mt-4">
                                     <a class="btn m-2" style="background-color: #0F4D8A;" href="{{ route('profile.news.edit', ['id' => $news->id]) }}"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff"/></svg></a>
+                                    <a class="btn m-2" style="background-color: #ebb110;" href="{{ route('news.user', ['news' => $news->id]) }}"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff"/></svg></a>
                                     {{-- <button class="btn m-2" style="background-color: #0F4D8A;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff"/></svg></button> --}}
                                     <button class="btn m-2" style="background-color: #0F4D8A;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/></svg></button>
-                                    <button class="btn m-2" style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/></svg></button>
+
+                                    <form action="{{ route('news.destroy', ['news' => $news->id]) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+
+                                        <button class="btn m-2" style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/></svg></button>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
