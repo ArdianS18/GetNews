@@ -41,20 +41,9 @@ class ProfileController extends Controller
     {
         $subCategories = $this->subCategory->get();
         $news = $this->news->get();
-        return view('pages.profile.index', compact('news', 'subCategories'));
+        return view('pages.author.index', compact('news', 'subCategories'));
     }
 
-    public function createberita()
-    {
-        $subCategories = $this->subCategory->get();
-        $categories = $this->category->get();
-        $news = $this->news->get();
-        return view('pages.profile.create', compact('news','subCategories','categories'));
-    }
-
-    public function aboutuser(){
-        return view('pages.user.about.index');
-    }
 
     public function store(NewsRequest $request)
     {

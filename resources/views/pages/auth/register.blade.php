@@ -21,9 +21,9 @@
                      </div>
                      <div class="col-md-12 col-lg-6 offset-xl-1">
                          <form method="POST" action="{{ route('register') }}">
-                             @csrf
+                            @csrf
                              <div class="row align-items-center justify-content-center justify-content-lg-start">
-                                 <h2>Daftar Akun GetMedia.id</h2>
+                                <h2>Daftar Akun GetMedia.id</h2>
                              </div>
 
 

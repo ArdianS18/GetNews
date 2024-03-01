@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Enums\NewsPrimaryEnum;
 use App\Enums\NewsStatusEnum;
@@ -26,12 +28,17 @@ class NewsController extends Controller
     private NewsService $NewsService;
     private $newsTrendingService;
 
-    public function __construct(NewsInterface $news, SubCategoryInterface $subCategory, NewsService $NewsService, NewsTrendingService $newsTrendingService)
+    private CategoryInterface $category;
+    private NewsPhotoInterface $newsPhoto;
+
+    public function __construct(NewsInterface $news, SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsTrendingService $newsTrendingService,  NewsPhotoInterface $newsPhoto)
     {
         $this->news = $news;
         $this->subCategory = $subCategory;
         $this->NewsService = $NewsService;
+        $this->category = $category;
         $this->newsTrendingService = $newsTrendingService;
+        $this->newsPhoto = $newsPhoto;
 
     }
 
@@ -46,9 +53,14 @@ class NewsController extends Controller
         return view('pages.admin.news_admin.index', compact('news','subCategories'));
     }
 
-    public function usernews(){
-        return view('pages.user.news.singlepost');
+    public function createnews()
+    {
+        $subCategories = $this->subCategory->get();
+        $categories = $this->category->get();
+        $news = $this->news->get();
+        return view('pages.author.news.create', compact('news','subCategories','categories'));
     }
+
     /**
      * Display a listing of the resource.
      */

@@ -73,17 +73,40 @@ Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->na
 Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
 
 Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
-Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
+// Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('profilecreate', [NewsController::class, 'createnews'])->name('profile.berita.create');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
 
 Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
 Route::put('news/{news}', [NewsController::class, 'update'])->name('news.update');
 
-Route::get('profileupdate', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
-Route::get('news-singgle-post', [NewsController::class, 'usernews'])->name('news.user');
-Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
+Route::get('news-singgle-post',function(){
+    return view('pages.user.news.singlepost');
+})->name('news.user');
 
+Route::get('aboutnews', function(){
+    return view('pages.user.about.index');
+})->name('about.user');
+
+Route::get('statistic', function(){
+    return view('pages.author.statistic.index');
+})->name('statistic.author');
+
+Route::get('status', function(){
+    return view('pages.author.status.index');
+})->name('status.author');
+
+Route::get('profile', function(){
+    return view('pages.author.index');
+})->name('profile.index');
+
+Route::get('contact-us', function(){
+    return view('pages.user.contact-us.index');
+})->name('contact.user');
+
+Route::get('profileuser', function(){
+    return view('pages.user.profile.index');
+})->name('profile.user');
 ?>

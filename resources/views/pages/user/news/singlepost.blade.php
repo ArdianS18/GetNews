@@ -1,4 +1,4 @@
-@extends('layouts.user.app')
+@extends('layouts.user-profile.app')
 
 @section('content')
     
@@ -139,21 +139,21 @@
             </div>
         </div>
         <div id="cmt-form">
-        <div class="mb-30">
-        <h3 class="comment-box-title">Tinggalkan Komentar</h3>
-        </div>
-        <form action="#" class="comment-form">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="form-group">
-                <textarea name="messages" id="messages" cols="30" rows="10" placeholder="Please Enter Your Comment Here"></textarea>
+            <div class="mb-30">
+                <h3 class="comment-box-title">Tinggalkan Komentar</h3>
+            </div>
+            <form action="#" class="comment-form">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                    <textarea name="messages" id="messages" cols="30" rows="10" placeholder="Please Enter Your Comment Here"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <button class="btn-two" style="background-color: #0F4D8A">Kirim Komentar</button>
                 </div>
             </div>
-            <div class="col-md-12 mt-3">
-                <button class="btn-two" style="background-color: #0F4D8A">Kirim Komentar</button>
-            </div>
-        </div>
-        </form>
+            </form>
         </div>
         </div>
         <div class="col-lg-4">
