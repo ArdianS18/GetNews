@@ -3,20 +3,25 @@
 @section('content')
     <div class="d-flex gap-2 mb-3 mt-2">
         <form class="d-flex gap-2">
-            <div class="position-relative d-flex">
-                <input type="search" name="name" class="form-control search-chat py-2 ps-5" placeholder="Search">
+            <div>
+                <div class="position-relative d-flex">
+                <input type="search" name="search" class="form-control search-chat py-2 ps-5" placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                </div>
             </div>
 
-            <div class="d-flex gap-2">
-                <select name="status" class="form-select">
-                    <option>---</option>
-                    <option value="panding">Panding</option>
-                    <option value="active">Approved</option>
-                    <option value="nonactive">Reject</option>
-                    <option value="primary">Primary</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Filter</button>
+            <div>
+                <div class="d-flex gap-2">
+                    {{-- <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search"> --}}
+                    <select name="status" class="form-select">
+                        <option value="">Pilih Status</option>
+                        <option value="panding">Panding</option>
+                        <option value="active">Approved</option>
+                        <option value="nonactive">Reject</option>
+                        <option value="primary">Primary</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
             </div>
         </form>
 

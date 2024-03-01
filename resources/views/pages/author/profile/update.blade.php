@@ -75,16 +75,16 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container" style="margin-top: 3%;">
-
-    <h2 class="text-center">Tambah Berita</h2>
+    <h2 class="text-center">Update Berita</h2>
         <div class="news-card-a mt-5">
             <div class="container" style="padding: 3%;">
-                <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
                     <div class="row justify-content-between">
                     <div class="col-lg-6 col-md-12 from-outline">
                         <label class="form-label" for="nomor">Judul Berita</label>
-                        <input type="text" id="name" name="name" placeholder="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        <input type="text" id="name" name="name" placeholder="name" value="{{ $news->name }}" class="form-control @error('name') is-invalid @enderror">
                         @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -94,7 +94,7 @@
 
                     <div class="col-lg-6 col-md-12 from-outline">
                         <label class="form-label" for="photo">Thumbnail Berita</label>
-                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="text-center form-control @error('photo') is-invalid @enderror">
+                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ $news->photo }}" class="text-center form-control @error('photo') is-invalid @enderror">
                         @error('photo')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -107,7 +107,7 @@
 
                         <div class="col-lg-6 col-md-12 col-span-3 from-outline">
                             <label class="form-label" for="email">Sinopsis berita</label>
-                            <textarea name="sinopsis" id="sinopsis" rows="7" value="{{ old('sinopsis') }}"></textarea>
+                            <textarea name="sinopsis" id="sinopsis" rows="7" value="{{ $news->sinopsis }}">{{ $news->sinopsis }}</textarea>
                             @error('sinopsis')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
@@ -119,7 +119,7 @@
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Tags</label>
-                                <input type="text" id="tags" name="tags" placeholder="tags" value="{{ old('tags') }}" class="form-control @error('tags') is-invalid @enderror">
+                                <input type="text" id="tags" name="tags" placeholder="tags" value="{{ $news->tags }}" class="form-control @error('tags') is-invalid @enderror">
                                 @error('tags')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{$message}}</strong>
@@ -129,8 +129,9 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
-                                <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id')}}" aria-label="Default select example">
-                                    <option selected>pilih kategori</option>
+                                <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" aria-label="Default select example">
+                                    <option>pilih kategori</option>
+                                    <option value="{{ $news->category->id }}" selected>{{ $news->category->name }}</option>
                                     @foreach ($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @endforeach
@@ -144,7 +145,7 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                                <input type="date" id="upload_date" name="upload_date" placeholder="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                                <input type="date" id="upload_date" name="upload_date" placeholder="date" value="{{ $news->upload_date }}" class="form-control @error('date') is-invalid @enderror">
                                 @error('date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{$message}}</strong>
@@ -160,7 +161,7 @@
                         <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: 200px;">
                             <label class="form-label" for="content">Content</label>
                             <textarea id="content" name="content" placeholder="content"
-                            value="{{ old('content') }}"  class="form @error('content') is-invalid @enderror"></textarea>
+                            value="{{ $news->content }}"  class="form @error('content') is-invalid @enderror">{{$news->content}}</textarea>
                             @error('content')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
@@ -173,8 +174,9 @@
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <select class="form-select @error('sub_category_id') is-invalid @enderror" name="sub_category_id" value="{{ old('sub_category_id')}}" aria-label="Default select example">
-                                    <option selected>pilih sub kategori</option>
+                                <select class="form-select @error('sub_category_id') is-invalid @enderror" name="sub_category_id" value="{{ $news->subCategory->id }}" aria-label="Default select example">
+                                    <option>pilih sub kategori</option>
+                                    <option value="{{ $news->subCategory->id }}" selected>{{ $news->subCategory->name }}</option>
                                     @foreach ($subCategories as $subCategory)
                                         <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
                                     @endforeach
@@ -189,7 +191,9 @@
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                                 <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
-                                <input type="hidden" name="news_id" value="64116f4f-7829-3442-a8c2-045d96fe6d85">
+                                @foreach ($newsPhoto as $photo)
+                                    <img width="100px" src="{{ asset('storage/' . $photo->multi_photo) }}" alt="{{ $photo->multi_photo }}">
+                                @endforeach
                             </div>
 
                         </div>

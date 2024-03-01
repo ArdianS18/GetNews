@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Repositories\NewsRepository;
 use App\Enums\NewsPrimaryEnum;
 use App\Enums\NewsStatusEnum;
 use App\Enums\UploadDiskEnum;
@@ -13,6 +16,7 @@ use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsStatusRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
+use App\Models\NewsPhoto;
 use App\Models\User;
 use App\Services\NewsService;
 use App\Services\NewsTrendingService;
@@ -25,51 +29,68 @@ class NewsController extends Controller
 {
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
+    private UserInterface $user;
+    private CommentInterface $comment;
     private NewsService $NewsService;
-    private $newsTrendingService;
 
     private CategoryInterface $category;
     private NewsPhotoInterface $newsPhoto;
+    private $newsTrendingService;
 
-    public function __construct(NewsInterface $news, SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsTrendingService $newsTrendingService,  NewsPhotoInterface $newsPhoto)
+    protected $newsRepositoty;
+
+    public function __construct(CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
     {
         $this->news = $news;
+        $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
+        $this->user = $user;
+        $this->comment = $comment;
+        $this->category = $category;
         $this->NewsService = $NewsService;
         $this->category = $category;
         $this->newsTrendingService = $newsTrendingService;
         $this->newsPhoto = $newsPhoto;
+
+        $this->newsRepositoty = $newsRepository;
 
     }
 
     public function see(Request $request, News $news)
     {
         $request->merge([
+            'category_id' => $news->id,
             'sub_category_id' => $news->id
         ]);
-        
+
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);
         return view('pages.admin.news_admin.index', compact('news','subCategories'));
     }
 
-    public function createnews()
-    {
-        $subCategories = $this->subCategory->get();
-        $categories = $this->category->get();
-        $news = $this->news->get();
-        return view('pages.author.news.create', compact('news','subCategories','categories'));
-    }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $subCategories = $this->subCategory->get();
         $news = $this->news->get();
         return view('pages.news.index', compact('news','subCategories'));
     }
+
+    public function usernews($id)
+    {
+        $news = $this->news->where($id);
+
+        $comments = $this->comment->get()->whereIn('news_id', $news);
+        $subCategories = $this->subCategory->get();
+        $categories = $this->category->get();
+        $users = $this->user->get();
+        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments'));
+    }
+    /**
+     * Display a listing of the resource.
+     */
 
     public function approved(News $news)
     {
@@ -199,11 +220,22 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news)
+    public function destroy(News $news, NewsPhoto $newsPhoto)
     {
-        $this->news->delete($news->id);
-        $this->NewsService->remove($news->photo);
+        $relatedPhotos = $newsPhoto->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        foreach ($relatedPhotos as $photo) {
+            $this->NewsService->remove($photo->multi_photo);
+            $photo->delete();
+        }
+
+        $news->delete();
 
         return back();
     }
+
+
+
 }
