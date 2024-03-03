@@ -126,4 +126,7 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 //comment
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 
+Route::get('contact-us', function() {
+    return view('pages.user.contact.index');
+})->name('contact.user');
 ?>
