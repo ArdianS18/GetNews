@@ -68,7 +68,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3 col-sm-12 col-12 text-md-end order-md-2 order-sm-3 order-3">
-                            <a href="#cmt-form" class="reply-btn">Reply</a>
+                            {{-- <a href="#cmt-form" class="reply-btn">Reply</a> --}}
+                            <a href="javascript:void(0)" class="reply-btn" onclick="showReplyForm({{ $comment->id }})">Reply</a>
                             </div>
                             <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
                                 <div class="comment-text">
@@ -78,8 +79,16 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="reply-form-{{ $comment->id }}" class="reply-form" style="display: none;">
+                    <form action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}" method="post">
+                        @csrf
+                        <textarea name="content" placeholder="Type your reply here"></textarea>
+                        <input type="submit" value="Submit Reply">
+                    </form>
+                </div>
                 @empty
-                @endforelse
+             @endforelse
             </div>
         </div>
         <div id="cmt-form">
@@ -93,7 +102,6 @@
             <div class="col-lg-12">
                 <div class="form-group">
                 <textarea name="content" id="messages" cols="30" rows="10" placeholder="Please Enter Your Comment Here"></textarea>
-
                 </div>
             </div>
             <div class="col-md-12 mt-3">
@@ -241,4 +249,19 @@
         </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function showReplyForm(commentId) {
+            var replyForm = document.getElementById('reply-form-' + commentId);
+            if (replyForm) {
+                if (replyForm.style.display === 'block') {
+                    replyForm.style.display = 'none'; // If the form is open, close it
+                } else {
+                    replyForm.style.display = 'block'; // If the form is closed, open it
+                }
+            }
+        }
+    </script>
 @endsection

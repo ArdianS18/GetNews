@@ -25,12 +25,14 @@ class UserController extends Controller
     public function index(Request $request, User $user): View
     {
         $request->merge([
-            'name' => $user->name,
-            'status' => $user->status
+            'sub_category_id' => $user->id
         ]);
 
+        $search = $request->input('search');
+        $status = $request->input('status');
+
         $users = $this->user->search($request);
-        return view('pages.admin.user.index', compact('users'));
+        return view('pages.admin.user.index', compact('users', 'search', 'status'));
     }
 
     public function approved(User $user)

@@ -17,155 +17,150 @@
             }
     </style>
 @endsection
-@section('contentt')
+@section('content')
 
 <div class="container">
+        <div class="news-card-a mt-1">
+            <div  style="padding: 1%;">
+                <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row justify-content-between">
+                    <div class="col-lg-6 col-md-12 from-outline">
+                        <label class="form-label" for="nomor">Judul Berita</label>
+                        <input type="text" id="name" name="name" placeholder="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-    <div class="container" style="margin-top: 3%;">
+                    <div class="col-lg-6 col-md-12 from-outline">
+                        <label class="form-label" for="photo">Thumbnail Berita</label>
+                        <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="text-center form-control @error('photo') is-invalid @enderror">
+                        @error('photo')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    </div>
 
-        {{-- <h2 class="text-center">Tambah Berita</h2> --}}
-            <div class="news-card-a mt-5">
-                <div class="container" style="padding: 3%;">
-                    <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="row justify-content-between">
-                        <div class="col-lg-6 col-md-12 from-outline">
-                            <label class="form-label" for="nomor">Judul Berita</label>
-                            <input type="text" id="name" name="name" placeholder="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                            @error('name')
+                    <div class="row justify-content-between mt-2">
+
+                        <div class="col-lg-6 col-md-12 col-span-3 from-outline">
+                            <label class="form-label" for="email">Sinopsis berita</label>
+                            <textarea name="sinopsis" id="sinopsis" rows="8" class="form-control" value="{{ old('sinopsis') }}"></textarea>
+                            @error('sinopsis')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
 
-                        <div class="col-lg-6 col-md-12 from-outline">
-                            <label class="form-label" for="photo">Thumbnail Berita</label>
-                            <input type="file" id="photo" name="photo" placeholder="photo" value="{{ old('photo') }}" class="text-center form-control @error('photo') is-invalid @enderror">
-                            @error('photo')
+                        <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+
+                            <div class="">
+                                <label class="form-label" for="password_confirmation">Tags</label>
+                                <input type="text" id="tags" name="tags" placeholder="tags" value="{{ old('tags') }}" class="form-control @error('tags') is-invalid @enderror">
+                                @error('tags')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <label class="form-label" for="password_confirmation">Kategori</label>
+                                <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id')}}" aria-label="Default select example">
+                                    <option selected>pilih kategori</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="mt-2">
+                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                                <input type="date" id="upload_date" name="upload_date" placeholder="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                                @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-between mt-2">
+
+                        <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: auto;">
+                            <label class="form-label" for="content">Content</label>
+                            <textarea id="content" name="content" placeholder="content"
+                            value="{{ old('content') }}"  class="form "></textarea>
+                            @error('content')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
-                        </div>
 
-                        <div class="row justify-content-between mt-2">
 
-                            <div class="col-lg-6 col-md-12 col-span-3 from-outline">
-                                <label class="form-label" for="email">Sinopsis berita</label>
-                                <textarea name="sinopsis" id="sinopsis" rows="7" class="form-control" value="{{ old('sinopsis') }}"></textarea>
-                                @error('sinopsis')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
+                        <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+
+                            <div class="">
+                                <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                                <select class="form-select @error('sub_category_id') is-invalid @enderror" name="sub_category_id" value="{{ old('sub_category_id')}}" aria-label="Default select example">
+                                    <option selected>pilih sub kategori</option>
+                                    @foreach ($subCategories as $subCategory)
+                                        <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('sub_category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{$message}}</strong>
                                 </span>
                                 @enderror
                             </div>
 
-                            <div class="col-lg-6 col-md-12 row-span-1 from-outline">
-
-                                <div class="">
-                                    <label class="form-label" for="password_confirmation">Tags</label>
-                                    <input type="text" id="tags" name="tags" placeholder="tags" value="{{ old('tags') }}" class="form-control @error('tags') is-invalid @enderror">
-                                    @error('tags')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-2">
-                                    <label class="form-label" for="password_confirmation">Kategori</label>
-                                    <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id')}}" aria-label="Default select example">
-                                        <option selected>pilih kategori</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="mt-2">
-                                    <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                                    <input type="date" id="upload_date" name="upload_date" placeholder="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
-                                    @error('date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
+                            <div class="mt-2">
+                                <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
+                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
+                                <input type="hidden" name="news_id" value="64116f4f-7829-3442-a8c2-045d96fe6d85">
                             </div>
+
                         </div>
 
-                        <div class="row justify-content-between mt-2">
-
-                            <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: auto;">
-                                <label class="form-label" for="content">Content</label>
-                                <textarea id="content" name="content" placeholder="content"
-                                value="{{ old('content') }}"  class="form "></textarea>
-                                @error('content')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                        <div class="d-flex justify-content-between">
 
 
-                            <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                            <button type="submit" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
+                                Kembali
+                            </button>
 
-                                <div class="">
-                                    <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                    <select class="form-select @error('sub_category_id') is-invalid @enderror" name="sub_category_id" value="{{ old('sub_category_id')}}" aria-label="Default select example">
-                                        <option selected>pilih sub kategori</option>
-                                        @foreach ($subCategories as $subCategory)
-                                            <option value="{{$subCategory->id}}">{{$subCategory->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('sub_category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{$message}}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                            <div class="">
 
-                                <div class="mt-2">
-                                    <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                    <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
-                                    <input type="hidden" name="news_id" value="64116f4f-7829-3442-a8c2-045d96fe6d85">
-                                </div>
-
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-
-
-                                <button type="submit" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                                    Kembali
+                                <button type="submit" class="btn btn-md text-black m-2 justify-content-end" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
+                                        Ketentuan
                                 </button>
 
-                                <div class="">
-
-                                    <button type="submit" class="btn btn-md text-black m-2 justify-content-end" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                                            Ketentuan
-                                    </button>
-
-                                    <button type="submit" class="btn btn-md text-white m-2 justify-content-end" style="padding-left: 1rem; padding-right: 1rem; background-color: #0F4D8A;">
-                                        Upload
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn-md text-white m-2 justify-content-end" style="padding-left: 1rem; padding-right: 1rem; background-color: #0F4D8A;">
+                                    Upload
+                                </button>
                             </div>
-                            </div>
-                    </form>
-                </div>
+                        </div>
+                        </div>
+                </form>
             </div>
-    </div>
-
+        </div>
 </div>
+
 
 @endsection
 
@@ -190,7 +185,6 @@
             ]
         });
     });
-
 </script>
 
 <script src="{{ asset('assets/dist/imageuploadify.min.js')}}"></script>

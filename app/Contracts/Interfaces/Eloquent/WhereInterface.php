@@ -2,6 +2,8 @@
 
 namespace App\Contracts\Interfaces\Eloquent;
 
+use Illuminate\Http\Request;
+
 interface WhereInterface
 {
     /**
@@ -10,5 +12,5 @@ interface WhereInterface
      * @return mixed
      */
 
-    public function where(mixed $id): mixed;
+    public function where(Request $request): mixed;
 }

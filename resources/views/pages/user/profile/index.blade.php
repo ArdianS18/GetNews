@@ -1,4 +1,4 @@
-@extends('layouts.user-profile.app')
+@extends('layouts.author.sidebar')
 
 @section('style')
     <style>
@@ -16,7 +16,7 @@
     </style>
 @endsection
 
-@section('content')
+@section('contentt')
 
 
     <div class="container p-5" >

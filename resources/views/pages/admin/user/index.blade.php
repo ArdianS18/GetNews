@@ -5,20 +5,20 @@
         <form class="d-flex gap-2">
 
             <div class="position-relative">
-                <input type="search" name="name" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search">
+                <input type="search" name="search" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search" value="{{ request('search') }}">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
             </div>
 
             <div class="d-flex gap-2">
                 <select name="status" class="form-select">
-                    <option value="">Pilih Status</option>
+                    <option value="{{ request('status') }}">Pilih Status</option>
                     <option value="panding">Panding</option>
                     <option value="approved">Approved</option>
                     <option value="notapproved">Reject</option>
+                    <option value="">Tampilkan semua</option>
                 </select>
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
-
         </form>
     </div>
 

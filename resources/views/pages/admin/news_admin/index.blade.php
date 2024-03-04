@@ -5,7 +5,7 @@
         <form class="d-flex gap-2">
             <div>
                 <div class="position-relative d-flex">
-                <input type="search" name="search" class="form-control search-chat py-2 ps-5" placeholder="Search">
+                <input type="search" name="search" class="form-control search-chat py-2 ps-5" placeholder="Search" value="{{ request('search') }}">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                 </div>
             </div>
@@ -14,11 +14,12 @@
                 <div class="d-flex gap-2">
                     {{-- <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search"> --}}
                     <select name="status" class="form-select">
-                        <option value="">Pilih Status</option>
+                        <option value="{{ request('status') }}">Pilih Status</option>
                         <option value="panding">Panding</option>
                         <option value="active">Approved</option>
                         <option value="nonactive">Reject</option>
                         <option value="primary">Primary</option>
+                        <option value="">Tampilkan semua</option>
                     </select>
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
