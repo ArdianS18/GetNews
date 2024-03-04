@@ -63,9 +63,12 @@ class NewsController extends Controller
             'sub_category_id' => $news->id
         ]);
 
+        $search = $request->input('search');
+        $status = $request->input('status');
+
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);
-        return view('pages.admin.news_admin.index', compact('news','subCategories'));
+        return view('pages.admin.news_admin.index', compact('news','subCategories', 'search', 'status'));
     }
 
     public function createnews()

@@ -48,6 +48,15 @@ class CommentController extends Controller
         return back();
     }
 
+    public function reply(CommentRequest $request, News $news ,$commentId)
+    {
+        $data = $this->commentService->store($request);
+        $data['news_id'] = $news->id;
+        $data['parent_id'] = $commentId;
+        $this->comment->store($data);
+        return back();
+    }
+
     /**
      * Display the specified resource.
      */

@@ -10,8 +10,14 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'content','news_id'];
+    protected $fillable = ['user_id', 'content','news_id', 'parent_id'];
     protected $table = 'comments';
+
+
+    public function replies()
+    {
+        return $this->hasMany(Comment::class, 'parent_id');
+    }
 
     /**
      * Get the User that owns the Comment

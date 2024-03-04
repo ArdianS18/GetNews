@@ -46,6 +46,13 @@ class ProfileController extends Controller
         return view('pages.author.index', compact('news', 'subCategories'));
     }
 
+    public function createberita()
+    {
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->get();
+        $categories = $this->category->get();
+        return view('pages.author.news.create', compact('news', 'subCategories', 'categories'));
+    }
 
     public function store(NewsRequest $request)
     {

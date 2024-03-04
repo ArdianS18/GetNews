@@ -82,10 +82,10 @@
                 </div>
             </div>
         </div>
-
-@yield('content')
     </div>
 </div>
+
+
 
 
 <div class="container mt-5">
@@ -149,17 +149,7 @@
                             1.203</li>
                     </ul>
                 </div>
-                <div class="news-card-img col-md-12 col-lg-3 mt-5">
-                    <img src="assets/img/news/news-50.webp" class="img-home" alt="Image" />
-                </div>
-                <div class="news-card-info col-md-12 col-lg-3 mt-5">
-                    <h5 class="news-cat"><a href="business-details.html">Jiraiya Banks Wants to Teach You How to Build a House</a></h5>
-                    <p>Jiraiya Banks Wants to Teach You How to Build a House</p>
-                    <ul class="row list-style">
-                        <li class="col-md-12 col-lg-6"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/></svg>
-                        <a href="news-by-date.html" class="md-5">Feb 03, 2023</a></li>
-                        <li class="col-md-12 col-lg-6"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M198 448h172c15.7 0 28.6-9.6 34.2-23.4l57.1-135.4c1.7-4.4 2.6-9 2.6-14v-38.6c0-21.1-17-44.6-37.8-44.6H306.9l18-81.5.6-6c0-7.9-3.2-15.1-8.3-20.3L297 64 171 191.3c-6.8 6.9-11 16.5-11 27.1v192c0 21.1 17.2 37.6 38 37.6z" fill="#0f4d89"/><path d="M48 224h64v224H48z" fill="currentColor"/></svg>
-                            <a href="news-by-date.html" class="md-5">1.203</a></li>
+
                 <div class="news-card-img col-md-12 col-lg-3 mt-5">
                     <img src="assets/img/news/news-50.webp" class="img-home" width="290px" height="180px" alt="Image" />
                 </div>
@@ -173,12 +163,29 @@
                             1.203</li>
                     </ul>
                 </div>
+
                 <div class="news-card-img col-md-12 col-lg-3 mt-5">
+                    <img src="assets/img/news/news-50.webp" class="img-home" width="290px" height="180px" alt="Image" />
+                </div>
+                <div class="news-card-info col-md-12 col-lg-3 mt-5">
+                    <h5 class="news-cat">Jiraiya Banks Wants to Teach You How to Build a House</h5>
+                    <p>Jiraiya Banks Wants to Teach You How to Build a House</p>
+                    <ul class="row list-style">
+                        <li class="col-md-12 col-lg-6 mb-5"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/></svg>
+                        Feb 03, 2023</li>
+                        <li class="col-md-12 col-lg-6"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M198 448h172c15.7 0 28.6-9.6 34.2-23.4l57.1-135.4c1.7-4.4 2.6-9 2.6-14v-38.6c0-21.1-17-44.6-37.8-44.6H306.9l18-81.5.6-6c0-7.9-3.2-15.1-8.3-20.3L297 64 171 191.3c-6.8 6.9-11 16.5-11 27.1v192c0 21.1 17.2 37.6 38 37.6z" fill="#0f4d89"/><path d="M48 224h64v224H48z" fill="currentColor"/></svg>
+                            1.203</li>
+                    </ul>
+                </div>
+
+
+
+
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         var options = {
           series: [{

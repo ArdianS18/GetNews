@@ -185,7 +185,6 @@
             ]
         });
     });
-
 </script>
 
 <script src="{{ asset('assets/dist/imageuploadify.min.js')}}"></script>

@@ -124,6 +124,7 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 
 //comment
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
+Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
 
 Route::get('dashboard', function(){
     return view('pages.user.index');

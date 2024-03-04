@@ -98,11 +98,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             }
         }
 
-        // $photos_to_delete = array_diff($old_multi_photo, $new_multi_photo);
-        // foreach ($photos_to_delete as $photo) {
-        //     $this->remove($photo);
-        // }
-
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
             $old_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
