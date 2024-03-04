@@ -1,4 +1,3 @@
-{{-- @extends('layouts.user.app') --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +57,7 @@
             @include('layouts.admin.header')
             <!--  Header End -->
             <div class="container-fluid">
-                @yield('contentt')
+                @yield('content')
             </div>
             
             
@@ -305,10 +304,7 @@
             return formattedDate;
         }
     </script>
-    <div class="container">
-        @include('layouts.user.footer')
-    </div>
-   
+
     @yield('script')
     <script>
         $('.preloader').fadeOut();

@@ -2,16 +2,16 @@
 @section('content')
 <div class="trending-news-box">
     <div class="row gx-5">
-        <div class="col-xxl-2 col-xl-3 col-lg-3 col-md-4">
+        <div class="col-xxl-12 col-xl-3 col-lg-3 col-md-4 d-flex justify-content-center">
+            <div class="trending-prev" style="margin-right: 2%;"><i class="flaticon-left-arrow"></i></div>                 
             <h4>Trending Now</h4>
-            <div class="trending-prev"><i class="flaticon-left-arrow"></i></div>
-            <div class="trending-next"><i class="flaticon-right-arrow"></i></div>
+            <div class="trending-next" style="margin-left: 2%;"><i class="flaticon-right-arrow"></i></div>
         </div>
-        <div class="col-xxl-10 col-xl-9 col-lg-9 col-md-8">
+        <div class="col-xxl-12 col-xl-9 col-lg-9 col-md-8">
             <div class="trending-news-slider swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide news-card-one">
-                        <div class="news-card-img">
+                        <div class="news-card-img-dashboard">
                             <img src="assets/img/news/trending-1.webp" alt="Image" />
                         </div>
                         <div class="news-card-info">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="swiper-slide news-card-one">
-                        <div class="news-card-img">
+                        <div class="news-card-img-dashboard">
                             <img src="assets/img/news/trending-2.webp" alt="Image" />
                         </div>
                         <div class="news-card-info">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="swiper-slide news-card-one">
-                        <div class="news-card-img">
+                        <div class="news-card-img-dashboard">
                             <img src="assets/img/news/trending-3.webp" alt="Image" />
                         </div>
                         <div class="news-card-info">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="swiper-slide news-card-one">
-                        <div class="news-card-img">
+                        <div class="news-card-img-dashboard">
                             <img src="assets/img/news/trending-4.webp" alt="Image" />
                         </div>
                         <div class="news-card-info">

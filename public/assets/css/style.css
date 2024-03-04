@@ -622,9 +622,13 @@ select {
   background-color: var(--secondaryColor);
 }
 
+:root{
+
+}
+
 .btn-two {
   color: var(--whiteColor);
-  background-color: var(--secondaryColor);
+  background-color: var(--color-active);
 }
 .btn-two:before {
   background-color: var(--primaryColor);
@@ -2321,8 +2325,15 @@ select {
   height: 100px;
   border-radius: 50%;
 }
-.news-card-one .news-card-img img {
-  /* border-radius: 50%; */
+
+.news-card-one .news-card-img-dashboard {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.news-card-one .news-card-img-dashboard img {
+  border-radius: 50%;
 }
 .news-card-one .news-card-info {
   width: calc(100% - 130px);

@@ -80,7 +80,6 @@ Route::get('profilecreate', [NewsController::class, 'createnews'])->name('profil
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
-Route::get('profilecreate', [ProfileController::class, 'createberita'])->name('profile.berita.create');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
 
 Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
@@ -93,7 +92,7 @@ Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('pro
 
 Route::get('news-singgle-post',function(){
     return view('pages.user.news.singlepost');
-})->name('news.user');
+})->name('news.singgle-post');
 
 Route::get('aboutnews', function(){
     return view('pages.user.about.index');
@@ -126,4 +125,15 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 //comment
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 
+Route::get('dashboard', function(){
+    return view('pages.user.index');
+})->name('dashboard.user');
+
+Route::get('author', function(){
+    return view('pages.user.author.index');
+})->name('author.user');
+
+Route::get('author-detail', function(){
+    return view('pages.user.author.detail-author');
+})->name('author.detail');
 ?>
