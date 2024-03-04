@@ -93,7 +93,6 @@
             <div class="col-lg-12">
                 <div class="form-group">
                 <textarea name="content" id="messages" cols="30" rows="10" placeholder="Please Enter Your Comment Here"></textarea>
-
                 </div>
             </div>
             <div class="col-md-12 mt-3">

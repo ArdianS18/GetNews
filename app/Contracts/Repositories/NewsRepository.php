@@ -31,20 +31,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function search(Request $request): mixed
     {
-        // $query = $this->model->query();
-
-        // if ($request->has('search')) {
-        //     return $query->where('name', 'LIKE', '%'.$request->search.'%')->get();
-        // }
-
-        // if ($request->has('stat')) {
-        //     return $query->where('status', 'LIKE', '%'.$request->stat. '%')->get();
-        // }
-
-        // return $query->when($request->sub_category_id, function($query) use ($request){
-        //     $query->where('sub_category_id', $request->sub_category_id);
-        // })->get();
-
         return $this->model->query()
             ->when($request->search,function($query) use ($request){
                 $query->where('name','LIKE', '%'.$request->search.'%');
@@ -55,7 +41,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             })->when($request->sub_category_id,function($query) use($request){
                 $query->where('sub_category_id',$request->sub_category_id);
             })->get();
-
     }
 
 
@@ -75,7 +60,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showWithSlug(string $slug): mixed
     {
         return $this->model->query()
-            ->where(['slug' => $slug, 'status' => NewsStatusEnum::PUBLISHED->value])
+            ->where(['slug' => $slug, 'status' => NewsStatusEnum::ACTIVE->value])
             ->with(['category', 'user'])
             ->firstOrFail();
     }
