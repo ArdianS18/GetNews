@@ -1,53 +1,67 @@
 @extends('layouts.author.sidebar')
 
-@section('contentt')
+@section('style')
+    <style>
+        .card-statistic{
+            box-shadow: 0  5px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            padding-left: 3%;
+            padding-right: 3%;
+            border-radius: 10px;
+        }
+    </style>
+@endsection
+
+@section('content')
 <div class="container">
     <div class="tab-pane" id="statistika" role="tabpanel">
-        <div class="container" style="margin-top: 5%;">
-            <h3> <span style="color: #0F4D8A;">|</span>Analisis</h3>
+        <div class="container">
 
-            <div class="w-100 mt-5">
-                <div class="d-md-flex align-items-start gap-3">
-                    <div>
-                        <h6 class="mb-0">Product Condition</h6>
-                        <div class="d-flex align-items-center gap-3">
-                            <h2 class="mt-2 fw-bold">75%</h2>
-                            <span class="badge bg-primary px-2 py-1 d-flex align-items-center">
-                                <i class="ti ti-chevron-down fs-4"></i>2.8% </span>
+            
+            <div class="card-statistic">
+                <div class="w-100 mt-5">
+                    <div class="d-md-flex align-items-start gap-3">
+                        <div>
+                            <h6 class="mb-0">Product Condition</h6>
+                            <div class="d-flex align-items-center gap-3">
+                                <h2 class="mt-2 fw-bold">75%</h2>
+                                <span class="badge bg-primary px-2 py-1 d-flex align-items-center">
+                                    <i class="ti ti-chevron-down fs-4"></i>2.8% </span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="mt-4">
-                    <div id="financial" style="min-height: 600px;">
+                    <div class="mt-4">
+                        <div id="financial" style="min-height: 600px;">
 
-                        <div id="chart"></div>
+                            <div id="chart-info"></div>
 
-                        <div class="row" id="chart-info" style="margin-top: 5%;">
-                            <div class="col-md-12 col-lg-4">
-                                <h5>Jumlah Like</h5>
-                                <div class="d-flex text-center items-center">
-                                    <img src="assets/img/icons/like.svg" class="mb-3" width="25px" alt="Image" />&nbsp;
-                                    <p>+ 2.897</p>
+                            <div class="row" style="margin-top: 5%;">
+                                <div class="col-md-12 col-lg-4">
+                                    <h5>Jumlah Like</h5>
+                                    <div class="d-flex text-center items-center">
+                                        <img src="assets/img/icons/like.svg" class="mb-3" width="25px" alt="Image" />&nbsp;
+                                        <p>+ 2.897</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-lg-4">
-                                <h5>Jumlah Pengikut</h5>
-                                <div class="d-flex text-center items-center">
-                                    <img src="assets/img/icons/profile.svg" class="mb-3" width="25px" alt="Image" />&nbsp;
-                                    <p>+ 1.290</p>
+                                <div class="col-md-12 col-lg-4">
+                                    <h5>Jumlah Pengikut</h5>
+                                    <div class="d-flex text-center items-center">
+                                        <img src="assets/img/icons/profile.svg" class="mb-3" width="25px" alt="Image" />&nbsp;
+                                        <p>+ 1.290</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-lg-4">
-                                <h5>Pendapatan Keseluruhan</h5>
-                                <div class="d-flex text-center">
-                                    <img src="assets/img/icons/coin.svg" class="mb-3" width="25px" alt="Image" />&nbsp;
-                                    <p>+ 1324</p>
+                                <div class="col-md-12 col-lg-4">
+                                    <h5>Pendapatan Keseluruhan</h5>
+                                    <div class="d-flex text-center">
+                                        <img src="assets/img/icons/coin.svg" class="mb-3" width="25px" alt="Image" />&nbsp;
+                                        <p>+ 1324</p>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
+                        
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -92,7 +106,7 @@
     }
     };
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    var chart = new ApexCharts(document.querySelector("#chart-info"), options);
     chart.render();
 </script>
 @endsection

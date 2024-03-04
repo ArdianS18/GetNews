@@ -35,7 +35,7 @@
             <span class="slider round"></span>
         </label>
     </div>
-    {{-- @include('layouts.user.navbar-header') --}}
+    @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
 
     <div class="container-fluid">
