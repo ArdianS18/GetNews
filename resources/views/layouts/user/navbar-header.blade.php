@@ -1,4 +1,4 @@
-<div class="navbar-area header-one" id="navbar">
+<div class="navbar-area header-one mb-5" id="navbar">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
             <div class="sidebar-toggler md-none" style="padding-left: 50px;" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
