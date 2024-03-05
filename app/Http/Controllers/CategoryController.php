@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryRequest;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Casts\Json;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 
@@ -70,6 +73,19 @@ class CategoryController extends Controller
 
         $subCategory = $this->subCategory->search($request);
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
+    }
+
+        /**
+     * Display the specified resource.
+     */
+    public function getCategory(Category $category, Request $request) :JsonResponse
+    {
+        $request->merge([
+            'category_id' => $category->id
+        ]);
+
+        $subCategory = $this->subCategory->search($request);
+        return ResponseHelper::success($subCategory,trans('alert.fetch_success'));
     }
 
     /**

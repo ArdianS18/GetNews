@@ -36,6 +36,8 @@ class SubCategoryController extends Controller
         return back()->with('success', trans('alert.add_success'));
     }
 
+    
+
 
     public function update(SubCategoryRequest $request, SubCategory $subcategory)
     {

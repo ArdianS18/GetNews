@@ -58,6 +58,7 @@
                 <div class="comment-author-img">
                     {{-- <img src="assets/img/author/author-thumb-1.webp" alt="Image"> --}}
                 </div>
+
                 <div class="comment-author-wrap">
                     <div class="comment-author-info">
                         <div class="row align-items-start">
@@ -73,7 +74,7 @@
                             </div>
                             <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
                                 <div class="comment-text">
-                                <p>{{ $comment->content }}</p>
+                                    <p>{{ $comment->content }}</p>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
                     </form>
                 </div>
                 @empty
-             @endforelse
+                @endforelse
             </div>
         </div>
         <div id="cmt-form">
