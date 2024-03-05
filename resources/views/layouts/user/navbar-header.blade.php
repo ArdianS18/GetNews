@@ -2,11 +2,11 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
             <div class="sidebar-toggler md-none" style="padding-left: 50px;" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                <img src="assets/img/logo-get-media.png" width="150px" alt="Image" />
+                <img src="{{asset('assets/img/logo-get-media.png')}}" width="150px" alt="Image" />
             </div>
             <a class="navbar-brand d-lg-none" href="index.html">
-                <img class="logo-light" src="assets/img/logo-white.webp" alt="logo" />
-                <img class="logo-dark" src="assets/img/logo-white.webp" alt="logo" />
+                <img class="logo-light" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
+                <img class="logo-dark" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
             </a>
             <button type="button" class="search-btn d-lg-none" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
@@ -84,14 +84,14 @@
                     </li>
                    
                 </ul>
-                <div class="others-option d-flex align-items-center">
+                <div class="others-option d-flex align-items-center" id="loginSection">
                     <div class="news-card-img" style="padding-right: 50px;">
-                        <img src="assets/img/news/trending-3.webp" alt="Image" width="45px" style="border-radius: 50%;"/>
+                        <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
                     </div>
-
+                
                     <div class="">
                         <div class="option-item">
-                            <a href="login.html" class="btn-two">Sign In</a>
+                            <a href="login.html" class="btn-two" id="signInBtn">Sign In</a>
                         </div>
                     </div>
                 </div>
@@ -99,3 +99,4 @@
         </nav>
     </div>
 </div>
+

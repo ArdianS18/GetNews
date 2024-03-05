@@ -142,4 +142,9 @@ Route::get('author', function(){
 Route::get('author-detail', function(){
     return view('pages.user.author.detail-author');
 })->name('author.detail');
+
+Route::get('author-inbox', function(){
+    return view('pages.author.inbox.index');
+})->name('author.inbox');
+
 ?>

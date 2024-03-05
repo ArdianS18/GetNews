@@ -217,6 +217,10 @@ class NewsController extends Controller
             'news' => $news->news,
             'categories' => $this->news->get()
         ]);
+
+        if(auth()->user()?->id != $news->user_id){
+            $news->query()->increment('views');
+        }
     }
 
     /**
