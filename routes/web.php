@@ -15,6 +15,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\ContactUs;
 use App\Models\News;
+use App\Models\SubCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,32 +34,36 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
+//Beranda
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('categories', CategoryController::class);
+// Approved And Reject Author
 Route::resource('user', UserController::class);
-
 Route::patch('approved-user/{user}', [UserController::class, 'approved'])->name('user.approved');
 Route::patch('reject-user/{user}', [UserController::class, 'reject'])->name('user.reject');
 
+// Category and SubCategory
+Route::resource('categories', CategoryController::class);
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
 Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
 Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
+Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
 Route::resource('categories', CategoryController::class);
 
+// ===> Contact
 Route::get('contact', [ContactUsController::class, 'index'])->name('contact.index');
 Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
 Route::put('contact/{contact}', [ContactUsController::class, 'update'])->name('contact.update');
 Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
 
+// ===> Faq
 Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
 Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
 Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
 Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
+// Approved News And Reject News
 Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
-
 Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
 Route::put('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
 
@@ -73,23 +78,24 @@ Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.des
 Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
 Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
 
+// Inbox
 Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
 
 // Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::get('profilecreate', [NewsController::class, 'createnews'])->name('profile.berita.create');
-
+// Profile Author
+Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-
+Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
-
-Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
-Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
-// Route::put('update-news-profile/{news}', [ProfileController::class, 'updatenews'])->name('profile.news.update');
-Route::delete('delete-news-profile/{news}', [ProfileController::class, 'deletenews'])->name('profile.news.delete');
-
+// Update Profile
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
+// Update And Delete News
+Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
+Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
+Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
+// Singgle Post
 Route::get('news-singgle-post',function(){
     return view('pages.user.news.singlepost');
 })->name('news.singgle-post');
@@ -120,7 +126,6 @@ Route::get('profileuser', function(){
 
 Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
 Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
-
 
 //comment
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');

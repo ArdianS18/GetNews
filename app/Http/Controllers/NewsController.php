@@ -91,7 +91,12 @@ class NewsController extends Controller
 
     public function usernews($slug)
     {
+
         $news = $this->news->showWithSlug($slug);
+
+        if (auth()->user()?->id != $news->user_id) {
+            $news->query()->increment('views');
+        }
 
         $comments = $this->comment->get()->whereIn('news_id', $news);
         $subCategories = $this->subCategory->get();

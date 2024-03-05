@@ -46,6 +46,13 @@ class ProfileController extends Controller
         return view('pages.author.index', compact('news', 'subCategories'));
     }
 
+    public function profilestatus()
+    {
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->get();
+        return view('pages.author.status.index', compact('news', 'subCategories'));
+    }
+
     public function createberita()
     {
         $subCategories = $this->subCategory->get();
@@ -107,7 +114,7 @@ class ProfileController extends Controller
         $categories = $this->category->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
-        return view('pages.profile.update', compact('news','subCategories','categories','newsPhoto'));
+        return view('pages.author.profile.update', compact('news','subCategories','categories','newsPhoto'));
     }
 
     /**
