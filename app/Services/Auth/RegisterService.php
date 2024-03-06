@@ -8,12 +8,13 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 use App\Contracts\Interfaces\RegisterInterface;
+use App\Enums\UploadDiskEnum;
 
 class RegisterService
 {
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -33,5 +34,24 @@ class RegisterService
         $user = $register->store($data);
         $user->assignRole(RoleEnum::USER);
         return;
+    }
+
+    public function registerWithAdmin(RegisterRequest $request): array
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            $img = $request->file('photo');
+            $stored_image = $img->store(UploadDiskEnum::AUTHOR_CV->value , 'public');
+        }
+
+        return [
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'phone_number' => $data['phone_number'],
+            'address' => $data['address'],
+            'photo' => $stored_image,
+        ];
     }
 }

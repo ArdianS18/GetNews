@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorController;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsViewController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
+use App\Models\Author;
 use App\Models\ContactUs;
 use App\Models\News;
 use App\Models\SubCategory;
@@ -43,9 +45,11 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Approved And Reject Author
-Route::resource('user', UserController::class);
-Route::patch('approved-user/{user}', [UserController::class, 'approved'])->name('user.approved');
-Route::patch('reject-user/{user}', [UserController::class, 'reject'])->name('user.reject');
+Route::resource('user', AuthorController::class);
+Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved');
+Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject');
+
+Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create');
 
 // Category and SubCategory
 Route::resource('categories', CategoryController::class);
@@ -55,9 +59,11 @@ Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'des
 Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
 Route::resource('categories', CategoryController::class);
 
+
 Route::get('author',function () {
     return view('pages.user.author.index');
 })->name('author.index');
+
 
 // ===> Contact
 Route::get('contact', [ContactUsController::class, 'index'])->name('contact.index');

@@ -14,6 +14,7 @@ class AuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => 'required',
             'photo' => 'required',
         ];
     }

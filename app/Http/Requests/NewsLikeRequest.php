@@ -14,7 +14,7 @@ class NewsLikeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required',
+            'status' => 'required|boolean',
         ];
     }
 
@@ -22,7 +22,6 @@ class NewsLikeRequest extends FormRequest
     {
         return [
             'status.required' => 'Mohon untuk di inputkan',
-            
         ];
     }
 }

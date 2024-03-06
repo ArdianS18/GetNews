@@ -16,7 +16,7 @@
                         <option value="{{ request('status') }}">Pilih Status</option>
                         <option value="panding">Panding</option>
                         <option value="approved">Approved</option>
-                        <option value="notapproved">Reject</option>
+                        <option value="reject">Reject</option>
                         <option value="">Tampilkan semua</option>
                     </select>
                     <button type="submit" class="btn btn-primary">Filter</button>
@@ -29,7 +29,7 @@
                 + Tambah Penulis
             </button>
         </div>
-                
+
     </div>
 
     <div class="container mt-3 col-md-12 col-lg-12">
@@ -44,12 +44,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($users as $user)
+            @foreach($authors as $author)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->status }}</td>
+                <td>{{ $author->user->name }}</td>
+                <td>{{ $author->user->email }}</td>
+                <td>{{ $author->status }}</td>
                 <td>
                     <div class="d-flex">
 
@@ -66,13 +66,13 @@
                         <form action="{{ route('user.approved', ['user' => $user->id]) }}" method="post">
                             @method('patch')
                             @csrf
-                            <button type="submit" name="status" class="btn btn-success me-2" value="approved">Approved</button>
+                            <button type="submit" name="status" class="btn btn-success me-2" value="approved">Terima</button>
                         </form>
-    
+
                         <form action="{{ route('user.reject', ['user' => $user->id]) }}" method="post">
                             @method('patch')
                             @csrf
-                            <button type="submit" name="status" class="btn btn-danger" value="notapproved">Reject</button>
+                            <button type="submit" name="status" class="btn btn-danger" value="reject">Tolak</button>
                         </form>
                     </div>
                 </td>
@@ -81,7 +81,7 @@
         </tbody>
     </table>
 
-    
+
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -90,8 +90,94 @@
             <h5 class="modal-title" id="staticBackdropLabel"><span style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Tambah Akun</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
+            <form action="{{ route('author.create') }}" method="POST" enctype="multipart/form-data">
+                @csrf
             <div class="modal-body">
                 <div class="row container">
+                    <div class="col-md-12 col-lg-6 mb-3">
+                        <label class="form-label" for="nomor">Nama</label>
+                        <input type="text" id="name" name="name" placeholder="nama"
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 mb-3">
+                        <label class="form-label" for="nomor">Nomor Telepon</label>
+                        <input type="text" id="name" name="phone_number" placeholder="nomor telepon"
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 mb-3">
+                        <label class="form-label" for="nomor">Email</label>
+                        <input type="text" id="name" name="email" placeholder="email"
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 mb-3">
+                        <label class="form-label" for="nomor">CV</label>
+                        <input type="file" id="name" name="photo" placeholder="name"
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+
+                    </div>
+
+                    <div class="col-md-12 col-lg-6 mb-3">
+                        <label class="form-label" for="nomor">Password</label>
+                        <input type="text" id="name" name="password" placeholder="password"
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-12 col-lg-12 from-group mb-3">
+                        <label class="form-label" for="nomor">Alamat</label>
+                        <textarea name="address" id="" rows="6" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Tambah</button>
+            </div>
+        </form>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="modal-update" tabindex="-1"
+        aria-labelledby="modal-update Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="detailLabel"><span style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Tambah Akun</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row container">
+                    <div class="col-md-12 col-lg-12">
+                        profile
+                    </div>
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="nomor">Nama</label>
                         <input type="text" id="name" name="name" placeholder="nama"
@@ -129,7 +215,7 @@
                         <label class="form-label" for="nomor">CV</label>
                         <input type="file" id="name" name="name" placeholder="name"
                             value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                      
+
                     </div>
 
                     <div class="col-md-12 col-lg-6 mb-3">
@@ -157,26 +243,6 @@
 
 
                 </div>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-primary">Tambah</button>
-            </div>
-        </div>
-        </div>
-    </div>
-
-
-    <!-- Edit Modal -->
-    <div class="modal fade" id="modal-update" tabindex="-1"
-        aria-labelledby="modal-update Label" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- Modal content -->
-                <div class="modal-header">
-                    <h3 class="modal-title">update data User</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
                 <!-- Modal body -->
                 <form method="post" id="form-update">
                     @method('put')
@@ -200,7 +266,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Nomor Telepon</label>
                                 <input type="text" id="nomor" name="nomor" placeholder="nomor telepon"
@@ -211,7 +277,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Email</label>
                                 <input type="text" id="email" name="email" placeholder="email"
@@ -222,7 +288,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Password</label>
                                 <input type="text" id="password" name="password" placeholder="password"
@@ -233,7 +299,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-12 from-group mb-3">
                                 <label class="form-label" for="alamat">Alamat</label>
                                 <textarea name="alamat" id="" rows="6" class="form-control">{{old('alamat')}}</textarea>
@@ -245,8 +311,8 @@
                                     </span>
                                 @enderror --}}
                             </div>
-        
-        
+
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -294,7 +360,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Nomor Telepon</label>
                                 <input type="text" id="nomor" name="nomor" placeholder="nomor telepon"
@@ -305,7 +371,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Email</label>
                                 <input type="text" id="email" name="email" placeholder="email"
@@ -316,7 +382,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-6 mb-3">
                                 <label class="form-label" for="nomor">Password</label>
                                 <input type="text" id="password" name="password" placeholder="password"
@@ -327,7 +393,7 @@
                                     </span>
                                 @enderror
                             </div>
-        
+
                             <div class="col-md-12 col-lg-12 from-group mb-3">
                                 <label class="form-label" for="alamat">Alamat</label>
                                 <textarea name="alamat" id="" rows="6" class="form-control">{{old('alamat')}}</textarea>
@@ -339,8 +405,8 @@
                                     </span>
                                 @enderror --}}
                             </div>
-        
-        
+
+
                         </div>
                     </div>
                     <div class="modal-footer">

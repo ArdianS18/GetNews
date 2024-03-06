@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
                     'email' => str_replace(' ', '', $role['name']) . "@gmail.com",
                     'phone_number' => '08934574332',
                     'address' => '-',
-                    'status' => 'approved',
                     'password' => bcrypt('password'),
                     'email_verified_at' => now()
                 ]);

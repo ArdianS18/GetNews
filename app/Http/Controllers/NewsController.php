@@ -68,6 +68,7 @@ class NewsController extends Controller
 
         $search = $request->input('search');
         $status = $request->input('status');
+        
 
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);

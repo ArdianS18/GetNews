@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Models\Author;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class AuthorRepository extends BaseRepository implements AuthorInterface
 {
@@ -17,6 +18,18 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     {
         return $this->model->query()
             ->get();
+    }
+
+    public function search(Request $request): mixed
+    {
+        return $this->model->query()
+        ->when($request->search,function($query) use ($request){
+            $query->where('name','LIKE', '%'.$request->search.'%');
+        })->when($request->status,function($query) use($request){
+            $query->where('status','LIKE', '%'.$request->status.'%');
+        })->when($request->user_id,function($query) use($request){
+            $query->where('user_id',$request->user_id);
+        })->get();
     }
 
 

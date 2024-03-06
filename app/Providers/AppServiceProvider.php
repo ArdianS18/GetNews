@@ -47,7 +47,6 @@ class AppServiceProvider extends ServiceProvider
         NewsHasLikeInterface::class => NewsHasLikeRepository::class,
         AuthorInterface::class => AuthorRepository::class,
         RegisterInterface::class => RegisterRepository::class
-
     ];
 
     /**

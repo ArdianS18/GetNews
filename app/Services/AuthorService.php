@@ -4,20 +4,19 @@ namespace App\Services;
 
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
+use App\Contracts\Interfaces\AuthorInterface;
+use App\Enums\RoleEnum;
 use App\Enums\UploadDiskEnum;
 use App\Http\Requests\AuthorRequest;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
-use App\Http\Requests\NewsRequest;
-use App\Http\Requests\NewsUpdateRequest;
 use App\Models\Author;
-use App\Models\News;
-use App\Models\NewsPhoto;
+use App\Models\User;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
 use function Laravel\Prompts\multisearch;
 
-class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
+class AuthorService implements ShouldHandleFileUpload, CustomUploadValidation
 {
     use UploadTrait;
 
@@ -43,14 +42,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(AuthorRequest $request)
+    public function store(AuthorRequest $request, AuthorInterface $author)
     {
         $data = $request->validated();
+        $author = $author->store($data);
+        $author->assignRole(RoleEnum::AUTHOR);
 
         $photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('photo'));
 
         return [
-            'user_id' => auth()->id(),
             'photo' => $photo,
         ];
     }
@@ -66,14 +66,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     public function update(AuthorRequest $request, Author $author): array|bool
     {
 
-        $request->validated();
-
+        $data = $request->validated();
         $old_photo = $author->photo;
 
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
-            $old_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+            $old_photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('photo'));
         }
+
+        $author->update($data);
 
         return [
             'user_id' => auth()->id(),

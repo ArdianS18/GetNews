@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('photo');
             $table->text('content');
-            $table->string('sinopsis');
+            $table->text('sinopsis');
             $table->date('upload_date');
             $table->boolean('is_primary')->default(0);
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();

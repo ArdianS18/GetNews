@@ -63,22 +63,18 @@
                     <td>
 
                         {{-- <a class="btn btn-success" href="{{route('approved-news', ['news' => $news->id, 'status' => 'active'])}}"> Approved </a> --}}
-                        @if ($news->status == "panding" || $news->status == "nonactive")
                         <div class="d-flex gap-2">
                             <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
                                 @method('patch')
                                 @csrf
                             <button type="submit" class="btn btn-success">Approved</button>
                         </form>
-                        @endif
 
-                        @if ($news->status == "active")
                         <form action="{{ route('reject-news', ['news' => $news->id]) }}" method="post">
                             @method('patch')
                             @csrf
                             <button type="submit" class="btn btn-success">Reject</button>
                         </form>
-                        @endif
 
                         <button class="btn btn-primary btn-detail" data-id="{{ $news->id }}"
                             data-photo='"<img width="400px" src="{{ asset('storage/' . $news->photo) }}">"' data-name="{{ $news->user->name }}" data-title="{{ $news->name }}"
