@@ -1,8 +1,8 @@
 <div class="responsive-navbar offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
     <div class="offcanvas-header">
         <a href="index.html" class="logo d-inline-block">
-            <img class="logo-light" src="assets/img/logo.webp" alt="logo" />
-            <img class="logo-dark" src="assets/img/logo-white.webp" alt="logo" />
+            <img class="logo-light" src="assets/img/logo-get-media.png" alt="logo" />
+            <img class="logo-dark" src="assets/img/logo-get-media.png" alt="logo" />
         </a>
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="ri-close-line"></i>
@@ -11,7 +11,8 @@
     <div class="offcanvas-body">
         <div class="accordion" id="navbarAccordion">
             <div class="accordion-item">
-                <button class="accordion-button collapsed active" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Home</button>
+                <button class="accordion-button collapsed active" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Home</button>
                 <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion2">
@@ -29,7 +30,8 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapbaxour" aria-expanded="false" aria-controls="collapbaxour">Pages</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapbaxour" aria-expanded="false" aria-controls="collapbaxour">Pages</button>
                 <div id="collapbaxour" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion45">
@@ -59,7 +61,8 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Business</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Business</button>
                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion7">
@@ -74,7 +77,9 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Politics</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false"
+                    aria-controls="collapseThree">Politics</button>
                 <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion30">
@@ -89,7 +94,8 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Video</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Video</button>
                 <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion11">
@@ -97,14 +103,17 @@
                                 <a href="featured-video.html" class="accordion-link"> Featured Video </a>
                             </div>
                             <div class="accordion-item">
-                                <a href="featured-video-details.html" class="accordion-link"> Featured Video Details </a>
+                                <a href="featured-video-details.html" class="accordion-link"> Featured Video Details
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFourth" aria-expanded="false" aria-controls="collapseFourth">Sports</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFourth" aria-expanded="false"
+                    aria-controls="collapseFourth">Sports</button>
                 <div id="collapseFourth" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion111">
@@ -119,7 +128,8 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Shop</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Shop</button>
                 <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#navbarAccordion">
                     <div class="accordion-body">
                         <div class="accordion" id="navbarAccordion70">
@@ -164,7 +174,10 @@
                 </li>
                 <li>
                     <i class="ri-mail-fill"></i>
-                    <a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#9df5f8f1f1f2ddfffce5f2b3fef2f0"><span class="__cf_email__" data-cfemail="fa929f969695ba989b8295d4999597">[email&#160;protected]</span></a>
+                    <a
+                        href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#9df5f8f1f1f2ddfffce5f2b3fef2f0"><span
+                            class="__cf_email__"
+                            data-cfemail="fa929f969695ba989b8295d4999597">[email&#160;protected]</span></a>
                 </li>
                 <li>
                     <i class="ri-phone-fill"></i>

@@ -3,7 +3,8 @@
     <div class="d-flex justify-content-between mb-3 mt-2">
         <div>
             <form class="position-relative">
-                <input type="search" name="name" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search">
+                <input type="search" name="name" class="form-control search-chat py-2 ps-5" id="search-name"
+                    placeholder="Search">
                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
             </form>
         </div>
@@ -75,17 +76,29 @@
                         </button>
 
 
-                            <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-delete"
+                            data-id="{{ $faq->id }}">Hapus</button>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('no-data.svg') }}" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4>Ups... Ada kesalahan!!!</h4>
+                        </div>
                     </td>
                 </tr>
             @endforelse
         </tbody>
     </table>
 
-
     <!-- Edit Modal -->
-    <div class="modal fade" id="modal-update" tabindex="-1"
-        aria-labelledby="modal-update Label" aria-hidden="true">
+    <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modal-update Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal content -->
@@ -110,7 +123,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="answer" class="form-label">Answer:</label>
-                            <input type="text" id="answer" name="answer"
+                            <input type="text" id="update-answer" name="answer"
                                 class="form-control @error('answer') is-invalid @enderror" placeholder="Answer">
                             @error('answer')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
@@ -128,19 +141,15 @@
         </div>
     </div>
     <x-delete-modal-component />
-
 @endsection
 @section('script')
     <script>
         $('.btn-edit').click(function() {
             const formData = getDataAttributes($(this).attr('id'))
             var actionUrl = `faq/${formData['id']}`;
-            console.log(formData);
             $('#form-update').attr('action', actionUrl);
-
             setFormValues('form-update', formData)
             $('#form-update').data('id', formData['id'])
-            $('#form-update').attr('action', );
             $('#modal-update').modal('show')
         })
 

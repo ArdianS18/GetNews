@@ -61,7 +61,7 @@
     <script src="{{ asset('assets/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script>
 
-    {{-- @include('layouts.user.footer') --}}
+    @include('layouts.user.footer')
     @yield('script')
 </body>
 
