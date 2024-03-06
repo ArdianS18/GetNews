@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\ContactUs;
@@ -78,6 +79,10 @@ Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
+//NewsHasLike
+Route::post('news-like/{id}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
+Route::delete('news-unlike/{id}', [NewsHasLikeController::class, 'destroy'])->name('news.unlike.delete');
+
 //trending ke-?
 Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
 Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
@@ -135,6 +140,9 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
 
+Route::get('contact-us', function() {
+    return view('pages.user.contact.index');
+})->name('contact.user');
 Route::get('dashboard', function(){
     return view('pages.user.index');
 })->name('dashboard.user');
@@ -146,4 +154,9 @@ Route::get('author', function(){
 Route::get('author-detail', function(){
     return view('pages.user.author.detail-author');
 })->name('author.detail');
+
+Route::get('author-inbox', function(){
+    return view('pages.author.inbox.index');
+})->name('author.inbox');
+
 ?>

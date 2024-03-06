@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\NewsHasLikeInterface;
+use App\Http\Requests\NewsLikeRequest;
 use App\Models\NewsHasLike;
 use Illuminate\Http\Request;
 
 class NewsHasLikeController extends Controller
 {
+
+    private NewsHasLikeInterface $newsHasLike;
+
+    public function __construct(NewsHasLikeInterface $newsHasLike)
+    {
+        $this->newsHasLike = $newsHasLike;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +36,27 @@ class NewsHasLikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewsLikeRequest $request, $newsId)
     {
-        //
+        $data = $request->validated();
+
+        $query = NewsHasLike::query()
+            ->updateOrCreate(
+                [
+                    'user_id' => auth()->user()->id,
+                    'news_id' => $newsId
+                ],
+                [
+                    'status' => $data['status']
+                ]
+            );
+
+        $query->wasRecentlyCreated === true;
+        return back();
+        // $data['user_id'] = auth()->user()->id;
+        // $data['news_id'] = $newsId;
+        // $this->newsHasLike->store($data);
+
     }
 
     /**
@@ -58,8 +86,8 @@ class NewsHasLikeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NewsHasLike $newsHasLike)
+    public function destroy(NewsHasLike $newsHasLike, $newsId)
     {
-        //
+        $this->newsHasLike->delete($newsHasLike)->where('news_id', $newsId);
     }
 }

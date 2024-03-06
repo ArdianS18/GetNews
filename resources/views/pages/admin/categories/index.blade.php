@@ -34,6 +34,7 @@
             <thead class="table">
                 <th>No</th>
                 <th>Kategori</th>
+                <th>Dipakai</th>
                 <th>Aksi</th>
             </thead>
 
@@ -51,6 +52,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$category->name}}</td>
+                    <td>{{$category->news->count()}}</td>
                     <td class="d-flex justify-content-center gap-2">
                         <button type="button" class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 2 24 24">
                                 <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z" />
