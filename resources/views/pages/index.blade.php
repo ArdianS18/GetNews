@@ -11,6 +11,8 @@
             <div class="trending-news-slider swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide news-card-one">
+                        @foreach($popularView as $view)
+
                         <div class="news-card-img-dashboard">
                             <img src="assets/img/news/trending-1.webp" alt="Image" />
                         </div>
@@ -20,6 +22,10 @@
                                 <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
                             </ul>
                         </div>
+
+                        @endforeach
+
+
                     </div>
                     <div class="swiper-slide news-card-one">
                         <div class="news-card-img-dashboard">

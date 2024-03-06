@@ -16,10 +16,10 @@
 @section('content')
    
     <div class="container" style="margin-top: 6%;">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-12 col-lg-6">
                 <img src="" alt="">
-                <img width="600px" src="assets/img/contact-us.svg" alt="">
+                <img width="600px" src="{{asset('assets/img/contact-us.svg')}}" alt="">
 
             </div>
 
@@ -86,6 +86,25 @@
             </div>
         </div>
 
+        <div class="row col-md-12 col-lg-12">
+            @forelse ($faqs as $key => $faq)
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h1 class="accordion-header" id="flush-heading{{$key}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$key}}" aria-expanded="false" aria-controls="flush-collapse{{$key}}">
+                            {{$faq->question}}
+                        </button>
+                    </h1>
+                    <div id="flush-collapse{{$key}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$key}}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">{{$faq->answer}}</div>
+                    </div>
+                </div>
+            </div>
+            @empty
+                
+            @endforelse
+
+        </div>
     </div>
 
 @endsection

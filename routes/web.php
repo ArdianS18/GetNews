@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\NewsHasLikeController;
+use App\Http\Controllers\NewsViewController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\ContactUs;
@@ -29,9 +30,12 @@ use App\Models\SubCategory;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.index');
-});
+// Route::get('/', function () {
+
+//     return view('pages.index');
+// });
+
+Route::get('/', [App\Http\Controllers\NewsViewController::class, 'showPopularView'])->name('popular.news');
 
 Auth::routes();
 
@@ -108,6 +112,9 @@ Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->na
 Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
+// contact us
+Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
+
 // Singgle Post
 Route::get('news-singgle-post',function(){
     return view('pages.user.news.singlepost');
@@ -129,9 +136,6 @@ Route::get('profile', function(){
     return view('pages.author.index');
 })->name('profile.index');
 
-Route::get('contact-us', function(){
-    return view('pages.user.contact-us.index');
-})->name('contact.user');
 
 Route::get('profileuser', function(){
     return view('pages.user.profile.index');
@@ -144,9 +148,9 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
 
-Route::get('contact-us', function() {
-    return view('pages.user.contact.index');
-})->name('contact.user');
+// Route::get('contact-us', function() {
+//     return view('pages.user.contact.index');
+// })->name('contact.user');
 Route::get('dashboard', function(){
     return view('pages.user.index');
 })->name('dashboard.user');

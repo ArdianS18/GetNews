@@ -3,20 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\ContactUsInterface;
+use App\Contracts\Interfaces\FaqInterface;
 use App\Http\Requests\ContactUsRequest;
 use App\Models\ContactUs;
+use App\Models\Faq;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
 {
     private ContactUsInterface $contactUs;
+    private FaqInterface $faq;
     private User $user;
 
-    public function __construct(ContactUsInterface $contactUs, User $user)
+    public function __construct(ContactUsInterface $contactUs, FaqInterface $faq, User $user)
     {
         $this->contactUs = $contactUs;
-        // $this->user = $user;
+        $this->user = $user;
+        $this->faq = $faq;
     }
     
     /**
@@ -26,6 +30,12 @@ class ContactUsController extends Controller
     {
         $contactUs = $this->contactUs->get();
         return view('pages.contact.contact', compact('contactUs'));
+    }
+
+    public function contact(Faq $faq){  
+        $contactUs = $this->contactUs->get();
+        $faqs = $this->faq->get();
+        return view('pages.user.contact-us.index', compact('contactUs','faqs'));
     }
 
     /**

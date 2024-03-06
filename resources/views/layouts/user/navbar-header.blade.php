@@ -78,22 +78,30 @@
                                 <a href="featured-video.html" class="nav-link"> Featured Video </a>
                             </li>
                             <li class="nav-item">
-                                <a href="featured-video-details.html" class="nav-link"> Featured Video Details </a>
+                                <a href="featured-video-details.html" class="nav-link">Featured Video Details </a>
                             </li>
                         </ul>
                     </li>
                    
                 </ul>
                 <div class="others-option d-flex align-items-center" id="loginSection">
-                    <div class="news-card-img" style="padding-right: 50px;">
-                        <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
-                    </div>
-                
-                    <div class="">
-                        <div class="option-item">
-                            <a href="login.html" class="btn-two" id="signInBtn">Sign In</a>
+
+                    @auth
+                        <div class="news-card-img" style="padding-right: 50px;">
+                            <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
                         </div>
-                    </div>
+                    @else
+                        <div class="">
+                            <div class="option-item">
+                                <a href="login.html" class="btn-two" id="signInBtn">Sign In</a>
+                            </div>
+                        </div>
+
+                    @endauth
+
+                    
+                
+                   
                 </div>
             </div>
         </nav>
