@@ -39,6 +39,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Approved And Reject Author
+
+Route::middleware(['role:user'])->group(function () {
+    
+});
 Route::resource('user', UserController::class);
 Route::patch('approved-user/{user}', [UserController::class, 'approved'])->name('user.approved');
 Route::patch('reject-user/{user}', [UserController::class, 'reject'])->name('user.reject');
