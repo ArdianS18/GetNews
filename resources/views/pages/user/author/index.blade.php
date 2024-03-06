@@ -40,7 +40,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-4 col-md-12 col-12 mb-3">
-            <div class="card shadow border-bottom border-primary" style="border:transparent">
+            <div class="card shadow " style="border:transparent">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8 d-flex align-items-center">
@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-12 mb-3">
-            <div class="card shadow border-bottom border-primary" style="border:transparent">
+            <div class="card shadow " style="border:transparent">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8 d-flex align-items-center">
@@ -132,7 +132,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-12 mb-3">
-            <div class="card shadow border-bottom border-primary" style="border:transparent">
+            <div class="card shadow " style="border:transparent">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8 d-flex align-items-center">
@@ -178,7 +178,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-12 mb-3">
-            <div class="card shadow border-bottom border-primary" style="border:transparent">
+            <div class="card shadow " style="border:transparent">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8 d-flex align-items-center">
@@ -224,7 +224,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-12 mb-3">
-            <div class="card shadow border-bottom border-primary" style="border:transparent">
+            <div class="card shadow " style="border:transparent">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8 d-flex align-items-center">
@@ -270,7 +270,145 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-12 col-12 mb-3">
-            <div class="card shadow border-bottom border-primary" style="border:transparent">
+            <div class="card shadow " style="border:transparent">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-8 d-flex align-items-center">
+                            <img src="{{ asset('default.png') }}" class="rounded-circle user-profile mb-3" width="50"
+                                height="50" />
+                            <div class="ms-3">
+                                <p class="fs-4 fw-semibold fs-2">Mohammad Daffa</p>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <div class="">
+                                <button class="btn px-4 py-1 btn-primary  mt-2">ikuti</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-4">
+                            <div class="strip-right">
+                                <div>
+                                    <h6>Pengikut</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="strip-right">
+                                <div>
+                                    <h6>Diikuti</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div>
+                                <div>
+                                    <h6>Berita</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-12 mb-3">
+            <div class="card shadow " style="border:transparent">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-8 d-flex align-items-center">
+                            <img src="{{ asset('default.png') }}" class="rounded-circle user-profile mb-3" width="50"
+                                height="50" />
+                            <div class="ms-3">
+                                <p class="fs-4 fw-semibold fs-2">Mohammad Daffa</p>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <div class="">
+                                <button class="btn px-4 py-1 btn-primary  mt-2">ikuti</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-4">
+                            <div class="strip-right">
+                                <div>
+                                    <h6>Pengikut</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="strip-right">
+                                <div>
+                                    <h6>Diikuti</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div>
+                                <div>
+                                    <h6>Berita</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-12 mb-3">
+            <div class="card shadow " style="border:transparent">
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-8 d-flex align-items-center">
+                            <img src="{{ asset('default.png') }}" class="rounded-circle user-profile mb-3" width="50"
+                                height="50" />
+                            <div class="ms-3">
+                                <p class="fs-4 fw-semibold fs-2">Mohammad Daffa</p>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <div class="">
+                                <button class="btn px-4 py-1 btn-primary  mt-2">ikuti</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-md-4">
+                            <div class="strip-right">
+                                <div>
+                                    <h6>Pengikut</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="strip-right">
+                                <div>
+                                    <h6>Diikuti</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div>
+                                <div>
+                                    <h6>Berita</h6>
+                                </div>
+                                <p class="">349</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-12 mb-3">
+            <div class="card shadow " style="border:transparent">
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-8 d-flex align-items-center">
