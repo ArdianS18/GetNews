@@ -111,7 +111,7 @@
 
                         <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: auto;">
                             <label class="form-label" for="content">Content</label>
-                            <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form "></textarea>
+                            <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
                             @error('content')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -147,29 +147,100 @@
 
                         </div>
 
-                        <div class="d-flex justify-content-between">
-
-
-                            <button type="submit" class="btn btn-md text-black m-2"
+                        <div class="d-flex justify-content-between mt-5">
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-md text-black m-2 d-flex justify-content-start"
                                 style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                                Kembali
+                                Ketentuan & Persyaratan
                             </button>
 
-                            <div class="">
-
-                                <button type="submit" class="btn btn-md text-black m-2 justify-content-end"
-                                    style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                                    Ketentuan
-                                </button>
-
-                                <button type="submit" class="btn btn-md text-white m-2 justify-content-end"
-                                    style="padding-left: 1rem; padding-right: 1rem; background-color: #0F4D8A;">
-                                    Upload
-                                </button>
+                            <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-md text-black m-2"
+                                style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
+                                Simpan Draf
+                            </button>
+                            <button type="submit" class="btn btn-md text-white m-2"
+                                style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
+                                Upload
+                            </button>
                             </div>
+                            
+                        </div>
                         </div>
                     </div>
                 </form>
+
+
+                
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><span style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Ketentuan & Persyaratan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container p-2">
+                                <p>
+                                    Ketentuan dan Persyaratan Sebelum Menulis Berita <br><br>
+                                    1. Keaslian dan Orisinalitas 
+                                    Berita harus asli dan bukan hasil plagiasi.
+                                    Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
+                                    Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
+                                    2. Keakuratan dan Kebenaran
+                                    Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
+                                    Sumber informasi harus jelas dan kredibel.
+                                    Berita harus faktual dan tidak memihak. <br>
+                                    3. Keseimbangan
+                                    Berita harus menyajikan informasi secara seimbang dan tidak memihak.
+                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya. <br>
+                                    4. Objektivitas
+                                    Berita harus ditulis secara objektif dan tidak memihak.
+                                    Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                    5. Keaslian dan Orisinalitas 
+                                    Berita harus asli dan bukan hasil plagiasi.
+                                    Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
+                                    Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
+                                    6. Keakuratan dan Kebenaran
+                                    Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
+                                    Sumber informasi harus jelas dan kredibel.
+                                    Berita harus faktual dan tidak memihak. <br>
+                                    7. Keseimbangan
+                                    Berita harus menyajikan informasi secara seimbang dan tidak memihak.
+                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya. <br>
+                                    8. Objektivitas
+                                    Berita harus ditulis secara objektif dan tidak memihak.
+                                    Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                    4. Objektivitas
+                                    Berita harus ditulis secara objektif dan tidak memihak.
+                                    Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                    5. Keaslian dan Orisinalitas 
+                                    Berita harus asli dan bukan hasil plagiasi.
+                                    Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
+                                    Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
+                                    6. Keakuratan dan Kebenaran
+                                    Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
+                                    Sumber informasi harus jelas dan kredibel.
+                                    Berita harus faktual dan tidak memihak. <br>
+                                    7. Keseimbangan
+                                    Berita harus menyajikan informasi secara seimbang dan tidak memihak.
+                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya. <br>
+                                    8. Objektivitas
+                                    Berita harus ditulis secara objektif dan tidak memihak.
+                                    Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                </p>                
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -180,22 +251,24 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#content').summernote({
-                height: 250,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
+<script>
+    $(document).ready(function() {
+        $('#content').summernote
+        ({
+            height: 275,
+            toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+            
         });
-    </script>
+    });
+</script>
 
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 

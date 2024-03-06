@@ -23,15 +23,12 @@
                 <div class="col-lg-7 col-md-12 d-flex justify-content-center">
                     <img width="600px" class="img-fluid" style="height:auto" src="{{ asset('assets/img/log.png') }}"
                         alt="">
-                    {{-- <img src="https://mdbcdnmdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                        class="img-fluid" alt="Sample image"> --}}
                 </div>
                 <div class="col-md-12 col-lg-5">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="row align-items-center justify-content-center justify-content-lg-start">
                             <h2>Daftar Akun GetMedia.id</h2>
-                            {{-- <p class="lead fw-normal mb-0 me-5">Daftar Akun GetMedia.id</p> --}}
                         </div>
 
 
@@ -136,7 +133,6 @@
             <i class="fab fa-linkedin-in"></i>
         </a>
         </div>
-        <!-- Right -->
         </div>
     </section>
 </body>

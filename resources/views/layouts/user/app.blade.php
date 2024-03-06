@@ -38,7 +38,7 @@
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
 
-    <div class="container-fluid">
+    <div class="container-fluid pb-75">
     @yield('content')
     </div>
     

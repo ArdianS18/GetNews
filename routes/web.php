@@ -50,6 +50,10 @@ Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'des
 Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
 Route::resource('categories', CategoryController::class);
 
+Route::get('author',function () {
+    return view('pages.user.author.index');
+})->name('author.index');
+
 // ===> Contact
 Route::get('contact', [ContactUsController::class, 'index'])->name('contact.index');
 Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
@@ -145,4 +149,9 @@ Route::get('author', function(){
 Route::get('author-detail', function(){
     return view('pages.user.author.detail-author');
 })->name('author.detail');
+
+Route::get('author-inbox', function(){
+    return view('pages.author.inbox.index');
+})->name('author.inbox');
+
 ?>
