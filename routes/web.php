@@ -51,6 +51,13 @@ Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('u
 
 Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create');
 
+Route::middleware(['role:user'])->group(function () {
+
+});
+Route::resource('user', UserController::class);
+Route::patch('approved-user/{user}', [UserController::class, 'approved'])->name('user.approved');
+Route::patch('reject-user/{user}', [UserController::class, 'reject'])->name('user.reject');
+
 // Category and SubCategory
 Route::resource('categories', CategoryController::class);
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
