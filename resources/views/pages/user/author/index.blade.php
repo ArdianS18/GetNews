@@ -1,4 +1,24 @@
 @extends('layouts.user.app')
+
+@section('style')
+    <style>
+        .card-author{
+            box-shadow: 0  5px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f4f4f4; 
+            padding: 2%;
+        }
+        .card-profile{
+            box-shadow: 0  5px 2px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f4f4f4; 
+            padding: 7%;
+            border-radius: 10px;
+            /* width: 400px;
+            height: 130px; */
+        }
+    </style>
+@endsection
+
+
 @section('content')
     <div class="row">
         <div class="col-lg-4 col-md-6 col-12">

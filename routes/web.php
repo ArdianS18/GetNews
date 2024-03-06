@@ -140,6 +140,9 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
 
+Route::get('contact-us', function() {
+    return view('pages.user.contact.index');
+})->name('contact.user');
 Route::get('dashboard', function(){
     return view('pages.user.index');
 })->name('dashboard.user');
@@ -151,4 +154,9 @@ Route::get('author', function(){
 Route::get('author-detail', function(){
     return view('pages.user.author.detail-author');
 })->name('author.detail');
+
+Route::get('author-inbox', function(){
+    return view('pages.author.inbox.index');
+})->name('author.inbox');
+
 ?>

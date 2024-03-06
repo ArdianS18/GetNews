@@ -18,6 +18,7 @@ class ContactUsController extends Controller
         $this->contactUs = $contactUs;
         // $this->user = $user;
     }
+    
     /**
      * Display a listing of the resource.
      */

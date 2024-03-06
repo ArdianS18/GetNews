@@ -23,35 +23,48 @@
     <div class="container">
         <div class="">
             <div class="d-flex card-detail mt-5">
-                <div class="" style="margin-left: 2%;">
+                <div class="col-md-12 col-lg-1" style="margin-left: 2%;">
                     <img src="assets/img/news/trending-3.webp" alt="Image" width="100px" style="border-radius: 50%;"/>
             
                 </div>
                 <div class="" style="margin-left:20px;">
-                    <div class="d-flex">
-                        <h4>Daffa Prasetya</h4>
-                        <div class="" style="margin-left: 20px;">
-                            <button class="btn btn-sm text-white" style="background-color: #0F4D8A; padding-left: 2rem; padding-right: 2rem;">Ikuti</button>
+                    <div class="col-md-12 col-lg-11">
+                        <div class="d-flex">
+                            <h4>Daffa Prasetya</h4>
+                            <div class="" style="margin-left: 20px;">
+                                <button class="btn btn-sm text-white" style="background-color: #0F4D8A; padding-left: 2rem; padding-right: 2rem;">Ikuti</button>
+                            </div>
                         </div>
-                    </div>
+                        
+                        <p>lorem oancone o nicygiu  IVisu ub oiiuhcc oajicomec uhceb  lorem oancone o nicygiu  IVisu ub oiiuhcc oajicomec uhceb  aiuhec...</p>
                     
-                    <p>lorem oancone o nicygiu  IVisu ub oiiuhcc oajicomec uhceb  lorem oancone o nicygiu  IVisu ub oiiuhcc oajicomec uhceb  aiuhec...</p>
-                
-                    <div class="">
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64h-64z" fill="currentColor"/></svg>
-                        </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;" width="23" height="23" viewBox="0 0 512 512"><path fill="currentColor" d="M349.33 69.33a93.62 93.62 0 0 1 93.34 93.34v186.66a93.62 93.62 0 0 1-93.34 93.34H162.67a93.62 93.62 0 0 1-93.34-93.34V162.67a93.62 93.62 0 0 1 93.34-93.34zm0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32"/><path fill="currentColor" d="M377.33 162.67a28 28 0 1 1 28-28a27.94 27.94 0 0 1-28 28M256 181.33A74.67 74.67 0 1 1 181.33 256A74.75 74.75 0 0 1 256 181.33m0-37.33a112 112 0 1 0 112 112a112 112 0 0 0-112-112"/></svg>
-                        </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;" width="23" height="23" viewBox="0 0 512 512"><path fill="currentColor" d="M496 109.5a201.8 201.8 0 0 1-56.55 15.3a97.51 97.51 0 0 0 43.33-53.6a197.74 197.74 0 0 1-62.56 23.5A99.14 99.14 0 0 0 348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 0 0 2.54 22.1a280.7 280.7 0 0 1-203-101.3A95.69 95.69 0 0 0 36 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0 1 35.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 0 1-25.94 3.4a94.38 94.38 0 0 1-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0 1 39.5 405.6a203 203 0 0 1-23.5-1.4A278.68 278.68 0 0 0 166.74 448c181.36 0 280.44-147.7 280.44-275.8c0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 0 0 496 109.5"/></svg>
-                        </a>
-                        <a href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;" width="25" height="25" viewBox="0 0 512 512"><path d="M182.8 384V212.9h-54.9V384h54.9zm-25.4-197c18.3 0 29.7-13.1 29.7-29.5-.3-16.7-11.4-29.5-29.4-29.5S128 140.8 128 157.5c0 16.4 11.4 29.5 29 29.5h.4z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M320.6 209c-29.1 0-41.6 16.4-49.6 27.8V213h-55v171h55v-97.4c0-5 .4-10 1.9-13.5 4-10 13-20.3 28.2-20.3 19.9 0 27.9 15.3 27.9 37.7V384h55v-99.9c0-51.3-27.2-75.1-63.4-75.1z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM414 416H99.1c-1.8 0-3.1-1.4-3.1-3.1V98c0-1.1 1-2 2-2h316c1 0 2 1 2 2v316c0 .9-.9 2-2 2z" fill="currentColor"/></svg>
-                        </a>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div class="d-flex justify-content-start">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M288 192v-38.1c0-17.2 3.8-25.9 30.5-25.9H352V64h-55.9c-68.5 0-91.1 31.4-91.1 85.3V192h-45v64h45v192h83V256h56.4l7.6-64h-64z" fill="currentColor"/></svg>
+                            </a>
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;" width="23" height="23" viewBox="0 0 512 512"><path fill="currentColor" d="M349.33 69.33a93.62 93.62 0 0 1 93.34 93.34v186.66a93.62 93.62 0 0 1-93.34 93.34H162.67a93.62 93.62 0 0 1-93.34-93.34V162.67a93.62 93.62 0 0 1 93.34-93.34zm0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32"/><path fill="currentColor" d="M377.33 162.67a28 28 0 1 1 28-28a27.94 27.94 0 0 1-28 28M256 181.33A74.67 74.67 0 1 1 181.33 256A74.75 74.75 0 0 1 256 181.33m0-37.33a112 112 0 1 0 112 112a112 112 0 0 0-112-112"/></svg>
+                            </a>
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;" width="23" height="23" viewBox="0 0 512 512"><path fill="currentColor" d="M496 109.5a201.8 201.8 0 0 1-56.55 15.3a97.51 97.51 0 0 0 43.33-53.6a197.74 197.74 0 0 1-62.56 23.5A99.14 99.14 0 0 0 348.31 64c-54.42 0-98.46 43.4-98.46 96.9a93.21 93.21 0 0 0 2.54 22.1a280.7 280.7 0 0 1-203-101.3A95.69 95.69 0 0 0 36 130.4c0 33.6 17.53 63.3 44 80.7A97.5 97.5 0 0 1 35.22 199v1.2c0 47 34 86.1 79 95a100.76 100.76 0 0 1-25.94 3.4a94.38 94.38 0 0 1-18.51-1.8c12.51 38.5 48.92 66.5 92.05 67.3A199.59 199.59 0 0 1 39.5 405.6a203 203 0 0 1-23.5-1.4A278.68 278.68 0 0 0 166.74 448c181.36 0 280.44-147.7 280.44-275.8c0-4.2-.11-8.4-.31-12.5A198.48 198.48 0 0 0 496 109.5"/></svg>
+                            </a>
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;" width="25" height="25" viewBox="0 0 512 512"><path d="M182.8 384V212.9h-54.9V384h54.9zm-25.4-197c18.3 0 29.7-13.1 29.7-29.5-.3-16.7-11.4-29.5-29.4-29.5S128 140.8 128 157.5c0 16.4 11.4 29.5 29 29.5h.4z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M320.6 209c-29.1 0-41.6 16.4-49.6 27.8V213h-55v171h55v-97.4c0-5 .4-10 1.9-13.5 4-10 13-20.3 28.2-20.3 19.9 0 27.9 15.3 27.9 37.7V384h55v-99.9c0-51.3-27.2-75.1-63.4-75.1z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM414 416H99.1c-1.8 0-3.1-1.4-3.1-3.1V98c0-1.1 1-2 2-2h316c1 0 2 1 2 2v316c0 .9-.9 2-2 2z" fill="currentColor"/></svg>
+                            </a>
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <div class="" style="margin-right: 3%;">
+                                <button class="btn btn-sm text-black" style="background-color: #D9D9D9; padding-left: 2rem; padding-right: 2rem;">Berita</button>
+                            </div>
+                            <button class="btn btn-sm text-black" style="background-color: #D9D9D9; padding-left: 2rem; padding-right: 2rem;">Coments</button>
+                        </div>
+
                     </div>
-                
+                </div>
                 </div>
 
                 
