@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_has_likes', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('news_id')->constrained();
             $table->foreignUuid('user_id')->constrained();
-            $table->boolean('status')->default(0);
+            $table->text('photo');
+            $table->enum('status', ['panding', 'approved', 'reject']);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_has_likes');
+        Schema::dropIfExists('authors');
     }
 };

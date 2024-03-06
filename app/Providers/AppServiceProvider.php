@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
@@ -11,12 +12,15 @@ use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Interfaces\ContactUsInterface;
 use App\Contracts\Interfaces\SearchInterface;
 use App\Contracts\Interfaces\FaqInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\CommentRepository;
 use App\Contracts\Repositories\ContactUsRepository;
 use App\Contracts\Repositories\FaqRepository;
+use App\Contracts\Repositories\NewsHasLikeRepository;
 use App\Contracts\Repositories\NewsPhotoRepository;
 use App\Contracts\Repositories\NewsRepository;
 use App\Contracts\Repositories\SearchRepository;
@@ -34,7 +38,9 @@ class AppServiceProvider extends ServiceProvider
         NewsInterface::class => NewsRepository::class,
         UserInterface::class => UserRepository::class,
         NewsPhotoInterface::class => NewsPhotoRepository::class,
-        CommentInterface::class => CommentRepository::class
+        CommentInterface::class => CommentRepository::class,
+        NewsHasLikeInterface::class => NewsHasLikeRepository::class,
+        AuthorInterface::class => AuthorRepository::class
     ];
 
     /**

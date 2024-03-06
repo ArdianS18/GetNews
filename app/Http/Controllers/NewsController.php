@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
@@ -28,22 +29,24 @@ use Illuminate\Http\Request;
 class NewsController extends Controller
 {
     private NewsInterface $news;
-    private SubCategoryInterface $subCategory;
     private UserInterface $user;
-    private CommentInterface $comment;
     private NewsService $NewsService;
 
+    private CommentInterface $comment;
+    private SubCategoryInterface $subCategory;
     private CategoryInterface $category;
     private NewsPhotoInterface $newsPhoto;
+    private NewsHasLikeInterface $newsHasLike;
     private $newsTrendingService;
 
     protected $newsRepositoty;
 
-    public function __construct(CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
+    public function __construct(NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
     {
         $this->news = $news;
         $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
+        $this->newsHasLike = $newsHasLike;
         $this->user = $user;
         $this->comment = $comment;
         $this->category = $category;
@@ -102,13 +105,14 @@ class NewsController extends Controller
             }
         }
 
+        $newsLike = $this->newsHasLike->get()->whereIn('news_id', $news)->count();
         $comments = $this->comment->get()->whereIn('news_id', $news);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike'));
     }
     /**
      * Display a listing of the resource.

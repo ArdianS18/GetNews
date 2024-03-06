@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Models\ContactUs;
@@ -77,6 +78,10 @@ Route::put('reject-all', [NewsController::class, 'rejectall'])->name('reject-all
 Route::get('news', [NewsController::class, 'index'])->name('news.index');
 Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+//NewsHasLike
+Route::post('news-like/{id}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
+Route::delete('news-unlike/{id}', [NewsHasLikeController::class, 'destroy'])->name('news.unlike.delete');
 
 //trending ke-?
 Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');

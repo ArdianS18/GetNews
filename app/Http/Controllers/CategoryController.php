@@ -11,17 +11,20 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Database\Eloquent\Casts\Json;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 
 class CategoryController extends Controller
 {
     private CategoryInterface $categori;
     private SubCategoryInterface $subCategory;
+    private NewsInterface $news;
 
-    public function __construct(CategoryInterface $categori, SubCategoryInterface $subCategory)
+    public function __construct(CategoryInterface $categori, SubCategoryInterface $subCategory, NewsInterface $news)
     {
         $this->categori = $categori;
         $this->subCategory = $subCategory;
+        $this->news = $news;
     }
 
     /**
@@ -39,6 +42,7 @@ class CategoryController extends Controller
 
             return view('pages.admin.categories.index', compact('categoris'));
         }
+
 
         $categoris = $this->categori->get();
         return view('pages.admin.categories.index', compact('categoris'));
