@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Contracts\Interfaces\RegisterInterface;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Services\Auth\RegisterService;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+
+use function Laravel\Prompts\alert;
 
 class RegisterController extends Controller
 {
+
+    private RegisterInterface $register;
+    private RegisterService $service;
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -35,36 +40,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RegisterInterface $register,RegisterService $service)
     {
-        $this->middleware('guest');
-    }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'nomor' => ['required', 'numeric', 'min:15'],
-            'alamat' => ['required', 'string', 'max:255'],
-        ], [
-            'name.required' => 'Nama mohon untuk diisi',
-            'email.required' => 'Email mohon untuk diisi',
-            'email.email' => 'Mohon email berupa Gmail',
-            'password.required' => 'Password mohon untuk diisi',
-            'password.min' => 'Password minimal 8 karakter',
-            'nomor.required' => 'Nomor mohon untuk diisi',
-            'nomor.numeric' => 'Nomor mohon berupa angka',
-            'nomor.min' => 'Nomor minimal 15 karakter',
-            'alamat.required' => 'Alamat mohon untuk diisi'
-        ]);
+        $this->register = $register;
+        $this->service = $service;
     }
 
     /**
@@ -73,14 +52,9 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function register(RegisterRequest $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'nomor' => $data['nomor'],
-            'alamat' => $data['alamat'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $this->service->handleRegister($request,$this->register);
+        return redirect()->back()->with('success',alert('trans.add_success'));
     }
 }

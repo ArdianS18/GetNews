@@ -40,7 +40,7 @@
                              <div class="row justify-content-between mt-2">
                                 <div class="col-lg-6 col-md-12 from-outline mb-2">
                                     <label class="form-label" for="nomor">Nomor Hp</label>
-                                    <input id="nomor" type="text" placeholder="Nomor Hp" class="gap-8 form-control form-control-lg @error('nomor') is-invalid @enderror" name="nomor" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nomor" type="number" placeholder="Nomor Hp" class="gap-8 form-control form-control-lg @error('nomor') is-invalid @enderror" name="phone_number" value="{{ old('name') }}" required autocomplete="name" autofocus>
                             
                                     @error('nomor')
                                         <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                             </div>
                             <div class="from-outline mt-2 mb-4">
                                 <label class="form-label" for="email">Alamat</label>
-                                <textarea name="alamat" id="alamat" placeholder="Masukan Alamat" cols="10" rows="5"  class="form-control form-control-lg @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" required autocomplete="alamat" autofocus></textarea>
+                                <textarea name="address" id="alamat" placeholder="Masukan Alamat" cols="10" rows="5"  class="form-control form-control-lg @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" required autocomplete="alamat" autofocus></textarea>
                                 @error('alamat')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

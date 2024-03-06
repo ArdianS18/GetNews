@@ -51,7 +51,7 @@
                             <div class="col-lg-6 col-md-12 from-outline mb-2">
                                 <label class="form-label" for="nomor">Nomor Hp<span class="important">*</span></label>
                                 <input id="nomor" type="text" placeholder="Nomor Hp"
-                                    class="gap-8 form-control @error('nomor') is-invalid @enderror" name="nomor"
+                                    class="gap-8 form-control @error('nomor') is-invalid @enderror" name="phone_number"
                                     value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                 @error('nomor')
@@ -104,7 +104,7 @@
                         </div>
                         <div class="from-outline mt-2 mb-4">
                             <label class="form-label" for="email">Alamat<span class="important">*</span></label>
-                            <textarea name="alamat" id="alamat" placeholder="Masukan Alamat" cols="10" rows="5"
+                            <textarea name="address" id="alamat" placeholder="Masukan Alamat" cols="10" rows="5"
                                 class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}"
                                 autocomplete="alamat" autofocus></textarea>
                             @error('alamat')
