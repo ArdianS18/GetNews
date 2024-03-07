@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Http\Requests\NewsLikeRequest;
+use App\Models\News;
 use App\Models\NewsHasLike;
 use Illuminate\Http\Request;
 
@@ -36,22 +37,18 @@ class NewsHasLikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NewsLikeRequest $request, $id)
+    public function store(News $newsHasLike)
     {
-        $data = $request->validated();
-
-        dd($id);
         $this->newsHasLike->store
         ([
-            'news_id' => $id,
+            'news_id' => $newsHasLike->id,
             'user_id' => auth()->id()
         ],[
-            'news_id' => $id,
-            'user_id' => auth()->id(),
-            'status' => $data['status'],
+            'news_id' => $newsHasLike->id,
+            'user_id' => auth()->id()
         ]);
 
-            return back();
+        return back();
     }
 
     /**

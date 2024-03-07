@@ -100,8 +100,7 @@ Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
 //NewsHasLike
-Route::post('news-like/{newshaslike}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
-Route::delete('news-unlike/{id}', [NewsHasLikeController::class, 'destroy'])->name('news.unlike.delete');
+Route::get('news-like/{newsHasLike}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
 
 //trending ke-?
 Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
