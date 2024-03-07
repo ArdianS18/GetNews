@@ -1,4 +1,4 @@
-@extends('layouts.author.sidebar')
+@extends('layouts.user.sidebar')
 
 @section('style')
     <style>

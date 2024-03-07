@@ -98,6 +98,14 @@ class NewsController extends Controller
 
         $news = $this->news->showWithSlug($slug);
 
+        // $view = $this->newsHasLike->store([
+        //     'news_id' => $$news->id,
+        //     'user_id' => auth()->id()
+        // ],[
+        //     'news_id' => $$news->id,
+        //     'user_id' => auth()->id()
+        // ]);
+
         if (auth()->check() && auth()->user()->id != $news->user_id) {
             $newsId = $news->id;
             if (!session()->has('news_viewed_'.$newsId)) {

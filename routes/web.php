@@ -98,7 +98,7 @@ Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
 //NewsHasLike
-Route::post('news-like/{id}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
+Route::post('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
 Route::delete('news-unlike/{id}', [NewsHasLikeController::class, 'destroy'])->name('news.unlike.delete');
 
 //trending ke-?
@@ -126,9 +126,13 @@ Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])-
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 
 // Singgle Post
-Route::get('news-singgle-post',function(){
-    return view('pages.user.news.singlepost');
-})->name('news.singgle-post');
+// Route::get('news-singgle-post',function(){
+//     return view('pages.user.news.singlepost');
+// })->name('news.singgle-post');
+
+Route::get('news-post', function(){
+    return view('pages.user.news.news');
+})->name('news.post');
 
 Route::get('aboutnews', function(){
     return view('pages.user.about.index');
@@ -152,6 +156,10 @@ Route::get('profileuser', function(){
 })->name('profile.user');
 
 Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
+// Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
+// Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
+// Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
+
 Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
 //comment
