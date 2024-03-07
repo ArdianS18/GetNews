@@ -26,8 +26,9 @@
                 </svg>
                 15 Min Read</li>
             <li>
-                <form action="{{ route('news.like.store', ['id' => $news->id]) }}" method="POST">
+                <form action="{{ route('news.like.store', ['newshaslike' => $news->id]) }}" method="POST">
                     @csrf
+                    <input type="hidden" name="news_id" value="{{ $news->id }}">
                     <button type="submit" >Like</button>
                 </form>
                 <p>{{$newsLike}}</p>

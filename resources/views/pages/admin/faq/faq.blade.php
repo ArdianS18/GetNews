@@ -141,7 +141,9 @@
             </div>
         </div>
     </div>
+
     <x-delete-modal-component />
+    
 @endsection
 @section('script')
     <script>

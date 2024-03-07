@@ -24,7 +24,6 @@ return new class extends Migration
             $table->foreignId('sub_category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('slug')->unique();
             $table->enum('status', ['active', 'nonactive', 'panding', 'primary'])->default('panding');
-            $table->integer('views')->default(0);
             $table->string('tags');
             $table->timestamps();
         });

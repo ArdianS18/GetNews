@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Enums\UserStatusEnum;
 use App\Http\Requests\UserRequest;
@@ -13,11 +14,11 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-    private UserInterface $user;
+    private AuthorInterface $author;
 
-    public function __construct(UserInterface $user)
+    public function __construct(AuthorInterface $author)
     {
-        $this->user = $user;
+        $this->author = $author;
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -75,4 +76,21 @@ class UserController extends Controller
     {
         //
     }
+
+    // public function approved(Author $author)
+    // {
+    //     // dd($author);
+    //     $data['status'] = UserStatusEnum::APPROVED->value;
+    //     $this->author->update($author->id, $data);
+    //     return back();
+    // }
+
+    // public function reject(Author $author)
+    // {
+    //     $data['status'] = UserStatusEnum::REJECT->value;
+    //     $this->author->update($author->id, $data);
+    //     return back();
+    //     $authors = $this->author->get();
+    //     return view('pages.useraprove.index', compact('authors'));
+    // }
 }

@@ -36,18 +36,14 @@ class NewsHasLikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NewsLikeRequest $request, string $newsId)
+    public function store(NewsLikeRequest $request, NewsHasLike $newsHasLike)
     {
         $data = $request->validated();
 
-        // $data['user_id'] = auth()->user()->id;
-        // $data['news_id'] = $newsId;
-        // $this->newsHasLike->store($data);
-
-        $query = NewsHasLike::updateOrCreate(
+        $query = $newsHasLike->updateOrCreate(
             [
                 'user_id' => auth()->id(),
-                'news_id' => $newsId
+                'news_id' => $request->input('news_id')
             ],
             [
                 'status' => $data['status']

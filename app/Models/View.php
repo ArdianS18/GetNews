@@ -6,30 +6,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class NewsHasLike extends Model
+class View extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['news_id', 'user_id', 'status'];
-    protected $table = 'news_has_likes';
+    protected $fillable = ['news_id', 'user_id'];
 
     /**
-     * Get the user that owns the NewsHasLike
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the news that owns the NewsHasLike
+     * Get the news that owns the View
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function news(): BelongsTo
     {
         return $this->belongsTo(News::class);
+    }
+
+    /**
+     * Get the user that owns the View
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

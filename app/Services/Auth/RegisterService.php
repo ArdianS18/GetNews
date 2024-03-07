@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Contracts\Interfaces\AuthorInterface;
 use App\Enums\RoleEnum;
 use SebastianBergmann\Type\VoidType;
 use App\Http\Requests\Auth\LoginRequest;

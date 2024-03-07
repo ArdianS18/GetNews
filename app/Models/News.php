@@ -56,4 +56,24 @@ class News extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * Get all of the newsHasLike for the News
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function newsHasLike(): HasMany
+    {
+        return $this->hasMany(NewsHasLike::class);
+    }
+
+    /**
+     * Get all of the views for the News
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function views(): HasMany
+    {
+        return $this->hasMany(View::class);
+    }
 }
