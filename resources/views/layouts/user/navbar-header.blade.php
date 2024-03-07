@@ -39,7 +39,7 @@
                                 <a href="author.html" class="nav-link"> Author </a>
                             </li>
                             <li class="nav-item">
-                                <a href="privacy-policy.html" class="nav-link"> Privacy Policy </a>
+                                <a href="" class="nav-link"> Privacy Policy </a>
                             </li>
                             <li class="nav-item">
                                 <a href="terms-conditions.html" class="nav-link"> Terms & Conditions </a>
