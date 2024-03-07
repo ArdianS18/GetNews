@@ -127,9 +127,7 @@ Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])-
 // contact us
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 
-Route::get('detail-news-admin', function(){
-    return view('pages.admin.news_admin.detail-news');
-})->name('detail.news.admin');
+Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');
 // Singgle Post
 // Route::get('news-singgle-post',function(){
 //     return view('pages.user.news.singlepost');

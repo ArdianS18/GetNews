@@ -79,6 +79,17 @@ class NewsController extends Controller
         return view('pages.admin.news_admin.index', compact('news','subCategories', 'search', 'status'));
     }
 
+    public function detailnews($newsId)
+    {
+        $news = $this->news->get()->whereIn('slug', $newsId);
+
+        $subCategories = $this->subCategory->get();
+        $categories = $this->category->get();
+        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+
+        return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
+    }
+
     public function createnews()
     {
         $subCategories = $this->subCategory->get();
@@ -99,7 +110,6 @@ class NewsController extends Controller
 
     public function usernews($slug)
     {
-
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->get();
 

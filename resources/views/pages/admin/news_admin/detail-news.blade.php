@@ -77,38 +77,40 @@
 <div class="container" style="margin-top: 3%;">
     <h2 class="text-center">Detail Berita</h2>
         <div class="news-card-a mt-5">
+            
+            @forelse ($news as $news)
             <div class="container" style="padding: 3%;">
                     <div class="row justify-content-between">
-                    <div class="col-lg-6 col-md-12 from-outline">
-                        <label class="form-label" for="nomor">Judul Berita</label>
-                        <p class="form-control">Judul</p>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12 from-outline">
-                        <label class="form-label" for="photo">Thumbnail Berita</label>
-                        <div class="form-control">
-                            foto
+                        <div class="col-lg-6 col-md-12 from-outline">
+                            <label class="form-label" for="nomor">Judul Berita</label>
+                            <p class="form-control">{{ $news->name }}</p>
                         </div>
-                    </div>
+
+                        <div class="col-lg-6 col-md-12 from-outline">
+                            <label class="form-label" for="photo">Thumbnail Berita</label>
+                            <div>
+                                <img width="400px" src="{{ asset('storage/' . $news->photo) }}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row justify-content-between mt-2">
 
                         <div class="col-lg-6 col-md-12 col-span-3 from-outline">
                             <label class="form-label" for="email">Sinopsis berita</label>
-                            <textarea class="form-control" rows="5" style="resize: none;">Sinopsis</textarea>
+                            <textarea class="form-control" rows="5" style="resize: none;">{{ $news->sinopsis }}</textarea>
                         </div>
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Tags</label>
-                                <p class="form-control">Tags</p>
+                                <p class="form-control">{{ $news->tags }}</p>
                             </div>
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
-                                <p class="form-control">Kategory</p>
+                                <p class="form-control">{{ $news->category->name }}</p>
                             </div>
 
                         </div>
@@ -117,7 +119,7 @@
                     <div class="row justify-content-between mt-2">
                         <div class="col-lg-6 col-md-12 col-span-2 from-outline">
                             <label class="form-label" for="content">Content</label>
-                            <textarea class="form-control" rows="10" style="resize: none;">content</textarea>
+                            <textarea class="form-control" rows="10" style="resize: none;">{{ $news->content }}</textarea>
                         </div>
 
 
@@ -125,26 +127,29 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                                <p class="form-control">Tanggal</p>
+                                <p class="form-control">{{ $news->upload_date }}</p>
                             </div>
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <p class="form-control">Sub Kategory</p>
+                                <p class="form-control">{{ $news->subCategory->name }}</p>
                             </div>
 
+                @empty
+                @endforelse
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                                 <p class="form-control">Multi Gambar</p>
+                                @foreach ($newsPhoto as $photo)
+                                <img width="100px" src="{{ asset('storage/' . $photo->multi_photo) }}" alt="{{ $photo->multi_photo }}">
+                                @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                        Kembali
-                    </button>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ route('approved-news.index') }}" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                    </div>
                 </div>
         </div>
 </div>
