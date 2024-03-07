@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsViewController;
 use App\Http\Controllers\ReportController;
@@ -42,7 +43,7 @@ Route::get('/', [App\Http\Controllers\NewsViewController::class, 'showPopularVie
 Auth::routes();
 
 //Beranda
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('dashboard',[DashboardController::class,'index'])->name('home');
 
 // Approved And Reject Author
 // Route::resource('user', AuthorController::class);
@@ -163,12 +164,12 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
 Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
 
-// Route::get('contact-us', function() {
-//     return view('pages.user.contact.index');
-// })->name('contact.user');
-Route::get('dashboard', function(){
-    return view('pages.user.index');
-})->name('dashboard.user');
+// // Route::get('contact-us', function() {
+// //     return view('pages.user.contact.index');
+// // })->name('contact.user');
+// Route::get('dashboard', function(){
+//     return view('pages.user.index');
+// })->name('dashboard.user');
 
 Route::get('author', function(){
     return view('pages.user.author.index');
