@@ -8,7 +8,7 @@
 
         .btn-primary {
             --bs-btn-color: #fff;
-            --bs-btn-bg: #0f4d8a;
+            --bs-btn-bg:  #0f4d8a;
             --bs-btn-border-color: #0f4d8a;
             --bs-btn-hover-color: #fff;
             --bs-btn-hover-bg: #0b5ed7;
@@ -22,8 +22,6 @@
             --bs-btn-disabled-bg: #0f4d8a;
             --bs-btn-disabled-border-color: #0f4d8a;
         }
-
-
 
         .strip-right {
             border-right: 1px solid #0f4d8a;

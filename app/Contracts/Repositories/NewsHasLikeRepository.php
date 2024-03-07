@@ -56,10 +56,10 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
      *
      * @return mixed
      */
-    public function store(array $data): mixed
+    public function store(array $data, array $value = []): mixed
     {
         return $this->model->query()
-            ->create($data);
+            ->updateOrCreate($data, $value);
     }
 
     /**
