@@ -111,6 +111,22 @@ class NewsController extends Controller
             'user_id' => auth()->id()
         ]);
 
+        // $view = $this->newsHasLike->store([
+        //     'news_id' => $$news->id,
+        //     'user_id' => auth()->id()
+        // ],[
+        //     'news_id' => $$news->id,
+        //     'user_id' => auth()->id()
+        // ]);
+
+        if (auth()->check() && auth()->user()->id != $news->user_id) {
+            $newsId = $news->id;
+            if (!session()->has('news_viewed_'.$newsId)) {
+                $news->increment('views');
+                session()->put('news_viewed_'.$newsId, true);
+            }
+        }
+
         $newsLike = $this->newsHasLike->get()->whereIn('news_id', $news)->count();
         $comments = $this->comment->get()->whereIn('news_id', $news);
         $subCategories = $this->subCategory->get();

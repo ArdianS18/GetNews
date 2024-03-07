@@ -32,6 +32,14 @@
                     <button type="submit" >Like</button>
                 </form>
                 <p>{{$newsLike}}</p>
+
+                {{-- <form action="{{ route('news.like.store', ['id' => $news->id]) }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <button type="submit" name="status" value="1" class="btn btn-primary">Like</button>
+                        <button type="submit" name="status" value="0" class="btn btn-danger">Unlike</button>
+                    </div>
+                </form> --}}
             </li>
 
         </ul>

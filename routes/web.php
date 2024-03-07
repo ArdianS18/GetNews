@@ -132,9 +132,13 @@ Route::get('detail-news-admin', function(){
     return view('pages.admin.news_admin.detail-news');
 })->name('detail.news.admin');
 // Singgle Post
-Route::get('news-singgle-post',function(){
-    return view('pages.user.news.singlepost');
-})->name('news.singgle-post');
+// Route::get('news-singgle-post',function(){
+//     return view('pages.user.news.singlepost');
+// })->name('news.singgle-post');
+
+Route::get('news-post', function(){
+    return view('pages.user.news.news');
+})->name('news.post');
 
 Route::get('aboutnews', function(){
     return view('pages.user.about.index');
@@ -158,6 +162,10 @@ Route::get('profileuser', function(){
 })->name('profile.user');
 
 Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
+// Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
+// Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
+// Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
+
 Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
 //comment
