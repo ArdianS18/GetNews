@@ -188,4 +188,8 @@ Route::get('author-inbox', function(){
     return view('pages.author.inbox.index');
 })->name('author.inbox');
 
+Route::get('privacy-policy', function(){
+    return view('pages.user.privacy-policy.index');
+})->name('privacy-policy');
+
 ?>
