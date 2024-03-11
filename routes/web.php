@@ -38,13 +38,13 @@ use App\Models\SubCategory;
 //     return view('pages.index');
 // });
 
-Route::get('/', [App\Http\Controllers\NewsViewController::class, 'showPopularView'])->name('popular.news');
+Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes();
 
 Route::middleware(['role:admin|superadmin'])->group(function () {
     //Beranda *Admin*
-    Route::get('dashboard',[DashboardController::class,'index'])->name('home'); //dashboard
+    Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
     Route::get('list-author-admin', [AuthorController::class, 'listauthor'])->name('list.author.admin'); //list author approved
 

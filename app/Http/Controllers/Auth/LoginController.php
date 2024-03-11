@@ -3,10 +3,25 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Services\Auth\LoginService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+
+    private LoginService $service;
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(LoginService $service)
+    {
+        $this->middleware('guest')->except('logout');
+        $this->service = $service;
+
+    }
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -20,20 +35,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function login(LoginRequest $request)
     {
-        $this->middleware('guest')->except('logout');
+        return  $this->service->handleLogin($request);
     }
 }

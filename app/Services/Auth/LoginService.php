@@ -21,14 +21,21 @@ class LoginService
      * @throws ValidationException
      */
 
-    public function handleLoginUser(LoginRequest $request): void
-    {
-        $request->validated();
 
-        if (!auth()->attempt($request->only('email', 'password'))) {
-            throw ValidationException::withMessages([
-                'email' => [trans('auth.failed')],
-            ]);
+    public function handleLogin(LoginRequest $request)
+    {
+        if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (auth()->user()->email_verified_at) {
+                if (auth()->user()->roles->pluck('name')[0] == 'user') {
+                    return to_route('/');
+                } else if (auth()->user()->roles->pluck('name')[0] == 'author') {
+                    return to_route('/');
+                } else if (auth()->user()->roles->pluck('name')[0] == 'admin') {
+                    return to_route('dashboard-admin');
+                } else if (auth()->user()->roles->pluck('name')[0] == 'super admin') {
+                    return to_route('dashboard-admin');
+                }
+            }
         }
     }
 }
