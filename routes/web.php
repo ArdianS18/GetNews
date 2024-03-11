@@ -38,12 +38,12 @@ use App\Models\SubCategory;
 //     return view('pages.index');
 // });
 
-Route::get('/', [App\Http\Controllers\NewsViewController::class, 'showPopularView'])->name('popular.news');
+Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes();
 
 //Beranda
-Route::get('dashboard',[DashboardController::class,'index'])->name('home');
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard-admin');
 
 // Approved And Reject Author
 // Route::resource('user', AuthorController::class);
