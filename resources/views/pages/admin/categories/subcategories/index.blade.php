@@ -38,7 +38,7 @@
                 <th>Name</th>
                 <th>Aksi</th>
             </thead>
-            @foreach ($subCategory as $sub)
+            @forelse ($subCategory as $sub)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$sub->name}}</td>
@@ -75,7 +75,21 @@
                     </div>
                 </td>
             </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="3">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('no-data.svg') }}" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4>Ups... Ada kesalahan!!!</h4>
+                        </div>
+                        {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
+                    </td>
+                </tr>
+            @endforelse
         </table>
 
     <!-- Modal -->

@@ -81,7 +81,7 @@
                     <div class="col-9">
                         <h4>Statistik</h4>
                         <div id="chart-writer">
-        
+
                         </div>
                     </div>
                     <div class="col-3">
@@ -150,7 +150,7 @@
                 <div class="card-body">
                     <h4>Kategori Trending</h4>
                    <div>
-                    <div class="fs-5 mb-3" >
+                    <div class="fs-5 mb-3 mt-4" >
                         Pendidikan
                     </div>
                     <div class="fs-5 mb-3" >
@@ -174,7 +174,7 @@
                     <div class="fs-5 mb-3" >
                         Agama
                     </div>
-                    <div class="fs-5 mb-2" >
+                    <div class="fs-5 mb-3" >
                         Pendidikan
                     </div>
                    </div>
@@ -184,7 +184,141 @@
     </div>
 
     <div class="row">
-        
+        <div class="col-md-12 col-12">
+            <div class="card">
+               <div class="card-body">
+                <div class="row">
+                    <div class="col-md-7 col-lg-6">
+                        <h4>Statistik</h4>
+                        <div id="chart-news">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <h4 class="mb-3">Berita</h4>
+                        <div>
+                            <div class="d-flex gap-4 mb-3">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                          <div class="col-md-4 bg-secondary">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                              <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec</p>
+                                              <div class="d-flex justify-content-between align-items-center ms-0">
+                                                  <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/></svg><small> Apr 25, 2023</small></p>
+                                                  <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M27.6 18.6v-7.2A5.4 5.4 0 0 0 22.2 6L15 22.2V42h20.916a3.6 3.6 0 0 0 3.6-3.06L42 22.74a3.6 3.6 0 0 0-3.6-4.14zM15 22h-4.806C8.085 21.963 6.283 23.71 6 25.8v12.6a4.158 4.158 0 0 0 4.194 3.6H15z"/></svg><small> 1.203</small></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                          <div class="col-md-4 bg-secondary">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                              <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec</p>
+                                              <div class="d-flex justify-content-between align-items-center ms-0">
+                                                  <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/></svg><small> Apr 25, 2023</small></p>
+                                                  <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M27.6 18.6v-7.2A5.4 5.4 0 0 0 22.2 6L15 22.2V42h20.916a3.6 3.6 0 0 0 3.6-3.06L42 22.74a3.6 3.6 0 0 0-3.6-4.14zM15 22h-4.806C8.085 21.963 6.283 23.71 6 25.8v12.6a4.158 4.158 0 0 0 4.194 3.6H15z"/></svg><small> 1.203</small></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-4 mb-3">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                          <div class="col-md-4 bg-secondary">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                              <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec</p>
+                                              <div class="d-flex justify-content-between align-items-center ms-0">
+                                                  <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/></svg><small> Apr 25, 2023</small></p>
+                                                  <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M27.6 18.6v-7.2A5.4 5.4 0 0 0 22.2 6L15 22.2V42h20.916a3.6 3.6 0 0 0 3.6-3.06L42 22.74a3.6 3.6 0 0 0-3.6-4.14zM15 22h-4.806C8.085 21.963 6.283 23.71 6 25.8v12.6a4.158 4.158 0 0 0 4.194 3.6H15z"/></svg><small> 1.203</small></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                          <div class="col-md-4 bg-secondary">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                              <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec</p>
+                                              <div class="d-flex justify-content-between align-items-center ms-0">
+                                                  <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/></svg><small> Apr 25, 2023</small></p>
+                                                  <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M27.6 18.6v-7.2A5.4 5.4 0 0 0 22.2 6L15 22.2V42h20.916a3.6 3.6 0 0 0 3.6-3.06L42 22.74a3.6 3.6 0 0 0-3.6-4.14zM15 22h-4.806C8.085 21.963 6.283 23.71 6 25.8v12.6a4.158 4.158 0 0 0 4.194 3.6H15z"/></svg><small> 1.203</small></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-4 mb-3">
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                          <div class="col-md-4 bg-secondary">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                              <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec</p>
+                                              <div class="d-flex justify-content-between align-items-center ms-0">
+                                                  <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/></svg><small> Apr 25, 2023</small></p>
+                                                  <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M27.6 18.6v-7.2A5.4 5.4 0 0 0 22.2 6L15 22.2V42h20.916a3.6 3.6 0 0 0 3.6-3.06L42 22.74a3.6 3.6 0 0 0-3.6-4.14zM15 22h-4.806C8.085 21.963 6.283 23.71 6 25.8v12.6a4.158 4.158 0 0 0 4.194 3.6H15z"/></svg><small> 1.203</small></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                                <div class="col-md-12 col-lg-6">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                          <div class="col-md-4 bg-secondary">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body p-2">
+                                              <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec</p>
+                                              <div class="d-flex justify-content-between align-items-center ms-0">
+                                                  <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z"/></svg><small> Apr 25, 2023</small></p>
+                                                  <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M27.6 18.6v-7.2A5.4 5.4 0 0 0 22.2 6L15 22.2V42h20.916a3.6 3.6 0 0 0 3.6-3.06L42 22.74a3.6 3.6 0 0 0-3.6-4.14zM15 22h-4.806C8.085 21.963 6.283 23.71 6 25.8v12.6a4.158 4.158 0 0 0 4.194 3.6H15z"/></svg><small> 1.203</small></p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+
     </div>
 @endsection
 @section('script')
@@ -220,5 +354,39 @@
         var chart = new ApexCharts(document.querySelector("#chart-writer"), options);
         chart.render();
 
-    </script>
+</script>
+
+<script>
+    var options = {
+      series: [{
+      data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+    }],
+      chart: {
+      type: 'bar',
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 4,
+        horizontal: false,
+      }
+    },
+    title:{
+        text:'Berita Tranding'
+    },
+    dataLabels: {
+      enabled: false
+    },
+    xaxis: {
+      categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+        'United States', 'China', 'Germany'
+      ],
+    }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-news"), options);
+    chart.render();
+
+</script>
+
 @endsection

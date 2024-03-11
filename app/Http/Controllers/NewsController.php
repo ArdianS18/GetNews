@@ -75,19 +75,43 @@ class NewsController extends Controller
 
 
         $subCategories = $this->subCategory->get();
-        $news = $this->news->search($request);
+        $news = $this->news->search($request)->whereIn('status', "panding");
         return view('pages.admin.news_admin.index', compact('news','subCategories', 'search', 'status'));
+    }
+
+    public function listapproved(Request $request, News $news)
+    {
+        $request->merge([
+            'category_id' => $news->id,
+            'sub_category_id' => $news->id
+        ]);
+
+        $search = $request->input('search');
+        $status = $request->input('status');
+
+
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->search($request)->where('status', "active");
+        return view('pages.admin.news_admin.news-approve', compact('news','subCategories', 'search', 'status'));
     }
 
     public function detailnews($newsId)
     {
-        $news = $this->news->get()->whereIn('slug', $newsId);
+        $news = $this->news->where($newsId);
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
         return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
+
+        // $news = $this->news->get()->whereIn('slug', $slug);
+
+        // $subCategories = $this->subCategory->get();
+        // $categories = $this->category->get();
+        // $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+
+        // return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
     }
 
     public function createnews()
@@ -120,14 +144,6 @@ class NewsController extends Controller
             'news_id' => $news->id,
             'user_id' => auth()->id()
         ]);
-
-        // if (auth()->check() && auth()->user()->id != $news->user_id) {
-        //     $newsId = $news->id;
-        //     if (!session()->has('news_viewed_'.$newsId)) {
-        //         $news->increment('views');
-        //         session()->put('news_viewed_'.$newsId, true);
-        //     }
-        // }
 
         $newsLike = $this->newsHasLike->get()->whereIn('news_id', $news)->count();
         $comments = $this->comment->get()->whereIn('news_id', $news);
@@ -197,7 +213,7 @@ class NewsController extends Controller
             $this->newsTrendingService->markAsNotTrending($news);
         }
 
-        return back();
+        return to_route('list.approved');
     }
 
     public function filter(Request $request)

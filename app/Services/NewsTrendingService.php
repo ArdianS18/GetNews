@@ -10,7 +10,6 @@ class NewsTrendingService
     {
         $news->update([
             'is_primary' => true,
-            'status' => 'primary',
         ]);
     }
 

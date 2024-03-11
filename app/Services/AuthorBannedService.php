@@ -10,6 +10,7 @@ class AuthorBannedService
     {
         $author->update([
             'banned' => true,
+            'status' => 'reject'
         ]);
     }
 
@@ -17,6 +18,7 @@ class AuthorBannedService
     {
         $author->update([
             'banned' => false,
+            'status' => 'approved'
         ]);
     }
 }

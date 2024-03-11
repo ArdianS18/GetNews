@@ -95,6 +95,7 @@ class ProfileController extends Controller
         }
 
         return ResponseHelper::success(null, trans('alert.add_success'));
+        // return to_route('profile-status.author')->with('success', trans('alert.add_success'));
     }
 
     /**

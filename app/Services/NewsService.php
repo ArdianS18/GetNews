@@ -46,7 +46,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $data = $request->validated();
 
         $multi_photo = [];
-        // @dd($multi_photo);
 
             if ($request->hasFile('multi_photo')) {
                 foreach ($request->file('multi_photo') as $image) {
@@ -55,7 +54,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 }
             }
 
-        // $data['multi_photo'] = $multi_photo;
         $photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
 
         return [
@@ -94,7 +92,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             foreach ($request->file('multi_photo') as $image) {
                 $this->remove($image);
                 $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-                $old_multi_photo[] = $stored_image;
+                $new_multi_photo[] = $stored_image;
             }
         }
 

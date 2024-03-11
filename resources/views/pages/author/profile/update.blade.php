@@ -6,12 +6,10 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <style>
         .news-card-a {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -43,12 +41,6 @@
             color: #555;
         }
 
-        /* .dz-message span {
-            display: block;
-            margin-top: 10px;
-            color: #777;
-        } */
-
         .dz-preview {
             display: inline-block;
             margin: 6px;
@@ -72,7 +64,6 @@
         }
   </style>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <div class="container" style="margin-top: 3%;">
     <h2 class="text-center">Update Berita</h2>
@@ -201,9 +192,7 @@
                         <div class="d-flex justify-content-between">
 
 
-                            <button type="submit" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                                Kembali
-                            </button>
+                            <a href="{{ route('profile-status.author') }}" class="btn btn-md text-black m-2" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
 
                             <div class="">
 
@@ -221,6 +210,17 @@
             </div>
         </div>
 </div>
+
+
+
+
+@endsection
+
+@section('script')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/  .bundle.min.js" integnrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous"></script>
@@ -249,7 +249,5 @@
         $('#image-uploadify').imageuploadify();
     })
    </script>
-
-
 
 @endsection

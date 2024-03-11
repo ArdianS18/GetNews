@@ -38,15 +38,6 @@
                 <th>Aksi</th>
             </thead>
 
-                @if (isset($message))
-                <td>
-                    <td>
-                        <p>{{ $message }}</p>
-                    </td>
-                </td>
-                @endif
-
-
             @forelse ($categoris as $category)
             <tbody>
                 <tr>
@@ -91,6 +82,19 @@
                 </tr>
             </tbody>
             @empty
+            <tr>
+                <td colspan="4">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('no-data.svg') }}" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h4>Ups... Ada kesalahan!!!</h4>
+                    </div>
+                    {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
+                </td>
+            </tr>
             @endforelse
         </table>
 

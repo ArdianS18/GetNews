@@ -36,9 +36,9 @@ class NewsViewController extends Controller
      */
     public function showPopularView(News $news)
     {
-        $popularNews = News::orderBy('views', 'desc')->take(5)->get();
-
-        return view('pages.index', compact('popularNews'));
+        // $popularNews = News::orderBy('views', 'desc')->take(5)->get();
+        // compact('popularNews')
+        return view('pages.index');
     }
 
     /**

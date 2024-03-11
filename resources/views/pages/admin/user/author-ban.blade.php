@@ -36,7 +36,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($authors as $author)
+            @forelse($authors as $author)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{ $author->user->name}}</td>
@@ -74,7 +74,21 @@
                     </div>
                 </td>
             </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="5">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('no-data.svg') }}" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4>Ups... Ada kesalahan!!!</h4>
+                        </div>
+                        {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 

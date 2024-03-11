@@ -12,7 +12,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.reports.index');
+        // return view('pages.admin.inbox.index');
     }
 
     /**

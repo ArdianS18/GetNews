@@ -26,12 +26,12 @@
                 </svg>
                 15 Min Read</li>
             <li>
-                <a href="{{ route('news.like.store', ['newsHasLike' => $news->id]) }}" class="btn btn-primary">Like</a>
+                <a href="{{ route('news.like.store', ['news' => $news->id]) }}" class="btn btn-primary">Like</a>
+                <p>{{$newsLike}}</p>
                 {{-- <form action="{{ route('news.like.store', ['newsHasLike' => $news->id]) }}" method="GET">
                     @csrf
                     <button type="submit" >Like</button>
                 </form> --}}
-                <p>{{$newsLike}}</p>
 
                 {{-- <form action="{{ route('news.like.store', ['id' => $news->id]) }}" method="POST">
                     @csrf

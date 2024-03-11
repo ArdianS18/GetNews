@@ -14,7 +14,8 @@ class NewsLikeRequest extends FormRequest
     public function rules()
     {
         return [
-            'status' => 'required|boolean',
+            'news_id' => 'required',
+            'user_id' => 'required',
         ];
     }
 
@@ -26,8 +27,7 @@ class NewsLikeRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.required' => 'Status harus diisi.',
-            'status.boolean' => 'Status harus berupa boolean.',
+            //
         ];
     }
 }
