@@ -82,7 +82,7 @@
                             </li>
                         </ul>
                     </li>
-                   
+
                 </ul>
                 <div class="others-option d-flex align-items-center" id="loginSection">
 
@@ -99,9 +99,9 @@
 
                     @endauth
 
-                    
-                
-                   
+
+
+
                 </div>
             </div>
         </nav>

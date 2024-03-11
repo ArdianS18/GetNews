@@ -3,7 +3,7 @@
 <div class="trending-news-box">
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-3 col-lg-3 col-md-4 d-flex justify-content-center">
-            <div class="trending-prev" style="margin-right: 2%;"><i class="flaticon-left-arrow"></i></div>                 
+            <div class="trending-prev" style="margin-right: 2%;"><i class="flaticon-left-arrow"></i></div>
             <h4>Trending Now</h4>
             <div class="trending-next" style="margin-left: 2%;"><i class="flaticon-right-arrow"></i></div>
         </div>
@@ -11,7 +11,7 @@
             <div class="trending-news-slider swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide news-card-one">
-                        @foreach($popularView as $view)
+                        {{-- @foreach($popularView as $view) --}}
 
                         <div class="news-card-img-dashboard">
                             <img src="assets/img/news/trending-1.webp" alt="Image" />
@@ -23,7 +23,7 @@
                             </ul>
                         </div>
 
-                        @endforeach
+                        {{-- @endforeach --}}
 
 
                     </div>

@@ -8,6 +8,7 @@ use App\Services\AuthorService;
 use App\Http\Requests\AuthorRequest;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\RegisterInterface;
+use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
@@ -51,16 +52,30 @@ class AuthorController extends Controller
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
-    public function listauthor(Author $author)
+    public function listauthor(Request $request, Author $author)
     {
-        $authors = $this->author->get()->where('status', 'approved')->where('banned', false);
-        return view('pages.admin.user.author-list', compact('authors'));
+        $request->merge([
+            'user_id' => $author->id
+        ]);
+
+        $search = $request->input('search');
+        $status = $request->input('status');
+
+        $authors = $this->author->search($request)->where('status', 'approved')->where('banned', false);
+        return view('pages.admin.user.author-list', compact('authors', 'search', 'status'));
     }
 
-    public function listbanned(Author $author)
+    public function listbanned(Request $request, Author $author)
     {
-        $authors = $this->author->get()->where('status', 'approved')->where('banned', true);
-        return view('pages.admin.user.author-ban', compact('authors'));
+        $request->merge([
+            'user_id' => $author->id
+        ]);
+
+        $search = $request->input('search');
+        $status = $request->input('status');
+
+        $authors = $this->author->search($request)->where('status', 'reject')->where('banned', true);
+        return view('pages.admin.user.author-ban', compact('authors', 'search', 'status'));
     }
 
     public function approved(Author $author, $authorId)
@@ -104,13 +119,17 @@ class AuthorController extends Controller
     public function store(RegisterRequest $request)
     {
         $data = $this->serviceregister->registerWithAdmin($request);
-        $userId = $this->register->store($data)->id;
+        $user = $this->register->store($data);
+        $userId = $user->assignRole(RoleEnum::AUTHOR)->id;
 
         $img = $data['photo'];
         $this->author->store([
             'user_id' => $userId,
             'photo' => $img,
+            'status' => "approved"
         ]);
+
+
 
         return back();
     }

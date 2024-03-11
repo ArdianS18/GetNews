@@ -42,26 +42,19 @@ Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes();
 
-//Beranda
-Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard-admin');
+//Beranda *Admin*
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
+Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
+Route::get('list-author-admin', [AuthorController::class, 'listauthor'])->name('list.author.admin'); //list author approved
 
+Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
+Route::get('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
 // Approved And Reject Author
-// Route::resource('user', AuthorController::class);
-Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
-Route::get('list-author-admin', [AuthorController::class, 'listauthor'])->name('list.author.admin');
+Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved'); //fungsi approved author
+Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject'); // fungsi reject author
 
-Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin');
-Route::get('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author');
-Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved');
-Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject');
-
-Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create');
-
-Route::middleware(['role:user'])->group(function () {
-
-});
-// Route::resource('user', UserController::class);
-// Category and SubCategory
+Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create'); // fungsi create author dari admin -> langsung approve dan role : author
+// Sub Catgeory dan Category
 Route::resource('categories', CategoryController::class);
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
 Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
@@ -69,10 +62,33 @@ Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'des
 Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
 Route::resource('categories', CategoryController::class);
 
+// Approved News And Reject News
+Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
+Route::get('list-news-approved', [NewsController::class, 'listapproved'])->name('list.approved');
+// Detail News
+Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');
+// Approved All News
+Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
+Route::put('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
+// Reject All News
+Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
+Route::put('reject-all', [NewsController::class, 'rejectall'])->name('reject-all.news');
+// Filter and pin di halaman utama
+Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
+Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
 
-Route::get('author',function () {
-    return view('pages.user.author.index');
-})->name('author.index');
+// Author ===<
+// fungsi crud news
+Route::get('news', [NewsController::class, 'index'])->name('news.index');
+Route::post('news', [NewsController::class, 'store'])->name('news.store');
+Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+// Route::resource('user', AuthorController::class);
+// Route::resource('user', UserController::class);
+
+Route::middleware(['role:user'])->group(function () {
+
+});
 
 
 // ===> Contact
@@ -87,27 +103,13 @@ Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
 Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
 Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-// Approved News And Reject News
-Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
-Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
-Route::put('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
-
-Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
-Route::put('reject-all', [NewsController::class, 'rejectall'])->name('reject-all.news');
-
-Route::get('news', [NewsController::class, 'index'])->name('news.index');
-Route::post('news', [NewsController::class, 'store'])->name('news.store');
-Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
-
 //NewsHasLike
-Route::get('news-like/{newsHasLike}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
+Route::get('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
 
 //trending ke-?
-Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
-Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
 
 // Inbox
-Route::get('inbox', [ReportController::class, 'index'])->name('report.index');
+Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
 
 // Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 // Profile Author
@@ -127,11 +129,14 @@ Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])-
 // contact us
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 
-Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');
 // Singgle Post
 // Route::get('news-singgle-post',function(){
 //     return view('pages.user.news.singlepost');
 // })->name('news.singgle-post');
+
+Route::get('author',function () {
+    return view('pages.user.author.index');
+})->name('author.index');
 
 Route::get('news-post', function(){
     return view('pages.user.news.news');

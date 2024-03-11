@@ -22,17 +22,17 @@ class ContactUsController extends Controller
         $this->user = $user;
         $this->faq = $faq;
     }
-    
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $contactUs = $this->contactUs->get();
-        return view('pages.contact.contact', compact('contactUs'));
+        return view('pages.admin.inbox.index', compact('contactUs'));
     }
 
-    public function contact(Faq $faq){  
+    public function contact(Faq $faq){
         $contactUs = $this->contactUs->get();
         $faqs = $this->faq->get();
         return view('pages.user.contact-us.index', compact('contactUs','faqs'));

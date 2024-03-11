@@ -54,7 +54,7 @@
 
                         <div class="col-lg-6 col-md-12 col-span-3 from-outline">
                             <label class="form-label" for="email">Sinopsis berita</label>
-                            <textarea name="sinopsis" id="sinopsis" rows="8" class="form-control" value="{{ old('sinopsis') }}"></textarea>
+                            <textarea name="sinopsis" id="sinopsis" rows="7" value="{{ old('sinopsis') }}"></textarea>
                             @error('sinopsis')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -140,9 +140,7 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"
-                                    multiple>
-                                <input type="hidden" name="news_id" value="64116f4f-7829-3442-a8c2-045d96fe6d85">
+                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
                             </div>
 
                         </div>
@@ -160,17 +158,16 @@
                             </button>
                             <button type="submit" class="btn btn-md text-white m-2"
                                 style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                Upload
+                                Update
                             </button>
                             </div>
-                            
                         </div>
                         </div>
                     </div>
                 </form>
 
 
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -183,7 +180,7 @@
                             <div class="container p-2">
                                 <p>
                                     Ketentuan dan Persyaratan Sebelum Menulis Berita <br><br>
-                                    1. Keaslian dan Orisinalitas 
+                                    1. Keaslian dan Orisinalitas
                                     Berita harus asli dan bukan hasil plagiasi.
                                     Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
                                     Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
@@ -197,7 +194,7 @@
                                     4. Objektivitas
                                     Berita harus ditulis secara objektif dan tidak memihak.
                                     Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                                    5. Keaslian dan Orisinalitas 
+                                    5. Keaslian dan Orisinalitas
                                     Berita harus asli dan bukan hasil plagiasi.
                                     Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
                                     Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
@@ -214,7 +211,7 @@
                                     4. Objektivitas
                                     Berita harus ditulis secara objektif dan tidak memihak.
                                     Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                                    5. Keaslian dan Orisinalitas 
+                                    5. Keaslian dan Orisinalitas
                                     Berita harus asli dan bukan hasil plagiasi.
                                     Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
                                     Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
@@ -228,7 +225,7 @@
                                     8. Objektivitas
                                     Berita harus ditulis secara objektif dan tidak memihak.
                                     Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                                </p>                
+                                </p>
                             </div>
 
                         </div>
@@ -265,7 +262,7 @@
             ['insert', ['link', 'picture', 'video']],
             ['view', ['fullscreen', 'codeview', 'help']]
             ]
-            
+
         });
     });
 </script>

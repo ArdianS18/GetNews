@@ -25,28 +25,11 @@
                 </div>
             </div>
         </form>
-
-        <form id="approvalForm" action="{{ route('approved-all.news')}}" method="post">
-            @method('put')
-            @csrf
-            <input type="hidden" name="checkedIds" id="checkedIdsInput">
-            <button type="submit" class="btn btn-secondary">Approved semua</button>
-        </form>
-
-        <form id="rejectForm" action="{{ route('reject-all.news') }}" method="post">
-            @method('put')
-            @csrf
-            <input type="hidden" name="checkedIdss" id="checkedIdssInput">
-            <button type="submit" class="btn btn-danger">Reject semua</button>
-        </form>
     </div>
 
     <table class="table">
-        <thead>
+        <thead class="table">
             <tr>
-                <th>
-                    <input id="checkAll" type="checkbox" class="itemCheckbox" style="transform: scale(1);">
-                </th>
                 <th>No</th>
                 <th>Penulis</th>
                 <th>Email</th>
@@ -57,8 +40,7 @@
         </thead>
         <tbody>
             @forelse ($news as $news)
-                <tr class="checkboxRow">
-                    <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(1);"></td>
+                <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $news->user->name }}</td>
                     <td>{{ $news->user->email }}</td>
@@ -66,23 +48,30 @@
                     <td>{{ \Carbon\Carbon::parse($news->upload_date)->format('d / M / Y') }}</td>
                     <td>
 
-                        {{-- <a class="btn btn-success" href="{{route('approved-news', ['news' => $news->id, 'status' => 'active'])}}"> Approved </a> --}}
-                        <div class="d-flex gap-2">
-                            <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
-                                @method('patch')
-                                @csrf
-                            <button type="submit" class="btn btn-success">Approved</button>
-                        </form>
+                        <div class="d-flex">
+                            <a href="{{ route('detail.news.admin', ['news' => $news->id]) }}" class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A">
+                                <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                            </a>
 
-                        <button type="submit" class="btn btn-danger btn-reject" id="btn-reject-{{ $news->id }}">Tolak</button>
+                            {{-- <button class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A" data-id="{{ $news->id }}"
+                                data-photo='"<img width="400px" src="{{ asset('storage/' . $news->photo) }}">"' data-name="{{ $news->user->name }}" data-title="{{ $news->name }}"
+                                data-content="{{ $news->content }}" data-synopsis="{{$news->sinopsis}}" data-category="{{ $news->category->name }}" data-tags="{{ $news->tags }}"
+                                data-subcategory="{{ $news->subCategory->name }}" data-status="{{ $news->status }}" data-email="{{ $news->user->email }}" data-upload="{{ $news->upload_date }}"
+                                id="btn-detail-{{ $news->id }}">
+                                <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                            </button> --}}
 
-                        <button class="btn btn-primary btn-detail" data-id="{{ $news->id }}"
-                            data-photo='"<img width="400px" src="{{ asset('storage/' . $news->photo) }}">"' data-name="{{ $news->user->name }}" data-title="{{ $news->name }}"
-                            data-content="{{ $news->content }}" data-synopsis="{{$news->sinopsis}}" data-category="{{ $news->category->name }}" data-tags="{{ $news->tags }}"
-                            data-subcategory="{{ $news->subCategory->name }}" data-status="{{ $news->status }}" data-email="{{ $news->user->email }}" data-upload="{{ $news->upload_date }}"
-                            id="btn-detail-{{ $news->id }}">
-                            Detail
-                        </button>
+                            @if ($news->is_primary == 1)
+                                <button class="btn btn-sm btn-primary ms-2" style="background-color:#0F4D8A">
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="21"height="21" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3"/></svg></i>
+                                </button>
+                            @endif
+                        </div>
+
+                        {{-- <a href="{{ route('news.option.editor', ['news' => $news->id]) }}" class="btn btn-{{ $news->is_primary ? 'primary' : 'dark'}}">
+                            {{ $news->is_primary ? '' : ''}} <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3"/></svg></i>
+                        </a> --}}
+
                     </div>
                 </td>
             </tr>
@@ -103,39 +92,6 @@
             @endforelse
         </tbody>
     </table>
-
-    <div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- Modal content -->
-                <div class="modal-header">
-                        <h3 class="modal-title ms-2 mt-2">Tolak Berita Ini?</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="mb-3">
-                            <div>
-                                <h5 class="mb-3">Berikan Alasan</h5>
-                            </div>
-                            <div>
-                                <textarea class="form-control" name="" id="" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 col-lg-12">
-                                <div class="d-flex justify-content-end">
-                                    <button class="btn btn-danger me-2">Hapus</button>
-                                    <button class="btn btn-secondary">Batal</button>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label">
         <div class="modal-dialog modal-lg">

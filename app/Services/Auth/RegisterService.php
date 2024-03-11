@@ -10,6 +10,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\UploadDiskEnum;
+use App\Enums\UserStatusEnum;
 
 class RegisterService
 {

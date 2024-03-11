@@ -10,7 +10,7 @@ class NewsHasLike extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['news_id', 'user_id', 'status'];
+    protected $fillable = ['news_id', 'user_id'];
     protected $table = 'news_has_likes';
 
     /**
