@@ -46,7 +46,12 @@ Auth::routes();
 Route::get('dashboard',[DashboardController::class,'index'])->name('home');
 
 // Approved And Reject Author
-Route::resource('user', AuthorController::class);
+// Route::resource('user', AuthorController::class);
+Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
+Route::get('list-author-admin', [AuthorController::class, 'listauthor'])->name('list.author.admin');
+
+Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin');
+Route::get('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author');
 Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved');
 Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject');
 
@@ -55,10 +60,7 @@ Route::post('createauthor', [AuthorController::class, 'store'])->name('author.cr
 Route::middleware(['role:user'])->group(function () {
 
 });
-Route::resource('user', UserController::class);
-Route::patch('approved-user/{user}', [UserController::class, 'approved'])->name('user.approved');
-Route::patch('reject-user/{user}', [UserController::class, 'reject'])->name('user.reject');
-
+// Route::resource('user', UserController::class);
 // Category and SubCategory
 Route::resource('categories', CategoryController::class);
 Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
@@ -98,8 +100,7 @@ Route::post('news', [NewsController::class, 'store'])->name('news.store');
 Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
 //NewsHasLike
-Route::post('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
-Route::delete('news-unlike/{id}', [NewsHasLikeController::class, 'destroy'])->name('news.unlike.delete');
+Route::get('news-like/{newsHasLike}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
 
 //trending ke-?
 Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
@@ -114,6 +115,7 @@ Route::get('profile-create', [NewsController::class, 'createnews'])->name('profi
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
 Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
+
 // Update Profile
 Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
 
@@ -125,6 +127,7 @@ Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])-
 // contact us
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 
+Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');
 // Singgle Post
 // Route::get('news-singgle-post',function(){
 //     return view('pages.user.news.singlepost');
@@ -184,5 +187,9 @@ Route::get('author-detail', function(){
 Route::get('author-inbox', function(){
     return view('pages.author.inbox.index');
 })->name('author.inbox');
+
+Route::get('privacy-policy', function(){
+    return view('pages.user.privacy-policy.index');
+})->name('privacy-policy');
 
 ?>

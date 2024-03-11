@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('authors', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('views', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('news_id')->constrained();
             $table->foreignUuid('user_id')->constrained();
-            $table->text('photo');
-            $table->enum('status', ['panding', 'approved', 'reject']);
-            $table->boolean('banned')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('views');
     }
 };

@@ -70,16 +70,12 @@
                             <button type="submit" class="btn btn-success">Approved</button>
                         </form>
 
-                        <form action="{{ route('reject-news', ['news' => $news->id]) }}" method="post">
-                            @method('patch')
-                            @csrf
-                            <button type="submit" class="btn btn-success">Reject</button>
-                        </form>
+                        <button type="submit" class="btn btn-danger btn-reject" id="btn-reject-{{ $news->id }}">Tolak</button>
 
                         <button class="btn btn-primary btn-detail" data-id="{{ $news->id }}"
                             data-photo='"<img width="400px" src="{{ asset('storage/' . $news->photo) }}">"' data-name="{{ $news->user->name }}" data-title="{{ $news->name }}"
-                            data-content="{{ $news->content }}" data-synopsis="{{$news->sinopsis}}"
-                            data-subcategory="{{ $news->subCategory->name }}" data-status="{{ $news->status }}"
+                            data-content="{{ $news->content }}" data-synopsis="{{$news->sinopsis}}" data-category="{{ $news->category->name }}" data-tags="{{ $news->tags }}"
+                            data-subcategory="{{ $news->subCategory->name }}" data-status="{{ $news->status }}" data-email="{{ $news->user->email }}" data-upload="{{ $news->upload_date }}"
                             id="btn-detail-{{ $news->id }}">
                             Detail
                         </button>
@@ -97,6 +93,39 @@
         </tbody>
     </table>
 
+    <div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- Modal content -->
+                <div class="modal-header">
+                        <h3 class="modal-title ms-2 mt-2">Tolak Berita Ini?</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="mb-3">
+                            <div>
+                                <h5 class="mb-3">Berikan Alasan</h5>
+                            </div>
+                            <div>
+                                <textarea class="form-control" name="" id="" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12">
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn btn-danger me-2">Hapus</button>
+                                    <button class="btn btn-secondary">Batal</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -106,37 +135,87 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Modal body -->
-                <div class="modal-body">
-                        <div class="container">
+                <div class="modal-body p-4">
+                    <div class="container">
                             <div class="mb-3">
-                                <b>Nama User</b><br>
-                                <p id="detail-name"></p>
-                            </div>
-                            <div class="mb-3">
-                                <b>Nama Berita</b><br>
-                                <p id="detail-title"></p>
-                            </div>
-                            <div class="mb-3">
-                                <b>Gambar:</b><br>
-                                <p id="detail-photo" align="center"></p>
-                            </div>
-                            <div class="mb-3">
-                                <b>Sinopsis</b><br>
-                                <p id="detail-content"></p>
-                            </div>
-                            <div class="mb-3">
-                                <b>Content</b><br>
+                                <div class="mb-3">
+                                    <b>Taimnail</b>
+                                </div>
                                 <div>
-                                    <p id="detail-synopsis"></p>
+                                    <p id="detail-photo"></p>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <b>Sub Kategiori</b><br>
-                                <p id="detail-subcategory"></p>
+                                <div class="mb-3">
+                                    <b>Nama</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-name"></p>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <b>Status</b><br>
-                                <p id="detail-status"></p>
+                                <div class="mb-3">
+                                    <b>Email</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-email"></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <b>Judul Berita</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-title"></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <b>Tanggal Upload</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-upload"></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <b>Sinopsis</b>
+                                </div>
+                                <div>
+                                    <textarea cols="30" rows="5" id="detail-content" style="resize: none;"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <b>Kategori</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-category"></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div>
+                                    <b>Sub Kategori</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-subcategory"></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <b>Tags</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-tags"></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="mb-3">
+                                    <b>Content</b>
+                                </div>
+                                <div>
+                                    <p class="form-control" id="detail-synopsis"></p>
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -243,6 +322,15 @@
         $('#detail-synopsis').html(formData['synopsis'])
         handleDetail(formData)
         $('#modal-detail').modal('show')
+    })
+</script>
+
+<script>
+    $('.btn-reject').click(function() {
+        const formData = getDataAttributes($(this).attr('id'))
+        $('#detail-synopsis').html(formData['synopsis'])
+        handleDetail(formData)
+        $('#modal-reject').modal('show')
     })
 </script>
 @endsection

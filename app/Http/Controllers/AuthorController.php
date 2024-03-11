@@ -12,6 +12,8 @@ use App\Enums\UserStatusEnum;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Services\Auth\RegisterService;
+use App\Services\AuthorBannedService;
+use Illuminate\Support\Facades\Auth;
 
 class AuthorController extends Controller
 {
@@ -20,14 +22,16 @@ class AuthorController extends Controller
 
     private AuthorService $service;
     private RegisterService $serviceregister;
+    private $authorBannedService;
 
 
-    public function __construct(AuthorInterface $author, AuthorService $service, RegisterService $serviceregister, RegisterInterface $register)
+    public function __construct(AuthorInterface $author, AuthorService $service, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
 
         $this->service = $service;
+        $this->authorBannedService = $authorBannedService;
         $this->serviceregister = $serviceregister;
 
     }
@@ -43,24 +47,47 @@ class AuthorController extends Controller
         $search = $request->input('search');
         $status = $request->input('status');
 
-        $authors = $this->author->search($request);
+        $authors = $this->author->search($request)->where('status', 'panding');
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
-    public function approved(Author $author)
+    public function listauthor(Author $author)
+    {
+        $authors = $this->author->get()->where('status', 'approved')->where('banned', false);
+        return view('pages.admin.user.author-list', compact('authors'));
+    }
+
+    public function listbanned(Author $author)
+    {
+        $authors = $this->author->get()->where('status', 'approved')->where('banned', true);
+        return view('pages.admin.user.author-ban', compact('authors'));
+    }
+
+    public function approved(Author $author, $authorId)
     {
         $data['status'] = UserStatusEnum::APPROVED->value;
-        $this->author->update($author->id, $data);
+        $this->author->update($authorId, $data);
         return back();
     }
 
-    public function reject(Author $author)
+    public function reject(Author $author, $authorId)
     {
         $data['status'] = UserStatusEnum::REJECT->value;
-        $this->author->update($author->id, $data);
+        $this->author->update($authorId, $data);
         return back();
         $authors = $this->author->get();
         return view('pages.useraprove.index', compact('authors'));
+    }
+
+    public function banned(Author $author)
+    {
+        if (!$author->banned) {
+            $this->authorBannedService->banned($author);
+        } else {
+            $this->authorBannedService->unBanned($author);
+        }
+
+        return back();
     }
 
     /**

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Author;
 use App\Models\News;
 use App\Models\User;
+use App\Observers\AUthorObserver;
 use App\Observers\NewsObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         News::observe(NewsObserver::class);
+        Author::observe(AUthorObserver::class);
     }
 
     /**

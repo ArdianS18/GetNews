@@ -9,6 +9,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\ViewInterface;
 use App\Contracts\Repositories\NewsRepository;
 use App\Enums\NewsPrimaryEnum;
 use App\Enums\NewsStatusEnum;
@@ -25,25 +26,28 @@ use Dotenv\Parser\Value;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Foreach_;
 
 class NewsController extends Controller
 {
     private NewsInterface $news;
     private UserInterface $user;
-    private NewsService $NewsService;
-
     private CommentInterface $comment;
-    private SubCategoryInterface $subCategory;
     private CategoryInterface $category;
+    private SubCategoryInterface $subCategory;
     private NewsPhotoInterface $newsPhoto;
     private NewsHasLikeInterface $newsHasLike;
+    private ViewInterface $view;
+
+    private NewsService $NewsService;
     private $newsTrendingService;
 
     protected $newsRepositoty;
 
-    public function __construct(NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
+    public function __construct(ViewInterface $view, NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
     {
         $this->news = $news;
+        $this->view = $view;
         $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
         $this->newsHasLike = $newsHasLike;
@@ -68,11 +72,22 @@ class NewsController extends Controller
 
         $search = $request->input('search');
         $status = $request->input('status');
-        
+
 
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);
         return view('pages.admin.news_admin.index', compact('news','subCategories', 'search', 'status'));
+    }
+
+    public function detailnews($newsId)
+    {
+        $news = $this->news->get()->whereIn('slug', $newsId);
+
+        $subCategories = $this->subCategory->get();
+        $categories = $this->category->get();
+        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+
+        return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
     }
 
     public function createnews()
@@ -95,24 +110,24 @@ class NewsController extends Controller
 
     public function usernews($slug)
     {
-
         $news = $this->news->showWithSlug($slug);
+        $newsId = $news->get();
 
-        // $view = $this->newsHasLike->store([
-        //     'news_id' => $$news->id,
-        //     'user_id' => auth()->id()
-        // ],[
-        //     'news_id' => $$news->id,
-        //     'user_id' => auth()->id()
-        // ]);
+        $view = $this->view->store([
+            'news_id' => $news->id,
+            'user_id' => auth()->id()
+        ],[
+            'news_id' => $news->id,
+            'user_id' => auth()->id()
+        ]);
 
-        if (auth()->check() && auth()->user()->id != $news->user_id) {
-            $newsId = $news->id;
-            if (!session()->has('news_viewed_'.$newsId)) {
-                $news->increment('views');
-                session()->put('news_viewed_'.$newsId, true);
-            }
-        }
+        // if (auth()->check() && auth()->user()->id != $news->user_id) {
+        //     $newsId = $news->id;
+        //     if (!session()->has('news_viewed_'.$newsId)) {
+        //         $news->increment('views');
+        //         session()->put('news_viewed_'.$newsId, true);
+        //     }
+        // }
 
         $newsLike = $this->newsHasLike->get()->whereIn('news_id', $news)->count();
         $comments = $this->comment->get()->whereIn('news_id', $news);

@@ -47,29 +47,29 @@
             @foreach($authors as $author)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{ $author->user->name }}</td>
+                <td>{{ $author->user->name}}</td>
                 <td>{{ $author->user->email }}</td>
                 <td>{{ $author->status }}</td>
                 <td>
                     <div class="d-flex">
 
                         <!-- Detail Modal toggle -->
-                        <button class="btn btn-primary btn-detail me-2" data-id="{{ $user->id }}"
+                        {{-- <button class="btn btn-primary btn-detail me-2" data-id="{{ $author->id }}"
                             data-name="{{ $user->name }}" data-nomor="{{ $user->nomor }}" data-nomor="{{ $user->nomor }}"
                             data-email="{{ $user->email }}" data-cv="{{ $user->cv }}" data-password="{{ $user->password }}" data-alamat="{{ $user->alamat }}"
                             id="btn-detail-{{ $user->id }}">
                             Detail
-                        </button>
+                        </button> --}}
 
                         {{-- <button type="submit" name="status" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#detail{{$user->id}}" value="approved">Detail</button> --}}
 
-                        <form action="{{ route('user.approved', ['user' => $user->id]) }}" method="post">
+                        <form action="{{ route('user.approved', ['user' => $author->id]) }}" method="post">
                             @method('patch')
                             @csrf
                             <button type="submit" name="status" class="btn btn-success me-2" value="approved">Terima</button>
                         </form>
 
-                        <form action="{{ route('user.reject', ['user' => $user->id]) }}" method="post">
+                        <form action="{{ route('user.reject', ['user' => $author->id]) }}" method="post">
                             @method('patch')
                             @csrf
                             <button type="submit" name="status" class="btn btn-danger" value="reject">Tolak</button>

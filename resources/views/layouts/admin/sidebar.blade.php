@@ -53,9 +53,23 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->routeIs('user.index' ? 'active' : '') }}"
-                        href="{{ route('user.index') }}" aria-expanded="false">
+                        href="{{ route('author.admin') }}" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0m16 0a8 8 0 1 0-16 0"/></g></svg>
+                        <span class="hide-menu">Permintaan Penulis</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->routeIs('user.index' ? 'active' : '') }}"
+                        href="{{ route('list.author.admin') }}" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0m16 0a8 8 0 1 0-16 0"/></g></svg>
                         <span class="hide-menu">Daftar Penulis</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link {{ request()->routeIs('user.index' ? 'active' : '') }}"
+                        href="{{ route('list.banned.author.admin') }}" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0m16 0a8 8 0 1 0-16 0"/></g></svg>
+                        <span class="hide-menu">Daftar Banned Penulis</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -85,7 +99,7 @@
                     </form>
 
                 </li>
-                
+
             </ul>
         </nav>
     </div>

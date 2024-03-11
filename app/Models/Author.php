@@ -4,22 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Author extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'photo', 'status'];
+    protected $fillable = ['id','user_id', 'photo', 'status', 'banned'];
+
+    protected $primaryKey = 'id';
     protected $table = "authors";
+
+    public $incrementing = false;
+    public $keyType = 'char';
 
     /**
      * Get all of the user for the Author
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function user(): HasMany
+    public function user(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }

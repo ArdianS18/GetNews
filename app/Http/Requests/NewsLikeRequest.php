@@ -9,19 +9,25 @@ class NewsLikeRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'status' => 'required|boolean',
         ];
     }
 
-    public function messages(): array
+    /**
+     * Custom validation messages.
+     *
+     * @return array
+     */
+    public function messages()
     {
         return [
-            'status.required' => 'Mohon untuk di inputkan',
+            'status.required' => 'Status harus diisi.',
+            'status.boolean' => 'Status harus berupa boolean.',
         ];
     }
 }
