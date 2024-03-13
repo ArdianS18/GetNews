@@ -1,26 +1,17 @@
 <?php
 
 use App\Http\Controllers\AuthorController;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
-// use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\NewsController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsHasLikeController;
-use App\Http\Controllers\NewsViewController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
-use App\Models\Author;
-use App\Models\ContactUs;
-use App\Models\News;
-use App\Models\SubCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +29,10 @@ use App\Models\SubCategory;
 //     return view('pages.index');
 // });
 
-Route::get('/', [DashboardController::class,'home'])->name('home');
+Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
+Route::get('/', [DashboardController::class,'home'])->name('home')->middleware('verified');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::middleware(['role:admin|superadmin'])->group(function () {
     //Beranda *Admin*
@@ -90,7 +82,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
 });
 
-Route::middleware(['role:author'])->group(function () {
+Route::middleware(['role:author|admin'])->group(function () {
     // Author ===<
     // fungsi crud news
     Route::get('news', [NewsController::class, 'index'])->name('news.index');
@@ -159,9 +151,9 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
 });
 
 Route::middleware(['role:user'])->group(function () {
-    Route::get('profileuser', function(){
-        return view('pages.user.profile.index');
-    })->name('profile.user');
+
+    Route::get('profile-user/{user}', [DashboardController::class, 'userProfile'])->name('profile.user');
+    Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
 });
 
 

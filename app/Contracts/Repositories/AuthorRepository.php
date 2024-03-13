@@ -10,10 +10,9 @@ use Illuminate\Http\Request;
 
 class AuthorRepository extends BaseRepository implements AuthorInterface
 {
-    public function __construct(Author $author, User $user)
+    public function __construct(Author $author)
     {
         $this->model = $author;
-        $this->user = $user;
     }
 
     public function getAllWithUser()
@@ -27,7 +26,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
         ->when($request->search,function($query) use ($request){
             $query->join('users', 'authors.user_id', '=', 'users.id')
-                  ->where('users.name','LIKE', '%'.$request->search.'%');
+                ->where('users.name','LIKE', '%'.$request->search.'%');
         })->when($request->status,function($query) use($request){
             $query->where('status','LIKE', '%'.$request->status.'%');
         })->when($request->user_id,function($query) use($request){

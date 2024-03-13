@@ -23,6 +23,27 @@
                     <li class="nav-item">
                         <a href="javascript:void(0)" class="nav-link active"> Home </a>
                     </li>
+
+                    @forelse ($categories as $category)
+                    <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a>
+                            <ul class="dropdown-menu">
+                                {{-- @if ($subCategories === $category->id) --}}
+                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                    <li class="nav-item">
+                                        <a href="business.html" class="nav-link">{{ $subCategory->name }}</a>
+                                    </li>
+                                    @endforeach
+                                {{-- @endif --}}
+                            </ul>
+                        </li>
+                    @empty
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link"> Tidak ada kategori yang ditampilkan </a>
+                        </li>
+                    @endforelse
+
+
                     <li class="nav-item">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link"> Pages </a>
                         <ul class="dropdown-menu">
@@ -33,75 +54,36 @@
                                 <a href="contact.html" class="nav-link"> Contact Us </a>
                             </li>
                             <li class="nav-item">
-                                <a href="team.html" class="nav-link"> Team </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="author.html" class="nav-link"> Author </a>
                             </li>
                             <li class="nav-item">
                                 <a href="" class="nav-link"> Privacy Policy </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="terms-conditions.html" class="nav-link"> Terms & Conditions </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="error-404.html" class="nav-link"> 404 Error Page </a>
-                            </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link"> About Us </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a href="business.html" class="nav-link"> Business News </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="business-details.html" class="nav-link"> Business News Details </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link"> Contact Us </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a href="politics.html" class="nav-link"> Political News </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="politics-details.html" class="nav-link"> Political News Details </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link"> Author </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a href="featured-video.html" class="nav-link"> Featured Video </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="featured-video-details.html" class="nav-link">Featured Video Details </a>
-                            </li>
-                        </ul>
-                    </li>
-
                 </ul>
                 <div class="others-option d-flex align-items-center" id="loginSection">
 
                     @auth
-                        <div class="news-card-img" style="padding-right: 50px;">
-                            <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
-                        </div>
+                        @if (Auth::check() && Auth::user()->roles() === "author")
+                            <div class="news-card-img" style="padding-right: 50px;">
+                                <a href="{{ route('profile.index') }}">
+                                    <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
+                                </a>
+                            </div>
+                        @endif
+                        <a href="{{ route('profile.user', ['user' => auth()->user()]) }}">
+                            <div class="news-card-img" style="padding-right: 50px;">
+                                <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
+                            </div>
+                        </a>
                     @else
                         <div class="">
                             <div class="option-item">
-                                <a href="login.html" class="btn-two" id="signInBtn">Sign In</a>
+                                <a href="{{ route('login') }}" class="btn-two" id="signInBtn">Sign In</a>
                             </div>
                         </div>
-
                     @endauth
-
-
-
-
                 </div>
             </div>
         </nav>
