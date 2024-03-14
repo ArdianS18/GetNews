@@ -3,6 +3,7 @@
 <div class="trending-news-box">
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-3 col-lg-3 col-md-4 d-flex justify-content-center">
+
             <div class="trending-prev" style="margin-right: 2%;"><i class="flaticon-left-arrow"></i></div>
             <h4>Trending Now</h4>
             <div class="trending-next" style="margin-left: 2%;"><i class="flaticon-right-arrow"></i></div>
@@ -24,8 +25,6 @@
                         </div>
 
                         {{-- @endforeach --}}
-
-
                     </div>
                     <div class="swiper-slide news-card-one">
                         <div class="news-card-img-dashboard">
@@ -83,20 +82,25 @@
                     </ul>
                 </div>
             </div>
+            @forelse ($news as $news)
             <div class="news-card-three">
                 <div class="news-card-img">
-                    <img src="assets/img/news/news-3.webp" alt="Image" />
+                    <img src="{{ asset('storage/' . $news->photo) }}" width="100px" height="60px" alt="Image" />
                 </div>
                 <div class="news-card-info">
-                    <a href="business.html" class="news-cat">Fashion</a>
-                    <h3><a href="business-details.html">How To Recreate The High Pony-tail That Celebrities Love</a></h3>
+                    <a href="business.html" class="news-cat">{{ $news->name }}</a>
+                    <h3><a href="business-details.html">{{ $news->name }}</a></h3>
                     <ul class="news-metainfo list-style">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
                         <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
                     </ul>
                 </div>
             </div>
-            <div class="news-card-three">
+            @empty
+                
+            @endforelse
+
+            {{-- <div class="news-card-three">
                 <div class="news-card-img">
                     <img src="assets/img/news/news-4.webp" alt="Image" />
                 </div>
@@ -121,7 +125,7 @@
                         <li><i class="fi fi-rr-clock-three"></i>8 Min Read</li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="news-col-two">
             <div class="news-card-four">

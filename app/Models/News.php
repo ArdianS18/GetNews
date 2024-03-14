@@ -76,4 +76,9 @@ class News extends Model
     {
         return $this->hasMany(View::class);
     }
+
+    public function report(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
 }

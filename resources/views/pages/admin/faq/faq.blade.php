@@ -2,14 +2,20 @@
 @section('content')
     <div class="d-flex justify-content-between mb-3 mt-2">
         <div>
-            <form class="position-relative">
-                <input type="search" name="name" class="form-control search-chat py-2 ps-5" id="search-name"
-                    placeholder="Search">
-                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+            <form class="d-flex">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
+                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
+                </div>
+
             </form>
         </div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
-            Tambah Data Faq
+        <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+            </svg>
+            Tambah
         </button>
     </div>
 
@@ -45,8 +51,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
                     </div>
                 </form>
             </div>
@@ -55,10 +61,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Pertanyaan</th>
-                <th>Jawaban</th>
-                <th>Aksi</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
+                <th class="text-white" style="background-color: #175A95;">Pertanyaan</th>
+                <th class="text-white" style="background-color: #175A95;">Jawaban</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -69,14 +75,14 @@
                     <td>{{ $faq->answer }}</td>
                     <td>
                         <!-- Edit Modal toggle -->
-                        <button class="btn btn-warning btn-edit" data-id="{{ $faq->id }}"
+                        <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="{{ $faq->id }}"
                             data-question="{{ $faq->question }}" data-answer="{{ $faq->answer }}"
                             id="btn-edit-{{ $faq->id }}">
                             Edit
                         </button>
 
 
-                        <button type="submit" class="btn btn-danger btn-delete"
+                        <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white"
                             data-id="{{ $faq->id }}">Hapus</button>
                     </td>
                 </tr>
@@ -134,8 +140,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
                     </div>
                 </form>
             </div>

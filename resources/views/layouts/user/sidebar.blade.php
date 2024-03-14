@@ -1,4 +1,3 @@
-@extends('layouts.user.app')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -305,6 +304,8 @@
             return formattedDate;
         }
     </script>
+
+
     {{-- <div class="container">
         @include('layouts.user.footer')
     </div> --}}

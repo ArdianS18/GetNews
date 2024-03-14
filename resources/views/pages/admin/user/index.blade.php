@@ -7,8 +7,11 @@
             <form class="d-flex gap-2">
 
                 <div class="position-relative">
-                    <input type="search" name="search" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search" value="{{ request('search') }}">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        <button type="submit" class="btn btn-outline-primary">Cari</button>
+                    </div>
                 </div>
 
                 <div class="d-flex gap-2">
@@ -25,22 +28,25 @@
         </div>
 
         <div class="d-flex justify-content-end">
-            <button class="btn btn-sm btn-primary py-1 px-5" type="button"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                + Tambah Penulis
+            <button class="btn btn-md py-1 px-5 text-white" type="button" style="background-color: #175A95;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                    <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                </svg>
+                Tambah
             </button>
         </div>
 
     </div>
 
-    <div class="container mt-3 col-md-12 col-lg-12">
+    <div class="mt-3 col-md-12 col-lg-12">
     <table class="table">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">No</th>
+                <th class="text-white" style="background-color: #175A95; ">Name</th>
+                <th class="text-white" style="background-color: #175A95; ">Email</th>
+                <th class="text-white" style="background-color: #175A95; ">Status</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -66,13 +72,13 @@
                         <form action="{{ route('user.approved', ['user' => $author->id]) }}" method="post">
                             @method('patch')
                             @csrf
-                            <button type="submit" name="status" class="btn btn-success me-2" value="approved">Terima</button>
+                            <button type="submit" name="status" style="background-color: #67D679;" class="btn text-white me-2" value="approved">Terima</button>
                         </form>
 
                         <form action="{{ route('user.reject', ['user' => $author->id]) }}" method="post">
                             @method('patch')
                             @csrf
-                            <button type="submit" name="status" class="btn btn-danger" value="reject">Tolak</button>
+                            <button type="submit" name="status" style="background-color: #EF6E6E;" class="btn text-white" value="reject">Tolak</button>
                         </form>
                     </div>
                 </td>
@@ -168,8 +174,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+                <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
             </div>
         </form>
         </div>

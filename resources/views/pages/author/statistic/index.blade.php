@@ -15,9 +15,8 @@
 @section('content')
 <div class="container">
     <div class="tab-pane" id="statistika" role="tabpanel">
-        <div class="container">
+        <div class="">
 
-            
             <div class="card-statistic">
                 <div class="w-100 mt-5">
                     <div class="d-md-flex align-items-start gap-3">

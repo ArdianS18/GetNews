@@ -80,7 +80,8 @@
                     @else
                         <div class="">
                             <div class="option-item">
-                                <a href="{{ route('login') }}" class="btn-two" id="signInBtn">Sign In</a>
+                                <a href="/login" class="btn-two" id="signInBtn">Sign In</a>
+
                             </div>
                         </div>
                     @endauth

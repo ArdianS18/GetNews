@@ -82,6 +82,9 @@
         <div class="mt-5 p-5 card-bio row">
             <div class="mb-3">
                 <h5>Info</h5>
+
+                <h5>Info Dasar</h5>
+
             </div>
             <div class="row">
                 <div class="col-md-12 col-lg-6 mt-3">
@@ -96,6 +99,12 @@
                 </div>
 
                 <div class="col-md-12 col-lg-6 mt-3">
+                    <label class="form-label" for="email">Password</label>
+                    <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{ $user->password }}" required autocomplete="password" readonly>
+
+                    <label class="form-label" for="email">No Hp</label>
+                    <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
+
                     <label class="form-label" for="email">Password</label>
                     <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{ $user->password }}" required autocomplete="password" readonly>
 
@@ -123,15 +132,18 @@
                     <label class="form-label" for="nomor">No Hp</label>
                     <input id="name" type="text" placeholder="Nomor Hp" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ $user->phone_number }}" required autocomplete="name" readonly>
 
+                    <label class="form-label" for="password">Tanggql Lahir</label>
+                    <input id="name" type="password" placeholder="Password Baru" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                    <label class="form-label" for="nomor">No Hp</label>
+                    <input id="name" type="text" placeholder="Nomor Hp" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ $user->phone_number }}" required autocomplete="name" readonly>
+
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-            </div>
-
-            <div class="row">
             </div>
 
             <div class="row">
@@ -142,16 +154,12 @@
                 </div>
             </div>
 
+
             <div class="mt-4 d-flex justify-content-center align-items-center">
 
                 <div class="">
-                    {{-- <button class="btn btn-sm text-white" style="background-color: #175A95; padding-left: 1.5rem; padding-right: 1.5rem;">Upload</button> --}}
+                    <button class="btn btn-md text-black px-4 me-4" style="background-color: #D9D9D9; padding-left: 1.5rem; padding-right: 1.5rem;">Edit Profile</button>
                 </div>
-            </div>
-
-            <div class="m-2 mb-5 d-flex justify-content-center align-items-center">
-
-                {{-- <span style="color: #434343; font-size: ;">Dengan Format Jpg atau Png</span> --}}
             </div>
 
         </div>
