@@ -38,7 +38,6 @@ use App\Http\Controllers\SubCategoryController;
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('/', [DashboardController::class,'home'])->name('home');
-Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes(['verify' => true]);
 
