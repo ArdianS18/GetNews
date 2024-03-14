@@ -11,6 +11,7 @@ use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\AuthorsRequest;
 use App\Models\User;
 use App\Services\Auth\RegisterService;
 use App\Services\AuthorBannedService;
@@ -21,17 +22,17 @@ class AuthorController extends Controller
     private AuthorInterface $author;
     private RegisterInterface $register;
 
-    private AuthorService $service;
+    private AuthorService $authorService;
     private RegisterService $serviceregister;
     private $authorBannedService;
 
 
-    public function __construct(AuthorInterface $author, AuthorService $service, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+    public function __construct(AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
 
-        $this->service = $service;
+        $this->authorService = $authorService;
         $this->authorBannedService = $authorBannedService;
         $this->serviceregister = $serviceregister;
 
@@ -81,7 +82,7 @@ class AuthorController extends Controller
     public function approved(Author $author, $authorId)
     {
         $data['status'] = UserStatusEnum::APPROVED->value;
-        $this->author->update($authorId, $data);
+        $data = $this->author->update($authorId, $data);
         return back();
     }
 
@@ -108,9 +109,12 @@ class AuthorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(RegisterRequest $request, User $user)
     {
-        //
+        $data = $this->authorService->store($request, $user);
+        $this->author->store($data);
+
+        return back();
     }
 
     /**
@@ -134,6 +138,11 @@ class AuthorController extends Controller
         return back();
     }
 
+    public function createauthor ()
+    {
+        //
+    }
+
     /**
      * Display the specified resource.
      */
@@ -155,7 +164,7 @@ class AuthorController extends Controller
      */
     public function update(AuthorRequest $request, Author $author)
     {
-        $data = $this->service->update($request, $author);
+        $data = $this->authorService->update($request, $author);
         $this->author->update($author->id, $data);
         return back();
     }

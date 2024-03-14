@@ -76,21 +76,4 @@ class UserController extends Controller
     {
         //
     }
-
-    // public function approved(Author $author)
-    // {
-    //     // dd($author);
-    //     $data['status'] = UserStatusEnum::APPROVED->value;
-    //     $this->author->update($author->id, $data);
-    //     return back();
-    // }
-
-    // public function reject(Author $author)
-    // {
-    //     $data['status'] = UserStatusEnum::REJECT->value;
-    //     $this->author->update($author->id, $data);
-    //     return back();
-    //     $authors = $this->author->get();
-    //     return view('pages.useraprove.index', compact('authors'));
-    // }
 }

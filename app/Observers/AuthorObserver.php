@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\Models\Author;
 use Faker\Provider\Uuid;
 
-class AUthorObserver
+class AuthorObserver
 {
         /**
      * Handle the User "creating" event.

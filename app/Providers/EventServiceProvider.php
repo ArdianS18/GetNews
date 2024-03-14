@@ -33,7 +33,7 @@ class EventServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         News::observe(NewsObserver::class);
-        Author::observe(AUthorObserver::class);
+        Author::observe(AuthorObserver::class);
     }
 
     /**

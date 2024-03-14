@@ -60,8 +60,8 @@
             <div class="container-fluid">
                 @yield('contentt')
             </div>
-            
-            
+
+
         </div>
     </div>
     <!--  Import Js Files -->
@@ -305,10 +305,10 @@
             return formattedDate;
         }
     </script>
-    <div class="container">
+    {{-- <div class="container">
         @include('layouts.user.footer')
-    </div>
-   
+    </div> --}}
+
     @yield('script')
     <script>
         $('.preloader').fadeOut();

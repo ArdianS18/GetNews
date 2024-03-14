@@ -168,7 +168,6 @@ class NewsController extends Controller
     public function approvedall(Request $request, News $news)
     {
         $selectedIds = json_decode($request->input('checkedIds'));
-
         foreach ($selectedIds as $id) {
             $news = News::find($id);
 
@@ -190,7 +189,7 @@ class NewsController extends Controller
 
     public function rejectall(Request $request, News $news)
     {
-        $selected = json_decode($request->input('checkedIdss'));
+        $selected[] = json_decode($request->input('checkedIdss'));
 
         foreach ($selected as $id) {
             $news = News::find($id);

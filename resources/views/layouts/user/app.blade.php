@@ -23,6 +23,18 @@
 </head>
 
 <body>
+
+    {{-- @if (Auth::check() && !Auth::user()->email_verified_at)
+        <div class="alert alert-danger mb-n1 text-center" role="alert">
+            Anda belum verifikasi email,
+            <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                @csrf
+                <button type="submit"
+                    class="text-danger btn btn-link p-0 m-0 align-baseline">{{ __('verifikasi ulang') }}</button>.
+            </form>
+        </div>
+     @endif --}}
+
     <div class="loader-wrapper">
         <div class="loader"></div>
         <div class="loader-section section-left"></div>
@@ -41,7 +53,7 @@
     <div class="container-fluid pb-75">
     @yield('content')
     </div>
-    
+
     <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>

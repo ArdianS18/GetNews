@@ -15,7 +15,8 @@ class AuthorRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'photo' => 'required',
+            'photo' => 'required|image|mimes:jpg,png,jpeg',
+            'status' => 'required'
         ];
     }
 

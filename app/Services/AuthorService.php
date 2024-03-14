@@ -4,15 +4,12 @@ namespace App\Services;
 
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
-use App\Contracts\Interfaces\AuthorInterface;
-use App\Enums\RoleEnum;
 use App\Enums\UploadDiskEnum;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\AuthorRequest;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Models\Author;
-use App\Models\User;
 use App\Traits\UploadTrait;
-use Illuminate\Support\Str;
 
 use function Laravel\Prompts\multisearch;
 
@@ -42,16 +39,16 @@ class AuthorService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(AuthorRequest $request, AuthorInterface $author)
+    public function store(RegisterRequest $request, $user): array
     {
         $data = $request->validated();
-        $author = $author->store($data);
-        $author->assignRole(RoleEnum::AUTHOR);
 
         $photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('photo'));
 
         return [
+            'user_id' => $user->id,
             'photo' => $photo,
+            'status' => "panding"
         ];
     }
 
