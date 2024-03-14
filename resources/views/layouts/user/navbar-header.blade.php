@@ -24,24 +24,6 @@
                         <a href="javascript:void(0)" class="nav-link active"> Home </a>
                     </li>
 
-                    @forelse ($categories as $category)
-                    <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a>
-                            <ul class="dropdown-menu">
-                                {{-- @if ($subCategories === $category->id) --}}
-                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
-                                    <li class="nav-item">
-                                        <a href="business.html" class="nav-link">{{ $subCategory->name }}</a>
-                                    </li>
-                                    @endforeach
-                                {{-- @endif --}}
-                            </ul>
-                        </li>
-                    @empty
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link"> Tidak ada kategori yang ditampilkan </a>
-                        </li>
-                    @endforelse
 
 
                     <li class="nav-item">
