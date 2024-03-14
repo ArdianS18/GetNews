@@ -1,4 +1,3 @@
-@extends('layouts.user.app')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +49,7 @@
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
-        @include('layouts.user.side')
+        @include('layouts.author.side')
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -58,7 +57,7 @@
             @include('layouts.admin.header')
             <!--  Header End -->
             <div class="container-fluid">
-                @yield('contentt')
+                @yield('content')
             </div>
 
 

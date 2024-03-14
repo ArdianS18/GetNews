@@ -27,9 +27,9 @@ class LoginService
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             if (auth()->user()->email_verified_at) {
                 if (auth()->user()->roles->pluck('name')[0] == 'user') {
-                    return to_route('home');
+                    return to_route('/');
                 } else if (auth()->user()->roles->pluck('name')[0] == 'author') {
-                    return to_route('home');
+                    return to_route('/');
                 } else if (auth()->user()->roles->pluck('name')[0] == 'admin') {
                     return to_route('dashboard.admin');
                 } else if (auth()->user()->roles->pluck('name')[0] == 'super admin') {

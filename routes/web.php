@@ -30,7 +30,7 @@ use App\Http\Controllers\SubCategoryController;
 // });
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
-Route::get('/', [DashboardController::class,'home'])->name('home')->middleware('verified');
+Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes(['verify' => true]);
 
@@ -179,9 +179,8 @@ Route::middleware(['role:user'])->group(function () {
 
 Route::get('aboutnews', function(){
     return view('pages.user.about.index');
-})->name('about.user');
+})->name('about.user')
 
-Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
 
 
