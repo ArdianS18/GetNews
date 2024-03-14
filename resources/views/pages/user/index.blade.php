@@ -68,58 +68,49 @@
     <div class="container-fluid pb-75">
         <div class="news-col-wrap">
             <div class="news-col-one">
+
+
+                @forelse ($news as $news)
+
+                @if ($loop->first)
                 <div class="news-card-two">
                     <div class="news-card-img">
-                        <img src="assets/img/news/news-1.webp" alt="Image" />
-                        <a href="business.html" class="news-cat">Politics</a>
+                        <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px" style="object-fit: cover;" alt="Image" />
+                        <a href="business.html" class="news-cat">{{ $news->name }}</a>
                     </div>
                     <div class="news-card-info">
-                        <h3><a href="business-details.html">What The Federal Infrastructure Package Means For Minnesota</a></h3>
+                        <h3><a href="business-details.html">{!!$news->content!!}</a></h3>
                         <ul class="news-metainfo list-style">
                             <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25, 2023</a></li>
                             <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
                         </ul>
                     </div>
                 </div>
+
+                @else
+
                 <div class="news-card-three">
                     <div class="news-card-img">
-                        <img src="assets/img/news/news-3.webp" alt="Image" />
+                        <img src="{{ asset('storage/' . $news->photo) }}" width="120px" height="120px" style="border-radius: 5px; object-fit:cover;" alt="Image" />
                     </div>
                     <div class="news-card-info">
-                        <a href="business.html" class="news-cat">Fashion</a>
-                        <h3><a href="business-details.html">How To Recreate The High Pony-tail That Celebrities Love</a></h3>
+                        <a href="business.html" class="news-cat">{{ $news->name }}</a>
+                        <h3><a href="business-details.html">{{ $news->name }}</a></h3>
                         <ul class="news-metainfo list-style">
-                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
-                            <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
+                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $news->created_at }}</a></li>
+                            {{-- <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li> --}}
                         </ul>
                     </div>
                 </div>
-                <div class="news-card-three">
-                    <div class="news-card-img">
-                        <img src="assets/img/news/news-4.webp" alt="Image" />
-                    </div>
-                    <div class="news-card-info">
-                        <a href="business.html" class="news-cat">Fashion</a>
-                        <h3><a href="business-details.html">Tempores Imperdiet Rhoncus Ipsam Lobortis Kolats.</a></h3>
-                        <ul class="news-metainfo list-style">
-                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 14, 2023</a></li>
-                            <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="news-card-three">
-                    <div class="news-card-img">
-                        <img src="assets/img/news/news-5.webp" alt="Image" />
-                    </div>
-                    <div class="news-card-info">
-                        <a href="business.html" class="news-cat">Fashion</a>
-                        <h3><a href="business-details.html">Beauty Queens Need Beauty Material & Products</a></h3>
-                        <ul class="news-metainfo list-style">
-                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 10, 2023</a></li>
-                            <li><i class="fi fi-rr-clock-three"></i>8 Min Read</li>
-                        </ul>
-                    </div>
-                </div>
+
+                @endif
+
+
+                @empty
+                    
+                @endforelse
+
+
             </div>
             <div class="news-col-two">
                 <div class="news-card-four">
@@ -161,6 +152,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="news-col-three">
                 <div class="news-card-two">
                     <div class="news-card-img">

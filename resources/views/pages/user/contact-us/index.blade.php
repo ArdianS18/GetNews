@@ -35,7 +35,7 @@
 
                             <div class="" style="margin-left: 7px;">
                                 <b style="font-size: 14px;">Phone</b>
-                                <p style="font-size: 14px;">+62-123-4567-89</p>
+                                <p style="font-size: 14px;">+62-123456789</p>
                             </div>
                         </div>
 

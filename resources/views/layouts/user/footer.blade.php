@@ -35,19 +35,36 @@
 </button> --}}
 
 
-<div class="container-fluid footer">
-    <div class="footer-wrap">
-        <div class="row align-items-center">
+<div class="p-5" style="background-color: #253645;">
+    <div class="">
+        <div class="row align-items-center text-white">
+            <div class="col-md-12 col-lg-12">
+                <img src="{{asset('assets/img/logo-get-media.png')}}" width="150px" alt="Image" />
+            </div>
             <div class="col-lg-4">
-                <p class="copyright-text">© <span>Baxo</span> is proudly owned by <a href="https://hibootstrap.com/">HiBootstrap</a></p>
+
+                <p class="copyright-text">© <span>Baxo</span>Portal berita terlengkap dengan berita terbaru dan terpopuler.</p>
             </div>
 
             <div class="col-lg-2">
-                nn
+             
+                <ul style="list-style-type: none;" class="p-4">
+                    <span style="color: #92989F; font-size: 15px;">page</span>
+                    <li class="mb-2">Home</li>
+                    <li class="mb-2">About Us</li>
+                    <li class="mb-2">Contact Us</li>
+                    <li class="mb-2">Author</li>
+                </ul>
             </div>
 
             <div class="col-lg-2">
-                nn
+                <ul style="list-style-type: none;" class="p-4">
+                    <span style="color: #92989F; font-size: 15px;">Social Media</span>
+                    <li class="mb-2">Facebook</li>
+                    <li class="mb-2">Twitter</li>
+                    <li class="mb-2">Instagram</li>
+                    <li class="mb-2">Linkedin</li>
+                </ul>
             </div>
 
             {{-- <div class="col-lg-4 text-center">
@@ -67,9 +84,24 @@
                 </ul>
             </div> --}}
             <div class="col-lg-4">
-                <div class="footer-right">
-                    <button class="subscribe-btn" data-bs-toggle="modal" data-bs-target="#newsletter-popup">Become a subscriber<i class="flaticon-right-arrow"></i></button>
-                    <p>Get all the latest posts delivered straight to your inbox.</p>
+                <ul style="list-style-type: none;" class="p-4">
+                    <span style="color: #92989F; font-size: 15px;">Contact Us</span>
+                    <li class="mb-2">getmedia@gmail.com</li>
+                    <li class="mb-2"><span style="color: #92989F; font-size: 15px;">Berlangganaan</span></li>
+                    <li class="mb-2"><button type="button" class="btn btn-outline-danger px-5">Subcribe</button></li>
+                    {{-- <li class="mb-2">getmedia@gmail.com</li> --}}
+                </ul>
+            </div>
+
+            <div class="col-md-12 col-lg-12">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <span style="color: #92989F; font-size: 12px;">Design with love © TanahAirStudio 2020. All right reserved</span>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <span style="color: #92989F; font-size: 12px;">Privacy Policy</span>
+                    </div>
                 </div>
             </div>
         </div>

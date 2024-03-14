@@ -6,8 +6,11 @@
             <form class="d-flex gap-2">
 
                 <div class="position-relative">
-                    <input type="search" name="search" class="form-control search-chat py-2 ps-5" id="search-name" placeholder="Search" value="{{ request('search') }}">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        <button type="submit" class="btn btn-outline-primary">Cari</button>
+                    </div>
                 </div>
 
                 <div class="d-flex gap-2">
@@ -24,15 +27,15 @@
         </div>
     </div>
 
-    <div class="container mt-3 col-md-12 col-lg-12">
+    <div class="mt-3 col-md-12 col-lg-12">
     <table class="table">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">No</th>
+                <th class="text-white" style="background-color: #175A95; ">Name</th>
+                <th class="text-white" style="background-color: #175A95; ">Email</th>
+                <th class="text-white" style="background-color: #175A95; ">Status</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0 ">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -179,8 +182,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        {{-- <button type="submit" class="btn btn-primary">Simpan</button> --}}
+                        <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
                     </div>
                 </form>
             </div>

@@ -65,7 +65,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->firstOrFail();
     }
 
-
     /**
      * Handle the Get all data event from models.
      *
@@ -73,7 +72,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
      */
     public function get(): mixed
     {
-        return $this->model->query()
+        return $this->model->query()->withCount('views')->orderBy('views_count','desc')
             ->get();
     }
 

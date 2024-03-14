@@ -2,16 +2,23 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\ViewInterface;
-use App\Models\View;
+use App\Contracts\Interfaces\ReportInterface;
+use App\Models\Report;
 use Illuminate\Database\QueryException;
 
-class ViewRepository extends BaseRepository implements ViewInterface
+class ReportRepository extends BaseRepository implements ReportInterface
 {
-    public function __construct(View $view)
+    public function __construct(Report $report)
     {
-        $this->model = $view;
+        $this->model = $report;
     }
+
+    public function getAllWithUser()
+    {
+        return $this->model->query()
+            ->get();
+    }
+
 
     /**
      * Handle show method and delete data instantly from models.
@@ -36,7 +43,8 @@ class ViewRepository extends BaseRepository implements ViewInterface
      */
     public function show(mixed $id): mixed
     {
-
+        return $this->model->query()
+            ->findOrFail($id);
     }
 
     /**
@@ -48,7 +56,6 @@ class ViewRepository extends BaseRepository implements ViewInterface
     {
         return $this->model->query()
             ->get();
-
     }
 
     /**
@@ -58,10 +65,10 @@ class ViewRepository extends BaseRepository implements ViewInterface
      *
      * @return mixed
      */
-    public function store(array $data, array $values = []): mixed
+    public function store(array $data): mixed
     {
         return $this->model->query()
-            ->UpdateOrCreate($data, $values);
+            ->create($data);
     }
 
     /**

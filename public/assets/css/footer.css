@@ -38,7 +38,7 @@
   position: relative;
   top: 2px;
 }
-.footer-wrap .subscribe-btn {
+.subscribe-btn {
   color: var(--secondaryColor);
   border: 1px solid var(--secondaryColor);
   border-radius: 5px;
@@ -77,7 +77,7 @@
   .footer-wrap .social-profile {
     margin: 20px 0;
   }
-  .footer-wrap .subscribe-btn {
+ .subscribe-btn {
     font-size: 14px;
   }
   .footer-wrap p {

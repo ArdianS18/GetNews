@@ -5,8 +5,11 @@
         <form class="d-flex gap-2">
             <div>
                 <div class="position-relative d-flex">
-                <input type="search" name="search" class="form-control search-chat py-2 ps-5" placeholder="Search" value="{{ request('search') }}">
-                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        <button type="submit" class="btn btn-outline-primary">Cari</button>
+                    </div>
                 </div>
             </div>
 
@@ -44,15 +47,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">
                     <input id="checkAll" type="checkbox" class="itemCheckbox" style="transform: scale(1);">
                 </th>
+<<<<<<< HEAD
+                <th class="text-white" style="background-color: #175A95;">No</th>
+                <th class="text-white" style="background-color: #175A95;">Penulis</th>
+                <th class="text-white" style="background-color: #175A95;">Judul berita</th>
+                <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Option</th>
+=======
                 <th>No</th>
                 <th>Penulis</th>
                 <th>Email</th>
                 <th>Judul berita</th>
                 <th>Tanggal Upload</th>
                 <th>Option</th>
+>>>>>>> 3b092b27cbe29313b0fcebf4319e8a2b1aada666
             </tr>
         </thead>
         <tbody>

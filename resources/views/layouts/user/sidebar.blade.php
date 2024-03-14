@@ -304,6 +304,8 @@
             return formattedDate;
         }
     </script>
+
+
     {{-- <div class="container">
         @include('layouts.user.footer')
     </div> --}}

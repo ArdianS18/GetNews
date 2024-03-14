@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsHasLikeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 
 /*
@@ -29,7 +30,14 @@ use App\Http\Controllers\SubCategoryController;
 //     return view('pages.index');
 // });
 
+
+// Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
+// Route::get('/', [DashboardController::class,'home'])->name('home')->middleware('verified');
+
+// Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
+
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
+Route::get('/', [DashboardController::class,'home'])->name('home');
 Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes(['verify' => true]);
@@ -179,12 +187,26 @@ Route::middleware(['role:user'])->group(function () {
 
 Route::get('aboutnews', function(){
     return view('pages.user.about.index');
-})->name('about.user')
+})->name('about.user');
 
 
+Route::get('statistic', function(){
+    return view('pages.author.statistic.index');
+})->name('statistic.author');
 
+Route::get('status', function(){
+    return view('pages.author.status.index');
+})->name('status.author');
 
+Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
+Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
+
+Route::get('profile-update', function(){
+    return view('pages.user.profile.update');
+})->name('profile.user');
+
+Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
 
 // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
 // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
@@ -199,7 +221,10 @@ Route::get('aboutnews', function(){
 //     return view('pages.user.index');
 // })->name('dashboard.user');
 
-
-
-
+Route::get('admin-inbox', function(){
+    return view('pages.admin.inbox.index');
+})->name('admin.inbox');
+// Inbox
+Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
+Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
 ?>

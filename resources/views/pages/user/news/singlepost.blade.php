@@ -10,6 +10,28 @@
             <div class="news-img">
                 <img src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image">
             </div>
+            <ul class="news-metainfo list-style">
+                <li class="author">
+                    <span class="">
+                        <img src="{{ asset('assets/img/author/author-thumb-1.webp') }}" width="35px" style="border-radius: 50%;"  alt="Image">
+                    </span>
+                    <p class="m-1">{{ $news->user->name }}</p>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0F4D8A"/>
+                        <a href=""></a></svg>
+                    <a href="news-by-date.html">Mar 03, 2023</a></li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path fill-opacity=".9" d="M256 43C137.789 43 43 138.851 43 256s94.789 213 213 213 213-95.851 213-213S373.149 43 256 43zm0 383.4c-93.718 0-170.4-76.683-170.4-170.4S162.282 85.6 256 85.6 426.4 162.282 426.4 256 349.718 426.4 256 426.4z" fill="#0F4D8A"/><path fill-opacity=".9" d="M266.65 149.5H234.7v127.8l111.825 67.093 15.975-26.625-95.85-56.444z" fill="#0F4D8A"/>
+                    </svg>
+                    15 Min Read</li>
+                <li>
+                    <a href="{{ route('news.like.store', ['newsHasLike' => $news->id]) }}" class="btn btn-primary">Like</a>
+                    {{-- <form action="{{ route('news.like.store', ['newsHasLike' => $news->id]) }}" method="GET">
+                        @csrf
+                        <button type="submit" >Like</button>
+                    </form> --}}
+                    <p>{{$newsLike}}</p>
         <ul class="news-metainfo list-style">
             <li class="author">
                 <span class="">
@@ -32,17 +54,79 @@
                     @csrf
                     <button type="submit" >Like</button>
                 </form> --}}
+                    {{-- <form action="{{ route('news.like.store', ['id' => $news->id]) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <button type="submit" name="status" value="1" class="btn btn-primary">Like</button>
+                            <button type="submit" name="status" value="0" class="btn btn-danger">Unlike</button>
+                        </div>
+                    </form> --}}
+                </li>
 
-                {{-- <form action="{{ route('news.like.store', ['id' => $news->id]) }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <button type="submit" name="status" value="1" class="btn btn-primary">Like</button>
-                        <button type="submit" name="status" value="0" class="btn btn-danger">Unlike</button>
+                <li>
+                    {{-- <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z"/></svg>
+                    </button> --}}
+
+                    <div class="">
+                        <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z"/></svg>
+                        </a>
+                      
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                          <li>
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
+                                    Laporkan
+                                </button>
+                          </li>
+                        </ul>
+                      </div>
+
+                    {{-- modal tambah --}}
+                    <div class="modal fade" id="tambahdataLabel" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="tambahdataLabel"><span style="color: #0F4D8A; font-size: 25px;" class="mb-2 me-1">|</span>Laporkan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('report.store') }}" method="post">
+                                    @csrf
+                                    <div class="modal-body">
+
+                                        <div class="container">
+                                            <div class="mb-3 form-group">
+                                                <label for="message" class="form-label">Masukan Detail Laporan:</label>
+                                                <textarea name="message" id="message" class="form-control" rows="7"></textarea>
+                                                @error('message')
+                                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+    
+                                            <div class="mb-3">
+                                                <p>
+                                                    Video dan pengguna yang dilaporkan akan ditinjau oleh staf YouTube 24/7 untuk menentukan apakah video dan pengguna tersebut melanggar Pedoman Komunitas kami atau tidak. Akun akan dikenai sanksi jika melanggar Pedoman Komunitas, dan pelanggaran serius atau berulang dapat berakibat pada penghentian akun.
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </form> --}}
-            </li>
+                </li>
 
-        </ul>
+            </ul>
+
+
         <div class="news-para">
             <h4>{{ $news->sinopsis }}</h4>
             <p>{!!$news->content!!}<strong>gravida</strong> but also the leap into electronic typesetting, remaining essentially unchange was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum <a href="index.html">Ipsum</a> and more recently with desktop publishing software like Aldus Page maker including versions of Lorem Ipsum.</p>
@@ -267,6 +351,11 @@
         </div>
         </div>
     </div>
+</div>
+
+
+
+
 @endsection
 
 @section('script')

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->constrained();
+            $table->foreignUuid('news_id')->constrained();
             $table->text('message');
             $table->timestamps();
         });
