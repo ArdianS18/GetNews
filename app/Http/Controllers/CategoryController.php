@@ -71,6 +71,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
+        // dd($request);
         $request->merge([
             'category_id' => $category->id
         ]);

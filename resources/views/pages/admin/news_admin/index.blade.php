@@ -50,19 +50,18 @@
                 <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">
                     <input id="checkAll" type="checkbox" class="itemCheckbox" style="transform: scale(1);">
                 </th>
-<<<<<<< HEAD
                 <th class="text-white" style="background-color: #175A95;">No</th>
                 <th class="text-white" style="background-color: #175A95;">Penulis</th>
+                <th class="text-white" style="background-color: #175A95;">Email</th>
                 <th class="text-white" style="background-color: #175A95;">Judul berita</th>
+                <th class="text-white" style="background-color: #175A95;">Tanggal Upload</th>
                 <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Option</th>
-=======
-                <th>No</th>
+                {{-- <th>No</th>
                 <th>Penulis</th>
                 <th>Email</th>
                 <th>Judul berita</th>
                 <th>Tanggal Upload</th>
-                <th>Option</th>
->>>>>>> 3b092b27cbe29313b0fcebf4319e8a2b1aada666
+                <th>Option</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -105,7 +104,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <h4>Ups... Ada kesalahan!!!</h4>
+                            <h4>Tidak ada data yang ditampilkan</h4>
                         </div>
                         {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
                     </td>

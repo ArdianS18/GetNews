@@ -11,7 +11,7 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'user_id', 'name', 'photo', 'content', 'sinopsis', 'upload_date', 'is_primary', 'category_id', 'sub_category_id', 'slug', 'status', 'views', 'tags'];
+    protected $fillable = ['id', 'user_id', 'name', 'photo', 'content', 'upload_date', 'is_primary', 'category_id', 'sub_category_id', 'slug', 'status', 'views', 'tags'];
     protected $table = 'news';
 
     public $incrementing = false;

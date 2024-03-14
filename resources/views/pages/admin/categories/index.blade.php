@@ -25,8 +25,7 @@ background-color: #175A95;
         @endif
 
         <div class="d-flex justify-content-between mb-3">
-            <form class="d-flex" action="{{ route('categories.index') }}" method="GET">
-                @csrf
+            <form class="d-flex">
                 <div class="input-group">
                     <input type="text" name="query" class="form-control" placeholder="Cari...">
                     <button type="submit" class="btn btn-outline-primary">Cari</button>
@@ -48,7 +47,7 @@ background-color: #175A95;
             </thead>
 
                 {{-- @if (isset($message))
-               
+
                 @endif --}}
 
             @forelse ($categoris as $category)
@@ -114,20 +113,6 @@ background-color: #175A95;
                         <p></p>
                     </td>
                 </td> --}}
-
-            <tr>
-                <td colspan="4">
-                    <div class="d-flex justify-content-center">
-                        <div>
-                            <img src="{{ asset('no-data.svg') }}" alt="">
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h4>Ups... Ada kesalahan!!!</h4>
-                    </div>
-                    {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
-                </td>
-            </tr>
             @endforelse
         </table>
 

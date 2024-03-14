@@ -37,10 +37,10 @@ use App\Http\Controllers\SubCategoryController;
 // Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 // Route::get('/', [DashboardController::class,'home'])->name('home')->middleware('verified');
 
-Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
+// Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
-// Route::get('/', [DashboardController::class,'home'])->name('home');
+Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes();
 
@@ -62,7 +62,6 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
     Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
-    Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
     Route::resource('categories', CategoryController::class);
 
     // Approved News And Reject News
@@ -109,6 +108,8 @@ Route::middleware(['role:author'])->group(function () {
     Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
     Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
+
+    Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
 
     Route::get('author-inbox', function(){
         return view('pages.author.inbox.index');

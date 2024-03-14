@@ -52,7 +52,7 @@
 
                     <div class="row justify-content-between mt-2">
 
-                        <div class="col-lg-6 col-md-12 col-span-3 from-outline">
+                        {{-- <div class="col-lg-6 col-md-12 col-span-3 from-outline">
                             <label class="form-label" for="email">Sinopsis berita</label>
                             <textarea name="sinopsis" id="sinopsis" class="form-control" rows="8" value="{{ old('sinopsis') }}"></textarea>
                             @error('sinopsis')
@@ -60,7 +60,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
+                        </div> --}}
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 

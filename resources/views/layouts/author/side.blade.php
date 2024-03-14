@@ -54,6 +54,7 @@
                         <span class="hide-menu">Status Berita</span>
                     </a>
                 </li>
+                @endrole
                 <li class="sidebar-item">
                     <a class="sidebar-link {{ request()->routeIs('logout' ? 'active' : '') }}"
                         href="{{ route('logout') }}/login" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" aria-expanded="false">

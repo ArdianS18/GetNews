@@ -23,9 +23,6 @@
                     <li class="nav-item">
                         <a href="{{ route('home') }}" class="nav-link active"> Home </a>
                     </li>
-
-
-
                     <li class="nav-item">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link"> Pages </a>
                         <ul class="dropdown-menu">
@@ -44,22 +41,41 @@
                         </ul>
                     </li>
                 </ul>
+
                 <div class="others-option d-flex align-items-center" id="loginSection">
 
-                    @auth
-                        @if (Auth::check() && Auth::user()->roles() === "author")
-                            <div class="news-card-img" style="padding-right: 50px;">
-                                <a href="{{ route('profile.index') }}">
+                        @auth
+                        <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <div class="news-card-img" style="padding-right: 0px;">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">
                                     <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
                                 </a>
                             </div>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    @role('author')
+                                    <div class="news-card-img" style="padding-right: 50px;">
+                                        <a href="{{ route('profile.index') }}" class="nav-link">
+                                                Profile
+                                        </a>
+                                    </div>
+                                    @endrole
+                                </li>
+                                <li class="nav-item">
+                                    @role('user')
+                                    <a href="{{ route('profile.user', ['user' => auth()->user()]) }}" class="nav-link">
+                                        Profile
+                                    </a>
+                                    @endrole
+                                </li>
+                            </ul>
+                        </li>
+                        </ul>
+
+                        @if (Auth::check() && Auth::user()->roles() == "author")
                         @endif
-                        <a href="{{ route('profile.user', ['user' => auth()->user()]) }}">
-                            <div class="news-card-img" style="padding-right: 50px;">
-                                <img src="{{ asset('assets/img/news/trending-3.webp') }}" alt="Image" width="45px" style="border-radius: 50%;"/>
-                            </div>
-                        </a>
-                    @else
+                        @else
                         <div class="">
                             <div class="option-item">
                                 <a href="/login" class="btn-two" id="signInBtn">Sign In</a>
