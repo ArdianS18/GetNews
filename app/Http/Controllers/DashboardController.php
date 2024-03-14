@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Models\Category;
@@ -14,22 +15,24 @@ class DashboardController extends Controller
 {
 
     private CategoryInterface $category;
-    private UserInterface $user;
+    private NewsInterface $news;
     private SubCategoryInterface $subCategory;
 
-    public function __construct(UserInterface $user, CategoryInterface $category, SubCategoryInterface $subCategory)
+    public function __construct(NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory)
     {
         $this->category = $category;
         $this->subCategory = $subCategory;
+        $this->news = $news;
     }
 
     public function index(){
         return view('pages.admin.index');
     }
     public function home(){
+        $news = $this->news->get();
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        return view('pages.index',compact('categories', 'subCategories'));
+        return view('pages.index',compact('news', 'categories', 'subCategories'));
     }
 
     public function navbar(){

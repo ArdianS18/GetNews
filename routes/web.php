@@ -29,6 +29,9 @@ use App\Http\Controllers\SubCategoryController;
 
 //     return view('pages.index');
 // });
+// Route::get('/', function() {
+//     echo "aa";
+// })->name('home');
 
 
 // Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
@@ -39,7 +42,7 @@ use App\Http\Controllers\SubCategoryController;
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('/', [DashboardController::class,'home'])->name('home');
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::middleware(['role:admin|superadmin'])->group(function () {
     //Beranda *Admin*
@@ -89,7 +92,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
 });
 
-Route::middleware(['role:author|admin'])->group(function () {
+Route::middleware(['role:author'])->group(function () {
     // Author ===<
     // fungsi crud news
     Route::get('news', [NewsController::class, 'index'])->name('news.index');

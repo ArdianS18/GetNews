@@ -229,11 +229,6 @@ class NewsController extends Controller
     }
 
     public function showViews(){
-
-        // $var = $this->model->('get')('views_id' , $id);
-
-        // $var->count();
-
         $subCategories = $this->subCategory->get();
         $news = $this->news->get();
 

@@ -8,7 +8,8 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Login | GetMedia.Id</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 
 <body>
@@ -17,26 +18,23 @@
             <div class="container-fluid h-custom">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-md-12 col-lg-6 col-xl-6">
-                        <img width="500px" src="{{ asset('storage/public/log.png') }}" alt="">
+                        <img width="500px" src="assets/img/log.png" alt="">
                     </div>
                     <div class="col-md-12 col-lg-6 col-xl-4 offset-xl-1">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            <div
-                                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                 <h2>Daftar Akun GetMedia.id</h2>
                             </div>
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
                                 <label class="form-label" for="email">Email address</label>
-                                <input type="email" id="email"
-                                    class=" @error('email') is-invalid @enderror form-control form-control-lg"
-                                    placeholder="Enter a valid email address" name="email" value="{{ old('email') }}"
-                                    required autocomplete="email" autofocu />
+                                <input type="email" id="email" class=" @error('email') is-invalid @enderror form-control form-control-lg"
+                                    placeholder="Enter a valid email address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocu/>
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
 
                             </div>
@@ -44,15 +42,13 @@
                             <!-- Password input -->
                             <div class="form-outline mb-3">
                                 <label class="form-label" for="form3Example4">Password</label>
-                                <input id="password" type="password"
-                                    class="form-control form-control-lg @error('password') is-invalid @enderror"
-                                    name="password" required autocomplete="current-password"
-                                    placeholder="Enter password">
+                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"
+                                placeholder="Enter password">
 
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
                             </div>
 
@@ -61,16 +57,11 @@
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" class="btn btn-lg text-white"
-                                    style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #0F4D8A;">
+                                <button type="submit" class="btn btn-lg text-white" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #0F4D8A;">
                                     {{ __('Login') }}
                                 </button>
-
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                @endif
+                                <p class="small mt-2 pt-1 mb-0">Don't have an account? <a href="{{ route('register') }}"
+                                        class="link-danger">Register</a></p>
                             </div>
 
                         </form>
@@ -91,5 +82,10 @@
                 <i class="fab fa-linkedin-in"></i>
             </a>
     </div>
-</div>
-@endsection
+    <!-- Right -->
+    </div>
+    </section>
+    </div>
+</body>
+
+</html>

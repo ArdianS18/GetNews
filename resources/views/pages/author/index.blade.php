@@ -111,7 +111,7 @@
         <div class="" role="tabpanel">
             <div class="container mt-4">
                 <h3><span style="color: #0F4D8A;">|</span>Berita Penulis</h3>
-    
+
                 <div class="d-flex justify-content-between mb-5 mt-5">
                     <form class="d-flex" action="{{ route('categories.index') }}" method="GET">
                         @csrf
@@ -134,8 +134,8 @@
                 </div>
 
                 <div class="row">
-                    @forelse ($news as $news)
-                
+                    {{-- @forelse ($news as $news)
+
                         <div class="col-md-12 col-lg-6  mb-5">
                             <div class="d-flex">
                                 <div class="me-3">
@@ -158,11 +158,11 @@
                                 </div>
                             </div>
                         </div>
-            
+
                     @empty
-                        
-                    @endforelse
-                </div>  
+
+                    @endforelse --}}
+                </div>
 
             </div>
         </div>
@@ -175,7 +175,7 @@
 
 
 <div class="container mt-5">
-  
+
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>

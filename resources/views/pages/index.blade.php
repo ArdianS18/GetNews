@@ -83,21 +83,41 @@
                 </div>
             </div>
             @forelse ($news as $news)
+
+            @if ($loop->first)
+            <div class="news-card-two">
+                <div class="news-card-img">
+                    <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px" style="object-fit: cover;" alt="Image" />
+                    <a href="business.html" class="news-cat">{{ $news->name }}</a>
+                </div>
+                <div class="news-card-info">
+                    <h3><a href="business-details.html">{!!$news->content!!}</a></h3>
+                    <ul class="news-metainfo list-style">
+                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25, 2023</a></li>
+                        <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
+                    </ul>
+                </div>
+            </div>
+
+            @else
+
             <div class="news-card-three">
                 <div class="news-card-img">
-                    <img src="{{ asset('storage/' . $news->photo) }}" width="100px" height="60px" alt="Image" />
+                    <img src="{{ asset('storage/' . $news->photo) }}" width="120px" height="120px" style="border-radius: 5px; object-fit:cover;" alt="Image" />
                 </div>
                 <div class="news-card-info">
                     <a href="business.html" class="news-cat">{{ $news->name }}</a>
                     <h3><a href="business-details.html">{{ $news->name }}</a></h3>
                     <ul class="news-metainfo list-style">
-                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
-                        <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
+                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $news->created_at }}</a></li>
+                        {{-- <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li> --}}
                     </ul>
                 </div>
             </div>
+            @endif
+
             @empty
-                
+
             @endforelse
 
             {{-- <div class="news-card-three">
