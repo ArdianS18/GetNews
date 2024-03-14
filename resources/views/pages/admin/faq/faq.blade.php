@@ -85,7 +85,7 @@
                     <td colspan="5">
                         <div class="d-flex justify-content-center">
                             <div>
-                                <img src="{{ asset('no-data.svg') }}" alt="">
+                                <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
                             </div>
                         </div>
                         <div class="text-center">
