@@ -63,6 +63,37 @@
                         </div> --}}
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                        <div class="">
+                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
+                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mt-2">
+                            <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                            <select id="sub_category_id"
+                                class="form-select sub-category select2 @error('sub_category_id') is-invalid @enderror"
+                                name="sub_category_id" multiple="true" value="{{ old('sub_category_id') }}"
+                                aria-label="Default select example">
+                                <option selected>pilih sub kategori</option>
+
+                            </select>
+                            @error('sub_category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                    </div>
+
+                        <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Tags</label>
@@ -78,8 +109,8 @@
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
                                 <select id="category_id"
-                                    class="form-control category @error('category_id') is-invalid @enderror"
-                                    name="category_id" value="{{ old('category_id') }}"
+                                    class="form-control select2 category @error('category_id') is-invalid @enderror"
+                                    name="category_id" multiple="true" value="{{ old('category_id') }}"
                                     aria-label="Default select example">
                                     <option selected>pilih kategori</option>
                                     @foreach ($categories as $category)
@@ -93,7 +124,7 @@
                                 @enderror
                             </div>
 
-                            <div class="mt-2">
+                            {{-- <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Tanggal Upload</label>
                                 <input type="date" id="upload_date" name="upload_date" placeholder="date"
                                     value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
@@ -102,7 +133,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -122,7 +153,7 @@
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 
-                            <div class="">
+                            {{-- <div class="">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
                                 <select id="sub_category_id"
                                     class="form-select sub-category @error('sub_category_id') is-invalid @enderror"
@@ -136,7 +167,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
@@ -158,7 +189,7 @@
                             </button>
                             <button type="submit" class="btn btn-md text-white m-2"
                                 style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                Update
+                                Simpan
                             </button>
                             </div>
                         </div>
