@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link active"> Home </a>
+                        <a href="{{ route('home') }}" class="nav-link active"> Home </a>
                     </li>
 
 
@@ -30,16 +30,16 @@
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link"> Pages </a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <a href="about.html" class="nav-link"> About Us </a>
+                                <a href="{{ route('about.user') }}" class="nav-link"> About Us </a>
                             </li>
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> Contact Us </a>
+                                <a href="{{ route('contact-us.user') }}" class="nav-link"> Contact Us </a>
                             </li>
                             <li class="nav-item">
-                                <a href="author.html" class="nav-link"> Author </a>
+                                <a href="{{ route('author.index') }}" class="nav-link"> Author </a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link"> Privacy Policy </a>
+                                <a href="{{ route('privacy-policy') }}" class="nav-link"> Privacy Policy </a>
                             </li>
                         </ul>
                     </li>

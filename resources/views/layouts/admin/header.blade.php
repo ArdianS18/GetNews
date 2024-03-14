@@ -8,9 +8,9 @@
             </li>
         </ul>
         <ul class="navbar-nav quick-links d-none d-lg-flex">
-            
+
         </ul>
-        
+
 
         <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,8 +18,8 @@
                 <i class="ti ti-dots fs-7"></i>
             </span>
         </button>
-        
-        
+
+
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
                 <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
@@ -45,8 +45,8 @@
                             aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="user-profile-img user-profile">
-                                    <img src="{{ asset('default.png') }}" class="rounded-circle user-profile" style="object-fit: cover"
-                                        width="35" height="35" alt="" />
+                                    <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile"
+                                        style="object-fit: cover" width="35" height="35" alt="" />
                                 </div>
                             </div>
                         </a>
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class="message-body">
-                                    <a  class="py-8 px-7 mt-8 d-flex align-items-center">
+                                    <a class="py-8 px-7 mt-8 d-flex align-items-center">
                                         <span
                                             class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
                                             <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg"
@@ -102,9 +102,12 @@
                                         </div>
                                     </a> --}}
                                 </div>
-                                <div class="d-grid py-4 px-7 pt-8">
-                                    <button class="btn btn-outline-primary" id="logoutBtn">Log Out</button>
-                                </div>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <div class="d-grid py-4 px-7 pt-8">
+                                        <button class="btn btn-outline-primary" id="logoutBtn">Log Out</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </li>

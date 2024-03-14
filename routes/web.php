@@ -184,12 +184,10 @@ Route::middleware(['role:user'])->group(function () {
 
 
 
-// Route::get('aboutnews', function(){
-//     return view('pages.user.about.index');
-// })->name('about.user');
+Route::get('aboutnews', function(){
+    return view('pages.user.about.index');
+})->name('about.user');
 
-
-Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
 Route::get('statistic', function(){
     return view('pages.author.statistic.index');
