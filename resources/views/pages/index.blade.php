@@ -74,7 +74,7 @@
                         </h3>
                         <ul class="news-metainfo list-style">
                             <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25, 2023</a></li>
-                            <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
+                            <li><i class="fi fi-rr-eye"></i>100x Dilihat</li>
                         </ul>
                     </div>
                 </div>
