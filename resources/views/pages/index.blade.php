@@ -3,7 +3,6 @@
 <div class="trending-news-box">
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-3 col-lg-3 col-md-4 d-flex justify-content-center">
-
             <div class="trending-prev" style="margin-right: 2%;"><i class="flaticon-left-arrow"></i></div>
             <h4>Trending Now</h4>
             <div class="trending-next" style="margin-left: 2%;"><i class="flaticon-right-arrow"></i></div>
@@ -12,19 +11,8 @@
             <div class="trending-news-slider swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide news-card-one">
-                        {{-- @foreach($popularView as $view) --}}
 
-                        <div class="news-card-img-dashboard">
-                            <img src="assets/img/news/trending-1.webp" alt="Image" />
-                        </div>
-                        <div class="news-card-info">
-                            <h3><a href="business-details.html">Climate Change & Your Future Health</a></h3>
-                            <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                            </ul>
-                        </div>
 
-                        {{-- @endforeach --}}
                     </div>
                     <div class="swiper-slide news-card-one">
                         <div class="news-card-img-dashboard">
@@ -120,7 +108,7 @@
 
             @endforelse
 
-            {{-- <div class="news-card-three">
+            <div class="news-card-three">
                 <div class="news-card-img">
                     <img src="assets/img/news/news-4.webp" alt="Image" />
                 </div>
@@ -145,7 +133,7 @@
                         <li><i class="fi fi-rr-clock-three"></i>8 Min Read</li>
                     </ul>
                 </div>
-            </div> --}}
+            </div>
         </div>
         <div class="news-col-two">
             <div class="news-card-four">

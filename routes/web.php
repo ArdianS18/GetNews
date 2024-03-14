@@ -37,10 +37,10 @@ use App\Http\Controllers\SubCategoryController;
 // Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 // Route::get('/', [DashboardController::class,'home'])->name('home')->middleware('verified');
 
-// Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
+Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
-Route::get('/', [DashboardController::class,'home'])->name('home');
+// Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes();
 
@@ -206,7 +206,7 @@ Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.us
 
 Route::get('profile-update', function(){
     return view('pages.user.profile.update');
-})->name('profile.user');
+})->name('profile.user.update');
 
 Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
 

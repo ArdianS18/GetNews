@@ -54,7 +54,7 @@
 
                         <div class="col-lg-6 col-md-12 col-span-3 from-outline">
                             <label class="form-label" for="email">Sinopsis berita</label>
-                            <textarea name="sinopsis" id="sinopsis" rows="7" value="{{ old('sinopsis') }}"></textarea>
+                            <textarea name="sinopsis" id="sinopsis" class="form-control" rows="8" value="{{ old('sinopsis') }}"></textarea>
                             @error('sinopsis')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
