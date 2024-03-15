@@ -49,7 +49,7 @@
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
-        @include('layouts.author.side')
+        @include('layouts.user.side')
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">

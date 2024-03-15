@@ -191,7 +191,7 @@
                             </button>
                             <button type="submit" class="btn btn-md text-white m-2"
                                 style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                Simpan
+                                Upload
                             </button>
                             </div>
                         </div>

@@ -2,7 +2,17 @@
 @section('style')
     <style>
         .table-get{
-background-color: #175A95;
+            background-color: #175A95;
+        }
+        .card-table{
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        .table-border{
+            border: 1px solid #DADADA;
+            border-radius: 5px;
+            /* padding: 25px; */
         }
     </style>
 @endsection
@@ -24,97 +34,105 @@ background-color: #175A95;
         </div>
         @endif
 
-        <div class="d-flex justify-content-between mb-3">
-            <form class="d-flex">
-                <div class="input-group">
-                    <input type="text" name="query" class="form-control" placeholder="Cari...">
-                    <button type="submit" class="btn btn-outline-primary">Cari</button>
-                </div>
-            </form>
-            <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal" data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                </svg>
-                Tambah
-            </button>
+        <div class="card-table shadow-sm">
+            <div class="d-flex justify-content-between">
+                <form class="d-flex">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Cari...">
+                        <button type="submit" class="btn btn-outline-primary">Cari</button>
+                    </div>
+                </form>
+                <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal" data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                        <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    </svg>
+                    Tambah
+                </button>
+            </div>            
         </div>
 
-        <table class="table text-center">
-            <thead>
-                <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;" >No</th>
-                <th class="text-white" style="background-color: #175A95;">Kategori</th>
-                <th class="text-white" style="background-color: #175A95;">Dipakai</th>
-                <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
-            </thead>
+        <div class="card-table shadow-sm mt-4">
+            <div class="table-border mb-3">
+                <table class="table text-center mb-3">
+                    <thead>
+                        <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;" >No</th>
+                        <th class="text-white" style="background-color: #175A95;">Kategori</th>
+                        <th class="text-white" style="background-color: #175A95;">Dipakai</th>
+                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
+                    </thead>
 
-                {{-- @if (isset($message))
+                        {{-- @if (isset($message))
 
-                @endif --}}
+                        @endif --}}
 
-            @forelse ($categoris as $category)
-            <tbody>
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$category->name}}</td>
-                    <td>{{$category->news->count()}}</td>
-                    <td class="d-flex justify-content-center gap-2">
-                        <button type="button" class="btn text-white" style="background-color: #FFD643" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 2 24 24">
-                                <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z" />
-                            </svg>
-                            Edit
-                        </button>
+                    @forelse ($categoris as $category)
+                    <tbody>
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$category->name}}</td>
+                            <td>{{$category->news->count()}}</td>
+                            <td class="d-flex justify-content-center gap-2">
+                                <button type="button" class="btn text-white" style="background-color: #FFD643" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 2 24 24">
+                                        <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z" />
+                                    </svg>
+                                    Edit
+                                </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="editModal{{ $category->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="editModal{{ $category->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{route('categories.update', $category->id )}}" method="POST">
+                                                @method('put')
+                                                @csrf
+                                                <div class="modal-body text-start">
+                                                    <label class="form-label mt-2">Kategori</label>
+                                                    <input class="form-control" type="text" name="name" value="{{ $category->name }}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-outline-primary">Edit</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <form action="{{route('categories.update', $category->id )}}" method="POST">
-                                        @method('put')
-                                        @csrf
-                                        <div class="modal-body text-start">
-                                            <label class="form-label mt-2">Kategori</label>
-                                            <input class="form-control" type="text" name="name" value="{{ $category->name }}">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-outline-primary">Edit</button>
-                                        </div>
-                                    </form>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div>
-                            <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white" data-id="{{ $category->id }}">Hapus</button>
-                        </div>
-                        <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn text-white" style="background-color: #175A95;">Sub Categori</a>
-                    </td>
-                </tr>
-            </tbody>
-            @empty
-                <tr>
-                    <td colspan="4" class="">
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h6>Tidak ada data</h6>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
-                    </td>
-                </tr>
+                                <div>
+                                    <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white" data-id="{{ $category->id }}">Hapus</button>
+                                </div>
+                                <a href="{{ route('categories.show', ['category' => $category->id])}}" class="btn text-white" style="background-color: #175A95;">Sub Categori</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h6>Tidak ada data</h6>
+                                </div>
+                                {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
+                            </td>
+                        </tr>
 
-                {{-- <td>
-                    <td>
-                        <p></p>
-                    </td>
-                </td> --}}
-            @endforelse
-        </table>
+                        {{-- <td>
+                            <td>
+                                <p></p>
+                            </td>
+                        </td> --}}
+                    @endforelse
+                </table>                   
+            </div>
+         
+        </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
