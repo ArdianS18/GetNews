@@ -57,7 +57,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
 
         return [
-            'user_id' => auth()->id(),
+            'author_id' => auth()->user()->author->id,
             'name' => $data['name'],
             'photo' => $photo,
             'multi_photo' => $multi_photo,
@@ -101,7 +101,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
 
         return [
-            'user_id' => auth()->id(),
+            'author_id' => auth()->user()->author->id,
             'name' => $data['name'],
             'photo' => $old_photo,
             'multi_photo' => $new_multi_photo ?: $old_multi_photo,

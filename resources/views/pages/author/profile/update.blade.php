@@ -96,16 +96,6 @@
 
                     <div class="row justify-content-between mt-2">
 
-                        <div class="col-lg-6 col-md-12 col-span-3 from-outline">
-                            <label class="form-label" for="email">Sinopsis berita</label>
-                            <textarea name="sinopsis" id="sinopsis" rows="7" value="{{ $news->sinopsis }}">{{ $news->sinopsis }}</textarea>
-                            @error('sinopsis')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 
                             <div class="">
@@ -219,8 +209,8 @@
 @section('script')
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/  .bundle.min.js" integnrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous"></script>
@@ -248,6 +238,6 @@
     $(document).ready(function() {
         $('#image-uploadify').imageuploadify();
     })
-   </script>
+</script>
 
 @endsection

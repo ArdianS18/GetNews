@@ -61,7 +61,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where(['slug' => $slug, 'status' => NewsStatusEnum::ACTIVE->value])
-            ->with(['category', 'user'])
+            ->with(['category', 'author'])
             ->firstOrFail();
     }
 
@@ -73,7 +73,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function get(): mixed
     {
         return $this->model->query()->withCount('views')->orderBy('views_count','desc')
-            ->where('status', "approved")
             ->get();
     }
 

@@ -69,29 +69,23 @@
                 <tr class="checkboxRow">
                     <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(1);"></td>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $news->user->name }}</td>
-                    <td>{{ $news->user->email }}</td>
+                    <td>{{ $news->author->user->name }}</td>
+                    <td>{{ $news->author->user->email }}</td>
                     <td>{{ $news->name }}</td>
                     <td>{{ \Carbon\Carbon::parse($news->upload_date)->format('d / M / Y') }}</td>
                     <td>
 
-                        {{-- <a class="btn btn-success" href="{{route('approved-news', ['news' => $news->id, 'status' => 'active'])}}"> Approved </a> --}}
-                        <div class="d-flex gap-2">
-                            <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
-                                @method('patch')
-                                @csrf
-                            <button type="submit" class="btn btn-success">Approved</button>
-                        </form>
+                        <a href="{{ route('detail.news.admin', ['news' => $news->slug]) }}" class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A">
+                            <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                        </a>
 
-                        <button type="submit" class="btn btn-danger btn-reject" id="btn-reject-{{ $news->id }}">Tolak</button>
-
-                        <button class="btn btn-primary btn-detail" data-id="{{ $news->id }}"
+                        {{-- <button class="btn btn-primary btn-detail" data-id="{{ $news->id }}"
                             data-photo='"<img width="400px" src="{{ asset('storage/' . $news->photo) }}">"' data-name="{{ $news->user->name }}" data-title="{{ $news->name }}"
                             data-content="{{ $news->content }}" data-synopsis="{{$news->sinopsis}}" data-category="{{ $news->category->name }}" data-tags="{{ $news->tags }}"
                             data-subcategory="{{ $news->subCategory->name }}" data-status="{{ $news->status }}" data-email="{{ $news->user->email }}" data-upload="{{ $news->upload_date }}"
                             id="btn-detail-{{ $news->id }}">
                             Detail
-                        </button>
+                        </button> --}}
                     </div>
                 </td>
             </tr>
@@ -140,104 +134,6 @@
                                 </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- Modal content -->
-                <div class="modal-header">
-                    <h3 class="modal-title">Detail Data News</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body p-4">
-                    <div class="container">
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Taimnail</b>
-                                </div>
-                                <div>
-                                    <p id="detail-photo"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Nama</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-name"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Email</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-email"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Judul Berita</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-title"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Tanggal Upload</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-upload"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Sinopsis</b>
-                                </div>
-                                <div>
-                                    <textarea cols="30" rows="5" id="detail-content" style="resize: none;"></textarea>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Kategori</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-category"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div>
-                                    <b>Sub Kategori</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-subcategory"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Tags</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-tags"></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="mb-3">
-                                    <b>Content</b>
-                                </div>
-                                <div>
-                                    <p class="form-control" id="detail-synopsis"></p>
-                                </div>
-                            </div>
-                        </div>
                 </div>
             </div>
         </div>

@@ -94,7 +94,7 @@
                 </div>
             </div>
             @empty
-                @endforelse
+            @endforelse
     </div>
 </div>
 @endsection

@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\CommentInterface;
 use App\Models\Comment;
 use App\Models\News;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class CommentRepository extends BaseRepository implements CommentInterface
 {
@@ -51,6 +52,12 @@ class CommentRepository extends BaseRepository implements CommentInterface
             ->get();
     }
 
+    public function where(mixed $id): mixed
+    {
+        return $this->model->query()
+        ->where('news_id', $id)
+            ->get();
+    }
     /**
      * Handle store data event to models.
      *

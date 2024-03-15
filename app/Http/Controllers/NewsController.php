@@ -89,19 +89,19 @@ class NewsController extends Controller
         $search = $request->input('search');
         $status = $request->input('status');
 
-
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request)->where('status', "active");
         return view('pages.admin.news_admin.news-approve', compact('news','subCategories', 'search', 'status'));
     }
 
-    public function detailnews($newsId)
+    public function detailnews($slug)
     {
-        $news = $this->news->where($newsId);
+        $news = $this->news->showWithSlug($slug);
+        $newsId = $news->id;
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
-        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+        $newsPhoto = $this->newsPhoto->where($newsId);
 
         return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
 
@@ -135,7 +135,7 @@ class NewsController extends Controller
     public function usernews($slug)
     {
         $news = $this->news->showWithSlug($slug);
-        $newsId = $news->get();
+        $newsId = $news->id;
 
         $view = $this->view->store([
             'news_id' => $news->id,
@@ -145,12 +145,12 @@ class NewsController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        $newsLike = $this->newsHasLike->get()->whereIn('news_id', $news)->count();
-        $comments = $this->comment->get()->whereIn('news_id', $news);
+        $newsLike = $this->newsHasLike->where($news)->count();
+        $comments = $this->comment->where($news);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();
-        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+        $newsPhoto = $this->newsPhoto->where($newsId);
 
         return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike'));
     }
@@ -162,7 +162,7 @@ class NewsController extends Controller
     {
         $data['status'] = NewsStatusEnum::ACTIVE->value;
         $this->news->update($news->id, $data);
-        return back();
+        return to_route('approved-news');
     }
 
     public function approvedall(Request $request, News $news)

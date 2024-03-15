@@ -28,4 +28,14 @@ class Author extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get all of the news for the Author
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class);
+    }
 }

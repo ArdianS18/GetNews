@@ -72,7 +72,6 @@
                             </ul>
                         </li>
                         </ul>
-
                         @if (Auth::check() && Auth::user()->roles() == "author")
                         @endif
                         @else

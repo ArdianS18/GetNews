@@ -17,38 +17,44 @@
 @endsection
 
 @section('content')
+
+<div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel{{$user->id}}">Daftar Author</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{{ route('user.author', ['user' => $user->id]) }}" enctype="multipart/form-data">
+                @csrf
+                @method('put')
+                <div class="modal-body">
+                    <label class="form-label mt-2">Masukkan Cv</label>
+                    <input class="form-control" type="file" name="photo">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-primary">Daftar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
     <div class="container p-1" >
         <div class="card-profile row">
-            <div class="m-3 mt-4">
-                <h5>User</h5>
-            </div>
-            <div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
-                Daftar jadi penulis
-                </button>
-            </div>
-
-            <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel{{$user->id}}">Daftar Author</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form method="post" action="{{ route('user.author', ['user' => $user->id]) }}" enctype="multipart/form-data">
-                            @csrf
-                            @method('put')
-                            <div class="modal-body">
-                                <label class="form-label mt-2">Masukkan Cv</label>
-                                <input class="form-control" type="file" name="photo">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-outline-primary">Daftar</button>
-                            </div>
-                        </form>
+            <div class="container">
+                <div class="d-flex justify-content-between">
+                    <div class="m-3 mt-4">
+                        <h5>User</h5>
+                    </div>
+                    <div class="m-3 mt-4">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
+                            Daftar jadi penulis
+                        </button>
                     </div>
                 </div>
             </div>
+
 
             <div class="d-flex justify-content-center align-items-center">
                 <div class="">
@@ -72,12 +78,11 @@
 
         <div class="mt-5 p-5 card-bio row">
             <div class="mb-3">
-                <h5>Info</h5>
-
-                <h5>Info Dasar</h5>
+                <h5>Info profile</h5>
 
             </div>
-            <div class="row">
+
+            <div class="row justify-content-between mt-2">
                 <div class="col-md-12 col-lg-6 mt-3">
                     <label class="form-label" for="email">Nama</label>
                     <input id="name" type="text" placeholder="Nama" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" readonly>
@@ -90,25 +95,6 @@
                 </div>
 
                 <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="email">Password</label>
-                    <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{ $user->password }}" required autocomplete="password" readonly>
-
-                    <label class="form-label" for="email">No Hp</label>
-                    <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}" required autocomplete="password" autofocus>
-
-                    <label class="form-label" for="email">Password</label>
-                    <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="{{ $user->password }}" required autocomplete="password" readonly>
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 col-lg-6 mt-3">
                     <label class="form-label" for="email">Email</label>
                     <input id="name" type="email" placeholder="Email" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ $user->email }}" required autocomplete="name" readonly>
 
@@ -118,17 +104,13 @@
                         </span>
                     @enderror
                 </div>
+            </div>
+
+            <div class="row">
 
                 <div class="col-md-12 col-lg-6 mt-3">
                     <label class="form-label" for="nomor">No Hp</label>
                     <input id="name" type="text" placeholder="Nomor Hp" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ $user->phone_number }}" required autocomplete="name" readonly>
-
-                    <label class="form-label" for="password">Tanggql Lahir</label>
-                    <input id="name" type="password" placeholder="Password Baru" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    <label class="form-label" for="nomor">No Hp</label>
-                    <input id="name" type="text" placeholder="Nomor Hp" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ $user->phone_number }}" required autocomplete="name" readonly>
-
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -146,7 +128,7 @@
             </div>
 
 
-            <div class="mt-4 d-flex justify-content-center align-items-center">
+            <div class="mt-4 d-flex justify-content-end">
 
                 <div class="">
                     <button class="btn btn-md text-black px-4 me-4" style="background-color: #D9D9D9; padding-left: 1.5rem; padding-right: 1.5rem;">Edit Profile</button>

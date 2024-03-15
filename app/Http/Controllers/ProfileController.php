@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
@@ -24,14 +25,16 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
     private NewsInterface $news;
+    private AuthorInterface $author;
     private SubCategoryInterface $subCategory;
     private NewsService $NewsService;
     private CategoryInterface $category;
     private NewsPhotoInterface $newsPhoto;
 
-    public function __construct(NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
+    public function __construct(AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
     {
         $this->news = $news;
+        $this->author = $author;
         $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
         $this->category = $category;
@@ -43,7 +46,8 @@ class ProfileController extends Controller
     {
         $subCategories = $this->subCategory->get();
         $news = $this->news->get();
-        return view('pages.author.index', compact('news', 'subCategories'));
+        $author = $this->author->get();
+        return view('pages.author.index', compact('news', 'subCategories', 'author'));
     }
 
     public function profilestatus()

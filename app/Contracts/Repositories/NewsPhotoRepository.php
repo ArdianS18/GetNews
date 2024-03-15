@@ -7,6 +7,7 @@ use App\Models\Comment;
 use App\Models\News;
 use App\Models\NewsPhoto;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class NewsPhotoRepository extends BaseRepository implements NewsPhotoInterface
 {
@@ -39,6 +40,13 @@ class NewsPhotoRepository extends BaseRepository implements NewsPhotoInterface
     public function show(mixed $id): mixed
     {
 
+    }
+
+    public function where(mixed $id): mixed
+    {
+        return $this->model->query()
+            ->where('news_id', $id)
+            ->get();
     }
 
     /**

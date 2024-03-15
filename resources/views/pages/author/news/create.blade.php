@@ -74,21 +74,25 @@
                             @enderror
                         </div>
 
-                        <div class="mt-2">
-                            <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                            <select id="sub_category_id"
-                                class="form-select sub-category select2 @error('sub_category_id') is-invalid @enderror"
-                                name="sub_category_id" multiple="true" value="{{ old('sub_category_id') }}"
-                                aria-label="Default select example">
-                                <option selected>pilih sub kategori</option>
 
+                        <div class="mt-2">
+                            <label class="form-label" for="password_confirmation">Kategori</label>
+                            <select id="category_id"
+                                class="form-control select2 category @error('category_id') is-invalid @enderror"
+                                name="category_id" multiple="true" value="{{ old('category_id') }}"
+                                aria-label="Default select example">
+                                <option selected>pilih kategori</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
-                            @error('sub_category_id')
+                            @error('category_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+
 
                     </div>
 
@@ -107,17 +111,15 @@
                             </div>
 
                             <div class="mt-2">
-                                <label class="form-label" for="password_confirmation">Kategori</label>
-                                <select id="category_id"
-                                    class="form-control select2 category @error('category_id') is-invalid @enderror"
-                                    name="category_id" multiple="true" value="{{ old('category_id') }}"
+                                <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                                <select id="sub_category_id"
+                                    class="form-select sub-category select2 @error('sub_category_id') is-invalid @enderror"
+                                    name="sub_category_id" multiple="true" value="{{ old('sub_category_id') }}"
                                     aria-label="Default select example">
-                                    <option selected>pilih kategori</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
+                                    <option selected>pilih sub kategori</option>
+
                                 </select>
-                                @error('category_id')
+                                @error('sub_category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

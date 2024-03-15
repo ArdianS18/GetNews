@@ -15,7 +15,7 @@
                     <span class="">
                         <img src="{{ asset('assets/img/author/author-thumb-1.webp') }}" width="35px" style="border-radius: 50%;"  alt="Image">
                     </span>
-                    <p class="m-1">{{ $news->user->name }}</p>
+                    <p class="m-1">{{ $news->author->user->name }}</p>
                 </li>
                 <li>
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0F4D8A"/>
@@ -26,7 +26,7 @@
                     </svg>
                     15 Min Read</li>
                 <li>
-                    <a href="{{ route('news.like.store', ['newsHasLike' => $news->id]) }}" class="btn btn-primary">Like</a>
+                    <a href="{{ route('news.like.store', ['news' => $news->id]) }}" class="btn btn-primary">Like</a>
                     {{-- <form action="{{ route('news.like.store', ['newsHasLike' => $news->id]) }}" method="GET">
                         @csrf
                         <button type="submit" >Like</button>
@@ -37,7 +37,7 @@
                 <span class="">
                     <img src="{{ asset('assets/img/author/author-thumb-1.webp') }}" width="35px" style="border-radius: 50%;"  alt="Image">
                 </span>
-                <p class="m-1">{{ $news->user->name }}</p>
+                <p class="m-1">{{ $news->author->user->name }}</p>
             </li>
             <li>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0F4D8A"/>
@@ -72,7 +72,7 @@
                         <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z"/></svg>
                         </a>
-                      
+
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                           <li>
                                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
@@ -104,7 +104,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-    
+
                                             <div class="mb-3">
                                                 <p>
                                                     Video dan pengguna yang dilaporkan akan ditinjau oleh staf YouTube 24/7 untuk menentukan apakah video dan pengguna tersebut melanggar Pedoman Komunitas kami atau tidak. Akun akan dikenai sanksi jika melanggar Pedoman Komunitas, dan pelanggaran serius atau berulang dapat berakibat pada penghentian akun.

@@ -11,7 +11,7 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'user_id', 'name', 'photo', 'content', 'upload_date', 'is_primary', 'category_id', 'sub_category_id', 'slug', 'status', 'views', 'tags'];
+    protected $fillable = ['id', 'author_id', 'name', 'photo', 'content', 'upload_date', 'is_primary', 'category_id', 'sub_category_id', 'slug', 'status', 'views', 'tags'];
     protected $table = 'news';
 
     public $incrementing = false;
@@ -22,9 +22,9 @@ class News extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
-    public function user(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Author::class);
     }
 
     /**
