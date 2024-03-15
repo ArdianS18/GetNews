@@ -21,22 +21,43 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="{{ route('home') }}" class="nav-link active"> Home </a>
+                        <a href="javascript:void(0)" class="nav-link active"> Home </a>
                     </li>
+
+                    @forelse ($categories as $category)
+                    <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a>
+                            <ul class="dropdown-menu">
+                                {{-- @if ($subCategories === $category->id) --}}
+                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                    <li class="nav-item">
+                                        <a href="business.html" class="nav-link">{{ $subCategory->name }}</a>
+                                    </li>
+                                    @endforeach
+                                {{-- @endif --}}
+                            </ul>
+                        </li>
+                    @empty
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link"> Tidak ada kategori yang ditampilkan </a>
+                        </li>
+                    @endforelse
+
+
                     <li class="nav-item">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link"> Pages </a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
-                                <a href="{{ route('about.user') }}" class="nav-link"> About Us </a>
+                                <a href="about.html" class="nav-link"> About Us </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('contact-us.user') }}" class="nav-link"> Contact Us </a>
+                                <a href="contact.html" class="nav-link"> Contact Us </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('author.index') }}" class="nav-link"> Author </a>
+                                <a href="author.html" class="nav-link"> Author </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('privacy-policy') }}" class="nav-link"> Privacy Policy </a>
+                                <a href="" class="nav-link"> Privacy Policy </a>
                             </li>
                         </ul>
                     </li>

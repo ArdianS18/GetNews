@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Enums\CategoryStatusEnum;
 use App\Models\Category;
 use Illuminate\Database\QueryException;
 
@@ -43,6 +44,20 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     {
         return $this->model->query()
         ->findOrFail($id);
+    }
+
+        /**
+     * Handle get the specified data by id from models.
+     *
+     * @param string $slug
+     * @return mixed
+     */
+    public function showWithSlug(string $slug): mixed
+    {
+        return $this->model->query()
+            ->where(['slug' => $slug, 'status' => CategoryStatusEnum::PUBLISHED->value])
+            ->with(['category', 'user'])
+            ->firstOrFail();
     }
 
     /**

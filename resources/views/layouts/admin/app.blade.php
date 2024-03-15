@@ -34,7 +34,7 @@
     </style>
 </head>
 
-<body>
+<body style="background-color: #F6F6F6;">
     <!-- Preloader -->
     <div class="preloader">
         <img src="{{ env('APP_LOGO') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />

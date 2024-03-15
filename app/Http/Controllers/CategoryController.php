@@ -13,18 +13,21 @@ use Illuminate\Database\Eloquent\Casts\Json;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
     private CategoryInterface $categori;
     private SubCategoryInterface $subCategory;
     private NewsInterface $news;
+    private CategoryService $CategoryService;
 
-    public function __construct(CategoryInterface $categori, SubCategoryInterface $subCategory, NewsInterface $news)
+    public function __construct(CategoryInterface $categori, SubCategoryInterface $subCategory, NewsInterface $news, CategoryService $CategoryService)
     {
         $this->categori = $categori;
         $this->subCategory = $subCategory;
         $this->news = $news;
+        $this->CategoryService = $CategoryService;
     }
 
     /**
@@ -61,8 +64,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request): RedirectResponse
     {
+        $data = $this->CategoryService->store($request);
 
-        $categori = $this->categori->store($request->validated());
+        $this->categori->store($data);
+        // $categori = $this->categori->store($request->validated());
         return redirect()->back()->with('success', trans('alert.add_success'));
     }
 
@@ -71,13 +76,22 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        // dd($request);
+        // $subCategory = $this->subCategory->showWithSlug($slug);s
         $request->merge([
             'category_id' => $category->id
         ]);
 
         $subCategory = $this->subCategory->search($request);
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
+    }
+
+    public function showCategory(string $slug): View
+    {
+        $categories = $this->categori->showWithSlug($slug);
+
+        return view('pages.product-detail', [
+            'name' => $categories->name,
+        ]);
     }
 
         /**

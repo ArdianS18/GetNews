@@ -1,7 +1,5 @@
 @extends('layouts.admin.app')
 
-<<<<<<< Updated upstream
-
 @section('style')
     <style>
         .card-profile{
@@ -152,9 +150,6 @@
 
 
 </div>
-@endsection
-=======
->>>>>>> Stashed changes
             @empty
             <div class="d-flex justify-content-center py-4 mt-4">
                 <div>
@@ -168,7 +163,3 @@
         </div>
     </div>
 @endsection
-<<<<<<< Updated upstream
-=======
->>>>>>> 3b092b27cbe29313b0fcebf4319e8a2b1aada666
->>>>>>> Stashed changes
