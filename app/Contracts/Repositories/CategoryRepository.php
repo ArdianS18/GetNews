@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Enums\CategoryStatusEnum;
 use App\Models\Category;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
 {
@@ -16,7 +17,13 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
 
     public function search(mixed $query): mixed
     {
-        return $this->model->where('name', 'like', '%'.$query.'%')->get();
+        return $this->model->where('name', 'like', '%'.$query.'%')->paginate(5);
+    }
+
+    public function paginate(): mixed
+    {
+        return $this->model->query()
+            ->paginate(5);
     }
 
     /**

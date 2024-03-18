@@ -126,10 +126,10 @@ class AuthorController extends Controller
         $user = $this->register->store($data);
         $userId = $user->assignRole(RoleEnum::AUTHOR)->id;
 
-        $img = $data['photo'];
+        $img = $data['cv'];
         $this->author->store([
             'user_id' => $userId,
-            'photo' => $img,
+            'cv' => $img,
             'status' => "approved"
         ]);
 

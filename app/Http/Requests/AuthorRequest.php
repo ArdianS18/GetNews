@@ -15,7 +15,7 @@ class AuthorRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'photo' => 'required|image|mimes:jpg,png,jpeg',
+            'cv' => 'required|image|mimes:jpg,png,jpeg',
             'status' => 'required'
         ];
     }
@@ -23,7 +23,7 @@ class AuthorRequest extends FormRequest
     public function messages()
     {
         return [
-            'photo.required' => 'Mohon untuk inputkan foto CV anda',
+            'cv.required' => 'Mohon untuk inputkan foto CV anda',
         ];
     }
 }

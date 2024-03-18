@@ -119,7 +119,7 @@
                     </tr>
                 @endforelse
             </tbody>
-        </table>        
+        </table>
     </div>
 
 
@@ -172,7 +172,7 @@
 
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="nomor">CV</label>
-                        <input type="file" id="name" name="photo" placeholder="name"
+                        <input type="file" id="name" name="cv" placeholder="name"
                             value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
 
                     </div>

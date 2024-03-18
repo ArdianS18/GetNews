@@ -30,9 +30,6 @@ use App\Http\Controllers\UserController;
 
 //     return view('pages.index');
 // });
-// Route::get('/', function() {
-//     echo "aa";
-// })->name('home');
 
 
 // Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
@@ -47,6 +44,7 @@ Auth::routes();
 
 Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
 Route::middleware(['role:admin|superadmin'])->group(function () {
+    //Beranda *Admin*
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
     //Beranda *Admin*
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
@@ -94,13 +92,13 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
 });
 
 
-Route::middleware(['role:admin|author|superadmin'])->group(function (){
+Route::middleware(['auth','role:admin|author|superadmin'])->group(function (){
     //update news ===>
     Route::patch('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 });
 
-Route::middleware(['role:author'])->group(function () {
+Route::middleware(['auth','role:author'])->group(function () {
     // fungsi crud news
     Route::get('news', [NewsController::class, 'index'])->name('news.index');
     Route::post('news', [NewsController::class, 'store'])->name('news.store');

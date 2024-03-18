@@ -11,7 +11,7 @@ class Author extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','user_id', 'photo', 'status', 'banned'];
+    protected $fillable = ['id','user_id', 'cv', 'status', 'banned'];
 
     protected $primaryKey = 'id';
     protected $table = "authors";

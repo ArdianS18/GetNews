@@ -42,8 +42,8 @@ class RegisterService
     {
         $data = $request->validated();
 
-        if ($request->hasFile('photo')) {
-            $img = $request->file('photo');
+        if ($request->hasFile('cv')) {
+            $img = $request->file('cv');
             $stored_image = $img->store(UploadDiskEnum::AUTHOR_CV->value , 'public');
         }
 
@@ -53,7 +53,7 @@ class RegisterService
             'password' => bcrypt($data['password']),
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
-            'photo' => $stored_image,
+            'cv' => $stored_image,
         ];
     }
 }

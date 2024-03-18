@@ -34,6 +34,10 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         })->get();
     }
 
+    public function paginate(): mixed
+    {
+        
+    }
 
     /**
      * Handle show method and delete data instantly from models.
