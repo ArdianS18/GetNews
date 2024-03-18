@@ -136,6 +136,10 @@ class NewsController extends Controller
     {
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
+        $content = strip_tags($news->content);
+        $content = str_replace('&nbsp;', ' ', $content);
+        $pages = str_split($content, 100);
+
 
         $view = $this->view->store([
             'news_id' => $news->id,
@@ -152,7 +156,7 @@ class NewsController extends Controller
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike','pages'));
     }
     /**
      * Display a listing of the resource.
