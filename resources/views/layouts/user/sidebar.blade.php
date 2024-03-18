@@ -82,8 +82,6 @@
     <script src="{{ asset('admin/dist/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/forms/form-wizard.js') }}"></script>
     <!--Axios-->
-    <script src="{{ asset('admin/dist/libs/axios/dist/axios.js') }}"></script>
-    <script src="{{ asset('admin/dist/libs/axios/dist/axios.min.js') }}"></script>
 
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/select2/dist/js/select2.full.min.js') }}"></script>
