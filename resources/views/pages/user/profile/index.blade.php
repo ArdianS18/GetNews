@@ -40,6 +40,28 @@
     </div>
 </div>
 
+
+{{-- <div class="modal fade" id="fotoUser" tabindex="-1" aria-labelledby="fotoUserLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="fotoUserLabel">Upload Foto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="{{ route('photo.user', ['user' => $user->id ]) }}" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <label class="form-label mt-2">Masukkan Foto</label>
+                    <input class="form-control" type="file" name="photo">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-primary">Ubah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> --}}
+
     <div class="container p-1" >
         <div class="card-profile row">
             <div class="container">
@@ -63,9 +85,18 @@
             </div>
 
             <div class="mt-4 d-flex justify-content-center align-items-center">
-
                 <div class="">
-                    <button class="btn btn-sm text-white" style="background-color: #175A95; padding-left: 1.5rem; padding-right: 1.5rem;">Upload</button>
+
+                    <form  method="post" action="{{ route('photo.user', ['user' => $user->id ]) }}" id="upload-photo" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" style="display: none" name="photo" id="photo">
+                        <ul class="error-text"></ul>
+                        <button class="btn btn-sm text-white btn-upload" type="button"
+                            id="btn-upload" style="background-color: #175A95; padding-left: 1.5rem; padding-right: 1.5rem;">Upload</button>
+                        <button type="submit" style="display: none" id="submit-button">Save</button>
+                    </form>
+
+                    {{-- <button class="btn btn-sm text-white" data-bs-toggle="modal" data-bs-target="#fotoUser" style="background-color: #175A95; padding-left: 1.5rem; padding-right: 1.5rem;">Upload</button> --}}
                 </div>
             </div>
 
@@ -137,4 +168,18 @@
 
         </div>
     </div>
+@endsection
+
+@section('script')
+
+<script>
+    document.getElementById('btn-upload').addEventListener('click', function() {
+        document.getElementById('photo').click();
+    });
+
+    document.getElementById('photo').addEventListener('change', function() {
+        document.getElementById('submit-button').click();
+    });
+</script>
+
 @endsection

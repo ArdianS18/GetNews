@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            // $table->enum('status', ['panding', 'approved', 'notapproved'])->default('panding');
             $table->string('password');
-            // $table->text('photo')->nullable();
+            $table->text('photo')->nullable();
             $table->string('phone_number');
             $table->string('address');
             $table->rememberToken();

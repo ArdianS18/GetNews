@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,35 +139,45 @@ Route::middleware(['role:author'])->group(function () {
 // Route::resource('user', UserController::class);
 
 Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
+    Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
 
-    Route::get('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
-
-    Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
-
     Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
+    Route::get('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
 
-    Route::get('author',function () {
-        return view('pages.user.author.index');
-    })->name('author.index');
+    Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
+    Route::get('author-detail', [DashboardController::class, 'authordetail'])->name('author.detail');
 
-    Route::get('news-post', function(){
-        return view('pages.user.news.news');
-    })->name('news.post');
+    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about-us-user');
 
-    Route::get('author-detail', function(){
-        return view('pages.user.author.detail-author');
-    })->name('author.detail');
+    Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
+    // Route::get('news-post', function(){
+    //     return view('pages.user.news.news');
+    // })->name('news.post');
 
-    Route::get('privacy-policy', function(){
-        return view('pages.user.privacy-policy.index');
-    })->name('privacy-policy');
+    // Route::get('author-detail', function(){
+    //     return view('pages.user.author.detail-author');
+    // })->name('author.detail');
+
+    Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
+
+    // Route::get('privacy-policy', function(){
+    //     return view('pages.user.privacy-policy.index');
+    // })->name('privacy-policy');
+
+
+    // Route::get('author',function () {
+    //     return view('pages.user.author.index');
+    // })->name('author.index');
+
 });
 
 Route::middleware(['role:user'])->group(function () {
+
+    Route::post('photo-user/{user}', [UserController::class, 'store'])->name('photo.user');
 
     Route::get('profile-user/{user}', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
@@ -193,9 +204,10 @@ Route::middleware(['role:user'])->group(function () {
 
 
 
-Route::get('aboutnews', function(){
-    return view('pages.user.about.index');
-})->name('about.user');
+// Route::get('aboutnews', function(){
+//     return view('pages.user.about.index');
+// })->name('about.user');
+
 
 
 Route::get('statistic', function(){
@@ -208,7 +220,7 @@ Route::get('status', function(){
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
-Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
+// Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
 Route::get('profile-update', function(){
     return view('pages.user.profile.update');

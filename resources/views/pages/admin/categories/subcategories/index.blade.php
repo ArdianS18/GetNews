@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <h4>Ups... Ada kesalahan!!!</h4>
+                                    <h5>Tidak ada data</h5>
                                 </div>
                                 {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
                             </td>

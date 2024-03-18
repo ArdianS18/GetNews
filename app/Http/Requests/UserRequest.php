@@ -14,14 +14,14 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:panding,approved,notapproved',
+            'photo' => 'nullable|image|mimes:jpg,png,jpeg',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'status|required' => 'Mohon ubah statusnya',
+            'photo.nullable' => 'Ubah foto kamu',
         ];
     }
 }

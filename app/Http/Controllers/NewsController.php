@@ -94,14 +94,14 @@ class NewsController extends Controller
         return view('pages.admin.news_admin.news-approve', compact('news','subCategories', 'search', 'status'));
     }
 
-    public function detailnews($slug)
+    public function detailnews($newsId)
     {
-        $news = $this->news->showWithSlug($slug);
-        $newsId = $news->id;
+        $news = $this->news->where($newsId);
+        // $newsId = $news->id;
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
-        $newsPhoto = $this->newsPhoto->where($newsId);
+        $newsPhoto = $this->newsPhoto->where($news);
 
         return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
 
@@ -166,7 +166,7 @@ class NewsController extends Controller
     {
         $data['status'] = NewsStatusEnum::ACTIVE->value;
         $this->news->update($news->id, $data);
-        return to_route('approved-news');
+        return redirect('approved-news');
     }
 
     public function approvedall(Request $request, News $news)

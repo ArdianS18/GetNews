@@ -8,17 +8,20 @@ use App\Enums\UserStatusEnum;
 use App\Http\Requests\UserRequest;
 use App\Models\Author;
 use App\Models\User;
+use App\Services\UserPhotoService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
-    private AuthorInterface $author;
+    private UserInterface $user;
+    private UserPhotoService $userPhoto;
 
-    public function __construct(AuthorInterface $author)
+    public function __construct(UserInterface $user, UserPhotoService $userPhoto)
     {
-        $this->author = $author;
+        $this->user = $user;
+        $this->userPhoto = $userPhoto;
     }
 
     /**
@@ -40,9 +43,11 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request, User $user)
     {
-        //
+        $data = $this->userPhoto->store($request);
+         $this->user->update($user->id, $data);
+        return back();
     }
 
     /**
