@@ -14,7 +14,7 @@
   </style>
 @endsection
 @section('content')
-    
+
 <!-- Mirrored from demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/html/main/page-user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Jul 2023 01:59:16 GMT -->
 <head>
     <!-- --------------------------------------------------- -->
@@ -106,31 +106,31 @@
                 <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-berita-tab" data-bs-toggle="pill" data-bs-target="#pills-berita" type="button" role="tab" aria-controls="pills-berita" aria-selected="false">
                     <i class="ti ti-file-description me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Berita</span> 
+                    <span class="d-none d-md-block">Berita</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-status-tab" data-bs-toggle="pill" data-bs-target="#pills-status" type="button" role="tab" aria-controls="pills-status" aria-selected="false">
                     <i class="ti ti-file-description me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Status</span> 
+                    <span class="d-none d-md-block">Status</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">
                     <i class="ti ti-user-circle me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Profile</span> 
+                    <span class="d-none d-md-block">Profile</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers" type="button" role="tab" aria-controls="pills-followers" aria-selected="false">
                     <i class="ti ti-heart me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Followers</span> 
+                    <span class="d-none d-md-block">Followers</span>
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-friends-tab" data-bs-toggle="pill" data-bs-target="#pills-friends" type="button" role="tab" aria-controls="pills-friends" aria-selected="false">
                     <i class="ti ti-user-circle me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Friends</span> 
+                    <span class="d-none d-md-block">Friends</span>
                   </button>
                 </li>
               </ul>
@@ -161,7 +161,7 @@
                   </select>
               </div>
               </div>
-            
+
               <!-- Row -->
               <div class="">
                 @forelse ($news as $news)
@@ -171,18 +171,19 @@
                       <div class="row">
                         <div class="col-md-12 col-lg-5">
                           <div>
-                            <img src="{{asset('assets/img/test.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
+                            <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
+                            {{-- <img src="{{asset('assets/img/test.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt=""> --}}
                           </div>
                         </div>
                         <div class="col-md-12 col-lg-7 align-items-center">
                           <div>
-                            <h5>Lorem ih6sum koakwi kkoalk coeocnoa olawok acec</h5>
-                            <p class="mt-2">Lorem ipsum koakwi kkoalk coeocnoa ol</p>
+                            <h5>{{ $news->name }}</h5>
+                            <p class="mt-2">{!! $news->content !!}</p>
                           </div>
                           <div class="d-flex">
                             <div class="d-flex">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></svg>
-                              <p class="ms-2">Apr 25, 2023 </p>
+                              <p class="ms-2">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d, Y') }}</p>
                             </div>
                             <div class="d-flex ms-4">
                               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
@@ -193,142 +194,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-md-12 mb-5">
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                          <div>
-                            <img src="{{asset('assets/img/test1.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7 align-items-center">
-                          <div>
-                            <h5>Lorem ih6sum koakwi kkoalk coeocnoa olawok acec</h5>
-                            <p class="mt-2">Lorem ipsum koakwi kkoalk coeocnoa ol</p>
-                          </div>
-                          <div class="d-flex">
-                            <div class="d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></svg>
-                              <p class="ms-2">Apr 25, 2023 </p>
-                            </div>
-                            <div class="d-flex ms-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
-                              <p class="ms-2">1.203 </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 mb-5">
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                          <div>
-                            <img src="{{asset('assets/img/test.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7 align-items-center">
-                          <div>
-                            <h5>Lorem ih6sum koakwi kkoalk coeocnoa olawok acec</h5>
-                            <p class="mt-2">Lorem ipsum koakwi kkoalk coeocnoa ol</p>
-                          </div>
-                          <div class="d-flex">
-                            <div class="d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></svg>
-                              <p class="ms-2">Apr 25, 2023 </p>
-                            </div>
-                            <div class="d-flex ms-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
-                              <p class="ms-2">1.203 </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 mb-5">
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                          <div>
-                            <img src="{{asset('assets/img/test1.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7 align-items-center">
-                          <div>
-                            <h5>Lorem ih6sum koakwi kkoalk coeocnoa olawok acec</h5>
-                            <p class="mt-2">Lorem ipsum koakwi kkoalk coeocnoa ol</p>
-                          </div>
-                          <div class="d-flex">
-                            <div class="d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></svg>
-                              <p class="ms-2">Apr 25, 2023 </p>
-                            </div>
-                            <div class="d-flex ms-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
-                              <p class="ms-2">1.203 </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 mb-5">
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                          <div>
-                            <img src="{{asset('assets/img/test.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7 align-items-center">
-                          <div>
-                            <h5>Lorem ih6sum koakwi kkoalk coeocnoa olawok acec</h5>
-                            <p class="mt-2">Lorem ipsum koakwi kkoalk coeocnoa ol</p>
-                          </div>
-                          <div class="d-flex">
-                            <div class="d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></svg>
-                              <p class="ms-2">Apr 25, 2023 </p>
-                            </div>
-                            <div class="d-flex ms-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
-                              <p class="ms-2">1.203 </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 mb-5">
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                          <div>
-                            <img src="{{asset('assets/img/test1.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7 align-items-center">
-                          <div>
-                            <h5>Lorem ih6sum koakwi kkoalk coeocnoa olawok acec</h5>
-                            <p class="mt-2">Lorem ipsum koakwi kkoalk coeocnoa ol</p>
-                          </div>
-                          <div class="d-flex">
-                            <div class="d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5zM5 8h14V6H5zm0 0V6z"/></svg>
-                              <p class="ms-2">Apr 25, 2023 </p>
-                            </div>
-                            <div class="d-flex ms-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ef6e6e" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
-                              <p class="ms-2">1.203 </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>                  
+                </div>
                 @empty
                   <div class="col-md-12 col-lg-12">
                       <div class="d-flex justify-content-center">
@@ -345,7 +211,7 @@
               </div>
               <!-- End Row -->
             </div>
-            <div class="tab-pane fade card-detail" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">
+            <div class="tab-pane fade card-status" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">
               <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                 <div class="">
                   <form class="d-flex">
@@ -364,7 +230,7 @@
                   </select>
                 </div>
               </div>
-            
+
               <!-- Row -->
               <div class="">
                 <table class="table">
@@ -380,24 +246,24 @@
                       </tr>
                   </thead>
                   <tbody>
-                      @forelse ($news as $news)
+                      @forelse ($news_status as $news_status)
                           <tr>
                               <td>{{ $loop->iteration }}</td>
-                              <td>{{ $news->name }}</td>
-                              <td>{{ $news->category }}</td>
-                              <td>{{ $news->subCategori->name }}</td>
-                              <td>{{ \Carbon\Carbon::parse($news->upload_date)->format('d / M / Y') }}</td>
-                              <td>{{ $news->status }}</td>
+                              <td>{{ $news_status->name }}</td>
+                              <td>{{ $news_status->category->name }}</td>
+                              <td>{{ $news_status->subCategory->name }}</td>
+                              <td>{{ \Carbon\Carbon::parse($news_status->upload_date)->format('d / M / Y') }}</td>
+                              <td>{{ $news_status->status }}</td>
                               <td>
-                                  <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="{{ $news->id }}"
-                                      data-question="{{ $news->question }}" data-answer="{{ $news->answer }}"
-                                      id="btn-edit-{{ $news->id }}">
+                                  <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="{{ $news_status->id }}"
+                                      data-question="{{ $news_status->question }}" data-answer="{{ $news_status->answer }}"
+                                      id="btn-edit-{{ $news_status->id }}">
                                       Edit
                                   </button>
-      
-      
+
+
                                   <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white"
-                                      data-id="{{ $news->id }}">Hapus</button>
+                                      data-id="{{ $news_status->id }}">Hapus</button>
                               </td>
                           </tr>
                       @empty
@@ -422,7 +288,7 @@
 
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
               <div class="row">
- 
+
               </div>
             </div>
             <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab" tabindex="0">
@@ -1707,7 +1573,7 @@
       <div class="layout-type pb-4">
         <h6 class="fw-semibold fs-4 mb-1">Layout Type</h6>
         <div class="d-flex align-items-center gap-3 my-3">
-          <a href="index-2.html" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2">              
+          <a href="index-2.html" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2">
             <i class="ti ti-layout-sidebar fs-6 text-primary"></i>
             <span class="text-dark">Vertical</span>
           </a>
@@ -1720,7 +1586,7 @@
       <div class="container-option pb-4">
         <h6 class="fw-semibold fs-4 mb-1">Container Option</h6>
         <div class="d-flex align-items-center gap-3 my-3">
-          <a href="javascript:void(0)" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2 boxed-width text-dark">              
+          <a href="javascript:void(0)" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2 boxed-width text-dark">
             <i class="ti ti-layout-distribute-vertical fs-7 text-primary"></i>
             <span class="text-dark">Boxed</span>
           </a>
@@ -1733,7 +1599,7 @@
       <div class="sidebar-type pb-4">
         <h6 class="fw-semibold fs-4 mb-1">Sidebar Type</h6>
         <div class="d-flex align-items-center gap-3 my-3">
-          <a  href="javascript:void(0)" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2 fullsidebar">              
+          <a  href="javascript:void(0)" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2 fullsidebar">
             <i class="ti ti-layout-sidebar-right fs-7"></i>
             <span class="text-dark">Full</span>
           </a>
@@ -1746,7 +1612,7 @@
       <div class="card-with pb-4">
         <h6 class="fw-semibold fs-4 mb-1">Card With</h6>
         <div class="d-flex align-items-center gap-3 my-3">
-          <a href="javascript:void(0)" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2 text-dark cardborder">              
+          <a href="javascript:void(0)" class="rounded-2 p-9 customizer-box hover-img d-flex align-items-center gap-2 text-dark cardborder">
             <i class="ti ti-border-outer fs-7"></i>
             <span class="text-dark">Border</span>
           </a>
@@ -1774,7 +1640,7 @@
     <script src="../../dist/js/app.init.js"></script>
     <script src="../../dist/js/app-style-switcher.js"></script>
     <script src="../../dist/js/sidebarmenu.js"></script>
-    
+
     <script src="../../dist/js/custom.js"></script>
     <!-- ---------------------------------------------- -->
     <!-- current page js files -->

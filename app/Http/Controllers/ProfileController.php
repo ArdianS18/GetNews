@@ -47,8 +47,9 @@ class ProfileController extends Controller
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();
         $news = $this->news->get();
+        $news_status = $this->news->get();
         $author = $this->author->get();
-        return view('pages.author.index', compact('news', 'subCategories', 'author','category'));
+        return view('pages.author.index', compact('news', 'news_status', 'subCategories', 'author','category'));
     }
 
     public function profilestatus()
