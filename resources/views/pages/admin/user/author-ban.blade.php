@@ -63,7 +63,29 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{ $author->user->name}}</td>
                     <td>{{ $author->user->email }}</td>
-                    <td>{{ $author->status }}</td>
+                    <td>
+                        @if ($author->banned)
+                            <div class="
+                            btn btn-lg
+                            px-4
+                            fs-4
+                            btn-light-danger
+                            text-danger
+                            font-weight-medium
+                            disabled
+                            ">Diblokir</div>
+                        @else
+                            <div class="
+                            btn btn-lg
+                            px-4
+                            fs-4
+                            btn-light-success
+                            text-success
+                            font-weight-medium
+                            disabled
+                            ">Tidak Diblokir</div>
+                        @endif
+                    </td>
                     <td>
                         <div class="d-flex">
 

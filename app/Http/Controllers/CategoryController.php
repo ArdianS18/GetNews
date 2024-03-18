@@ -37,17 +37,13 @@ class CategoryController extends Controller
     {
         if ($request) {
                 $query = $request->input('query');
-                $categoris = $query ? $this->categori->search($query) : $this->categori->get();
-
-                if ($categoris->isEmpty()) {
-                    return view('pages.admin.categories.index', compact('categoris'))->with('message', 'Data tidak ditemukan atau tidak ada');
-                }
+                $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
 
             return view('pages.admin.categories.index', compact('categoris'));
         }
 
 
-        $categoris = $this->categori->get();
+        $categoris = $this->categori->paginate();
         return view('pages.admin.categories.index', compact('categoris'));
     }
 

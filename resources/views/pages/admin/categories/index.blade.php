@@ -47,7 +47,7 @@
                     </svg>
                     Tambah
                 </button>
-            </div>            
+            </div>
         </div>
 
         <div class="card-table shadow-sm mt-4">
@@ -128,9 +128,9 @@
                             </td>
                         </td> --}}
                     @endforelse
-                </table>                   
+                </table>
             </div>
-         
+
         </div>
 
 
@@ -152,6 +152,18 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="page d-flex mt-4">
+        <div class="container">
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{{ $categoris->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                @for ($i = 1; $i <= $categoris->lastPage(); $i++)
+                <a href="{{ $categoris->url($i) }}" class="btn btn-black {{ $categoris->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+                <a href="{{ $categoris->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
             </div>
         </div>
     </div>

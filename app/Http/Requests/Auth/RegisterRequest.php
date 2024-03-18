@@ -23,7 +23,7 @@ class RegisterRequest extends BaseRequest
             'password' => 'required', 'string', 'min:8', 'confirmed',
             'phone_number' => 'required', 'numeric', 'min:15',
             'address' => 'required', 'string', 'max:255',
-            'photo' => 'required',
+            'cv' => 'required',
         ];
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained();
-            $table->text('photo');
+            $table->text('cv');
             $table->enum('status', ['panding', 'approved', 'reject']);
             $table->boolean('banned')->default(0);
             $table->timestamps();
