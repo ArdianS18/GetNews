@@ -14,8 +14,6 @@
   </style>
 @endsection
 @section('content')
-
-<!-- Mirrored from demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/html/main/page-user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Jul 2023 01:59:16 GMT -->
 <head>
     <!-- --------------------------------------------------- -->
     <!-- Title -->
@@ -40,7 +38,7 @@
     <!-- Core Css -->
     <!-- --------------------------------------------------- -->
     <link  id="themeColors"  rel="stylesheet" href="../../dist/css/style.min.css" />
-  </head>
+</head>
   <body>
 
     <!-- --------------------------------------------------- -->
@@ -142,7 +140,7 @@
           </div>
 
           <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade card-detail" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
+            <div class="tab-pane fade show active card-detail" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
               <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                 <div class="">
                   <form class="d-flex">
@@ -1648,5 +1646,4 @@
     <script src="../../dist/js/apps/chat.js"></script>
   </body>
 
-<!-- Mirrored from demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/html/main/page-user-profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Jul 2023 01:59:21 GMT -->
 @endsection
