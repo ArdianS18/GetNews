@@ -27,8 +27,8 @@
             <form method="post" action="{{ route('update.news.admin', ['news' => $news->id]) }}" enctype="multipart/form-data">
                 @method('post')
                 @csrf
-        <div class="news-card-a mt-5">
-            <div class="container" style="padding: 3%;">
+                <div class="news-card-a mt-5">
+                    <div class="container" style="padding: 3%;">
 
                     <div class="justify-content-start">
                         <div class="col-lg-6 col-md-20 from-outline">
@@ -90,31 +90,63 @@
                         <a href="{{ route('list.approved') }}" class="btn btn-lg px-3 text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
                     </div>
                 @endif
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-success btn-lg px-3">Simpan</button>
+                    </div>
+                </form>
 
                 @if ($news->status === "panding")
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-success btn-lg px-3">Simpan</button>
-
                     <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
                         @method('patch')
                         @csrf
                         <button type="submit" class="btn btn-success btn-lg px-3">Approved</button>
                     </form>
-                    <button type="submit" class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</button>
+
+                    <button class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</button>
                 </div>
                 @else
-                <div>
-                    <a href="{{ route('news.option.editor', ['news' => $news->id]) }}" class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'primary' : 'dark'}}">
-                        <div class="d-flex gap-2">
+                    <div>
+                        <a href="{{ route('news.option.editor', ['news' => $news->id]) }}" class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'primary' : 'dark'}}">
+                            <div class="d-flex gap-2">
                                 {{ $news->is_primary ? '' : ''}} <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3"/></svg></i>
                                 Pin Berita
                             </div>
                         </a>
                     </div>
-                    @endif
-                </div>
-            </form>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-header">
+                    <h3 class="modal-title ms-2 mt-2">Tolak Berita Ini?</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="mb-3">
+                        <div>
+                            <h5 class="mb-3">Berikan Alasan</h5>
+                        </div>
+                        <div>
+                            <textarea class="form-control" name="" id="" cols="30" rows="10" placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-12">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-danger me-2">Hapus</button>
+                                <button class="btn btn-secondary">Batal</button>
+                            </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -173,5 +205,14 @@ $(document).ready(function() {
             }
         })
     }
+</script>
+
+<script>
+    $('.btn-reject').click(function() {
+        const formData = getDataAttributes($(this).attr('id'))
+        $('#detail-synopsis').html(formData['synopsis'])
+        handleDetail(formData)
+        $('#modal-reject').modal('show')
+    })
 </script>
 @endsection

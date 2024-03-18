@@ -258,7 +258,7 @@
                         </ul>
                     </div>
                 </div>
-                @forelse ($news as $news)
+                {{-- @forelse ($news as $news)
                     @if ($loop->first)
                         <div class="news-card-two">
                             <div class="news-card-img">
@@ -287,14 +287,14 @@
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="news-by-date.html">{{ $news->created_at }}</a></li>
-                                    {{-- <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li> --}}
+                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
                                 </ul>
                             </div>
                         </div>
                     @endif
 
                 @empty
-                @endforelse
+                @endforelse --}}
 
                 <div class="news-card-three">
                     <div class="news-card-img">
@@ -917,7 +917,7 @@
                                     src="assets/img/section-img.webp" alt="Image" /></h2>
                         </div>
                         <div class="col-md-5 text-md-end">
-                            <a href="business.html" class="link-one">View All News<i
+                            <a href="/news-post" class="link-one">View All News<i
                                     class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>

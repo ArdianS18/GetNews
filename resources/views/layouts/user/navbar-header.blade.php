@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="javascript:void(0)" class="nav-link active"> Home </a>
+                        <a href="/" class="nav-link active"> Beranda </a>
                     </li>
 
                     @forelse ($categories as $category)
@@ -44,7 +44,7 @@
                     @endforelse
 
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="javascript:void(0)" class="dropdown-toggle nav-link"> Pages </a>
                         <ul class="dropdown-menu">
                             <li class="nav-item">
@@ -60,7 +60,7 @@
                                 <a href="" class="nav-link"> Privacy Policy </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <div class="others-option d-flex align-items-center" id="loginSection">

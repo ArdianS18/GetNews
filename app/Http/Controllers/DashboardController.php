@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Http\Requests\ViewRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -46,5 +47,35 @@ class DashboardController extends Controller
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.profile.index', compact('user', 'categories', 'subCategories'));
+    }
+
+    public function authoruser() {
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        return view('pages.user.author.index', compact('categories', 'subCategories'));
+    }
+
+    public function aboutus() {
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        return view('pages.user.about.index', compact('categories', 'subCategories'));
+    }
+
+    public function newspost() {
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        return view('pages.user.news.news', compact('categories', 'subCategories'));
+    }
+
+    public function authordetail() {
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        return view('pages.user.author.detail-author', compact('categories', 'subCategories'));
+    }
+
+    public function privacypolicy() {
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        return view('pages.user.privacy-policy.index', compact('categories', 'subCategories'));
     }
 }

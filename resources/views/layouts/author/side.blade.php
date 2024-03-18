@@ -55,6 +55,7 @@
                         <span class="hide-menu">Status Berita</span>
                     </a>
                 </li>
+                @endrole
                 <li class="sidebar-item">
                     <a class="sidebar-link"
                         href="/" aria-expanded="false">
@@ -62,7 +63,6 @@
                         <span class="hide-menu">Kembali</span>
                     </a>
                 </li>
-                @endrole
             </ul>
         </nav>
     </div>

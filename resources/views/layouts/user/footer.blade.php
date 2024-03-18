@@ -43,17 +43,17 @@
             </div>
             <div class="col-lg-4">
 
-                <p class="copyright-text">© <span>Baxo</span>Portal berita terlengkap dengan berita terbaru dan terpopuler.</p>
+                <p class="copyright-text">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p>
             </div>
 
             <div class="col-lg-2">
-             
+
                 <ul style="list-style-type: none;" class="p-4">
                     <span style="color: #92989F; font-size: 15px;">page</span>
-                    <li class="mb-2">Home</li>
-                    <li class="mb-2">About Us</li>
-                    <li class="mb-2">Contact Us</li>
-                    <li class="mb-2">Author</li>
+                    <li class="mb-2"><a href="/" style="color: #FFFFFF">Home</a></li>
+                    <li class="mb-2"><a href="/aboutus" style="color: #FFFFFF">About Us</a></li>
+                    <li class="mb-2"><a href="/contact-us" style="color: #FFFFFF">Contact Us</a></li>
+                    <li class="mb-2"><a href="/author" style="color: #FFFFFF">Author</a></li>
                 </ul>
             </div>
 
@@ -87,6 +87,7 @@
                 <ul style="list-style-type: none;" class="p-4">
                     <span style="color: #92989F; font-size: 15px;">Contact Us</span>
                     <li class="mb-2">getmedia@gmail.com</li>
+                    <li class="mb-2">+62 *** **** ****  </li>
                     <li class="mb-2"><span style="color: #92989F; font-size: 15px;">Berlangganaan</span></li>
                     <li class="mb-2"><button type="button" class="btn btn-outline-danger px-5">Subcribe</button></li>
                     {{-- <li class="mb-2">getmedia@gmail.com</li> --}}
