@@ -12,10 +12,9 @@
             box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
             border: 1px solid #ddd;
             padding: 20px;
-            /* Memberi ruang di sekitar elemen */
             margin-bottom: 20px;
-            /* Memberi jarak antara elemen berikutnya */
             border-radius: 10px;
+            background-color: #fff;
         }
     </style>
 @endsection
