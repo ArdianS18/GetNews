@@ -136,9 +136,9 @@ class NewsController extends Controller
     {
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
-        $content = strip_tags($news->content);
+        $content = $news->content;
         $content = str_replace('&nbsp;', ' ', $content);
-        $pages = str_split($content, 100);
+        $pages = str_split($content, 2000);
 
 
         $view = $this->view->store([

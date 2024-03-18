@@ -26,13 +26,9 @@ class LoginService
     {
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             if (auth()->user()->email_verified_at) {
-                if (auth()->user()->roles->pluck('name')[0] == 'user') {
+                if (auth()->user()->roles->pluck('name')[0] == 'user' || auth()->user()->roles->pluck('name')[0] == 'author') {
                     return redirect('/');
-                } else if (auth()->user()->roles->pluck('name')[0] == 'author') {
-                    return redirect('/');
-                } else if (auth()->user()->roles->pluck('name')[0] == 'admin') {
-                    return redirect('dashboard');
-                } else if (auth()->user()->roles->pluck('name')[0] == 'super admin') {
+                } else if (auth()->user()->roles->pluck('name')[0] == 'admin' || auth()->user()->roles->pluck('name')[0] == 'super admin') {
                     return redirect('dashboard');
                 }else{
                     return redirect()->back();

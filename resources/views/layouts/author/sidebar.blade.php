@@ -14,7 +14,6 @@
     <!--  Favicon -->
     <link rel="shortcut icon" type="{{ asset('image/png') }}" href="{{ env('APP_LOGO') }}" />
     <!-- Owl Carousel  -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/dist/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}">
     <!-- Core Css -->
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link id="themeColors" rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
@@ -81,9 +80,7 @@
     <script src="{{ asset('admin/dist/libs/jquery-steps/build/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/forms/form-wizard.js') }}"></script>
-    <!--Axios-->
-    <script src="{{ asset('admin/dist/libs/axios/dist/axios.js') }}"></script>
-    <script src="{{ asset('admin/dist/libs/axios/dist/axios.min.js') }}"></script>
+
 
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/select2/dist/js/select2.full.min.js') }}"></script>

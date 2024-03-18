@@ -177,7 +177,7 @@
 
 
                         <div class="news-para">
-                            <p>{{ $pages[0] }}</p> 
+                            <p>{!! $pages[0] !!}</p>
                             <ul class="page-nav list-style mt-20"> 
                                 <li>Halaman : </li>
                                 @for ($i = 0; $i < count($pages); $i++)

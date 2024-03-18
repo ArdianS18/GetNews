@@ -1,69 +1,65 @@
 @extends('layouts.author.sidebar')
+@section('style')
+<link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
 
-@section('content')
+<link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
+
+<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+<style>
+    .news-card-a {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    padding: 20px; /* Memberi ruang di sekitar elemen */
+    margin-bottom: 20px; /* Memberi jarak antara elemen berikutnya */
+    border-radius: 10px;
+    }
+    /* .card-dropzone{
+    border: 3px dashed #ddd;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    height: 250px;
+
+    } */
 
 
-<head>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <style>
-        .news-card-a {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border: 1px solid #ddd;
-        padding: 20px; /* Memberi ruang di sekitar elemen */
-        margin-bottom: 20px; /* Memberi jarak antara elemen berikutnya */
-        border-radius: 10px;
-        }
-        /* .card-dropzone{
-        border: 3px dashed #ddd;
+    .dropzone {
+        border: 2px dashed #ccc;
         padding: 30px;
-        margin-bottom: 20px;
+        text-align: center;
         border-radius: 10px;
-        height: 250px;
+        height: 240px;
+    }
 
-        } */
+    .dz-message {
+        font-size: 1.5em;
+        color: #555;
+    }
 
+    .dz-preview {
+        display: inline-block;
+        margin: 6px;
+        vertical-align: top;
+    }
 
-        .dropzone {
-            border: 2px dashed #ccc;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            height: 240px;
-        }
+    .dz-preview .dz-image {
+        border-radius: 10px;
+        overflow: hidden;
+    }
 
-        .dz-message {
-            font-size: 1.5em;
-            color: #555;
-        }
+    .dz-preview .dz-image img {
+        width: 100%;
+        height: auto;
+    }
 
-        .dz-preview {
-            display: inline-block;
-            margin: 6px;
-            vertical-align: top;
-        }
-
-        .dz-preview .dz-image {
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .dz-preview .dz-image img {
-            width: 100%;
-            height: auto;
-        }
-
-        .dz-error-message {
-            display: block;
-            color: #ea2121;
-            margin: 0.2em 0;
-        }
-  </style>
-</head>
+    .dz-error-message {
+        display: block;
+        color: #ea2121;
+        margin: 0.2em 0;
+    }
+</style>
+@endsection
+@section('content')
 
 <div class="container" style="margin-top: 3%;">
     <h2 class="text-center">Update Berita</h2>
@@ -110,7 +106,7 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
-                                <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" aria-label="Default select example">
+                                <select class="form-control select2 @error('category_id') is-invalid @enderror" name="category_id" multiple="true" aria-label="Default select example">
                                     <option>pilih kategori</option>
                                     <option value="{{ $news->category->id }}" selected>{{ $news->category->name }}</option>
                                     @foreach ($categories as $category)
@@ -142,7 +138,7 @@
                         <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: 200px;">
                             <label class="form-label" for="content">Content</label>
                             <textarea id="content" name="content" placeholder="content"
-                            value="{{ $news->content }}"  class="form @error('content') is-invalid @enderror">{{$news->content}}</textarea>
+                            value="{{ $news->content }}"  class="form summernote @error('content') is-invalid @enderror">{{$news->content}}</textarea>
                             @error('content')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
@@ -155,7 +151,7 @@
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <select class="form-select @error('sub_category_id') is-invalid @enderror" name="sub_category_id" value="{{ $news->subCategory->id }}" aria-label="Default select example">
+                                <select class="form-select select2 @error('sub_category_id') is-invalid @enderror" name="sub_category_id" multiple="true" value="{{ $news->subCategory->id }}" aria-label="Default select example">
                                     <option>pilih sub kategori</option>
                                     <option value="{{ $news->subCategory->id }}" selected>{{ $news->subCategory->name }}</option>
                                     @foreach ($subCategories as $subCategory)
@@ -208,26 +204,21 @@
 
 @section('script')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/  .bundle.min.js" integnrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        $('#content').summernote({
-            height: 250,
-            toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
+        /************************************/
+      $(".summernote").summernote({
+        height: 350,
+        minHeight: null, 
+        maxHeight: null, 
+        focus: false, 
+      });
+      $(".inline-editor").summernote({
+        airMode: false,
+      });
     });
 
 </script>
