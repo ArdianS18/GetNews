@@ -36,7 +36,7 @@ use App\Http\Controllers\UserController;
 
 
 // Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
-// Route::get('/', [DashboardController::class,'home'])->name('home')->middleware('verified');
+// Route::get('/', [DashboardC ontroller::class,'home'])->name('home')->middleware('verified');
 
 // Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
 
@@ -45,6 +45,7 @@ Route::get('/', [DashboardController::class,'home'])->name('home');
 
 Auth::routes();
 
+Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
 Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
     //Beranda *Admin*
@@ -80,7 +81,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
     Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
     // ===> Faq
-    Route::get('faq', [FaqController::class, 'index'])->name('faq.index');
+    Route::get('faq-list', [FaqController::class, 'index'])->name('faq.index');
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');

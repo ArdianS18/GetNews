@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
@@ -11,6 +12,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View ;
 
 class DashboardController extends Controller
 {
@@ -18,12 +20,14 @@ class DashboardController extends Controller
     private CategoryInterface $category;
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
+    private FaqInterface $faq;
 
-    public function __construct(NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory)
+    public function __construct(NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
     {
         $this->category = $category;
         $this->subCategory = $subCategory;
         $this->news = $news;
+        $this->faq = $faq;
     }
 
     public function index(){
@@ -77,5 +81,13 @@ class DashboardController extends Controller
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.privacy-policy.index', compact('categories', 'subCategories'));
+    }
+
+    public function faq() : View {
+        $faqs = $this->faq->get();
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+
+        return view('pages.contact.faq',compact('faqs','categories', 'subCategories'));
     }
 }

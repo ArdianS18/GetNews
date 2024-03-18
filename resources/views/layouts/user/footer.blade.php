@@ -54,6 +54,7 @@
                     <li class="mb-2"><a href="/aboutus" style="color: #FFFFFF">About Us</a></li>
                     <li class="mb-2"><a href="/contact-us" style="color: #FFFFFF">Contact Us</a></li>
                     <li class="mb-2"><a href="/author" style="color: #FFFFFF">Author</a></li>
+                    <li class="mb-2"><a href="{{ route('faq.dashboard') }}" style="color: #FFFFFF">FAQ</a></li>
                 </ul>
             </div>
 
