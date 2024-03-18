@@ -34,8 +34,12 @@ class LoginService
                     return redirect('dashboard');
                 } else if (auth()->user()->roles->pluck('name')[0] == 'super admin') {
                     return redirect('dashboard');
+                }else{
+                    return redirect()->back();
                 }
             }
+        }else{
+            return redirect()->back()->withErrors(trans('auth.login_failed'))->withInput();
         }
     }
 }

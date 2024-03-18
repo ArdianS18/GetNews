@@ -23,14 +23,19 @@
                     <div class="col-md-12 col-lg-6 col-xl-4 offset-xl-1">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
-                            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                            <div
+                                class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                                 <h2>Daftar Akun GetMedia.id</h2>
                             </div>
+
+
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
                                 <label class="form-label" for="email">Email address</label>
-                                <input type="email" id="email" class=" @error('email') is-invalid @enderror form-control form-control-lg"
-                                    placeholder="Enter a valid email address" name="email" value="{{ old('email') }}" required autocomplete="email" autofocu/>
+                                <input type="email" id="email"
+                                    class=" @error('email') is-invalid @enderror form-control form-control-lg"
+                                    placeholder="Enter a valid email address" name="email" value="{{ old('email') }}"
+                                    required autocomplete="email" autofocus />
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,8 +47,10 @@
                             <!-- Password input -->
                             <div class="form-outline mb-3">
                                 <label class="form-label" for="form3Example4">Password</label>
-                                <input id="password" type="password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"
-                                placeholder="Enter password">
+                                <input id="password" type="password"
+                                    class="form-control form-control-lg @error('password') is-invalid @enderror"
+                                    name="password" required autocomplete="current-password"
+                                    placeholder="Enter password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +64,8 @@
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2">
-                                <button type="submit" class="btn btn-lg text-white" style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #0F4D8A;">
+                                <button type="submit" class="btn btn-lg text-white"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #0F4D8A;">
                                     {{ __('Login') }}
                                 </button>
                                 <p class="small mt-2 pt-1 mb-0">Don't have an account? <a href="{{ route('register') }}"
