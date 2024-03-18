@@ -74,10 +74,10 @@
                             <ul class="news-metainfo list-style">
                                 <li class="author">
                                     <span class="author-img">
-                                        <img src="{{ asset($news->author->user->photo ? 'storage/' . $news->author->user->photo : 'default.png') }}"
+                                        <img src="{{ asset( 'default.png') }}"
                                             alt="Image">
                                     </span>
-                                    <a href="author.html">{{ $news->author->user->name }}</a>
+                                    <a href="author.html">{{ $news->name }}</a>
                                 </li>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -177,15 +177,14 @@
 
 
                         <div class="news-para">
-                            <p>{!! $news->content !!}<strong>gravida</strong> but also the leap into electronic
-                                typesetting, remaining essentially unchange was popularised in the 1960s with the release of
-                                Letraset sheets containing Lorem Ipsum <a href="index.html">Ipsum</a> and more recently
-                                with
-                                desktop publishing software like Aldus Page maker including versions of Lorem Ipsum.</p>
-                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have
-                                suffered alteration in some form, by injected humour, or randomised words which don't look
-                                even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be
-                                sure there isn't anything embarrassing hidden in the middle of text.</p>
+                            <p>{{ $pages[0] }}</p> 
+                            <ul class="page-nav list-style mt-20"> 
+                                <li>Halaman : </li>
+                                @for ($i = 0; $i < count($pages); $i++)
+                                <li><a class="{{ $i+1 == 1 ? "active" : "" }}" href="business.html">{{ $i + 1 }}</a></li>
+                                @endfor
+                                    <li><a href="">Semua</a></li>
+                                </ul>
                         </div>
                         <div class="news-img">
                             <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image">
