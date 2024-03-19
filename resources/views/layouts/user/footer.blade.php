@@ -97,7 +97,7 @@
             <div class="col-md-12 col-lg-12">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex justify-content-start">
-                        <span style="color: #92989F; font-size: 12px;">Design with love © TanahAirStudio 2020. All right reserved</span>
+                        <span style="color: #92989F; font-size: 12px;">Design By GetMedia Team</span>
                     </div>
 
                     <div class="d-flex justify-content-end">
