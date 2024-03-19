@@ -11,6 +11,11 @@
       border-radius: 10px;
       background-color: #fff;
     }
+    .top-right {
+      position: absolute;
+      top: 8px;
+      right: 16px;
+    }
   </style>
 @endsection
 @section('content')
@@ -55,7 +60,10 @@
           <div class="card overflow-hidden">
             <div class="card-profile">
               <div class="card-body p-0">
-                <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="300px" style="border-radius:10px;" alt="" class="img-fluid">
+                <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="200px" style="border-radius:10px;" alt="" class="img-fluid">
+                <div class="top-right">
+                  <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
+                </div>
                 <div class="row align-items-center">
                   <div class="col-lg-5 order-lg-1 order-2">
                     <div class="d-flex align-items-center justify-content-between m-4">
@@ -96,6 +104,40 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-lg-4 order-lg-3 order-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div class="text-center">
+                        <div class="">
+                          <span class="badge bg-light-warning text-warning fs-6 px-3 py-2">
+                            3
+                          </span>
+                        </div>
+                        <div class="">
+                          <p class="mb-0 fs-4">Pending</p>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <div class="">
+                          <span class="badge bg-light-danger text-danger fs-6 px-3 py-2">
+                            3
+                          </span>
+                        </div>
+                        <div class="">
+                        <p class="mb-0 fs-4">Ditolak</p>
+                        </div>
+                      </div>
+                      <div class="text-center">
+                        <div class="">
+                          <span class="badge bg-light-success text-success fs-6 px-3 py-2">
+                            3
+                          </span>
+                        </div>
+                        <div class="">
+                          <p class="mb-0 fs-4">Diterima</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -114,23 +156,18 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
+                  <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-friends-tab" data-bs-toggle="pill" data-bs-target="#pills-friends" type="button" role="tab" aria-controls="pills-friends" aria-selected="false">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="me-2" width="20" height="20" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 3c2.314 0 4.456.408 6.058 1.109c.799.35 1.509.792 2.032 1.334c.485.5.845 1.128.902 1.856L21 7.5v10c0 .814-.381 1.51-.91 2.057c-.523.542-1.233.984-2.032 1.334C16.456 21.591 14.314 22 12 22c-2.314 0-4.456-.408-6.058-1.109c-.799-.35-1.509-.792-2.032-1.334c-.485-.5-.845-1.128-.902-1.856L3 17.5v-10c0-.814.381-1.51.91-2.057c.523-.542 1.233-.984 2.032-1.334C7.544 3.409 9.686 3 12 3m7 12.407a8.13 8.13 0 0 1-.942.484C16.456 16.591 14.314 17 12 17c-2.314 0-4.456-.408-6.058-1.109A8.122 8.122 0 0 1 5 15.407V17.5c0 .152.066.376.348.667c.286.296.748.608 1.396.892C8.038 19.625 9.895 20 12 20c2.105 0 3.962-.375 5.256-.941c.648-.284 1.11-.596 1.396-.892c.282-.29.348-.515.348-.667zm0-5a8.13 8.13 0 0 1-.942.484C16.456 11.591 14.314 12 12 12c-2.314 0-4.456-.408-6.058-1.109A8.122 8.122 0 0 1 5 10.407V12.5c0 .152.066.376.348.667c.286.296.748.608 1.396.892C8.038 14.625 9.895 15 12 15c2.105 0 3.962-.375 5.256-.941c.648-.284 1.11-.596 1.396-.892c.282-.29.348-.515.348-.667zM12 5c-2.105 0-3.962.375-5.256.941c-.648.284-1.11.596-1.396.892c-.282.29-.348.515-.348.667c0 .152.066.376.348.667c.286.296.748.608 1.396.892C8.038 9.625 9.895 10 12 10c2.105 0 3.962-.375 5.256-.941c.648-.284 1.11-.596 1.396-.892c.282-.29.348-.515.348-.667c0-.152-.066-.376-.348-.667c-.286-.296-.748-.608-1.396-.892C15.962 5.375 14.105 5 12 5"/></g></svg>
+                  <span class="d-none d-md-block">Pendapatan</span>
+                  </button>
+                </li>                
+                <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">
                     <i class="ti ti-user-circle me-2 fs-6"></i>
                     <span class="d-none d-md-block">Profile</span>
                   </button>
                 </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-followers-tab" data-bs-toggle="pill" data-bs-target="#pills-followers" type="button" role="tab" aria-controls="pills-followers" aria-selected="false">
-                    <i class="ti ti-heart me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Followers</span>
-                  </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-friends-tab" data-bs-toggle="pill" data-bs-target="#pills-friends" type="button" role="tab" aria-controls="pills-friends" aria-selected="false">
-                    <i class="ti ti-user-circle me-2 fs-6"></i>
-                    <span class="d-none d-md-block">Friends</span>
-                  </button>
-                </li>
+
               </ul>
             </div>
           </div>
@@ -209,7 +246,7 @@
               </div>
               <!-- End Row -->
             </div>
-            <div class="tab-pane fade card-status" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">
+            <div class="tab-pane fade card-detail" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">
               <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                 <div class="">
                   <form class="d-flex">
@@ -284,890 +321,64 @@
               <!-- End Row -->
             </div>
 
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-              <div class="row">
+            <div class="tab-pane fade card-detail" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+              <div class="row p-2">
+                <h4 class="mb-4">Biodata</h4>
 
-              </div>
-            </div>
-            <div class="tab-pane fade" id="pills-followers" role="tabpanel" aria-labelledby="pills-followers-tab" tabindex="0">
-              <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Followers <span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span></h3>
-                <form class="position-relative">
-                  <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search Followers">
-                  <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-                </form>
-              </div>
-              <div class="row">
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Betty Adams</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Sint Maarten</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-lg-6 mb-4">
+                  <label class="form-label" for="nomor">Nama</label>
+                    <input type="text" id="name" name="name" placeholder="name"
+                        value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-2.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Virginia Wong</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Tunisia</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-lg-6 mb-4">
+                  <label class="form-label" for="nomor">No Hp</label>
+                    <input type="text" id="name" name="name" placeholder="name"
+                        value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-3.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Birdie Burgess</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Algeria</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-lg-6 mb-4">
+                  <label class="form-label" for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="email"
+                        value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-4.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Steven Lindsey</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Malaysia</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-lg-6 mb-4">
+                  <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="password"
+                        value="{{ old('password') }}" class="form-control @error('password') is-invalid @enderror">
+                    @error('password')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-5.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Hannah Rhodes</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Grenada</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
+                <div class="col-md-12 col-lg-6 mb-4">
+                  <label class="form-label" for="email">Tanggal Lahir</label>
+                    <input type="text" id="email" name="email" placeholder="email"
+                        value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-6.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Effie Gross</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Azerbaijan</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-7.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Mark Barton</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>French Southern Territories</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-8.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Carolyn Knight</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Nauru</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-9.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Elizabeth Malone</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Djibouti</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-10.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Jon Cohen</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>United States</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Mary Hernandez</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Equatorial Guinea</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-2.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Willie Peterson</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Solomon Islands</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-3.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Harvey Baldwin</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Uruguay</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-4.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Alice George</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Madagascar</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-5.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Beulah Simpson</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Bahrain</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-6.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Francis Barber</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Colombia</span>
-                      </div>
-                      <button class="btn btn-outline-primary py-1 px-2 ms-auto">Follow</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-7.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Christian Morales</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Maldives</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-8.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Laura Nelson</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>St. Helena</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-9.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Blanche Strickland</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>South Africa</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-                <div class=" col-md-6 col-xl-4">
-                  <div class="card">
-                    <div class="card-body p-4 d-flex align-items-center gap-3">
-                      <img src="../../dist/images/profile/user-10.jpg" alt="" class="rounded-circle" width="40" height="40">
-                      <div>
-                        <h5 class="fw-semibold mb-0">Adam Washington</h5>
-                        <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>Suriname</span>
-                      </div>
-                      <button class="btn btn-primary py-1 px-2 ms-auto">Followed</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="pills-friends" role="tabpanel" aria-labelledby="pills-friends-tab" tabindex="0">
-              <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <h3 class="mb-3 mb-sm-0 fw-semibold d-flex align-items-center">Friends <span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2">20</span></h3>
-                <form class="position-relative">
-                  <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search Friends">
-                  <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
-                </form>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Betty Adams</h5>
-                      <span class="text-dark fs-2">Medical Secretary</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-2.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Inez Lyons</h5>
-                      <span class="text-dark fs-2">Medical Technician</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-3.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Lydia Bryan</h5>
-                      <span class="text-dark fs-2">Preschool Teacher</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-4.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Carolyn Bryant</h5>
-                      <span class="text-dark fs-2">Legal Secretary</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-5.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Paul Benson</h5>
-                      <span class="text-dark fs-2">Safety Engineer</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-6.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Robert Francis</h5>
-                      <span class="text-dark fs-2">Nursing Administrator</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-7.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Billy Rogers</h5>
-                      <span class="text-dark fs-2">Legal Secretary</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-8.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Rosetta Brewer</h5>
-                      <span class="text-dark fs-2">Comptroller</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-9.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Patrick Knight</h5>
-                      <span class="text-dark fs-2">Retail Store Manager</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-10.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Francis Sutton</h5>
-                      <span class="text-dark fs-2">Astronomer</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-1.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Bernice Henry</h5>
-                      <span class="text-dark fs-2">Security Consultant</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-2.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Estella Garcia</h5>
-                      <span class="text-dark fs-2">Lead Software Test Engineer</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-3.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Norman Moran</h5>
-                      <span class="text-dark fs-2">Engineer Technician</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-4.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Jessie Matthews</h5>
-                      <span class="text-dark fs-2">Lead Software Engineer</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-5.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Elijah Perez</h5>
-                      <span class="text-dark fs-2">Special Education Teacher</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-6.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Robert Martin</h5>
-                      <span class="text-dark fs-2">Transportation Manager</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-7.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Elva Wong</h5>
-                      <span class="text-dark fs-2">Logistics Manager</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-8.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Edith Taylor</h5>
-                      <span class="text-dark fs-2">Union Representative</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-9.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Violet Jackson</h5>
-                      <span class="text-dark fs-2">Agricultural Inspector</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-lg-4">
-                  <div class="card hover-img">
-                    <div class="card-body p-4 text-center border-bottom">
-                      <img src="../../dist/images/profile/user-10.jpg" alt="" class="rounded-circle mb-3" width="80" height="80">
-                      <h5 class="fw-semibold mb-0">Phoebe Owens</h5>
-                      <span class="text-dark fs-2">Safety Engineer</span>
-                    </div>
-                    <ul class="px-2 py-2 bg-light list-unstyled d-flex align-items-center justify-content-center mb-0">
-                      <li class="position-relative">
-                        <a class="text-primary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold" href="javascript:void(0)">
-                          <i class="ti ti-brand-facebook"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-danger d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-instagram"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-info d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-github"></i>
-                        </a>
-                      </li>
-                      <li class="position-relative">
-                        <a class="text-secondary d-flex align-items-center justify-content-center p-2 fs-5 rounded-circle fw-semibold " href="javascript:void(0)">
-                          <i class="ti ti-brand-twitter"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                <div class="col-md-12 col-lg-12 mb-4">
+                  <label class="form-label" for="email">Alamat</label>
+                  <textarea name="alamat" class="form-control" id="" cols="30" rows="10"></textarea>
+                    
                 </div>
               </div>
             </div>

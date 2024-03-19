@@ -108,8 +108,10 @@ Route::middleware(['auth','role:author'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
     Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
-    // Update Profile
-    Route::put('profileupdatenews', [ProfileController::class, 'update'])->name('profile.berita.update');
+    // 
+    Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.autor.update');
+    // UpdateNews
+    Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
     // Update And Delete News
     Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
     Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
@@ -221,7 +223,7 @@ Route::get('profile', [ProfileController::class, 'index'])->name('profile.index'
 
 // Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 
-Route::get('profile-update', function(){
+Route::get('profile-user-update', function(){
     return view('pages.user.profile.update');
 })->name('profile.user.update');
 

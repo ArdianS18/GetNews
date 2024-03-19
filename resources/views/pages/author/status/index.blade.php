@@ -9,11 +9,10 @@
         border-radius: 10px;
         padding: 2%;
         align-items: center;
+        background-color: #fff;
     }
 
-
     .card-detail img {
-        width: 400px; /* Lebar otomatis */
         max-width: 100%; /* Maksimum lebar adalah 100% dari lebar elemen induknya */
         max-height: 100%;
         height: auto; /* Ketinggian otomatis */
@@ -31,18 +30,22 @@
 
 @section('content')
 
-<div class="container">
+<div class="">
     <div class="tab-pane" id="status" role="tabpanel">
-        <div class="container">
+        <div class="">
+            
             @forelse ($news as $news)
-            <div class="news-card-a mt-5">
+            <div class="news-card-a">
 
-                <div class="row">
-                    <div class="card-detail col-md-12 col-lg-10">
-                        <div class="d-flex flex-column flex-md-row">
-                            <div class="mb-3 mb-md-0" style="margin-left: 2%;">
-                                <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}" width="300px" height="200px" class="img-status">
-                            </div>
+                <div class="row card-detail">
+                    <div class="col-md-12 col-lg-3">
+                        <div class="" style="margin-left: 2%;">
+                            <img src="{{ asset('assets/img/test.svg') }}" alt="{{ $news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
+                        </div>
+                    </div>
+                    <div class=" col-md-12 col-lg-7">
+                        <div class="d-flex">
+
                             <div class="order-md-1" style="margin-left:20px;">
                                 <h4>{{ $news->name }}</h4>
                                 <p>{{ $news->sinopsis }}</p>
@@ -52,22 +55,20 @@
 
                     <div class="col-md-12 col-lg-2 mt-3 mt-lg-0 ">
                         <div class="d-flex justify-content-end">
-                            <div class="text-md-right mt-3 mt-md-0">
-                                <button class="text-white btn btn-sm" style="background-color: #F0CA40; border-radius: 8px; padding-left: 3rem; padding-right: 3rem;">
+                            <div class="text-md-right mt-md-0">
+                                <button class="text-white btn btn-lg" style="background-color: #F0CA40; border-radius: 8px; padding-left: 3rem; padding-right: 3rem;">
                                     {{ $news->status }}
                                 </button>
                             </div>
                         </div>
 
-                        <div class="mt-4 d-flex justify-content-end">
+                        <div class="mt-3 d-flex justify-content-end">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/>
-                            </svg> Apr 25, 2023
+                            </svg>
+                            <p class="ms-2"> Apr 25, 2023</p>
                         </div>
 
-                        <div class="mt-4 mb-2 d-flex justify-content-end">
-                            {{-- <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
-                            </button> --}}
-
+                        <div class="mt-3 d-flex justify-content-end">
                             <a href="{{ route('profile.news.edit', ['id' => $news->id]) }}" class="btn btn-sm m-1" style="background-color: #0F4D8A;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff"/>
