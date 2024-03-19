@@ -176,20 +176,24 @@
                         </div>
 
 
+                        {{-- @foreach ($pages as $index => $page) --}}
                         <div class="news-para">
-                            <p>{!! $pages[0] !!}</p>
-                            <ul class="page-nav list-style mt-20"> 
-                                <li>Halaman : </li>
-                                @for ($i = 0; $i < count($pages); $i++)
-                                <li><a class="{{ $i+1 == 1 ? "active" : "" }}" href="business.html">{{ $i + 1 }}</a></li>
-                                @endfor
-                                    <li><a href="">Semua</a></li>
+                            {{-- <p>{!! $pages !!}</p> --}}
+                                <p>{!! $pages[$currentPage] !!}</p>
+                                <ul class="page-nav list-style mt-20">
+                                    <li>Halaman : </li>
+                                    @for ($i = 0; $i < count($pages); $i++)
+                                    <li><a class="{{ $i+1 == $currentPage ? "active" : "" }}" href="{{ route('news.user', ['news' => $news->slug , 'page' => $i + 1]) }}">{{ $i + 1 }}</a></li>
+                                    @endfor
+                                    <li><a href="{{ route('news.user', ['news' => $news->slug , 'page' => 'all']) }}">Semua</a></li>
                                 </ul>
-                        </div>
+                            </div>
+                        {{-- @endforeach --}}
                         <div class="news-img">
                             <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image">
                         </div>
                         <div class="news-para">
+                            <br>
                             <h5>Mastering Digital Transformation: How to Stay Ahead in a Rapidly Changing Business Landscape
                             </h5>
                             <p>There are many variations of passages of Lorem Ipsum available, but the majority have

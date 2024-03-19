@@ -49,11 +49,11 @@
             <div class="col-lg-2">
 
                 <ul style="list-style-type: none;" class="p-4">
-                    <span style="color: #92989F; font-size: 15px;">page</span>
-                    <li class="mb-2"><a href="/" style="color: #FFFFFF">Home</a></li>
-                    <li class="mb-2"><a href="/aboutus" style="color: #FFFFFF">About Us</a></li>
-                    <li class="mb-2"><a href="/contact-us" style="color: #FFFFFF">Contact Us</a></li>
-                    <li class="mb-2"><a href="/author" style="color: #FFFFFF">Author</a></li>
+                    <span style="color: #92989F; font-size: 15px;">Halaman</span>
+                    <li class="mb-2"><a href="/" style="color: #FFFFFF">Beranda</a></li>
+                    <li class="mb-2"><a href="/aboutus" style="color: #FFFFFF">Tentang Kami</a></li>
+                    <li class="mb-2"><a href="/contact-us" style="color: #FFFFFF">Hubungi Kami</a></li>
+                    <li class="mb-2"><a href="/author" style="color: #FFFFFF">Penulis</a></li>
                 </ul>
             </div>
 
