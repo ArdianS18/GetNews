@@ -39,10 +39,10 @@ use App\Http\Controllers\UserController;
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('/', [DashboardController::class,'home'])->name('home');
+Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
 
 Auth::routes();
 
-Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
 Route::middleware(['role:admin|superadmin'])->group(function () {
     //Beranda *Admin*
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
