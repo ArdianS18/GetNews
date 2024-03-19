@@ -132,14 +132,14 @@ class NewsController extends Controller
         return view('pages.news.index', compact('news','subCategories'));
     }
 
-    public function usernews($slug)
+    public function usernews(Request $request ,$slug, $page)
     {
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;
-        $content = str_replace('&nbsp;', ' ', $content);
-        $pages = str_split($content, 100000);
-
+        // $contents = str_replace('&nbsp;', ' ', $content);
+        $pages = str_split($content, 2000);
+        $currentPage = $page;
 
         $view = $this->view->store([
             'news_id' => $news->id,
@@ -156,7 +156,7 @@ class NewsController extends Controller
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike','pages'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'pages', 'currentPage'));
     }
     /**
      * Display a listing of the resource.
