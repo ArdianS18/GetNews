@@ -141,7 +141,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
 
-    Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
+    // Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
     Route::get('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
@@ -227,6 +227,7 @@ Route::get('profile-update', function(){
 
 ///
 // Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
 
 // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
 // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');

@@ -23,6 +23,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function paginate(): mixed
     {
         return $this->model->query()
+            ->latest()
             ->paginate(5);
     }
 

@@ -102,6 +102,7 @@ class NewsController extends Controller
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $newsPhoto = $this->newsPhoto->where($news);
+        // dd($newsPhoto);
 
         return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
 
@@ -140,6 +141,12 @@ class NewsController extends Controller
         // $contents = str_replace('&nbsp;', ' ', $content);
         $pages = str_split($content, 2000);
         $currentPage = $page;
+
+        // if (auth()->check()) {
+        //     $user_id = auth()->id();
+        // } else {
+        //     $user_id = '4aeeb642-9f34-331a-9b4e-a1f3ee9adf58';
+        // }
 
         $view = $this->view->store([
             'news_id' => $news->id,

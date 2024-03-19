@@ -24,6 +24,7 @@ class RegisterRequest extends BaseRequest
             'phone_number' => 'required', 'numeric', 'min:15',
             'address' => 'required', 'string', 'max:255',
             'cv' => 'required',
+            'photo' => 'required',
         ];
     }
 

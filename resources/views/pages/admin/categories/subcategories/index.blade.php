@@ -48,7 +48,7 @@
                     Tambah
                 </button>
             </div>
-            
+
         </div>
 
 
@@ -112,9 +112,9 @@
                             </td>
                         </tr>
                     @endforelse
-                </table>                      
+                </table>
             </div>
-      
+
         </div>
 
 
@@ -136,6 +136,18 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="page d-flex mt-4">
+        <div class="container">
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{{ $subCategory->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                @for ($i = 1; $i <= $subCategory->lastPage(); $i++)
+                <a href="{{ $subCategory->url($i) }}" class="btn btn-black {{ $subCategory->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+                <a href="{{ $subCategory->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
             </div>
         </div>
     </div>

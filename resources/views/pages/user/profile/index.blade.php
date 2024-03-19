@@ -30,7 +30,7 @@
                 @method('put')
                 <div class="modal-body">
                     <label class="form-label mt-2">Masukkan Cv</label>
-                    <input class="form-control" type="file" name="photo">
+                    <input class="form-control" type="file" name="cv">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-primary">Daftar</button>

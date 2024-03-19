@@ -43,11 +43,11 @@ class AuthorService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request->validated();
 
-        $photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('photo'));
+        $photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('cv'));
 
         return [
             'user_id' => $user->id,
-            'photo' => $photo,
+            'cv' => $photo,
             'status' => "panding"
         ];
     }
@@ -66,16 +66,16 @@ class AuthorService implements ShouldHandleFileUpload, CustomUploadValidation
         $data = $request->validated();
         $old_photo = $author->photo;
 
-        if ($request->hasFile('photo')) {
+        if ($request->hasFile('cv')) {
             $this->remove($old_photo);
-            $old_photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('photo'));
+            $old_photo = $this->upload(UploadDiskEnum::AUTHOR_CV->value, $request->file('cv'));
         }
 
         $author->update($data);
 
         return [
             'user_id' => auth()->id(),
-            'photo' => $old_photo,
+            'cv' => $old_photo,
         ];
     }
 }

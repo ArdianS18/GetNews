@@ -176,7 +176,7 @@
                         <div class="col-md-12 col-lg-7 align-items-center">
                           <div>
                             <h5>{{ $news->name }}</h5>
-                            <p class="mt-2">{!! $news->content !!}</p>
+                            {{-- <p class="mt-2">{!! $news->content !!}</p> --}}
                           </div>
                           <div class="d-flex">
                             <div class="d-flex">

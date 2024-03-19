@@ -77,7 +77,8 @@ class CategoryController extends Controller
             'category_id' => $category->id
         ]);
 
-        $subCategory = $this->subCategory->search($request);
+        $query = $request->input('query');
+        $subCategory = $query ? $this->subCategory->search($query) : $this->subCategory->paginate();
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
     }
 

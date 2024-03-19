@@ -24,6 +24,13 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
         })->get();
     }
 
+    public function paginate(): mixed
+    {
+        return $this->model->query()
+            ->latest()
+            ->paginate(5);
+    }
+
 
     /**
      * Handle show method and delete data instantly from models.
