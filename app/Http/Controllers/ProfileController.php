@@ -122,7 +122,12 @@ class ProfileController extends Controller
         $categories = $this->category->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
-        return view('pages.author.profile.update', compact('news','subCategories','categories','newsPhoto'));
+        return view('pages.author.news.update', compact('news','subCategories','categories','newsPhoto'));
+    }
+
+    public function profileupdate(){
+        $author = $this->author->get();
+        return view('pages.author.profile.update', compact('author'));
     }
 
     /**

@@ -14,9 +14,7 @@
 
         <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="p-2">
-                <i class="ti ti-dots fs-7"></i>
-            </span>
+
         </button>
 
 
@@ -57,13 +55,14 @@
                                     <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
                                 </div>
                                 <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                    <img src="" class="rounded-circle user-profile" style="object-fit: cover"
+                                    <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile" style="object-fit: cover"
                                         width="80" height="80" alt="" />
                                     <div class="ms-3">
-                                        <h5 class="mb-1 fs-3 username"></h5>
-                                        <span class="mb-1 d-block text-dark role"></span>
+                                        <h5 class="mb-1 fs-3 username">{{ auth()->user()->name }}</h5>
+                                        <span class="mb-1 d-block text-dark role">{{ auth()->user()->roles->pluck('name')[0] }}</span>
                                         <p class="mb-0 d-flex text-dark align-items-center gap-2 email">
                                             <i class="ti ti-mail fs-4"></i>
+                                            {{ auth()->user()->email }}
                                         </p>
                                     </div>
                                 </div>

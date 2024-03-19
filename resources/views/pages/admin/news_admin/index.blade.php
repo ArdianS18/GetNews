@@ -16,96 +16,103 @@
 @endsection
 
 @section('content')
-    <div class="d-flex gap-2 mb-3 mt-2">
-        <form class="d-flex gap-2">
-            <div>
-                <div class="position-relative d-flex">
-                    <div class="input-group">
-                        <input type="text" name="query" class="form-control search-chat py-2 ps-5"placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" class="btn btn-outline-primary">Cari</button>
+
+    <div class="card-table shadow-sm">
+        <div class="d-flex gap-2 mb-3 mt-2">
+            <form class="d-flex gap-2">
+                <div>
+                    <div class="position-relative d-flex">
+                        <div class="input-group">
+                            <input type="text" name="query" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                            <button type="submit" class="btn btn-outline-primary">Cari</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <div class="d-flex gap-2">
-                    {{-- <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search"> --}}
-                    <select name="status" class="form-select">
-                        <option value="{{ request('status') }}">Pilih Status</option>
-                        <option value="panding">Panding</option>
-                        <option value="active">Approved</option>
-                        <option value="nonactive">Reject</option>
-                        <option value="primary">Primary</option>
-                        <option value="">Tampilkan semua</option>
-                    </select>
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                <div>
+                    <div class="d-flex gap-2">
+                        {{-- <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search"> --}}
+                        <select name="status" class="form-select">
+                            <option value="{{ request('status') }}">Pilih Status</option>
+                            <option value="panding">Panding</option>
+                            <option value="active">Approved</option>
+                            <option value="nonactive">Reject</option>
+                            <option value="primary">Primary</option>
+                            <option value="">Tampilkan semua</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
-        <form id="approvalForm" action="{{ route('approved-all.news')}}" method="post">
-            @method('put')
-            @csrf
-            <input type="hidden" name="checkedIds" id="checkedIdsInput">
-            <button type="submit" class="btn btn-secondary">Terima semua</button>
-        </form>
+            <form id="approvalForm" action="{{ route('approved-all.news')}}" method="post">
+                @method('put')
+                @csrf
+                <input type="hidden" name="checkedIds" id="checkedIdsInput">
+                <button type="submit" class="btn ms-2 px-4 text-white" style="background-color: #1EBB9E;">Terima semua</button>
+            </form>
 
-        <form id="rejectForm" action="{{ route('reject-all.news') }}" method="post">
-            @method('put')
-            @csrf
-            <input type="hidden" name="checkedIdss" id="checkedIdssInput">
-            <button type="submit" class="btn btn-danger">Tolak semua</button>
-        </form>
+            <form id="rejectForm" action="{{ route('reject-all.news') }}" method="post">
+                @method('put')
+                @csrf
+                <input type="hidden" name="checkedIdss" id="checkedIdssInput">
+                <button type="submit" class="btn text-white ms-2 px-4" style="background-color: #EF6E6E;">Tolak semua</button>
+            </form>
+        </div>
     </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">
-                    <input id="checkAll" type="checkbox" class="itemCheckbox" style="transform: scale(1);">
-                </th>
-                <th class="text-white" style="background-color: #175A95;">No</th>
-                <th class="text-white" style="background-color: #175A95;">Penulis</th>
-                <th class="text-white" style="background-color: #175A95;">Email</th>
-                <th class="text-white" style="background-color: #175A95;">Judul berita</th>
-                <th class="text-white" style="background-color: #175A95;">Tanggal Upload</th>
-                <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Option</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($news as $news)
-                <tr class="checkboxRow">
-                    <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(1);"></td>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $news->author->user->name }}</td>
-                    <td>{{ $news->author->user->email }}</td>
-                    <td>{{ $news->name }}</td>
-                    <td>{{ \Carbon\Carbon::parse($news->upload_date)->format('d / M / Y') }}</td>
-                    <td>
-                        <a href="{{ route('detail.news.admin', ['news' => $news->id]) }}" class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A">
-                            <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            @empty
-                <tr>
-                    <td colspan="7">
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <img src="{{ asset('no-data.svg') }}" alt="">
+    <div class="card-table shadow-sm mt-4">
+        <div class="table-border mb-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">
+                            <input id="checkAll" type="checkbox" class="itemCheckbox" style="transform: scale(1);">
+                        </th>
+                        <th class="text-white" style="background-color: #175A95;">No</th>
+                        <th class="text-white" style="background-color: #175A95;">Penulis</th>
+                        <th class="text-white" style="background-color: #175A95;">Email</th>
+                        <th class="text-white" style="background-color: #175A95;">Judul berita</th>
+                        <th class="text-white" style="background-color: #175A95;">Tanggal Upload</th>
+                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($news as $news)
+                        <tr class="checkboxRow">
+                            <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(1);"></td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $news->author->user->name }}</td>
+                            <td>{{ $news->author->user->email }}</td>
+                            <td>{{ $news->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($news->upload_date)->format('d / M / Y') }}</td>
+                            <td>
+                                <a href="{{ route('detail.news.admin', ['news' => $news->id]) }}" class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A">
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                                </a>
                             </div>
-                        </div>
-                        <div class="text-center">
-                            <h4>Tidak ada data yang ditampilkan</h4>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+                        </td>
+                    </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <img src="{{ asset('no-data.svg') }}" alt="">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h4>Tidak ada data yang ditampilkan</h4>
+                                </div>
+                                {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('script')

@@ -109,10 +109,10 @@
                                 @enderror
                             </div>
 
-                            <div class="mt-2">
+                            <div class="mt-2" style="max-width: 100%;">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
                                 <select id="sub_category_id"
-                                    class="form-select sub-category select2 @error('sub_category_id') is-invalid @enderror"
+                                    class="form-control sub-category select2 @error('sub_category_id') is-invalid @enderror"
                                     name="sub_category_id" multiple="true" value="{{ old('sub_category_id') }}"
                                     aria-label="Default select example">
                                     <option selected>pilih sub kategori</option>
@@ -141,7 +141,7 @@
 
                     <div class="row justify-content-between mt-2">
 
-                        <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: auto;">
+                        <div class="col-lg-6 col-md-12 col-span-2 mt-2 from-outline" style="height: auto;">
                             <label class="form-label" for="content">Content</label>
                             <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
                             @error('content')
@@ -284,7 +284,7 @@
     $(document).ready(function() {
         $('#content').summernote
         ({
-            height: 275,
+            height: 200,
             toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
