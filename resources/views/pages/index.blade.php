@@ -72,7 +72,7 @@
                     <a href="{{ route('categories.show',['category'=>$news->category->name]) }}" class="news-cat">{{ $news->category->name }}</a>
                 </div>
                 <div class="news-card-info">
-                    <h3><a href="{{ route('news.user',['news'=>$news->name]) }}">{{ $news->name }}</a></h3>
+                    <h3><a href="{{ route('news.user',['news'=>$news->name,'page'=>"1"]) }}">{{ $news->name }}</a></h3>
                     <ul class="news-metainfo list-style">
                         <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25, 2023</a></li>
                         <li><i class="fi fi-rr-eye"></i>10 Min Read</li>

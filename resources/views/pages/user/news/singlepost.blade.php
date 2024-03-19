@@ -22,23 +22,30 @@
         }
 
         .thumbnail-container {
-            display: flex;
-            margin-top: 10px;
-            /* Sesuaikan dengan jarak antara slideshow dan thumbnail */
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .thumbnail-container::-webkit-scrollbar {
+            display: none;
         }
 
         .thumbnail {
-            cursor: pointer;
-            margin: 0 5px;
-            /* Sesuaikan dengan jarak antara thumbnail */
+            display: inline-block;
+            margin-right: 10px;
         }
 
         .thumbnail img {
             width: 100px;
-            /* Sesuaikan dengan lebar thumbnail */
             height: 100px;
-            /* Sesuaikan dengan tinggi thumbnail */
             object-fit: cover;
+        }
+
+        #prev-button,
+        #next-button {
+            margin-top: 10px;
         }
     </style>
 @endsection
@@ -49,23 +56,27 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <article>
-                        <div class="slideshow-container">
+                        <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
-                                <img src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image">
+                                <img id="main-image" src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image">
                                 <a href="business.html" class="news-cat">Business</a>
                             </div>
-                            <div class="thumbnail-container">
-                                <div class="thumbnail ">
-                                    <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image">
-                                </div>
-                                <div class="thumbnail ">
-                                    <img src="{{ asset('assets/img/news/single-news-3.webp') }}" alt="Image">
-                                </div>
-                                <div class="thumbnail ">
-                                    <img src="{{ asset('assets/img/news/single-news-4.webp') }}" alt="Image">
-                                </div>
-                                <div class="thumbnail ">
-                                    <img src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image">
+
+                            <div class="thumbnail-container d-flex justify-content-center">
+                                <div class="thumbnails">
+                                    <div class="thumbnail">
+                                        <img src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image"
+                                            onclick="changeImage(this)">
+                                    </div>
+                                    <div class="thumbnail">
+                                        <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image"
+                                            onclick="changeImage(this)">
+                                    </div>
+                                    <div class="thumbnail">
+                                        <img src="{{ asset('assets/img/news/single-news-3.webp') }}" alt="Image"
+                                            onclick="changeImage(this)">
+                                    </div>
+                                    <!-- Tambahkan thumbnail lainnya di sini -->
                                 </div>
                             </div>
                         </div>
@@ -74,8 +85,7 @@
                             <ul class="news-metainfo list-style">
                                 <li class="author">
                                     <span class="author-img">
-                                        <img src="{{ asset( 'default.png') }}"
-                                            alt="Image">
+                                        <img src="{{ asset('default.png') }}" alt="Image">
                                     </span>
                                     <a href="author.html">{{ $news->name }}</a>
                                 </li>
@@ -179,15 +189,18 @@
                         {{-- @foreach ($pages as $index => $page) --}}
                         <div class="news-para">
                             {{-- <p>{!! $pages !!}</p> --}}
-                                <p>{!! $pages[$currentPage] !!}</p>
-                                <ul class="page-nav list-style mt-20">
-                                    <li>Halaman : </li>
-                                    @for ($i = 0; $i < count($pages); $i++)
-                                    <li><a class="{{ $i+1 == $currentPage ? "active" : "" }}" href="{{ route('news.user', ['news' => $news->slug , 'page' => $i + 1]) }}">{{ $i + 1 }}</a></li>
-                                    @endfor
-                                    <li><a href="{{ route('news.user', ['news' => $news->slug , 'page' => 'all']) }}">Semua</a></li>
-                                </ul>
-                            </div>
+                            <p>{!! $pages[$currentPage] !!}</p>
+                            <ul class="page-nav list-style mt-20">
+                                <li>Halaman : </li>
+                                @for ($i = 0; $i < count($pages); $i++)
+                                    <li><a class="{{ $i == $currentPage ? 'active' : '' }}"
+                                            href="{{ route('news.user', ['news' => $news->slug, 'page' => $i + 1]) }}">{{ $i + 1 }}</a>
+                                    </li>
+                                @endfor
+                                <li><a href="{{ route('news.user', ['news' => $news->slug, 'page' => 'all']) }}">Semua</a>
+                                </li>
+                            </ul>
+                        </div>
                         {{-- @endforeach --}}
                         <div class="news-img">
                             <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image">
@@ -519,23 +532,34 @@
                 var replyForm = document.getElementById('reply-form-' + commentId);
                 if (replyForm) {
                     if (replyForm.style.display === 'block') {
-                        replyForm.style.display = 'none'; // If the form is open, close it
+                        replyForm.style.display = 'none';
                     } else {
-                        replyForm.style.display = 'block'; // If the form is closed, open it
+                        replyForm.style.display = 'block';
                     }
                 }
             }
-            // Ambil elemen-elemen yang dibutuhkan
-            var slideshow = document.querySelector('.slideshow');
-            var thumbnails = document.querySelectorAll('.thumbnail');
+            const thumbnailContainer = document.querySelector('.thumbnail-container');
+            const prevButton = document.querySelector('#prev-button');
+            const nextButton = document.querySelector('#next-button');
 
-            // Tambahkan event listener untuk setiap thumbnail
-            thumbnails.forEach(function(thumbnail) {
-                thumbnail.addEventListener('click', function() {
-                    // Ganti gambar slideshow dengan gambar thumbnail yang diklik
-                    var imgSrc = thumbnail.querySelector('img').src;
-                    slideshow.querySelector('img').src = imgSrc;
-                });
-            });
+            prevButton.addEventListener('click', scrollThumbnails.bind(null, 'left'));
+            nextButton.addEventListener('click', scrollThumbnails.bind(null, 'right'));
+
+            function scrollThumbnails(direction) {
+                const scrollAmount = 300;
+                const containerWidth = thumbnailContainer.offsetWidth;
+
+                if (direction === 'left') {
+                    thumbnailContainer.scrollLeft -= scrollAmount;
+                } else if (direction === 'right') {
+                    thumbnailContainer.scrollLeft += scrollAmount;
+                }
+            }
+
+
+            function changeImage(thumbnail) {
+                const mainImage = document.getElementById('main-image');
+                mainImage.src = thumbnail.src;
+            }
         </script>
     @endsection

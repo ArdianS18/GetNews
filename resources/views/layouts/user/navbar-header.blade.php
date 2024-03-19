@@ -26,7 +26,7 @@
 
                     @forelse ($categories as $category)
                     <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a>
+                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                             <ul class="dropdown-menu">
                                 {{-- @if ($subCategories === $category->id) --}}
                                     @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
@@ -70,7 +70,7 @@
                             <li class="nav-item">
                                 <div class="news-card-img" style="padding-right: 0px;">
                                     <a href="javascript:void(0)" class="nav-link">
-                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="35px" style="border-radius: 50%; object-fit:cover;"/>
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
                                     </a>
                                 </div>
                                 <ul class="dropdown-menu">
