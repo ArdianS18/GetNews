@@ -80,7 +80,7 @@
 
             <div class="d-flex justify-content-center align-items-center">
                 <div class="">
-                    <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" width="120px" style="border-radius: 50%;"  alt="Image">
+                    <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" width="120px" class="rounded-circle profile" height="120px" style="object-fit: cover"  alt="Image">
                 </div>
             </div>
 
