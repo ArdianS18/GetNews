@@ -141,6 +141,11 @@
     </div>
 
     <div class="page d-flex mt-4">
+
+        <div class="container">
+            <a href="{{ route('categories.index') }}" class="btn text-white mr-2" style="background-color: #175A95">Kembali</a>
+        </div>
+
         <div class="container">
             <div class="d-flex justify-content-end gap-2">
                 <a href="{{ $subCategory->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
