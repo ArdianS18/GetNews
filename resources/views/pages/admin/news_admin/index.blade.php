@@ -23,7 +23,7 @@
                 <div>
                     <div class="position-relative d-flex">
                         <div class="input-group">
-                            <input type="text" name="query" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                            <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                             <button type="submit" class="btn btn-outline-primary">Cari</button>
                         </div>

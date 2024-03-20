@@ -7,7 +7,9 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\UserInterface;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -15,15 +17,19 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\NewsPhoto;
 use App\Models\SubCategory;
+use App\Models\User;
 use App\Services\NewsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    private UserInterface $user;
     private NewsInterface $news;
     private AuthorInterface $author;
     private SubCategoryInterface $subCategory;
@@ -31,8 +37,9 @@ class ProfileController extends Controller
     private CategoryInterface $category;
     private NewsPhotoInterface $newsPhoto;
 
-    public function __construct(AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
+    public function __construct(UserInterface $user, AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
     {
+        $this->user = $user;
         $this->news = $news;
         $this->author = $author;
         $this->newsPhoto = $newsPhoto;
@@ -48,8 +55,9 @@ class ProfileController extends Controller
         $category = $this->category->get();
         $news = $this->news->get();
         $news_status = $this->news->get();
-        $author = $this->author->get();
-        return view('pages.author.index', compact('news', 'news_status', 'subCategories', 'author','category'));
+        $authors = $this->author->get();
+
+        return view('pages.author.index', compact('news', 'news_status', 'subCategories', 'category', 'authors'));
     }
 
     public function profilestatus()
@@ -126,8 +134,22 @@ class ProfileController extends Controller
     }
 
     public function profileupdate(){
-        $author = $this->author->get();
-        return view('pages.author.profile.update', compact('author'));
+        return view('pages.author.profile.update');
+    }
+
+    public function updateprofile(User $user, RegisterRequest $registerRequest){
+        $this->user->update($user->id, $registerRequest->validated());
+        return back();
+    }
+
+    public function changepassword(User $user, RegisterRequest $registerRequest){
+        if (!Hash::check($registerRequest->old_password, auth()->user()->password)) {
+            throw ValidationException::withMessages(['old_password' => 'Password lama tidak sesuai.']);
+            return redirect()->back()->with('failed', trans('alert.password_failed'));
+        }
+
+        $this->user->update($user->id, $registerRequest->validated());
+        return redirect()->back()->with('success', trans('alert.password_updated'));
     }
 
     /**

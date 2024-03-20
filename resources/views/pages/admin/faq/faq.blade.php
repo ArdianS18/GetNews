@@ -17,7 +17,7 @@
             <div>
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
+                        <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
                     </div>
@@ -166,8 +166,20 @@
         </div>
     </div>
 
+    <div class="page d-flex mt-4">
+        <div class="container">
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{{ $faqs->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                @for ($i = 1; $i <= $faqs->lastPage(); $i++)
+                <a href="{{ $faqs->url($i) }}" class="btn btn-black {{ $faqs->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+                <a href="{{ $faqs->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
+            </div>
+        </div>
+    </div>
+
     <x-delete-modal-component />
-    
+
 @endsection
 @section('script')
     <script>

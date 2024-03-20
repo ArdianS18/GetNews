@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\FaqInterface;
 use App\Models\Faq;
 use App\Models\News;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class FaqRepository extends BaseRepository implements FaqInterface
 {
@@ -28,6 +29,14 @@ class FaqRepository extends BaseRepository implements FaqInterface
         ->delete();
     }
 
+
+    public function paginate(): mixed
+    {
+        return $this->model->query()
+            ->latest()
+            ->paginate(5);
+    }
+
     /**
      * Handle get the specified data by id from models.
      *
@@ -38,6 +47,11 @@ class FaqRepository extends BaseRepository implements FaqInterface
     public function show(mixed $id): mixed
     {
 
+    }
+
+    public function search(mixed $query): mixed
+    {
+        return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
     }
 
     /**

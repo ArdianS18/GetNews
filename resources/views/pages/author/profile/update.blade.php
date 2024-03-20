@@ -1,6 +1,22 @@
 @extends('layouts.author.sidebar')
 
 @section('content')
+    @if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ $error }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endforeach
+    @endif
+
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{session('success') }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="">
         <div class="">
             <div class="tab-content" id="pills-tabContent">
@@ -15,9 +31,14 @@
                                     <div class="text-center">
                                         <img src="{{asset(Auth::user()->photo ? "storage/".Auth::user()->photo : "default.png") }}" alt=""
                                             class="img-fluid rounded-circle" width="120" height="120">
-                                        <div class="d-flex align-items-center justify-content-center my-4 gap-3">
-                                            <button class="btn btn-primary">Upload</button>
-                                        </div>
+                                            <form method="POST" action="{{ route('update-photo', ['user' => auth()->user()->id]) }}" id="upload-photo" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="d-flex align-items-center justify-content-center my-4 gap-3">
+                                                    <input type="file" style="display: none" name="photo" id="photo">
+                                                    <button class="btn btn-primary btn-upload" type="button" id="btn-upload">Upload</button>
+                                                    <button type="submit" style="display: none" id="submit-button">Save</button>
+                                                </div>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -28,21 +49,29 @@
                                     <h5 class="card-title fw-semibold">Ganti Password</h5>
                                     <p class="card-subtitle mb-4">Untuk mengubah kata sandi Anda, silakan konfirmasi di sini
                                     </p>
-                                    <form>
+                                    <form action="{{ route('change.password.profile', ['user' => auth()->user()->id]) }}" method="POST">
+                                        @method('post')
+                                        @csrf
                                         <div class="mb-4">
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Password
                                                 Lama</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <input type="password" name="old_password" class="form-control" id="exampleInputPassword1">
                                         </div>
                                         <div class="mb-4">
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Password
                                                 Baru</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                                         </div>
                                         <div class="">
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Konfirmasi
                                                 Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1">
+                                            <input type="password" name="confirm_passwrod" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
+                                                <button class="btn btn-primary">Save</button>
+                                                <button class="btn btn-light-danger text-danger">Cancel</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -54,20 +83,22 @@
                                     <h5 class="card-title fw-semibold">Biodata</h5>
                                     <p class="card-subtitle mb-4">Untuk mengubah detail pribadi Anda, edit dan simpan dari
                                         sini</p>
-                                    <form>
+                                    <form action="{{ route('update.author.profile', ['user' => auth()->user()->id]) }}" method="POST">
+                                        @method('post')
+                                        @csrf
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="mb-4">
                                                     <label for="exampleInputPassword1" class="form-label fw-semibold">Nama
                                                         Anda</label>
                                                     <input type="text" class="form-control"
-                                                        value="{{ Auth::user()->name }}" id="exampleInputtext">
+                                                        value="{{ auth()->user()->name }}" name="name" id="exampleInputtext">
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="exampleInputPassword1"
                                                         class="form-label fw-semibold">Email</label>
                                                     <input type="email" class="form-control" id="exampleInputtext"
-                                                        value="{{ Auth::user()->email }}" placeholder="Masukan Email Anda">
+                                                        value="{{ auth()->user()->email }}" name="email" placeholder="Masukan Email Anda">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -75,19 +106,19 @@
                                                     <label for="exampleInputPassword1" class="form-label fw-semibold">No
                                                         Telephone</label>
                                                     <input type="text" class="form-control" id="exampleInputtext"
-                                                        value="{{ Auth::user()->phone_number }}">
+                                                        value="{{ auth()->user()->phone_number }}" name="phone_number">
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="exampleInputPassword1"
                                                         class="form-label fw-semibold">Tanggal Lahir</label>
-                                                    <input type="date" class="form-control" id="exampleInputtext">
+                                                    <input type="date" value="{{ auth()->user()->date }}" class="form-control" id="exampleInputtext">
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="">
                                                     <label for="exampleInputPassword1"
                                                         class="form-label fw-semibold">Address</label>
-                                                    <textarea type="text" class="form-control" id="exampleInputtext" placeholder="814 Howard Street, 120065, India"> </textarea>
+                                                    <textarea type="text" class="form-control" name="address" id="exampleInputtext" placeholder="814 Howard Street, 120065, India" style="resize: none">{{ auth()->user()->address }}</textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -103,7 +134,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-notifications" role="tabpanel"
+
+                {{-- <div class="tab-pane fade" id="pills-notifications" role="tabpanel"
                     aria-labelledby="pills-notifications-tab" tabindex="0">
                     <div class="row justify-content-center">
                         <div class="col-lg-9">
@@ -483,7 +515,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

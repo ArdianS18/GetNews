@@ -19,7 +19,7 @@
             top: 8px;
             right: 16px;
             margin-top: 70px;
-        }        
+        }
     </style>
 @endsection
 
@@ -150,7 +150,7 @@
             </div>
 
             <div class="mt-4 d-flex justify-content-center align-items-center">
-    
+
                 <div class="">
                     {{-- <button class="btn btn-sm text-white" style="background-color: #175A95; padding-left: 1.5rem; padding-right: 1.5rem;">Upload</button> --}}
                 </div>

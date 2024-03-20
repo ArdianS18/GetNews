@@ -31,6 +31,14 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             ->paginate(5);
     }
 
+    public function showWithSlug(string $slug): mixed
+    {
+        return $this->model->query()
+            ->where(['slug' => $slug])
+            ->with(['category'])
+            ->firstOrFail();
+    }
+
 
     /**
      * Handle show method and delete data instantly from models.

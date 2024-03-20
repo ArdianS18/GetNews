@@ -25,7 +25,7 @@
 
                     <div class="position-relative">
                         <div class="input-group">
-                            <input type="text" name="query" class="form-control search-chat py-2 px-5 ps-5"placeholder="Search">
+                            <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5"placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                             <button type="submit" class="btn" style="background-color: #DBDBDB;">Cari</button>
                         </div>
@@ -55,7 +55,6 @@
                     <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">No</th>
                     <th class="text-white" style="background-color: #175A95; ">Name</th>
                     <th class="text-white" style="background-color: #175A95; ">Email</th>
-                    <th class="text-white" style="background-color: #175A95; ">Status</th>
                     <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0">Actions</th>
                 </tr>
             </thead>
@@ -65,20 +64,8 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{ $author->user->name}}</td>
                     <td>{{ $author->user->email }}</td>
-                    <td>{{ $author->status }}</td>
                     <td>
                         <div class="d-flex">
-
-                            <!-- Detail Modal toggle -->
-                            {{-- <button class="btn btn-primary btn-detail me-2" data-id="{{ $author->id }}"
-                                data-name="{{ $user->name }}" data-nomor="{{ $user->nomor }}" data-nomor="{{ $user->nomor }}"
-                                data-email="{{ $user->email }}" data-cv="{{ $user->cv }}" data-password="{{ $user->password }}" data-alamat="{{ $user->alamat }}"
-                                id="btn-detail-{{ $user->id }}">
-                                Detail
-                            </button> --}}
-
-                            {{-- <button type="submit" name="status" class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#detail{{$user->id}}" value="approved">Detail</button> --}}
-
                             <button class="btn btn-sm btn-primary btn-detail me-2" style="background-color:#0F4D8A" data-id="{{ $author->id }}"
                                 data-name="{{ $author->user->name }}" data-nomor="{{ $author->user->phone_number }}"
                                 data-email="{{ $author->user->email }}" data-photo="{{ $author->user->photo }}" data-alamat="{{ $author->user->address }}"
@@ -173,259 +160,20 @@
     </div>
 </div>
 
-    <!-- Edit Modal -->
-    <div class="modal fade" id="modal-update" tabindex="-1"
-        aria-labelledby="modal-update Label" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="detailLabel"><span style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Tambah Akun</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row container">
-                    <div class="col-md-12 col-lg-12">
-                        profile
-                    </div>
-                    <div class="col-md-12 col-lg-6 mb-3">
-                        <label class="form-label" for="nomor">Nama</label>
-                        <input type="text" id="name" name="name" placeholder="nama"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mb-3">
-                        <label class="form-label" for="nomor">Nomor Telepon</label>
-                        <input type="text" id="name" name="name" placeholder="nomor telepon"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mb-3">
-                        <label class="form-label" for="nomor">Email</label>
-                        <input type="text" id="name" name="name" placeholder="email"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mb-3">
-                        <label class="form-label" for="nomor">CV</label>
-                        <input type="file" id="name" name="name" placeholder="name"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-
-                    </div>
-
-                    <div class="col-md-12 col-lg-6 mb-3">
-                        <label class="form-label" for="nomor">Password</label>
-                        <input type="text" id="name" name="name" placeholder="password"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-12 col-lg-12 from-group mb-3">
-                        <label class="form-label" for="nomor">Alamat</label>
-                        <textarea name="alamat" id="" rows="6" class="form-control"></textarea>
-                        {{-- <input type="text" id="name" name="name" placeholder="name"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                            <span class="invalid-feedback" role="alert" style="color: red;">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror --}}
-                    </div>
-                </div>
-                <!-- Modal body -->
-                <form method="post" id="form-update">
-                    @method('put')
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row container">
-
-                            <div class="col-md-12 col-lg-12 mb-4">
-                                <div class="d-flex justify-content-center">
-                                    <img src="{{ asset('assets/img/news/single-news-1.webp') }}" width="180" height="180" style="border-radius: 50%;" alt="photo">
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Nama</label>
-                                <input type="text" id="name" name="name" placeholder="nama"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Nomor Telepon</label>
-                                <input type="text" id="nomor" name="nomor" placeholder="nomor telepon"
-                                    value="{{ old('nomor') }}" class="form-control @error('nomor') is-invalid @enderror">
-                                @error('nomor')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Email</label>
-                                <input type="text" id="email" name="email" placeholder="email"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Password</label>
-                                <input type="text" id="password" name="password" placeholder="password"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-12 from-group mb-3">
-                                <label class="form-label" for="alamat">Alamat</label>
-                                <textarea name="alamat" id="" rows="6" class="form-control">{{old('alamat')}}</textarea>
-                                {{-- <input type="text" id="name" name="name" placeholder="name"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        {{-- <button type="submit" class="btn btn-primary">Simpan</button> --}}
-                    </div>
-                </form>
-            </div>
+{{-- <div class="page d-flex mt-4">
+    <div class="container">
+        <div class="d-flex justify-content-end gap-2">
+            <a href="{{ $authors->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+            @for ($i = 1; $i <= $faqs->lastPage(); $i++)
+            <a href="{{ $authors->url($i) }}" class="btn btn-black {{ $faqs->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+            @endfor
+            <a href="{{ $authors->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
         </div>
     </div>
-    <x-delete-modal-component />
+</div> --}}
 
+<x-delete-modal-component />
 
-
-    <!-- Detail Modal -->
-    <div class="modal fade" id="modal-detail" tabindex="-1"
-        aria-labelledby="modal-detail Label" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- Modal content -->
-                <div class="modal-header">
-                    <h3 class="modal-title">Detail data User</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <form method="post" id="form-detail">
-                    @method('put')
-                    @csrf
-                    <div class="modal-body">
-                        <div class="row container">
-
-                            <div class="col-md-12 col-lg-12 mb-4">
-                                <div class="d-flex justify-content-center">
-                                    <img src="{{ asset('assets/img/news/single-news-1.webp') }}" width="180" height="180" style="border-radius: 50%;" alt="photo">
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Nama</label>
-                                <input type="text" id="name" name="name" placeholder="nama"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Nomor Telepon</label>
-                                <input type="text" id="nomor" name="nomor" placeholder="nomor telepon"
-                                    value="{{ old('nomor') }}" class="form-control @error('nomor') is-invalid @enderror">
-                                @error('nomor')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Email</label>
-                                <input type="text" id="email" name="email" placeholder="email"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <label class="form-label" for="nomor">Password</label>
-                                <input type="text" id="password" name="password" placeholder="password"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-12 col-lg-12 from-group mb-3">
-                                <label class="form-label" for="alamat">Alamat</label>
-                                <textarea name="alamat" id="" rows="6" class="form-control">{{old('alamat')}}</textarea>
-                                {{-- <input type="text" id="name" name="name" placeholder="name"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror --}}
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        {{-- <button type="submit" class="btn btn-primary">Simpan</button> --}}
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <x-delete-modal-component />
 
 
 
