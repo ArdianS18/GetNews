@@ -29,7 +29,7 @@
         <div class="card-profile">
             <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="180px" style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">
             <div class="top-right">
-                <button class="btn btn-sm px-4 py-1 text-white m-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}" style="background-color: #175A95;">Daftar Jadi Penulis</button>
+                <button class="btn btn-sm px-4 py-1 text-white m-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #175A95;">Daftar Jadi Penulis</button>
             </div>
             <div class="row align-items-center">
               <div class="col-lg-12 mt-n3 order-lg-2">
@@ -164,7 +164,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -184,7 +184,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('script')
 

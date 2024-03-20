@@ -253,7 +253,5 @@ Route::get('admin-inbox', function(){
 Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
 Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
 
-// Route::get('user-author', function(){
-//     return view('pages.user.author.index');
-// })->name('user.author-user');
+Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user')
 ?>

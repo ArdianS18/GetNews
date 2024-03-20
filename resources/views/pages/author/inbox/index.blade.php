@@ -115,7 +115,7 @@
         </div>
 
         <div class="col-md-12 col-lg-6 mb-2">
-            <div class="mb-4">
+<div class="mb-4">
                 <div class="card-body">
                     <div class="d-flex card-profile">
                         <div class="">
