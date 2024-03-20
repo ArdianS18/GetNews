@@ -63,8 +63,8 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function showWithSlug(string $slug): mixed
     {
         return $this->model->query()
-            ->where(['slug' => $slug, 'status' => CategoryStatusEnum::PUBLISHED->value])
-            ->with(['category', 'user'])
+            ->where(['slug' => $slug])
+            ->with(['news'])
             ->firstOrFail();
     }
 

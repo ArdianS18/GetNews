@@ -39,6 +39,13 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             ->firstOrFail();
     }
 
+    public function where(mixed $id): mixed
+    {
+        return $this->model->query()
+            ->where('category_id', $id)
+            ->get();
+    }
+
 
     /**
      * Handle show method and delete data instantly from models.

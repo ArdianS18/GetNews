@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="col-lg-12">
+    <div class="breadcrumb-wrap">
+        <h2 class="breadcrumb-title">{{ $category->name }}</h2>
+        <ul class="breadcrumb-menu list-style">
+            <li><a href="index.html">Home</a></li>
+            <li>Kategori {{ $category->name }}</li>
+        </ul>
+    </div>
+</div>
+
 <div class="">
     <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -14,22 +24,13 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="breadcrumb-wrap">
-        <div class="container">
-            <h2 class="breadcrumb-title">Kesehatan</h2>
-            <ul class="breadcrumb-menu list-style">
-                <li><a href="index.html">Home</a></li>
-                <li>Kategori Kesehatan</li>
-            </ul>
-        </div>
-    </div>
-
-
+<div class="container gp-5">
+<div class="d-flex mt-5 gap-5">
 <div class="sports-wrap ptb-100">
-<div class="container">
 <div class="row gx-55 gx-5">
-<div class="col-lg-8">
+<div class="col-lg-12">
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="news-card-thirteen">
@@ -151,15 +152,16 @@
             </div>
         </div>
     </div>
-
 </div>
-    <ul class="page-nav list-style text-center mt-20">
-        <li><a href="kesehatan.html"><i class="flaticon-arrow-left"></i></a></li>
-        <li><a class="active" href="kesehatan.html">01</a></li>
-        <li><a href="kesehatan.html">02</a></li>
-        <li><a href="kesehatan.html">03</a></li>
-        <li><a href="kesehatan.html"><i class="flaticon-arrow-right"></i></a></li>
-    </ul>
+</div>
+</div>
+<ul class="page-nav list-style text-center mt-20">
+    <li><a href="kesehatan.html"><i class="flaticon-arrow-left"></i></a></li>
+    <li><a class="active" href="kesehatan.html">01</a></li>
+    <li><a href="kesehatan.html">02</a></li>
+    <li><a href="kesehatan.html">03</a></li>
+    <li><a href="kesehatan.html"><i class="flaticon-arrow-right"></i></a></li>
+</ul>
 </div>
 <div class="col-lg-4">
 <div class="sidebar">
@@ -190,7 +192,6 @@
                     alt="Image">Trending<span>(4)</span></a></li>
     </ul>
 </div>
-
 <div class="sidebar-widget">
     <h3 class="sidebar-widget-title">Berita Popular</h3>
     <div class="pp-post-wrap">
@@ -376,6 +377,8 @@
 <div class="sidebar-widget" style="height: 700px">
     <h3 class="sidebar-widget-title">iklan</h3>
 </div>
-
+</div>
+</div>
+</div>
 </div>
 @endsection

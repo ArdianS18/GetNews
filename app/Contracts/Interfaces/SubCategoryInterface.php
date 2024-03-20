@@ -9,8 +9,9 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
+use App\Contracts\Interfaces\Eloquent\WhereInterface;
 
-interface SubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, ShowSlugInterface
+interface SubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, ShowSlugInterface, WhereInterface
 {
 
 }
