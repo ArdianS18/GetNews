@@ -72,7 +72,8 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        // $subCategory = $this->subCategory->showWithSlug($slug);s
+        // $subCategory = $this->subCategory->showWithSlug($slug);
+
         $request->merge([
             'category_id' => $category->id
         ]);

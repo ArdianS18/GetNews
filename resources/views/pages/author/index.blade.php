@@ -62,7 +62,7 @@
               <div class="card-body p-0">
                 <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="200px" style="border-radius:10px;" alt="" class="img-fluid">
                 <div class="top-right">
-                  <a href="{{ route('profile.autor.update') }}">
+                  <a href="{{ route('profile.author.update') }}">
                     <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
                   </a>
                 </div>
@@ -162,7 +162,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="me-2" width="20" height="20" viewBox="0 0 24 24"><g fill="none"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 3c2.314 0 4.456.408 6.058 1.109c.799.35 1.509.792 2.032 1.334c.485.5.845 1.128.902 1.856L21 7.5v10c0 .814-.381 1.51-.91 2.057c-.523.542-1.233.984-2.032 1.334C16.456 21.591 14.314 22 12 22c-2.314 0-4.456-.408-6.058-1.109c-.799-.35-1.509-.792-2.032-1.334c-.485-.5-.845-1.128-.902-1.856L3 17.5v-10c0-.814.381-1.51.91-2.057c.523-.542 1.233-.984 2.032-1.334C7.544 3.409 9.686 3 12 3m7 12.407a8.13 8.13 0 0 1-.942.484C16.456 16.591 14.314 17 12 17c-2.314 0-4.456-.408-6.058-1.109A8.122 8.122 0 0 1 5 15.407V17.5c0 .152.066.376.348.667c.286.296.748.608 1.396.892C8.038 19.625 9.895 20 12 20c2.105 0 3.962-.375 5.256-.941c.648-.284 1.11-.596 1.396-.892c.282-.29.348-.515.348-.667zm0-5a8.13 8.13 0 0 1-.942.484C16.456 11.591 14.314 12 12 12c-2.314 0-4.456-.408-6.058-1.109A8.122 8.122 0 0 1 5 10.407V12.5c0 .152.066.376.348.667c.286.296.748.608 1.396.892C8.038 14.625 9.895 15 12 15c2.105 0 3.962-.375 5.256-.941c.648-.284 1.11-.596 1.396-.892c.282-.29.348-.515.348-.667zM12 5c-2.105 0-3.962.375-5.256.941c-.648.284-1.11.596-1.396.892c-.282.29-.348.515-.348.667c0 .152.066.376.348.667c.286.296.748.608 1.396.892C8.038 9.625 9.895 10 12 10c2.105 0 3.962-.375 5.256-.941c.648-.284 1.11-.596 1.396-.892c.282-.29.348-.515.348-.667c0-.152-.066-.376-.348-.667c-.286-.296-.748-.608-1.396-.892C15.962 5.375 14.105 5 12 5"/></g></svg>
                   <span class="d-none d-md-block">Pendapatan</span>
                   </button>
-                </li>                
+                </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="true">
                     <i class="ti ti-user-circle me-2 fs-6"></i>
@@ -200,9 +200,8 @@
               </div>
 
               <!-- Row -->
-              <div class="">
+              <div class="row">
                 @forelse ($news as $news)
-                <div class="row">
                   <div class="col-lg-6 col-md-12 mb-5">
                     <div class="">
                       <div class="row">
@@ -231,7 +230,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
                 @empty
                   <div class="col-md-12 col-lg-12">
                       <div class="d-flex justify-content-center">
@@ -380,7 +378,7 @@
                 <div class="col-md-12 col-lg-12 mb-4">
                   <label class="form-label" for="email">Alamat</label>
                   <textarea name="alamat" class="form-control" id="" cols="30" rows="10"></textarea>
-                    
+
                 </div>
               </div>
             </div>

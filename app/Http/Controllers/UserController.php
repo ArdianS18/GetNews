@@ -45,8 +45,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request, User $user)
     {
-        $data = $this->userPhoto->store($request);
-         $this->user->update($user->id, $data);
+        $data = $this->userPhoto->store($request, $user);
+        $this->user->update($user->id, $data);
         return back();
     }
 

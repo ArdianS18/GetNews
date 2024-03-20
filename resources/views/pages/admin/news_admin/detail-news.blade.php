@@ -72,12 +72,12 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                        <div class="col-lg-6 col-md-12 row-span-1 from-outline mt-5">
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar</label>
                                 <div class="d-flex gap-2">
                                     @foreach ($newsPhoto as $photo)
-                                    <img width="350px" src="{{ asset('storage/' . $photo->multi_photo) }}" alt="{{ $photo->multi_photo }}">
+                                    <img width="320 px" src="{{ asset('storage/' . $photo->multi_photo) }}" alt="{{ $photo->multi_photo }}">
                                     @endforeach
                                 </div>
                             </div>
@@ -89,14 +89,22 @@
 
                     <div class="d-flex justify-content-start gap-2">
 
-                        <button type="submit" class="btn btn-success btn-lg px-3" style="padding-left">Simpan</button>
-
+                        @if ($news->status === "panding")
+                        <div>
+                            <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                        </div>
+                        @else
+                        <div>
+                            <a href="{{ route('list.approved') }}" class="btn btn-lg px-3 text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                        </div>
+                        @endif
                     </div>
 
-                    
-
-                    @if ($news->status === "panding")
                     <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success btn-lg px-3" style="padding-left">Simpan</button>
+
+                        @if ($news->status === "panding")
+                        <div class="d-flex gap-2">
                         <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
                             @method('patch')
                             @csrf
@@ -114,7 +122,8 @@
                                 </div>
                             </a>
                         </div>
-                    @endif
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

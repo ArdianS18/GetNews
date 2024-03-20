@@ -73,11 +73,9 @@
                             @enderror
                         </div>
 
-
                         <div class="mt-2">
                             <label class="form-label" for="password_confirmation">Kategori</label>
-                            <select id="category_id"
-                                class="form-control select2 category @error('category_id') is-invalid @enderror"
+                                <select id="category_id" class="select2 form-control category @error('category_id') is-invalid @enderror"
                                 name="category_id" multiple="true" value="{{ old('category_id') }}"
                                 aria-label="Default select example">
                                 <option selected>pilih kategori</option>
@@ -86,12 +84,11 @@
                                 @endforeach
                             </select>
                             @error('category_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
-
 
                     </div>
 

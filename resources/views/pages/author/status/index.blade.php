@@ -33,9 +33,9 @@
 <div class="">
     <div class="tab-pane" id="status" role="tabpanel">
         <div class="">
-            
+
             @forelse ($news as $news)
-            <div class="news-card-a">
+            <div class="news-card-a mt-4">
 
                 <div class="row card-detail">
                     <div class="col-md-12 col-lg-3">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class=" col-md-12 col-lg-7">
-                        <div class="d-flex">
+                        <div class="d-flex  ">
 
                             <div class="order-md-1" style="margin-left:20px;">
                                 <h4>{{ $news->name }}</h4>

@@ -203,7 +203,7 @@
                               </div>
                             </div>
 
-                            <div class="chat-list chat active-chat" data-user-id="88">
+                            <div class="chat-list chat" data-user-id="88">
                                 <div class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
                                   <div class="d-flex align-items-center gap-2">
                                     <img src="{{asset('assets/img/usr1.svg')}}" alt="user8" width="48" height="48" class="rounded-circle" />

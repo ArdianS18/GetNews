@@ -108,8 +108,10 @@ Route::middleware(['auth','role:author'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
     Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
-    // 
-    Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.autor.update');
+    //
+    Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.author.update');
+    Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
+    Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
     // Update And Delete News
@@ -178,12 +180,12 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
 
 Route::middleware(['role:user'])->group(function () {
 
-    Route::post('photo-user/{user}', [UserController::class, 'store'])->name('photo.user');
 
     Route::get('profile-user/{user}', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
 });
 
+Route::post('photo/{user}', [UserController::class, 'store'])->name('update-photo');
 
 // ===> Contact
 
@@ -251,7 +253,5 @@ Route::get('admin-inbox', function(){
 Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
 Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
 
-// Route::get('user-author', function(){
-//     return view('pages.user.author.index');
-// })->name('user.author-user');
+Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user')
 ?>

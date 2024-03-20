@@ -69,7 +69,7 @@
             <div class="news-card-two">
                 <div class="news-card-img">
                     <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px" style="object-fit: cover;" alt="Image" />
-                    <a href="{{ route('categories.show',['category'=>$news->category->name]) }}" class="news-cat">{{ $news->category->name }}</a>
+                    <a href="{{ route('categories.show.user',['category'=>$news->category->name]) }}" class="news-cat">{{ $news->category->name }}</a>
                 </div>
                 <div class="news-card-info">
                     <h3><a href="{{ route('news.user',['news'=>$news->name,'page'=>"1"]) }}">{{ $news->name }}</a></h3>

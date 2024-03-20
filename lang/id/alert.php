@@ -24,6 +24,7 @@ return [
     'delete_failed' => 'Gagal menghapus data',
     'profile_updated' => 'Berhasil memperbarui profil',
     'password_updated' => 'Berhasil memperbarui password',
+    'password_failed' => 'Gagal mengubah password',
     'file_exist' => 'File berkas panduan telah tersedia di server. Silahkan ubah nama file',
     'contact_us_feedback' => 'Terimakasih atas masukan anda!',
     'checkout_success' => 'Invoice berhasil dibuat. Silahkan cek email anda',

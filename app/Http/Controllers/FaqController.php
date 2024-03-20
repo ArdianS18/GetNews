@@ -19,9 +19,16 @@ class FaqController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Faq $faq)
     {
-        $faqs = $this->faq->get();
+        $request->merge([
+            'question' => $faq->id,
+        ]);
+
+        $query = $request->input('search');
+        $searchTerm = $request->input('search', '');
+        $faqs = $query ? $this->faq->search($query) : $this->faq->paginate();
+        $faqs->appends(['search' => $searchTerm]);
         return view('pages.admin.faq.faq', compact('faqs'));
     }
 

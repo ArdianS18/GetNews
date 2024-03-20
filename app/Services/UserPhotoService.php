@@ -11,6 +11,7 @@ use App\Http\Requests\NewsUpdateRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\News;
 use App\Models\NewsPhoto;
+use App\Models\User;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
@@ -42,9 +43,14 @@ class UserPhotoService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(UserRequest $request)
+    public function store(UserRequest $request, User $user)
     {
         $data = $request->validated();
+
+        if ($data['photo']) {
+            $old_file = $user->photo;
+            $this->remove($old_file);
+        }
 
             if ($request->hasFile('photo')) {
                 $photo = $this->upload(UploadDiskEnum::USER_PHOTO->value, $request->file('photo'));
