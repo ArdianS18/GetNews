@@ -26,15 +26,25 @@ class LoginService
     {
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             if (auth()->user()->email_verified_at) {
-                if (auth()->user()->roles->pluck('name')[0] == 'user' || auth()->user()->roles->pluck('name')[0] == 'author') {
-                    return redirect('/');
-                } else if (auth()->user()->roles->pluck('name')[0] == 'admin' || auth()->user()->roles->pluck('name')[0] == 'super admin') {
-                    return redirect('dashboard');
-                }else{
-                    return redirect()->back();
+                $role = auth()->user()->roles->pluck('name')[0];
+                switch ($role) {
+                    case "user":
+                        return redirect('/');
+                        break;
+                    case "author":
+                        return redirect('/');
+                        break;
+                    case 'admin':
+                        return redirect('dashboard');
+                        break;
+                    default:
+                        return redirect()->back()->withErrors("Ada Yang Salah");
+                        break;
                 }
+            }else{
+                return redirect('login')->withErrors("Email anda belum di verifikasi silahkan cek inbox anda!!");
             }
-        }else{
+        } else {
             return redirect()->back()->withErrors(trans('auth.login_failed'))->withInput();
         }
     }

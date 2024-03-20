@@ -42,7 +42,7 @@
     <!-- --------------------------------------------------- -->
     <!-- Core Css -->
     <!-- --------------------------------------------------- -->
-    <link  id="themeColors"  rel="stylesheet" href="../../dist/css/style.min.css" />
+    <link  id="themeColors"  rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
 </head>
   <body>
 
@@ -62,7 +62,9 @@
               <div class="card-body p-0">
                 <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="200px" style="border-radius:10px;" alt="" class="img-fluid">
                 <div class="top-right">
-                  <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
+                  <a href="{{ route('profile.autor.update') }}">
+                    <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
+                  </a>
                 </div>
                 <div class="row align-items-center">
                   <div class="col-lg-5 order-lg-1 order-2">
