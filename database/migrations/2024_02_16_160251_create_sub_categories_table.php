@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug');
             $table->timestamps();
         });
     }

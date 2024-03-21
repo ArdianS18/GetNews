@@ -118,7 +118,8 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category): RedirectResponse
     {
-        $this->categori->update($category->id, $request->validated());
+        $data = $this->CategoryService->update($request, $category);
+        $this->categori->update($category->id, $data);
         return redirect()->back()->with('success', trans('alert.update_success'));
     }
 

@@ -86,7 +86,8 @@
                                                 <input class="form-control" type="text" name="name" value="{{ $sub->name }}">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-outline-primary">Edit</button>
+                                                <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                                                <button type="submit" style="background-color: #175A95;" class="btn text-white">Simpan</button>
                                             </div>
                                         </form>
                                     </div>
@@ -132,6 +133,7 @@
                         <label class="form-label mt-2">Kategori</label>
                         <input class="form-control @error('name') is-invalid @enderror" type="text" name="name">
                         <div class="modal-footer">
+                            <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-outline-primary">Buat data baru</button>
                         </div>
                     </div>

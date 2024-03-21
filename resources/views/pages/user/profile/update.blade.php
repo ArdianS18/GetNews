@@ -24,7 +24,6 @@
 @endsection
 
 @section('content')
-
     <div class="" >
         <div class="card-profile">
             <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="180px" style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">

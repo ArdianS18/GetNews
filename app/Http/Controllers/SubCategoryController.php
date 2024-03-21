@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Services\SubCategoryService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -14,10 +14,12 @@ class SubCategoryController extends Controller
 {
 
     private SubCategoryInterface $subCategory;
+    private SubCategoryService $subCategoryService;
 
-    public function __construct(SubCategoryInterface $subCategory)
+    public function __construct(SubCategoryInterface $subCategory, SubCategoryService $subCategoryService)
     {
         $this->subCategory = $subCategory;
+        $this->subCategoryService = $subCategoryService;
     }
 
 
@@ -29,20 +31,18 @@ class SubCategoryController extends Controller
 
     public function store(SubCategory $SubCategory , SubCategoryRequest $request , Category $category)
     {
-        $data = $request->validated();
+        $data = $this->subCategoryService->store($request);
         $data['category_id'] = $category->id;
         $this->subCategory->store($data);
 
         return back()->with('success', trans('alert.add_success'));
     }
 
-    
-
-
-    public function update(SubCategoryRequest $request, SubCategory $subcategory)
+    public function update(SubCategoryRequest $request, SubCategory $subCategory, Category $category)
     {
-        //
-        $this->subCategory->update($subcategory->id, $request->validated());
+        $data = $this->subCategoryService->update($request, $subCategory);
+        $data['category_id'] = $category->id;
+        $this->subCategory->update($subCategory->id, $data);
         return back()->with('success', trans('alert.update_success'));
     }
 

@@ -36,7 +36,21 @@
     </style>
 </head>
 
-<body style="background-color: #F6F6F6;>
+<body style="background-color: #F6F6F6;">
+
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <div class="switch-theme-mode">
+        <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider" />
+            <span class="slider round"></span>
+        </label>
+    </div>
+    
     <!-- Preloader -->
     <div class="preloader">
         <img src="{{ env('APP_LOGO') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />
