@@ -21,13 +21,12 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             $query->where('name', 'Like', '%'.$request->name.'%');
         })->when($request->category_id, function($query) use ($request){
             $query->where('category_id',$request->category_id);
-        })->get();
+        })->paginate(5);
     }
 
     public function paginate(): mixed
     {
         return $this->model->query()
-            ->latest()
             ->paginate(5);
     }
 

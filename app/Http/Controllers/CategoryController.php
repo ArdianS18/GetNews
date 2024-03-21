@@ -42,7 +42,6 @@ class CategoryController extends Controller
             return view('pages.admin.categories.index', compact('categoris'));
         }
 
-
         $categoris = $this->categori->paginate();
         return view('pages.admin.categories.index', compact('categoris'));
     }
@@ -78,8 +77,8 @@ class CategoryController extends Controller
             'category_id' => $category->id
         ]);
 
-        $query = $request->input('query');
-        $subCategory = $query ? $this->subCategory->search($query) : $this->subCategory->paginate();
+        // $query = $request->input('query');
+        $subCategory = $this->subCategory->search($request);
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
     }
 
