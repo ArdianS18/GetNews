@@ -60,7 +60,7 @@
           <div class="card overflow-hidden">
             <div class="card-profile">
               <div class="card-body p-0">
-                <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="200px" style="border-radius:10px;" alt="" class="img-fluid">
+                <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="150px" style="border-radius:10px;" alt="" class="img-fluid">
                 <div class="top-right">
                   <a href="{{ route('profile.author.update') }}">
                     <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
@@ -71,22 +71,22 @@
                     <div class="d-flex align-items-center justify-content-between m-4">
                       <div class="text-center">
                         <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-                        <h4 class="mb-0 fw-semibold lh-1">938</h4>
+                        <h5 class="mb-0 fw-semibold lh-1">938</h5>
                         <p class="mb-0 fs-4">Posts</p>
                       </div>
                       <div class="text-center">
                         <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                        <h4 class="mb-0 fw-semibold lh-1">3,586</h4>
+                        <h5 class="mb-0 fw-semibold lh-1">3,586</h5>
                         <p class="mb-0 fs-4">Followers</p>
                       </div>
                       <div class="text-center">
                         <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                        <h4 class="mb-0 fw-semibold lh-1">2,659</h4>
+                        <h5 class="mb-0 fw-semibold lh-1">2,659</h5>
                         <p class="mb-0 fs-4">Following</p>
                       </div>
                       <div class="text-center">
                           <i class="ti ti-thumb-up fs-6 d-block mb-2"></i>
-                          <h4 class="mb-0 fw-semibold lh-1">3.212</h4>
+                          <h5 class="mb-0 fw-semibold lh-1">3.212</h5>
                           <p class="mb-0 fs-4">Like</p>
                         </div>
                     </div>

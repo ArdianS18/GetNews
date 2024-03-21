@@ -179,10 +179,11 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
 });
 
 Route::middleware(['role:user'])->group(function () {
-
-
     Route::get('profile-user/{user}', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
+    Route::get('user-beranda', function(){
+        return view('pages.user.home');
+    })->name('user.home');
 });
 
 Route::post('photo/{user}', [UserController::class, 'store'])->name('update-photo');

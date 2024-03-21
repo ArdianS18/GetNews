@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\SubCategory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SubCategorySeeder extends Seeder
 {
@@ -83,6 +84,7 @@ class SubCategorySeeder extends Seeder
             SubCategory::create([
                 'category_id' => $subCategory['category_id'],
                 'name' => $subCategory['name'],
+                'slug' => Str::slug($subCategory['name']),
             ]);
         }
         

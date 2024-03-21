@@ -9,15 +9,16 @@ use App\Http\Requests\CategoryRequest;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
-use App\Models\Category;
+use App\Http\Requests\SubCategoryRequest;
 use App\Models\News;
 use App\Models\NewsPhoto;
+use App\Models\SubCategory;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
 use function Laravel\Prompts\multisearch;
 
-class CategoryService implements ShouldHandleFileUpload, CustomUploadValidation
+class SubCategoryService implements ShouldHandleFileUpload, CustomUploadValidation
 {
     use UploadTrait;
 
@@ -43,7 +44,7 @@ class CategoryService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(CategoryRequest $request)
+    public function store(SubCategoryRequest $request)
     {
         $data = $request->validated();
 
@@ -61,7 +62,7 @@ class CategoryService implements ShouldHandleFileUpload, CustomUploadValidation
      * @return array|bool
      */
 
-    public function update(CategoryRequest $request, Category $category): array|bool
+    public function update(SubCategoryRequest $request, SubCategory $subCategory): array|bool
     {
 
         $data = $request->validated();
