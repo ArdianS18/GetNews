@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\UploadDiskEnum;
 use App\Enums\UserStatusEnum;
+use App\Http\Requests\AuthorRequest;
 
 class RegisterService
 {
@@ -40,7 +41,7 @@ class RegisterService
 
     public function registerWithAdmin(RegisterRequest $request): array
     {
-        $data = $request->validated();
+        $datas = $request->validated();
 
         if ($request->hasFile('cv')) {
             $img = $request->file('cv');
@@ -48,11 +49,11 @@ class RegisterService
         }
 
         return [
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'phone_number' => $data['phone_number'],
-            'address' => $data['address'],
+            'name' => $datas['name'],
+            'email' => $datas['email'],
+            'password' => bcrypt($datas['password']),
+            'phone_number' => $datas['phone_number'],
+            'address' => $datas['address'],
             'cv' => $stored_image,
         ];
     }

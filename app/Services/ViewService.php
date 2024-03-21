@@ -48,7 +48,6 @@ class ViewService implements ShouldHandleFileUpload, CustomUploadValidation
         $data = $request->validated();
 
         return [
-            'user_id' => auth()->id(),
             'news_id' => $view->id,
         ];
     }

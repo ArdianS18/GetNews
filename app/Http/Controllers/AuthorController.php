@@ -49,7 +49,7 @@ class AuthorController extends Controller
         $search = $request->input('search');
         $status = $request->input('status');
 
-        $authors = $this->author->search($request)->where('status', 'panding');
+        $authors = $search ? $this->author->search($request)->where('status', 'panding') : $this->author->paginate();
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
@@ -132,8 +132,6 @@ class AuthorController extends Controller
             'cv' => $img,
             'status' => "approved"
         ]);
-
-
 
         return back();
     }

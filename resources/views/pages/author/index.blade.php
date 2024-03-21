@@ -200,7 +200,7 @@
               </div>
 
               <!-- Row -->
-              <div class="row">
+              {{-- <div class="row">
                 @forelse ($news as $news)
                   <div class="col-lg-6 col-md-12 mb-5">
                     <div class="">
@@ -208,13 +208,11 @@
                         <div class="col-md-12 col-lg-5">
                           <div>
                             <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt="">
-                            {{-- <img src="{{asset('assets/img/test.svg')}}" style="width: 100%; height: 100%;" class="img-fluid" height="160px" alt=""> --}}
                           </div>
                         </div>
                         <div class="col-md-12 col-lg-7 align-items-center">
                           <div>
                             <h5>{{ $news->name }}</h5>
-                            {{-- <p class="mt-2">{!! $news->content !!}</p> --}}
                           </div>
                           <div class="d-flex">
                             <div class="d-flex">
@@ -243,7 +241,7 @@
                   </div>
                 @endforelse
 
-              </div>
+              </div> --}}
               <!-- End Row -->
             </div>
             <div class="tab-pane fade card-detail" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">
@@ -280,7 +278,7 @@
                           <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
                       </tr>
                   </thead>
-                  <tbody>
+                  {{-- <tbody>
                       @forelse ($news_status as $news_status)
                           <tr>
                               <td>{{ $loop->iteration }}</td>
@@ -315,7 +313,7 @@
                               </td>
                           </tr>
                       @endforelse
-                  </tbody>
+                  </tbody> --}}
                 </table>
               </div>
               <!-- End Row -->

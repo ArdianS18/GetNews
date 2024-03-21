@@ -332,7 +332,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 
     <div class="row">
         <div class="col-md-4 col-sm-12">
@@ -628,7 +628,7 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>

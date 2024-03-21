@@ -157,25 +157,8 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about-us-user');
 
     Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
-    // Route::get('news-post', function(){
-    //     return view('pages.user.news.news');
-    // })->name('news.post');
-
-    // Route::get('author-detail', function(){
-    //     return view('pages.user.author.detail-author');
-    // })->name('author.detail');
 
     Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
-
-    // Route::get('privacy-policy', function(){
-    //     return view('pages.user.privacy-policy.index');
-    // })->name('privacy-policy');
-
-
-    // Route::get('author',function () {
-    //     return view('pages.user.author.index');
-    // })->name('author.index');
-
 });
 
 Route::middleware(['role:user'])->group(function () {
@@ -187,24 +170,6 @@ Route::middleware(['role:user'])->group(function () {
 });
 
 Route::post('photo/{user}', [UserController::class, 'store'])->name('update-photo');
-
-// ===> Contact
-
-
-//NewsHasLike
-
-//trending ke-?
-
-
-// Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-
-
-// contact us
-
-// Singgle Post
-// Route::get('news-singgle-post',function(){
-//     return view('pages.user.news.singlepost');
-// })->name('news.singgle-post');
 
 
 
@@ -221,8 +186,6 @@ Route::get('statistic', function(){
 Route::get('status', function(){
     return view('pages.author.status.index');
 })->name('status.author');
-
-Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 
 // Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
 

@@ -15,7 +15,6 @@ class ViewRequest extends FormRequest
     {
         return [
             'news_id' => 'required',
-            'user_id' => 'required',
         ];
     }
 }

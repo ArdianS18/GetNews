@@ -10,7 +10,7 @@ class View extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['news_id', 'user_id'];
+    protected $fillable = ['news_id'];
 
     /**
      * Get the news that owns the View
@@ -20,15 +20,5 @@ class View extends Model
     public function news(): BelongsTo
     {
         return $this->belongsTo(News::class);
-    }
-
-    /**
-     * Get the user that owns the View
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 }

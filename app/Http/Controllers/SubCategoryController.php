@@ -29,7 +29,7 @@ class SubCategoryController extends Controller
     }
 
 
-    public function store(SubCategory $SubCategory , SubCategoryRequest $request , Category $category)
+    public function store(SubCategoryRequest $request , Category $category)
     {
         $data = $this->subCategoryService->store($request);
         $data['category_id'] = $category->id;
