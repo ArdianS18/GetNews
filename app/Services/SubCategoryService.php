@@ -62,7 +62,7 @@ class SubCategoryService implements ShouldHandleFileUpload, CustomUploadValidati
      * @return array|bool
      */
 
-    public function update(SubCategoryRequest $request, SubCategory $subCategory): array|bool
+    public function update(SubCategoryRequest $request, SubCategory $subcategory): array|bool
     {
 
         $data = $request->validated();

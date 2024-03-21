@@ -38,11 +38,10 @@ class SubCategoryController extends Controller
         return back()->with('success', trans('alert.add_success'));
     }
 
-    public function update(SubCategoryRequest $request, SubCategory $subCategory, Category $category)
+    public function update(SubCategoryRequest $request, SubCategory $subcategory, Category $category)
     {
-        $data = $this->subCategoryService->update($request, $subCategory);
-        $data['category_id'] = $category->id;
-        $this->subCategory->update($subCategory->id, $data);
+        $data = $this->subCategoryService->update($request, $subcategory);
+        $this->subCategory->update($subcategory->id, $data);
         return back()->with('success', trans('alert.update_success'));
     }
 
