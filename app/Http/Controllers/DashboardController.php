@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\NewsInterface;
@@ -16,14 +17,17 @@ use Illuminate\View\View ;
 
 class DashboardController extends Controller
 {
-
+    private AuthorInterface $author;
+    private UserInterface $user;
     private CategoryInterface $category;
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
     private FaqInterface $faq;
 
-    public function __construct(NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
+    public function __construct(UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
     {
+        $this->user = $user;
+        $this->author = $author;
         $this->category = $category;
         $this->subCategory = $subCategory;
         $this->news = $news;
@@ -31,7 +35,10 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        return view('pages.admin.index');
+        $users = $this->user->get()->count();
+        $authors = $this->author->get()->count();
+        $news_count = $this->news->get()->count();
+        return view('pages.admin.index', compact('authors', 'users', 'news_count'));
     }
     public function home(){
         $news = $this->news->get();

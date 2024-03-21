@@ -112,7 +112,6 @@
                                     name="sub_category_id" multiple="true" value="{{ old('sub_category_id') }}"
                                     aria-label="Default select example">
                                     <option selected>pilih sub kategori</option>
-
                                 </select>
                                 @error('sub_category_id')
                                     <span class="invalid-feedback" role="alert">

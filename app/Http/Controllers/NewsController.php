@@ -141,18 +141,12 @@ class NewsController extends Controller
         $pages = str_split($content, 100000);
         $currentPage = $page-1;
 
-        // if (auth()->check()) {
-        //     $user_id = auth()->id();
-        // } else {
-        //     $user_id = '4aeeb642-9f34-331a-9b4e-a1f3ee9adf58';
-        // }
-
         $view = $this->view->store([
             'news_id' => $news->id,
-            'user_id' => auth()->id()
+            'created_at' => now()
         ],[
             'news_id' => $news->id,
-            'user_id' => auth()->id()
+            'created_at' => now()
         ]);
 
         $newsLike = $this->newsHasLike->where($news)->count();

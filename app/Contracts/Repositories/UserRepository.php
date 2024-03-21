@@ -29,6 +29,11 @@ class UserRepository extends BaseRepository implements UserInterface
         ->delete();
     }
 
+    public function whereRelation(): mixed
+    {
+        //
+    }
+
     /**
      * Handle get the specified data by id from models.
      *

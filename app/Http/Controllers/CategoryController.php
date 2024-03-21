@@ -96,11 +96,11 @@ class CategoryController extends Controller
      */
     public function getCategory(Category $category, Request $request) :JsonResponse
     {
-        $request->merge([
-            'category_id' => $category->id
-        ]);
+        // $request->merge([
+        //     'category_id' => $category->id
+        // ]);
 
-        $subCategory = $this->subCategory->search($request);
+        $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id);
         return ResponseHelper::success($subCategory,trans('alert.fetch_success'));
     }
 

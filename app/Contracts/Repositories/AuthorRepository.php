@@ -30,15 +30,18 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         })->when($request->status,function($query) use($request){
             $query->where('status','LIKE', '%'.$request->status.'%');
         })->when($request->user_id,function($query) use($request){
-            $query->where('user_id',$request->user_id);        })->paginate(5);
+            $query->where('user_id',$request->user_id);
+        })->get();
     }
 
     public function paginate(): mixed
     {
         return $this->model->query()
-            ->whereIn('status', 'panding')
-            ->latest()
-            ->paginate(5);
+        ->when(route('author.admin'), function($query){
+            $query->where('status', "panding");
+        })
+        ->latest()
+        ->paginate(5);
     }
 
     /**

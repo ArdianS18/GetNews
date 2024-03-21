@@ -157,8 +157,8 @@
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="nomor">Nomor Telepon</label>
                         <input type="text" id="name" name="phone_number" placeholder="nomor telepon"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
+                            value="{{ old('phone_number') }}" class="form-control @error('phone_number') is-invalid @enderror">
+                        @error('phone_number')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -167,9 +167,9 @@
 
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="nomor">Email</label>
-                        <input type="text" id="name" name="email" placeholder="email"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
+                        <input type="text" id="email" name="email" placeholder="email"
+                            value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                        @error('email')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -178,16 +178,16 @@
 
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="nomor">CV</label>
-                        <input type="file" id="name" name="cv" placeholder="name"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        <input type="file" id="cv" name="cv" placeholder="name"
+                            value="{{ old('cv') }}" class="form-control @error('cv') is-invalid @enderror">
 
                     </div>
 
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="nomor">Password</label>
-                        <input type="text" id="name" name="password" placeholder="password"
-                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
+                        <input type="text" id="password" name="password" placeholder="password"
+                            value="{{ old('password') }}" class="form-control @error('password') is-invalid @enderror">
+                        @error('password')
                             <span class="invalid-feedback" role="alert" style="color: red;">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -195,8 +195,8 @@
                     </div>
 
                     <div class="col-md-12 col-lg-12 from-group mb-3">
-                        <label class="form-label" for="nomor">Alamat</label>
-                        <textarea name="address" id="" rows="6" class="form-control"></textarea>
+                        <label class="form-label" for="address">Alamat</label>
+                        <textarea name="address" id="address" rows="6" class="form-control"></textarea>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 @extends('layouts.author.sidebar')
 
 @section('content')
-    @if ($errors->any())
+    {{-- @if ($errors->any())
     @foreach ($errors->all() as $error)
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{ $error }}</strong>
@@ -15,7 +15,7 @@
     <strong>{{session('success') }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    @endif
+    @endif --}}
 
     <div class="">
         <div class="">
@@ -69,7 +69,7 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
-                                                <button class="btn btn-primary">Save</button>
+                                                <button type="submit" class="btn btn-primary">Save</button>
                                                 <button class="btn btn-light-danger text-danger">Cancel</button>
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@
                                                 <div class="mb-4">
                                                     <label for="exampleInputPassword1"
                                                         class="form-label fw-semibold">Tanggal Lahir</label>
-                                                    <input type="date" value="{{ auth()->user()->date }}" class="form-control" id="exampleInputtext">
+                                                    <input type="date" value="{{ auth()->user()->birth_date }}" name="birth_date" class="form-control" id="exampleInputtext">
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -123,7 +123,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
-                                                    <button class="btn btn-primary">Save</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
                                                     <button class="btn btn-light-danger text-danger">Cancel</button>
                                                 </div>
                                             </div>
