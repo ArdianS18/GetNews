@@ -62,48 +62,47 @@
                         </div> --}}
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
-                        <div class="">
-                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
-                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
-                            @error('date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                            <div class="">
+                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                                <input type="date" id="upload_date" name="upload_date" placeholder="date"
+                                    value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                                @error('date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                        <div class="mt-2">
-                            <label class="form-label" for="password_confirmation">Kategori</label>
-                                <select id="category_id" class="select2 form-control category @error('category_id') is-invalid @enderror"
-                                name="category_id" multiple="true" value="{{ old('category_id') }}"
-                                aria-label="Default select example">
-                                <option selected>pilih kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('category_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                            <div class="mt-2">
+                                <label class="form-label" for="password_confirmation">Kategori</label>
+                                <select id="category_id"
+                                    class="select2 form-control category @error('category_id') is-invalid @enderror"
+                                    name="category_id" multiple="true" value="{{ old('category_id') }}"
+                                    aria-label="Default select example">
+                                    <option selected>pilih kategori</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                    </div>
+                        </div>
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 
 
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Tags</label>
-                                <input type="text" id="tags" name="tags" placeholder="tags"
-                                    value="{{ old('tags') }}" class="form-control @error('tags') is-invalid @enderror">
-                                @error('tags')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <select class="form-control select2 tags" multiple="multiple">
+                                    <option selected="selected">orange</option>
+                                    <option>white</option>
+                                    <option selected="selected">purple</option>
+                                </select>
                             </div>
 
                             <div class="mt-2" style="max-width: 100%;">
@@ -169,41 +168,47 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
+                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"
+                                    multiple>
                             </div>
 
                         </div>
 
                         <div class="d-flex justify-content-between mt-5">
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-md text-black m-2 d-flex justify-content-start"
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                class="btn btn-md text-black m-2 d-flex justify-content-start"
                                 style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
                                 Ketentuan & Persyaratan
                             </button>
 
                             <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-md text-black m-2"
-                                style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
-                                Simpan Draf
-                            </button>
-                            <button type="submit" class="btn btn-md text-white m-2"
-                                style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                Upload
-                            </button>
+                                <button type="button" class="btn btn-md text-black m-2"
+                                    style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
+                                    Simpan Draf
+                                </button>
+                                <button type="submit" class="btn btn-md text-white m-2"
+                                    style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
+                                    Upload
+                                </button>
                             </div>
                         </div>
-                        </div>
                     </div>
-                </form>
+            </div>
+            </form>
 
 
 
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"><span style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Ketentuan & Persyaratan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title" id="staticBackdropLabel"><span
+                                    style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Ketentuan
+                                & Persyaratan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <div class="container p-2">
@@ -219,7 +224,8 @@
                                     Berita harus faktual dan tidak memihak. <br>
                                     3. Keseimbangan
                                     Berita harus menyajikan informasi secara seimbang dan tidak memihak.
-                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya. <br>
+                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
+                                    pendapatnya. <br>
                                     4. Objektivitas
                                     Berita harus ditulis secara objektif dan tidak memihak.
                                     Penulis berita harus menghindari opini dan prasangka pribadi. <br>
@@ -233,7 +239,8 @@
                                     Berita harus faktual dan tidak memihak. <br>
                                     7. Keseimbangan
                                     Berita harus menyajikan informasi secara seimbang dan tidak memihak.
-                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya. <br>
+                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
+                                    pendapatnya. <br>
                                     8. Objektivitas
                                     Berita harus ditulis secara objektif dan tidak memihak.
                                     Penulis berita harus menghindari opini dan prasangka pribadi. <br>
@@ -250,7 +257,8 @@
                                     Berita harus faktual dan tidak memihak. <br>
                                     7. Keseimbangan
                                     Berita harus menyajikan informasi secara seimbang dan tidak memihak.
-                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya. <br>
+                                    Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
+                                    pendapatnya. <br>
                                     8. Objektivitas
                                     Berita harus ditulis secara objektif dan tidak memihak.
                                     Penulis berita harus menghindari opini dan prasangka pribadi. <br>
@@ -259,16 +267,16 @@
 
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                            {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
                         </div>
                     </div>
-                    </div>
                 </div>
-
-
             </div>
+
+
         </div>
+    </div>
     </div>
 @endsection
 
@@ -277,24 +285,23 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#content').summernote
-        ({
-            height: 200,
-            toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+    <script>
+        $(document).ready(function() {
+            $('#content').summernote({
+                height: 200,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
 
+            });
         });
-    });
-</script>
+    </script>
 
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 
@@ -312,15 +319,20 @@
                 url: "sub-category-detail/" + id,
                 method: "GET",
                 dataType: "JSON",
-                beforeSend:function(){
+                beforeSend: function() {
                     $('.sub-category').html('')
                 },
                 success: function(response) {
                     $.each(response.data, function(index, data) {
-                        $('.sub-category').append('<option value="' + data.id +'">' + data.name + '</option>');
+                        $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+                            '</option>');
                     });
                 }
             })
         }
+        $(".tags").select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        })
     </script>
 @endsection
