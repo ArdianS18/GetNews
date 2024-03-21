@@ -28,13 +28,11 @@
                     <li class="nav-item">
                             <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                             <ul class="dropdown-menu">
-                                {{-- @if ($subCategories === $category->id) --}}
                                     @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
                                     <li class="nav-item">
                                         <a href="business.html" class="nav-link">{{ $subCategory->name }}</a>
                                     </li>
                                     @endforeach
-                                {{-- @endif --}}
                             </ul>
                         </li>
                     @empty
@@ -42,25 +40,6 @@
                             <a href="javascript:void(0)" class="nav-link"> Tidak ada kategori yang ditampilkan </a>
                         </li>
                     @endforelse
-
-
-                    {{-- <li class="nav-item">
-                        <a href="javascript:void(0)" class="dropdown-toggle nav-link"> Pages </a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a href="about.html" class="nav-link"> About Us </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> Contact Us </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="author.html" class="nav-link"> Author </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link"> Privacy Policy </a>
-                            </li>
-                        </ul>
-                    </li> --}}
                 </ul>
 
                 <div class="others-option d-flex align-items-center" id="loginSection">
