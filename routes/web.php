@@ -160,7 +160,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
     Route::get('author-detail', [DashboardController::class, 'authordetail'])->name('author.detail');
 
-    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about-us-user');
+    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 
     Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
@@ -224,4 +224,10 @@ Route::get('admin-report', [ReportController::class, 'index'])->name('admin.repo
 Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
 
 Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+
+Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
+Route::get('confirm-password',function(){
+    return view('pages.auth.passwords.confirm');
+})->name('confirm.password');
 ?>

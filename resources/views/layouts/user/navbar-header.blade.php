@@ -4,7 +4,7 @@
             <div class="sidebar-toggler md-none" style="padding-left: 50px;" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <img src="{{asset('assets/img/logo-get-media.png')}}" width="150px" alt="Image" />
             </div>
-            <a class="navbar-brand d-lg-none" href="index.html">
+            <a class="navbar-brand d-lg-none" href="/">
                 <img class="logo-light" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
                 <img class="logo-dark" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
             </a>
@@ -13,24 +13,77 @@
             </button>
             <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <span class="burger-menu">
-                    <span class="top-bar"></span>
+                    <span 4class="top-bar"></span>
                     <span class="middle-bar"></span>
                     <span class="bottom-bar"></span>
                 </span>
             </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link active"> Beranda </a>
-                    </li>
+                    @foreach ($categories as $category)
+                        @if ($loop->iteration <= 7)
+                            <li class="nav-item">
+                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
+                                <ul class="dropdown-menu">
+                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                        <li class="nav-item">
+                                            <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @else
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="  nav-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
+                            </a>
+                            <ul class="dropdown-menu">
+                                @if ($loop->iteration >= 7)
+                                {{-- <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a> --}}
+                                @if($categories->count() > 7)
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    @for ($i = 7; $i < $categories->count(); $i++)
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-heading{{$i}}">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$i}}" aria-expanded="false" aria-controls="flush-collapse{{$i}}">
+                                                    {{$categories[$i]->name}}
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$i}}" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    @foreach ($categories[$i]->subCategories as $subCategory)
+                                                        <li class="nav-item">
+                                                            <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            @endif
+                            
+                                @endif
+                            </ul>
+                        </li>
+                     
+                            @break
+                        @endif
+                    @endforeach
 
-                    @forelse ($categories as $category)
+@empty($categories)
+    <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
+    </li>
+@endempty
+
+                    {{-- @forelse ($categories as $category)
                     <li class="nav-item">
                             <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                             <ul class="dropdown-menu">
                                     @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
                                     <li class="nav-item">
-                                        <a href="business.html" class="nav-link">{{ $subCategory->name }}</a>
+                                        <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                     </li>
                                     @endforeach
                             </ul>
@@ -39,7 +92,7 @@
                         <li class="nav-item">
                             <a href="javascript:void(0)" class="nav-link"> Tidak ada kategori yang ditampilkan </a>
                         </li>
-                    @endforelse
+                    @endforelse --}}
                 </ul>
 
                 <div class="others-option d-flex align-items-center" id="loginSection">

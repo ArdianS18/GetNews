@@ -254,6 +254,17 @@ class NewsController extends Controller
 
         return view('pages.user.news.category', compact('news','subCategories','categories','category', 'subCategory'));
     }
+
+    public function showSubCategories($slug){
+        $subCategory = $this->subCategory->showWithSlug($slug);
+        $categoryId = $subCategory->id;
+
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->get()->whereIn('category_id', $categoryId);
+
+        return view('pages.user.news.subcategory', compact('news','subCategories','categories','subCategory'));
+    }
     /**
      * Store a newly created resource in storage.
      */

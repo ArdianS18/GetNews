@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 @section('content')
-    <div class="container-fluid">
+    <div class="">
         <div class="trending-news-box">
             <div class="d-flex justify-content-center gap-2 mb-3">
                 <div class="trending-prev"><i class="flaticon-left-arrow"></i></div>
