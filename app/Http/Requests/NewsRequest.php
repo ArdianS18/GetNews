@@ -18,10 +18,13 @@ class NewsRequest extends FormRequest
             'multi_photo' => 'array|nullable',
             'multi_photo.*' => 'nullable',
             'content' => 'required',
-            'category_id' => 'required',
-            'tags' => 'required',
-            'upload_date' => 'required',
-            'sub_category_id' => 'required',
+            'category' => 'array|required',
+            'category.*' => 'required',
+            'sub_category' => 'array|required',
+            'sub_category.*' => 'required',
+            'tags' => 'array|required',
+            'tags.*' => 'required',
+            'upload_date' => 'required'
         ];
     }
 
@@ -32,10 +35,10 @@ class NewsRequest extends FormRequest
             'photo.required' => 'Foto tidak boleh kosong',
             'multi_photo.required' => 'Foto tidak boleh kosong',
             'content.required' => 'Konten tidak boleh kosong',
-            'category_id.required' => 'Kategori tidak boleh kosong',
+            'category.required' => 'Kategori tidak boleh kosong',
             'tags.required' => 'Tags tidak boleh kosong',
             'upload_date.required' => 'Tanggal tidak boleh kosong',
-            'sub_category_id.required' => 'Sub kategori tidak boleh kosong',
+            'sub_category.required' => 'Sub kategori tidak boleh kosong',
         ];
     }
 }

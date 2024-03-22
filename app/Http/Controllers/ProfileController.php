@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
+use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\Auth\RegisterRequest;
@@ -26,6 +30,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -35,10 +40,20 @@ class ProfileController extends Controller
     private SubCategoryInterface $subCategory;
     private NewsService $NewsService;
     private CategoryInterface $category;
-    private NewsPhotoInterface $newsPhoto;
+    private TagInterface $tag;
 
-    public function __construct(UserInterface $user, AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
+    private NewsPhotoInterface $newsPhoto;
+    private NewsCategoryInterface $newsCategory;
+    private NewsSubCategoryInterface $newsSubCategory;
+    private NewsTagInterface $newsTag;
+
+    public function __construct(TagInterface $tag, NewsTagInterface $newsTag, NewsSubCategoryInterface $newsSubCategory, NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
     {
+        $this->newsCategory = $newsCategory;
+        $this->newsTag = $newsTag;
+        $this->newsSubCategory = $newsSubCategory;
+
+        $this->tag = $tag;
         $this->user = $user;
         $this->news = $news;
         $this->author = $author;
@@ -81,6 +96,27 @@ class ProfileController extends Controller
 
         $data = $this->NewsService->store($request);
         $newsId = $this->news->store($data)->id;
+
+        foreach ($data['category'] as $category) {
+            $this->newsCategory->store([
+                'news_id' => $newsId,
+                'category_id' => $category
+            ]);
+        }
+
+        foreach ($data['sub_category'] as $subCategory) {
+            $this->newsSubCategory->store([
+                'news_id' => $newsId,
+                'sub_category_id' => $subCategory
+            ]);
+        }
+
+        foreach ($data['tags'] as $tagId) {
+            $this->newsTag->store([
+                'news_id' => $newsId,
+                'tag_id' => $tagId
+            ]);
+        }
 
         foreach ($data['multi_photo'] as $img) {
             $this->newsPhoto->store([

@@ -83,6 +83,7 @@ class AuthorController extends Controller
     {
         $data['status'] = UserStatusEnum::APPROVED->value;
         $data = $this->author->update($authorId, $data);
+
         return back();
     }
 

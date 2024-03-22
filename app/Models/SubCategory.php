@@ -33,4 +33,9 @@ public function category(): BelongsTo
     {
         return $this->hasMany(News::class);
     }
+
+    public function newsSubCategories(): HasMany
+    {
+        return $this->hasMany(NewsSubCategory::class);
+    }
 }

@@ -76,8 +76,8 @@
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
                                 <select id="category_id"
-                                    class="select2 form-control category @error('category_id') is-invalid @enderror"
-                                    name="category_id" multiple="true" value="{{ old('category_id') }}"
+                                    class="select2 form-control category @error('category') is-invalid @enderror"
+                                    name="category[]" multiple="true" value="{{ old('category') }}"
                                     aria-label="Default select example">
                                     <option selected>pilih kategori</option>
                                     @foreach ($categories as $category)
@@ -94,22 +94,21 @@
                         </div>
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
-
-
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Tags</label>
-                                <select class="form-control select2 tags" multiple="multiple">
-                                    <option selected="selected">orange</option>
-                                    <option>white</option>
-                                    <option selected="selected">purple</option>
+                                <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                                    <option>pilih tags</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="mt-2" style="max-width: 100%;">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
                                 <select id="sub_category_id"
-                                    class="form-control sub-category select2 @error('sub_category_id') is-invalid @enderror"
-                                    name="sub_category_id" multiple="true" value="{{ old('sub_category_id') }}"
+                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                    name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
                                     aria-label="Default select example">
                                     <option selected>pilih sub kategori</option>
                                 </select>
