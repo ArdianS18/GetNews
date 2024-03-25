@@ -16,7 +16,7 @@
             <div>
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5"
+                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
                             value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         <button type="submit" style="background-color: #C7C7C7;"
@@ -150,12 +150,24 @@
 @section('script')
     <script>
         get(1)
+        let debounceTimer;
+
+        $('#search-name').keyup(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
 
         function get(page) {
             $.ajax({
                 url: "{{ route('faq.index') }}",
                 method: 'Get',
                 dataType: "JSON",
+                data:{
+                    search:$('#search-name').val()
+                },
                 beforeSend: function() {
                     $('#data').html("")
                     $('#loading').html(showLoading())
@@ -248,7 +260,7 @@
             e.preventDefault()
             const id = $(this).data('id')
             $.ajax({
-                url: "faq/"+id,
+                url: "faq/" + id,
                 type: 'DELETE',
                 success: function(response) {
                     $('.preloader').fadeOut()
