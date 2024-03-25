@@ -71,7 +71,7 @@
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px"
                                     style="object-fit: cover;" alt="Image" />
-                                <a href="{{ route('categories.show.user', ['category' => $news->category->name]) }}"
+                                <a href="{{ route('categories.show.user', ['category' => $news->category->slug]) }}"
                                     class="news-cat">{{ $news->category->name }}</a>
                             </div>
                             <div class="news-card-info">
@@ -103,6 +103,7 @@
                             </div>
                         </div>
                     @endif
+                    
 
                 @empty
                 @endforelse
