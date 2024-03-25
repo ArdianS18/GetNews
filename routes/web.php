@@ -81,7 +81,10 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('option-editor-news/{news}', [NewsController::class, 'trending'])->name('news.option.editor');
     Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
     // ===> Faq
-    Route::get('faq-list', [FaqController::class, 'index'])->name('faq.index');
+    Route::get('faq-admin', [FaqController::class, 'index'])->name('faq.index');
+    Route::get('faq-list', function(){
+        return view('pages.admin.faq.faq');
+    })->name('faq.admin');
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');

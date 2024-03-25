@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class FaqRequest extends BaseRequest
+class FaqRequest extends ApiRequest
 {
     /**
      * Get the validation rules that apply to the request.

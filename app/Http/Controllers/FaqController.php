@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\FaqInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\FaqRequest;
+use App\Http\Resources\FaqResource;
 use App\Models\Faq;
 use Illuminate\Http\Request;
 
@@ -29,7 +31,8 @@ class FaqController extends Controller
         $searchTerm = $request->input('search', '');
         $faqs = $query ? $this->faq->search($query) : $this->faq->paginate();
         $faqs->appends(['search' => $searchTerm]);
-        return view('pages.admin.faq.faq', compact('faqs'));
+        $data = FaqResource::collection($faqs);
+        return ResponseHelper::success($data);
     }
 
     /**
@@ -38,7 +41,7 @@ class FaqController extends Controller
     public function store(FaqRequest $request)
     {
         $this->faq->store(($request->validated()));
-        return back()->with('success', 'berhasil menambah data');
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**
