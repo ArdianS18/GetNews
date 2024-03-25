@@ -134,9 +134,7 @@ class ProfileController extends Controller
         $this->news->update($news->id, $data);
 
         if ($request->hasFile('multi_photo')) {
-
             $newsPhoto->where('news_id', $news->id)->delete();
-
             foreach ($data['multi_photo'] as $photo) {
                 $newsPhoto->create([
                     'news_id' => $news->id,
@@ -165,9 +163,13 @@ class ProfileController extends Controller
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
+        $tags = $this->tag->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+        $newsTags = $this->newsTag->get();
+        $newsCategory = $this->newsCategory->get()->whereIn('news_id', $news);
+        $newsSubCategory = $this->newsSubCategory->get()->whereIn('news_id', $news);
 
-        return view('pages.author.news.update', compact('news','subCategories','categories','newsPhoto'));
+        return view('pages.author.news.update', compact('news','subCategories','categories','newsPhoto', 'tags', 'newsCategory', 'newsSubCategory', 'newsTags'));
     }
 
     public function profileupdate(){

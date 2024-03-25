@@ -28,8 +28,8 @@
                 </div>
 
                 <div>
-                    <div class="d-flex gap-2">
-                        {{-- <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search"> --}}
+                    {{-- <div class="d-flex gap-2">
+                        <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search">
                         <select name="status" class="form-select">
                             <option value="{{ request('status') }}">Pilih Status</option>
                             <option value="panding">Panding</option>
@@ -39,7 +39,7 @@
                             <option value="">Tampilkan semua</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+                    </div> --}}
                 </div>
             </form>
         </div>
@@ -76,7 +76,7 @@
                                     data-id="{{ $news->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5q0-.425.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5q0 .425-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8q-.425 0-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8q-.425 0-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>
                                     </button>
-                                    
+
 
                                     {{-- <button class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A" data-id="{{ $news->id }}"
                                         data-photo='"<img width="400px" src="{{ asset('storage/' . $news->photo) }}">"' data-name="{{ $news->user->name }}" data-title="{{ $news->name }}"
@@ -118,9 +118,22 @@
                 </tbody>
             </table>
         </div>
+
+        {{-- <div class="page d-flex mt-4">
+            <div class="container">
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ $news->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                    @for ($i = 1; $i <= $news->lastPage(); $i++)
+                    <a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @endfor
+                    <a href="{{ $news->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
+                </div>
+            </div>
+        </div> --}}
+
     </div>
 
-    <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label">
+    {{-- <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <!-- Modal content -->
@@ -215,7 +228,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @section('script')

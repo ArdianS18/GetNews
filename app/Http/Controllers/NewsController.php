@@ -74,11 +74,13 @@ class NewsController extends Controller
 
         $search = $request->input('search');
         $status = $request->input('status');
+        $searchTerm = $request->input('search', '');
 
-
-        $subCategories = $this->subCategory->get();
-        $news = $this->news->search($request)->whereIn('status', "panding");
-        return view('pages.admin.news_admin.index', compact('news','subCategories', 'search', 'status'));
+        // $subCategories = $this->subCategory->get();
+        $news = $this->news->whereIn("panding", false, $request);
+        // $news->appends(['search' => $searchTerm]);
+        // $news = $this->news->search($request)->whereIn('status', "panding");
+        return view('pages.admin.news_admin.index', compact('news', 'search', 'status'));
     }
 
     public function listapproved(Request $request, News $news)
@@ -91,30 +93,24 @@ class NewsController extends Controller
         $search = $request->input('search');
         $status = $request->input('status');
 
-        $subCategories = $this->subCategory->get();
-        $news = $this->news->search($request)->where('status', "active");
-        return view('pages.admin.news_admin.news-approve', compact('news','subCategories', 'search', 'status'));
+        $searchTerm = $request->input('search', '');
+
+        // $subCategories = $this->subCategory->get();
+        $news = $this->news->whereIn("active", false, $request);
+        // $news->appends(['search' => $searchTerm]);
+        // $news = $this->news->search($request)->where('status', "active");
+        return view('pages.admin.news_admin.news-approve', compact('news', 'search', 'status'));
     }
 
     public function detailnews($newsId)
     {
         $news = $this->news->where($newsId);
-        // $newsId = $news->id;
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $newsPhoto = $this->newsPhoto->where($news);
-        // dd($newsPhoto);
 
         return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
-
-        // $news = $this->news->get()->whereIn('slug', $slug);
-
-        // $subCategories = $this->subCategory->get();
-        // $categories = $this->category->get();
-        // $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
-
-        // return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
     }
 
     public function createnews()
@@ -161,10 +157,10 @@ class NewsController extends Controller
 
         return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'pages', 'currentPage'));
     }
+
     /**
      * Display a listing of the resource.
      */
-
     public function approved(News $news)
     {
         $data['status'] = NewsStatusEnum::ACTIVE->value;

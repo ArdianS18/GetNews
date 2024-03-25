@@ -18,6 +18,10 @@
 @endsection
 @section('content')
 
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
         @if ($errors->any())
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -36,11 +40,10 @@
 
         <div class="card-table shadow-sm">
             <div class="d-flex justify-content-between">
-                <form class="d-flex">
+                <form id="search-form" class="d-flex">
                     <div class="input-group">
                         <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" class="btn btn-outline-primary">Cari</button>
                     </div>
                 </form>
                 <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal" data-bs-target="#exampleModal"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
@@ -53,18 +56,13 @@
 
         <div class="card-table shadow-sm mt-4">
             <div class="table-border mb-3">
-                <table class="table text-center mb-3">
+                <table id="category-table" class="table text-center mb-3">
                     <thead>
                         <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;" >No</th>
                         <th class="text-white" style="background-color: #175A95;">Kategori</th>
                         <th class="text-white" style="background-color: #175A95;">Dipakai</th>
                         <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
                     </thead>
-
-                        {{-- @if (isset($message))
-
-                        @endif --}}
-
                     @forelse ($categoris as $category)
                     <tbody>
                         <tr>
@@ -133,6 +131,18 @@
                 </table>
             </div>
 
+            <div class="page d-flex mt-4">
+                <div class="container">
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ $categoris->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                        @for ($i = 1; $i <= $categoris->lastPage(); $i++)
+                        <a href="{{ $categoris->url($i) }}" class="btn btn-black {{ $categoris->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                        @endfor
+                        <a href="{{ $categoris->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 
@@ -155,18 +165,6 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="page d-flex mt-4">
-        <div class="container">
-            <div class="d-flex justify-content-end gap-2">
-                <a href="{{ $categoris->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
-                @for ($i = 1; $i <= $categoris->lastPage(); $i++)
-                <a href="{{ $categoris->url($i) }}" class="btn btn-black {{ $categoris->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                @endfor
-                <a href="{{ $categoris->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
             </div>
         </div>
     </div>

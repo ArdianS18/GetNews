@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    {{-- <div class="d-flex gap-2">
                         <select name="status" class="form-select">
                             <option value="{{ request('status') }}">Pilih Status</option>
                             <option value="panding">Panding</option>
@@ -39,7 +39,7 @@
                             <option value="">Tampilkan semua</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
             <div class="d-flex justify-content-end">
@@ -263,6 +263,18 @@
                         <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="page d-flex mt-4">
+        <div class="container">
+            <div class="d-flex justify-content-end gap-2">
+                <a href="{{ $authors->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                @for ($i = 1; $i <= $authors->lastPage(); $i++)
+                <a href="{{ $authors->url($i) }}" class="btn btn-black {{ $authors->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+                <a href="{{ $authors->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
             </div>
         </div>
     </div>

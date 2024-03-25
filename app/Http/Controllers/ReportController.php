@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReportController extends Controller
 {
@@ -46,7 +47,7 @@ class ReportController extends Controller
     }
 
 
-    public function report(Report $report){  
+    public function report(Report $report){
         $report = $this->report->get();
         $news = $this->news->get();
         return view('pages.user.news.index', compact('contactUs','news'));

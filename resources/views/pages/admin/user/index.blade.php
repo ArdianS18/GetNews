@@ -31,7 +31,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex gap-2">
+                    {{-- <div class="d-flex gap-2">
                         <select name="status" class="form-select">
                             <option value="{{ request('status') }}">Pilih Status</option>
                             <option value="panding">Panding</option>
@@ -40,7 +40,7 @@
                             <option value="">Tampilkan semua</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
         </div>

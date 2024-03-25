@@ -22,9 +22,17 @@ class TagController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Tag $tag)
     {
-        $tags = $this->tag->get();
+        $request->merge([
+            'name' => $tag->id,
+        ]);
+
+        $query = $request->input('search');
+        $searchTerm = $request->input('search', '');
+        $tags = $query ? $this->tag->search($query) : $this->tag->paginate();
+        $tags->appends(['search' => $searchTerm]);
+
         return view('pages.admin.tag.index', compact('tags'));
     }
 
@@ -77,6 +85,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $this->tag->delete($tag->id);
+        return back();
     }
 }
