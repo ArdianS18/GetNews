@@ -41,19 +41,20 @@ class RegisterService
 
     public function registerWithAdmin(RegisterRequest $request): array
     {
-        $datas = $request->validated();
-
+        $data = $request->validated();
+        
         if ($request->hasFile('cv')) {
             $img = $request->file('cv');
             $stored_image = $img->store(UploadDiskEnum::AUTHOR_CV->value , 'public');
         }
+        
 
         return [
-            'name' => $datas['name'],
-            'email' => $datas['email'],
-            'password' => bcrypt($datas['password']),
-            'phone_number' => $datas['phone_number'],
-            'address' => $datas['address'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'phone_number' => $data['phone_number'],
+            'address' => $data['address'],
             'cv' => $stored_image,
         ];
     }

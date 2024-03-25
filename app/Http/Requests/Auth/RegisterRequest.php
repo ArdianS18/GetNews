@@ -24,7 +24,7 @@ class RegisterRequest extends BaseRequest
             'phone_number' => 'required|numeric|min:15',
             'address' => 'required|string|max:255',
             'birth_date' => 'nullable|date',
-            'cv' => 'required|image|mimes:jpg,png,jpeg'
+            'cv' => 'nullable|image|mimes:jpg,png,jpeg'
         ];
     }
 
