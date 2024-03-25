@@ -33,4 +33,11 @@ public function news(): HasMany
     return $this->hasMany(News::class);
 }
 
+public function newsCategories(): HasMany
+{
+    return $this->hasMany(NewsCategory::class);
+}
+
+
+
 }

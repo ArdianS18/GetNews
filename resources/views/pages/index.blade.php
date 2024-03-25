@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 @section('content')
-    <div class="container-fluid">
+    <div class="">
         <div class="trending-news-box">
             <div class="d-flex justify-content-center gap-2 mb-3">
                 <div class="trending-prev"><i class="flaticon-left-arrow"></i></div>
@@ -65,7 +65,7 @@
     <div class="container-fluid pb-75">
         <div class="news-col-wrap">
             <div class="news-col-one">
-                @forelse ($news as $news)
+                {{-- @forelse ($news as $news)
                     @if ($loop->first)
                         <div class="news-card-two">
                             <div class="news-card-img">
@@ -98,7 +98,7 @@
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="news-by-date.html">{{ $news->created_at }}</a></li>
-                                    {{-- <li><i class="fi fi-rr-eye"></i>11 Min Read</li> --}}
+
                                 </ul>
                             </div>
                         </div>
@@ -106,7 +106,7 @@
                     
 
                 @empty
-                @endforelse
+                @endforelse --}}
 
                 <div class="news-card-three">
                     <div class="news-card-img">

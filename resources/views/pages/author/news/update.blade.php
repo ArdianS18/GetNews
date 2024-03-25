@@ -212,9 +212,9 @@
         /************************************/
       $(".summernote").summernote({
         height: 350,
-        minHeight: null, 
-        maxHeight: null, 
-        focus: false, 
+        minHeight: null,
+        maxHeight: null,
+        focus: false,
       });
       $(".inline-editor").summernote({
         airMode: false,

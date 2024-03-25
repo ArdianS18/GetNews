@@ -16,14 +16,14 @@ return new class extends Migration
             $table->foreignUuid('author_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('name');
             $table->text('photo');
-            $table->longText('content');    
+            $table->longText('content');
             $table->date('upload_date');
             $table->boolean('is_primary')->default(0);
-            $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->foreignId('sub_category_id')->nullable()->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            // $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            // $table->foreignId('sub_category_id')->nullable()->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('slug')->unique();
             $table->enum('status', ['active', 'nonactive', 'panding', 'primary'])->default('panding');
-            $table->string('tags');
+            // $table->string('tags');
             $table->timestamps();
         });
     }

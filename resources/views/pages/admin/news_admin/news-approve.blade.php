@@ -20,9 +20,10 @@
         <div class="d-flex gap-2 mb-3 mt-2">
             <form class="d-flex gap-2">
                 <div>
-                    <div class="position-relative d-flex">
-                    <input type="search" name="search" class="form-control search-chat py-2 ps-5" placeholder="Search" value="{{ request('search') }}">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        <button type="submit" class="btn btn-outline-primary">Cari</button>
                     </div>
                 </div>
 
@@ -108,7 +109,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <h4>Ups... Ada kesalahan!!!</h4>
+                                    <h4>Tidak ada data</h4>
                                 </div>
                                 {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
                             </td>

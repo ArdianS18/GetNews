@@ -8,6 +8,7 @@ use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Contracts\Repositories\NewsRepository;
@@ -38,14 +39,15 @@ class NewsController extends Controller
     private NewsPhotoInterface $newsPhoto;
     private NewsHasLikeInterface $newsHasLike;
     private ViewInterface $view;
-
+    private TagInterface $tags;
     private NewsService $NewsService;
     private $newsTrendingService;
 
     protected $newsRepositoty;
 
-    public function __construct(ViewInterface $view, NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
+    public function __construct(TagInterface $tags, ViewInterface $view, NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
     {
+        $this->tags = $tags;
         $this->news = $news;
         $this->view = $view;
         $this->newsPhoto = $newsPhoto;
@@ -117,10 +119,11 @@ class NewsController extends Controller
 
     public function createnews()
     {
+        $tags = $this->tags->get();
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $news = $this->news->get();
-        return view('pages.author.news.create', compact('news','subCategories','categories'));
+        return view('pages.author.news.create', compact('tags','news','subCategories','categories'));
     }
 
     /**
@@ -250,6 +253,17 @@ class NewsController extends Controller
         $news = $this->news->get()->whereIn('category_id', $categoryId);
 
         return view('pages.user.news.category', compact('news','subCategories','categories','category', 'subCategory'));
+    }
+
+    public function showSubCategories($slug){
+        $subCategory = $this->subCategory->showWithSlug($slug);
+        $categoryId = $subCategory->id;
+
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->get()->whereIn('category_id', $categoryId);
+
+        return view('pages.user.news.subcategory', compact('news','subCategories','categories','subCategory'));
     }
     /**
      * Store a newly created resource in storage.

@@ -10,6 +10,8 @@ use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Models\NewsPhoto;
+use App\Models\NewsTag;
+use App\Models\Tag;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
@@ -43,10 +45,23 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      */
     public function store(NewsRequest $request)
     {
+
         $data = $request->validated();
 
-        $multi_photo = [];
+        if ($request->has('tags')) {
+            $newTags = [];
+            foreach ($request->input('tags') as $tagName) {
+                $tag = Tag::firstOrCreate(
+                    ['name' => $tagName],
+                    ['slug' => Str::slug($tagName)]
+                );
+                $newTags[] = $tag->id;
+            }
 
+            $data['tags'] = $newTags;
+        }
+
+        $multi_photo = [];
             if ($request->hasFile('multi_photo')) {
                 foreach ($request->file('multi_photo') as $image) {
                     $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
@@ -63,10 +78,10 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'multi_photo' => $multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
-            'category_id' => $data['category_id'],
+            'category' => $data['category'],
+            'sub_category' => $data['sub_category'],
             'tags' => $data['tags'],
-            'upload_date' => $data['upload_date'],
-            'sub_category_id' => $data['sub_category_id'],
+            'upload_date' => $data['upload_date']
         ];
     }
 
@@ -82,6 +97,19 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     {
 
         $data = $request->validated();
+
+        if ($request->has('tags')) {
+            $newTags = [];
+            foreach ($request->input('tags') as $tagName) {
+                $tag = Tag::firstOrCreate(
+                    ['name' => $tagName],
+                    ['slug' => Str::slug($tagName)]
+                );
+                $newTags[] = $tag->id;
+            }
+
+            $data['tags'] = $newTags;
+        }
 
         $old_photo = $news->photo;
         $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();

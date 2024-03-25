@@ -3,15 +3,15 @@
         <div class="row text-white">
             <div class="col-lg-4">
                 <ul style="list-style-type: none;" class="p-4">
-                    <img src="{{asset('assets/img/logo-get-media.png')}}" width="150px" alt="Image" />
+                    <img src="{{asset('assets/img/logo-get-media.png')}}" width="200px" alt="Image" />
                     <li></li>
                     <li>
-                        <p class="copyright-text">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p>
+                        <p class="copyright-text mt-4" style="font-size: 20px">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p>
                     </li>
                     <li></li>
                     <li></li>
                 </ul>
-               
+
             </div>
 
             <div class="col-lg-2">

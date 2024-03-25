@@ -50,7 +50,7 @@
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
 
-    <div class="container-fluid">
+    <div class="ms-5 me-5">
     @yield('content')
     </div>
 

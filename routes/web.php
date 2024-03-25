@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -89,6 +90,11 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('contact', [ContactUsController::class, 'index'])->name('contact.index');
     Route::put('contact/{contact}', [ContactUsController::class, 'update'])->name('contact.update');
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
+
+    Route::get('list-tag', [TagController::class, 'index'])->name('tag.detail');
+    Route::post('create-tag', [TagController::class, 'store'])->name('tag.create');
+    Route::post('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
+    Route::delete('delete-tag/{tag}', [TagController::class, 'destroy'])->name('delete.tag');
 });
 
 
@@ -154,7 +160,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
     Route::get('author-detail', [DashboardController::class, 'authordetail'])->name('author.detail');
 
-    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about-us-user');
+    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 
     Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
@@ -217,5 +223,11 @@ Route::get('admin-inbox', function(){
 Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
 Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
 
-Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user')
+Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+
+Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
+Route::get('confirm-password',function(){
+    return view('pages.auth.passwords.confirm');
+})->name('confirm.password');
 ?>

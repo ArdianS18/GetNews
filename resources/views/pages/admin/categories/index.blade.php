@@ -38,7 +38,8 @@
             <div class="d-flex justify-content-between">
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="text" name="query" class="form-control" placeholder="Cari...">
+                        <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         <button type="submit" class="btn btn-outline-primary">Cari</button>
                     </div>
                 </form>
@@ -69,7 +70,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$category->name}}</td>
-                            <td>{{$category->news->count()}}</td>
+                            <td>{{$category->newsCategories->count()}}</td>
                             <td class="d-flex justify-content-center gap-2">
                                 <button type="button" class="btn text-white" style="background-color: #FFD643" data-bs-toggle="modal" data-bs-target="#editModal{{ $category->id }}"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 2 24 24">
                                         <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75z" />

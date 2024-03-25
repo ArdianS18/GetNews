@@ -34,21 +34,24 @@
 
         <div class="card-table shadow-sm">
             <div class="d-flex justify-content-between">
-                    <form class="d-flex">
-                        <div class="input-group">
-                            <input type="text" name="query" class="form-control" placeholder="Cari...">
-                            <button type="submit" class="btn btn-outline-primary">Cari</button>
-                        </div>
-                    </form>
+                <form class="d-flex">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        <button type="submit" class="btn btn-outline-primary">Cari</button>
+                    </div>
+                </form>
 
-                <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                        <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                    </svg>
-                    Tambah
-                </button>
+                <div class="">
+                    <a href="{{ route('categories.index') }}" class="btn text-white mr-2 me-2" style="background-color: #175A95">Kembali</a>
+                    <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                            <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                        </svg>
+                        Tambah
+                    </button>
+                </div>
             </div>
-
         </div>
 
 
@@ -143,10 +146,6 @@
     </div>
 
     <div class="page d-flex mt-4">
-
-        <div class="container">
-            <a href="{{ route('categories.index') }}" class="btn text-white mr-2" style="background-color: #175A95">Kembali</a>
-        </div>
 
         <div class="container">
             <div class="d-flex justify-content-end gap-2">

@@ -1,200 +1,135 @@
 @extends('layouts.user.sidebar')
 
-@section('style')
-    <style>
-        .card-profile{
-            border: 1px solid #ddd;
-            box-shadow: 0  5px 2px rgba(81, 81, 81, 0.1);
-            border-radius: 10px;
-            background-color: #fff;
-        }
-        .card-bio{
-            border: 1px solid #ddd;
-            box-shadow: 0  5px 2px rgba(81, 81, 81, 0.1);
-            border-radius: 10px;
-            background-color: #fff;
-        }
-        .top-right {
-            position: absolute;
-            top: 8px;
-            right: 16px;
-            margin-top: 70px;
-        }
-    </style>
-@endsection
-
 @section('content')
-    <div class="" >
-        <div class="card-profile">
-            <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="180px" style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">
-            <div class="top-right">
-                <button class="btn btn-sm px-4 py-1 text-white m-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #175A95;">Daftar Jadi Penulis</button>
-            </div>
-            <div class="row align-items-center">
-              <div class="col-lg-12 mt-n3 order-lg-2">
-                <div class="mt-n5">
-                  <div class="d-flex align-items-center justify-content-center mb-2">
-                    <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
-                      <div class="d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;";>
-                        <img src="{{asset('assets/img/profile.svg')}}" alt="" class="w-100 h-100">
-                      </div>
+    <div class="">
+        <div class="">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade active show" id="pills-account" role="tabpanel" aria-labelledby="pills-account-tab"
+                    tabindex="0">
+                    <div class="row">
+                        <div class="col-lg-6 d-flex align-items-stretch">
+                            <div class="card w-100 position-relative overflow-hidden">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title fw-semibold">Ganti Profile</h5>
+                                    <p class="card-subtitle mb-4">Ganti Foto Profile Anda Di Sini</p>
+                                    <div class="text-center">
+                                        <img src="{{asset(Auth::user()->photo ? "storage/".Auth::user()->photo : "default.png") }}" alt=""
+                                            class="img-fluid rounded-circle" width="120" height="120">
+                                            <form method="POST" action="{{ route('update-photo', ['user' => auth()->user()->id]) }}" id="upload-photo" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="d-flex align-items-center justify-content-center my-4 gap-3">
+                                                    <input type="file" style="display: none" name="photo" id="photo">
+                                                    <button class="btn btn-primary btn-upload" type="button" id="btn-upload">Upload</button>
+                                                    <button type="submit" style="display: none" id="submit-button">Save</button>
+                                                </div>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-stretch">
+                            <div class="card w-100 position-relative overflow-hidden">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title fw-semibold">Ganti Password</h5>
+                                    <p class="card-subtitle mb-4">Untuk mengubah kata sandi Anda, silakan konfirmasi di sini
+                                    </p>
+                                    <form action="{{ route('change.password.profile', ['user' => auth()->user()->id]) }}" method="POST">
+                                        @method('post')
+                                        @csrf
+                                        <div class="mb-4">
+                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Password
+                                                Lama</label>
+                                            <input type="password" name="old_password" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Password
+                                                Baru</label>
+                                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                        <div class="">
+                                            <label for="exampleInputPassword1" class="form-label fw-semibold">Konfirmasi
+                                                Password</label>
+                                            <input type="password" name="confirm_passwrod" class="form-control" id="exampleInputPassword1">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button class="btn btn-light-danger text-danger">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card w-100 position-relative overflow-hidden mb-0">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title fw-semibold">Biodata</h5>
+                                    <p class="card-subtitle mb-4">Untuk mengubah detail pribadi Anda, edit dan simpan dari
+                                        sini</p>
+                                    <form action="{{ route('update.author.profile', ['user' => auth()->user()->id]) }}" method="POST">
+                                        @method('post')
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="exampleInputPassword1" class="form-label fw-semibold">Nama
+                                                        Anda</label>
+                                                    <input type="text" class="form-control"
+                                                        value="{{ auth()->user()->name }}" name="name" id="exampleInputtext">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="exampleInputPassword1"
+                                                        class="form-label fw-semibold">Email</label>
+                                                    <input type="email" class="form-control" id="exampleInputtext"
+                                                        value="{{ auth()->user()->email }}" name="email" placeholder="Masukan Email Anda">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-4">
+                                                    <label for="exampleInputPassword1" class="form-label fw-semibold">No
+                                                        Telephone</label>
+                                                    <input type="text" class="form-control" id="exampleInputtext"
+                                                        value="{{ auth()->user()->phone_number }}" name="phone_number">
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="exampleInputPassword1"
+                                                        class="form-label fw-semibold">Tanggal Lahir</label>
+                                                    <input type="date" value="{{ auth()->user()->birth_date }}" name="birth_date" class="form-control" id="exampleInputtext">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="">
+                                                    <label for="exampleInputPassword1"
+                                                        class="form-label fw-semibold">Address</label>
+                                                    <textarea type="text" class="form-control" name="address" id="exampleInputtext" placeholder="814 Howard Street, 120065, India" style="resize: none">{{ auth()->user()->address }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <button class="btn btn-light-danger text-danger">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="text-center">
-                      <button class="btn btn-sm px-4 py-1 text-white mt-2" style="background-color: #175A95;">Upload</button>
-                      <p class="mt-2">File dengan format Jpg atau Png </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-        </div>
-
-        <div class="mt-4 p-5 card-bio">
-            <div class="mb-3">
-                <h5>Biodata</h5>
-                <p>Masukan data diri anda dengan benar</p>
-            </div>
-            <div class="row">
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="email">Nama</label>
-                    <input id="name" type="text" placeholder="Nama" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="email">Password Lama</label>
-                    <input id="name" type="password" placeholder="Password" class="form-control form-control-lg @error('password') is-invalid @enderror" name="password" value="" required autocomplete="password" autofocus>
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input id="name" type="email" placeholder="Email" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="password">Password Baru</label>
-                    <input id="name" type="password" placeholder="Password Baru" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="nomor">No Hp</label>
-                    <input id="name" type="text" placeholder="Nomor Hp" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="password">Konfirmasi Password</label>
-                    <input id="name" type="password" placeholder="konfirmasi password" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <label class="form-label" for="nomor">Tanggal Lahir</label>
-                    <input id="tangga" type="date" placeholder="Nomor Hp" class="form-control form-control-lg @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12 col-lg-12 mt-3">
-                    <label class="form-label" for="alamat">Alamat</label>
-                    <textarea name="sinopsis" id="sinopsis" rows="8" class="form-control" value="{{ old('sinopsis') }}"></textarea>
-                </textarea>
-                </div>
-            </div>
-
-            <div class="mt-4 d-flex justify-content-center align-items-center">
-
-                <div class="">
-                    {{-- <button class="btn btn-sm text-white" style="background-color: #175A95; padding-left: 1.5rem; padding-right: 1.5rem;">Upload</button> --}}
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-end mb-5 mt-3">
-                <button class="btn btn-lg px-5 py-2 text-black" style="background-color: #D9D9D9;">Kembali</button>
-                <button class="btn btn-lg px-5 py-2 text-white ms-3" style="background-color: #175A95;">Simpan</button>
-            </div>
-
         </div>
     </div>
-
-    {{-- <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel{{$user->id}}">Daftar Author</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="post" action="{{ route('user.author', ['user' => $user->id]) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('put')
-                    <div class="modal-body">
-                        <label class="form-label mt-2">Masukkan Cv</label>
-                        <input class="form-control" type="file" name="photo">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-primary">Daftar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
 @endsection
 @section('script')
+    <script>
+        document.getElementById('btn-upload').addEventListener('click', function() {
+            document.getElementById('photo').click();
+        });
 
-<script>
-    document.getElementById('btn-upload').addEventListener('click', function() {
-        document.getElementById('photo').click();
-    });
-
-    document.getElementById('photo').addEventListener('change', function() {
-        document.getElementById('submit-button').click();
-    });
-</script>
-
+        document.getElementById('photo').addEventListener('change', function() {
+            document.getElementById('submit-button').click();
+        });
+    </script>
 @endsection

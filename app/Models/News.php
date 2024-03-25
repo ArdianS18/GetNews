@@ -11,7 +11,7 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'author_id', 'name', 'photo', 'content', 'upload_date', 'is_primary', 'category_id', 'sub_category_id', 'slug', 'status', 'views', 'tags'];
+    protected $fillable = ['id', 'author_id', 'name', 'photo', 'content', 'upload_date', 'is_primary', 'slug', 'status', 'views'];
     protected $table = 'news';
 
     public $incrementing = false;
@@ -80,5 +80,22 @@ class News extends Model
     public function report(): HasMany
     {
         return $this->hasMany(Report::class);
+    }
+
+
+
+    public function newsTags(): HasMany
+    {
+        return $this->hasMany(NewsTag::class);
+    }
+
+    public function newsCategories(): HasMany
+    {
+        return $this->hasMany(NewsCategory::class);
+    }
+
+    public function newsSubCategories(): HasMany
+    {
+        return $this->hasMany(NewsSubCategory::class);
     }
 }
