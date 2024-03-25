@@ -24,6 +24,7 @@ class CategorySeeder extends Seeder
             'News',
             'Hiburan',
         ];
+        
         foreach($categories as $category)
         {
             Category::create([

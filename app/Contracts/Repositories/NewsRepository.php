@@ -29,6 +29,21 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->delete();
     }
 
+    public function whereIn(mixed $data, mixed $banned, Request $request): mixed
+    {
+        return $this->model->query()
+            // ->where('status', $data)
+            ->when($request->search,function($query) use ($request){
+                $query->where('name','LIKE', '%'.$request->search.'%');
+            })->when($request->status,function($query) use($request){
+                $query->where('status','LIKE', '%'.$request->status.'%');
+            })->when($request->category_id,function($query) use($request){
+                $query->where('category_id',$request->category_id);
+            })->when($request->sub_category_id,function($query) use($request){
+                $query->where('sub_category_id',$request->sub_category_id);
+            })->get();
+    }
+
     public function search(Request $request): mixed
     {
         return $this->model->query()
@@ -73,7 +88,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function get(): mixed
     {
         return $this->model->query()->withCount('views')->orderBy('views_count','desc')
-            ->get();
+        ->get();
     }
 
     /**

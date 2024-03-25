@@ -21,9 +21,26 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->get();
     }
 
+    public function whereIn(mixed $data, mixed $banned, Request $request): mixed
+    {
+        return $this->model->query()
+            ->where('status', $data)
+            ->where('banned', $banned)
+            ->when($request->search,function($query) use ($request){
+                $query->join('users', 'authors.user_id', '=', 'users.id')
+                    ->where('users.name','LIKE', '%'.$request->search.'%');
+            })->when($request->status,function($query) use($request){
+                $query->where('status','LIKE', '%'.$request->status.'%');
+            })->when($request->user_id,function($query) use($request){
+                $query->where('user_id',$request->user_id);
+            })
+            ->paginate(5);
+    }
+
     public function search(Request $request): mixed
     {
         return $this->model->query()
+        // ->where('status', $data)
         ->when($request->search,function($query) use ($request){
             $query->join('users', 'authors.user_id', '=', 'users.id')
                 ->where('users.name','LIKE', '%'.$request->search.'%');
@@ -31,15 +48,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             $query->where('status','LIKE', '%'.$request->status.'%');
         })->when($request->user_id,function($query) use($request){
             $query->where('user_id',$request->user_id);
-        })->get();
+        })
+        ->paginate(5);
     }
 
     public function paginate(): mixed
     {
         return $this->model->query()
-        ->when(route('author.admin'), function($query){
-            $query->where('status', "panding");
-        })
         ->latest()
         ->paginate(5);
     }

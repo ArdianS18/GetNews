@@ -31,4 +31,5 @@ class NewsTag extends Model
     {
         return $this->belongsTo(Tag::class);
     }
+
 }

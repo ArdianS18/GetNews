@@ -8,9 +8,9 @@ use App\Contracts\Interfaces\Eloquent\PaginateInterface;
 use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
-use App\Contracts\Interfaces\Eloquent\WhereInterface;
+use App\Contracts\Interfaces\Eloquent\WhereInInterface;
 
-interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface
+interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, WhereInInterface
 {
 
 }

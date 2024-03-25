@@ -31,8 +31,8 @@
                 </div>
 
                 <div>
-                    <div class="d-flex gap-2">
-                        {{-- <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search"> --}}
+                    {{-- <div class="d-flex gap-2">
+                        <input type="search" name="stat" class="form-control search-chat py-2 ps-5" placeholder="Search">
                         <select name="status" class="form-select">
                             <option value="{{ request('status') }}">Pilih Status</option>
                             <option value="panding">Panding</option>
@@ -42,7 +42,7 @@
                             <option value="">Tampilkan semua</option>
                         </select>
                         <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+                    </div> --}}
                 </div>
             </form>
 
@@ -112,6 +112,19 @@
                 </tbody>
             </table>
         </div>
+
+        {{-- <div class="page d-flex mt-4">
+            <div class="container">
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ $news->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                    @for ($i = 1; $i <= $news->lastPage(); $i++)
+                    <a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @endfor
+                    <a href="{{ $news->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
+                </div>
+            </div>
+        </div> --}}
+
     </div>
 @endsection
 

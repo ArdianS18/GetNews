@@ -119,6 +119,19 @@
                 @endforelse
             </tbody>
         </table>
+
+        <div class="page d-flex mt-4">
+            <div class="container">
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ $faqs->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                    @for ($i = 1; $i <= $faqs->lastPage(); $i++)
+                    <a href="{{ $faqs->url($i) }}" class="btn btn-black {{ $faqs->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @endfor
+                    <a href="{{ $faqs->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -162,18 +175,6 @@
                         <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="page d-flex mt-4">
-        <div class="container">
-            <div class="d-flex justify-content-end gap-2">
-                <a href="{{ $faqs->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
-                @for ($i = 1; $i <= $faqs->lastPage(); $i++)
-                <a href="{{ $faqs->url($i) }}" class="btn btn-black {{ $faqs->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                @endfor
-                <a href="{{ $faqs->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
             </div>
         </div>
     </div>

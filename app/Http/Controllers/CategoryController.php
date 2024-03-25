@@ -35,15 +35,24 @@ class CategoryController extends Controller
      */
     public function index(Request $request): View
     {
-        if ($request) {
-                $query = $request->input('query');
-                $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
+        $query = $request->input('search');
+        $searchTerm = $request->input('search', '');
 
-            return view('pages.admin.categories.index', compact('categoris'));
-        }
-
-        $categoris = $this->categori->paginate();
+        $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
+        $categoris->appends(['search' => $searchTerm]);
+        
         return view('pages.admin.categories.index', compact('categoris'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->get('search');
+        $searchTerm = $request->input('search', '');
+
+        $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
+        $categoris->appends(['search' => $searchTerm]);
+
+        return response()->json($categoris);
     }
 
     /**
@@ -77,8 +86,11 @@ class CategoryController extends Controller
             'category_id' => $category->id
         ]);
 
-        // $query = $request->input('query');
-        $subCategory = $this->subCategory->search($request);
+        $data = $request->input('query');
+        $subCategory = $this->subCategory->whereIn($data, false, $request);
+
+        // $subCategory = $query ? $this->subCategory->search($query) : $this->subCategory->paginate();
+        // $subCategory = $this->subCategory->search($query);
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
     }
 

@@ -14,14 +14,27 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
         $this->model = $subCategory;
     }
 
-    public function search(Request $request): mixed
+    public function whereIn(mixed $data, mixed $banned, Request $request): mixed
     {
         return $this->model->query()
-        ->when($request->name, function($query) use($request){
-            $query->where('name', 'Like', '%'.$request->name.'%');
+        ->when($data, function($query) use($data){
+            $query->where('name', 'Like', '%'.$data.'%');
         })->when($request->category_id, function($query) use ($request){
             $query->where('category_id',$request->category_id);
         })->paginate(5);
+    }
+
+    public function search(mixed $query): mixed
+    {
+
+        return $this->model->where('name', 'like', '%'.$query.'%')->paginate(5);
+
+        // return $this->model->query()
+        // ->when($request->name, function($query) use($request){
+        //     $query->where('name', 'Like', '%'.$request->name.'%');
+        // })->when($request->category_id, function($query) use ($request){
+        //     $query->where('category_id',$request->category_id);
+        // })->paginate(5);
     }
 
     public function paginate(): mixed

@@ -48,8 +48,10 @@ class AuthorController extends Controller
 
         $search = $request->input('search');
         $status = $request->input('status');
+        $searchTerm = $request->input('search', '');
 
-        $authors = $search ? $this->author->search($request)->where('status', 'panding') : $this->author->paginate();
+        $authors = $this->author->whereIn("panding", false, $request);
+        $authors->appends(['search' => $searchTerm]);
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
@@ -61,8 +63,12 @@ class AuthorController extends Controller
 
         $search = $request->input('search');
         $status = $request->input('status');
+        $searchTerm = $request->input('search', '');
 
-        $authors = $this->author->search($request)->where('status', 'approved')->where('banned', false);
+        $authors = $this->author->whereIn("approved", false, $request);
+        $authors->appends(['search' => $searchTerm]);
+
+        // $authors = $search ? $this->author->search($request)->where('banned', false) : $this->author->paginate();
         return view('pages.admin.user.author-list', compact('authors', 'search', 'status'));
     }
 
@@ -74,8 +80,12 @@ class AuthorController extends Controller
 
         $search = $request->input('search');
         $status = $request->input('status');
+        $searchTerm = $request->input('search', '');
 
-        $authors = $this->author->search($request)->where('status', 'reject')->where('banned', true);
+        $authors = $this->author->whereIn("reject", true, $request);
+        $authors->appends(['search' => $searchTerm]);
+
+        // $authors = $this->author->search($request)->where('status', 'reject')->where('banned', true);
         return view('pages.admin.user.author-ban', compact('authors', 'search', 'status'));
     }
 
@@ -92,8 +102,6 @@ class AuthorController extends Controller
         $data['status'] = UserStatusEnum::REJECT->value;
         $this->author->update($authorId, $data);
         return back();
-        $authors = $this->author->get();
-        return view('pages.useraprove.index', compact('authors'));
     }
 
     public function banned(Author $author)

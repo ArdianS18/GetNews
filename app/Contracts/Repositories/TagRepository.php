@@ -49,7 +49,7 @@ class TagRepository extends BaseRepository implements TagInterface
 
     public function search(mixed $query): mixed
     {
-        return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
+        return $this->model->where('name','LIKE', '%'.$query.'%')->paginate(5);
     }
 
     /**

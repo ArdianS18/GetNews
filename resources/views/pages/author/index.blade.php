@@ -200,8 +200,8 @@
               </div>
 
               <!-- Row -->
-              {{-- <div class="row">
-                @forelse ($news as $news)
+              <div class="row">
+                {{-- @forelse ($news as $news)
                   <div class="col-lg-6 col-md-12 mb-5">
                     <div class="">
                       <div class="row">
@@ -239,9 +239,9 @@
                           <h5>Tidak ada data</h5>
                       </div>
                   </div>
-                @endforelse
+                @endforelse --}}
 
-              </div> --}}
+              </div>
               <!-- End Row -->
             </div>
             <div class="tab-pane fade card-detail" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">

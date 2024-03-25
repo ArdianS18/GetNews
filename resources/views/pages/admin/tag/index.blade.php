@@ -79,13 +79,10 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $tag->name }}</td>
                         <td>
-                            <!-- Edit Modal toggle -->
                             <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="{{ $tag->id }}"
-                                data-question="{{ $tag->name }}" id="btn-edit-{{ $tag->id }}">
+                                data-name="{{ $tag->name }}" id="btn-edit-{{ $tag->id }}">
                                 Edit
                             </button>
-
-
                             <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white"
                                 data-id="{{ $tag->id }}">Hapus</button>
                         </td>
@@ -99,19 +96,31 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <h4>Ups... Ada kesalahan!!!</h4>
+                                <h4>Ups... Data tidak di temukan!!</h4>
                             </div>
-                            {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
+
+        <div class="page d-flex mt-4">
+            <div class="container">
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="{{ $tags->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
+                    @for ($i = 1; $i <= $tags->lastPage(); $i++)
+                    <a href="{{ $tags->url($i) }}" class="btn btn-black {{ $tags->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                    @endfor
+                    <a href="{{ $tags->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
     <!-- Edit Modal -->
-    {{-- <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modal-update Label" aria-hidden="true">
+    <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modal-update Label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal content -->
@@ -120,13 +129,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Modal body -->
-                <form action="{{ route('tag.update', ['tag' =>  $tag->id ]) }}" method="post" id="form-update">
+                <form method="post" id="form-update">
                     @method('post')
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="name" class="form-label">Update Tag:</label>
-                            <input type="text" id="name" name="name" value="{{ $tag->name }}"
+                            <input type="text" id="name" name="name"
                                 class="form-control @error('name') is-invalid @enderror" placeholder="Tags">
                             @error('name')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
@@ -142,18 +151,7 @@
                 </form>
             </div>
         </div>
-    </div> --}}
-    {{-- <div class="page d-flex mt-4">
-        <div class="container">
-            <div class="d-flex justify-content-end gap-2">
-                <a href="{{ $faqs->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
-                @for ($i = 1; $i <= $faqs->lastPage(); $i++)
-                <a href="{{ $faqs->url($i) }}" class="btn btn-black {{ $faqs->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                @endfor
-                <a href="{{ $faqs->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
-            </div>
-        </div>
-    </div> --}}
+    </div>
 
     <x-delete-modal-component />
 
@@ -171,7 +169,7 @@
 
         $('.btn-delete').click(function() {
             id = $(this).data('id')
-            var actionUrl = `delete-tag/${id}`;
+            var actionUrl = `delete-tag/` + id;
             $('#form-delete').attr('action', actionUrl);
             $('#modal-delete').modal('show')
         })

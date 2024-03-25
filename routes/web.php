@@ -60,6 +60,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create'); // fungsi create author dari admin -> langsung approve dan role : author
     // Sub Catgeory dan Category
     Route::resource('categories', CategoryController::class);
+    Route::get('search', [CategoryController::class, 'search'])->name('search.category');
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
     Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
@@ -207,18 +208,10 @@ Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'
 // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
 // Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
 
-
-
-// // Route::get('contact-us', function() {
-// //     return view('pages.user.contact.index');
-// // })->name('contact.user');
-// Route::get('dashboard', function(){
-//     return view('pages.user.index');
-// })->name('dashboard.user');
-
 Route::get('admin-inbox', function(){
     return view('pages.admin.inbox.index');
 })->name('admin.inbox');
+
 // Inbox
 Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
 Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
