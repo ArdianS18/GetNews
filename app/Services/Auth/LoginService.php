@@ -37,6 +37,9 @@ class LoginService
                     case 'admin':
                         return redirect('dashboard');
                         break;
+                    case 'super admin':
+                        return redirect('dashboard');
+                        break;
                     default:
                         return redirect()->back()->withErrors("Ada Yang Salah");
                         break;
