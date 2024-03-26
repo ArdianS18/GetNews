@@ -52,6 +52,7 @@ class AuthorController extends Controller
 
         $authors = $this->author->whereIn("panding", false, $request);
         $authors->appends(['search' => $searchTerm]);
+        
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
@@ -93,7 +94,7 @@ class AuthorController extends Controller
     {
         $data['status'] = UserStatusEnum::APPROVED->value;
         $data = $this->author->update($authorId, $data);
-
+        $data->assignRole(RoleEnum::AUTHOR);
         return back();
     }
 

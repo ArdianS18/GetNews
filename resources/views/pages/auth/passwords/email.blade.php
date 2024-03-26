@@ -33,13 +33,10 @@
                             <p class="ms-5">Silakan masukkan alamat email yang terkait dengan akun Anda dan Kami akan mengirimkan email berisi tautan untuk mengatur ulang kata sandi Anda.</p>
                             <form method="POST" action="{{ route('password.email') }}">
                                 @csrf
-        
                                 <div class="row mb-3 mt-5">
                                     <label for="email" class="ms-5 form-label">{{ __('Email Address') }}</label>
-        
                                     <div class="col-md-11">
                                         <input id="email" type="email" class="ms-5 form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-        
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -47,7 +44,6 @@
                                         @enderror
                                     </div>
                                 </div>
-        
                                 <div class="row mb-0">
                                     <div class="col-md-12 ms-5">
                                         <button type="submit" class="btn btn-md col-md-11 mt-3 text-white" style="background-color: #0F4D8A;">
@@ -59,8 +55,6 @@
                                     </div>
                                 </div>
                             </form>
-                        
-                        
                         </div>
                     </div>
                 </div>

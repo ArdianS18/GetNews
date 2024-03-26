@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('password.request') }}" class="text-body">Forgot password?</a>
+                                <a href="{{ route('confirm.email') }}" class="text-body">Forgot password?</a>
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2">
