@@ -77,9 +77,9 @@ class NewsController extends Controller
         $searchTerm = $request->input('search', '');
 
         // $subCategories = $this->subCategory->get();
-        $news = $this->news->whereIn("panding", false, $request);
+        // $news = $this->news->whereIn("panding", false, $request);
+        $news = $this->news->search($request)->whereIn('status', "panding");
         // $news->appends(['search' => $searchTerm]);
-        // $news = $this->news->search($request)->whereIn('status', "panding");
         return view('pages.admin.news_admin.index', compact('news', 'search', 'status'));
     }
 
@@ -96,9 +96,9 @@ class NewsController extends Controller
         $searchTerm = $request->input('search', '');
 
         // $subCategories = $this->subCategory->get();
-        $news = $this->news->whereIn("active", false, $request);
+        // $news = $this->news->whereIn("active", false, $request);
         // $news->appends(['search' => $searchTerm]);
-        // $news = $this->news->search($request)->where('status', "active");
+        $news = $this->news->search($request)->where('status', "active");
         return view('pages.admin.news_admin.news-approve', compact('news', 'search', 'status'));
     }
 
@@ -192,9 +192,8 @@ class NewsController extends Controller
 
     public function rejectall(Request $request, News $news)
     {
-        $selected[] = json_decode($request->input('checkedIdss'));
-
-        foreach ($selected as $id) {
+        $selectedIds = json_decode($request->input('checkedIdss'));
+        foreach ($selectedIds as $id) {
             $news = News::find($id);
 
             if ($news) {
@@ -253,13 +252,12 @@ class NewsController extends Controller
 
     public function showSubCategories($slug){
         $subCategory = $this->subCategory->showWithSlug($slug);
-        $categoryId = $subCategory->id;
 
         $categories = $this->category->get();
+        $totalCategories = $this->category->showWhithCount();
         $subCategories = $this->subCategory->get();
-        $news = $this->news->get()->whereIn('category_id', $categoryId);
 
-        return view('pages.user.news.subcategory', compact('news','subCategories','categories','subCategory'));
+        return view('pages.user.news.subcategory', compact('totalCategories','subCategories','categories','subCategory'));
     }
     /**
      * Store a newly created resource in storage.

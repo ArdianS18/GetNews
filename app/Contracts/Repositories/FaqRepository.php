@@ -7,6 +7,7 @@ use App\Models\Faq;
 use App\Models\News;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class FaqRepository extends BaseRepository implements FaqInterface
 {
@@ -49,9 +50,22 @@ class FaqRepository extends BaseRepository implements FaqInterface
 
     }
 
-    public function search(mixed $query): mixed
+    public function search(mixed $request): mixed
     {
-        return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
+        return $this->model->query()
+        ->when($request->question, function ($query) use ($request) {
+            $query->where('question', 'LIKE', '%' . $request->question . '%');
+        })
+        ->get();
+    }
+
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->when($request->question, function ($query) use ($request) {
+                $query->where('question', $request->question);
+            })
+            ->fastPaginate($pagination);
     }
 
     /**

@@ -82,9 +82,11 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
     // ===> Faq
     Route::get('faq-admin', [FaqController::class, 'index'])->name('faq.index');
+
     Route::get('faq-list', function(){
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
+
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
@@ -197,14 +199,10 @@ Route::get('status', function(){
     return view('pages.author.status.index');
 })->name('status.author');
 
-// Route::get('aboutnews', [ProfileController::class, 'aboutuser'])->name('about.user');
-
 Route::get('profile-user-update', function(){
     return view('pages.user.profile.update');
 })->name('profile.user.update');
 
-///
-// Route::get('news-singgle-post/{news}', [NewsController::class, 'usernews'])->name('news.user');
 Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
 
 // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
@@ -222,6 +220,12 @@ Route::post('admin-store', [ReportController::class, 'index'])->name('report.sto
 Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 
 Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
+
+
+Route::get('confirm-email', function(){
+    return view('pages.auth.passwords.email');
+})->name('confirm.email');
 
 Route::get('confirm-password',function(){
     return view('pages.auth.passwords.confirm');

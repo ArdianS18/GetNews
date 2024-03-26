@@ -2,11 +2,12 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\CategoryInterface;
-use App\Enums\CategoryStatusEnum;
 use App\Models\Category;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use App\Enums\CategoryStatusEnum;
+use Illuminate\Database\QueryException;
+use App\Contracts\Interfaces\CategoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
 {
@@ -17,7 +18,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
 
     public function search(mixed $query): mixed
     {
-        return $this->model->where('name', 'like', '%'.$query.'%')->paginate(5);
+        return $this->model->where('name', 'like', '%' . $query . '%')->paginate(5);
     }
 
     public function paginate(): mixed
@@ -37,8 +38,8 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -51,10 +52,10 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     public function show(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id);
+            ->findOrFail($id);
     }
 
-        /**
+    /**
      * Handle get the specified data by id from models.
      *
      * @param string $slug
@@ -64,7 +65,6 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     {
         return $this->model->query()
             ->where(['slug' => $slug])
-            ->with(['news'])
             ->firstOrFail();
     }
 
@@ -105,5 +105,17 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
+    }
+
+    public function showWhithCount(): mixed
+    {
+        return DB::table('news_categories')
+            ->join('news', 'news_categories.news_id', '=', 'news.id')
+            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
+            ->select('categories.name', 'categories.slug', DB::raw('count(*) as total'))
+            ->groupBy('categories.name', 'categories.slug')
+            ->orderBy('total', 'desc')
+            ->take(6)
+            ->get();
     }
 }

@@ -201,8 +201,8 @@
     // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
     function sendCheckedIdss() {
         var checkedIdss = [];
-        var checkboxes = document.querySelectorAll('.itemCheckbox:checked');
-        checkboxes.forEach(function(checkbox) {
+        var checkboxess = document.querySelectorAll('.itemCheckbox:checked');
+        checkboxess.forEach(function(checkbox) {
             checkedIdss.push(checkbox.value);
         });
         // Setel nilai input tersembunyi dengan ID yang dicentang
