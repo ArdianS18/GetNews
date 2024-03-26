@@ -98,7 +98,6 @@
                             <div class="text-center">
                                 <h4>Tidak ada data</h4>
                             </div>
-                            {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
                         </td>
                     </tr>
                 @endforelse

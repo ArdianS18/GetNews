@@ -17,7 +17,7 @@
             <div>
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
+                        <input type="search" id="search-name" name="search" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
                     </div>
