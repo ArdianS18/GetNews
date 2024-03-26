@@ -97,7 +97,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::put('contact/{contact}', [ContactUsController::class, 'update'])->name('contact.update');
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
 
-    Route::get('taq-admin', [TagController::class, 'index'])->name('tag.detail');
+    Route::get('tag-admin', [TagController::class, 'index'])->name('tag.detail');
 
     Route::get('list-tag', function(){
         return view('pages.admin.tag.index');
@@ -111,7 +111,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
 
 Route::middleware(['auth','role:admin|author|superadmin'])->group(function (){
     //update news ===>
-    Route::patch('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
+    // Route::patch('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 });
 
