@@ -23,15 +23,17 @@ class FaqController extends Controller
      */
     public function index(Request $request, Faq $faq)
     {
-        $request->merge([
-            'question' => $faq->id,
-        ]);
-
-        $query = $request->input('search');
-        $searchTerm = $request->input('search', '');
-        $faqs = $query ? $this->faq->search($query) : $this->faq->paginate();
-        $faqs->appends(['search' => $searchTerm]);
-        $data = FaqResource::collection($faqs);
+        if ($request->has('page')) {
+            $faq = $this->faq->customPaginate($request, 10);
+            $data['paginate'] = [
+                'current_page' => $faq->currentPage(),
+                'last_page' => $faq->lastPage(),
+            ];
+            $data['data'] = FaqResource::collection($faq);
+        } else {
+            $faqs = $this->faq->search($request);
+            $data = FaqResource::collection($faqs);
+        }
         return ResponseHelper::success($data);
     }
 
@@ -50,7 +52,7 @@ class FaqController extends Controller
     public function update(FaqRequest $request, Faq $faq)
     {
         $this->faq->update($faq->id, $request->validated());
-        return back()->with('success', 'berhasil mengupdate data!!');
+        return ResponseHelper::success(null, trans('alert.update_success'));
     }
 
     /**
@@ -59,6 +61,6 @@ class FaqController extends Controller
     public function destroy(Faq $faq)
     {
         $this->faq->delete($faq->id);
-        return back()->with('success', 'berhasil menghapus data');
+        return ResponseHelper::success(null, trans('alert.delete_success'));
     }
 }

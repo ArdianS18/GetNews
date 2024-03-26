@@ -110,8 +110,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Modal body -->
-                <form method="post" id="form-update">
-                    @method('put')
+                <form id="form-update">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -162,29 +161,34 @@
 
         function get(page) {
             $.ajax({
-                url: "{{ route('faq.index') }}",
+                url: "{{ route('faq.index') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data:{
-                    search:$('#search-name').val()
+                    question:$('#search-name').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")
                     $('#loading').html(showLoading())
+                    $('#pagination').html('')
                 },
                 success: function(response) {
-                    var faq = response.data
+                    var faq = response.data.data
                     $('#loading').html("")
-                    if (response.data.length > 0) {
-                        $.each(response.data, function(index, data) {
+                    if (response.data.data.length > 0) {
+                        $.each(response.data.data, function(index, data) {
                             $('#data').append(rowFaq(index, data))
                         })
+                        $('#pagination').html(handlePaginate(response.data.paginate))
+
 
                         $('.btn-edit').click(function() {
                             var faqId = $(this).data('id');
                             var data = faq.find(faq => faq.id === faqId)
 
                             setFormValues('form-update', data)
+                            $('#form-update').data('id', data['id'])
+
                             $('#modal-update').modal('show')
                         })
 
@@ -262,6 +266,7 @@
             $.ajax({
                 url: "faq/" + id,
                 type: 'DELETE',
+                data:$(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -274,7 +279,30 @@
                 },
                 error: function(response) {
                     $('.preloader').fadeOut()
-                    console.log(response)
+                }
+            })
+        })
+
+        $('#form-update').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            $.ajax({
+                url: "faq/" + id,
+                type: 'PUT',
+                data:$(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-update').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
                 }
             })
         })
