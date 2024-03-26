@@ -65,7 +65,6 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     {
         return $this->model->query()
             ->where(['slug' => $slug])
-            ->with(['news'])
             ->firstOrFail();
     }
 
