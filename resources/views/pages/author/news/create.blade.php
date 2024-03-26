@@ -137,22 +137,6 @@
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 
-                            {{-- <div class="">
-                                <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <select id="sub_category_id"
-                                    class="form-select sub-category @error('sub_category_id') is-invalid @enderror"
-                                    name="sub_category_id" value="{{ old('sub_category_id') }}"
-                                    aria-label="Default select example">
-                                    <option selected>pilih sub kategori</option>
-
-                                </select>
-                                @error('sub_category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div> --}}
-
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                                 <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"

@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     @foreach ($categories as $category)
-                        @if ($loop->iteration <= 7)
+                        @if ($loop->iteration <= 6)
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
@@ -38,11 +38,11 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
                             </a>
                             <ul class="dropdown-menu">
-                                @if ($loop->iteration >= 7)
+                                @if ($loop->iteration >= 6)
                                 {{-- <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a> --}}
-                                @if($categories->count() > 7)
+                                @if($categories->count() > 6)
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    @for ($i = 7; $i < $categories->count(); $i++)
+                                    @for ($i = 6; $i < $categories->count(); $i++)
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="flush-heading{{$i}}">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$i}}" aria-expanded="false" aria-controls="flush-collapse{{$i}}">
@@ -71,11 +71,11 @@
                         @endif
                     @endforeach
 
-@empty($categories)
-    <li class="nav-item">
-        <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
-    </li>
-@endempty
+                    @empty($categories)
+                        <li class="nav-item">
+                            <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
+                        </li>
+                    @endempty
 
                     {{-- @forelse ($categories as $category)
                     <li class="nav-item">
@@ -95,14 +95,38 @@
                     @endforelse --}}
                 </ul>
 
-                <div class="others-option d-flex align-items-center" id="loginSection">
+                <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
+
+                    <div class="option-item">
+                        <button type="button" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+                            <i class="flaticon-loupe"></i>
+                        </button>
+                    </div>
+                    <div class="">
+                        <div class="option-item">
+                            <a href="/" class="btn-two px-4" id="signInBtn">Subcribe</a>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form>
+                                    <input type="text" class="form-control" placeholder="Search here...." />
+                                    <button type="submit"><i class="fi fi-rr-search"></i></button>
+                                </form>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>
+                            </div>
+                        </div>
+                    </div>
 
                         @auth
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item">
-                                <div class="news-card-img" style="padding-right: 0px;">
+                                <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
                                     <a href="javascript:void(0)" class="nav-link">
-                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="img-fluid" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
                                     </a>
                                 </div>
                                 <ul class="dropdown-menu">
@@ -162,10 +186,10 @@
                         @if (Auth::check() && Auth::user()->roles() == "author")
                         @endif
                         @else
+
                         <div class="">
                             <div class="option-item">
                                 <a href="/login" class="btn-two" id="signInBtn">Sign In</a>
-
                             </div>
                         </div>
                     @endauth

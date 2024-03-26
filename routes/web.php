@@ -226,4 +226,12 @@ Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubC
 Route::get('confirm-password',function(){
     return view('pages.auth.passwords.confirm');
 })->name('confirm.password');
+
+Route::get('tukar-coin', function(){
+    return view('pages.user.coins.index');
+})->name('tukar.coin');
+
+Route::get('pengajuan-berita', function(){
+    return view('pages.user.news.pengajuan');
+})->name('pengajuan.berita');
 ?>

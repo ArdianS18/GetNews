@@ -82,7 +82,7 @@
                             <form action="{{ route('user.reject', ['user' => $author->id]) }}" method="post">
                                 @method('patch')
                                 @csrf
-                                <button type="submit" name="status" style="background-color: #EF6E6E;" class="btn text-white" value="reject">Tolak</button>
+                                <button type="submit" data-bs-toggle="tooltip" title="Blokir" name="status" style="background-color: #EF6E6E;" class="btn text-white" value="reject">Tolak</button>
                             </form>
                         </div>
                     </td>

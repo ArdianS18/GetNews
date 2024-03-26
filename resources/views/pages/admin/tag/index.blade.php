@@ -79,11 +79,11 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $tag->name }}</td>
                         <td>
-                            <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="{{ $tag->id }}"
+                            <button style="background-color: #FFD643;" data-bs-toggle="tooltip" title="Edit" class="btn btn-edit text-white me-2" data-id="{{ $tag->id }}"
                                 data-name="{{ $tag->name }}" id="btn-edit-{{ $tag->id }}">
                                 Edit
                             </button>
-                            <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white"
+                            <button type="submit" data-bs-toggle="tooltip" title="Hapus" style="background-color: #EF6E6E" class="btn btn-delete text-white"
                                 data-id="{{ $tag->id }}">Hapus</button>
                         </td>
                     </tr>
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <h4>Ups... Data tidak di temukan!!</h4>
+                                <h4>Tidak ada data</h4>
                             </div>
                         </td>
                     </tr>

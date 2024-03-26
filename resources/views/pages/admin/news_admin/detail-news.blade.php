@@ -152,7 +152,7 @@
 
                     <div class="col-md-12 col-lg-12">
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-danger me-2">Tolak</button>
+                                <button data-bs-toggle="tooltip" title="Tolak" class="btn btn-danger me-2">Tolak</button>
                                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
                             </div>
                     </div>
