@@ -97,9 +97,14 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::put('contact/{contact}', [ContactUsController::class, 'update'])->name('contact.update');
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
 
-    Route::get('list-tag', [TagController::class, 'index'])->name('tag.detail');
+    Route::get('taq-admin', [TagController::class, 'index'])->name('tag.detail');
+
+    Route::get('list-tag', function(){
+        return view('pages.admin.tag.index');
+    })->name('tag.detail.list');
+
     Route::post('create-tag', [TagController::class, 'store'])->name('tag.create');
-    Route::post('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
+    Route::put('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::delete('delete-tag/{tag}', [TagController::class, 'destroy'])->name('delete.tag');
 });
 

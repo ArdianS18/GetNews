@@ -52,18 +52,14 @@ class FaqRepository extends BaseRepository implements FaqInterface
 
     public function search(mixed $request): mixed
     {
-        return $this->model->query()
-        ->when($request->question, function ($query) use ($request) {
-            $query->where('question', 'LIKE', '%' . $request->question . '%');
-        })
-        ->get();
+        return $this->model->where('question', 'LIKE', '%' . $request->question . '%')->get();
     }
 
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
             ->when($request->question, function ($query) use ($request) {
-                $query->where('question', $request->question);
+                $query->where('question', 'LIKE', '%' .  $request->question . '%');
             })
             ->fastPaginate($pagination);
     }
