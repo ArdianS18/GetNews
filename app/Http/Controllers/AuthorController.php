@@ -10,12 +10,17 @@ use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\AuthorsRequest;
+use App\Http\Resources\AuthorResource;
 use App\Models\User;
 use App\Services\Auth\RegisterService;
 use App\Services\AuthorBannedService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+
+use function Laravel\Prompts\alert;
 
 class AuthorController extends Controller
 {
@@ -56,21 +61,20 @@ class AuthorController extends Controller
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
-    public function listauthor(Request $request, Author $author)
+    public function listauthor(Request $request, Author $author) : JsonResponse
     {
-        $request->merge([
-            'user_id' => $author->id
-        ]);
-
-        $search = $request->input('search');
-        $status = $request->input('status');
-        $searchTerm = $request->input('search', '');
-
-        $authors = $this->author->whereIn("approved", false, $request);
-        $authors->appends(['search' => $searchTerm]);
-
-        // $authors = $search ? $this->author->search($request)->where('banned', false) : $this->author->paginate();
-        return view('pages.admin.user.author-list', compact('authors', 'search', 'status'));
+     
+        if ($request->has('page')) {
+            $author = $this->author->customPaginate($request, 10);
+            $data['paginate'] = [
+                'current_page' => $author->currentPage(),
+                'last_page' => $author->lastPage(),
+            ];
+            $data['data'] = AuthorResource::collection($author);
+        }else{
+            $data = $this->author->get();
+        }
+        return ResponseHelper::success($data);
     }
 
     public function listbanned(Request $request, Author $author)
@@ -113,7 +117,7 @@ class AuthorController extends Controller
             $this->authorBannedService->unBanned($author);
         }
 
-        return back();
+        return ResponseHelper::success(null, trans('alert.update_success'));
     }
 
     /**
@@ -143,7 +147,7 @@ class AuthorController extends Controller
             'status' => "approved"
         ]);
 
-        return back();
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     public function createauthor ()

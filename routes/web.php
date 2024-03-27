@@ -49,10 +49,14 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
     //Beranda *Admin*
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
-    Route::get('list-author-admin', [AuthorController::class, 'listauthor'])->name('list.author.admin'); //list author approved
+    Route::get('list-author-admin', function(){
+        return view('pages.admin.user.author-list');
+    })->name('list.author.admin'); //list author approved
+
+    Route::get('author-admin-list',[AuthorController::class,'listauthor'])->name('author.admin.list'); //list author approved
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
-    Route::get('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
+    Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
     // Approved And Reject Author
     Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved'); //fungsi approved author
     Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject'); // fungsi reject author

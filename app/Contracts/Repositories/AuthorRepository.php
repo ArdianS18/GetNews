@@ -2,11 +2,13 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\AuthorInterface;
-use App\Models\Author;
 use App\Models\User;
-use Illuminate\Database\QueryException;
+use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use App\Contracts\Interfaces\AuthorInterface;
+use App\Enums\UserStatusEnum;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AuthorRepository extends BaseRepository implements AuthorInterface
 {
@@ -26,13 +28,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
             ->where('status', $data)
             ->where('banned', $banned)
-            ->when($request->search,function($query) use ($request){
+            ->when($request->search, function ($query) use ($request) {
                 $query->join('users', 'authors.user_id', '=', 'users.id')
-                    ->where('users.name','LIKE', '%'.$request->search.'%');
-            })->when($request->status,function($query) use($request){
-                $query->where('status','LIKE', '%'.$request->status.'%');
-            })->when($request->user_id,function($query) use($request){
-                $query->where('user_id',$request->user_id);
+                    ->where('users.name', 'LIKE', '%' . $request->search . '%');
+            })->when($request->status, function ($query) use ($request) {
+                $query->where('status', 'LIKE', '%' . $request->status . '%');
+            })->when($request->user_id, function ($query) use ($request) {
+                $query->where('user_id', $request->user_id);
             })
             ->paginate(5);
     }
@@ -40,23 +42,23 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function search(Request $request): mixed
     {
         return $this->model->query()
-        // ->where('status', $data)
-        ->when($request->search,function($query) use ($request){
-            $query->join('users', 'authors.user_id', '=', 'users.id')
-                ->where('users.name','LIKE', '%'.$request->search.'%');
-        })->when($request->status,function($query) use($request){
-            $query->where('status','LIKE', '%'.$request->status.'%');
-        })->when($request->user_id,function($query) use($request){
-            $query->where('user_id',$request->user_id);
-        })
-        ->paginate(5);
+            // ->where('status', $data)
+            ->when($request->search, function ($query) use ($request) {
+                $query->join('users', 'authors.user_id', '=', 'users.id')
+                    ->where('users.name', 'LIKE', '%' . $request->search . '%');
+            })->when($request->status, function ($query) use ($request) {
+                $query->where('status', 'LIKE', '%' . $request->status . '%');
+            })->when($request->user_id, function ($query) use ($request) {
+                $query->where('user_id', $request->user_id);
+            })
+            ->paginate(5);
     }
 
     public function paginate(): mixed
     {
         return $this->model->query()
-        ->latest()
-        ->paginate(5);
+            ->latest()
+            ->paginate(5);
     }
 
     /**
@@ -69,8 +71,8 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -124,4 +126,18 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->findOrFail($id)
             ->update($data);
     }
-}
+
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->when($request->name, function ($query) use ($request) {
+                $query->whereHas('user', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->name . '%');
+                });
+            })
+            ->when($request->status,function ($query) use ($request) {
+                $query->where('banned',$request->status);
+            })
+            ->where('status',"!=",UserStatusEnum::PENDING->value)
+            ->fastPaginate($pagination);
+    }}

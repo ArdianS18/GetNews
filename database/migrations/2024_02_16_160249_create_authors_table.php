@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained();
             $table->text('cv');
             $table->enum('status', ['panding', 'approved', 'reject']);
-            $table->boolean('banned')->default(0);
+            $table->boolean('banned')->default(false);
             $table->timestamps();
         });
     }
