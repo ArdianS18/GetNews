@@ -53,7 +53,22 @@ class NewsController extends Controller
 
     protected $newsRepositoty;
 
-    public function __construct(TagInterface $tags, NewsCategoryInterface $newsCategory, NewsSubCategoryInterface $newsSubCategory, NewsTagInterface $newsTag,ViewInterface $view, NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
+    public function __construct(
+        TagInterface $tags,
+        NewsCategoryInterface $newsCategory,
+        NewsSubCategoryInterface $newsSubCategory,
+        NewsTagInterface $newsTag,
+        ViewInterface $view,
+        NewsHasLikeInterface $newsHasLike ,
+        CommentInterface $comment,
+        UserInterface $user,
+        NewsRepository $newsRepository,
+        NewsInterface $news,
+        SubCategoryInterface $subCategory,
+        CategoryInterface $category,
+        NewsService $NewsService,
+        NewsTrendingService $newsTrendingService,
+        NewsPhotoInterface $newsPhoto)
     {
         $this->newsCategory = $newsCategory;
         $this->newsSubCategory = $newsSubCategory;
