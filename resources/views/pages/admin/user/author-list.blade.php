@@ -33,7 +33,7 @@
                     <div class="d-flex gap-2">
                         <select name="status" class="form-select" id="search-status">
                             <option value="">Tampilkan semua</option>
-                            <option value="true">Blokir</option>
+                            <option value="1">Blokir</option>
                             <option value="false">Aktif</option>
                         </select>
                     </div>
