@@ -89,7 +89,7 @@
             <tbody id="data">
             </tbody>
         </table>
-        
+
         <div id="loading"></div>
         <div class="d-flex justify-content-end">
             <nav id="pagination">
@@ -188,7 +188,6 @@
 
                             setFormValues('form-update', data)
                             $('#form-update').data('id', data['id'])
-
                             $('#modal-update').modal('show')
                         })
 

@@ -53,6 +53,16 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
         return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
     }
 
+    public function updateOrCreate(array $data): mixed
+    {
+        return $this->model->query()
+        ->updateOrCreate([
+            'news_id' => $data['news_id'],
+            'sub_category_id' => $data['sub_category_id']
+        ],$data);
+    }
+
+
     /**
      * Handle the Get all data event from models.
      *

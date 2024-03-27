@@ -115,7 +115,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
 
 Route::middleware(['auth','role:admin|author|superadmin'])->group(function (){
     //update news ===>
-    // Route::patch('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
+    Route::patch('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 });
 
@@ -135,11 +135,11 @@ Route::middleware(['auth','role:author'])->group(function () {
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
+    Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
     // Update And Delete News
     Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
     Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
-    Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
 
     Route::get('author-inbox', function(){
         return view('pages.author.inbox.index');

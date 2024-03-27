@@ -30,6 +30,11 @@ class NewsPhotoRepository extends BaseRepository implements NewsPhotoInterface
         ->delete();
     }
 
+    public function exists(array $conditions): bool
+    {
+        return $this->model->where($conditions)->exists();
+    }
+
     /**
      * Handle get the specified data by id from models.
      *
@@ -45,7 +50,7 @@ class NewsPhotoRepository extends BaseRepository implements NewsPhotoInterface
     public function where(mixed $id): mixed
     {
         return $this->model->query()
-            ->where('news_id', $id)
+            ->whereIn('news_id', $id)
             ->get();
     }
 

@@ -45,15 +45,42 @@
                         </div>
                         <div class="col-lg-6 col-md-12 from-outline mt-2">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <input type="text"  name="tags" class="form-control" value="{{ $news->tags }}">
+                            <select class="form-control select2 tags" name="tags[]" multiple="multiple" value="">
+                                <option>pilih tags</option>
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}" {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
+                                        {{ $tag->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
-                                <input type="text" name="category_id" class="form-control" value="{{ $news->category->name }}">
+                                <select id="category_id"
+                                    class="select2 form-control category @error('category') is-invalid @enderror"
+                                    name="category[]" multiple="true" value=""
+                                    aria-label="Default select example">
+                                    <option>pilih kategori</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <input type="text" class="form-control" value="{{ $news->subCategory->name }}">
+                                <select id="sub_category_id"
+                                class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                name="sub_category[]" multiple="true" value=""
+                                aria-label="Default select example">
+                                <option >pilih sub kategori</option>
+                                @foreach ($subCategories as $subCategory)
+                                <option value="{{ $subCategory->id }}" {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
+                                    {{ $subCategory->name }}
+                                </option>
+                                @endforeach
+                            </select>
                             </div>
                     </div>
 

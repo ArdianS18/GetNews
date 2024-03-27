@@ -40,7 +40,7 @@ class CategoryController extends Controller
 
         $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
         $categoris->appends(['search' => $searchTerm]);
-        
+
         return view('pages.admin.categories.index', compact('categoris'));
     }
 

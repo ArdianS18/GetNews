@@ -6,5 +6,5 @@ enum UserStatusEnum: string
 {
     case APPROVED = "approved";
     case REJECT = "reject";
-    case PENDING = "pending";
+    case PANDING = "panding";
 }

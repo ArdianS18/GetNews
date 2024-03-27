@@ -40,7 +40,10 @@ class DashboardController extends Controller
         $news_count = $this->news->get()->count();
         return view('pages.admin.index', compact('authors', 'users', 'news_count'));
     }
+
     public function home(){
+        $newsTrending = $this->news->get();
+        // dd($newsTrending);
         $news = $this->news->get();
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();

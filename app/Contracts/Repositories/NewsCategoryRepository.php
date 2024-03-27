@@ -52,6 +52,15 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
         return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
     }
 
+    public function updateOrCreate(array $data): mixed
+    {
+        return $this->model->query()
+        ->updateOrCreate([
+            'news_id' => $data['news_id'],
+            'category_id' => $data['category_id']
+        ],$data);
+    }
+
     /**
      * Handle the Get all data event from models.
      *
