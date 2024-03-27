@@ -138,6 +138,6 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->when($request->status,function ($query) use ($request) {
                 $query->where('banned',$request->status);
             })
-            ->where('status',"!=",UserStatusEnum::PENDING->value)
+            ->where('status',"!=",UserStatusEnum::PANDING->value)
             ->fastPaginate($pagination);
     }}
