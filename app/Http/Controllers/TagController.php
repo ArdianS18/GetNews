@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\TagInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\TagRequest;
+use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use App\Services\TagService;
 use Illuminate\Http\Request;
@@ -24,16 +26,19 @@ class TagController extends Controller
      */
     public function index(Request $request, Tag $tag)
     {
-        $request->merge([
-            'name' => $tag->id,
-        ]);
 
-        $query = $request->input('search');
-        $searchTerm = $request->input('search', '');
-        $tags = $query ? $this->tag->search($query) : $this->tag->paginate();
-        $tags->appends(['search' => $searchTerm]);
-
-        return view('pages.admin.tag.index', compact('tags'));
+        if ($request->has('page')) {
+            $tag = $this->tag->customPaginate($request, 10);
+            $data['paginate'] = [
+                'current_page' => $tag->currentPage(),
+                'last_page' => $tag->lastPage(),
+            ];
+            $data['data'] = TagResource::collection($tag);
+        } else {
+            $tags = $this->tag->search($request);
+            $data = TagResource::collection($tags);
+        }
+        return ResponseHelper::success($data);
     }
 
     /**
@@ -51,7 +56,7 @@ class TagController extends Controller
     {
         $data = $this->tagService->store($request);
         $this->tag->store($data);
-        return back()->with('success', 'berhasil menambah data');
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**
@@ -77,7 +82,7 @@ class TagController extends Controller
     {
         $data = $this->tagService->update($request);
         $this->tag->update($tag->id, $data);
-        return back()->with('success', 'berhasil update data');
+        return ResponseHelper::success(null, trans('alert.update_success'));
     }
 
     /**
@@ -86,6 +91,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $this->tag->delete($tag->id);
-        return back();
+        return ResponseHelper::success(null, trans('alert.delete_success'));
     }
 }

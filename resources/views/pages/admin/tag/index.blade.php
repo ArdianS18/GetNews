@@ -17,7 +17,7 @@
             <div>
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="search" id="search-name" name="search" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
+                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
                     </div>
@@ -40,9 +40,7 @@
                     <h5 class="modal-title" id="tambahdataLabel">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('tag.create') }}" method="post">
-                    @method('post')
-                    @csrf
+                <form id="form-create" method="post">
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tag" class="form-label">Tambahkan Tag: </label>
@@ -73,47 +71,14 @@
                     <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse ($tags as $tag)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $tag->name }}</td>
-                        <td>
-                            <button style="background-color: #FFD643;" data-bs-toggle="tooltip" title="Edit" class="btn btn-edit text-white me-2" data-id="{{ $tag->id }}"
-                                data-name="{{ $tag->name }}" id="btn-edit-{{ $tag->id }}">
-                                Edit
-                            </button>
-                            <button type="submit" data-bs-toggle="tooltip" title="Hapus" style="background-color: #EF6E6E" class="btn btn-delete text-white"
-                                data-id="{{ $tag->id }}">Hapus</button>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="5">
-                            <div class="d-flex justify-content-center">
-                                <div>
-                                    <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <h4>Tidak ada data</h4>
-                            </div>
-                        </td>
-                    </tr>
-                @endforelse
+            <tbody id="data">
             </tbody>
         </table>
 
-        <div class="page d-flex mt-4">
-            <div class="container">
-                <div class="d-flex justify-content-end gap-2">
-                    <a href="{{ $tags->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
-                    @for ($i = 1; $i <= $tags->lastPage(); $i++)
-                    <a href="{{ $tags->url($i) }}" class="btn btn-black {{ $tags->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                    @endfor
-                    <a href="{{ $tags->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
-                </div>
-            </div>
+        <div id="loading"></div>
+        <div class="d-flex justify-content-end">
+            <nav id="pagination">
+            </nav>
         </div>
 
     </div>
@@ -129,8 +94,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <!-- Modal body -->
-                <form method="post" id="form-update">
-                    @method('post')
+                <form id="form-update">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
@@ -158,20 +122,160 @@
 @endsection
 @section('script')
     <script>
-        $('.btn-edit').click(function() {
-            const formData = getDataAttributes($(this).attr('id'))
-            var actionUrl = `update-tag/${formData['id']}`;
-            $('#form-update').attr('action', actionUrl);
-            setFormValues('form-update', formData)
-            $('#form-update').data('id', formData['id'])
-            $('#modal-update').modal('show')
+        get(1)
+        let debounceTimer;
+
+        $('#search-name').keyup(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+
+        function get(page) {
+            $.ajax({
+                url: "{{ route('tag.detail') }}?page=" + page,
+                method: 'Get',
+                dataType: "JSON",
+                data:{
+                    name:$('#search-name').val()
+                },
+                beforeSend: function() {
+                    $('#data').html("")
+                    $('#loading').html(showLoading())
+                    $('#pagination').html('')
+                },
+                success: function(response) {
+                    var tag = response.data.data
+                    $('#loading').html("")
+                    if (response.data.data.length > 0) {
+                        $.each(response.data.data, function(index, data) {
+                            $('#data').append(rowTag(index, data))
+                        })
+                        $('#pagination').html(handlePaginate(response.data.paginate))
+
+
+                        $('.btn-edit').click(function() {
+                            var tagid = $(this).data('id');
+                            var data = tag.find(tag => tag.id === tagid)
+                            setFormValues('form-update', data)
+                            $('#form-update').data('id', data['id'])
+                            $('#modal-update').modal('show')
+                        })
+
+                        $('.btn-delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
+                        })
+                    } else {
+                        $('#data').html(showNoData('TAG KOSONG!!'))
+                    }
+                }
+            })
+        }
+
+        function rowTag(index, data) {
+            return `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${data.name}</td>
+                <td>
+                    <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="${data.id}"
+                        id="btn-edit-${data.id}">
+                        Edit
+                    </button>
+                    <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white"
+                        data-id="${data.id}">Hapus</button>
+                </td>
+            </tr>
+        `
+        }
+
+
+        $('#form-create').submit(function(e) {
+            $('.preloader').show();
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{ route('tag.create') }}",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    get(1)
+                    $('.preloader').fadeOut();
+                    var response = response.responseJSON
+
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: "Berhasil Menambahkan Data"
+                    })
+                    $('#modal-create').modal('hide')
+                    emptyForm('form-create')
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut();
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Terdapat masalah saat input data"
+                    });
+                    var response = response.responseJSON
+                    var status = response.meta.code
+                    if (status == 422) {
+                        handleValidate(response.data, 'create')
+                    }
+                }
+            })
         })
 
-        $('.btn-delete').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `delete-tag/` + id;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
+        $('#form-delete').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            $.ajax({
+            url: "delete-tag/" + id,
+                type: 'DELETE',
+                data:$(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-delete').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                }
+            })
+        })
+
+        $('#form-update').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            $.ajax({
+                url: "update-tag/" + id,
+                type: 'PUT',
+                data:$(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-update').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                }
+            })
         })
     </script>
 @endsection

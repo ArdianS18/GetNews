@@ -87,9 +87,9 @@
                 </tr>
             </thead>
             <tbody id="data">
-
             </tbody>
         </table>
+        
         <div id="loading"></div>
         <div class="d-flex justify-content-end">
             <nav id="pagination">

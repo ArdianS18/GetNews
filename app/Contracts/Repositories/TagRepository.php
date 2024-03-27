@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\TagInterface;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TagRepository extends BaseRepository implements TagInterface
 {
@@ -50,6 +51,15 @@ class TagRepository extends BaseRepository implements TagInterface
     public function search(mixed $query): mixed
     {
         return $this->model->where('name','LIKE', '%'.$query.'%')->paginate(5);
+    }
+
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->name . '%');
+            })
+            ->fastPaginate($pagination);
     }
 
     /**
