@@ -42,12 +42,12 @@ class RegisterService
     public function registerWithAdmin(RegisterRequest $request): array
     {
         $data = $request->validated();
-        
+
         if ($request->hasFile('cv')) {
             $img = $request->file('cv');
             $stored_image = $img->store(UploadDiskEnum::AUTHOR_CV->value , 'public');
         }
-        
+
 
         return [
             'name' => $data['name'],

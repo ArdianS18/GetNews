@@ -276,7 +276,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" id="daftar" disabled class="btn btn-outline-primary">Daftar</button>
+                        <button type="submit" id="daftar" class="btn btn-outline-primary">Daftar</button>
                     </div>
                 </form>
             </div>
@@ -286,8 +286,6 @@
 
 @section('script')
     <script>
-        
-
         $('.test').change(function() { // Attach a change event listener to the checkbox
             if ($(this).prop('checked')) { // Check if the checkbox is checked
                 console.log(true);

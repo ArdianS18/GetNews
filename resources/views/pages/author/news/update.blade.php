@@ -236,6 +236,7 @@
 @endsection --}}
 
 
+
 @extends('layouts.author.sidebar')
 
 @section('style')
@@ -260,7 +261,8 @@
     <div class="container">
         <div class="news-card-a mt-1">
             <div style="padding: 1%;">
-                <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
                     <div class="row justify-content-between">
                         <div class="col-lg-6 col-md-12 from-outline">
@@ -304,7 +306,7 @@
                                 <label class="form-label" for="password_confirmation">Kategori</label>
                                 <select id="category_id"
                                     class="select2 form-control category @error('category') is-invalid @enderror"
-                                    name="category[]" multiple="true" value="{{ old('category') }}"
+                                    name="category[]" multiple="true" value=""
                                     aria-label="Default select example">
                                     <option>pilih kategori</option>
                                     @foreach ($categories as $category)
@@ -319,7 +321,6 @@
                                     </span>
                                 @enderror
                             </div>
-
                         </div>
 
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
@@ -339,7 +340,7 @@
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
                                 <select id="sub_category_id"
                                     class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                    name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
+                                    name="sub_category[]" multiple="true" value=""
                                     aria-label="Default select example">
                                     <option >pilih sub kategori</option>
                                     @foreach ($subCategories as $subCategory)
@@ -354,17 +355,6 @@
                                     </span>
                                 @enderror
                             </div>
-
-                            {{-- <div class="mt-2">
-                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                                <input type="date" id="upload_date" name="upload_date" placeholder="date"
-                                    value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
-                                @error('date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div> --}}
                         </div>
                     </div>
 
@@ -379,7 +369,6 @@
                             @enderror
                         </div>
 
-
                         <div class="col-lg-6 col-md-12 row-span-1 from-outline">
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
@@ -390,7 +379,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="d-flex justify-content-between mt-5">
@@ -399,7 +387,6 @@
                                 style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
                                 Ketentuan & Persyaratan
                             </button>
-
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-md text-black m-2"
                                     style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
@@ -407,16 +394,13 @@
                                 </button>
                                 <button type="submit" class="btn btn-md text-white m-2"
                                     style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                    Upload
+                                    Update
                                 </button>
                             </div>
                         </div>
                     </div>
             </div>
             </form>
-
-
-
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -529,26 +513,26 @@
             $('#image-uploadify').imageuploadify();
         })
 
-        $('.category').change(function() {
-            getSubCategory($(this).val())
-        })
+        // $('.category').change(function() {
+        //     getSubCategory($(this).val())
+        // })
 
-        function getSubCategory(id) {
-            $.ajax({
-                url: "sub-category-detail/" + id,
-                method: "GET",
-                dataType: "JSON",
-                beforeSend: function() {
-                    $('.sub-category').html('')
-                },
-                success: function(response) {
-                    $.each(response.data, function(index, data) {
-                        $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-                            '</option>');
-                    });
-                }
-            })
-        }
+        // function getSubCategory(id) {
+        //     $.ajax({
+        //         url: "sub-category-detail/" + id,
+        //         method: "GET",
+        //         dataType: "JSON",
+        //         beforeSend: function() {
+        //             $('.sub-category').html('')
+        //         },
+        //         success: function(response) {
+        //             $.each(response.data, function(index, data) {
+        //                 $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+        //                     '</option>');
+        //             });
+        //         }
+        //     })
+        // }
         $(".tags").select2({
             tags: true,
             tokenSeparators: [',', ' ']

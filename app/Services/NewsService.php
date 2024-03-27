@@ -101,7 +101,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         if ($request->has('tags')) {
             $newTags = [];
             foreach ($request->input('tags') as $tagName) {
-                $tag = Tag::firstOrCreate(
+                $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
                 );
@@ -135,10 +135,10 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'multi_photo' => $new_multi_photo ?: $old_multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
-            'category_id' => $data['category_id'],
+            'category' => $data['category'],
             'tags' => $data['tags'],
             'upload_date' => $data['upload_date'],
-            'sub_category_id' => $data['sub_category_id'],
+            'sub_category' => $data['sub_category'],
         ];
     }
 }

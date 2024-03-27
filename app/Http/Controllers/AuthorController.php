@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Services\Auth\RegisterService;
 use App\Services\AuthorBannedService;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class AuthorController extends Controller
 {
@@ -52,7 +53,7 @@ class AuthorController extends Controller
 
         $authors = $this->author->whereIn("panding", false, $request);
         $authors->appends(['search' => $searchTerm]);
-        
+
         return view('pages.admin.user.index', compact('authors', 'search', 'status'));
     }
 
@@ -93,9 +94,20 @@ class AuthorController extends Controller
     public function approved(Author $author, $authorId)
     {
         $data['status'] = UserStatusEnum::APPROVED->value;
-        $data = $this->author->update($authorId, $data);
-        $data->assignRole(RoleEnum::AUTHOR);
-        return back();
+        $author = Author::find($authorId);
+
+        if ($author) {
+            $author->update($data);
+
+            $user = $author->user;
+            $authorRole = Role::where('name', 'author')->first();
+
+        if ($user && $authorRole) {
+            $user->roles()->sync([$authorRole->id]);
+        }
+    }
+
+    return back();
     }
 
     public function reject(Author $author, $authorId)

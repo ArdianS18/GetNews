@@ -41,6 +41,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="form-create" method="post">
+                    @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="tag" class="form-label">Tambahkan Tag: </label>
@@ -169,7 +170,7 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#data').html(showNoData('TAG KOSONG!!'))
+                        $('#loading').html(showNoData('TAG KOSONG!!'))
                     }
                 }
             })

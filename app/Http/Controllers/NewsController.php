@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
+use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
@@ -20,6 +23,7 @@ use App\Http\Requests\NewsStatusRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Models\NewsPhoto;
+use App\Models\NewsTag;
 use App\Models\User;
 use App\Services\NewsService;
 use App\Services\NewsTrendingService;
@@ -31,6 +35,10 @@ use PhpParser\Node\Stmt\Foreach_;
 
 class NewsController extends Controller
 {
+    private NewsCategoryInterface $newsCategory;
+    private NewsSubCategoryInterface $newsSubCategory;
+    private NewsTagInterface $newsTag;
+
     private NewsInterface $news;
     private UserInterface $user;
     private CommentInterface $comment;
@@ -45,8 +53,12 @@ class NewsController extends Controller
 
     protected $newsRepositoty;
 
-    public function __construct(TagInterface $tags, ViewInterface $view, NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
+    public function __construct(TagInterface $tags, NewsCategoryInterface $newsCategory, NewsSubCategoryInterface $newsSubCategory, NewsTagInterface $newsTag,ViewInterface $view, NewsHasLikeInterface $newsHasLike ,CommentInterface $comment, UserInterface $user, NewsRepository $newsRepository, NewsInterface $news, SubCategoryInterface $subCategory, CategoryInterface $category,NewsService $NewsService, NewsTrendingService $newsTrendingService, NewsPhotoInterface $newsPhoto)
     {
+        $this->newsCategory = $newsCategory;
+        $this->newsSubCategory = $newsSubCategory;
+        $this->newsTag = $newsTag;
+
         $this->tags = $tags;
         $this->news = $news;
         $this->view = $view;
@@ -110,7 +122,13 @@ class NewsController extends Controller
         $categories = $this->category->get();
         $newsPhoto = $this->newsPhoto->where($news);
 
-        return view('pages.admin.news_admin.detail-news', compact('news','subCategories','categories','newsPhoto'));
+        $tags = $this->tags->get();
+
+        $newsCategories = $this->newsCategory->get()->whereIn('news_id', $news);
+        $newsSubCategories = $this->newsSubCategory->get()->whereIn('news_id', $news);
+        $newsTags = $this->newsTag->get()->whereIn('news_id', $news);
+
+        return view('pages.admin.news_admin.detail-news', compact('news','tags','newsCategories','newsSubCategories','subCategories','newsTags','categories','newsPhoto'));
     }
 
     public function createnews()

@@ -130,6 +130,7 @@ class ProfileController extends Controller
 
     public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto)
     {
+        // dd($request);
         $data = $this->NewsService->update($request, $news, $newsPhoto);
         $this->news->update($news->id, $data);
 
@@ -141,6 +142,27 @@ class ProfileController extends Controller
                     'multi_photo' => $photo,
                 ]);
             }
+        }
+
+        foreach ($data['category'] as $category) {
+            $this->newsCategory->updateOrCreate([
+                'news_id' => $news->id,
+                'category_id' => $category
+            ]);
+        }
+
+        foreach ($data['sub_category'] as $subCategory) {
+            $this->newsSubCategory->updateOrCreate([
+                'news_id' => $news->id,
+                'sub_category_id' => $subCategory
+            ]);
+        }
+
+        foreach ($data['tags'] as $tagId) {
+            $this->newsTag->updateOrCreate([
+                'news_id' => $news->id,
+                'tag_id' => $tagId
+            ]);
         }
 
         return ResponseHelper::success(null, trans('alert.add_success'));

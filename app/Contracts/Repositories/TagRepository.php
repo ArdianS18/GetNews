@@ -28,6 +28,11 @@ class TagRepository extends BaseRepository implements TagInterface
         ->delete();
     }
 
+    public function getIdsByName(array $tagNames): array
+    {
+        return $this->model->whereIn('name', $tagNames)->pluck('id')->all();
+    }
+
 
     public function paginate(): mixed
     {
