@@ -45,10 +45,9 @@ Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
 
 Auth::routes();
 
-Route::middleware(['role:admin|superadmin'])->group(function () {
-    //Beranda *Admin*
+
+Route::middleware(['auth','role:admin|superadmin','verified'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
-    //Beranda *Admin*
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
     Route::get('list-author-admin', function(){
         return view('pages.admin.user.author-list');
