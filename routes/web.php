@@ -68,6 +68,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::get('search', [CategoryController::class, 'search'])->name('search.category');
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
+    Route::get('subcategories/{subcategory}', [CategoryController::class, 'show'])->name('sub.category.show');
     Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
     Route::resource('categories', CategoryController::class);
 
@@ -108,6 +109,18 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::post('kategori', [CategoryController::class, 'store'])->name('kategori.store');
     Route::put('kategori/{category}', [CategoryController::class, 'update'])->name('kategori.update');
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
+
+     // ==== Sub Kategori ====
+
+     Route::get('SubKategori-admin', [SubCategoryController::class, 'index'])->name('subkategori.index');
+
+     Route::get('Subategori-list', function(){
+         return view('pages.admin.subcategories.index');
+     })->name('subkategori.admin');
+ 
+     Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
+     Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
+     Route::delete('SubKategori/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subkategori.destroy');
 
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');

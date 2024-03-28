@@ -24,15 +24,15 @@
         <section>
             <div class="container-fluid h-custom">
                 <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-md-12 col-lg-6 col-xl-6">
+                    <div class="col-md-12 col-lg-6">
                         <img width="500px" src="assets/img/log.png" alt="">
                     </div>
-                    <div class="col-md-12 col-lg-6 col-xl-4 offset-xl-1">
+                    <div class="col-md-12 col-lg-6">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div
                                 class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <h2>Daftar Akun GetMedia.id</h2>
+                                <h2>Login Akun GetMedia.id</h2>
                             </div>
                             @if ($errors->any())
                                 @foreach ($errors->all() as $error)
