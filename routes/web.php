@@ -50,7 +50,7 @@ Auth::routes();
 Route::middleware(['auth','role:admin|superadmin','verified'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
-    Route::get('list-author-admin', function(){
+    Route::get('list-author', function(){
         return view('pages.admin.user.author-list');
     })->name('list.author.admin'); //list author approved
 

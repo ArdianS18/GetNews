@@ -68,7 +68,7 @@
                 </tbody>
             </table>
             <div id="loading"></div>
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end mx-4">
                 <nav id="pagination">
                 </nav>
             </div>
@@ -228,6 +228,35 @@
                     <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
                         data-bs-dismiss="modal">
                         Blokir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-unblock" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <form id="form-unblock" method="POST" class="modal-content">
+                @csrf
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Buka Blokir Penulis
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Apakah anda yakin akan Membuka Blokir penulis ini?  </p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Buka
                     </button>
                 </div>
             </form>
