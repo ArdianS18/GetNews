@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +46,9 @@ Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
 
 Auth::routes();
 
-Route::middleware(['role:admin|superadmin'])->group(function () {
-    //Beranda *Admin*
+
+Route::middleware(['auth','role:admin|superadmin','verified'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
-    //Beranda *Admin*
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
     Route::get('list-author-admin', function(){
         return view('pages.admin.user.author-list');
@@ -64,10 +64,11 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
 
     Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create'); // fungsi create author dari admin -> langsung approve dan role : author
     // Sub Catgeory dan Category
-    Route::resource('categories', CategoryController::class);
+    // Route::resource('categories', CategoryController::class);
     Route::get('search', [CategoryController::class, 'search'])->name('search.category');
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
+    Route::get('subcategories/{subcategory}', [CategoryController::class, 'show'])->name('sub.category.show');
     Route::delete('subcategories/{subcategory}', [SubCategoryController::class, 'destroy'])->name('sub.category.destroy');
     Route::resource('categories', CategoryController::class);
 
@@ -95,6 +96,32 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
+
+    // ==== Kategori ====
+
+    Route::get('kategori-admin', [CategoryController::class, 'index'])->name('kategori.index');
+
+    Route::get('category', function(){
+        return view('pages.admin.categories.index');
+    })->name('kategori.admin');
+
+    Route::post('kategori', [CategoryController::class, 'store'])->name('kategori.store');
+    Route::put('kategori/{category}', [CategoryController::class, 'update'])->name('kategori.update');
+    Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
+
+     // ==== Sub Kategori ====
+
+     Route::get('SubKategori-admin/{category}', [SubCategoryController::class, 'index'])->name('subkategori.index');
+
+     Route::get('sub-category/{category}', function($category){
+         return view('pages.admin.categories.subcategories.index',compact('category'));
+     })->name('sub.category.admin');
+ 
+     Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
+     Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
+     Route::delete('SubKategori/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subkategori.destroy');
+
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
@@ -252,4 +279,5 @@ Route::get('tukar-coin', function(){
 Route::get('pengajuan-berita', function(){
     return view('pages.user.news.pengajuan');
 })->name('pengajuan.berita');
+
 ?>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubCategoryRequest extends FormRequest
+class SubCategoryRequest extends ApiRequest
 {
 
     /**
@@ -22,7 +22,7 @@ class SubCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name|required' => 'Nama tidak boleh kosong',
+            'name.required' => 'Nama tidak boleh kosong',
         ];
     }
 }

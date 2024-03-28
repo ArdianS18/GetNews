@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Interfaces;
 
+use App\Contracts\Interfaces\Eloquent\CustomPaginationInterface;
 use App\Contracts\Interfaces\Eloquent\DeleteInterface;
 use App\Contracts\Interfaces\Eloquent\GetInterface;
 use App\Contracts\Interfaces\Eloquent\PaginateInterface;
@@ -10,7 +11,7 @@ use App\Contracts\Interfaces\Eloquent\ShowSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface CategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, ShowSlugInterface, PaginateInterface
+interface CategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, ShowSlugInterface, PaginateInterface, CustomPaginationInterface
 {
     public function showWhithCount() : mixed;
 }

@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseHelper;
+use App\Services\CategoryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\CategoryResource;
+use App\Contracts\Interfaces\NewsInterface;
 use Illuminate\Database\Eloquent\Casts\Json;
 use App\Contracts\Interfaces\CategoryInterface;
-use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
-use App\Services\CategoryService;
+use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Contracts\Interfaces\NewsSubCategoryInterface;
 
 class CategoryController extends Controller
 {
@@ -22,37 +25,34 @@ class CategoryController extends Controller
     private NewsInterface $news;
     private CategoryService $CategoryService;
 
-    public function __construct(CategoryInterface $categori, SubCategoryInterface $subCategory, NewsInterface $news, CategoryService $CategoryService)
+    private NewsSubCategoryInterface $newsSubCategory;
+
+    public function __construct(NewsSubCategoryInterface $newsSubCategory, CategoryInterface $categori, SubCategoryInterface $subCategory, NewsInterface $news, CategoryService $CategoryService)
     {
         $this->categori = $categori;
         $this->subCategory = $subCategory;
         $this->news = $news;
+        $this->newsSubCategory = $newsSubCategory;
         $this->CategoryService = $CategoryService;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): View
-    {
-        $query = $request->input('search');
-        $searchTerm = $request->input('search', '');
-
-        $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
-        $categoris->appends(['search' => $searchTerm]);
-
-        return view('pages.admin.categories.index', compact('categoris'));
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->get('search');
-        $searchTerm = $request->input('search', '');
-
-        $categoris = $query ? $this->categori->search($query) : $this->categori->paginate();
-        $categoris->appends(['search' => $searchTerm]);
-
-        return response()->json($categoris);
+    public function index(Request $request, Category $category)
+    {   
+        if ($request->has('page')) {
+            $category = $this->categori->customPaginate($request, 10);
+            $data['paginate'] = [
+                'current_page' => $category->currentPage(),
+                'last_page' => $category->lastPage(),
+            ];
+            $data['data'] = CategoryResource::collection($category);
+        } else {
+            $categories = $this->categori->search($request);
+            $data = CategoryResource::collection($categories);
+        }
+        return ResponseHelper::success($data);
     }
 
     /**
@@ -66,13 +66,11 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request): RedirectResponse
+    public function store(CategoryRequest $request)
     {
         $data = $this->CategoryService->store($request);
-
         $this->categori->store($data);
-        // $categori = $this->categori->store($request->validated());
-        return redirect()->back()->with('success', trans('alert.add_success'));
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**
@@ -106,14 +104,18 @@ class CategoryController extends Controller
         /**
      * Display the specified resource.
      */
-    public function getCategory(Category $category, Request $request) :JsonResponse
+    public function getCategory(Category $category, Request $request)
     {
         // $request->merge([
         //     'category_id' => $category->id
         // ]);
 
-        $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id);
-        return ResponseHelper::success($subCategory,trans('alert.fetch_success'));
+        $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id)->id;
+        $news = $this->news->get();
+        $newsSubCategories = $this->newsSubCategory->get();
+        
+        return view('pages.user.news.subcategory', compact('subCategory','news', 'newsSubCategories'));
+        // return ResponseHelper::success($subCategory,$news,$newsSubCategory,trans('alert.fetch_success'));
     }
 
     /**
@@ -127,22 +129,20 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category): RedirectResponse
+    public function update(CategoryRequest $request, Category $category)
     {
         $data = $this->CategoryService->update($request, $category);
         $this->categori->update($category->id, $data);
-        return redirect()->back()->with('success', trans('alert.update_success'));
+        return ResponseHelper::success(null, trans('alert.update_success'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category): RedirectResponse
+    public function destroy(Category $category)
     {
-        if (!$this->categori->delete($category->id)) {
-            return back()->with('success', trans('alert.delete_success'));
-        }
+        $this->categori->delete($category->id);
+        return ResponseHelper::success(null, trans('alert.delete_success'));
 
-        return redirect()->back()->with('success', trans('alert.delete_success'));
     }
 }

@@ -1,12 +1,42 @@
 <div class="navbar-area header-one mb-5" id="navbar">
+    <div class="header-top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-6 col-5">
+                    <button class="subscribe-btn" data-bs-toggle="modal" data-bs-target="#newsletter-popup">Berlangganan<i class="flaticon-right-arrow"></i></button>
+                </div>
+                <div class="col-lg-4 col-md-6 md-none">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" />
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 col-7">
+                    <ul class="social-profile list-style">
+                        <li>
+                            <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
             <div class="sidebar-toggler md-none" style="padding-left: 50px;" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <img src="{{asset('assets/img/logo-get-media.png')}}" width="150px" alt="Image" />
             </div>
             <a class="navbar-brand d-lg-none" href="/">
-                <img class="logo-light" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
-                <img class="logo-dark" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
+                {{-- <img class="logo-light" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" />
+                <img class="logo-dark" src="{{asset('assets/img/logo-white.webp')}}" alt="logo" /> --}}
             </a>
             <button type="button" class="search-btn d-lg-none" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
@@ -38,7 +68,6 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
                             </a>
                             <ul class="dropdown-menu">
-                                @if ($loop->iteration >= 6)
                                 {{-- <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a> --}}
                                 @if($categories->count() > 6)
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -61,7 +90,6 @@
                                         </div>
                                     @endfor
                                 </div>
-                            @endif
                             
                                 @endif
                             </ul>
@@ -76,23 +104,6 @@
                             <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
                         </li>
                     @endempty
-
-                    {{-- @forelse ($categories as $category)
-                    <li class="nav-item">
-                            <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
-                            <ul class="dropdown-menu">
-                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
-                                    <li class="nav-item">
-                                        <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}" class="nav-link">{{ $subCategory->name }}</a>
-                                    </li>
-                                    @endforeach
-                            </ul>
-                        </li>
-                    @empty
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link"> Tidak ada kategori yang ditampilkan </a>
-                        </li>
-                    @endforelse --}}
                 </ul>
 
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
@@ -123,6 +134,7 @@
 
                         @auth
                         <ul class="navbar-nav mx-auto">
+                            {{-- <li></li> --}}
                             <li class="nav-item">
                                 <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
                                     <a href="javascript:void(0)" class="nav-link">

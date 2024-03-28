@@ -5,9 +5,10 @@ namespace App\Contracts\Repositories;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Enums\CategoryStatusEnum;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\CategoryInterface;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
 {
@@ -28,6 +29,15 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->paginate(5);
     }
 
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->when($request->category, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->category . '%');
+            })
+            ->fastPaginate($pagination);
+    }
+    
     /**
      * Handle show method and delete data instantly from models.
      *
@@ -118,4 +128,6 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->take(6)
             ->get();
     }
+
+    
 }
