@@ -15,6 +15,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +64,7 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
 
     Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create'); // fungsi create author dari admin -> langsung approve dan role : author
     // Sub Catgeory dan Category
-    Route::resource('categories', CategoryController::class);
+    // Route::resource('categories', CategoryController::class);
     Route::get('search', [CategoryController::class, 'search'])->name('search.category');
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
@@ -94,6 +95,20 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
+
+    // ==== Kategori ====
+
+    Route::get('kategori-admin', [CategoryController::class, 'index'])->name('kategori.index');
+
+    Route::get('kategori-list', function(){
+        return view('pages.admin.categories.index');
+    })->name('kategori.admin');
+
+    Route::post('kategori', [CategoryController::class, 'store'])->name('kategori.store');
+    Route::put('kategori/{category}', [CategoryController::class, 'update'])->name('kategori.update');
+    Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
+
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
 
@@ -247,4 +262,5 @@ Route::get('tukar-coin', function(){
 Route::get('pengajuan-berita', function(){
     return view('pages.user.news.pengajuan');
 })->name('pengajuan.berita');
+
 ?>
