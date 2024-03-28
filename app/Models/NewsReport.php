@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Report extends Model
+class NewsReport extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'news_id',  'message', 'status_delete'];
-    protected $table = 'reports';
+    protected $fillable = ['user_id', 'news_id', 'message'];
 
     /**
-     * Get the user that owns the ContactUs
+     * Get the user that owns toe NewsReport
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -23,8 +22,8 @@ class Report extends Model
         return $this->belongsTo(User::class);
     }
 
-        /**
-     * Get the user that owns the ContactUs
+    /**
+     * Get the user that owns the NewsReport
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

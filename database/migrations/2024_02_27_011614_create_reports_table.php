@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained();
             $table->foreignUuid('news_id')->constrained();
             $table->text('message');
+            $table->boolean('status_delete')->default(0);
             $table->timestamps();
         });
     }

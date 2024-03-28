@@ -94,6 +94,27 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        $data = [
+            'status_delete' => 1
+        ];
+
+        $this->report->update($report->id, $data);
+        return back()->with('success', 'berhasil menghapus data');
+    }
+
+    public function recovery(Report $report)
+    {
+        $data = [
+            'status_delete' => 0
+        ];
+
+        $this->report->update($report->id, $data);
+        return back()->with('success', 'berhasil menghapus data');
+    }
+
+    public function delete(Report $report)
+    {
+        $this->report->delete($report->id);
+        return back()->with('success', 'berhasil menghapus data');
     }
 }

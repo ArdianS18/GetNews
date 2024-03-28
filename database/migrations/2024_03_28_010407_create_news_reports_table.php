@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact_us', function (Blueprint $table) {
+        Schema::create('news_reports', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->constrained();
-            $table->string('message');
-            $table->boolean('status_delete')->default(0);
+            $table->foreignUuid('news_id')->constrained();
+            $table->text('message');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contact_us');
+        Schema::dropIfExists('news_reports');
     }
 };

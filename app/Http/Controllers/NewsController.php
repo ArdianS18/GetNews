@@ -280,7 +280,9 @@ class NewsController extends Controller
         $subCategories = $this->subCategory->get();
         $news = $this->news->get()->whereIn('category_id', $categoryId);
 
-        return view('pages.user.news.category', compact('news','subCategories','categories','category', 'subCategory'));
+        $newsCategories = $this->newsCategory->get()->where('category_id', $categoryId);
+
+        return view('pages.user.news.category', compact('news','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
     public function showSubCategories($slug){

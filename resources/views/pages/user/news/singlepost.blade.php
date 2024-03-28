@@ -141,12 +141,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="tambahdataLabel"><span
-                                                style="color: #0F4D8A; font-size: 25px;" class="mb-2 me-1">|</span>Laporkan
+                                                style="color: #0F4D8A; font-size: 25px;" class="mb-2 me-1"></span>Laporkan
                                         </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="{{ route('report.store') }}" method="post">
+                                    <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
+                                        @method('post')
                                         @csrf
                                         <div class="modal-body">
 
@@ -154,7 +155,7 @@
                                                 <div class="mb-3 form-group">
                                                     <label for="message" class="form-label">Masukan Detail
                                                         Laporan:</label>
-                                                    <textarea name="message" id="message" class="form-control" rows="7"></textarea>
+                                                    <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
                                                     @error('message')
                                                         <span class="invalid-feedback" role="alert" style="color: red;">
                                                             <strong>{{ $message }}</strong>

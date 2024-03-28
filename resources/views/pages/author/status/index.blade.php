@@ -40,7 +40,7 @@
                 <div class="row card-detail">
                     <div class="col-md-12 col-lg-3">
                         <div class="" style="margin-left: 2%;">
-                            <img src="{{ asset('assets/img/test.svg') }}" alt="{{ $news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
+                            <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
                         </div>
                     </div>
                     <div class=" col-md-12 col-lg-7">

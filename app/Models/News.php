@@ -77,7 +77,7 @@ class News extends Model
         return $this->hasMany(View::class);
     }
 
-    public function report(): HasMany
+    public function reports(): HasMany
     {
         return $this->hasMany(Report::class);
     }
@@ -97,5 +97,10 @@ class News extends Model
     public function newsSubCategories(): HasMany
     {
         return $this->hasMany(NewsSubCategory::class);
+    }
+
+    public function newsReports(): HasMany
+    {
+        return $this->hasMany(NewsReport::class);
     }
 }

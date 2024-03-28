@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\ReportInterface;
 use App\Models\Report;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class ReportRepository extends BaseRepository implements ReportInterface
 {
@@ -17,6 +18,11 @@ class ReportRepository extends BaseRepository implements ReportInterface
     {
         return $this->model->query()
             ->get();
+    }
+
+    public function where(Request $request): mixed
+    {
+        return $this->model->whereIn('status_delete', $request)->ger();
     }
 
 

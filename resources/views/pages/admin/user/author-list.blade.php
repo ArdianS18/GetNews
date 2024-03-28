@@ -21,7 +21,6 @@
         <div class="d-flex justify-content-between">
             <div class="d-flex justify-content-start gap-2 ">
                 <form class="d-flex gap-2">
-
                     <div class="position-relative">
                         <div class="input-group">
                             <input type="text" name="search" class="form-control search-chat py-2 ps-5" id="search-name"
@@ -33,8 +32,8 @@
                     <div class="d-flex gap-2">
                         <select name="status" class="form-select" id="search-status">
                             <option value="">Tampilkan semua</option>
-                            <option value="true">Blokir</option>
-                            <option value="false">Aktif</option>
+                            <option value="1">Blokir</option>
+                            <option value="0">Aktif</option>
                         </select>
                     </div>
                 </form>
@@ -222,9 +221,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-    
+
                     <p>Apakah anda yakin akan memblokir penulis ini?  </p>
-    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
@@ -237,7 +236,7 @@
             </form>
         </div>
     </div>
-    
+
 @endsection
 
 @section('script')
@@ -296,7 +295,7 @@
             })
         }
 
-        
+
         $('#form-create').submit(function(e) {
             $('.preloader').show();
             e.preventDefault();

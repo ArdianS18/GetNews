@@ -15,7 +15,8 @@ class ContactUsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'required'
+            'message' => 'required',
+            'status_delete' => 'required'
         ];
     }
 

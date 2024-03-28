@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsHasLikeController;
+use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
@@ -96,10 +97,14 @@ Route::middleware(['role:admin|superadmin'])->group(function () {
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
-
-    Route::get('contact', [ContactUsController::class, 'index'])->name('contact.index');
-    Route::put('contact/{contact}', [ContactUsController::class, 'update'])->name('contact.update');
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
+    Route::delete('report/{report}', [ReportController::class, 'destroy'])->name('report.destroy.');
+
+    Route::delete('contact-recovery/{contact}', [ContactUsController::class, 'recovery'])->name('contact.recovery');
+    Route::delete('report-recovery/{report}', [ReportController::class, 'recovery'])->name('report.recovery');
+
+    Route::delete('contact-delete/{contact}', [ContactUsController::class, 'delete'])->name('contact.delete');
+    Route::delete('report-delete/{report}', [ReportController::class, 'delete'])->name('report.delete');
 
     Route::get('tag-admin', [TagController::class, 'index'])->name('tag.detail');
 
@@ -224,7 +229,7 @@ Route::get('admin-inbox', function(){
 
 // Inbox
 Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
-Route::post('admin-store', [ReportController::class, 'index'])->name('report.store');
+Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
 
 Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 

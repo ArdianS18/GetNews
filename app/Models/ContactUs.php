@@ -10,7 +10,7 @@ class ContactUs extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'message'];
+    protected $fillable = ['user_id', 'message', 'status_delete'];
     protected $table = 'contact_us';
 
     /**

@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\ContactUsInterface;
 use App\Models\ContactUs;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
 class ContactUsRepository extends BaseRepository implements ContactUsInterface
 {
@@ -19,6 +20,10 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
             ->get();
     }
 
+    public function where(Request $request): mixed
+    {
+        return $this->model->whereIn('status_delete', $request)->get();
+    }
 
     /**
      * Handle show method and delete data instantly from models.
