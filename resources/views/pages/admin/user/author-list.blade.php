@@ -69,6 +69,10 @@
                 </tbody>
             </table>
             <div id="loading"></div>
+            <div class="d-flex justify-content-end">
+                <nav id="pagination">
+                </nav>
+            </div>
         </div>
 
         <div class="modal fade" id="modal-create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -88,63 +92,54 @@
                             <div class="row container">
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Nama</label>
-                                    <input type="text" id="name" name="name" placeholder="nama"
+                                    <input type="text" id="create-name" name="name" placeholder="nama"
                                         value="{{ old('name') }}"
-                                        class="form-control @error('name') is-invalid @enderror">
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                        class="form-control ">
+                                        <ul class="error-text"></ul>
+
+                                   
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Nomor Telepon</label>
-                                    <input type="text" id="name" name="phone_number" placeholder="nomor telepon"
-                                        value="{{ old('phone_number') }}"
-                                        class="form-control @error('phone_number') is-invalid @enderror">
-                                    @error('phone_number')
-                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <input type="text" id="create-phone_number" name="phone_number"
+                                        placeholder="nomor telepon" value="{{ old('phone_number') }}"
+                                        class="form-control ">
+                                        <ul class="error-text"></ul>
+
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Email</label>
-                                    <input type="text" id="email" name="email" placeholder="email"
+                                    <input type="text" id="create-email" name="email" placeholder="email"
                                         value="{{ old('email') }}"
-                                        class="form-control @error('email') is-invalid @enderror">
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                        class="form-control ">
+                                        <ul class="error-text"></ul>
+
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">CV</label>
-                                    <input type="file" id="cv" name="cv" placeholder="name"
+                                    <input type="file" id="create-cv" name="cv" placeholder="name"
                                         value="{{ old('cv') }}"
-                                        class="form-control @error('cv') is-invalid @enderror">
+                                        class="form-control ">
+                                        <ul class="error-text"></ul>
 
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Password</label>
-                                    <input type="text" id="password" name="password" placeholder="password"
+                                    <input type="text" id="create-password" name="password" placeholder="password"
                                         value="{{ old('password') }}"
-                                        class="form-control @error('password') is-invalid @enderror">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                        class="form-control">
+                                        <ul class="error-text"></ul>
+
                                 </div>
 
                                 <div class="col-md-12 col-lg-12 from-group mb-3">
                                     <label class="form-label" for="address">Alamat</label>
-                                    <textarea name="address" id="address" rows="6" class="form-control"></textarea>
+                                    <textarea name="address" id="create-address" rows="6" class="form-control"></textarea>
+                                    <ul class="error-text"></ul>
                                 </div>
                             </div>
                         </div>
@@ -222,15 +217,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-    
-                    <p>Apakah anda yakin akan memblokir penulis ini?  </p>
-    
+
+                    <p>Apakah anda yakin akan memblokir penulis ini? </p>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                        data-bs-dismiss="modal">
                         Batal
                     </button>
-                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                        data-bs-dismiss="modal">
                         Blokir
                     </button>
                 </div>
@@ -248,22 +245,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-    
-                    <p>Apakah anda yakin akan membuka Blokir penulis ini?  </p>
-    
+
+                    <p>Apakah anda yakin akan membuka Blokir penulis ini? </p>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                        data-bs-dismiss="modal">
                         Batal
                     </button>
-                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect" data-bs-dismiss="modal">
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                        data-bs-dismiss="modal">
                         Buka
                     </button>
                 </div>
             </form>
         </div>
     </div>
-    
 @endsection
 
 @section('script')
@@ -289,12 +287,13 @@
                 method: "GET",
                 data: {
                     name: $('#search-name').val(),
-                    status:$('#search-status').val()
+                    status: $('#search-status').val()
                 },
                 dataType: "JSON",
-                beforeSend:function(){
+                beforeSend: function() {
                     $('#data').html('')
                     $('#loading').html(showLoading())
+                    $('#pagination').html('')
                 },
                 success: function(response) {
                     $('#loading').html('')
@@ -303,6 +302,8 @@
                         $.each(response.data.data, function(index, data) {
                             $('#data').append(authorRow(index, data))
                         })
+                        $('#pagination').html(handlePaginate(response.data.paginate))
+
                         $('.btn-detail').click(function() {
                             var authorId = $(this).data('id');
                             var data = author.find(author => author.id === authorId)
@@ -311,23 +312,23 @@
                             detailPhoto.src = data['photo'];
                             $('#modal-detail').modal('show')
                         })
-                        $('.blokir').click(function(){
-                            $('#form-blokir').data('id',$(this).data('id'))
+                        $('.blokir').click(function() {
+                            $('#form-blokir').data('id', $(this).data('id'))
                             $('#modal-blokir').modal('show')
                         })
 
-                        $('.unblock').click(function(){
-                            $('#form-unblock').data('id',$(this).data('id'))
+                        $('.unblock').click(function() {
+                            $('#form-unblock').data('id', $(this).data('id'))
                             $('#modal-unblock').modal('show')
                         })
-                    }else{
+                    } else {
                         $('#loading').html(showNoData('Penulis Tidak Ada !!'))
                     }
                 }
             })
         }
 
-        
+
         $('#form-create').submit(function(e) {
             $('.preloader').show();
             e.preventDefault();
@@ -359,11 +360,8 @@
                         icon: 'error',
                         text: "Terdapat masalah saat input data"
                     });
-                    var response = response.responseJSON
-                    var status = response.meta.code
-                    if (status == 422) {
-                        handleValidate(response.data, 'create')
-                    }
+                    handleValidate(response.responseJSON.errors,'create')
+
                 }
             })
         })
@@ -375,7 +373,7 @@
             $.ajax({
                 url: "banned-author/" + id,
                 type: 'PUT',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -399,7 +397,7 @@
             $.ajax({
                 url: "banned-author/" + id,
                 type: 'PUT',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -467,6 +465,5 @@
                 </tr>
         `
         }
-
     </script>
 @endsection

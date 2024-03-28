@@ -99,18 +99,18 @@
             const keys = Object.keys(messages);
             for (const key of keys) {
                 const text = messages[key];
-                var ErrorList = $('<li>').text(text[0])
+                var ErrorList = $('<li>').text(text[0]).addClass('text-danger')
                 let inputElement = $(`#${type}-${key}`)
                 let select2Element = $(`#${type}-${key}`).siblings('.select2-container');
                 if (!inputElement.is('div')) {
-                    inputElement.addClass('error')
-                    select2Element.addClass('error');
+                    inputElement.addClass('is-invalid')
+                    select2Element.addClass('is-invalid');
                 }
                 inputElement.next('ul').html(ErrorList)
                 select2Element.next('ul').html(ErrorList)
             }
-            $('.error').change(function() {
-                $(this).removeClass('error')
+            $('.is-invalid').change(function() {
+                $(this).removeClass('is-invalid')
                 $(this).next('ul').html('')
             })
         }
