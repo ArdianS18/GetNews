@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\SubCategoryInterface;
-use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
-use App\Services\SubCategoryService;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
+use Illuminate\Contracts\View\View;
+use App\Services\SubCategoryService;
+use App\Http\Requests\SubCategoryRequest;
+use App\Http\Resources\SubCategoryResource;
+use App\Contracts\Interfaces\SubCategoryInterface;
 
 class SubCategoryController extends Controller
 {
@@ -23,9 +25,17 @@ class SubCategoryController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request,Category $category)
     {
-        //
+        $request->merge(['category' => $category->id]);
+        $faq = $this->subCategory->customPaginate($request, 10);
+        $data['paginate'] = [
+            'current_page' => $faq->currentPage(),
+            'last_page' => $faq->lastPage(),
+        ];
+        $data['data'] = SubCategoryResource::collection($faq);
+        return ResponseHelper::success($data);
+
     }
 
 
@@ -35,14 +45,14 @@ class SubCategoryController extends Controller
         $data['category_id'] = $category->id;
         $this->subCategory->store($data);
 
-        return back()->with('success', trans('alert.add_success'));
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     public function update(SubCategoryRequest $request, SubCategory $subcategory, Category $category)
     {
         $data = $this->subCategoryService->update($request, $subcategory);
         $this->subCategory->update($subcategory->id, $data);
-        return back()->with('success', trans('alert.update_success'));
+        return ResponseHelper::success(null, trans('alert.update_success'));
     }
 
     /**
@@ -55,6 +65,6 @@ class SubCategoryController extends Controller
             return back()->with('success', trans('alert.delete_success'));
         }
 
-        return redirect()->back()->with('success', trans('alert.delete_success'));
+        return ResponseHelper::success(null, trans('alert.delete_success'));
     }
 }

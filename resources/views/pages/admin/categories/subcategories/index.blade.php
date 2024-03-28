@@ -16,35 +16,20 @@
 @endsection
 
 @section('content')
-        @if ($errors->any())
-        @foreach ($errors->all() as $error)
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ $error }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endforeach
-        @endif
-
-        @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{session('success') }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
+       
 
         <div class="card-table shadow-sm">
             <div class="d-flex justify-content-between">
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 ps-5"placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" class="btn btn-outline-primary">Cari</button>
                     </div>
                 </form>
 
                 <div class="">
                     <a href="{{ route('categories.index') }}" class="btn text-white mr-2 me-2" style="background-color: #175A95">Kembali</a>
-                    <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5" data-bs-toggle="modal" data-bs-target="#modal-create">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
                             <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
                         </svg>
@@ -68,26 +53,11 @@
                     </tbody>
                 </table>
 
+                
                 <div id="loading"></div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex mx-4 justify-content-end">
                     <nav id="pagination">
                     </nav>
-                </div>
-
-            </div>
-            <div class="page d-flex mt-4">
-                <div class="container">
-                    <a href="{{ route('categories.index') }}" class="btn text-white mr-2" style="background-color: #175A95">Kembali</a>
-                </div>
-
-                <div class="container">
-                    <div class="d-flex justify-content-end gap-2">
-                        <a href="{{ $subCategory->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
-                        @for ($i = 1; $i <= $subCategory->lastPage(); $i++)
-                        <a href="{{ $subCategory->url($i) }}" class="btn btn-black {{ $subCategory->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                        @endfor
-                        <a href="{{ $subCategory->nextPageUrl() }}" style="background-color: #175A95" class="btn text-white">></a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -98,17 +68,20 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Sub Kategori</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="form-create">
                     @csrf
                     <div class="modal-body">
-                        <label class="form-label mt-2">Sub Kategori</label>
-                        <input id="create-subkategori" class="form-control @error('name') is-invalid @enderror" type="text" name="name">
+                        <div>
+                            <label class="form-label mt-2">Sub Kategori</label>
+                            <input id="create-name" class="form-control" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-outline-primary">Buat data baru</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                     </div>
                 </form>
@@ -128,7 +101,7 @@
                         @csrf
                         <div class="modal-body text-start">
                             <label class="form-label mt-2">Name</label>
-                            <input id="update-name" class="form-control" type="text" name="name" value="{{ $sub->name }}">
+                            <input id="update-name" class="form-control" type="text" name="name" >
                         </div>
                         <div class="modal-footer">
                             <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
@@ -164,11 +137,11 @@
 
         function get(page) {
             $.ajax({
-                url: "{{ route('subkategori.index') }}?page=" + page,
+                url: "{{ route('subkategori.index',['category'=> $category ]) }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data:{
-                    category:$('#search-name').val()
+                    name:$('#search-name').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")
@@ -200,13 +173,13 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#data').html(showNoData('SUBKATEGORI KOSONG!!'))
+                        $('#loading').html(showNoData('SUBKATEGORI KOSONG!!'))
                     }
                 }
             })
         }
 
-        function rowKategori(index, data) {
+        function rowSubKategori(index, data) {
             let subCategory = ""
             return `
         <tr>
@@ -268,7 +241,7 @@
             e.preventDefault()
             const id = $(this).data('id')
             $.ajax({
-                url: "kategori/" + id,
+                url: "/SubKategori/" + id,
                 type: 'DELETE',
                 data:$(this).serialize(),
                 success: function(response) {
@@ -292,7 +265,7 @@
             e.preventDefault()
             const id = $(this).data('id')
             $.ajax({
-                url: "kategori/" + id,
+                url: "/SubKategori/" + id,
                 type: 'PUT',
                 data:$(this).serialize(),
                 success: function(response) {

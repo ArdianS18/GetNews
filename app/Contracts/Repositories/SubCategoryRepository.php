@@ -2,10 +2,12 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Models\SubCategory;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use App\Contracts\Repositories\BaseRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
+use App\Contracts\Interfaces\SubCategoryInterface;
 
 class SubCategoryRepository extends BaseRepository implements SubCategoryInterface
 {
@@ -124,4 +126,14 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             ->findOrFail($id)
             ->update($data);
     }
+
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+        ->where('category_id',$request->category)
+        ->when($request->name, function ($query) use ($request) {
+            $query->where('name', 'LIKE', '%' .  $request->name . '%');
+        })
+        ->fastPaginate($pagination);
+    }   
 }

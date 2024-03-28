@@ -128,4 +128,6 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->take(6)
             ->get();
     }
+
+    
 }

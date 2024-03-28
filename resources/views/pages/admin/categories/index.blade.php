@@ -114,8 +114,11 @@
                 <form id="form-create">
                     @csrf
                     <div class="modal-body">
-                        <label class="form-label mt-2">Kategori</label>
-                        <input id="create-kategori" class="form-control @error('name') is-invalid @enderror" type="text" name="name">
+                        <div>
+                            <label class="form-label mt-2">Kategori</label>
+                            <input id="create-name" class="form-control" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
@@ -139,12 +142,8 @@
                     @csrf
                     <div class="modal-body text-start">
                         <label class="form-label mt-2">Kategori</label>
-                        <input id="update-kategori" class="form-control @error('name') is-invalid @enderror" type="text" name="name">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                        <input id="update-name" class="form-control " type="text" name="name">
+                       <ul class="error-text"></ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
@@ -231,7 +230,7 @@
                         <button data-id="${data.id}" type="submit" style="background-color: #EF6E6E"
                             class="btn btn-delete text-white me-2">Hapus</button>
                             
-                            <a href="/subcategories/${data.id}" data-id="${data.id}" data-bs-toggle="tooltip" title="Sub Category" class="btn text-white" style="background-color: #0F4D8A;">
+                            <a href="/sub-category/${data.id}" data-id="${data.id}" data-bs-toggle="tooltip" title="Sub Category" class="btn text-white" style="background-color: #0F4D8A;">
                                 Sub Category
                             </a>
             
@@ -298,6 +297,7 @@
                 },
                 error: function(response) {
                     $('.preloader').fadeOut()
+                    
                 }
             })
         })

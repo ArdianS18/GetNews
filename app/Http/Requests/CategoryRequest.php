@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class CategoryRequest extends ApiRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -21,7 +21,7 @@ class CategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name|required' => 'Nama tidak boleh kosong',
+            'name.required' => 'Nama tidak boleh kosong',
         ];
     }
 }

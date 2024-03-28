@@ -101,7 +101,7 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
     Route::get('kategori-admin', [CategoryController::class, 'index'])->name('kategori.index');
 
-    Route::get('kategori-list', function(){
+    Route::get('category', function(){
         return view('pages.admin.categories.index');
     })->name('kategori.admin');
 
@@ -111,11 +111,11 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
      // ==== Sub Kategori ====
 
-     Route::get('SubKategori-admin', [SubCategoryController::class, 'index'])->name('subkategori.index');
+     Route::get('SubKategori-admin/{category}', [SubCategoryController::class, 'index'])->name('subkategori.index');
 
-     Route::get('Subategori-list', function(){
-         return view('pages.admin.subcategories.index');
-     })->name('subkategori.admin');
+     Route::get('sub-category/{category}', function($category){
+         return view('pages.admin.categories.subcategories.index',compact('category'));
+     })->name('sub.category.admin');
  
      Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
      Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
