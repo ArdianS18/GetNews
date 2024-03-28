@@ -58,7 +58,6 @@
                     <article>
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
-                                <img src="{{ asset('assets/img/test.svg') }}" alt="{{ $news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
                                 <img id="main-image" src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image">
                                 <a href="business.html" class="news-cat">Business</a>
                             </div>

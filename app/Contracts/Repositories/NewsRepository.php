@@ -87,7 +87,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
      */
     public function get(): mixed
     {
-        return $this->model->query()->withCount('views')->orderBy('views_count','desc')
+        return $this->model->query()
+        ->where('status',NewsStatusEnum::ACTIVE->value)
+        ->withCount('views')
+        ->orderBy('views_count','desc')
         ->get();
     }
 

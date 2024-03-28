@@ -65,14 +65,15 @@
     <div class="container-fluid pb-75">
         <div class="news-col-wrap">
             <div class="news-col-one">
-                {{-- @forelse ($news as $news)
+                @forelse ($news as $news)
                     @if ($loop->first)
                         <div class="news-card-two">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px"
                                     style="object-fit: cover;" alt="Image" />
-                                <a href="{{ route('categories.show.user', ['category' => $news->category->slug]) }}"
-                                    class="news-cat">{{ $news->category->name }}</a>
+                                    
+                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a
@@ -106,7 +107,7 @@
                     
 
                 @empty
-                @endforelse --}}
+                @endforelse
 
                 <div class="news-card-three">
                     <div class="news-card-img">
