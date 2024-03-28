@@ -12,6 +12,7 @@ use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\UploadDiskEnum;
 use App\Enums\UserStatusEnum;
 use App\Http\Requests\AuthorRequest;
+use Carbon\Carbon;
 
 class RegisterService
 {
@@ -55,6 +56,7 @@ class RegisterService
             'password' => bcrypt($data['password']),
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'cv' => $stored_image,
         ];
     }

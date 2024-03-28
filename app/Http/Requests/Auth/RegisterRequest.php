@@ -19,7 +19,7 @@ class RegisterRequest extends BaseRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
             'phone_number' => 'required|numeric|min:15',
             'address' => 'required|string|max:255',
@@ -35,6 +35,7 @@ class RegisterRequest extends BaseRequest
             'name.required' => 'Nama mohon untuk diisi',
             'email.required' => 'Email mohon untuk diisi',
             'email.email' => 'Mohon email berupa Gmail',
+            'email.unique' => 'Email sudah digunakan!!',
             'password.required' => 'Password mohon untuk diisi',
             'password.min' => 'Password minimal 8 karakter',
             'phone_number.required' => 'Nomor mohon untuk diisi',
