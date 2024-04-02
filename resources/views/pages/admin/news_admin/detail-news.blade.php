@@ -128,6 +128,15 @@
                     <div>
                         <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-black"
                             style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                        @if ($news->status === "panding")
+                        <div>
+                            <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                        </div>
+                        @else
+                        <div>
+                            <a href="{{ route('news.approve.admin') }}" class="btn btn-lg px-3 text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                        </div>
+                        @endif
                     </div>
                 @else
                     <div>

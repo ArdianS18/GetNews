@@ -1,195 +1,283 @@
 @extends('layouts.user.sidebar')
 
+@section('style')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
-    <div class="">
 
-        <div class="card bg-light-info shadow-none position-relative overflow-hidden">
-            <div class="card-body px-4 py-4">
-              <div class="row align-items-center">
-                <div class="col-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 56 56"><path fill="#175A95" d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906m0-3.984C16.937 47.922 8.1 39.062 8.1 28c0-11.04 8.813-19.922 19.876-19.922c11.039 0 19.921 8.883 19.945 19.922c.023 11.063-8.883 19.922-19.922 19.922m-.023-15.68c1.124 0 1.757-.633 1.78-1.851l.352-12.375c.024-1.196-.914-2.086-2.156-2.086c-1.266 0-2.156.867-2.133 2.062l.305 12.399c.023 1.195.68 1.851 1.852 1.851m0 7.617c1.335 0 2.53-1.078 2.53-2.437c0-1.383-1.171-2.438-2.53-2.438c-1.383 0-2.532 1.078-2.532 2.438c0 1.336 1.172 2.437 2.532 2.437"/></svg>
-                </div>
-                <div class="col-7">
-                  <h4 class="fw-semibold mb-8" style="color: #175A95;">Pengajuan Berita</h4>
-                  {{-- <nav aria-label="breadcrumb"> --}}
-                    <p style="color: #175A95;">proses pengunggahan berita ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
-                    
-                  {{-- </nav> --}}
-                </div>
-                <div class="col-3">
-                  <div class="text-center mb-n4">
-                    <img src="{{asset('assets/img/bg-nw.svg')}}" width="200px" alt="" class="img-fluid">
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div class="card shadow-sm position-relative overflow-hidden"  style="background-color: #175A95;">
+    <div class="card-body px-4 py-4">
+      <div class="row justify-content-between">
+        <div class="col-8 text-white">
+          <h4 class="fw-semibold mb-3 mt-2 text-white">Pengajuan Berita</h4>
+            <p>Tuliskan beritamu di getmedia</p>
+        </div>
+        <div class="col-3">
+          <div class="text-center mb-n4">
+            <img src="{{asset('assets/img/bg-ajuan.svg')}}" width="250px" alt="" class="img-fluid">
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="col-12">
-            <div class="card">
-              <div class="card-body wizard-content">
-                {{-- <h4 class="card-title mb-0">Custom Design Example</h4> --}}
-                <h6 class="card-subtitle mb-3"></h6>
-                <form action="#" class="tab-wizard wizard-circle">
-                  <!-- Step 1 -->
-                  <h6>Buat Berita</h6>
-                  <section>
-                    <div class="mb-3">
-                        <h5>Baca ketentuan dan persyaratan sembelum mengunggah berita</h5>
-                        <button class="btn btn-sm px-3" style="background-color: #D9D9D9; color: #434343;">
-                            Ketentuan & Persyaratan
-                        </button>
+  <div class="ms-1">
+    <h5>Baca ketentuan dan persyaratan sembelum mengunggah berita</h5>
+    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+        class="btn btn-sm text-black d-flex justify-content-start"
+        style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
+        Ketentuan & Persyaratan
+    </button>
+  </div>
+
+  <div class="ms-1 mt-5 d-flex justify-content-between">
+    <h5>Isi form dibawah ini untuk mengunggah berita</h5>
+
+    <div class="mb-3">
+        <button type="button" class="btn btn-sm me-2 text-white"
+            style="padding-left: 2rem; padding-right: 2rem; background-color: #1EBB9E;">
+            Simpan Draf
+        </button>
+        <button type="submit" class="btn btn-sm text-white"
+            style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
+            Berikutnya
+        </button>
+    </div>
+  </div>
+
+    <div class="card mt-1">
+        <div class="p-4">
+            <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
+                @csrf
+                <div class="row justify-content-between">
+                    <div class="col-lg-6 col-md-12 from-outline">
+                        <label class="form-label" for="nomor">Judul Berita</label>
+                        <input type="text" id="name" name="name" placeholder="name"
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    <div class="mt-5 mb-2">
-                        <h5>Isi form dibawah ini untuk mengunggah berita</h5>
+
+                    <div class="col-lg-6 col-md-12 from-outline">
+                        <label class="form-label" for="photo">Thumbnail Berita</label>
+                        <input type="file" id="photo" name="photo" placeholder="photo"
+                            value="{{ old('photo') }}"
+                            class="text-center form-control @error('photo') is-invalid @enderror">
+                        @error('photo')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="firstName1">Judul Berita:</label>
-                          <input type="text" class="form-control" id="firstName1" />
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="lastName1">Thumbnail Berita :</label>
-                          <input type="file" class="form-control" id="lastName1" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="emailAddress1">Kategori :</label>
-                          <input type="text" class="form-control" id="emailAddress1" />
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="phoneNumber1">Tanggal Upload :</label>
-                          <input type="date" class="form-control" id="phoneNumber1" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="location1">Sub Kategori :</label>
-                          <select class="form-select" id="location1" name="location">
-                            <option value="">Select City</option>
-                            <option value="Amsterdam">India</option>
-                            <option value="Berlin">USA</option>
-                            <option value="Frankfurt">Dubai</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="date1">Tags :</label>
-                          <input type="text" class="form-control" id="date1" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-span-2 mt-2 from-outline" style="height: auto;">
-                            <label class="form-label" for="content">Isi Berita</label>
-                            <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
-                            @error('content')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
+                </div>
+
+                <div class="row justify-content-between mt-2">
+                    <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                        <div class="">
+                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
+                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
 
-                        <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                        <div class="mt-2">
+                            <label class="form-label" for="password_confirmation">Kategori</label>
+                            <select id="category_id"
+                                class="select2 form-control category @error('category') is-invalid @enderror"
+                                name="category[]" multiple="true" value="{{ old('category') }}"
+                                aria-label="Default select example">
+                                <option selected>pilih kategori</option>
+                                {{-- @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach --}}
+                            </select>
+                            @error('category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-                            <div class="mt-2">
-                                <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"
-                                    multiple>
-                            </div>
+                    </div>
 
+                    <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                        <div class="">
+                            <label class="form-label" for="password_confirmation">Tags</label>
+                            <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                                <option>pilih tags</option>
+                                {{-- @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach --}}
+                            </select>
+                        </div>
+
+                        <div class="mt-2" style="max-width: 100%;">
+                            <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                            <select id="sub_category_id"
+                                class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
+                                aria-label="Default select example">
+                                <option selected>pilih sub kategori</option>
+                            </select>
+                            @error('sub_category_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        {{-- <div class="mt-2">
+                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
+                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div> --}}
+
+                    </div>
+                </div>
+
+                <div class="row justify-content-between mt-2">
+
+                    <div class="col-lg-6 col-md-12 col-span-2 mt-2 from-outline" style="height: auto;">
+                        <label class="form-label" for="content">Content</label>
+                        <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
+                        @error('content')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+
+                        <div class="mt-2">
+                            <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
+                            <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"
+                                multiple>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-5">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                            class="btn btn-md text-black m-2 d-flex justify-content-start"
+                            style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
+                            Ketentuan & Persyaratan
+                        </button>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-md text-black m-2"
+                                style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
+                                Simpan Draf
+                            </button>
+                            <button type="submit" class="btn btn-md text-white m-2"
+                                style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
+                                Upload
+                            </button>
                         </div>
                     </div>
-                  </section>
-                  <!-- Step 2 -->
-                  <h6>Pembayaran</h6>
-                  <section>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="jobTitle1">Job Title :</label>
-                          <input type="text" class="form-control" id="jobTitle1" />
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="videoUrl1">Company Name :</label>
-                          <input type="text" class="form-control" id="videoUrl1" />
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="mb-3">
-                          <label for="shortDescription1">Job Description :</label>
-                          <textarea name="shortDescription" id="shortDescription1" rows="6" class="form-control"></textarea>
-                        </div>
-                      </div>
+                </div>
+        </div>
+        </form>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"><span
+                                style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Ketentuan
+                            & Persyaratan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
-                  </section>
-                  <!-- Step 3 -->
-                  <h6>Selesai</h6>
-                  <section>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="int1">Interview For :</label>
-                          <input type="text" class="form-control" id="int1" />
+                    <div class="modal-body">
+                        <div class="container p-2">
+                            <p>
+                                Ketentuan dan Persyaratan Sebelum Menulis Berita <br><br>
+                                1. Keaslian dan Orisinalitas
+                                Berita harus asli dan bukan hasil plagiasi.
+                                Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
+                                Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
+                                2. Keakuratan dan Kebenaran
+                                Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
+                                Sumber informasi harus jelas dan kredibel.
+                                Berita harus faktual dan tidak memihak. <br>
+                                3. Keseimbangan
+                                Berita harus menyajikan informasi secara seimbang dan tidak memihak.
+                                Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
+                                pendapatnya. <br>
+                                4. Objektivitas
+                                Berita harus ditulis secara objektif dan tidak memihak.
+                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                5. Keaslian dan Orisinalitas
+                                Berita harus asli dan bukan hasil plagiasi.
+                                Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
+                                Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
+                                6. Keakuratan dan Kebenaran
+                                Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
+                                Sumber informasi harus jelas dan kredibel.
+                                Berita harus faktual dan tidak memihak. <br>
+                                7. Keseimbangan
+                                Berita harus menyajikan informasi secara seimbang dan tidak memihak.
+                                Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
+                                pendapatnya. <br>
+                                8. Objektivitas
+                                Berita harus ditulis secara objektif dan tidak memihak.
+                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                4. Objektivitas
+                                Berita harus ditulis secara objektif dan tidak memihak.
+                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                                5. Keaslian dan Orisinalitas
+                                Berita harus asli dan bukan hasil plagiasi.
+                                Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
+                                Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
+                                6. Keakuratan dan Kebenaran
+                                Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
+                                Sumber informasi harus jelas dan kredibel.
+                                Berita harus faktual dan tidak memihak. <br>
+                                7. Keseimbangan
+                                Berita harus menyajikan informasi secara seimbang dan tidak memihak.
+                                Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
+                                pendapatnya. <br>
+                                8. Objektivitas
+                                Berita harus ditulis secara objektif dan tidak memihak.
+                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
+                            </p>
                         </div>
-                        <div class="mb-3">
-                          <label for="intType1">Interview Type :</label>
-                          <select class="form-select" id="intType1" data-placeholder="Type to search cities" name="intType1">
-                            <option value="Banquet">Normal</option>
-                            <option value="Fund Raiser">Difficult</option>
-                            <option value="Dinner Party">Hard</option>
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label for="Location1">Location :</label>
-                          <select class="form-select" id="Location1" name="location">
-                            <option value="">Select City</option>
-                            <option value="India">India</option>
-                            <option value="USA">USA</option>
-                            <option value="Dubai">Dubai</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="mb-3">
-                          <label for="jobTitle2">Interview Date :</label>
-                          <input type="date" class="form-control" id="jobTitle2" />
-                        </div>
-                        <div class="mb-3">
-                          <label>Requirements :</label>
-                          <div class="c-inputs-stacked">
-                            <div class="form-check">
-                              <input type="radio" id="customRadio6" name="customRadio" class="form-check-input" />
-                              <label class="form-check-label" for="customRadio6">Employee</label>
-                            </div>
-                            <div class="form-check">
-                              <input type="radio" id="customRadio7" name="customRadio" class="form-check-input" />
-                              <label class="form-check-label" for="customRadio7">Contract</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+
                     </div>
-                  </section>
-                </form>
-              </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
+
+    </div>
 @endsection
 
 @section('script')

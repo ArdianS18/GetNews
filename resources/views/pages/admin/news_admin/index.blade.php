@@ -21,7 +21,7 @@
 </head>
 
 @section('content')
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex gap-2 mb-3 mt-2">
             <form class="d-flex gap-2">
                 <div>
@@ -69,8 +69,8 @@
         </div>
     </div>
 
-    <div class="card-table shadow-sm mt-4">
-        <div class="table-border mb-3">
+    <div class="mt-4">
+        <div class="mb-3">
             <table class="table">
                 <thead>
                     <tr>

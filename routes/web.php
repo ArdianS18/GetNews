@@ -74,7 +74,16 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
     // Approved News And Reject News
     Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
-    Route::get('list-news-approved', [NewsController::class, 'listapproved'])->name('list.approved');
+
+    // list news
+    Route::get('list-news-approved', [NewsController::class, 'listapproved'])->name('list.approved.index');
+
+    Route::get('news-approved-list', function(){
+        return view('pages.admin.news_admin.news-approve');
+    })->name('news.approve.admin');
+
+    Route::delete('news-approved/{news-approved}', [NewsController::class, 'destroy'])->name('news.approved.destroy');
+
     // Detail News
     Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');
     // Approved All News
@@ -279,5 +288,13 @@ Route::get('tukar-coin', function(){
 Route::get('pengajuan-berita', function(){
     return view('pages.user.news.pengajuan');
 })->name('pengajuan.berita');
+
+Route::get('status-berita', function(){
+    return view('pages.user.news.status');
+})->name('status.berita');
+
+Route::get('status-detail-berita', function(){
+    return view('pages.user.news.status-berita');
+})->name('status.detail.berita');
 
 ?>

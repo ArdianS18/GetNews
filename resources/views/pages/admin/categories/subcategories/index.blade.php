@@ -21,42 +21,36 @@
 </head>
 
 @section('content')
-    <div class="card-table shadow-sm">
-        <div class="d-flex justify-content-between">
-            <form class="d-flex">
-                <div class="input-group">
-                    <input type="text" name="search" id="search-name"
-                        class="form-control search-chat py-2 ps-5"placeholder="Search">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                </div>
-            </form>
+        <div class="">
+            <div class="d-flex justify-content-between">
+                <form class="d-flex">
+                    <div class="input-group">
+                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    </div>
+                </form>
 
-            <div class="">
-                <a href="{{ route('categories.index') }}" class="btn text-white mr-2 me-2"
-                    style="background-color: #175A95">Kembali</a>
-                <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5"
-                    data-bs-toggle="modal" data-bs-target="#modal-create">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                        <path fill="currentColor"
-                            d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                    </svg>
-                    Tambah
-                </button>
-            </div>
+                <div class="">
+                    <a href="{{ route('categories.index') }}" class="btn text-white mr-2 me-2" style="background-color: #175A95">Kembali</a>
+                    <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5" data-bs-toggle="modal" data-bs-target="#modal-create">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                            <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                        </svg>
+                        Tambah
+                    </button>
+                </div>
         </div>
     </div>
 
-
-    <div class="card-table shadow-sm mt-4">
-        <div class="table-border mb-3">
-            <table class="table text-center mb-3">
-                <thead class="table">
-                    <th class="text-white" style="background-color: #175A95;  border-radius: 5px 0 0 5px;">No</th>
-                    <th class="text-white" style="background-color: #175A95;">Name</th>
-                    <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
-                </thead>
-                <tbody id="data">
-
+        <div class="mt-4">
+            <div class="table-border mb-3">
+                <table class="table text-center mb-3">
+                    <thead class="table">
+                        <th class="text-white" style="background-color: #175A95;  border-radius: 5px 0 0 5px;">No</th>
+                        <th class="text-white" style="background-color: #175A95;">Name</th>
+                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
+                    </thead>
+                    <tbody id="data">
                 </tbody>
             </table>
 
@@ -181,7 +175,7 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#loading').html(showNoData('SUBKATEGORI KOSONG!!'))
+                        $('#loading').html(showNoData('Tidak ada data'))
                     }
                 }
             })
