@@ -138,7 +138,7 @@
                     <div class="modal-footer">
                         <button type="button" style="background-color: #C9C9C9;" class="btn"
                             data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
+                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Edit</button>
                     </div>
                 </form>
             </div>

@@ -28,8 +28,8 @@
         </div>
     </div>
 
-    <div class="card-table mt-4 shadow-sm">
-        <div class="table-border mb-3">
+    <div class="mt-4">
+        <div class="">
             <table class="table">
                 <thead class="table">
                     <tr>
@@ -45,11 +45,11 @@
 
                 </tbody>
             </table>
-            <div id="loading"></div>
-            <div class="d-flex justify-content-end">
-                <nav id="pagination">
-                </nav>
-            </div>
+        </div>
+        <div id="loading"></div>
+        <div class="d-flex justify-content-end">
+            <nav id="pagination">
+            </nav>
         </div>
     </div>
 @endsection

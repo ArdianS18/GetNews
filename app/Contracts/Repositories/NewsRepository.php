@@ -78,8 +78,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-            ->when($request->search, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' .  $request->search . '%');
+            ->where('status', "active")
+            ->when($request->category, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->category . '%');
             })
             ->fastPaginate($pagination);
     }

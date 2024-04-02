@@ -4,7 +4,6 @@
         .table-get {
             background-color: #175A95;
         }
-<<<<<<< HEAD
 
         .card-table {
             background-color: #fff;
@@ -53,7 +52,6 @@
                     <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
                         value="{{ request('search') }}" placeholder="Search">
                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                    <button type="submit" class="btn btn-outline-primary">Cari</button>
                 </div>
             </form>
             <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
@@ -66,57 +64,6 @@
             </button>
         </div>
     </div>
-
-<<<<<<< HEAD
-    <div class="card-table shadow-sm mt-4">
-        <div class="table-border mb-3">
-            <table id="category-table" class="table text-center mb-3">
-                <thead>
-                    <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
-                    <th class="text-white" style="background-color: #175A95;">Kategori</th>
-                    <th class="text-white" style="background-color: #175A95;">Dipakai</th>
-                    <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
-                </thead>
-                <tbody id="data">
-                </tbody>
-
-                {{-- <tr>
-                            <td colspan="4" class="">
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h6>Tidak ada data</h6>
-                                </div>
-                                <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
-                            </td>
-                        </tr> --}}
-
-                {{-- <td>
-                            <td>
-                                <p></p>
-                            </td>
-                        </td> --}}
-=======
-        <div class="">
-            <div class="d-flex justify-content-between">
-                <form class="d-flex">
-                    <div class="input-group">
-                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
-                            value="{{ request('search') }}" placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                    </div>
-                </form>
-                <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
-                    data-bs-target="#modal-create"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                        <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                    </svg>
-                    Tambah
-                </button>
-            </div>
-        </div>
 
         <div class="mt-4">
             <div class="table-border mb-3">
@@ -131,7 +78,6 @@
                     </tbody>
 
                 </table>
->>>>>>> ce42991acaba869871468b52e4c311f0f1115691
 
             </table>
 
