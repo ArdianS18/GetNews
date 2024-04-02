@@ -45,13 +45,13 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      */
     public function store(NewsRequest $request)
     {
-
+        // dd($request);
         $data = $request->validated();
 
         if ($request->has('tags')) {
             $newTags = [];
             foreach ($request->input('tags') as $tagName) {
-                $tag = Tag::firstOrCreate(
+                $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
                 );
@@ -95,7 +95,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
     public function update(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto): array|bool
     {
-
         $data = $request->validated();
 
         if ($request->has('tags')) {

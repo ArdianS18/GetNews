@@ -2,12 +2,13 @@
 
 @section('style')
     <style>
-        .card-table{
+        .card-table {
             background-color: #fff;
             padding: 25px;
             border-radius: 10px;
         }
-        .table-border{
+
+        .table-border {
             border: 1px solid #DADADA;
             border-radius: 5px;
             /* padding: 25px; */
@@ -15,15 +16,19 @@
     </style>
 @endsection
 
-@section('content')
+<head>
+    <title>Admin | News</title>
+</head>
 
+@section('content')
     <div class="card-table shadow-sm">
         <div class="d-flex gap-2 mb-3 mt-2">
             <form class="d-flex gap-2">
                 <div>
                     <div class="position-relative d-flex">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
+                            <input type="text" name="search"
+                                class="form-control search-chat py-2 ps-5"placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                             <button type="submit" class="btn btn-outline-primary">Cari</button>
                         </div>
@@ -46,18 +51,20 @@
                 </div>
             </form>
 
-            <form id="approvalForm" action="{{ route('approved-all.news')}}" method="post">
+            <form id="approvalForm" action="{{ route('approved-all.news') }}" method="post">
                 @method('put')
                 @csrf
                 <input type="hidden" name="checkedIds" id="checkedIdsInput">
-                <button type="submit" class="btn ms-2 px-4 text-white" style="background-color: #1EBB9E;">Terima semua</button>
+                <button type="submit" class="btn ms-2 px-4 text-white" style="background-color: #1EBB9E;">Terima
+                    semua</button>
             </form>
 
             <form id="rejectForm" action="{{ route('reject-all.news') }}" method="post">
                 @method('put')
                 @csrf
                 <input type="hidden" name="checkedIdss" id="checkedIdssInput">
-                <button type="submit" class="btn text-white ms-2 px-4" style="background-color: #EF6E6E;">Tolak semua</button>
+                <button type="submit" class="btn text-white ms-2 px-4" style="background-color: #EF6E6E;">Tolak
+                    semua</button>
             </form>
         </div>
     </div>
@@ -81,39 +88,46 @@
                 <tbody>
                     @forelse ($news as $news)
                         <tr class="checkboxRow">
-                            <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox" style="transform: scale(1);"></td>
+                            <td><input type="checkbox" value="{{ $news->id }}" class="itemCheckbox"
+                                    style="transform: scale(1);"></td>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $news->author->user->name }}</td>
                             <td>{{ $news->author->user->email }}</td>
                             <td>{{ $news->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($news->upload_date)->format('d / M / Y') }}</td>
                             <td>
-                                <a href="{{ route('detail.news.admin', ['news' => $news->id]) }}" data-bs-toggle="tooltip" title="Detail" class="btn btn-sm btn-primary btn-detail" style="background-color:#0F4D8A">
-                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
+                                <a href="{{ route('detail.news.admin', ['news' => $news->id]) }}" data-bs-toggle="tooltip"
+                                    title="Detail" class="btn btn-sm btn-primary btn-detail"
+                                    style="background-color:#0F4D8A">
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                            viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
+                                        </svg></i>
                                 </a>
-                            </div>
-                        </td>
-                    </tr>
-                    @empty
-                        <tr>
-                            <td colspan="7">
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <img src="{{ asset('no-data.svg') }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h4>Tidak ada data</h4>
-                                </div>
-                                {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
         </div>
+        </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="7">
+                <div class="d-flex justify-content-center">
+                    <div>
+                        <img src="{{ asset('no-data.svg') }}" alt="">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4>Tidak ada data</h4>
+                </div>
+                {{-- <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button> --}}
+            </td>
+        </tr>
+        @endforelse
+        </tbody>
+        </table>
+    </div>
 
-        {{-- <div class="page d-flex mt-4">
+    {{-- <div class="page d-flex mt-4">
             <div class="container">
                 <div class="d-flex justify-content-end gap-2">
                     <a href="{{ $news->previousPageUrl() }}" style="background-color: #175A95" class="btn text-white mr-2"><</a>
@@ -129,112 +143,113 @@
 @endsection
 
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous">
-</script>
-<script>
-    $(document).ready(function() {
-        $('#synopsis').summernote({
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#synopsis').summernote({
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
         });
-    });
 
-    $(document).ready(function() {
-        $('.sinop').summernote({
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+        $(document).ready(function() {
+            $('.sinop').summernote({
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
         });
-    });
-</script>
+    </script>
 
-<script>
-    var isCheckedAll = false;
-    function toggleCheckboxes() {
-        var checkboxes = document.querySelectorAll('.itemCheckbox');
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = isCheckedAll;
+    <script>
+        var isCheckedAll = false;
+
+        function toggleCheckboxes() {
+            var checkboxes = document.querySelectorAll('.itemCheckbox');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = isCheckedAll;
+            });
+            isCheckedAll = !isCheckedAll;
+        }
+        document.getElementById('checkAll').addEventListener('click', function() {
+            toggleCheckboxes();
         });
-        isCheckedAll = !isCheckedAll;
-    }
-    document.getElementById('checkAll').addEventListener('click', function() {
-        toggleCheckboxes();
-    });
-</script>
+    </script>
 
-<script>
-    // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
-    function sendCheckedIds() {
-        var checkedIds = [];
-        var checkboxes = document.querySelectorAll('.itemCheckbox:checked');
-        checkboxes.forEach(function(checkbox) {
-            checkedIds.push(checkbox.value);
-        });
-        // Setel nilai input tersembunyi dengan ID yang dicentang
-        document.getElementById('checkedIdsInput').value = JSON.stringify(checkedIds);
-    }
+    <script>
+        // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
+        function sendCheckedIds() {
+            var checkedIds = [];
+            var checkboxes = document.querySelectorAll('.itemCheckbox:checked');
+            checkboxes.forEach(function(checkbox) {
+                checkedIds.push(checkbox.value);
+            });
+            // Setel nilai input tersembunyi dengan ID yang dicentang
+            document.getElementById('checkedIdsInput').value = JSON.stringify(checkedIds);
+        }
 
-    // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
-    var approvalForm = document.getElementById('approvalForm');
-    if (approvalForm) {
-        approvalForm.addEventListener('submit', function(event) {
-            sendCheckedIds();
-        });
-    }
-</script>
+        // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
+        var approvalForm = document.getElementById('approvalForm');
+        if (approvalForm) {
+            approvalForm.addEventListener('submit', function(event) {
+                sendCheckedIds();
+            });
+        }
+    </script>
 
-<script>
-    // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
-    function sendCheckedIdss() {
-        var checkedIdss = [];
-        var checkboxess = document.querySelectorAll('.itemCheckbox:checked');
-        checkboxess.forEach(function(checkbox) {
-            checkedIdss.push(checkbox.value);
-        });
-        // Setel nilai input tersembunyi dengan ID yang dicentang
-        document.getElementById('checkedIdssInput').value = JSON.stringify(checkedIdss);
-    }
+    <script>
+        // Fungsi untuk mengirim ID yang dicentang ke formulir saat tombol diklik
+        function sendCheckedIdss() {
+            var checkedIdss = [];
+            var checkboxess = document.querySelectorAll('.itemCheckbox:checked');
+            checkboxess.forEach(function(checkbox) {
+                checkedIdss.push(checkbox.value);
+            });
+            // Setel nilai input tersembunyi dengan ID yang dicentang
+            document.getElementById('checkedIdssInput').value = JSON.stringify(checkedIdss);
+        }
 
-    // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
-    var rejectForm = document.getElementById('rejectForm');
-    if (rejectForm) {
-        rejectForm.addEventListener('submit', function(event) {
-            sendCheckedIdss();
-        });
-    }
-</script>
+        // Tambahkan event listener untuk tombol "Approved semua" jika elemen tersebut tersedia di DOM
+        var rejectForm = document.getElementById('rejectForm');
+        if (rejectForm) {
+            rejectForm.addEventListener('submit', function(event) {
+                sendCheckedIdss();
+            });
+        }
+    </script>
 
 
 
-<script>
-    $('.btn-detail').click(function() {
-        const formData = getDataAttributes($(this).attr('id'))
-        $('#detail-synopsis').html(formData['synopsis'])
-        handleDetail(formData)
-        $('#modal-detail').modal('show')
-    })
-</script>
+    <script>
+        $('.btn-detail').click(function() {
+            const formData = getDataAttributes($(this).attr('id'))
+            $('#detail-synopsis').html(formData['synopsis'])
+            handleDetail(formData)
+            $('#modal-detail').modal('show')
+        })
+    </script>
 
-<script>
-    $('.btn-reject').click(function() {
-        const formData = getDataAttributes($(this).attr('id'))
-        $('#detail-synopsis').html(formData['synopsis'])
-        handleDetail(formData)
-        $('#modal-reject').modal('show')
-    })
-</script>
+    <script>
+        $('.btn-reject').click(function() {
+            const formData = getDataAttributes($(this).attr('id'))
+            $('#detail-synopsis').html(formData['synopsis'])
+            handleDetail(formData)
+            $('#modal-reject').modal('show')
+        })
+    </script>
 @endsection

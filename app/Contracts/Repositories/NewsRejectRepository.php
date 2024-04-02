@@ -2,16 +2,16 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\NewsSubCategoryInterface;
-use App\Models\NewsCategory;
-use App\Models\NewsSubCategory;
+use App\Contracts\Interfaces\NewsRejectInterface;
+use App\Models\NewsReject;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
-class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategoryInterface
+class NewsRejectRepository extends BaseRepository implements NewsRejectInterface
 {
-    public function __construct(NewsSubCategory $newsSubCategory)
+    public function __construct(NewsReject $newsReject)
     {
-        $this->model = $newsSubCategory;
+        $this->model = $newsReject;
     }
 
     /**
@@ -28,14 +28,6 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
         ->delete();
     }
 
-
-    public function paginate(): mixed
-    {
-        return $this->model->query()
-            ->latest()
-            ->paginate(5);
-    }
-
     /**
      * Handle get the specified data by id from models.
      *
@@ -45,29 +37,15 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
      */
     public function show(mixed $id): mixed
     {
-        return $this->model->query()
-            ->where('sub_category_id', $id)
-            ->paginate(7);
+
     }
 
-    public function search(mixed $id, mixed $query): mixed
+    public function where(mixed $id): mixed
     {
         return $this->model->query()
-            ->where('sub_category_id', $id)
-            ->whereHas('news', function($cari) use ($query){
-            $cari->where('name', 'LIKE', '%'.$query.'%');
-        })->paginate(7);
+            ->where('news_id', $id)
+            ->get();
     }
-
-    public function updateOrCreate(array $data): mixed
-    {
-        return $this->model->query()
-        ->updateOrCreate([
-            'news_id' => $data['news_id'],
-            'sub_category_id' => $data['sub_category_id']
-        ],$data);
-    }
-
 
     /**
      * Handle the Get all data event from models.

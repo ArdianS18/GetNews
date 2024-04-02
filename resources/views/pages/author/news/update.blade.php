@@ -329,7 +329,7 @@
                                 <select class="form-control select2 tags" name="tags[]" multiple="multiple" value="">
                                     <option>pilih tags</option>
                                     @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}" {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
+                                        <option value="{{ $tag->name }}" {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
                                             {{ $tag->name }}
                                         </option>
                                     @endforeach

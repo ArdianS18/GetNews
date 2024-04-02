@@ -40,7 +40,7 @@ class CategoryController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request, Category $category)
-    {   
+    {
         if ($request->has('page')) {
             $category = $this->categori->customPaginate($request, 10);
             $data['paginate'] = [
@@ -110,12 +110,12 @@ class CategoryController extends Controller
         //     'category_id' => $category->id
         // ]);
 
-        $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id)->id;
+        $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id);
         $news = $this->news->get();
         $newsSubCategories = $this->newsSubCategory->get();
-        
-        return view('pages.user.news.subcategory', compact('subCategory','news', 'newsSubCategories'));
-        // return ResponseHelper::success($subCategory,$news,$newsSubCategory,trans('alert.fetch_success'));
+
+        // return view('pages.user.news.subcategory', compact('subCategory','news', 'newsSubCategories'));
+        return ResponseHelper::success($subCategory,trans('alert.fetch_success'));
     }
 
     /**

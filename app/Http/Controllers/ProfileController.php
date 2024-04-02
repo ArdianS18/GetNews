@@ -19,7 +19,10 @@ use App\Http\Requests\NewsUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\NewsCategory;
 use App\Models\NewsPhoto;
+use App\Models\NewsSubCategory;
+use App\Models\NewsTag;
 use App\Models\SubCategory;
 use App\Models\User;
 use App\Services\NewsService;
@@ -128,9 +131,8 @@ class ProfileController extends Controller
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
-    public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto)
+    public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
-        // dd($request);
         $data = $this->NewsService->update($request, $news, $newsPhoto);
         $this->news->update($news->id, $data);
 
@@ -139,34 +141,36 @@ class ProfileController extends Controller
             foreach ($data['multi_photo'] as $photo) {
                 $newsPhoto->create([
                     'news_id' => $news->id,
-                    'multi_photo' => $photo,
+                    'multi_photo' => $photo
                 ]);
             }
         }
 
+        $newsCategory->where('news_id', $news->id)->delete();
         foreach ($data['category'] as $category) {
-            $this->newsCategory->updateOrCreate([
+            $this->newsCategory->store([
                 'news_id' => $news->id,
                 'category_id' => $category
             ]);
         }
 
+        $newsSubCategory->where('news_id', $news->id)->delete();
         foreach ($data['sub_category'] as $subCategory) {
-            $this->newsSubCategory->updateOrCreate([
+            $this->newsSubCategory->store([
                 'news_id' => $news->id,
                 'sub_category_id' => $subCategory
             ]);
         }
 
+        $newsTag->where('news_id', $news->id)->delete();
         foreach ($data['tags'] as $tagId) {
-            $this->newsTag->updateOrCreate([
+            $this->newsTag->store([
                 'news_id' => $news->id,
                 'tag_id' => $tagId
             ]);
         }
 
         return ResponseHelper::success(null, trans('alert.add_success'));
-        // return to_route('profile-status.author')->with('success', trans('alert.add_success'));
     }
 
     /**
@@ -187,7 +191,7 @@ class ProfileController extends Controller
         $categories = $this->category->get();
         $tags = $this->tag->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
-        $newsTags = $this->newsTag->get();
+        $newsTags = $this->newsTag->get()->whereIn('news_id', $news);
         $newsCategory = $this->newsCategory->get()->whereIn('news_id', $news);
         $newsSubCategory = $this->newsSubCategory->get()->whereIn('news_id', $news);
 

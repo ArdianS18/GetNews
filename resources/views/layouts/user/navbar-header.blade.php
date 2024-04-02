@@ -90,11 +90,10 @@
                                         </div>
                                     @endfor
                                 </div>
-                            
                                 @endif
                             </ul>
                         </li>
-                     
+
                             @break
                         @endif
                     @endforeach

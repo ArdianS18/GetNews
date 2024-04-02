@@ -37,7 +37,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             })
             ->fastPaginate($pagination);
     }
-    
+
     /**
      * Handle show method and delete data instantly from models.
      *
@@ -117,17 +117,26 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->update($data);
     }
 
+    // public function showWhithCount(): mixed
+    // {
+    //     return DB::table('categories')
+    //         ->select('categories.name', 'categories.slug', DB::raw('count(*) as total'))
+    //         ->groupBy('categories.name', 'categories.slug')
+    //         ->orderBy('total', 'desc')
+    //         ->take(6)
+    //         ->get();
+    // }
+
     public function showWhithCount(): mixed
     {
-        return DB::table('news_categories')
-            ->join('news', 'news_categories.news_id', '=', 'news.id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->select('categories.name', 'categories.slug', DB::raw('count(*) as total'))
-            ->groupBy('categories.name', 'categories.slug')
+        return DB::table('categories')
+            ->join('news_categories', 'categories.id', '=', 'news_categories.category_id')
+            ->select('categories.id', 'categories.name', 'categories.slug', DB::raw('SUM(1) as total'))
+            ->groupBy('categories.id', 'categories.name', 'categories.slug')
             ->orderBy('total', 'desc')
             ->take(6)
             ->get();
     }
 
-    
+
 }

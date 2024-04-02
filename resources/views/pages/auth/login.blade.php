@@ -46,15 +46,15 @@
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
                                 <label class="form-label" for="email">Email address</label>
-                                <input type="email" id="email"
+                                <input type="text" id="email"
                                     class=" @error('email') is-invalid @enderror form-control form-control-lg"
                                     placeholder="Enter a valid email address" name="email" value="{{ old('email') }}"
-                                    required autocomplete="email" autofocu />
-                                @error('email')
+                                    autofocu />
+                                    @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                    @enderror
 
                             </div>
 
@@ -65,7 +65,6 @@
                                     class="form-control form-control-lg @error('password') is-invalid @enderror"
                                     name="password" required autocomplete="current-password"
                                     placeholder="Enter password">
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

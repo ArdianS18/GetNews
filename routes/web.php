@@ -117,7 +117,7 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
      Route::get('sub-category/{category}', function($category){
          return view('pages.admin.categories.subcategories.index',compact('category'));
      })->name('sub.category.admin');
- 
+
      Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
      Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
      Route::delete('SubKategori/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subkategori.destroy');
@@ -147,7 +147,7 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
 Route::middleware(['auth','role:admin|author|superadmin'])->group(function (){
     //update news ===>
-    Route::patch('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
+    Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 });
 

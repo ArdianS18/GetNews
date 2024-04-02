@@ -2,12 +2,13 @@
 
 @section('style')
     <style>
-        .card-table{
+        .card-table {
             background-color: #fff;
             padding: 25px;
             border-radius: 10px;
         }
-        .table-border{
+
+        .table-border {
             border: 1px solid #DADADA;
             border-radius: 5px;
             /* padding: 25px; */
@@ -15,52 +16,58 @@
     </style>
 @endsection
 
+<head>
+    <title>Admin | Sub-Category</title>
+</head>
+
 @section('content')
-       
-
-        <div class="card-table shadow-sm">
-            <div class="d-flex justify-content-between">
-                <form class="d-flex">
-                    <div class="input-group">
-                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 ps-5"placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                    </div>
-                </form>
-
-                <div class="">
-                    <a href="{{ route('categories.index') }}" class="btn text-white mr-2 me-2" style="background-color: #175A95">Kembali</a>
-                    <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5" data-bs-toggle="modal" data-bs-target="#modal-create">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                            <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                        </svg>
-                        Tambah
-                    </button>
+    <div class="card-table shadow-sm">
+        <div class="d-flex justify-content-between">
+            <form class="d-flex">
+                <div class="input-group">
+                    <input type="text" name="search" id="search-name"
+                        class="form-control search-chat py-2 ps-5"placeholder="Search">
+                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                 </div>
+            </form>
+
+            <div class="">
+                <a href="{{ route('categories.index') }}" class="btn text-white mr-2 me-2"
+                    style="background-color: #175A95">Kembali</a>
+                <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5"
+                    data-bs-toggle="modal" data-bs-target="#modal-create">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                        <path fill="currentColor"
+                            d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    </svg>
+                    Tambah
+                </button>
             </div>
         </div>
+    </div>
 
 
-        <div class="card-table shadow-sm mt-4">
-            <div class="table-border mb-3">
-                <table class="table text-center mb-3">
-                    <thead class="table">
-                        <th class="text-white" style="background-color: #175A95;  border-radius: 5px 0 0 5px;">No</th>
-                        <th class="text-white" style="background-color: #175A95;">Name</th>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
-                    </thead>
-                    <tbody id="data">
+    <div class="card-table shadow-sm mt-4">
+        <div class="table-border mb-3">
+            <table class="table text-center mb-3">
+                <thead class="table">
+                    <th class="text-white" style="background-color: #175A95;  border-radius: 5px 0 0 5px;">No</th>
+                    <th class="text-white" style="background-color: #175A95;">Name</th>
+                    <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
+                </thead>
+                <tbody id="data">
 
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-                
-                <div id="loading"></div>
-                <div class="d-flex mx-4 justify-content-end">
-                    <nav id="pagination">
-                    </nav>
-                </div>
+
+            <div id="loading"></div>
+            <div class="d-flex mx-4 justify-content-end">
+                <nav id="pagination">
+                </nav>
             </div>
         </div>
+    </div>
 
 
     <!-- Modal -->
@@ -80,7 +87,8 @@
                             <ul class="error-text"></ul>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                            <button type="button" style="background-color: #C9C9C9;" class="btn"
+                                data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                     </div>
@@ -89,31 +97,31 @@
         </div>
     </div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form id="form-update">
-                        @csrf
-                        <div class="modal-body text-start">
-                            <label class="form-label mt-2">Name</label>
-                            <input id="update-name" class="form-control" type="text" name="name" >
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" style="background-color: #175A95;" class="btn text-white">Simpan</button>
-                        </div>
-                    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editModalLabel">Edit</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form id="form-update">
+                    @csrf
+                    <div class="modal-body text-start">
+                        <label class="form-label mt-2">Name</label>
+                        <input id="update-name" class="form-control" type="text" name="name">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" style="background-color: #C9C9C9;" class="btn"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
     <x-delete-modal-component />
-
 @endsection
 @section('script')
     <script>
@@ -137,11 +145,11 @@
 
         function get(page) {
             $.ajax({
-                url: "{{ route('subkategori.index',['category'=> $category ]) }}?page=" + page,
+                url: "{{ route('subkategori.index', ['category' => $category]) }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
-                data:{
-                    name:$('#search-name').val()
+                data: {
+                    name: $('#search-name').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")
@@ -243,7 +251,7 @@
             $.ajax({
                 url: "/SubKategori/" + id,
                 type: 'DELETE',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -267,7 +275,7 @@
             $.ajax({
                 url: "/SubKategori/" + id,
                 type: 'PUT',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)

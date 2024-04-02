@@ -14,5 +14,5 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface
 {
-
+    public function showWhithCount() : mixed;
 }

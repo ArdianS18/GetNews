@@ -1,31 +1,38 @@
 @extends('layouts.admin.app')
 
 @section('style')
-<style>
-    .card-table{
-        background-color: #fff;
-        padding: 25px;
-        border-radius: 10px;
-    }
-</style>
+    <style>
+        .card-table {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+        }
+    </style>
 @endsection
 
-@section('content')
+<head>
+    <title>Admin | Tag-list</title>
+</head>
 
+@section('content')
     <div class="card-table shadow-sm">
         <div class="d-flex justify-content-between">
             <div>
                 <form class="d-flex">
                     <div class="input-group">
-                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
+                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
+                            value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
+                        <button type="submit" style="background-color: #C7C7C7;"
+                            class="btn btn-sm text-black px-4">Cari</button>
                     </div>
                 </form>
             </div>
-            <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
+            <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5"
+                data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    <path fill="currentColor"
+                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
                 </svg>
                 Tambah
             </button>
@@ -55,7 +62,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" style="background-color: #C9C9C9;" class="btn"
+                            data-bs-dismiss="modal">Batal</button>
                         <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
                     </div>
                 </form>
@@ -110,7 +118,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" style="background-color: #C9C9C9;" class="btn"
+                            data-bs-dismiss="modal">Batal</button>
                         <button type="submit" style="background-color: #175A95;" class="btn text-white">Update</button>
                     </div>
                 </form>
@@ -119,7 +128,6 @@
     </div>
 
     <x-delete-modal-component />
-
 @endsection
 @section('script')
     <script>
@@ -139,8 +147,8 @@
                 url: "{{ route('tag.detail') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
-                data:{
-                    name:$('#search-name').val()
+                data: {
+                    name: $('#search-name').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")
@@ -236,9 +244,9 @@
             e.preventDefault()
             const id = $(this).data('id')
             $.ajax({
-            url: "delete-tag/" + id,
+                url: "delete-tag/" + id,
                 type: 'DELETE',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -262,7 +270,7 @@
             $.ajax({
                 url: "update-tag/" + id,
                 type: 'PUT',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)

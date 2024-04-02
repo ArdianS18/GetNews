@@ -19,6 +19,13 @@
     </style>
     <link rel="stylesheet" href="{{ 'admin/dist/libs/prismjs/themes/prism-okaidia.min.css' }}">
 @endsection
+
+
+<head>
+    <title>Admin | Dashboard</title>
+</head>
+
+
 @section('content')
     <div class="row">
         <div class="col-12 col-md-6 col-lg-3">
@@ -465,8 +472,8 @@
                     <h4>Lorem Ipsum dolor</h4>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <img src="{{ asset('premium.svg') }}"
-                        width="50%" height="200" style="object-fit:cover" class="mb-4" alt="...">
+                    <img src="{{ asset('premium.svg') }}" width="50%" height="200" style="object-fit:cover"
+                        class="mb-4" alt="...">
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="ms-auto">
@@ -521,8 +528,8 @@
                     <h4>Lorem Ipsum dolor</h4>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <img src="{{ asset('premium.svg') }}"
-                        width="50%" height="200" style="object-fit:cover" class="mb-4" alt="...">
+                    <img src="{{ asset('premium.svg') }}" width="50%" height="200" style="object-fit:cover"
+                        class="mb-4" alt="...">
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="ms-auto">
@@ -577,8 +584,8 @@
                     <h4>Lorem Ipsum dolor</h4>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <img src="{{ asset('premium.svg') }}"
-                        width="50%" height="200" style="object-fit:cover" class="mb-4" alt="...">
+                    <img src="{{ asset('premium.svg') }}" width="50%" height="200" style="object-fit:cover"
+                        class="mb-4" alt="...">
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="ms-auto">
@@ -628,7 +635,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>

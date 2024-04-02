@@ -86,9 +86,9 @@
                             <div class="">
                                 <label class="form-label" for="password_confirmation">Tags</label>
                                 <select class="form-control select2 tags" name="tags[]" multiple="multiple">
-                                    <option>pilih tags</option>
+                                    <option disabled>pilih tags</option>
                                     @foreach ($tags as $tag)
-                                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -139,8 +139,7 @@
 
                             <div class="mt-2">
                                 <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"
-                                    multiple>
+                                <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
                             </div>
 
                         </div>

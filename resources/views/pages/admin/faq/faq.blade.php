@@ -10,16 +10,19 @@
     </style>
 @endsection
 
+<head>
+    <title>Admin | Faq-List</title>
+</head>
+
 @section('content')
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex justify-content-between">
             <div>
                 <form class="d-flex">
                     <div class="input-group">
                         <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
-                            value="{{ request('search') }}" placeholder="Search">
+                            value="{{ request('search') }}" placeholder="Cari..">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" class="btn btn-outline-primary">Cari</button>
                     </div>
                 </form>
             </div>
@@ -75,7 +78,7 @@
         </div>
     </div>
 
-    <div class="card-table shadow-sm mt-4">
+    <div class="mt-4">
         <table class="table">
             <thead>
                 <tr>
@@ -163,8 +166,8 @@
                 url: "{{ route('faq.index') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
-                data:{
-                    question:$('#search-name').val()
+                data: {
+                    question: $('#search-name').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")
@@ -195,7 +198,7 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#data').html(showNoData('FAQ KOSONG!!'))
+                        $('#loading').html(showNoData('Tidak ada data'))
                     }
                 }
             })
@@ -203,7 +206,7 @@
 
         function rowFaq(index, data) {
             return `
-        <tr>
+                <tr>
                     <td>${index + 1}</td>
                     <td>${data.question}</td>
                     <td>${data.answer}</td>
@@ -264,7 +267,7 @@
             $.ajax({
                 url: "faq/" + id,
                 type: 'DELETE',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -288,7 +291,7 @@
             $.ajax({
                 url: "faq/" + id,
                 type: 'PUT',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)

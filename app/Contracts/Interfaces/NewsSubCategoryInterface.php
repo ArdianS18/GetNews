@@ -9,8 +9,9 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateOrCreateInterface;
+use Illuminate\Http\Request;
 
-interface NewsSubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, UpdateOrCreateInterface
+interface NewsSubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, PaginateInterface, UpdateOrCreateInterface
 {
-
+    public function search(mixed $id, Request $request) : mixed;
 }

@@ -16,8 +16,12 @@
     </style>
 @endsection
 
+<head>
+    <title>Admin | Author-List</title>
+</head>
+
 @section('content')
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex justify-content-between">
             <div class="d-flex justify-content-start gap-2 ">
                 <form class="d-flex gap-2">
@@ -31,9 +35,10 @@
 
                     <div class="d-flex gap-2">
                         <select name="status" class="form-select" id="search-status">
+                            <option disabled>Pilih status</option>
+                            <option value="0">Aktif</option>
+                            <option value="1">Blokir</option>
                             <option value="">Tampilkan semua</option>
-                            <option value="true">Blokir</option>
-                            <option value="false">Aktif</option>
                         </select>
                     </div>
                 </form>
@@ -51,8 +56,8 @@
         </div>
     </div>
 
-    <div class="mt-4 col-md-12 col-lg-12 card-table shadow-sm">
-        <div class="table-border mb-3">
+    <div class="mt-4 col-md-12 col-lg-12 ">
+        <div class="">
             <table class="table mb-3">
                 <thead>
                     <tr>
@@ -67,11 +72,11 @@
 
                 </tbody>
             </table>
-            <div id="loading"></div>
-            <div class="d-flex justify-content-end mx-4">
-                <nav id="pagination">
-                </nav>
-            </div>
+        </div>
+        <div id="loading"></div>
+        <div class="d-flex justify-content-end">
+            <nav id="pagination" style="position: fixed; bottom: 10px; right: 10px py-5">
+            </nav>
         </div>
 
         <div class="modal fade" id="modal-create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -92,9 +97,8 @@
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Nama</label>
                                     <input type="text" id="create-name" name="name" placeholder="nama"
-                                        value="{{ old('name') }}"
-                                        class="form-control ">
-                                        <ul class="error-text"></ul>
+                                        value="{{ old('name') }}" class="form-control ">
+                                    <ul class="error-text"></ul>
 
 
                                 </div>
@@ -102,43 +106,67 @@
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Nomor Telepon</label>
                                     <input type="text" id="create-phone_number" name="phone_number"
-                                        placeholder="nomor telepon" value="{{ old('phone_number') }}"
-                                        class="form-control ">
-                                        <ul class="error-text"></ul>
-
+                                        placeholder="nomor telepon" value="{{ old('phone_number') }}" class=" @error('phone_number') is-invalid @enderror form-control">
+                                    <ul class="error-text">
+                                        @error('phone_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </ul>
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Email</label>
                                     <input type="text" id="create-email" name="email" placeholder="email"
-                                        value="{{ old('email') }}"
-                                        class="form-control ">
-                                        <ul class="error-text"></ul>
-
+                                        value="{{ old('email') }}"  class=" @error('email') is-invalid @enderror form-control">
+                                    <ul class="error-text">
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </ul>
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">CV</label>
                                     <input type="file" id="create-cv" name="cv" placeholder="name"
-                                        value="{{ old('cv') }}"
-                                        class="form-control ">
-                                        <ul class="error-text"></ul>
+                                        value="{{ old('cv') }}"  class=" @error('cv') is-invalid @enderror form-control">
+                                    <ul class="error-text">
+                                        @error('cv')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </ul>
 
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Password</label>
-                                    <input type="text" id="create-password" name="password" placeholder="password"
-                                        value="{{ old('password') }}"
-                                        class="form-control">
-                                        <ul class="error-text"></ul>
+                                    <input type="password" id="create-password" name="password" placeholder="password"
+                                        value="{{ old('password') }}"  class=" @error('password') is-invalid @enderror form-control">
+                                    <ul class="error-text">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </ul>
 
                                 </div>
 
                                 <div class="col-md-12 col-lg-12 from-group mb-3">
                                     <label class="form-label" for="address">Alamat</label>
-                                    <textarea name="address" id="create-address" rows="6" class="form-control"></textarea>
-                                    <ul class="error-text"></ul>
+                                    <textarea name="address" id="create-address" rows="6" class=" @error('address') is-invalid @enderror form-control" style="resize: none"></textarea>
+                                    <ul class="error-text">
+                                        @error('address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -217,7 +245,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <p>Apakah anda yakin akan memblokir penulis ini?  </p>
+                    <p>Apakah anda yakin akan memblokir penulis ini? </p>
 
                 </div>
                 <div class="modal-footer">
@@ -246,7 +274,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <p>Apakah anda yakin akan Membuka Blokir penulis ini?  </p>
+                    <p>Apakah anda yakin akan Membuka Blokir penulis ini? </p>
 
                 </div>
                 <div class="modal-footer">
@@ -262,7 +290,6 @@
             </form>
         </div>
     </div>
-
 @endsection
 
 @section('script')
@@ -361,7 +388,7 @@
                         icon: 'error',
                         text: "Terdapat masalah saat input data"
                     });
-                    handleValidate(response.responseJSON.errors,'create')
+                    handleValidate(response.responseJSON.errors, 'create')
 
                 }
             })

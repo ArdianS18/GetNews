@@ -25,6 +25,7 @@ use App\Contracts\Repositories\AuthorRepository;
 use App\Contracts\Repositories\SearchRepository;
 use App\Contracts\Repositories\CommentRepository;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
+use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\ReportInterface;
@@ -37,6 +38,7 @@ use App\Contracts\Repositories\ContactUsRepository;
 use App\Contracts\Repositories\NewsCategoryRepository;
 use App\Contracts\Repositories\NewsPhotoRepository;
 use App\Contracts\Repositories\NewsHasLikeRepository;
+use App\Contracts\Repositories\NewsRejectRepository;
 use App\Contracts\Repositories\NewsSubCategoryRepository;
 use App\Contracts\Repositories\NewsTagRepository;
 use App\Contracts\Repositories\ReportRepository;
@@ -64,7 +66,8 @@ class AppServiceProvider extends ServiceProvider
         TagInterface::class => TagRepository::class,
         NewsCategoryInterface::class => NewsCategoryRepository::class,
         NewsSubCategoryInterface::class => NewsSubCategoryRepository::class,
-        NewsTagInterface::class => NewsTagRepository::class
+        NewsTagInterface::class => NewsTagRepository::class,
+        NewsRejectInterface::class => NewsRejectRepository::class
     ];
 
     /**

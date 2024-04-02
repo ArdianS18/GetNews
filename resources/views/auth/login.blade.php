@@ -28,11 +28,10 @@
                                 <h2>Daftar Akun GetMedia.id</h2>
                             </div>
 
-
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
                                 <label class="form-label" for="email">Email address</label>
-                                <input type="email" id="email"
+                                <input type="text" id="email"
                                     class=" @error('email') is-invalid @enderror form-control form-control-lg"
                                     placeholder="Enter a valid email address" name="email" value="{{ old('email') }}"
                                     required autocomplete="email" autofocus />

@@ -7,6 +7,8 @@ use App\Enums\NewsStatusEnum;
 use App\Models\News;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Termwind\Components\Raw;
 
 class NewsRepository extends BaseRepository implements NewsInterface
 {
@@ -128,4 +130,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->findOrFail($id)
             ->update($data);
     }
+
+    public function showWhithCount(): mixed
+    {
+        return DB::table('news')
+            ->select('news.id', 'news.name', 'news.photo', DB::raw('DATE_FORMAT(news.created_at, "%M %d, %Y") as created_at_formatted') ,DB::raw('COUNT(views.news_id) as views_count'))
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->groupBy('news.id', 'news.name')
+            ->orderBy('views_count', 'desc')
+            ->take(6)
+            ->get();
+    }
+
 }

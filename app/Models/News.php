@@ -103,4 +103,9 @@ class News extends Model
     {
         return $this->hasMany(NewsReport::class);
     }
+
+    public function newsRejects(): HasMany
+    {
+        return $this->hasMany(NewsReject::class);
+    }
 }

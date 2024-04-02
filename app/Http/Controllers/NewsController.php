@@ -8,6 +8,7 @@ use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
+use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
@@ -23,6 +24,7 @@ use App\Http\Requests\NewsStatusRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
 use App\Models\NewsPhoto;
+use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\User;
 use App\Services\NewsService;
@@ -39,6 +41,7 @@ class NewsController extends Controller
     private NewsSubCategoryInterface $newsSubCategory;
     private NewsTagInterface $newsTag;
 
+    private NewsRejectInterface $newsReject;
     private NewsInterface $news;
     private UserInterface $user;
     private CommentInterface $comment;
@@ -55,6 +58,7 @@ class NewsController extends Controller
 
     public function __construct(
         TagInterface $tags,
+        NewsRejectInterface $newsReject,
         NewsCategoryInterface $newsCategory,
         NewsSubCategoryInterface $newsSubCategory,
         NewsTagInterface $newsTag,
@@ -73,6 +77,7 @@ class NewsController extends Controller
         $this->newsCategory = $newsCategory;
         $this->newsSubCategory = $newsSubCategory;
         $this->newsTag = $newsTag;
+        $this->newsReject = $newsReject;
 
         $this->tags = $tags;
         $this->news = $news;
@@ -216,10 +221,18 @@ class NewsController extends Controller
         return back();
     }
 
-    public function reject(News $news)
+    public function reject(News $news, Request $request)
     {
+        // dd($news);
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
         $this->news->update($news->id, $data);
+
+        $this->newsReject->store([
+            'user_id' => $news->author->user->id,
+            'news_id' => $news->id,
+            'massage' => $request->input('massage')
+        ]);
+
         return back();
     }
 
@@ -285,14 +298,24 @@ class NewsController extends Controller
         return view('pages.user.news.category', compact('news','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
-    public function showSubCategories($slug){
+    public function showSubCategories($slug, Request $request, NewsSubCategory $newsSubCategory)
+    {
+        $request->merge([
+            'name' => $newsSubCategory->id,
+        ]);
+
         $subCategory = $this->subCategory->showWithSlug($slug);
 
-        $categories = $this->category->get();
+        $categories = $this->category->get()->take(6);
         $totalCategories = $this->category->showWhithCount();
         $subCategories = $this->subCategory->get();
 
-        return view('pages.user.news.subcategory', compact('totalCategories','subCategories','categories','subCategory'));
+        $query = $request->input('search ');
+        $newsSubCategories = $this->newsSubCategory->search($subCategory->id, $query);
+
+        $news = $this->news->showWhithCount();
+
+        return view('pages.user.news.subcategory', compact('totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
     }
     /**
      * Store a newly created resource in storage.
