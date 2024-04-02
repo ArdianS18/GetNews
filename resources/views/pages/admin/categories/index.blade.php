@@ -4,11 +4,6 @@
         .table-get{
             background-color: #175A95;
         }
-        .card-table{
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 10px;
-        }
         .table-border{
             border: 1px solid #DADADA;
             border-radius: 5px;
@@ -38,14 +33,13 @@
         </div>
         @endif
 
-        <div class="card-table shadow-sm">
+        <div class="">
             <div class="d-flex justify-content-between">
                 <form class="d-flex">
                     <div class="input-group">
                         <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
                             value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" class="btn btn-outline-primary">Cari</button>
                     </div>
                 </form>
                 <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal" 
@@ -57,7 +51,7 @@
             </div>
         </div>
 
-        <div class="card-table shadow-sm mt-4">
+        <div class="mt-4">
             <div class="table-border mb-3">
                 <table id="category-table" class="table text-center mb-3">
                     <thead>
@@ -68,26 +62,6 @@
                     </thead>
                     <tbody id="data">
                     </tbody>
-                    
-                        {{-- <tr>
-                            <td colspan="4" class="">
-                                <div class="d-flex justify-content-center">
-                                    <div>
-                                        <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h6>Tidak ada data</h6>
-                                </div>
-                                <button type="submit" class="btn btn-danger btn-delete" data-id="{{ $faq->id }}">Hapus</button>
-                            </td>
-                        </tr> --}}
-
-                        {{-- <td>
-                            <td>
-                                <p></p>
-                            </td>
-                        </td> --}}
                     
                 </table>
 
@@ -208,7 +182,7 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#data').html(showNoData('KATEGORI KOSONG!!'))
+                        $('#loading').html(showNoData('Tidak ada data'))
                     }
                 }
             })

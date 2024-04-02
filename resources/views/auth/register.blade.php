@@ -33,7 +33,7 @@
 
 
                         <div class="from-outline mt-2">
-                            <label class="form-label" for="email">Nama Lengka<span class="important">*</span></label>
+                            <label class="form-label" for="email">Nama Lengkap<span class="important">*</span></label>
                             <input id="name" type="text" placeholder="Nama Lengkap"
                                 class="form-control @error('name') is-invalid @enderror" name="name"
                                 value="{{ old('name') }}" autocomplete="name" autofocus>

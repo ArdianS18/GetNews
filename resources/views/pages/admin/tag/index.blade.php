@@ -1,25 +1,15 @@
 @extends('layouts.admin.app')
 
-@section('style')
-<style>
-    .card-table{
-        background-color: #fff;
-        padding: 25px;
-        border-radius: 10px;
-    }
-</style>
-@endsection
 
 @section('content')
 
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex justify-content-between">
             <div>
                 <form class="d-flex">
                     <div class="input-group">
                         <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5" value="{{ request('search') }}" placeholder="Search">
                         <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
                     </div>
                 </form>
             </div>
@@ -63,8 +53,8 @@
         </div>
     </div>
 
-    <div class="card-table shadow-sm mt-4">
-        <table class="table">
+    <div class="mt-4">
+        <table class="table responsive">
             <thead>
                 <tr>
                     <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
@@ -170,7 +160,7 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#loading').html(showNoData('TAG KOSONG!!'))
+                        $('#loading').html(showNoData('Tidak ada data'))
                     }
                 }
             })

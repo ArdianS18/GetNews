@@ -2,11 +2,13 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\NewsInterface;
-use App\Enums\NewsStatusEnum;
 use App\Models\News;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use App\Enums\NewsStatusEnum;
+use Illuminate\Database\QueryException;
+use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Repositories\BaseRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class NewsRepository extends BaseRepository implements NewsInterface
 {
@@ -71,6 +73,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
         //
     }
 
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' .  $request->search . '%');
+            })
+            ->fastPaginate($pagination);
+    }
 
     public function showWithSlug(string $slug): mixed
     {

@@ -36,7 +36,7 @@
     </style>
 </head>
 
-<body style="background-color: #F6F6F6;">
+<body style="background-color: #FAFAFA;">
 
     <div class="loader-wrapper">
         <div class="loader"></div>

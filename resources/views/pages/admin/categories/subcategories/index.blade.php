@@ -2,11 +2,6 @@
 
 @section('style')
     <style>
-        .card-table{
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 10px;
-        }
         .table-border{
             border: 1px solid #DADADA;
             border-radius: 5px;
@@ -18,7 +13,7 @@
 @section('content')
        
 
-        <div class="card-table shadow-sm">
+        <div class="">
             <div class="d-flex justify-content-between">
                 <form class="d-flex">
                     <div class="input-group">
@@ -40,7 +35,7 @@
         </div>
 
 
-        <div class="card-table shadow-sm mt-4">
+        <div class="mt-4">
             <div class="table-border mb-3">
                 <table class="table text-center mb-3">
                     <thead class="table">
@@ -173,7 +168,7 @@
                             $('#modal-delete').modal('show')
                         })
                     } else {
-                        $('#loading').html(showNoData('SUBKATEGORI KOSONG!!'))
+                        $('#loading').html(showNoData('Tidak ada data'))
                     }
                 }
             })

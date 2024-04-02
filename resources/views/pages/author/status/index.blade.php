@@ -43,8 +43,8 @@
                             <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
                         </div>
                     </div>
-                    <div class=" col-md-12 col-lg-7">
-                        <div class="d-flex  ">
+                    <div class="col-md-12 col-lg-7">
+                        <div class="d-flex">
 
                             <div class="order-md-1" style="margin-left:20px;">
                                 <h4>{{ $news->name }}</h4>
@@ -79,11 +79,6 @@
                                     <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
                                 </svg>
                             </button>
-                            {{-- <button class="btn btn-sm m-1" style="background-color: #C94F4F;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
-                                    <path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/>
-                                </svg>
-                            </button> --}}
 
                             <form action="{{ route('profile.news.delete', ['news' => $news->id]) }}" method="POST">
                                 @method('delete')

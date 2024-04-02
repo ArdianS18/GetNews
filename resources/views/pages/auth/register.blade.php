@@ -16,8 +16,8 @@
          <section>
              <div class="container-fluid h-custom">
                  <div class="row justify-content-center align-items-center">
-                     <div class="col-lg-6 col-md-12 col-xl-4">
-                        <img width="500px" src="assets/img/regis.png" alt="">
+                     <div class="col-lg-6 col-md-12">
+                        <img  src="assets/img/regis.png" width="300px" alt="">
                      </div>
                      <div class="col-md-12 col-lg-6 offset-xl-1">
                          <form method="POST" action="{{ route('register') }}">

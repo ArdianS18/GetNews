@@ -2,36 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\CategoryInterface;
-use App\Contracts\Interfaces\CommentInterface;
-use App\Contracts\Interfaces\NewsCategoryInterface;
-use App\Contracts\Interfaces\NewsHasLikeInterface;
-use App\Contracts\Interfaces\NewsInterface;
-use App\Contracts\Interfaces\NewsPhotoInterface;
-use App\Contracts\Interfaces\NewsSubCategoryInterface;
-use App\Contracts\Interfaces\NewsTagInterface;
-use App\Contracts\Interfaces\SubCategoryInterface;
-use App\Contracts\Interfaces\TagInterface;
-use App\Contracts\Interfaces\UserInterface;
-use App\Contracts\Interfaces\ViewInterface;
-use App\Contracts\Repositories\NewsRepository;
-use App\Enums\NewsPrimaryEnum;
-use App\Enums\NewsStatusEnum;
-use App\Enums\UploadDiskEnum;
-use App\Http\Requests\NewsRequest;
-use App\Http\Requests\NewsStatusRequest;
-use App\Http\Requests\NewsUpdateRequest;
 use App\Models\News;
-use App\Models\NewsPhoto;
-use App\Models\NewsTag;
 use App\Models\User;
-use App\Services\NewsService;
-use App\Services\NewsTrendingService;
+use App\Models\NewsTag;
 use Dotenv\Parser\Value;
-use Illuminate\Contracts\View\View;
+use App\Models\NewsPhoto;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Enums\NewsStatusEnum;
+use App\Enums\UploadDiskEnum;
+use App\Services\NewsService;
+use App\Enums\NewsPrimaryEnum;
+use App\Helpers\ResponseHelper;
 use PhpParser\Node\Stmt\Foreach_;
+use App\Http\Requests\NewsRequest;
+use Illuminate\Contracts\View\View;
+use App\Http\Resources\NewsResource;
+use App\Services\NewsTrendingService;
+use App\Http\Requests\NewsStatusRequest;
+use App\Http\Requests\NewsUpdateRequest;
+use App\Contracts\Interfaces\TagInterface;
+use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\ViewInterface;
+use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\NewsTagInterface;
+use App\Contracts\Repositories\NewsRepository;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsPhotoInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
+use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Contracts\Interfaces\NewsSubCategoryInterface;
 
 class NewsController extends Controller
 {
@@ -112,21 +114,31 @@ class NewsController extends Controller
 
     public function listapproved(Request $request, News $news)
     {
-        $request->merge([
-            'category_id' => $news->id,
-            'sub_category_id' => $news->id
-        ]);
+        // $request->merge([
+        //     'category_id' => $news->id,
+        //     'sub_category_id' => $news->id
+        // ]);
 
-        $search = $request->input('search');
-        $status = $request->input('status');
+        // $search = $request->input('search');
+        // $status = $request->input('status');
 
-        $searchTerm = $request->input('search', '');
+        // $searchTerm = $request->input('search', '');
 
-        // $subCategories = $this->subCategory->get();
-        // $news = $this->news->whereIn("active", false, $request);
-        // $news->appends(['search' => $searchTerm]);
-        $news = $this->news->search($request)->where('status', "active");
-        return view('pages.admin.news_admin.news-approve', compact('news', 'search', 'status'));
+        // $news = $this->news->search($request)->where('status', "active");
+        // return view('pages.admin.news_admin.news-approve', compact('news', 'search', 'status'));
+
+        if ($request->has('page')) {
+            $news = $this->news->customPaginate($request, 10);
+            $data['paginate'] = [
+                'current_page' => $news->currentPage(),
+                'last_page' => $news->lastPage(),
+            ];
+            $data['data'] = NewsResource::collection($news);
+        } else {
+            $news = $this->news->search($request);
+            $data = NewsResource::collection($news);
+        }
+        return ResponseHelper::success($data);
     }
 
     public function detailnews($newsId)

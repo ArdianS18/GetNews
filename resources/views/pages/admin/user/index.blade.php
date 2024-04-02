@@ -2,11 +2,6 @@
 
 @section('style')
     <style>
-        .card-table{
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 10px;
-        }
         .table-border{
             border: 1px solid #DADADA;
             border-radius: 5px;
@@ -17,38 +12,25 @@
 
 @section('content')
 
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex justify-content-between">
 
             <div class="d-flex justify-content-start gap-2 ">
                 <form class="d-flex gap-2">
 
                     <div class="position-relative">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control search-chat py-2 ps-5"placeholder="Search">
-                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                            <button type="submit" class="btn btn-outline-primary">Cari</button>
-                        </div>
+                        <input type="text" name="search" class="form-control search-chat py-2 px-4 ps-5"placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    
                     </div>
-
-                    {{-- <div class="d-flex gap-2">
-                        <select name="status" class="form-select">
-                            <option value="{{ request('status') }}">Pilih Status</option>
-                            <option value="panding">Panding</option>
-                            <option value="approved">Approved</option>
-                            <option value="reject">Reject</option>
-                            <option value="">Tampilkan semua</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div> --}}
                 </form>
             </div>
         </div>
     </div>
 
 
-    <div class="mt-4 col-md-12 col-lg-12 card-table shadow-sm">
-    <div class="table-border mb-3">
+    <div class="mt-4 col-md-12 col-lg-12">
+    <div class="mb-3">
         <table class="table mb-3">
             <thead>
                 <tr>

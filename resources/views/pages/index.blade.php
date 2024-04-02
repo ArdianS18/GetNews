@@ -72,8 +72,8 @@
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px"
                                     style="object-fit: cover;" alt="Image" />
                                     
-                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                {{-- <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a> --}}
                             </div>
                             <div class="news-card-info">
                                 <h3><a
