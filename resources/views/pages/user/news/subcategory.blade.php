@@ -43,7 +43,7 @@
                                         <img src="{{ asset('storage/' . $newsSubCategory->news->photo) }}" alt="{{ $newsSubCategory->news->photo }}" style="width: 100%;height:100%;" width="400px" height="234" class="img-status">
                                         {{-- <img src="{{ asset('assets/img/test1.svg') }}" width="400px" height="234"
                                             style="width: 100%;height:100%;" alt="Iamge"> --}}
-                                        <a href="kesehatan.html" class="news-cat">{{ $newsSubCategory->subCategory->name }}</a>
+                                        <a href="{{ route('subcategories.show.user',['subCategory'=> $newsSubCategory->subCategory->slug ]) }}" class="news-cat">{{ $newsSubCategory->subCategory->name }}</a>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a href="kesehatan-details.html">{{ $newsSubCategory->news->name }}</a></h3>
