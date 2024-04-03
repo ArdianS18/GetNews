@@ -10,5 +10,6 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
 interface ViewInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
+    public function trending() : mixed;
 
 }

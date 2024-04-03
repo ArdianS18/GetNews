@@ -3,10 +3,13 @@
 namespace App\Contracts\Repositories;
 
 use App\Models\News;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Termwind\Components\Raw;
 use App\Enums\NewsStatusEnum;
+use App\Helpers\TenDaysHelper;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Repositories\BaseRepository;
@@ -210,5 +213,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->take(6)
             ->get();
     }
+
+   
 
 }
