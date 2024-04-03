@@ -270,8 +270,8 @@ Route::get('admin-inbox', function(){
 Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
 Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
 
-Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 
+Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 
 

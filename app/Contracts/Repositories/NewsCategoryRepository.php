@@ -47,9 +47,13 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
 
     }
 
-    public function search(mixed $query): mixed
+    public function search(mixed $id, mixed $query): mixed
     {
-        return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
+        return $this->model->query()
+            ->where('category_id', $id)
+            ->whereHas('news', function($search) use ($query){
+            $search->where('name', 'LIKE', '%'.$query.'%');
+        })->paginate(10);
     }
 
     public function updateOrCreate(array $data): mixed

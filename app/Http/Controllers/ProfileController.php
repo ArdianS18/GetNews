@@ -170,11 +170,8 @@ class ProfileController extends Controller
             ]);
         }
 
-        if (auth()->user() === "admin") {
-            return back();
-        } else {
-            return ResponseHelper::success(null, trans('alert.add_success'));
-        }
+        
+        return ResponseHelper::success(null, trans('alert.add_success'));
 
     }
 

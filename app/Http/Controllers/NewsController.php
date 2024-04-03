@@ -27,6 +27,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Models\NewsCategory;
 use App\Models\NewsSubCategory;
 
 class NewsController extends Controller
@@ -272,19 +273,26 @@ class NewsController extends Controller
         return view('pages.user.index', compact('news','subCategories'));
     }
 
-    public function showCategories($slug){
+    public function showCategories($slug, Request $request, NewsCategory $newsCategory){
+
+        $request->merge([
+            'name' => $newsCategory->id,
+        ]);
+
         $category = $this->category->showWithSlug($slug);
         $categoryId = $category->id;
         $subCategory = $this->subCategory->where($categoryId);
 
 
         $categories = $this->category->get();
+        $totalCategories = $this->category->showWhithCount();
         $subCategories = $this->subCategory->get();
-        $news = $this->news->get()->whereIn('category_id', $categoryId);
+        $news = $this->news->showWhithCount();
 
-        $newsCategories = $this->newsCategory->get()->where('category_id', $categoryId);
+        $query = $request->input('search');
+        $newsCategories = $this->newsCategory->search($category->id, $query);
 
-        return view('pages.user.news.category', compact('news','subCategories','categories','category', 'subCategory', 'newsCategories'));
+        return view('pages.user.news.category', compact('news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
     public function showSubCategories($slug, Request $request, NewsSubCategory $newsSubCategory)
@@ -299,7 +307,7 @@ class NewsController extends Controller
         $totalCategories = $this->category->showWhithCount();
         $subCategories = $this->subCategory->get();
 
-        $query = $request->input('search ');
+        $query = $request->input('search');
         $newsSubCategories = $this->newsSubCategory->search($subCategory->id, $query);
 
         $news = $this->news->showWhithCount();
