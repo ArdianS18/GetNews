@@ -24,7 +24,6 @@
                                             <img src="{{ asset('storage/' . $newsCategory->news->photo) }}"
                                                 alt="{{ $newsCategory->news->photo }}" style="width: 100%;height:100%;"
                                                 width="400px" height="234">
-                                            {{-- <img src="{{asset('assets/img/test1.svg')}}" width="400px" height="234" style="width: 100%;height:100%;" alt="Iamge"> --}}
                                             <a href="kesehatan.html"
                                                 class="news-cat">{{ $newsCategory->category->name }}</a>
                                         </div>
