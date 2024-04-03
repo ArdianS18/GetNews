@@ -93,37 +93,22 @@ class NewsController extends Controller
 
     public function see(Request $request, News $news)
     {
-        $request->merge([
-            'category_id' => $news->id,
-            'sub_category_id' => $news->id
-        ]);
-
-        $search = $request->input('search');
-        $status = $request->input('status');
-        $searchTerm = $request->input('search', '');
-
-        // $subCategories = $this->subCategory->get();
-        // $news = $this->news->whereIn("panding", false, $request);
-        $news = $this->news->search($request)->whereIn('status', "panding");
-        // $news->appends(['search' => $searchTerm]);
-        return view('pages.admin.news_admin.index', compact('news', 'search', 'status'));
+        if ($request->has('page')) {
+            $news = $this->news->customPaginate2($request, 10);
+            $data['paginate'] = [
+                'current_page' => $news->currentPage(),
+                'last_page' => $news->lastPage(),
+            ];
+            $data['data'] = NewsResource::collection($news);
+        } else {
+            $news = $this->news->search($request);
+            $data = NewsResource::collection($news);
+        }
+        return ResponseHelper::success($data);
     }
 
     public function listapproved(Request $request, News $news)
     {
-        // $request->merge([
-        //     'category_id' => $news->id,
-        //     'sub_category_id' => $news->id
-        // ]);
-
-        // $search = $request->input('search');
-        // $status = $request->input('status');
-
-        // $searchTerm = $request->input('search', '');
-
-        // $news = $this->news->search($request)->where('status', "active");
-        // return view('pages.admin.news_admin.news-approve', compact('news', 'search', 'status'));
-
         if ($request->has('page')) {
             $news = $this->news->customPaginate($request, 10);
             $data['paginate'] = [
@@ -144,7 +129,7 @@ class NewsController extends Controller
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
-        $newsPhoto = $this->newsPhoto->where($news);
+        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
         $tags = $this->tags->get();
 

@@ -74,6 +74,9 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
     // Approved News And Reject News
     Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
+    Route::get('news-list', function(){
+        return view('pages.admin.news_admin.index');
+    })->name('news.list.admin');
 
     // list news
     Route::get('list-news-approved', [NewsController::class, 'listapproved'])->name('list.approved.index');

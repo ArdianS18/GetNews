@@ -29,8 +29,8 @@
     <div class="container" style="margin-top: 3%;">
         {{-- <h2 class="text-center">Detail Berita</h2> --}}
         {{-- <h5 class="text-left mb-0">Detail / {{ $news->name }}</h6> --}}
-        <form method="post" action="{{ route('update.news.admin', ['news' => $news->id]) }}" enctype="multipart/form-data">
-            @method('post')
+        <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
+            @method('put')
             @csrf
             <div class="news-card-a mt-5" style="background-color: #FFFFFF">
                 <div class="container" style="padding: 3%;">
@@ -42,8 +42,8 @@
                         </div>
                         <div class="col-lg-6 col-md-12 from-outline mt-2">
                             <label class="form-label" for="nomor">Penulis</label>
-                            <input type="text" name="name" class="form-control"
-                                value="{{ $news->author->user->name }}">
+                            <input type="text" class="form-control"
+                                value="{{ $news->author->user->name }}" readonly>
                         </div>
                         <div class="col-lg-6 col-md-12 from-outline mt-2">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
@@ -51,10 +51,10 @@
                         </div>
                         <div class="col-lg-6 col-md-12 from-outline mt-2">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control select2 tags" name="tags[]" multiple="multiple" value="">
+                            <select class="form-control select2 tags" name="tags[]" multiple="multiple">
                                 <option>pilih tags</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}"
+                                    <option value="{{ $tag->name }}"
                                         {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
                                         {{ $tag->name }}
                                     </option>
@@ -94,7 +94,7 @@
                     <div class="row justify-content-between mt-2">
                         <div class="">
                             <label class="form-label" for="content">Content</label>
-                            <textarea class="form-control" name="content" rows="10" value="{!! $news->content !!}" style="resize: none;">{!! $news->content !!}</textarea>
+                            <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" style="resize: none;">{!! $news->content !!}</textarea>
                         </div>
 
                         <div class="justify-content-start mt-2">
@@ -119,6 +119,8 @@
                         </div>
                     </div>
                 </div>
+
+                <button type="submit" class="btn btn-success btn-lg px-3" style="padding-left">Simpan</button>
         </form>
         <div class="d-flex justify-content-between ms-5 me-5 mb-3">
 
@@ -126,8 +128,6 @@
 
                 @if ($news->status === 'panding')
                     <div>
-                        <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-black"
-                            style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
                         @if ($news->status === "panding")
                         <div>
                             <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
@@ -269,6 +269,13 @@
                 }
             })
         }
+    </script>
+
+    <script>
+        $(".tags").select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        })
     </script>
 
     <script>

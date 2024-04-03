@@ -16,19 +16,44 @@
 @endsection
 
 @section('content')
-    <div class="card-table">
-        <div class="d-flex gap-2 mb-3 mt-2">
-            <form class="d-flex">
-                <div class="input-group">
-                    <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
-                        value="{{ request('search') }}" placeholder="Search">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+<div class="">
+    <div class="d-flex gap-2 mb-3 mt-2">
+        <form class="d-flex gap-2">
+            <div>
+                <div class="position-relative d-flex">
+                    <div class="input-group">
+                        <input type="text" name="search"
+                            class="form-control search-chat py-2 ps-5" style="width: 200px" id="search-name" placeholder="Search">
+                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
 
-    <div class="mt-4">
+            <div>
+                <div class="d-flex gap-2">
+                    <select class="form-select" id="opsi-latest" style="width: 200px">
+                        <option disabled selected>Pilih opsi</option>
+                        <option value="terbaru">Terbaru</option>
+                        <option value="terlama">Terlama</option>
+                        <option value="">Tampilkan semua</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex gap-2">
+                    <select class="form-select" id="opsi-perpage" style="width: 200px">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
         <div class="">
             <table class="table">
                 <thead class="table">
@@ -51,7 +76,6 @@
             <nav id="pagination">
             </nav>
         </div>
-    </div>
 @endsection
 
 @section('script')
@@ -85,13 +109,31 @@
             }, 500);
         });
 
+        $('#opsi-latest').change(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+
+        $('#opsi-perpage').change(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+
         function get(page) {
             $.ajax({
                 url: "{{ route('list.approved.index') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data:{
-                    category:$('#search-name').val()
+                    category:$('#search-name').val(),
+                    latest:$('#search-name').val(),
+                    perpage:$('#search-name').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")
@@ -100,6 +142,8 @@
                 },
                 success: function(response) {
                     var category = response.data.data
+                    var latest = response.data.data
+                    var perpage = response.data.data
                     $('#loading').html("")
                     if (response.data.data.length > 0) {
                         $.each(response.data.data, function(index, data) {

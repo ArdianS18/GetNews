@@ -13,6 +13,7 @@ use App\Models\NewsPhoto;
 use App\Models\NewsTag;
 use App\Models\Tag;
 use App\Traits\UploadTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use function Laravel\Prompts\multisearch;
@@ -111,6 +112,67 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
 
         $old_photo = $news->photo;
+        $new_photo= "";
+
+        $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
+        $new_multi_photo = [];
+
+        if ($request->hasFile('multi_photo')) {
+            foreach ($request->file('multi_photo') as $image) {
+                $this->remove($image);
+                $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
+                $new_multi_photo[] = $stored_image;
+            }
+        }
+
+
+        if ($request->hasFile('photo')) {
+            $this->remove($old_photo);
+            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+        }
+
+
+        $id = "";
+        if (auth()->user()->roles->pluck('name')->contains("admin")) {
+            $id = $news->author_id;
+        } else {
+            $id = auth()->user()->author->id;
+        }
+
+        return [
+            'author_id' => $id,
+            'name' => $data['name'],
+            'photo' => $old_photo ?: $new_photo,
+            'multi_photo' => $new_multi_photo ?: $old_multi_photo,
+            'content' => $data['content'],
+            'slug' => Str::slug($data['name']),
+            'category' => $data['category'],
+            'tags' => $data['tags'],
+            'upload_date' => $data['upload_date'],
+            'sub_category' => $data['sub_category'],
+        ];
+    }
+
+    public function updateByAdmin(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto): array|bool
+    {
+        $data = $request->validated();
+
+        if ($request->has('tags')) {
+            $newTags = [];
+            foreach ($request->input('tags') as $tagName) {
+                $tag = Tag::updateOrCreate(
+                    ['name' => $tagName],
+                    ['slug' => Str::slug($tagName)]
+                );
+                $newTags[] = $tag->id;
+            }
+
+            $data['tags'] = $newTags;
+        }
+
+        $old_photo = $news->photo;
+        $new_photo= "";
+
         $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
         $new_multi_photo = [];
 
@@ -124,13 +186,13 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
-            $old_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
         }
 
         return [
-            'author_id' => auth()->user()->author->id,
+            'author_id' => $news->author->id,
             'name' => $data['name'],
-            'photo' => $old_photo,
+            'photo' => $old_photo ?: $new_photo,
             'multi_photo' => $new_multi_photo ?: $old_multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
