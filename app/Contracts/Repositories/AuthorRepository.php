@@ -136,8 +136,26 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
                 });
             })
             ->when($request->status,function ($query) use ($request) {
-                $query->where('banned','LIKE', '%' . $request->status . '%');
+                $query->where('status',$request->status);
             })
-            ->where('status',"!=",UserStatusEnum::PANDING->value)
             ->fastPaginate($pagination);
-    }}
+    }
+
+
+    public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+        ->where('status','panding')
+            ->when($request->name, function ($query) use ($request) {
+                $query->whereHas('user', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->name . '%');
+                });
+            })
+            ->when($request->status,function ($query) use ($request) {
+                $query->where('status',$request->status);
+            })
+            ->fastPaginate($pagination);
+    }
+
+}
+

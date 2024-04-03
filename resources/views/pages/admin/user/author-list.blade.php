@@ -315,7 +315,7 @@
                 method: "GET",
                 data: {
                     name: $('#search-name').val(),
-                    status: $('#search-status').val()
+                    status: 'approved'
                 },
                 dataType: "JSON",
                 beforeSend: function() {
@@ -340,6 +340,7 @@
                             detailPhoto.src = data['photo'];
                             $('#modal-detail').modal('show')
                         })
+
                         $('.blokir').click(function() {
                             $('#form-blokir').data('id', $(this).data('id'))
                             $('#modal-blokir').modal('show')

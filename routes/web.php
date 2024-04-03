@@ -41,20 +41,20 @@ use App\Models\Category;
 // Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
-Route::get('/', [DashboardController::class,'home'])->name('home');
-Route::get('faq',[DashboardController::class,'faq'])->name('faq.dashboard');
+Route::get('/', [DashboardController::class, 'home'])->name('home');
+Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
 Auth::routes();
 
 
-Route::middleware(['auth','role:admin|superadmin','verified'])->group(function () {
-    Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
+Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
-    Route::get('list-author', function(){
+    Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
     })->name('list.author.admin'); //list author approved
 
-    Route::get('author-admin-list',[AuthorController::class,'listauthor'])->name('author.admin.list'); //list author approved
+    Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
     Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
@@ -74,14 +74,14 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
     // Approved News And Reject News
     Route::get('approved-news', [NewsController::class, 'see'])->name('approved-news.index');
-    Route::get('news-list', function(){
+    Route::get('news-list', function () {
         return view('pages.admin.news_admin.index');
     })->name('news.list.admin');
 
     // list news
     Route::get('list-news-approved', [NewsController::class, 'listapproved'])->name('list.approved.index');
 
-    Route::get('news-approved-list', function(){
+    Route::get('news-approved-list', function () {
         return view('pages.admin.news_admin.news-approve');
     })->name('news.approve.admin');
 
@@ -101,7 +101,7 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
     // ===> Faq
     Route::get('faq-admin', [FaqController::class, 'index'])->name('faq.index');
 
-    Route::get('faq-list', function(){
+    Route::get('faq-list', function () {
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
 
@@ -114,7 +114,7 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
     Route::get('kategori-admin', [CategoryController::class, 'index'])->name('kategori.index');
 
-    Route::get('category', function(){
+    Route::get('category', function () {
         return view('pages.admin.categories.index');
     })->name('kategori.admin');
 
@@ -122,17 +122,17 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
     Route::put('kategori/{category}', [CategoryController::class, 'update'])->name('kategori.update');
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('kategori.destroy');
 
-     // ==== Sub Kategori ====
+    // ==== Sub Kategori ====
 
-     Route::get('SubKategori-admin/{category}', [SubCategoryController::class, 'index'])->name('subkategori.index');
+    Route::get('SubKategori-admin/{category}', [SubCategoryController::class, 'index'])->name('subkategori.index');
 
-     Route::get('sub-category/{category}', function($category){
-         return view('pages.admin.categories.subcategories.index',compact('category'));
-     })->name('sub.category.admin');
+    Route::get('sub-category/{category}', function ($category) {
+        return view('pages.admin.categories.subcategories.index', compact('category'));
+    })->name('sub.category.admin');
 
-     Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
-     Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
-     Route::delete('SubKategori/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subkategori.destroy');
+    Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
+    Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
+    Route::delete('SubKategori/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subkategori.destroy');
 
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
@@ -147,7 +147,7 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 
     Route::get('tag-admin', [TagController::class, 'index'])->name('tag.detail');
 
-    Route::get('list-tag', function(){
+    Route::get('list-tag', function () {
         return view('pages.admin.tag.index');
     })->name('tag.detail.list');
 
@@ -157,13 +157,13 @@ Route::middleware(['auth','role:admin|superadmin','verified'])->group(function (
 });
 
 
-Route::middleware(['auth','role:admin|author|superadmin'])->group(function (){
+Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
 });
 
-Route::middleware(['auth','role:author'])->group(function () {
+Route::middleware(['auth', 'role:author'])->group(function () {
     // fungsi crud news
     Route::get('news', [NewsController::class, 'index'])->name('news.index');
     Route::post('news', [NewsController::class, 'store'])->name('news.store');
@@ -179,25 +179,25 @@ Route::middleware(['auth','role:author'])->group(function () {
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
-    Route::get('sub-category-detail/{category}',[CategoryController::class,'getCategory'])->name('sub.category.id');
+    Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     // Update And Delete News
     Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
     Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
 
-    Route::get('author-inbox', function(){
+    Route::get('author-inbox', function () {
         return view('pages.author.inbox.index');
     })->name('author.inbox');
 
-    Route::get('statistic', function(){
+    Route::get('statistic', function () {
         return view('pages.author.statistic.index');
     })->name('statistic.author');
 
-    Route::get('status', function(){
+    Route::get('status', function () {
         return view('pages.author.status.index');
     })->name('status.author');
 
-    Route::get('profile', function(){
+    Route::get('profile', function () {
         return view('pages.author.index');
     })->name('profile.index');
 });
@@ -229,7 +229,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
 Route::middleware(['role:user'])->group(function () {
     Route::get('profile-user/{user}', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
-    Route::get('user-beranda', function(){
+    Route::get('user-beranda', function () {
         return view('pages.user.home');
     })->name('user.home');
 });
@@ -244,15 +244,15 @@ Route::post('photo/{user}', [UserController::class, 'store'])->name('update-phot
 
 
 
-Route::get('statistic', function(){
+Route::get('statistic', function () {
     return view('pages.author.statistic.index');
 })->name('statistic.author');
 
-Route::get('status', function(){
+Route::get('status', function () {
     return view('pages.author.status.index');
 })->name('status.author');
 
-Route::get('profile-user-update', function(){
+Route::get('profile-user-update', function () {
     return view('pages.user.profile.update');
 })->name('profile.user.update');
 
@@ -262,7 +262,7 @@ Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'
 // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
 // Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
 
-Route::get('admin-inbox', function(){
+Route::get('admin-inbox', function () {
     return view('pages.admin.inbox.index');
 })->name('admin.inbox');
 
@@ -276,28 +276,39 @@ Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubC
 
 
 
-Route::get('confirm-email', function(){
+Route::get('confirm-email', function () {
     return view('pages.auth.passwords.email');
 })->name('confirm.email');
 
-Route::get('confirm-password',function(){
+Route::get('confirm-password', function () {
     return view('pages.auth.passwords.confirm');
 })->name('confirm.password');
 
-Route::get('tukar-coin', function(){
+Route::get('tukar-coin', function () {
     return view('pages.user.coins.index');
 })->name('tukar.coin');
 
-Route::get('pengajuan-berita', function(){
+Route::get('pengajuan-berita', function () {
     return view('pages.user.news.pengajuan');
 })->name('pengajuan.berita');
 
-Route::get('status-berita', function(){
+Route::get('status-berita', function () {
     return view('pages.user.news.status');
 })->name('status.berita');
 
-Route::get('status-detail-berita', function(){
+Route::get('status-detail-berita', function () {
     return view('pages.user.news.status-berita');
 })->name('status.detail.berita');
 
+Route::get('iklan-upload', function(){
+    return view('pages.user.iklan.upload');
+})->name('iklan.upload');
+
+Route::get('berita-upload', function(){
+    return view('pages.user.news.upload');
+})->name('berita.upload');
+
+Route::get('berlangganan', function(){
+    return view('pages.admin.berlangganan.index');
+})->name('berlangganan')
 ?>

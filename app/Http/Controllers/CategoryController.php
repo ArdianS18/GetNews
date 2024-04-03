@@ -143,6 +143,5 @@ class CategoryController extends Controller
     {
         $this->categori->delete($category->id);
         return ResponseHelper::success(null, trans('alert.delete_success'));
-
     }
 }

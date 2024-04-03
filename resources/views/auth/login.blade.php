@@ -25,15 +25,15 @@
                             @csrf
                             <div
                                 class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <h2>Daftar Akun GetMedia.id</h2>
+                                <h2>Login Akun GetMedia.id</h2>
                             </div>
 
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
-                                <label class="form-label" for="email">Email address</label>
+                                <label class="form-label" for="email">Alamat Email</label>
                                 <input type="text" id="email"
                                     class=" @error('email') is-invalid @enderror form-control form-control-lg"
-                                    placeholder="Enter a valid email address" name="email" value="{{ old('email') }}"
+                                    placeholder="Masukan Alamat Email" name="email" value="{{ old('email') }}"
                                     required autocomplete="email" autofocus />
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
                                 <input id="password" type="password"
                                     class="form-control form-control-lg @error('password') is-invalid @enderror"
                                     name="password" required autocomplete="current-password"
-                                    placeholder="Enter password">
+                                    placeholder="Masukan Password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('confirm.email') }}" class="text-body">Forgot password?</a>
+                                <a href="{{ route('confirm.email') }}" class="text-body">Lupa password?</a>
                             </div>
 
                             <div class="text-center text-lg-start mt-4 pt-2">
@@ -67,8 +67,8 @@
                                     style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #0F4D8A;">
                                     {{ __('Login') }}
                                 </button>
-                                <p class="small mt-2 pt-1 mb-0">Don't have an account? <a href="{{ route('register') }}"
-                                        class="link-danger">Register</a></p>
+                                <p class="small mt-2 pt-1 mb-0">Tidak Punya Akun? <a href="{{ route('register') }}"
+                                        class="link-danger">Daftar</a></p>
                             </div>
 
                         </form>

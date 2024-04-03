@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Enums\NewsStatusEnum;
 use App\Models\NewsCategory;
 use App\Models\NewsSubCategory;
 use Illuminate\Http\Request;
@@ -53,10 +54,11 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
     public function search(mixed $id, mixed $query): mixed
     {
         return $this->model->query()
-            ->where('sub_category_id', $id)
-            ->whereHas('news', function($cari) use ($query){
+        ->where('sub_category_id', $id)
+        ->whereHas('news', function($cari) use ($query){
+            $cari->where('status',NewsStatusEnum::ACTIVE->value);
             $cari->where('name', 'LIKE', '%'.$query.'%');
-        })->paginate(7);
+        })->paginate(8);
     }
 
     public function updateOrCreate(array $data): mixed
