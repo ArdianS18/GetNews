@@ -19,7 +19,7 @@
             <div class="sports-wrap ptb-100">
                 <div class="row gx-55 gx-5">
                     <div class="col-lg-8 col-12">
-                        <div class="row justify-content-center">
+                        <div class="row">
                             @forelse ($newsSubCategories as $newsSubCategory)
                             <div class="col-md-6">
                                 <div class="news-card-thirteen">
