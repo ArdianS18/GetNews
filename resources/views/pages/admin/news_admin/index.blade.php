@@ -138,6 +138,8 @@
             }, 500);
         });
 
+       
+
         $('#opsi-perpage').change(function() {
             clearTimeout(debounceTimer);
             debounceTimer = setTimeout(function() {

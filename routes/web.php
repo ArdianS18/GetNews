@@ -49,12 +49,20 @@ Auth::routes();
 
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
-    Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
+    // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); 
     Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
     })->name('list.author.admin'); //list author approved
 
     Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
+
+    // Author admin
+    Route::get('author-admin-approve', [AuthorController::class, 'index'])->name('author.admin.index');
+    Route::get('penulis-list', function(){
+        return view('pages.admin.user.index');
+    })->name('author.admin');
+    Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
+    
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
     Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author

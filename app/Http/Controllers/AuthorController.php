@@ -74,7 +74,9 @@ class AuthorController extends Controller
             ];
             $data['data'] = AuthorResource::collection($author);
         }else{
-            $data = $this->author->get();
+            // $data = $this->author->get();
+            $author = $this->author->search($request);
+            $data = AuthorResource::collection($author);
         }
         return ResponseHelper::success($data);
     }
@@ -112,14 +114,14 @@ class AuthorController extends Controller
         }
     }
 
-    return back();
+    return ResponseHelper::success($data);
     }
 
     public function reject(Author $author, $authorId)
     {
         $data['status'] = UserStatusEnum::REJECT->value;
         $this->author->update($authorId, $data);
-        return back();
+        return ResponseHelper::success($data);
     }
 
     public function banned(Author $author)
