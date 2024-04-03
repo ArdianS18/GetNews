@@ -23,12 +23,28 @@
         <div class="card p-4">
             <div class="row">
                 <div class="col-md-12 col-lg-5">
-                    <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="100%" height="200px" class="" style=" object-fit:cover;">
+                    <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="100%" height="200px" class="mb-2" style=" object-fit:cover;">
                 </div>
                 <div class="col-md-12 col-lg-7">
-                    <h5 class="mb-3">Jiraiya Banks Wants To Teach You How To Build A House</h5>
+                    <h4 class="mb-4 fw-semibold">Jiraiya Banks Wants To Teach You How To Build A House</h4>
                     <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print…</p>
-    
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <p class="fw-semibold fs-4 text-black">Tanggal Upload:</p>
+                <div class="d-flex justify-content-between">
+                    <div class="mt-2 d-flex justify-content-end">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/>
+                        </svg>
+                        <p class="ms-2"> Apr 25, 2023</p>
+                    </div>
+
+                    <div class="text-md-right">
+                        <span class="badge bg-light-warning text-warning fs-4 px-5 py-2">
+                            Pending
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +60,7 @@
                 <p class="fs-3" style="color: #175A95;">ABCDE</p>
             </div>
 
-            <div class="d-flex mt-3 justify-content-between">
+            <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Harga Upload</p>
 
                 <div class="d-flex">
@@ -53,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="d-flex mt-3 justify-content-between">
+            <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Harga Upload</p>
 
                 <div class="d-flex">
@@ -61,22 +77,22 @@
                 </div>
             </div>
 
-            <div class="d-flex mt-3 justify-content-between">
+            <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Bayar Sebelum Tanggal</p>
                 <p class="fs-3" style="color: #175A95;">12/12/2020</p>
             </div>
 
-            <div class="d-flex mt-3 justify-content-between">
+            <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Kode Transaksi</p>
                 <p class="fs-3" style="color: #175A95;">DEV-T26250149620IYONL</p>
             </div>
 
-            <div class="d-flex mt-3 justify-content-between">
+            <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Metode Pembayaran</p>
                 <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
             </div>
 
-            <div class="d-flex mt-3 justify-content-between">
+            <div class="d-flex mt-4 justify-content-between">
                     <p class="fw-semibold">Kode Pembayaran</p>
 
                     <div class="d-flex">

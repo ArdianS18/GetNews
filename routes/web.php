@@ -49,7 +49,16 @@ Auth::routes();
 
 Route::middleware(['auth','role:admin|superadmin','verified'])->group(function () {
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.admin'); //dashboard
-    Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); //list author panding
+
+    // Author admin
+    Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin.index');
+    Route::get('penulis-list', function(){
+        return view('pages.admin.user.index');
+    })->name('author.admin');
+    Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
+
+
+    // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('list-author', function(){
         return view('pages.admin.user.author-list');
     })->name('list.author.admin'); //list author approved
@@ -300,4 +309,15 @@ Route::get('status-detail-berita', function(){
     return view('pages.user.news.status-berita');
 })->name('status.detail.berita');
 
+Route::get('iklan-upload', function(){
+    return view('pages.user.iklan.upload');
+})->name('iklan.upload');
+
+Route::get('berita-upload', function(){
+    return view('pages.user.news.upload');
+})->name('berita.upload');
+
+Route::get('berlangganan', function(){
+    return view('pages.admin.berlangganan.index');
+})->name('berlangganan')
 ?>

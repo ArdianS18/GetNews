@@ -33,12 +33,13 @@
                         </div>
 
                     </li>
+                    <li class="nav item">
+                        <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
+                            <span class="mt-2 fs-4 lh-1 text-end fw-semibold">{{ auth()->user()->name }}</span>
+                            <span class="fs-4 text-end">{{ auth()->user()->email }}</span>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
-                        {{-- <a class="nav-link notify-badge nav-icon-hover" href="javascript:void(0)"
-                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            <i class="ti ti-basket"></i>
-                            <span class="badge rounded-pill bg-danger fs-2">2</span>
-                        </a> --}}
                         <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <div class="d-flex align-items-center">
