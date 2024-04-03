@@ -35,7 +35,7 @@
 
                     <div class="d-flex gap-2">
                         <select name="status" class="form-select" id="search-status">
-                            <option disabled>Pilih status</option>
+                            <option value="">Pilih status</option>
                             <option value="0">Aktif</option>
                             <option value="1">Blokir</option>
                             <option value="">Tampilkan semua</option>
@@ -315,7 +315,7 @@
                 method: "GET",
                 data: {
                     name: $('#search-name').val(),
-                    status: 'approved'
+                    status: $('#search-status').val()
                 },
                 dataType: "JSON",
                 beforeSend: function() {
