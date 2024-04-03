@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\AuthorService;
 use App\Http\Requests\AuthorRequest;
 use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
@@ -28,17 +29,19 @@ class AuthorController extends Controller
 {
     private AuthorInterface $author;
     private RegisterInterface $register;
+    private NewsInterface $news;
 
     private AuthorService $authorService;
     private RegisterService $serviceregister;
     private $authorBannedService;
 
 
-    public function __construct(AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+    public function __construct(NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
 
+        $this->news = $news;
         $this->authorService = $authorService;
         $this->authorBannedService = $authorBannedService;
         $this->serviceregister = $serviceregister;
@@ -65,7 +68,7 @@ class AuthorController extends Controller
 
     public function listauthor(Request $request, Author $author) : JsonResponse
     {
-     
+
         if ($request->has('page')) {
             $author = $this->author->customPaginate($request, 10);
             $data['paginate'] = [
@@ -126,6 +129,7 @@ class AuthorController extends Controller
     {
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
+
         } else {
             $this->authorBannedService->unBanned($author);
         }

@@ -18,6 +18,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface
 {
     public function showWhithCount() : mixed;
-
+    public function showCountMonth() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 }

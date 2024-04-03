@@ -78,4 +78,9 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->findOrFail($id)
             ->update($data);
     }
+
+    public function showCountView(): mixed
+    {
+        
+    }
 }

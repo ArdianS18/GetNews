@@ -283,7 +283,6 @@ class NewsController extends Controller
         $categoryId = $category->id;
         $subCategory = $this->subCategory->where($categoryId);
 
-
         $categories = $this->category->get();
         $totalCategories = $this->category->showWhithCount();
         $subCategories = $this->subCategory->get();

@@ -39,7 +39,7 @@
                     </div>
                     <div style="color: #41739e" class="text-center mt-2">
                         <h2>Jumlah Pengunjung</h2>
-                        <h3 style="color: #41739e">+ 530</h3>
+                        <h3 style="color: #41739e">530</h3>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     </div>
                     <div style="color: #e68888" class="text-center mt-2">
                         <h2>Jumlah Penulis</h2>
-                        <h3 style="color: #e68888">+ 530</h3>
+                        <h3 style="color: #e68888">{{ $authors }}</h3>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     </div>
                     <div style="color: #bacff0" class="text-center mt-2">
                         <h2>Jumlah User</h2>
-                        <h3 style="color: #bacff0">+ 530</h3>
+                        <h3 style="color: #bacff0">{{ $users }}</h3>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     </div>
                     <div style="color:#fce287" class="text-center mt-2">
                         <h2>Jumlah Berita</h2>
-                        <h3 style="color:#fce287">+ 530</h3>
+                        <h3 style="color:#fce287">{{ $news_count }}</h3>
                     </div>
                 </div>
             </div>
@@ -101,174 +101,36 @@
                     <div class="col-md-12 col-lg-12">
                         <h4 class="mb-3">Berita</h4>
                         <div class="row">
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <div class="" style="max-width: 540px;">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                                style="width: 100%; height: auto;" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body p-2">
-                                                <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                                </p>
-                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="15" height="15" viewBox="0 0 2048 2048">
-                                                            <path fill="#0f4d8a"
-                                                                d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                        </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24">
-                                                            <path fill="#0f4d8a"
-                                                                d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                        </svg><small style="color: #0f4d8a"> 1.203</small></p>
+                            @forelse ($news as $news)
+                                <div class="col-md-12 col-lg-6 mb-3">
+                                    <div class="" style="max-width: 540px;">
+                                        <div class="row g-2">
+                                            <div class="col-md-4">
+                                                <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%; height: auto;" alt="">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body p-2">
+                                                    <p class="card-text">{{ $news->name }}
+                                                    </p>
+                                                    <div class="d-flex gap-3 align-items-center ms-0">
+                                                        <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                width="15" height="15" viewBox="0 0 2048 2048">
+                                                                <path fill="#0f4d8a"
+                                                                    d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
+                                                            </svg><small style="color: #0f4d8a">{{ $news->created_at_formatted }}</small></p>
+                                                        <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                width="20" height="20" viewBox="0 0 24 24">
+                                                                <path fill="#0f4d8a"
+                                                                    d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
+                                                            </svg><small style="color: #0f4d8a">{{ $news->views_count }}</small></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <div class="" style="max-width: 540px;">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                                style="width: 100%; height: auto;" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body p-2">
-                                                <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                                </p>
-                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="15" height="15" viewBox="0 0 2048 2048">
-                                                            <path fill="#0f4d8a"
-                                                                d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                        </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24">
-                                                            <path fill="#0f4d8a"
-                                                                d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                        </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <div class="" style="max-width: 540px;">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                                style="width: 100%; height: auto;" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body p-2">
-                                                <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                                </p>
-                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="15" height="15" viewBox="0 0 2048 2048">
-                                                            <path fill="#0f4d8a"
-                                                                d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                        </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24">
-                                                            <path fill="#0f4d8a"
-                                                                d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                        </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <div class="" style="max-width: 540px;">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                                style="width: 100%; height: auto;" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body p-2">
-                                                <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                                </p>
-                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="15" height="15" viewBox="0 0 2048 2048">
-                                                            <path fill="#0f4d8a"
-                                                                d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                        </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24">
-                                                            <path fill="#0f4d8a"
-                                                                d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                        </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <div class="" style="max-width: 540px;">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                                style="width: 100%; height: auto;" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body p-2">
-                                                <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                                </p>
-                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="15" height="15" viewBox="0 0 2048 2048">
-                                                            <path fill="#0f4d8a"
-                                                                d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                        </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24">
-                                                            <path fill="#0f4d8a"
-                                                                d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                        </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 col-lg-6 mb-3">
-                                <div class="" style="max-width: 540px;">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                                style="width: 100%; height: auto;" alt="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body p-2">
-                                                <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                                </p>
-                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                    <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="15" height="15" viewBox="0 0 2048 2048">
-                                                            <path fill="#0f4d8a"
-                                                                d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                        </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="20" height="20" viewBox="0 0 24 24">
-                                                            <path fill="#0f4d8a"
-                                                                d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                        </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @empty
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -279,62 +141,17 @@
                 <div class="card-body">
                     <h4>Kategori Trending</h4>
                     <div>
-                        <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
+                        @forelse ($categories as $category)
+                            <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
+                                <div>
+                                    {{ $category->name }}
+                                </div>
+                                <div>
+                                    <span class="badge bg-light-danger text-danger">{{ $category->total }}</span>
+                                </div>
                             </div>
-                            <div>
-                                <span class="badge bg-light-danger text-danger">12</span>
-                            </div>
-                        </div>
-                        <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
-                            </div>
-                            <div>
-                                <span class="badge bg-light-danger text-danger">12</span>
-                            </div>
-                        </div>
-                        <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
-                            </div>
-                            <div>
-                                <span class="badge bg-light-primary text-primary">12</span>
-                            </div>
-                        </div>
-                        <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
-                            </div>
-                            <div>
-                                <span class="badge bg-light-primary text-primary">12</span>
-                            </div>
-                        </div>
-                        <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
-                            </div>
-                            <div>
-                                <span class="badge bg-light-warning text-warning">12</span>
-                            </div>
-                        </div>
-                        <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
-                            </div>
-                            <div>
-                                <span class="badge bg-light-warning text-warning">12</span>
-                            </div>
-                        </div>
-                        <div class="fs-5 mb-2 mt-4 d-flex justify-content-between">
-                            <div>
-                                Pendidikan
-                            </div>
-                            <div>
-                                <span class="badge bg-light-warning text-warning">12</span>
-                            </div>
-                        </div>
+                        @empty
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -346,103 +163,24 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3">Penulis</h4>
+                    @forelse ($authors1 as $author)
                     <div>
                         <div class="d-flex justify-content-between">
                             <div class="d-flex align-items-center">
-                                <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" width="40"
-                                    height="40" />
+                                <img src="{{ asset( $author->photo ? 'storage/'.$author->photo : "default.png")  }}" class="rounded-circle mb-3 img" alt="Image" width="40px" height="40px"/>
                                 <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">mohammad abdul kader al jaelani
-                                        maulana malik ibrahim</p>
+                                    <p class="fs-4 fw-semibold fs-2 student-name">{{$author->name}}</p>
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <span class="badge bg-light-danger text-danger">12</span>
+                                    <span class="badge bg-light-danger text-danger">{{ $author->count }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" width="40"
-                                    height="40" />
-                                <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">Mohammad Daffa</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <span class="badge bg-light-danger text-danger">12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" width="40"
-                                    height="40" />
-                                <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">Mohammad Daffa</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <span class="badge bg-light-primary text-primary">12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" width="40"
-                                    height="40" />
-                                <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">Mohammad Daffa</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <span class="badge bg-light-primary text-primary">12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" width="40"
-                                    height="40" />
-                                <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">Mohammad Daffa</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <span class="badge bg-light-warning text-warning">12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('default.png') }}" class="rounded-circle mb-3 img" width="40"
-                                    height="40" />
-                                <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">Mohammad Daffa</p>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <span class="badge bg-light-warning text-warning">12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @empty
+                    @endforelse
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Enums\UserStatusEnum;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class AuthorRepository extends BaseRepository implements AuthorInterface
 {
@@ -157,5 +158,14 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->fastPaginate($pagination);
     }
 
+    public function showWhithCount(): mixed
+    {
+        return DB::table('authors')
+            ->join('news', 'authors.id', '=', 'news.author_id')
+            ->join('users', 'authors.user_id', '=', 'users.id')
+            ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(*) as count'))
+            ->groupBy('authors.id', 'users.name')
+            ->get();
+    }
 }
 

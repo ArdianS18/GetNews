@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\FaqInterface;
+use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
@@ -17,6 +18,7 @@ use Illuminate\View\View ;
 
 class DashboardController extends Controller
 {
+    private NewsCategoryInterface $newsCategory;
     private AuthorInterface $author;
     private UserInterface $user;
     private CategoryInterface $category;
@@ -24,7 +26,7 @@ class DashboardController extends Controller
     private SubCategoryInterface $subCategory;
     private FaqInterface $faq;
 
-    public function __construct(UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
+    public function __construct( NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
     {
         $this->user = $user;
         $this->author = $author;
@@ -32,13 +34,20 @@ class DashboardController extends Controller
         $this->subCategory = $subCategory;
         $this->news = $news;
         $this->faq = $faq;
+
+        $this->newsCategory = $newsCategory;
     }
 
     public function index(){
         $users = $this->user->get()->count();
         $authors = $this->author->get()->count();
         $news_count = $this->news->get()->count();
-        return view('pages.admin.index', compact('authors', 'users', 'news_count'));
+        $authors1 = $this->author->showWhithCount();
+        $news = $this->news->showWhithCount();
+        $categories = $this->category->showWhithCount();
+
+        $news2 = $this->news->showCountMonth();
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
     }
 
     public function home(){

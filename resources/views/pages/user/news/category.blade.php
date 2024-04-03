@@ -29,6 +29,7 @@
                         </div>
                         <div class="news-card-info">
                             <h3><a href="kesehatan-details.html">{{ $newsCategory->news->name }}</a></h3>
+                            {{-- <p>{!! Illuminate\Support\Str::limit($newsCategory->news->content, 30) !!}</p> --}}
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $newsCategory->news->created_at->format('M d, Y') }}</a></li>
                                 <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views->count() }}</li>

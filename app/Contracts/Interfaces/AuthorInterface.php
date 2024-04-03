@@ -16,4 +16,5 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, WhereInInterface,CustomPaginationInterface
 {
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
+    public function showWhithCount() : mixed;
 }

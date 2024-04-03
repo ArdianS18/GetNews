@@ -96,7 +96,7 @@
                                 <a class="btn btn-warning" id="clickEdit" onclick="edit()">Edit</a>
                                 <a class="btn btn-success" id="clickSave" onclick="save()">Save</a>
                             </div>
-                            <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none;">{!! $news->content !!}</textarea>
+                            <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
                         </div>
 
                         <div class="justify-content-start mt-2">

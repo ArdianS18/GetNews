@@ -7,6 +7,7 @@ use App\Contracts\Interfaces\UserInterface;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository extends BaseRepository implements UserInterface
 {
@@ -95,5 +96,17 @@ class UserRepository extends BaseRepository implements UserInterface
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
+    }
+
+    public function showWhithCount(): mixed
+    {
+        return DB::table('user')
+        ->join('author', 'user.id', '=', 'author.user_id')
+        ->join('news', 'author.id', '=', 'news.author_id')
+        ->select('user.id', 'user.name', 'user.photo', DB::raw('SUM(1) as total'))
+        ->groupBy('user.id', 'user.name', 'user.photo')
+        ->orderBy('total', 'desc')
+        ->take(6)
+        ->get();
     }
 }

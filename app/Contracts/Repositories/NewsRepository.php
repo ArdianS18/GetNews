@@ -203,11 +203,23 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showWhithCount(): mixed
     {
         return DB::table('news')
-            ->select('news.id', 'news.name', 'news.photo', DB::raw('DATE_FORMAT(news.created_at, "%M %d, %Y") as created_at_formatted') ,DB::raw('COUNT(views.news_id) as views_count'))
+            ->select('news.id', 'news.name', 'news.photo', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d, %Y") as created_at_formatted') ,DB::raw('COUNT(views.news_id) as views_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->groupBy('news.id', 'news.name')
             ->orderBy('views_count', 'desc')
             ->take(6)
+            ->get();
+    }
+
+    public function showCountMonth(): mixed
+    {
+        $year = date('Y');
+        return DB::table('news')
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(id) as news_count'))
+            ->whereYear('created_at', $year)
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
             ->get();
     }
 

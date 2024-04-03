@@ -30,10 +30,7 @@ class NewsViewController extends Controller
     {
         //
     }
-
     /**
-<<<<<<< HEAD
-=======
      * Display the specified resource.
      */
     public function showPopularView(News $news)
@@ -44,7 +41,6 @@ class NewsViewController extends Controller
     }
 
     /**
->>>>>>> 3b092b27cbe29313b0fcebf4319e8a2b1aada666
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
