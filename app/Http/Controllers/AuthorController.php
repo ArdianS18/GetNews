@@ -49,18 +49,18 @@ class AuthorController extends Controller
      */
     public function index(Request $request, Author $author)
     {
-        $request->merge([
-            'user_id' => $author->id
-        ]);
-
-        $search = $request->input('search');
-        $status = $request->input('status');
-        $searchTerm = $request->input('search', '');
-
-        $authors = $this->author->whereIn("panding", false, $request);
-        $authors->appends(['search' => $searchTerm]);
-
-        return view('pages.admin.user.index', compact('authors', 'search', 'status'));
+        if ($request->has('page')) {
+            $author = $this->author->customPaginate2($request, 10);
+            $data['paginate'] = [
+                'current_page' => $author->currentPage(),
+                'last_page' => $author->lastPage(),
+            ];
+            $data['data'] = AuthorResource::collection($author);
+        } else {
+            $author = $this->author->search($request);
+            $data = AuthorResource::collection($author);
+        }
+        return ResponseHelper::success($data);
     }
 
     public function listauthor(Request $request, Author $author) : JsonResponse
@@ -199,6 +199,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $this->author->delete($author->id);
+        return ResponseHelper::success(null, trans('alert.delete_success'));
     }
 }

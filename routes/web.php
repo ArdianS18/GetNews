@@ -299,3 +299,16 @@ Route::get('status-berita', function () {
 Route::get('status-detail-berita', function () {
     return view('pages.user.news.status-berita');
 })->name('status.detail.berita');
+
+Route::get('iklan-upload', function(){
+    return view('pages.user.iklan.upload');
+})->name('iklan.upload');
+
+Route::get('berita-upload', function(){
+    return view('pages.user.news.upload');
+})->name('berita.upload');
+
+Route::get('berlangganan', function(){
+    return view('pages.admin.berlangganan.index');
+})->name('berlangganan')
+?>

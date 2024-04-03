@@ -23,7 +23,7 @@
     <div class="container" style="margin-top: 10%;">
         <section>
             <div class="container-fluid h-custom">
-                <div class="row d-flex justify-content-center align-items-center">
+                <div class="row justify-content-center align-items-center">
                     <div class="col-md-12 col-lg-6">
                         <img width="500px" src="assets/img/log.png" alt="">
                     </div>

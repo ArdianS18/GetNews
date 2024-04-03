@@ -27,52 +27,48 @@
 
         <div class="row">
             <div class="col-md-12 col-lg-7">
-                <div class="card shadow-sm">
-                    <div class="p-4">
-                        <h4>Data Diri</h4>
-                        <p>Pastikan data diri anda di isi denga benar</p>
-                        <div class="">
-                            <div class="col-12 mb-4">
-                                <label class="form-label" for="nomor">Name</label>
-                                <input type="text" id="name" name="name" placeholder="name"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="col-12 mb-4">
-                                <label class="form-label" for="nomor">Email</label>
-                                <input type="text" id="name" name="name" placeholder=""
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label" for="nomor">Nomor Telepon</label>
-                                <input type="text" id="name" name="name" placeholder="name"
-                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
+                <div class="card p-4 shadow-sm">
+                    <h4>Data Diri</h4>
+                    <p>Pastikan data diri anda di isi denga benar</p>
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <label class="form-label" for="nomor">Name</label>
+                            <input type="text" id="name" name="name" placeholder="name"
+                                value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label" for="nomor">Email</label>
+                            <input type="text" id="name" name="name" placeholder=""
+                                value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label" for="nomor">Nomor Telepon</label>
+                            <input type="text" id="name" name="name" placeholder="name"
+                                value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-12 col-lg-5">
-                <div class="card shadow-sm">
-                    <div class="p-4">
-                        <h4>Pembayaran</h4>
-
+                <div class="card p-4 shadow-sm">
+                    <h4>Pembayaran</h4>
+                    <div class="row">
                         <div class="col-12 mb-4 mt-5">
                             <label class="form-label" for="nomor">Metode Pembayaran</label>
                             <input type="text" id="name" name="name" placeholder="pilih metode pembayaran"
@@ -101,11 +97,11 @@
                             <h5>Rp. 100.000</h5>
                         </div>
 
-                        <div class="mt-3 ms-1 row col-md-12">
-                            <button type="submit" class="btn btn-md text-white"
-                                style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
+                        <div class="mt-4">
+                            <a href="{{route('pengajuan.berita')}}" type="submit" class="btn btn-md w-100 text-white"
+                                style="background-color: #0F4D8A;">
                                 Selanjutnya
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
