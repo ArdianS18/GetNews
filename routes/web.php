@@ -58,7 +58,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
 
     // Author admin
     Route::get('author-admin-approve', [AuthorController::class, 'index'])->name('author.admin.index');
-    Route::get('penulis-list', function(){
+    Route::get('author-list', function(){
         return view('pages.admin.user.index');
     })->name('author.admin');
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
@@ -309,8 +309,12 @@ Route::get('status-detail-berita', function () {
 })->name('status.detail.berita');
 
 Route::get('iklan-upload', function(){
+    return view('pages.user.iklan.pengajuan');
+})->name('iklan.pengajuan');
+
+Route::get('iklan-biodata', function(){
     return view('pages.user.iklan.upload');
-})->name('iklan.upload');
+})->name('iklan.biodata');
 
 Route::get('berita-upload', function(){
     return view('pages.user.news.upload');

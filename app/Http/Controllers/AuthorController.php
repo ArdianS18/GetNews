@@ -53,7 +53,7 @@ class AuthorController extends Controller
     public function index(Request $request, Author $author)
     {
         if ($request->has('page')) {
-            $author = $this->author->customPaginate2($request, 10);
+            $author = $this->author->customPaginate($request, 10);
             $data['paginate'] = [
                 'current_page' => $author->currentPage(),
                 'last_page' => $author->lastPage(),
@@ -70,7 +70,7 @@ class AuthorController extends Controller
     {
 
         if ($request->has('page')) {
-            $author = $this->author->customPaginate($request, 10);
+            $author = $this->author->customPaginate2($request, 10);
             $data['paginate'] = [
                 'current_page' => $author->currentPage(),
                 'last_page' => $author->lastPage(),
