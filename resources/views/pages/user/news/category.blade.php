@@ -6,8 +6,7 @@
     <div class="breadcrumb-wrap">
         <h2 class="breadcrumb-title">{{ $category->name }}</h2>
         <ul class="breadcrumb-menu list-style">
-            <li><a href="index.html">Home</a></li>
-            <li><p>Detail</p></li>
+            <li><a href="{{ route('user.home') }}">Home</a></li>
             <li>{{ $category->name }}</li>
         </ul>
     </div>
