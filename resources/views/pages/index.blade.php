@@ -72,17 +72,17 @@
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px"
                                     style="object-fit: cover;" alt="Image" />
                                     
-                                {{-- <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a> --}}
+                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a
                                         href="{{ route('news.user', ['news' => $news->name, 'page' => '1']) }}">{{ $news->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25, 2023</a>
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y')  }}</p></a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>10 Min Read</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $news->views->count() }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -90,15 +90,19 @@
                         <div class="news-card-three">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="120px" height="120px"
-                                    style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                                style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                               
                             </div>
                             <div class="news-card-info">
-                                <h3><a
+                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                <h3>
+                                    <a
                                         href="{{ route('news.user', ['news' => $news->name, 'page' => 1]) }}">{{ $news->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ $news->created_at }}</a></li>
+                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y') }}</a></li>
+                                            <li><i class="fi fi-rr-eye"></i>{{  $news->views->count() }}</li>
 
                                 </ul>
                             </div>

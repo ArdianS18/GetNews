@@ -9,6 +9,7 @@ use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\ViewInterface;
 use App\Http\Requests\ViewRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -25,8 +26,10 @@ class DashboardController extends Controller
     private NewsInterface $news;
     private SubCategoryInterface $subCategory;
     private FaqInterface $faq;
+    private ViewInterface $view;
 
-    public function __construct( NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
+    public function __construct(ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
+
     {
         $this->user = $user;
         $this->author = $author;
@@ -36,6 +39,7 @@ class DashboardController extends Controller
         $this->faq = $faq;
 
         $this->newsCategory = $newsCategory;
+        $this->view = $view;
     }
 
     public function index(){
@@ -52,10 +56,10 @@ class DashboardController extends Controller
 
     public function home(){
         $newsTrending = $this->news->get();
-        // dd($newsTrending);
         $news = $this->news->get();
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
+        $trending = $this->view->trending();
         return view('pages.index',compact('news', 'categories', 'subCategories'));
     }
 

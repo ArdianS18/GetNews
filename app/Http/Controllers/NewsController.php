@@ -390,6 +390,5 @@ class NewsController extends Controller
         return back();
     }
 
-
-
+ 
 }

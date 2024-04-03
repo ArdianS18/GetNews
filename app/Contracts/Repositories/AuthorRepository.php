@@ -131,13 +131,14 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-            ->when($request->name, function ($query) use ($request) {
+            ->where('status', "!=", UserStatusEnum::PANDING->value)
+            ->when($request->author, function ($query) use ($request) {
                 $query->whereHas('user', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->name . '%');
+                    $query->where('name', 'LIKE', '%' . $request->author . '%');
                 });
             })
-            ->when($request->status,function ($query) use ($request) {
-                $query->where('status',$request->status);
+            ->when($request->status, function ($query) use ($request) {
+                $query->where('status', $request->status);
             })
             ->fastPaginate($pagination);
     }
@@ -146,14 +147,14 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-        ->where('status','panding')
+            ->where('status', 'panding')
             ->when($request->name, function ($query) use ($request) {
                 $query->whereHas('user', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' . $request->name . '%');
                 });
             })
-            ->when($request->status,function ($query) use ($request) {
-                $query->where('status',$request->status);
+            ->when($request->status, function ($query) use ($request) {
+                $query->where('status', $request->status);
             })
             ->fastPaginate($pagination);
     }
@@ -168,4 +169,3 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->get();
     }
 }
-

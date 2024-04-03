@@ -22,7 +22,8 @@ class AuthorResource extends JsonResource
             'status' => $this->banned,
             'photo' => $this->user->photo ? asset('storage/' . $this->user->photo) : asset('default.png'),
             'birth_date' => $this->user->birth_date ? $this->user->birth_date : "-",
-            'address' => $this->user->address
+            'address' => $this->user->address,
+            'cv' => $this->cv ? asset('storage/' . $this->cv): asset('')
         ];
     }
 }

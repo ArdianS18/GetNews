@@ -11,4 +11,5 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 interface ViewInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
     public function showCountView() : mixed;
+    public function trending() : mixed;
 }

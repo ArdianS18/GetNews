@@ -1,17 +1,15 @@
 @extends('layouts.user.app')
 
 @section('content')
-
-<div class="col-lg-12">
-    <div class="breadcrumb-wrap">
-        <h2 class="breadcrumb-title">{{ $category->name }}</h2>
-        <ul class="breadcrumb-menu list-style">
-            <li><a href="index.html">Home</a></li>
-            <li><p>Detail</p></li>
-            <li>{{ $category->name }}</li>
-        </ul>
+    <div class="col-lg-12">
+        <div class="breadcrumb-wrap">
+            <h2 class="breadcrumb-title">{{ $category->name }}</h2>
+            <ul class="breadcrumb-menu list-style">
+                <li><a href="{{ route('user.home') }}">Home</a></li>
+                <li>{{ $category->name }}</li>
+            </ul>
+        </div>
     </div>
-</div>
 
 <div class="container gp-5">
 <div class="d-flex mt-5 gap-5">
@@ -29,7 +27,6 @@
                         </div>
                         <div class="news-card-info">
                             <h3><a href="kesehatan-details.html">{{ $newsCategory->news->name }}</a></h3>
-                            {{-- <p>{!! Illuminate\Support\Str::limit($newsCategory->news->content, 30) !!}</p> --}}
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $newsCategory->news->created_at->format('M d, Y') }}</a></li>
                                 <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views->count() }}</li>
@@ -49,75 +46,70 @@
         </ul>
     </div>
 
-    <div class="col-lg-4">
-        <div class="sidebar">
-            <div class="sidebar-widget-two">
-                <form class="search-box-widget">
-                    <input type="search" name="search" placeholder="Search">
-                    <button type="submit">
-                        <i class="fi fi-rr-search"></i>
-                    </button>
-                </form>
-            </div>
-        <div class="sidebar-widget">
-            <h3 class="sidebar-widget-title">Kategori</h3>
-            <ul class="category-widget list-style">
-                @foreach ($totalCategories as $category)
-                <li><a href="{{ route('categories.show.user',['category' => $category->slug]) }}"><img
-                        src="{{ asset('assets/img/icons/arrow-right.svg') }}"
-                        alt="Image">{{ $category->name }} <span>({{ $category->total }})</span></a></li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="sidebar-widget">
-            <h3 class="sidebar-widget-title">Berita Popular</h3>
-            <div class="pp-post-wrap">
-                @forelse ($news as $news)
-                <div class="news-card-one">
-                    <div class="news-card-img">
-                        <img src="{{ asset('storage/' . $news->photo) }}">
+                    <div class="col-lg-4">
+                        <div class="sidebar">
+                            <div class="sidebar-widget-two">
+                                <form class="search-box-widget">
+                                    <input type="search" name="search" placeholder="Search">
+                                    <button type="submit">
+                                        <i class="fi fi-rr-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="sidebar-widget">
+                                <h3 class="sidebar-widget-title">Kategori</h3>
+                                <ul class="category-widget list-style">
+                                    @foreach ($totalCategories as $category)
+                                        <li><a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
+                                                    src="{{ asset('assets/img/icons/arrow-right.svg') }}"
+                                                    alt="Image">{{ $category->name }}
+                                                <span>({{ $category->total }})</span></a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="sidebar-widget">
+                                <h3 class="sidebar-widget-title">Berita Popular</h3>
+                                <div class="pp-post-wrap">
+                                    @forelse ($news as $news)
+                                        <div class="news-card-one">
+                                            <div class="news-card-img">
+                                                <img src="{{ asset('storage/' . $news->photo) }}">
+                                            </div>
+                                            <div class="news-card-info">
+                                                <h3><a href="business-details.html">{{ $news->name }}</a>
+                                                </h3>
+                                                <ul class="news-metainfo list-style">
+                                                    <li>
+
+                                                        <i><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" viewBox="0 0 512 512">
+                                                                <path
+                                                                    d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
+                                                                    fill="#E93314" />
+                                                            </svg></i><a
+                                                            href="news-by-date.html">{{ $news->created_at_formatted }}</a>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fi fi-rr-eye">
+                                                        </i><a href="news-by-date.html">{{ $news->views_count }}</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            </div>
+                            <div class="sidebar-widget" style="height: 700px">
+                                <h3 class="sidebar-widget-title">iklan</h3>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="news-card-info">
-                        <h3><a href="business-details.html">{{ $news->name }}</a>
-                        </h3>
-                        <ul class="news-metainfo list-style">
-                            <li>
 
-                                <i><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                        height="20" viewBox="0 0 512 512">
-                                        <path
-                                            d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                            fill="#E93314" />
-                                    </svg></i><a href="news-by-date.html">{{ $news->created_at_formatted }}</a>
-                            </li>
-
-                            <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 512 512">
-                                    <path
-                                        d="M198 448h172c15.7 0 28.6-9.6 34.2-23.4l57.1-135.4c1.7-4.4 2.6-9 2.6-14v-38.6c0-21.1-17-44.6-37.8-44.6H306.9l18-81.5.6-6c0-7.9-3.2-15.1-8.3-20.3L297 64 171 191.3c-6.8 6.9-11 16.5-11 27.1v192c0 21.1 17.2 37.6 38 37.6z"
-                                        fill="#E93314" />
-                                    <path d="M48 224h64v224H48z" fill="#E93314" />
-                                </svg>
-                            </i><a href="news-by-date.html">{{ $news->views_count }}</a></li>
-
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-                @empty
-                @endforelse
+
             </div>
-        </div>
-        <div class="sidebar-widget" style="height: 700px">
-            <h3 class="sidebar-widget-title">iklan</h3>
         </div>
     </div>
-
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
 @endsection
