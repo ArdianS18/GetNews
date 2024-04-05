@@ -51,7 +51,7 @@ class DashboardController extends Controller
         $categories = $this->category->showWhithCount();
 
         $news2 = $this->news->showCountMonth();
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1','news2'));
     }
 
     public function home(){
