@@ -11,50 +11,19 @@
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
                     <div class="trending-news-slider swiper">
                         <div class="swiper-wrapper">
+                            @foreach ($trendings as $trending)
                             <div class="swiper-slide news-card-one">
                                 <div class="news-card-img">
-                                    <img src="assets/img/news/trending-1.webp" alt="Image" />
+                                    <img src="{{ asset('storage/'. $trending->news->photo ) }}" alt="Image" />
                                 </div>
                                 <div class="news-card-info">
-                                    <h3><a href="business-details.html">Climate Change & Your Future Health</a></h3>
+                                    <h3><a href="business-details.html">{{  $trending->news->name }}</a></h3>
                                     <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="swiper-slide news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/trending-2.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Female Hawks Win $10,000 Funding Boost</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/trending-3.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Goodwin Must Break Clarkson Hold</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-clock-three"></i>8 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="swiper-slide news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/trending-4.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Major GWC Collection Is Coming To QVC</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-clock-three"></i>12 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -77,7 +46,7 @@
                             </div>
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $news->name, 'page' => '1']) }}">{{ $news->name }}</a>
+                                        href="{{ route('news.user', ['news' => $news->slug, 'page' => '1']) }}">{{ $news->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y')  }}</p></a>
@@ -97,7 +66,7 @@
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                                 <h3>
                                     <a
-                                        href="{{ route('news.user', ['news' => $news->name, 'page' => 1]) }}">{{ $news->name }}</a>
+                                        href="{{ route('news.user', ['news' => $news->slug, 'page' => 1]) }}">{{ $news->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a

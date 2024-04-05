@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
 use App\Enums\UploadDiskEnum;
+use App\Helpers\ImageCompressing;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
@@ -70,12 +71,12 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 }
             }
 
-        $photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+            $image = ImageCompressing::process( $request->file('photo'),UploadDiskEnum::NEWS->value);
 
         return [
             'author_id' => auth()->user()->author->id,
             'name' => $data['name'],
-            'photo' => $photo,
+            'photo' => $image,
             'multi_photo' => $multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),

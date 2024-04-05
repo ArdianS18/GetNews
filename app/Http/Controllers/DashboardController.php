@@ -59,8 +59,8 @@ class DashboardController extends Controller
         $news = $this->news->get();
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        $trending = $this->view->trending();
-        return view('pages.index',compact('news', 'categories', 'subCategories'));
+        $trendings = $this->view->trending();
+        return view('pages.index',compact('news', 'categories', 'subCategories','trendings'));
     }
 
     public function navbar(){
