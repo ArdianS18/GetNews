@@ -32,36 +32,36 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     public function whereIn(mixed $data, mixed $banned, Request $request): mixed
     {
         return $this->model->query()
             // ->where('status', $data)
-            ->when($request->search,function($query) use ($request){
-                $query->where('name','LIKE', '%'.$request->search.'%');
-            })->when($request->status,function($query) use($request){
-                $query->where('status','LIKE', '%'.$request->status.'%');
-            })->when($request->category_id,function($query) use($request){
-                $query->where('category_id',$request->category_id);
-            })->when($request->sub_category_id,function($query) use($request){
-                $query->where('sub_category_id',$request->sub_category_id);
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            })->when($request->status, function ($query) use ($request) {
+                $query->where('status', 'LIKE', '%' . $request->status . '%');
+            })->when($request->category_id, function ($query) use ($request) {
+                $query->where('category_id', $request->category_id);
+            })->when($request->sub_category_id, function ($query) use ($request) {
+                $query->where('sub_category_id', $request->sub_category_id);
             })->get();
     }
 
     public function search(Request $request): mixed
     {
         return $this->model->query()
-            ->when($request->search,function($query) use ($request){
-                $query->where('name','LIKE', '%'.$request->search.'%');
-            })->when($request->status,function($query) use($request){
-                $query->where('status','LIKE', '%'.$request->status.'%');
-            })->when($request->category_id,function($query) use($request){
-                $query->where('category_id',$request->category_id);
-            })->when($request->sub_category_id,function($query) use($request){
-                $query->where('sub_category_id',$request->sub_category_id);
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            })->when($request->status, function ($query) use ($request) {
+                $query->where('status', 'LIKE', '%' . $request->status . '%');
+            })->when($request->category_id, function ($query) use ($request) {
+                $query->where('category_id', $request->category_id);
+            })->when($request->sub_category_id, function ($query) use ($request) {
+                $query->where('sub_category_id', $request->sub_category_id);
             })->get();
     }
 
@@ -87,25 +87,25 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->where('name', 'LIKE', '%' .  $request->name . '%');
             })
             ->when($request->latest, function ($query) use ($request) {
-                $query->when($request->latest === 'terbaru' ,function ($terbaru){
+                $query->when($request->latest === 'terbaru', function ($terbaru) {
                     $terbaru->latest()->get();
                 });
 
-                $query->when($request->latest === 'terlama' ,function ($terlama){
+                $query->when($request->latest === 'terlama', function ($terlama) {
                     $terlama->oldest()->get();
                 });
             })
-            ->when($request->perpage, function($query) use ($request){
-                $query->when($request->perpage === '10' ,function ($var){
+            ->when($request->perpage, function ($query) use ($request) {
+                $query->when($request->perpage === '10', function ($var) {
                     $var->take(10);
                 });
-                $query->when($request->perpage === '20' ,function ($var){
+                $query->when($request->perpage === '20', function ($var) {
                     $var->take(20);
                 });
-                $query->when($request->perpage === '50' ,function ($var){
+                $query->when($request->perpage === '50', function ($var) {
                     $var->take(50);
                 });
-                $query->when($request->perpage === '100' ,function ($var){
+                $query->when($request->perpage === '100', function ($var) {
                     $var->take(100);
                 });
             })
@@ -121,25 +121,25 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->where('name', 'LIKE', '%' .  $request->category . '%');
             })
             ->when($request->latest, function ($query) use ($request) {
-                $query->when($request->latest === 'terbaru' ,function ($terbaru){
+                $query->when($request->latest === 'terbaru', function ($terbaru) {
                     $terbaru->latest()->get();
                 });
 
-                $query->when($request->latest === 'terlama' ,function ($terlama){
+                $query->when($request->latest === 'terlama', function ($terlama) {
                     $terlama->oldest()->get();
                 });
             })
-            ->when($request->perpage, function($query) use ($request){
-                $query->when($request->perpage === '10' ,function ($var){
+            ->when($request->perpage, function ($query) use ($request) {
+                $query->when($request->perpage === '10', function ($var) {
                     $var->take(10);
                 });
-                $query->when($request->perpage === '20' ,function ($var){
+                $query->when($request->perpage === '20', function ($var) {
                     $var->take(20);
                 });
-                $query->when($request->perpage === '50' ,function ($var){
+                $query->when($request->perpage === '50', function ($var) {
                     $var->take(50);
                 });
-                $query->when($request->perpage === '100' ,function ($var){
+                $query->when($request->perpage === '100', function ($var) {
                     $var->take(100);
                 });
             })
@@ -162,10 +162,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function get(): mixed
     {
         return $this->model->query()
-        ->where('status',NewsStatusEnum::ACTIVE->value)
-        ->withCount('views')
-        ->orderBy('views_count','desc')
-        ->get();
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->withCount('views')
+            ->orderBy('views_count', 'desc')
+            ->get();
     }
 
     /**
@@ -205,8 +205,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showWhithCount(): mixed
     {
-        return DB::table('news')
-            ->select('news.id', 'news.name', 'news.photo', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d, %Y") as created_at_formatted') ,DB::raw('COUNT(views.news_id) as views_count'))
+        return $this->model->query()
+            ->select('news.id', 'news.name', 'news.photo', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d, %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->groupBy('news.id', 'news.name')
             ->orderBy('views_count', 'desc')
@@ -217,13 +217,29 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showCountMonth(): mixed
     {
         $year = date('Y');
-        return DB::table('news')
-            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(id) as news_count'))
+        $result = $this->model->query()
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(id) as news_count'))
             ->whereYear('created_at', $year)
-            ->groupBy('year', 'month')
-            ->orderBy('year')
+            ->groupBy('month')
             ->orderBy('month')
             ->get();
-    }
 
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $found = false;
+            foreach ($result as $row) {
+                if ($row->month == $i) {
+                    $newsCount = $row->news_count;
+                    $monthlyData[] = $newsCount;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $monthlyData[] = 0;
+            }
+        }
+
+        return $monthlyData;
+    }
 }

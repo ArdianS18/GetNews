@@ -51,9 +51,10 @@ class DashboardController extends Controller
         $news2 = $this->news->showCountMonth();
 
         $newsCategory = $this->newsCategory->trending();
-        dd($newsCategory);
+        // dd($newsCategory);
 
         return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1','news2'));
     }
 
     public function home(){
@@ -61,8 +62,8 @@ class DashboardController extends Controller
         $news = $this->news->get();
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        $trending = $this->view->trending();
-        return view('pages.index',compact('news', 'categories', 'subCategories'));
+        $trendings = $this->view->trending();
+        return view('pages.index',compact('news', 'categories', 'subCategories','trendings'));
     }
 
     public function navbar(){

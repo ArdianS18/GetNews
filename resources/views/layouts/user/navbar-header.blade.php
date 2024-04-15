@@ -129,7 +129,6 @@
                         @auth
                         <div class="ms-2">
                             <ul class="navbar-nav mx-auto">
-                                {{-- <li></li> --}}
                                 <li class="nav-item">
                                     <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
                                         <a href="javascript:void(0)" class="nav-link">

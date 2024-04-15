@@ -70,40 +70,7 @@
                     </div>
                     <!-- Modal body -->
                     {{-- <form method="post" id="form-detail"> --}}
-                        {{-- <div class="modal-body">
-                            <div class="row container">
-
-                                <div class="col-md-12 col-lg-12 mb-4">
-                                    <div class="d-flex justify-content-center">
-                                        <img src="{{ asset(Auth::user()->photo ? 'storage/' . Auth::user()->photo : 'default.png') }}"
-                                            alt="photo" width="180" height="180"
-                                            style="border-radius: 50%; object-fit:cover;" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12 col-lg-6 mb-3">
-                                    <li class="list-group-item" style="font-weight: bold;">Nama : <span
-                                        id="detail-name" style="font-weight: normal;"></span>
-                                </li>
-                                </div>
-
-                                <div class="col-md-12 col-lg-6 mb-3">
-                                    <p class="fw-bold text-black">Email :</p>
-                                    <p id="detail-email"> </p>
-                                </div>
-
-                                <div class="col-md-12 col-lg-6 mb-3">
-                                    <label class="form-label" for="nomor">Email</label>
-                                    <input type="text" id="email" name="email" placeholder="email"
-                                        value="{{ old('name') }}" class="form-control" readonly>
-                                </div>
-
-                                <div class="col-md-12 col-lg-12 from-group mb-3">
-                                    <label class="form-label" for="alamat">Alamat</label>
-                                    <textarea name="alamat" id="alamat" rows="6" class="form-control" style="resize: none" readonly>{{ old('alamat') }}</textarea>
-                                </div>
-                            </div>
-                        </div> --}}
+    
                         <div class="modal-body">
                             <div class="d-flex justify-content-center">
                                 <img src="" class="rounded-circle mb-2" id="detail-photo" width="150"
@@ -147,9 +114,7 @@
                                         Tolak
                                     </button>
                                 </form>
-                                 
-                               
-                               
+   
                                 <form method="post" id="form-terima">
                                     @csrf
                                     @method('patch')
@@ -245,7 +210,7 @@
         var id = $(this).data('id');
             $.ajax({
                 url: "approved-user/" + id,
-                method: 'PATCH', // Pastikan metode sesuai dengan yang diterima server
+                method: 'PATCH',
                 data: $(this).serialize(),
                 dataType: "JSON",
                 success: function(response) {
@@ -254,10 +219,8 @@
                         text: response.message, 
                         icon: 'success',
                         confirmButtonText: 'Oke'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
+                    })
+                    get(1)
                 },
                 error: function(xhr, status, error) {
                     Swal.fire({
@@ -275,20 +238,18 @@
         var id = $(this).data('id');
             $.ajax({
                 url: "reject-user/" + id,
-                method: 'PATCH', // Pastikan metode sesuai dengan yang diterima server
+                method: 'PATCH', 
                 data: $(this).serialize(),
                 dataType: "JSON",
                 success: function(response) {
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        text: response.message, 
-                        icon: 'success',
-                        confirmButtonText: 'Oke'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                        }
-                    });
-                },
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: response.message, 
+                    icon: 'success',
+                    confirmButtonText: 'Oke'
+                })
+                get(1)
+            },
                 error: function(xhr, status, error) {
                     Swal.fire({
                         title: 'Error!',

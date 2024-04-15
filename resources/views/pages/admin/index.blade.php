@@ -106,7 +106,8 @@
                                     <div class="" style="max-width: 540px;">
                                         <div class="row g-2">
                                             <div class="col-md-4">
-                                                <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%; height: auto;" alt="">
+                                                <img src="{{ asset('storage/' . $news->photo) }}"
+                                                    style="width: 100%; height: auto;" alt="">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
@@ -117,12 +118,15 @@
                                                                 width="15" height="15" viewBox="0 0 2048 2048">
                                                                 <path fill="#0f4d8a"
                                                                     d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                            </svg><small style="color: #0f4d8a">{{ $news->created_at_formatted }}</small></p>
+                                                            </svg><small
+                                                                style="color: #0f4d8a">{{ $news->created_at_formatted }}</small>
+                                                        </p>
                                                         <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg"
                                                                 width="20" height="20" viewBox="0 0 24 24">
                                                                 <path fill="#0f4d8a"
                                                                     d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                            </svg><small style="color: #0f4d8a">{{ $news->views_count }}</small></p>
+                                                            </svg><small
+                                                                style="color: #0f4d8a">{{ $news->views_count }}</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,21 +168,22 @@
                 <div class="card-body">
                     <h4 class="mb-3">Penulis</h4>
                     @forelse ($authors1 as $author)
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset( $author->photo ? 'storage/'.$author->photo : "default.png")  }}" class="rounded-circle mb-3 img" alt="Image" width="40px" height="40px"/>
-                                <div class="ms-3">
-                                    <p class="fs-4 fw-semibold fs-2 student-name">{{$author->name}}</p>
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset($author->photo ? 'storage/' . $author->photo : 'default.png') }}"
+                                        class="rounded-circle mb-3 img" alt="Image" width="40px" height="40px" />
+                                    <div class="ms-3">
+                                        <p class="fs-4 fw-semibold fs-2 student-name">{{ $author->name }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
                                 <div>
-                                    <span class="badge bg-light-danger text-danger">{{ $author->count }}</span>
+                                    <div>
+                                        <span class="badge bg-light-danger text-danger">{{ $author->count }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @empty
                     @endforelse
                 </div>
@@ -377,9 +382,21 @@
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script>
+        var monthlyData = <?php echo json_encode($news2); ?>;
+
+        var monthlyDataString = JSON.stringify(monthlyData);
+
+        var monthlyDataObj = JSON.parse(monthlyDataString);
+
+        var values = [];
+        for (var key in monthlyDataObj) {
+            if (monthlyDataObj.hasOwnProperty(key)) {
+                values.push(monthlyDataObj[key]);
+            }
+        }
         var options = {
             series: [{
-                data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+                data: values,
             }],
             chart: {
                 type: 'line',
