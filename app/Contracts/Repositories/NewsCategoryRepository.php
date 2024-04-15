@@ -4,7 +4,9 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Models\NewsCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsCategoryRepository extends BaseRepository implements NewsCategoryInterface
 {
@@ -102,5 +104,19 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
+    }
+
+    public function trending(): mixed
+    {
+        $startDate = Carbon::now()->toDateString();
+        $endDate = Carbon::now()->addDays(10)->toDateString();
+
+        return $this->model->query()
+        ->select('news_id', DB::raw('COUNT(*) as total'))
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->groupBy('news_id')
+        ->orderBy('total', 'desc')
+        ->limit(9)
+        ->get();
     }
 }

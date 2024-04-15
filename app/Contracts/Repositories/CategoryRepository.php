@@ -8,6 +8,7 @@ use App\Enums\CategoryStatusEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\CategoryInterface;
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryRepository extends BaseRepository implements CategoryInterface
@@ -137,6 +138,4 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->take(6)
             ->get();
     }
-
-
 }

@@ -29,7 +29,6 @@ class DashboardController extends Controller
     private ViewInterface $view;
 
     public function __construct(ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
-
     {
         $this->user = $user;
         $this->author = $author;
@@ -49,8 +48,11 @@ class DashboardController extends Controller
         $authors1 = $this->author->showWhithCount();
         $news = $this->news->showWhithCount();
         $categories = $this->category->showWhithCount();
-
         $news2 = $this->news->showCountMonth();
+
+        $newsCategory = $this->newsCategory->trending();
+        dd($newsCategory);
+
         return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
     }
 
