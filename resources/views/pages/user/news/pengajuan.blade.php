@@ -40,19 +40,19 @@
     <h5>Isi form dibawah ini untuk mengunggah berita</h5>
 
     <div class="mb-3">
-        <button type="button" class="btn btn-sm me-2 text-white"
-            style="padding-left: 2rem; padding-right: 2rem; background-color: #1EBB9E;">
+        <button type="button" class="btn btn-md me-2 text-white"
+            style="background-color: #1EBB9E;">
             Simpan Draf
         </button>
-        <button type="submit" class="btn btn-sm text-white"
-            style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
+        <button type="submit" class="btn btn-md text-white"
+            style="background-color: #0F4D8A;">
             Berikutnya
         </button>
     </div>
   </div>
 
-    <div class="card mt-1">
-        <div class="p-4">
+    <div class="card shadow-sm mt-1">
+        <div class="p-4 mb-4">
             <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-between">
@@ -138,18 +138,6 @@
                                 </span>
                             @enderror
                         </div>
-
-                        {{-- <div class="mt-2">
-                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
-                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
-                            @error('date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div> --}}
-
                     </div>
                 </div>
 
@@ -174,25 +162,6 @@
                                 multiple>
                         </div>
 
-                    </div>
-
-                    <div class="d-flex justify-content-between mt-5">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                            class="btn btn-md text-black m-2 d-flex justify-content-start"
-                            style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                            Ketentuan & Persyaratan
-                        </button>
-
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-md text-black m-2"
-                                style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
-                                Simpan Draf
-                            </button>
-                            <button type="submit" class="btn btn-md text-white m-2"
-                                style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                Upload
-                            </button>
-                        </div>
                     </div>
                 </div>
         </div>
