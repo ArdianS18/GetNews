@@ -127,8 +127,8 @@
                 <p class="fw-semibold">Harga Upload</p>
 
                 <div class="d-flex">
-                    <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del>
-                    <p class="fs-3" style="color: #175A95;">Rp. 80.000</p>
+                    {{-- <del><p class="fs-3 me-3" style="color: #175A95;">Rp. 100.000</p></del> --}}
+                    <p class="fs-3" style="color: #175A95;">Rp. 10.000</p>
                 </div>
             </div>
 
@@ -136,7 +136,15 @@
                 <p class="fw-semibold">Diskon Voucher</p>
 
                 <div class="d-flex">
-                    <p class="fs-3" style="color: #175A95;">Rp. 100.000</p>
+                    <p class="fs-3" style="color: #175A95;"><span>-</span>Rp. 20.000</p>
+                </div>
+            </div>
+
+            <div class="d-flex mt-4 justify-content-between">
+                <p class="fw-semibold">Total Pembayaran</p>
+
+                <div class="d-flex">
+                    <p class="fs-3" style="color: #175A95;">Rp. 80.000</p>
                 </div>
             </div>
 

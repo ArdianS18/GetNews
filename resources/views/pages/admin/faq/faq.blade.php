@@ -15,7 +15,7 @@
 </head>
 
 @section('content')
-    <div class="">
+    <div class="mb-4">
         <div class="d-flex justify-content-between">
             <div>
                 <form class="d-flex">
@@ -69,16 +69,16 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn"
-                            data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="table border text-nowrap customize-table mb-0 align-middle"mt-4">
+    <div class="table-responsive rounded-2 mt-4">
         <table class="table border text-nowrap customize-table mb-0 align-middle">
             <thead>
                 <tr>
