@@ -57,8 +57,8 @@
     </div>
 
     <div class="mt-4 col-md-12 col-lg-12 ">
-        <div class="">
-            <table class="table mb-3">
+        <div class="table-responsive rounded-2">
+            <table class="table border text-nowrap customize-table mb-0 align-middle">
                 <thead>
                     <tr>
                         <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">No</th>
@@ -74,7 +74,7 @@
             </table>
         </div>
         <div id="loading"></div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex mt-2 justify-content-end">
             <nav id="pagination" style="position: fixed; bottom: 10px; right: 10px py-5">
             </nav>
         </div>

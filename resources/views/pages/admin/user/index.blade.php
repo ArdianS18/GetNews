@@ -21,25 +21,23 @@
 
 @section('content')
 
-    <div class="card-table shadow-sm">
-        <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
 
-            <div class="d-flex justify-content-start gap-2 ">
-                <form>
-                    <div class="input-group">
-                        <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
-                            value="{{ request('search') }}" placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                    </div>
-                </form>
-            </div>
+        <div class="d-flex justify-content-start gap-2 ">
+            <form>
+                <div class="input-group">
+                    <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
+                        value="{{ request('search') }}" placeholder="Search">
+                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                </div>
+            </form>
         </div>
     </div>
 
 
-    <div class="mt-4 col-md-12 col-lg-12 card-table shadow-sm">
-    <div class="table-border mb-3">
-        <table class="table mb-3">
+    <div class="mt-4 col-md-12 col-lg-12">
+    <div class="table-responsive rounded-2 mb-3">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
             <thead>
                 <tr>
                     <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">No</th>
@@ -53,7 +51,7 @@
             </tbody>
         </table>
         <div id="loading"></div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex mt-2 justify-content-end">
             <nav id="pagination">
             </nav>
         </div>

@@ -45,7 +45,7 @@
         </div>
     @endif
 
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex justify-content-between">
             <form class="d-flex">
                 <div class="input-group">
@@ -66,8 +66,8 @@
     </div>
 
         <div class="mt-4">
-            <div class="table-border mb-3">
-                <table id="category-table" class="table text-center mb-3">
+            <div class="table-responsive rounded-2 mb-3">
+                <table id="category-table" class="table border text-nowrap customize-table mb-0 align-middle">
                     <thead>
                         <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;" >No</th>
                         <th class="text-white" style="background-color: #175A95;">Kategori</th>
@@ -83,7 +83,7 @@
 
         </div>
         <div id="loading"></div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex mt-2 justify-content-end">
             <nav id="pagination">
             </nav>
         </div>

@@ -12,7 +12,7 @@
 
 @section('content')
 
-    <div class="card-table shadow-sm">
+    <div class="">
         <div class="d-flex justify-content-between">
             <div>
                 <form class="d-flex">
@@ -67,8 +67,8 @@
         </div>
     </div>
 
-    <div class="mt-4">
-        <table class="table responsive">
+    <div class="table-responsive rounded-2 mt-4">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
             <thead>
                 <tr>
                     <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
@@ -81,7 +81,7 @@
         </table>
 
         <div id="loading"></div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex mt-2 justify-content-end">
             <nav id="pagination">
             </nav>
         </div>

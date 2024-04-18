@@ -43,8 +43,8 @@
     </div>
 
         <div class="mt-4">
-            <div class="table-border mb-3">
-                <table class="table text-center mb-3">
+            <div class="table-responsive rounded-2 mb-3">
+                <table class="table border text-nowrap customize-table mb-0 align-middle"">
                     <thead class="table">
                         <th class="text-white" style="background-color: #175A95;  border-radius: 5px 0 0 5px;">No</th>
                         <th class="text-white" style="background-color: #175A95;">Name</th>
@@ -56,7 +56,7 @@
 
 
             <div id="loading"></div>
-            <div class="d-flex mx-4 justify-content-end">
+            <div class="d-flex mt-2 mx-4 justify-content-end">
                 <nav id="pagination">
                 </nav>
             </div>
