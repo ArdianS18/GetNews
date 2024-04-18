@@ -35,7 +35,7 @@
 
                     <div class="d-flex gap-2">
                         <select name="status" class="form-select" id="search-status">
-                            <option value="">Pilih status</option>
+                            <option>Pilih status</option>
                             <option value="0">Aktif</option>
                             <option value="1">Blokir</option>
                             <option value="">Tampilkan semua</option>
@@ -418,7 +418,7 @@
                 }
             })
         })
-        
+
         $('#form-unblock').submit(function(e) {
             $('.preloader').show()
             e.preventDefault()
