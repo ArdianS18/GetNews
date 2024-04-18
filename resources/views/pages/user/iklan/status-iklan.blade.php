@@ -21,7 +21,70 @@
 <div class="row">
     <div class="col-md-12 col-lg-7">
         <div class="card p-4">
-            <div class="row">
+            <h4>Konten Pengiklanan</h5>
+                <div class="d-flex mb-3 justify-content-center align-items-center">
+                    <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="320px" height="240px" class="mb-2" style="object-fit:cover;">
+                </div>
+
+                <div class="row from-outline">
+                    <div class="col-lg-6 mb-4">
+                        <label class="form-label" for="nomor">Jenis Iklan</label>
+                        <input type="text" id="name" name="name" placeholder=""
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <label class="form-label" for="nomor">Halaman</label>
+                        <input type="text" id="name" name="name" placeholder=""
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+        
+                    <div class="col-lg-6 mb-4">
+                        <label class="form-label" for="nomor">Tanggal Awal</label>
+                        <input type="text" id="name" name="name" placeholder=""
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    
+                    <div class="col-lg-6 mb-4">
+                        <label class="form-label" for="nomor">Tanggal Akhir</label>
+                        <input type="text" id="name" name="name" placeholder=""
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+        
+                    <div class="col-lg-12 mb-4">
+                        <label class="form-label" for="nomor">URL</label>
+                        <input type="text" id="name" name="name" placeholder=""
+                            value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                
+            {{-- <div class="row">
                 <div class="col-md-12 col-lg-5">
                     <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="100%" height="200px" class="mb-2" style=" object-fit:cover;">
                 </div>
@@ -29,9 +92,9 @@
                     <h4 class="mb-4 fw-semibold">Jiraiya Banks Wants To Teach You How To Build A House</h4>
                     <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print…</p>
                 </div>
-            </div>
+            </div> --}}
 
-            <div class="mt-5">
+            {{-- <div class="mt-5">
                 <p class="fw-semibold fs-4 text-black">Tanggal Upload:</p>
                 <div class="d-flex justify-content-between">
                     <div class="mt-2 d-flex justify-content-end">
@@ -46,7 +109,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

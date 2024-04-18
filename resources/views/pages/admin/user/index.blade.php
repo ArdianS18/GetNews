@@ -146,7 +146,7 @@
 
         function get(page) {
             $.ajax({
-                url: "{{ route('author.admin.list') }}?page=" + page,
+                url: "{{ route('author.admin.index') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data:{

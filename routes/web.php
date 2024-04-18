@@ -316,6 +316,22 @@ Route::get('iklan-biodata', function(){
     return view('pages.user.iklan.upload');
 })->name('iklan.biodata');
 
+Route::get('iklan-ajukan', function(){
+    return view('pages.user.iklan.ajukan');
+})->name('iklan.ajukan');
+
+Route::get('status-iklan', function(){
+    return view('pages.user.iklan.status');
+})->name('iklan.status');
+
+Route::get('status-detail-iklan', function(){
+    return view('pages.user.iklan.status-iklan');
+})->name('status.detail.iklan');
+
+Route::get('status-selesai-iklan', function(){
+    return view('pages.user.iklan.status-selesa');
+})->name('status.selesai.iklan');
+
 Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
