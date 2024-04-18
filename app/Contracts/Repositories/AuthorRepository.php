@@ -131,6 +131,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
+            ->where('status', UserStatusEnum::PANDING->value)
             ->when($request->search, function ($query) use ($request) {
                 $query->whereHas('user', function ($query) use ($request) {
                     $query->where('name', 'LIKE', '%' . $request->search . '%');

@@ -11,16 +11,8 @@
                 </div>
                 <div class="col-7">
                   <h4 class="fw-semibold mb-8" style="color: #175A95;">Pengajuan Berita</h4>
-                  {{-- <nav aria-label="breadcrumb"> --}}
                     <p style="color: #175A95;">proses pengunggahan berita ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
-                    
-                  {{-- </nav> --}}
                 </div>
-                {{-- <div class="col-3">
-                  <div class="text-center mb-n4">
-                    <img src="{{asset('assets/img/bg-nw.svg')}}" width="200px" alt="" class="img-fluid">
-                  </div>
-                </div> --}}
               </div>
             </div>
           </div>
