@@ -210,8 +210,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->groupBy('news.id', 'news.name')
             ->orderBy('views_count', 'desc')
-            ->take(6)
-            ->get();
+            ->take(6);
+            // ->get();
     }
 
     public function showCountMonth(): mixed

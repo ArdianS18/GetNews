@@ -165,7 +165,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->join('news', 'authors.id', '=', 'news.author_id')
             ->join('users', 'authors.user_id', '=', 'users.id')
             ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(*) as count'))
-            ->groupBy('authors.id', 'users.name')
+            ->groupBy('authors.id', 'users.name', 'users.photo')
             ->get();
     }
 }

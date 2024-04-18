@@ -102,13 +102,13 @@
                             <form action="{{ route('user.approved', ['user' => $author->id]) }}" method="post">
                                 @method('patch')
                                 @csrf
-                                <button type="submit" name="status" class="btn btn-success me-2" value="approved">Terima</button>
+                                <button type="submit" name="status" class="btn btn-rounded btn-light-success text-success me-2" value="approved">Terima</button>
                             </form> --}}
 
                             {{-- <form action="{{ route('user.reject', ['user' => $author->id]) }}" method="post">
                                 @method('patch')
                                 @csrf
-                                <button type="submit" name="status" class="btn btn-danger" value="reject">Banned</button>
+                                <button type="submit" name="status" class="btn btn-rounded btn-lightsuccess text-success" value="reject">Banned</button>
                             </form> --}}
 
                             <button class="btn btn-sm btn-primary btn-detail me-2" data-bs-toggle="tooltip" title="Detail" style="background-color:#0F4D8A" data-id="{{ $author->id }}"

@@ -10,7 +10,7 @@
             </div>
         </div>
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar>
+        <nav class="sidebar-nav scroll-sidebar mt-3" data-simplebar>
             <ul id="sidebarnav">
 
                 <li class="sidebar-item">
