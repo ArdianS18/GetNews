@@ -53,7 +53,7 @@ class DashboardController extends Controller
         $newsCategory = $this->newsCategory->trending();
         // dd($newsCategory);
 
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
+        // return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
         return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1','news2'));
     }
 

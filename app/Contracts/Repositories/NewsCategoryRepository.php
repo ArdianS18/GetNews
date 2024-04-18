@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Enums\NewsStatusEnum;
 use App\Models\NewsCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -54,7 +55,8 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
         return $this->model->query()
             ->where('category_id', $id)
             ->whereHas('news', function($search) use ($query){
-            $search->where('name', 'LIKE', '%'.$query.'%');
+                $search->where('status',NewsStatusEnum::ACTIVE->value);
+                $search->where('name', 'LIKE', '%'.$query.'%');
         })->paginate(10);
     }
 

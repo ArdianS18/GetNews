@@ -132,7 +132,7 @@
                                 <li class="nav-item">
                                     <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
                                         <a href="javascript:void(0)" class="nav-link">
-                                            <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="img-fluid" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                            <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
                                         </a>
                                     </div>
                                     <ul class="dropdown-menu">

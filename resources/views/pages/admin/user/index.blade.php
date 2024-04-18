@@ -70,7 +70,7 @@
                     </div>
                     <!-- Modal body -->
                     {{-- <form method="post" id="form-detail"> --}}
-    
+
                         <div class="modal-body">
                             <div class="d-flex justify-content-center">
                                 <img src="" class="rounded-circle mb-2" id="detail-photo" width="150"
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <ul class="list-group list-group-flush">
-                                    
+
                                             <li class="list-group-item mb-3" style="font-weight: bold;">Email: <span
                                                 id="detail-email" style="font-weight: normal;"></span>
                                             </li>
@@ -114,7 +114,7 @@
                                         Tolak
                                     </button>
                                 </form>
-   
+
                                 <form method="post" id="form-terima">
                                     @csrf
                                     @method('patch')
@@ -192,7 +192,7 @@
                         } else {
                             console.error('Tidak ada data penulis yang ditemukan dengan id:', authorId);
                         }
-                       
+
                     });
 
                         // $('.btn-delete').click(function() {
@@ -216,7 +216,7 @@
                 success: function(response) {
                     Swal.fire({
                         title: 'Berhasil!',
-                        text: response.message, 
+                        text: response.message,
                         icon: 'success',
                         confirmButtonText: 'Oke'
                     })
@@ -238,13 +238,13 @@
         var id = $(this).data('id');
             $.ajax({
                 url: "reject-user/" + id,
-                method: 'PATCH', 
+                method: 'PATCH',
                 data: $(this).serialize(),
                 dataType: "JSON",
                 success: function(response) {
                 Swal.fire({
                     title: 'Berhasil!',
-                    text: response.message, 
+                    text: response.message,
                     icon: 'success',
                     confirmButtonText: 'Oke'
                 })
@@ -336,6 +336,6 @@
                 }
             })
         })
-        
+
     </script>
 @endsection
