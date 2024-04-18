@@ -85,9 +85,10 @@
                             <ul class="news-metainfo list-style">
                                 <li class="author">
                                     <span class="author-img">
-                                        <img src="{{ asset('default.png') }}" alt="Image">
+                                        <img src="{{ asset( $news->author->user->photo ? 'storage/'.$news->author->user->photo : "default.png")  }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;"/>
+                                        {{-- <img src="{{ asset('default.png') }}" alt="Image"> --}}
                                     </span>
-                                    <a href="author.html">{{ $news->name }}</a>
+                                    <a href="author.html">{{ $news->author->user->name }}</a>
                                 </li>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -97,10 +98,11 @@
                                             fill="#0F4D8A" />
                                         <a href=""></a>
                                     </svg>
-                                    <a href="news-by-date.html">Mar 03, 2023</a>
+                                    <a href="news-by-date.html">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
                                 <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2M20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2"/></svg>
+                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                         viewBox="0 0 512 512">
                                         <path fill-opacity=".9"
                                             d="M256 43C137.789 43 43 138.851 43 256s94.789 213 213 213 213-95.851 213-213S373.149 43 256 43zm0 383.4c-93.718 0-170.4-76.683-170.4-170.4S162.282 85.6 256 85.6 426.4 162.282 426.4 256 349.718 426.4 256 426.4z"
@@ -108,8 +110,8 @@
                                         <path fill-opacity=".9"
                                             d="M266.65 149.5H234.7v127.8l111.825 67.093 15.975-26.625-95.85-56.444z"
                                             fill="#0F4D8A" />
-                                    </svg>
-                                    15 Min Read
+                                    </svg> --}}
+                                    {{-- 15 Min Read --}}
                                 </li>
                             </ul>
 
@@ -198,12 +200,12 @@
                                             href="{{ route('news.user', ['news' => $news->slug, 'page' => $i + 1]) }}">{{ $i + 1 }}</a>
                                     </li>
                                 @endfor
-                                <li><a href="{{ route('news.user', ['news' => $news->slug, 'page' => 'all']) }}">Semua</a>
+                                {{-- <li><a href="{{ route('news.user', ['news' => $news->slug, 'page' => $i]) }}">Semua</a> --}}
                                 </li>
                             </ul>
                         </div>
                         {{-- @endforeach --}}
-                        <div class="news-img">
+                        {{-- <div class="news-img">
                             <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image">
                         </div>
                         <div class="news-para">
@@ -233,7 +235,7 @@
                                 even slightly believable. If you are going to use a <strong>adipisicing</strong> of Lorem
                                 Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
                             </p>
-                        </div>
+                        </div> --}}
 
                         <h3 class="comment-box-title mt-4">3 Komentar</h3>
                         <div class="comment-item-wrap">
