@@ -28,6 +28,7 @@ use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Models\NewsCategory;
+use App\Models\NewsHasLike;
 use App\Models\NewsSubCategory;
 
 class NewsController extends Controller
@@ -176,6 +177,7 @@ class NewsController extends Controller
             'created_at' => now()
         ]);
 
+        $userLike = $this->newsHasLike->get()->where('user_id', auth()->user());
         $newsLike = $this->newsHasLike->where($news)->count();
         $comments = $this->comment->where($news);
         $subCategories = $this->subCategory->get();
@@ -183,7 +185,7 @@ class NewsController extends Controller
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'pages', 'currentPage'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'userLike', 'pages', 'currentPage'));
     }
 
     /**

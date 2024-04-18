@@ -44,7 +44,7 @@ class NewsHasLikeController extends Controller
             'news_id' => $news->id,
             'user_id' => auth()->id()
         ]);
-
+        
         return back();
 
         // $likeData = [

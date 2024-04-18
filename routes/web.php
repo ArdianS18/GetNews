@@ -49,7 +49,7 @@ Auth::routes();
 
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
-    // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin'); 
+    // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
     })->name('list.author.admin'); //list author approved
@@ -62,7 +62,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
         return view('pages.admin.user.index');
     })->name('author.admin');
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
-    
+
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
     Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
@@ -264,7 +264,7 @@ Route::get('profile-user-update', function () {
     return view('pages.user.profile.update');
 })->name('profile.user.update');
 
-Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('news-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
 
 // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
 // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');

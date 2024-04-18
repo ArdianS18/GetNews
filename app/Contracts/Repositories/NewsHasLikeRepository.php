@@ -66,10 +66,10 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     public function store(array $data): mixed
     {
         return $this->model->query()
-            ->updateOrCreate([
+            ->store([
                 'news_id' => $data['news_id'],
                 'user_id' => auth()->id()
-            ],$data);
+            ]);
 
         //     $existingLike = $this->model->query()
         // ->where('news_id', $data['news_id'])
