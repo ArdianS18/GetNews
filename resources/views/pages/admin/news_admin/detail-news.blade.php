@@ -7,16 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <style>
+    {{-- <style>
         .news-card-a {
-            box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
             border: 1px solid #ddd;
-            padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
             background-color: #fff;
         }
-    </style>
+    </style> --}}
 @endsection
 
 <head>
@@ -25,203 +23,185 @@
 
 @section('content')
     <div class="container" style="margin-top: 3%;">
-        {{-- <h2 class="text-center">Detail Berita</h2> --}}
-        {{-- <h5 class="text-left mb-0">Detail / {{ $news->name }}</h6> --}}
-            <div class="news-card-a mt-5">
-                <h3>Detail Berita</h3>
-            </div>
-
-            <div class="news-card-a" style="background-color: #FFFFFF">
-
-                <div class="d-flex gap-2">
-                    @if ($news->status === 'panding')
-                        <div class="d-flex gap-2">
-                            <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
-                                @method('patch')
-                                @csrf
-                                <button type="submit" class="btn btn-success">Approved</button>
-                            </form>
-
-                            <a class="btn btn-danger btn-reject" id="btn-reject-{{ $news->id }}">Tolak</a>
-                        </div>
-                    @else
-                        <div>
-                            <a href="{{ route('news.option.editor', ['news' => $news->id]) }}"
-                                class="btn btn-{{ $news->is_primary ? 'primary' : 'dark' }}">
-                                <div class="d-flex gap-2">
-                                    {{ $news->is_primary ? '' : '' }} <i><svg xmlns="http://www.w3.org/2000/svg"
-                                            width="20" height="20" viewBox="0 0 24 24">
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3" />
-                                        </svg></i>
-                                    Pin Berita
-                                </div>
-                            </a>
-                        </div>
-                    @endif
+        
+        <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
+            @method('put')
+            @csrf
+            <div class="card border border-1 shadow-sm mt-5" style="background-color: #FFFFFF">
+                <div class="px-4 py-3 border-bottom">
+                    <h5 class="card-title fw-semibold mb-0 lh-sm">Detail Berita</h5>
                 </div>
 
-                <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
-                    @method('put')
-                    @csrf
-                    <div class="d-flex gap-2 mb-3">
-                        <a class="btn btn-warning" id="clickEdit" onclick="edit()">Edit</a>
-                        <a class="btn btn-success" id="clickSave" onclick="save()">Save</a>
+                <div class="d-flex justify-content-between mt-4 ms-4 me-4">
+
+                    <div class="d-flex justify-content-start gap-2">
+        
+                        @if ($news->status === 'panding')
+                            <div>
+                                @if ($news->status === "panding")
+                                <div>
+                                    <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
+                                </div>
+                                @else
+                                <div>
+                                    <a href="{{ route('news.approve.admin') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
+                                </div>
+                                @endif
+                            </div>
+                        @else
+                            <div>
+                                <a href="{{ route('list.approved') }}" class="btn btn-lg px-3 text-white"
+                                    style="background-color: #5D87FF;">Kembali</a>
+                            </div>
+                        @endif
                     </div>
-                    <div class="news-card-a mt-2" style="background-color: #FFFFFF">
-                        <div class="container" style="padding: 3%;">
-                            <div class="justify-content-start mt-2">
-                                <div class="col-lg-6 col-md-20 from-outline">
-                                    <label class="form-label" for="photo">Thumbnail Berita</label>
-                                    <div>
-                                        <img width="350px" src="{{ asset('storage/' . $news->photo) }}">
+        
+                    <div class="d-flex gap-2">
+                        {{-- <button type="submit" class="btn btn-success btn-lg px-3" style="padding-left">Simpan</button> --}}
+        
+                        @if ($news->status === 'panding')
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</a>
+
+                                <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
+                                    @method('patch')
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-lg px-3">Terima</button>
+                                </form>
+                            </div>
+                        @else
+                            <div>
+                                <a href="{{ route('news.option.editor', ['news' => $news->id]) }}"
+                                    class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'primary' : 'dark' }}">
+                                    <div class="d-flex gap-2">
+                                        {{ $news->is_primary ? '' : '' }} <i><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="20" height="20" viewBox="0 0 24 24">
+                                                <path fill="currentColor" fill-rule="evenodd"
+                                                    d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3" />
+                                            </svg></i>
+                                        Pin Berita
                                     </div>
+                                </a>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="container p-4">
+
+                    <div class="card border shadow-none p-3">
+                        <div class="row justify-content-between mt-2">
+
+                            <div class="col-lg-12 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="photo">Thumbnail Berita</label>
+                                <div>
+                                    <img width="350px" src="{{ asset('storage/' . $news->photo) }}">
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-12 row-span-1 from-outline mt-5">
+                            <div class="col-lg-12 col-md-12 row-span-1 from-outline mt-5">
                                 <div class="mt-2">
                                     <label class="form-label" for="password_confirmation">Multi Gambar</label>
                                     <div class="d-flex gap-2">
                                         @foreach ($newsPhoto as $photo)
-                                            <img width="200 px" src="{{ asset('storage/' . $photo->multi_photo) }}"
+                                            <img width="320 px" src="{{ asset('storage/' . $photo->multi_photo) }}"
                                                 alt="{{ $photo->multi_photo }}">
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row justify-content-between mt-2">
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="nomor" style="font-weight: bold">Judul Berita</label>
-                                    <h6 class="mt-2" style="font-size: 16px"><small>{{ $news->name }}</small></h6>
-                                    {{-- <input type="text" name="name" class="form-control" value="{{ $news->name }}"> --}}
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="nomor" style="font-weight: bold">Penulis</label>
-                                    <h6 class="mt-2" style="font-size: 16px"><small>{{ $news->author->user->name }}</small></h6>
-                                    {{-- <input type="text" class="form-control" value="{{ $news->author->user->name }}" readonly> --}}
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation" style="font-weight: bold">Tanggal Upload</label>
-                                    <h6 class="mt-2" style="font-size: 16px"><small>{{ $news->upload_date }}</small></h6>
-                                    {{-- <input type="date" name="upload_date" class="form-control" value="{{ $news->upload_date }}"> --}}
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation" style="font-weight: bold">Tags</label>
-
-                                    <div class="d-flex flex-wrap">
-                                        @foreach ($newsTags as $index => $newsTag)
-                                            <div class="border p-2 me-2 mb-2" style="width: fit-content; background-color: #175A95; border-radius: 5px">
-                                                <h6 class="m-0" style="font-size: 16px; color: #FFFFFF"><small>{{ $newsTag->tag->name }}</small></h6>
-                                            </div>
-                                            @if (($index + 1) % 5 == 0)
-                                                <div class="w-100"></div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-
-                                    {{-- <select class="form-control select2 tags" name="tags[]" multiple="multiple">
-                                        <option>pilih tags</option>
-                                        @foreach ($tags as $tag)
-                                            <option value="{{ $tag->name }}"
-                                                {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
-                                                {{ $tag->name }}
-                                            </option>
-                                        @endforeach
-                                    </select> --}}
-
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation" style="font-weight: bold">Kategori</label>
-
-
-                                    <div class="d-flex flex-wrap">
-                                        @foreach ($newsCategories as $index => $newsCategory)
-                                            <div class="border p-2 me-2 mb-2" style="width: fit-content; background-color: #175A95; border-radius: 5px">
-                                                <h6 class="m-0" style="font-size: 16px; color: #FFFFFF"><small>{{ $newsCategory->category->name }}</small></h6>
-                                            </div>
-                                            @if (($index + 1) % 5 == 0)
-                                                <div class="w-100"></div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-
-                                    {{-- <select id="category_id"
-                                        class="select2 form-control category @error('category') is-invalid @enderror"
-                                        name="category[]" multiple="true" value="" aria-label="Default select example">
-                                        <option>pilih kategori</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select> --}}
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation" style="font-weight: bold">Sub Kategori</label>
-
-                                    <div class="d-flex flex-wrap">
-                                        @foreach ($newsSubCategories as $index => $newsSubCategory)
-                                            <div class="border p-2 me-2 mb-2" style="width: fit-content; background-color: #175A95; border-radius: 5px">
-                                                <h6 class="m-0" style="font-size: 16px; color: #FFFFFF"><small>{{ $newsSubCategory->subCategory->name }}</small></h6>
-                                            </div>
-                                            @if (($index + 1) % 5 == 0)
-                                                <div class="w-100"></div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-
-                                    {{-- <select id="sub_category_id"
-                                        class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                        name="sub_category[]" multiple="true" value="" aria-label="Default select example">
-                                        <option>pilih sub kategori</option>
-                                        @foreach ($subCategories as $subCategory)
-                                            <option value="{{ $subCategory->id }}"
-                                                {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
-                                                {{ $subCategory->name }}
-                                            </option>
-                                        @endforeach
-                                    </select> --}}
-                                </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="nomor">Judul Berita</label>
+                                <input type="text" name="name" class="form-control" value="{{ $news->name }}">
                             </div>
-
-                            <div class="row justify-content-between mt-2">
-                                <div class="">
-                                    <label class="form-label" for="content" style="font-weight: bold">Content</label>
-                                    <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
-                                </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="nomor">Penulis</label>
+                                <input type="text" class="form-control"
+                                    value="{{ $news->author->user->name }}" readonly>
+                            </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                                <input type="date" name="upload_date" class="form-control" value="{{ $news->upload_date }}">
+                            </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="password_confirmation">Tags</label>
+                                <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                                    <option>pilih tags</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->name }}"
+                                            {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
+                                            {{ $tag->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="password_confirmation">Kategori</label>
+                                <select id="category_id"
+                                    class="select2 form-control category @error('category') is-invalid @enderror"
+                                    name="category[]" multiple="true" value="" aria-label="Default select example">
+                                    <option>pilih kategori</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-2">
+                                <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                                <select id="sub_category_id"
+                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                    name="sub_category[]" multiple="true" value="" aria-label="Default select example">
+                                    <option>pilih sub kategori</option>
+                                    @foreach ($subCategories as $subCategory)
+                                        <option value="{{ $subCategory->id }}"
+                                            {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
+                                            {{ $subCategory->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                    </div>
-                </form>
 
-                <div class="d-flex justify-content-between me-5 mb-3">
-
-                    <div class="d-flex justify-content-start gap-2">
-
-                        @if ($news->status === 'panding')
-                            <div>
-                                @if ($news->status === "panding")
-                                <div>
-                                    <a href="{{ route('approved-news.index') }}" class="btn text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                        <div class="row justify-content-between mt-2">
+                            <div class="">
+                                <label class="form-label" for="content">Content</label>
+                                <div class="d-flex gap-2 mb-3">
+                                    <a class="btn btn-warning" id="clickEdit" onclick="edit()">Edit</a>
+                                    <a class="btn btn-success" id="clickSave" onclick="save()">Save</a>
                                 </div>
-                                @else
-                                <div>
-                                    <a href="{{ route('news.approve.admin') }}" class="btn text-black" style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
+                                <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
+                            </div>
+
+                            <div class="justify-content-start mt-2">
+                                {{-- <div class="col-lg-6 col-md-20 from-outline">
+                                    <label class="form-label" for="photo">Thumbnail Berita</label>
+                                    <div>
+                                        <img width="350px" src="{{ asset('storage/' . $news->photo) }}">
+                                    </div>
+                                </div> --}}
+                            </div>
+
+                            {{-- <div class="col-lg-6 col-md-12 row-span-1 from-outline mt-5">
+                                <div class="mt-2">
+                                    <label class="form-label" for="password_confirmation">Multi Gambar</label>
+                                    <div class="d-flex gap-2">
+                                        @foreach ($newsPhoto as $photo)
+                                            <img width="320 px" src="{{ asset('storage/' . $photo->multi_photo) }}"
+                                                alt="{{ $photo->multi_photo }}">
+                                        @endforeach
+                                    </div>
                                 </div>
-                                @endif
-                            </div>
-                        @else
-                            <div>
-                                <a href="{{ route('list.approved') }}" class="btn text-black"
-                                    style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">Kembali</a>
-                            </div>
-                        @endif
+                            </div> --}}
+                        </div>
                     </div>
+
                 </div>
-            </div>
+        </form>
+
     </div>
     </div>
     </div>
@@ -271,9 +251,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
-        var edit = function() {
-        // }
-        // $(document).ready(function() {
+        // var edit = function() {
+        //     $('#content').summernote({
+        //         height: 400,
+        //         toolbar: [
+        //             ['style', ['style']],
+        //             ['font', ['bold', 'underline', 'clear']],
+        //             ['color', ['color']],
+        //             ['para', ['ul', 'ol', 'paragraph']],
+        //             ['table', ['table']],
+        //             ['insert', ['link', 'picture', 'video']],
+        //             ['view', ['fullscreen', 'codeview', 'help']]
+        //         ]
+        //     });
+        // };
+
+        $(document).ready(function() {
             $('#content').summernote({
                 height: 400,
                 toolbar: [
@@ -285,13 +278,14 @@
                     ['insert', ['link', 'picture', 'video']],
                     ['view', ['fullscreen', 'codeview', 'help']]
                 ]
-            });
-        };
 
-        var save = function() {
-            var markup = $('#content').summernote('code');
-            $('#content').summernote('destroy');
-        }
+            });
+        });
+
+        // var save = function() {
+        //     var markup = $('#content').summernote('code');
+        //     $('#content').summernote('destroy');
+        // }
     </script>
 
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>

@@ -15,11 +15,6 @@
             margin-top: 70px;
         }
 
-        .card-detail {
-            padding: 25px;
-            border-radius: 10px;
-            background-color: #fff;
-        }
     </style>
 @endsection
 
@@ -133,7 +128,7 @@
                     Penulis</button>
             </div>
 
-            <div class="tab-pane fade show active card-detail" id="pills-berlangganan" role="tabpanel"
+            <div class="tab-pane fade show active card p-4 shadow-sm" id="pills-berlangganan" role="tabpanel"
                 aria-labelledby="pills-berlangganan-tab" tabindex="0">
 
                 <!-- Row -->

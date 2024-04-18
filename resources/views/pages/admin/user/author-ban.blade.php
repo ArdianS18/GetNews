@@ -46,7 +46,7 @@
     </div>
 
     <div class="mt-3 col-md-12 col-lg-12 card-table shadow-sm">
-    <div class="table-border mb-3">
+    <div class="table-responsive rounded-2 mb-3">
         <table class="table mb-3">
             <thead>
                 <tr>

@@ -99,7 +99,7 @@
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
-                                                    id="chat_user_0" data-user-id="1">
+                                                    id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}">
                                                     <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
@@ -116,7 +116,6 @@
                                                                 <p class="mb-0 fs-2 text-muted">{{ $contact->created_at }}
                                                                 </p>
                                                             </div>
-                                                            {{-- <p class="mb-0 fs-2 text-muted">04:00pm</p> --}}
                                                         </div>
                                                     </div>
                                                 </a>
@@ -256,42 +255,10 @@
                                                                 <p class="mb-3 text-dark">
                                                                     {{ $contactUs->message }}
                                                                 </p>
-                                                                {{-- <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque nisi
-                                    magna, laoreet a augue eget, tempor volutpat diam.</p> --}}
                                                                 <p class="mb-0 text-dark">Regards,</p>
                                                                 <h6 class="fw-semibold mb-0 text-dark pb-1">
                                                                     {{ $contactUs->user->name }}</h6>
                                                             </div>
-                                                            {{-- <div class="mb-3">
-                                  <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
-                                  <div class="d-block d-sm-flex align-items-center gap-4">
-                                    <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
-                                      <div class="d-flex align-items-center gap-3">
-                                        <div class="rounded-1 bg-light p-6">
-                                          <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/chat/icon-adobe.svg" alt="" width="24" height="24">
-                                        </div>
-                                        <div>
-                                          <h6 class="fw-semibold">service-task.pdf</h6>
-                                          <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
-                                              MB</span><span>2 Dec 2023</span></div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
-                                      <div class="d-flex align-items-center gap-3">
-                                        <div class="rounded-1 bg-light p-6">
-                                          <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/chat/icon-zip-folder.svg" alt="" width="24"
-                                            height="24">
-                                        </div>
-                                        <div>
-                                          <h6 class="fw-semibold">work-project.zip</h6>
-                                          <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
-                                              MB</span><span>2 Dec 2023</span></div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </div>
-                                </div> --}}
                                                         </div>
                                                     </div>
                                                     <div class="px-9 py-3 border-top chat-send-message-footer">
