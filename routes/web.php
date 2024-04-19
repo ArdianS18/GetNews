@@ -344,4 +344,8 @@ Route::get('user-berlangganan', function(){
 Route::get('berlangganan', function(){
     return view('pages.admin.berlangganan.index');
 })->name('berlangganan');
+
+Route::get('user-inbox', function(){
+    return view('pages.user.inbox.index');
+})->name('user.inbox');
 ?>
