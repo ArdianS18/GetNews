@@ -1,4 +1,4 @@
-@charset "UTF-8";
+ @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap);
 
 /*!
@@ -47220,7 +47220,7 @@ html[dir=rtl] .welcome-bg-img {
 }
 
 .sidebar-nav ul .sidebar-item .sidebar-link {
-    color: #2a3547;
+    color: #fff;
     display: flex;
     font-size: 14px;
     white-space: nowrap;
@@ -47229,7 +47229,7 @@ html[dir=rtl] .welcome-bg-img {
     position: relative;
     margin: 0 0 2px;
     padding: 10px;
-    border-radius: 7px;
+    border-radius: 0;
     gap: 15px;
     text-decoration: none;
     font-weight: 400
@@ -47314,8 +47314,9 @@ html[dir=rtl] .welcome-bg-img {
 .sidebar-nav ul .sidebar-item.selected>.sidebar-link,
 .sidebar-nav ul .sidebar-item.selected>.sidebar-link.active,
 .sidebar-nav ul .sidebar-item>.sidebar-link.active {
-    background-color: #175A95;
-    color: #fff
+    border-radius: 8px;
+    background-color: #fff;
+    color: #183249
 }
 
 .sidebar-nav ul .sidebar-item.selected .sidebar-link.has-arrow::after {

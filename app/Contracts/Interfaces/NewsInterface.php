@@ -12,6 +12,7 @@ use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInterface;
+use Illuminate\Foundation\Mix;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -20,4 +21,6 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function showWhithCount() : mixed;
     public function showCountMonth() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
+
+    public function getAll() : mixed;
 }

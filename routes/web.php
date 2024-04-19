@@ -205,9 +205,9 @@ Route::middleware(['auth', 'role:author'])->group(function () {
         return view('pages.author.status.index');
     })->name('status.author');
 
-    Route::get('profile', function () {
-        return view('pages.author.index');
-    })->name('profile.index');
+    // Route::get('profile', function () {
+    //     return view('pages.author.index');
+    // })->name('profile.index');
 });
 
 
