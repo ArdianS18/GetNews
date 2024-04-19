@@ -278,13 +278,13 @@
                           <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
                       </tr>
                   </thead>
-                  {{-- <tbody>
-                      @forelse ($news_status as $news_status)
+                  <tbody>
+                      @forelse ($news as $news_status)
                           <tr>
                               <td>{{ $loop->iteration }}</td>
                               <td>{{ $news_status->name }}</td>
-                              <td>{{ $news_status->category->name }}</td>
-                              <td>{{ $news_status->subCategory->name }}</td>
+                              {{-- <td>{{ $news_status->category->name }}</td> --}}
+                              {{-- <td>{{ $news_status->subCategory->name }}</td> --}}
                               <td>{{ \Carbon\Carbon::parse($news_status->upload_date)->format('d / M / Y') }}</td>
                               <td>{{ $news_status->status }}</td>
                               <td>
@@ -313,7 +313,7 @@
                               </td>
                           </tr>
                       @endforelse
-                  </tbody> --}}
+                  </tbody>
                 </table>
               </div>
               <!-- End Row -->
@@ -326,7 +326,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="nomor">Nama</label>
                     <input type="text" id="name" name="name" placeholder="name"
-                        value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror">
                     @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -336,7 +336,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="nomor">No Hp</label>
                     <input type="text" id="name" name="name" placeholder="name"
-                        value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        value="{{ auth()->user()->phone_number }}" class="form-control @error('name') is-invalid @enderror">
                     @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -346,7 +346,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="email"
-                        value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                        value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror">
                     @error('email')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -356,7 +356,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="password"
-                        value="{{ old('password') }}" class="form-control @error('password') is-invalid @enderror">
+                        value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror">
                     @error('password')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -365,8 +365,8 @@
                 </div>
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Tanggal Lahir</label>
-                    <input type="text" id="email" name="email" placeholder="email"
-                        value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                    <input type="text" id="email" name="email" placeholder="Tanggal lahir"
+                        value="{{ auth()->user()->birth_date }}" class="form-control @error('email') is-invalid @enderror">
                     @error('email')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -375,7 +375,7 @@
                 </div>
                 <div class="col-md-12 col-lg-12 mb-4">
                   <label class="form-label" for="email">Alamat</label>
-                  <textarea name="alamat" class="form-control" id="" cols="30" rows="10"></textarea>
+                  <textarea name="alamat" class="form-control" id="" cols="30" rows="10">{{ auth()->user()->address }}</textarea>
 
                 </div>
               </div>

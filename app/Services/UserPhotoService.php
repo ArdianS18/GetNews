@@ -47,14 +47,12 @@ class UserPhotoService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request->validated();
 
-        if ($data['photo']) {
-            $old_file = $user->photo;
-            $this->remove($old_file);
-        }
+        // if ($data['photo']) {
+        //     $old_file = $user->photo;
+        //     $this->remove($old_file);
+        // }
 
         if ($request->hasFile('photo')) {
-
-
             $photo = $this->upload(UploadDiskEnum::USER_PHOTO->value, $request->file('photo'));
         }
 

@@ -168,6 +168,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function getAll(): mixed
+    {
+        return $this->model->query()
+            ->get();
+    }
+
     /**
      * Handle store data event to models.
      *

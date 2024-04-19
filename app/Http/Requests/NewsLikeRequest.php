@@ -14,7 +14,6 @@ class NewsLikeRequest extends FormRequest
     public function rules()
     {
         return [
-            'news_id' => 'required',
             'user_id' => 'required',
         ];
     }

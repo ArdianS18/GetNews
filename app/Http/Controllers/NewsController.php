@@ -177,7 +177,7 @@ class NewsController extends Controller
             'created_at' => now()
         ]);
 
-        $userLike = $this->newsHasLike->get()->where('user_id', auth()->user());
+        $userLike = $this->newsHasLike->get();
         $newsLike = $this->newsHasLike->where($news)->count();
         $comments = $this->comment->where($news);
         $subCategories = $this->subCategory->get();

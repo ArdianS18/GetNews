@@ -206,7 +206,8 @@ class ProfileController extends Controller
     }
 
     public function updateprofile(User $user, RegisterRequest $registerRequest){
-        $this->user->update($user->id, $registerRequest->validated());
+        $data = $registerRequest->validated();
+        $this->user->update($user->id, $data);
         return back();
     }
 

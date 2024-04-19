@@ -91,8 +91,8 @@
                                                 <div class="mb-4">
                                                     <label for="exampleInputPassword1" class="form-label fw-semibold">Nama
                                                         Anda</label>
-                                                    <input type="text" class="form-control"
-                                                        value="{{ auth()->user()->name }}" name="name" id="exampleInputtext">
+                                                    <input type="text" class="form-control"  id="exampleInputtext"
+                                                    value="{{ auth()->user()->name }}" name="name">
                                                 </div>
                                                 <div class="mb-4">
                                                     <label for="exampleInputPassword1"

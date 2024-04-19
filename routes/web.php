@@ -50,17 +50,17 @@ Auth::routes();
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
+    Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
     Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
-    })->name('list.author.admin'); //list author approved
-
-    Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
+    })->name('list.author.admin');
 
     // Author admin
     Route::get('author-admin-approve', [AuthorController::class, 'index'])->name('author.admin.index');
     Route::get('author-list', function(){
         return view('pages.admin.user.index');
     })->name('author.admin');
+
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
 
 
@@ -205,9 +205,9 @@ Route::middleware(['auth', 'role:author'])->group(function () {
         return view('pages.author.status.index');
     })->name('status.author');
 
-    Route::get('profile', function () {
-        return view('pages.author.index');
-    })->name('profile.index');
+    // Route::get('profile', function () {
+    //     return view('pages.author.index');
+    // })->name('profile.index');
 });
 
 
@@ -219,7 +219,8 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
 
     // Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
-    Route::get('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
+    Route::post('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
+    Route::delete('news-unlike/{news}', [NewsHasLikeController::class, 'destroy'])->name('news.like.delete');
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
@@ -336,7 +337,15 @@ Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
 
+Route::get('user-berlangganan', function(){
+    return view('pages.user.berlangganan.index');
+})->name('user.berlangganan');
+
 Route::get('berlangganan', function(){
     return view('pages.admin.berlangganan.index');
-})->name('berlangganan')
+})->name('berlangganan');
+
+Route::get('user-inbox', function(){
+    return view('pages.user.inbox.index');
+})->name('user.inbox');
 ?>

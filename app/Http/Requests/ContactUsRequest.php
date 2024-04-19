@@ -16,7 +16,6 @@ class ContactUsRequest extends FormRequest
     {
         return [
             'message' => 'required',
-            'status_delete' => 'required'
         ];
     }
 

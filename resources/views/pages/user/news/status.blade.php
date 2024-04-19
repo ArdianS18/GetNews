@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="gap-2 ">
+<div class="gap-2">
     <form class="d-flex gap-2">
         <div class="position-relative">
             <div class="input-group">
@@ -41,11 +41,12 @@
 
 <div class="card p-4 mt-4">
     <div class="row">
-        <div class="col-md-12 col-lg-3">
+        <div class="col-md-3">
             <div class="">
-                <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
+                <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="200px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
             </div>
         </div>
+
 
         <div class="col-md-12 col-lg-6">
             <h4 class="mb-3">Jiraiya Banks Wants To Teach You How To Build...</h4>
@@ -53,24 +54,23 @@
 
         </div>
 
-        
         <div class="col-md-12 col-lg-3">
 
             <div class="d-flex justify-content-end">
                 <div class="text-md-right">
-                    <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
-                        Belum Dibayar
+                    <span class="badge bg-light-warning text-warning fs-4 px-3 py-2">
+                        Panding
                     </span>
                 </div>
             </div>
 
-            <div class="mt-3 d-flex justify-content-end">
+            <div class="mt-4 d-flex justify-content-end">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/>
                 </svg>
                 <p class="ms-2"> Apr 25, 2023</p>
             </div>
 
-            <div class="mt-2 d-flex justify-content-end">
+            <div class="mt-4 d-flex justify-content-end">
                 <a href="{{route('status.detail.berita')}}" class="btn btn-sm m-1" style="background-color: #5D87FF;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
@@ -91,14 +91,16 @@
     </div>
 
 </div>
-
+    
 <div class="card p-4">
     <div class="row">
-        <div class="col-md-12 col-lg-3">
-            <div class="">
-                <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
+        <div class="col-md-3">
+            {{-- <div class="col-md-12"> --}}
+                <div class="">
+                    <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="200px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
+                </div>
+            {{-- </div> --}}
             </div>
-        </div>
 
         <div class="col-md-12 col-lg-6">
             <h4 class="mb-3">Jiraiya Banks Wants To Teach You How To Build...</h4>
@@ -106,7 +108,6 @@
 
         </div>
 
-        
         <div class="col-md-12 col-lg-3">
 
             <div class="d-flex justify-content-end">
@@ -117,13 +118,13 @@
                 </div>
             </div>
 
-            <div class="mt-3 d-flex justify-content-end">
+            <div class="mt-4 d-flex justify-content-end">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/>
                 </svg>
                 <p class="ms-2"> Apr 25, 2023</p>
             </div>
 
-            <div class="mt-2 d-flex justify-content-end">
+            <div class="mt-4 d-flex justify-content-end">
                 <a href="" class="btn btn-sm m-1" style="background-color: #5D87FF;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
@@ -148,7 +149,7 @@
     <div class="row">
         <div class="col-md-12 col-lg-3">
             <div class="">
-                <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
+                <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="200px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
             </div>
         </div>
 
@@ -173,13 +174,13 @@
                 </div>
             </div>
 
-            <div class="mt-3 d-flex justify-content-end">
+            <div class="mt-4 d-flex justify-content-end">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/>
                 </svg>
                 <p class="ms-2"> Apr 25, 2023</p>
             </div>
 
-            <div class="mt-2 d-flex justify-content-end">
+            <div class="mt-4 d-flex justify-content-end">
                 <a href="" class="btn btn-sm m-1" style="background-color: #5D87FF;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
@@ -210,14 +211,14 @@
             </div>
         </div>
 
-        <div class="col-md-12 col-lg-6">
+        <div class="col-md-12 mt-4 col-lg-6">
             <h4 class="mb-3">Jiraiya Banks Wants To Teach You How To Build...</h4>
             <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print…</p>
 
         </div>
 
         
-        <div class="col-md-12 col-lg-3">
+        <div class="col-md-12 mt-4 col-lg-3">
 
             <div class="d-flex justify-content-end">
                 <div class="text-md-right">
