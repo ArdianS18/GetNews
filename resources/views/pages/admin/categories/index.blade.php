@@ -69,10 +69,10 @@
             <div class="table-responsive rounded-2 mb-3">
                 <table id="category-table" class="table border text-nowrap customize-table mb-0 align-middle">
                     <thead>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;" >No</th>
-                        <th class="text-white" style="background-color: #175A95;">Kategori</th>
-                        <th class="text-white" style="background-color: #175A95;">Dipakai</th>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
+                        <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;" >No</th>
+                        <th style="background-color: #D9D9D9;">Kategori</th>
+                        <th style="background-color: #D9D9D9;">Dipakai</th>
+                        <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0;">Aksi</th>
                     </thead>
                     <tbody id="data">
                     </tbody>

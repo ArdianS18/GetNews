@@ -48,9 +48,9 @@
     <div class="table-responsive rounded-2 mb-3">
         <table class="table border text-nowrap customize-table mb-0 align-middle"">
                     <thead class=" table">
-            <th class="text-white" style="background-color: #175A95;  border-radius: 5px 0 0 5px;">No</th>
-            <th class="text-white" style="background-color: #175A95;">Name</th>
-            <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
+            <th style="background-color: #D9D9D9;  border-radius: 5px 0 0 5px;">No</th>
+            <th style="background-color: #D9D9D9;">Name</th>
+            <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0;">Aksi</th>
             </thead>
             <tbody id="data">
             </tbody>

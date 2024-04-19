@@ -79,13 +79,13 @@
     </div>
 
     <div class="table-responsive rounded-2 mt-4">
-        <table class="table border text-nowrap customize-table mb-0 align-middle">
+        <table class="table border text-nowrap customize-table mb-0 align-middle ">
             <thead>
                 <tr>
-                    <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
-                    <th class="text-white" style="background-color: #175A95;">Pertanyaan</th>
-                    <th class="text-white" style="background-color: #175A95;">Jawaban</th>
-                    <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
+                    <th style="background-color: #D9D9D9;">No</th>
+                    <th style="background-color: #D9D9D9;">Pertanyaan</th>
+                    <th style="background-color: #D9D9D9;">Jawaban</th>
+                    <th style="background-color: #D9D9D9;">Aksi</th>
                 </tr>
             </thead>
             <tbody id="data">
