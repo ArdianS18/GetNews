@@ -315,7 +315,7 @@
                 method: "GET",
                 data: {
                     name: $('#search-name').val(),
-                    status: $('#search-status').val()
+                    banned: $('#search-status').val(),
                 },
                 dataType: "JSON",
                 beforeSend: function() {

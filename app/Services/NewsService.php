@@ -71,7 +71,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 }
             }
 
-            $image = ImageCompressing::process( $request->file('photo'),UploadDiskEnum::NEWS->value);
+            // $image = ImageCompressing::process( $request->file('photo'),UploadDiskEnum::NEWS->value);
 
         return [
             'author_id' => auth()->user()->author->id,

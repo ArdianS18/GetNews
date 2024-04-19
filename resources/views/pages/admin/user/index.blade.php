@@ -149,7 +149,6 @@
                 dataType: "JSON",
                 data:{
                     author:$('#search-name').val(),
-                    status : 'panding'
                 },
                 beforeSend: function() {
                     $('#data').html("")

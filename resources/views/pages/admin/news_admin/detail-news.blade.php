@@ -23,7 +23,7 @@
 
 @section('content')
     <div class="container" style="margin-top: 3%;">
-        
+
         <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
             @method('put')
             @csrf
@@ -35,7 +35,7 @@
                 <div class="d-flex justify-content-between mt-4 ms-4 me-4">
 
                     <div class="d-flex justify-content-start gap-2">
-        
+
                         @if ($news->status === 'panding')
                             <div>
                                 @if ($news->status === "panding")
@@ -55,16 +55,15 @@
                             </div>
                         @endif
                     </div>
-        
+
                     <div class="d-flex gap-2">
                         {{-- <button type="submit" class="btn btn-success btn-lg px-3" style="padding-left">Simpan</button> --}}
-        
+
                         @if ($news->status === 'panding')
                             <div class="d-flex gap-2">
                                 <a class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</a>
-
                                 <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
-                                    @method('patch')
+                                    @method('put')
                                     @csrf
                                     <button type="submit" class="btn btn-success btn-lg px-3">Terima</button>
                                 </form>

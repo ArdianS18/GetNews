@@ -60,6 +60,7 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
     public function get(): mixed
     {
         return $this->model->query()
+            ->latest()
             ->get();
     }
 

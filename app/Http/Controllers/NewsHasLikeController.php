@@ -6,16 +6,20 @@ use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Http\Requests\NewsLikeRequest;
 use App\Models\News;
 use App\Models\NewsHasLike;
+use App\Services\NewsHasLikeService;
 use Illuminate\Http\Request;
 
 class NewsHasLikeController extends Controller
 {
 
     private NewsHasLikeInterface $newsHasLike;
+    private NewsHasLikeService $newsHasLikeService;
 
-    public function __construct(NewsHasLikeInterface $newsHasLike)
+
+    public function __construct(NewsHasLikeInterface $newsHasLike, NewsHasLikeService $newsHasLikeService)
     {
         $this->newsHasLike = $newsHasLike;
+        $this->newsHasLikeService = $newsHasLikeService;
     }
 
     /**
@@ -37,14 +41,12 @@ class NewsHasLikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(News $news)
+    public function store(NewsLikeRequest $request, News $news)
     {
-        $this->newsHasLike->store
-        ([
-            'news_id' => $news->id,
-            'user_id' => auth()->id()
-        ]);
-        
+        $data =$this->newsHasLikeService->store($request, $news->id);
+        $data['news_id'] = $news->id;
+        $this->newsHasLike->store($data);
+
         return back();
 
         // $likeData = [

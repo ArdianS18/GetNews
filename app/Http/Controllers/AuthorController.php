@@ -66,9 +66,8 @@ class AuthorController extends Controller
         return ResponseHelper::success($data);
     }
 
-    public function listauthor(Request $request, Author $author) : JsonResponse
+    public function listauthor(Request $request, Author $author)
     {
-
         if ($request->has('page')) {
             $author = $this->author->customPaginate2($request, 10);
             $data['paginate'] = [

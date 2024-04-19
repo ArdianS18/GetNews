@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mt-3">
-                                <button class="btn btn- text-white" style="background-color: #0F4D8A; padding-left:3rem; padding-right:3rem;">Kirim</button>
+                                <button type="submit" class="btn text-white" style="background-color: #0F4D8A; padding-left:3rem; padding-right:3rem;">Kirim</button>
                             </div>
                         </div>
                         </form>
