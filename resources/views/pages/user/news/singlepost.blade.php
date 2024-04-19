@@ -101,7 +101,19 @@
                                     <a href="news-by-date.html">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
                                 <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2M20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2"/></svg>
+                                    {{-- <form class="like-form" action="{{ route('news.like.store', ['news' => $news->id]) }}" method="GET">
+                                        @csrf
+                                            <button class="like-button {{ auth()->user() && $userLike->contains('user_id', auth()->user()->id ) ? 'liked' : '' }}">
+                                                <i class="fa {{ auth()->user() && $userLike->contains('user_id', auth()->user()->id ) ? 'fa-heart text-danger' : 'fa-heart' }}"></i>
+                                            </button>
+                                    </form> --}}
+                                    <button class="btn-like {{ $userLike->contains('user_id', auth()->user()) ? 'liked' : ' '}}"
+                                        data-post-id="{{ auth()->user()->id }}"
+                                        data-liked="{{ $userLike->contains('user_id', auth()->user()) ? 'true' : 'false' }}">
+                                    {{ $userLike->contains('user_id', auth()->user()) ? 'Unlike' : 'Like' }}
+                                    </button>
+
+                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2M20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2"/></svg> --}}
                                     {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                         viewBox="0 0 512 512">
                                         <path fill-opacity=".9"
@@ -163,7 +175,6 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-
                                                 <div class="mb-3">
                                                     <p>
                                                         Video dan pengguna yang dilaporkan akan ditinjau oleh staf
@@ -174,9 +185,7 @@
                                                         penghentian akun.
                                                     </p>
                                                 </div>
-
                                             </div>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
@@ -531,6 +540,81 @@
     @endsection
 
     @section('script')
+
+        <script>
+            $('.btn-like').click(function(e) {
+                e.preventDefault();
+                var postId = $(this).data('post-id');
+                var liked = $(this).data('liked');
+                var $button = $(this);
+
+                // Fungsi untuk menyimpan data ke database
+                function storeData() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/news-like/' + postId,
+                        success: function(response) {
+                            $button.data('liked', 'true');
+                            $button.text('Unlike');
+                            $button.addClass('liked');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+
+                // Fungsi untuk menghapus data dari database
+                function deleteData() {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/news-unlike/' + postId,
+                        success: function(response) {
+                            $button.data('liked', 'false');
+                            $button.text('Like');
+                            $button.removeClass('liked');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+
+                // Pilih tindakan berdasarkan status like
+                if (liked === 'true') {
+                    deleteData();
+                } else {
+                    storeData();
+                }
+            });
+        </script>
+
+        {{-- <script>
+            $('.like-form').submit(function(e){
+                    e.preventDefault();
+                    var form = $(this);
+                    var url = form.attr('action');
+                    var likeButton = form.find('.like-Button');
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        dataType: 'json',
+                        data: form.serialize(response) {
+                            if (response.liked) {
+                                likeButton.addClass('liked');
+                                likeButton.find('i').removeClass('fa-heart').addClass('fa-heart text-danger');
+                            } else {
+                                likeButton.removeClass('liked');
+                                likeButton.find('i').removeClass('fa-heart text-danger').addClass('fa-heart');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                });
+        </script> --}}
+
         <script>
             function showReplyForm(commentId) {
                 var replyForm = document.getElementById('reply-form-' + commentId);

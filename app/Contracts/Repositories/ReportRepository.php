@@ -61,6 +61,7 @@ class ReportRepository extends BaseRepository implements ReportInterface
     public function get(): mixed
     {
         return $this->model->query()
+            ->latest()
             ->get();
     }
 

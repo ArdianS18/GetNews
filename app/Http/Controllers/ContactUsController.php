@@ -10,6 +10,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Http\Requests\ContactUsRequest;
 use App\Models\ContactUs;
 use App\Models\Faq;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,12 @@ class ContactUsController extends Controller
      */
     public function index()
     {
+        $contact = ContactUs::where('status_delete', 0)->latest()->first();
+        $idcontact = $contact->id;
+
+        $report = Report::where('status_delete', 0)->latest()->first();
+        $idreport = $report->id;
+
         $contactUs = $this->contactUs->get()->whereIn('status_delete', 0);
         $contactUs2 = $this->contactUs->get()->whereIn('status_delete', 0);
 
@@ -50,7 +57,7 @@ class ContactUsController extends Controller
         $reportsDelete = $this->report->get()->whereIn('status_delete', 1);
         $reportsDelete2 = $this->report->get()->whereIn('status_delete', 1);
 
-        return view('pages.admin.inbox.index', compact('contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2'));
+        return view('pages.admin.inbox.index', compact('idcontact', 'idreport', 'contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2'));
     }
 
     public function contact(Faq $faq){
