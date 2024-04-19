@@ -107,9 +107,9 @@
                             <ul class="error-text"></ul>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" style="background-color: #C9C9C9;" class="btn"
+                            <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                                 data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
+                            <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
                         </div>
                     </div>
                 </form>
@@ -134,9 +134,9 @@
                         <ul class="error-text"></ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn"
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                             data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Simpan</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Simpan</button>
                     </div>
                 </form>
             </div>

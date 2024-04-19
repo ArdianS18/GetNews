@@ -136,9 +136,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn"
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                             data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Edit</button>
+                        <button type="submit" class="btn btn-rounded btn-light-warning text-warning">Edit</button>
                     </div>
                 </form>
             </div>

@@ -58,9 +58,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn btn-rounded btn-light-danger"
+                        <button type="button" style="background-color: #FBF2EF;" class="btn btn-rounded btn-light-danger text-danger"
                             data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Tambah</button>
+                        <button type="submit" style="background-color: #E6FFFA;" class="btn text-success">Tambah</button>
                     </div>
                 </form>
             </div>
@@ -103,7 +103,7 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Update Tag:</label>
+                            <label for="name" class="form-label">Edit Tag:</label>
                             <input type="text" id="name" name="name"
                                 class="form-control @error('name') is-invalid @enderror" placeholder="Tags">
                             @error('name')
@@ -114,9 +114,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn"
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                             data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" style="background-color: #175A95;" class="btn text-white">Update</button>
+                        <button type="submit" class="btn btn-rounded btn-light-warning text-warning">Edit</button>
                     </div>
                 </form>
             </div>

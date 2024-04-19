@@ -337,7 +337,11 @@ Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
 
+Route::get('user-berlangganan', function(){
+    return view('pages.user.berlangganan.index');
+})->name('user.berlangganan');
+
 Route::get('berlangganan', function(){
     return view('pages.admin.berlangganan.index');
-})->name('berlangganan')
+})->name('berlangganan');
 ?>

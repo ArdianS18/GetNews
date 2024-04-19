@@ -58,7 +58,6 @@
 
                     <div class="d-flex gap-2">
                         {{-- <button type="submit" class="btn btn-success btn-lg px-3" style="padding-left">Simpan</button> --}}
-
                         @if ($news->status === 'panding')
                             <div class="d-flex gap-2">
                                 <a class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</a>
