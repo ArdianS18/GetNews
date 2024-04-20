@@ -224,8 +224,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn"
-                            data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
