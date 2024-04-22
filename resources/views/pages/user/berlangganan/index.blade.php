@@ -1,4 +1,37 @@
 @extends('layouts.user.app')
+@section('style')
+<head>
+    <title>{{ env('APP_NAME') }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="handheldfriendly" content="true" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="description" content="Mordenize" />
+    <meta name="author" content="" />
+    <meta name="keywords" content="Mordenize" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--  Favicon -->
+    <link rel="shortcut icon" type="{{ asset('image/png') }}" href="{{ env('APP_LOGO') }}" />
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="{{ asset('admin/assets/dist/libs/owl.carousel/dist/assets/owl.carousel.min.css') }}">
+    <!-- Core Css -->
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
+    <link id="themeColors" rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/prismjs/themes/prism-okaidia.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/dist/libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/dist/css/app.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}">
+    <style>
+        .important {
+            color: red;
+        }
+    </style>
+</head>
+@endsection
 @section('content')
 <div class="ps-5 pe-5">
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
@@ -22,7 +55,7 @@
 </div>
 
 <div class="container">
-    <div class="row">
+    <div class="row pb-4">
         <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
             <div class="card">
                 <div class="mt-5 text-center">
