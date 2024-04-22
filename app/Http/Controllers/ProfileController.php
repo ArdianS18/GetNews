@@ -72,11 +72,13 @@ class ProfileController extends Controller
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();
         $news = $this->news->get();
-        $news_status = $this->news->get();
+        $news_panding = $this->news->get()->wherein('status', "panding")->count();
+        $news_active = $this->news->get()->wherein('status', "active")->count();
+        $news_reject = $this->news->get()->wherein('status', "nonactive")->count();
         $authors = $this->author->get();
 
         // return view('pages.author.index', compact('news', 'news_status'));
-        return view('pages.author.index', compact('news','news_status', 'subCategories', 'category', 'authors'));
+        return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject'));
     }
 
     public function profilestatus()
