@@ -195,19 +195,17 @@ class AuthorController extends Controller
 
     public function detailnews ($newsId)
     {
-
-        $news = $this->news->where($newsId);
+        $news = $this->news->showWithSlug($newsId);
 
         $subCategories = $this->subCategories->get();
         $categories = $this->categories->get();
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
         $tags = $this->tags->get();
-
         $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
+
         $newsSubCategories = $this->newsSubCategories->get()->whereIn('news_id', $news);
         $newsTags = $this->newsTags->get()->whereIn('news_id', $news);
-        // $news = $this->news->get()->where('id', $news->id);
 
         return view('pages.author.news.detail', compact('news','tags','newsCategories','newsSubCategories','subCategories','newsTags','categories','newsPhoto'));
     }

@@ -80,7 +80,7 @@
                         <td>{{ $item->news->name }}</td>
                         <td>{{ $item->news->upload_date }}</td>
                         <td>
-                            <a href="/detail-news-admin/${data.id}" data-bs-toggle="tooltip"
+                            <a href="{{ route('detail.news', ['news' => $item->news->slug]) }}" data-bs-toggle="tooltip"
                                 title="Detail" class="btn btn-sm btn-primary btn-detail"
                                 style="background-color:#0F4D8A">
                                 <i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
