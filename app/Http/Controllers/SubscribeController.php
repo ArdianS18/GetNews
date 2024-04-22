@@ -6,22 +6,24 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\SubscribeInterface;
+use App\Http\Requests\SubscribeRequest;
 use App\Models\subcribe;
 use Illuminate\Http\Request;
 
-class SubcribeController extends Controller
+class SubscribeController extends Controller
 {
     private NewsCategoryInterface $newsCategory;
-    private CategoryInterface $category;
+    private SubscribeInterface $subscribe;
     private NewsInterface $news;
+    private CategoryInterface $category;
     private SubCategoryInterface $subCategory;
 
-    public function __construct(NewsCategoryInterface $newsCategory, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory)
+    public function __construct(SubscribeInterface $subscribe, CategoryInterface $category, SubCategoryInterface $subCategory)
     {
+        $this->subscribe = $subscribe;
         $this->category = $category;
         $this->subCategory = $subCategory;
-        $this->news = $news;
-        $this->newsCategory = $newsCategory;
     }
     /**
      * Display a listing of the resource.
@@ -47,9 +49,9 @@ class SubcribeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubscribeRequest $request)
     {
-        //
+        $this->subscribe->store(($request->validated()));
     }
 
     /**
@@ -71,9 +73,10 @@ class SubcribeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, subcribe $subcribe)
+    public function update(SubscribeRequest $request, subcribe $subcribe)
     {
-        //
+        $this->subscribe->update(($request->validated()));
+
     }
 
     /**
