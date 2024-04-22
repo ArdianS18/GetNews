@@ -7,14 +7,24 @@ use Illuminate\Http\Request;
 use App\Services\AuthorService;
 use App\Http\Requests\AuthorRequest;
 use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsPhotoInterface;
+use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\RegisterInterface;
+use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\TagInterface;
 use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\AuthorsRequest;
 use App\Http\Resources\AuthorResource;
+use App\Models\Category;
+use App\Models\News;
+use App\Models\SubCategory;
 use App\Models\User;
 use App\Services\Auth\RegisterService;
 use App\Services\AuthorBannedService;
@@ -31,17 +41,33 @@ class AuthorController extends Controller
     private RegisterInterface $register;
     private NewsInterface $news;
 
+    private CategoryInterface $categories;
+    private SubCategoryInterface $subCategories;
+    private TagInterface $tags;
+    private NewsTagInterface $newsTags;
+    private NewsCategoryInterface $newsCategories;
+    private NewsSubCategoryInterface $newsSubCategories;
+    private NewsPhotoInterface $newsPhoto;
+
     private AuthorService $authorService;
     private RegisterService $serviceregister;
     private $authorBannedService;
 
 
-    public function __construct(NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+    public function __construct(NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
 
         $this->news = $news;
+        $this->categories = $categories;
+        $this->subCategories = $subCategories;
+        $this->tags = $tags;
+        $this->newsTags = $newsTags;
+        $this->newsCategories = $newsCategories;
+        $this->newsSubCategories = $newsSubCategories;
+        $this->newsPhoto = $newsPhoto;
+
         $this->authorService = $authorService;
         $this->authorBannedService = $authorBannedService;
         $this->serviceregister = $serviceregister;
@@ -76,7 +102,6 @@ class AuthorController extends Controller
             ];
             $data['data'] = AuthorResource::collection($author);
         }else{
-            // $data = $this->author->get();
             $author = $this->author->search($request);
             $data = AuthorResource::collection($author);
         }
@@ -168,9 +193,23 @@ class AuthorController extends Controller
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
-    public function createauthor ()
+    public function detailnews ($newsId)
     {
-        //
+
+        $news = $this->news->where($newsId);
+
+        $subCategories = $this->subCategories->get();
+        $categories = $this->categories->get();
+        $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
+
+        $tags = $this->tags->get();
+
+        $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
+        $newsSubCategories = $this->newsSubCategories->get()->whereIn('news_id', $news);
+        $newsTags = $this->newsTags->get()->whereIn('news_id', $news);
+        // $news = $this->news->get()->where('id', $news->id);
+
+        return view('pages.author.news.detail', compact('news','tags','newsCategories','newsSubCategories','subCategories','newsTags','categories','newsPhoto'));
     }
 
     /**

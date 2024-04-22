@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\ReportController;
@@ -63,7 +64,6 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     })->name('author.admin');
 
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
-
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
     Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
@@ -177,6 +177,10 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('news', [NewsController::class, 'index'])->name('news.index');
     Route::post('news', [NewsController::class, 'store'])->name('news.store');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
+
+    Route::get('mynews', [NewsController::class, 'showmynews'])->name('my.news');
+
+    Route::get('detail-news/{news}', [AuthorController::class, 'detailnews'])->name('detail.news');
     // Profile Author
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -193,6 +197,7 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
     Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
+    Route::get('status-author', [NewsController::class, 'showstatusnews'])->name('status.news.author');
 
     Route::get('author-inbox', function () {
         return view('pages.author.inbox.index');
@@ -201,14 +206,6 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('statistic', function () {
         return view('pages.author.statistic.index');
     })->name('statistic.author');
-
-    Route::get('status', function () {
-        return view('pages.author.status.index');
-    })->name('status.author');
-
-    // Route::get('profile', function () {
-    //     return view('pages.author.index');
-    // })->name('profile.index');
 });
 
 

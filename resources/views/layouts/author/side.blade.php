@@ -34,8 +34,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->routeIs('author.inbox' ? 'active' : '') }}"
-                        href="{{route('author.inbox')}}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('my.news' ? 'active' : '') }}"
+                        href="{{route('my.news')}}" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5a2 2 0 0 0-2-2m0 16H5V7h14zm-2-7H7v-2h10zm-4 4H7v-2h6z"/></svg>
                         <span class="hide-menu">Beritaku</span>
                     </a>
@@ -55,7 +55,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                       <li class="sidebar-item">
-                        
+
                         <a href="{{route('berita.upload')}}" class="sidebar-link">
                           <div class="round-16 d-flex align-items-center justify-content-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M12.025 21q-.425 0-.712-.288T11.025 20v-1.15Q9.9 18.6 9.05 17.975t-1.375-1.75q-.175-.35-.012-.737t.587-.563q.35-.15.725.013t.575.537q.425.75 1.075 1.138t1.6.387q1.025 0 1.737-.462t.713-1.438q0-.875-.55-1.387t-2.55-1.163q-2.15-.675-2.95-1.612t-.8-2.288q0-1.625 1.05-2.525t2.15-1.025V4q0-.425.288-.713T12.025 3t.713.288t.287.712v1.1q.95.15 1.65.613t1.15 1.137q.225.325.088.725t-.563.575q-.35.15-.725.013t-.7-.488t-.763-.537t-1.087-.188q-1.1 0-1.675.488T9.825 8.65q0 .825.75 1.3t2.6 1q1.725.5 2.613 1.588t.887 2.512q0 1.775-1.05 2.7t-2.6 1.15V20q0 .425-.288.713t-.712.287"/></svg>
@@ -69,7 +69,7 @@
                             </div>
                             <span class="hide-menu">Berita</span>
                           </a>
-                          
+
                       </li>
                     </ul>
                 </li>
@@ -83,8 +83,8 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link {{ request()->routeIs('profile.berita.create' ? 'active' : '') }}"
-                        href="{{route('profile.berita.create')}}" aria-expanded="false">
+                    <a class="sidebar-link {{ request()->routeIs('status.news.author' ? 'active' : '') }}"
+                        href="{{route('status.news.author')}}" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><g fill="none"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2m0 2a8 8 0 1 0 0 16a8 8 0 0 0 0-16m0 11a1 1 0 1 1 0 2a1 1 0 0 1 0-2m0-9a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1"/></g></svg>
                         <span class="hide-menu">Status Berita</span>
                     </a>

@@ -34,10 +34,10 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <select name="status" class="form-select" id="search-status">
-                            <option>Pilih status</option>
-                            <option value="0">Aktif</option>
-                            <option value="1">Blokir</option>
+                        <select name="banned" class="form-select" id="search-status">
+                            <option value="">Pilih status</option>
+                            <option value="approved">Aktif</option>
+                            <option value="reject">Blokir</option>
                             <option value="">Tampilkan semua</option>
                         </select>
                     </div>

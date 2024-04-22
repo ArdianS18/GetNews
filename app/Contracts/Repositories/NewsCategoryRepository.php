@@ -60,6 +60,70 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
         })->paginate(10);
     }
 
+    public function searchAuthor(mixed $id, Request $request): mixed
+    {
+        return $this->model->query()
+            ->whereHas('news', function($findid) use ($id){
+                $findid->where('author_id', $id);
+            })
+            ->whereHas('news', function($findid) use ($request) {
+                $findid->when($request->search, function($query) use ($request){
+                    $query->where('name', 'LIKE', '%'.$request->search.'%');
+                });
+            })
+            ->when($request->opsilatest, function($query) use ($request){
+                $query->when($request->opsilatest === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+
+                $query->when($request->opsilatest === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->when($request->perpage, function ($query) use ($request) {
+                $query->when($request->perpage === '10', function ($var) {
+                    $var->take(10);
+                });
+                $query->when($request->perpage === '20', function ($var) {
+                    $var->take(20);
+                });
+                $query->when($request->perpage === '50', function ($var) {
+                    $var->take(50);
+                });
+                $query->when($request->perpage === '100', function ($var) {
+                    $var->take(100);
+                });
+            })
+            ->paginate(10);
+    }
+
+    public function searchStatus(mixed $id, Request $request): mixed
+    {
+        return $this->model->query()
+        ->whereHas('news', function($findid) use ($id){
+            $findid->where('author_id', $id);
+        })
+        ->whereHas('news', function($findid) use ($request) {
+            $findid->when($request->search, function($query) use ($request){
+                $query->where('name', 'LIKE', '%'.$request->search.'%');
+            });
+        })
+        ->whereHas('news', function ($findid) use ($request) {
+            $findid ->when($request->stat, function ($query) use ($request){
+                $query->when($request->stat === 'panding', function ($var) {
+                    $var->where('status', 'panding');
+                });
+                $query->when($request->stat === 'active', function ($var) {
+                    $var->where('status', 'active');
+                });
+                $query->when($request->stat === 'nonactive', function ($var) {
+                    $var->where('status', 'nonactive');
+                });
+            });
+        })
+        ->get();
+    }
+
     public function updateOrCreate(array $data): mixed
     {
         return $this->model->query()

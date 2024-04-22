@@ -21,9 +21,9 @@ class RoleSeeder extends Seeder
         $reflection = new \ReflectionClass(RoleEnum::class);
 
         foreach ($reflection->getConstants() as $case) {
-           Role::create([
-               'name' => $case
-           ]);
+            Role::create([
+                'name' => $case
+            ]);
         }
     }
 }

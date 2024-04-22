@@ -1,6 +1,7 @@
 @extends('layouts.author.sidebar')
 
 @section('style')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <style>
     .news-card-a {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -24,31 +25,54 @@
             width: 100%; /* Menyempitkan lebar saat di tampilan mobile */
         }
     }
-
-  </style>
+</style>
 @endsection
 
+<head>
+    <title>Author | Status News</title>
+</head>
+
 @section('content')
+    <form action="" class="d-flex gap-2">
+        <div>
+            <div class="position-relative d-flex">
+                <div class="input-group">
+                    <input type="text" name="search"
+                        class="form-control search-chat py-2 ps-5" style="width: 200px" id="search-name" placeholder="Search" value="">
+                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                </div>
+            </div>
+        </div>
 
-<div class="">
-    <div class="tab-pane" id="status" role="tabpanel">
-        <div class="">
+        <div>
+            <div class="d-flex gap-2">
+                <select class="form-select" style="width: 200px" name="stat">
+                    <option disabled selected value="">Pilih opsi</option>
+                    <option value="panding">Panding</option>
+                    <option value="active">Approved</option>
+                    <option value="nonactive">Reject</option>
+                    <option value="">Tampilkan semua</option>
+                </select>
+            </div>
+        </div>
 
-            @forelse ($news as $news)
+        <button type="submit">Pilih</button>
+    </form>
+    <div class="tab-pane">
+            @forelse ($news as $item)
             <div class="news-card-a mt-4">
-
                 <div class="row card-detail">
                     <div class="col-md-12 col-lg-3">
                         <div class="" style="margin-left: 2%;">
-                            <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
+                            <img src="{{ asset('storage/' . $item->news->photo) }}" alt="{{ $item->news->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-7">
                         <div class="d-flex">
 
                             <div class="order-md-1" style="margin-left:20px;">
-                                <h4>{{ $news->name }}</h4>
-                                <p>{{ $news->sinopsis }}</p>
+                                <h4>{{ $item->news->name }}</h4>
+                                <p>{{ Illuminate\Support\Str::limit($item->news->content, $limit = 200, $end = '...') }}</p>
                             </div>
                         </div>
                     </div>
@@ -57,7 +81,7 @@
                         <div class="d-flex justify-content-end">
                             <div class="text-md-right mt-md-0">
                                 <button class="text-white btn btn-lg" style="background-color: #F0CA40; border-radius: 8px; padding-left: 3rem; padding-right: 3rem;">
-                                    {{ $news->status }}
+                                    {{ $item->news->status }}
                                 </button>
                             </div>
                         </div>
@@ -69,7 +93,7 @@
                         </div>
 
                         <div class="mt-3 d-flex justify-content-end">
-                            <a href="{{ route('profile.news.edit', ['id' => $news->id]) }}" class="btn btn-sm m-1" style="background-color: #0F4D8A;">
+                            <a href="{{ route('profile.news.edit', ['id' => $item->news->id]) }}" class="btn btn-sm m-1" style="background-color: #0F4D8A;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff"/>
                                 </svg>
@@ -80,7 +104,7 @@
                                 </svg>
                             </button>
 
-                            <form action="{{ route('profile.news.delete', ['news' => $news->id]) }}" method="POST">
+                            <form action="{{ route('profile.news.delete', ['news' => $item->news->id]) }}" method="POST">
                                 @method('delete')
                                 @csrf
                                 <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/></svg></button>
@@ -92,5 +116,28 @@
             @empty
             @endforelse
     </div>
-</div>
+@endsection
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#content').summernote({
+                height: 400,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+
+            });
+        });
+    </script>
 @endsection

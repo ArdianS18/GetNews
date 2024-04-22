@@ -18,6 +18,13 @@
         }
     </style>
 @endsection
+
+<head>
+    <title>
+        Author | Create News
+    </title>
+</head>
+
 @section('content')
     <div class="container">
         <div class="news-card-a mt-1">

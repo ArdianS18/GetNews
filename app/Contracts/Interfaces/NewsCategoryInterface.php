@@ -14,5 +14,7 @@ use Illuminate\Http\Request;
 interface NewsCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, PaginateInterface, UpdateOrCreateInterface
 {
     public function search(mixed $id, Request $request) : mixed;
+    public function searchAuthor(mixed $id, Request $request) : mixed;
+    public function searchStatus(mixed $id, Request $request) : mixed;
     public function trending() : mixed;
 }

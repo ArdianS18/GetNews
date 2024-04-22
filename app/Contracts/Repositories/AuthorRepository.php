@@ -151,7 +151,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
                 });
             })
             ->when($request->banned, function ($query) use ($request) {
-                $query->where('banned', $request->banned);
+                $query->where('status', 'LIKE', '%'.$request->banned.'%');
             })
             ->fastPaginate($pagination);
     }

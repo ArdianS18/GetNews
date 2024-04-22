@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.author.sidebar')
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -23,10 +23,6 @@
 
 @section('content')
     <div class="container" style="margin-top: 3%;">
-
-        <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
-            @method('put')
-            @csrf
             <div class="card border border-1 shadow-sm mt-5" style="background-color: #FFFFFF">
                 <div class="px-4 py-3 border-bottom">
                     <h5 class="card-title fw-semibold mb-0 lh-sm">Detail Berita</h5>
@@ -36,7 +32,7 @@
 
                     <div class="d-flex justify-content-start gap-2">
 
-                        @if ($news->status === 'panding')
+                        {{-- @if ($news->status === 'panding')
                             <div>
                                 @if ($news->status === "panding")
                                 <div>
@@ -53,34 +49,7 @@
                                 <a href="{{ route('list.approved.index') }}" class="btn btn-lg px-3 text-white"
                                     style="background-color: #5D87FF;">Kembali</a>
                             </div>
-                        @endif
-                    </div>
-
-                    <div class="d-flex gap-2">
-                        @if ($news->status === 'panding')
-                            <div class="d-flex gap-2">
-                                <a class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</a>
-                                <form action="{{ route('approved-news', ['news' => $news->id]) }}" method="post">
-                                    @method('put')
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-lg px-3">Terima</button>
-                                </form>
-                            </div>
-                        @else
-                            <div>
-                                <a href="{{ route('news.option.editor', ['news' => $news->id]) }}"
-                                    class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'primary' : 'dark' }}">
-                                    <div class="d-flex gap-2">
-                                        {{ $news->is_primary ? '' : '' }} <i><svg xmlns="http://www.w3.org/2000/svg"
-                                                width="20" height="20" viewBox="0 0 24 24">
-                                                <path fill="currentColor" fill-rule="evenodd"
-                                                    d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3" />
-                                            </svg></i>
-                                        Pin Berita
-                                    </div>
-                                </a>
-                            </div>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
 
@@ -108,18 +77,18 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                <label class="form-label" for="nomor">Judul Berita</label>
-                                <input type="text" name="name" class="form-control" value="{{ $news->name }}">
+                            <div class="col-lg-6 col-md-12 from-outline mt-4">
+                                <label class="form-label">Judul Berita</label>
+                                {{-- <input type="text" name="name" class="form-control" value="{{ $news->name }}"> --}}
+                                <h5>{{ $news->name }}</h5>
+                            </div>
+                            <div class="col-lg-6 col-md-12 from-outline mt-4">
+                                <label class="form-label">Penulis</label>
+                                <h5>{{ $news->author->user->name }}</h5>
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                <label class="form-label" for="nomor">Penulis</label>
-                                <input type="text" class="form-control"
-                                    value="{{ $news->author->user->name }}" readonly>
-                            </div>
-                            <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                                <input type="date" name="upload_date" class="form-control" value="{{ $news->upload_date }}">
+                                <label class="form-label">Tanggal Upload</label>
+                                <h5>{{ $news->upload_date }}</h5>
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Tags</label>
@@ -166,79 +135,14 @@
                         <div class="row justify-content-between mt-2">
                             <div class="">
                                 <label class="form-label" for="content">Content</label>
-                                <div class="d-flex gap-2 mb-3">
-                                    <a class="btn btn-warning" id="clickEdit" onclick="edit()">Edit</a>
-                                    <a class="btn btn-success" id="clickSave" onclick="save()">Save</a>
-                                </div>
                                 <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
                             </div>
-
-                            <div class="justify-content-start mt-2">
-                                {{-- <div class="col-lg-6 col-md-20 from-outline">
-                                    <label class="form-label" for="photo">Thumbnail Berita</label>
-                                    <div>
-                                        <img width="350px" src="{{ asset('storage/' . $news->photo) }}">
-                                    </div>
-                                </div> --}}
-                            </div>
-
-                            {{-- <div class="col-lg-6 col-md-12 row-span-1 from-outline mt-5">
-                                <div class="mt-2">
-                                    <label class="form-label" for="password_confirmation">Multi Gambar</label>
-                                    <div class="d-flex gap-2">
-                                        @foreach ($newsPhoto as $photo)
-                                            <img width="320 px" src="{{ asset('storage/' . $photo->multi_photo) }}"
-                                                alt="{{ $photo->multi_photo }}">
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
-
                 </div>
-        </form>
-
     </div>
     </div>
     </div>
-    </div>
-
-    <div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <!-- Modal content -->
-                <div class="modal-header">
-                    <h3 class="modal-title ms-2 mt-2">Tolak Berita Ini?</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <form action="{{ route('reject-news', ['news' => $news->id])}}" method="POST">
-                        @csrf
-                        @method('patch')
-                        <div class="container">
-                            <div class="mb-3">
-                                <div>
-                                    <h5 class="mb-3">Berikan Alasan</h5>
-                                </div>
-                                <div>
-                                    <textarea class="form-control" name="massage" id="" cols="30" rows="10"
-                                    placeholder="Berita yang ditulis ada unsur penghinaan pihak tertentu" style="resize: none;"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 col-lg-12">
-                                <div class="d-flex justify-content-end">
-                                    <button data-bs-toggle="tooltip" title="Tolak" class="btn btn-danger me-2">Tolak</button>
-                                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 

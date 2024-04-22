@@ -27,6 +27,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Models\Author;
 use App\Models\NewsCategory;
 use App\Models\NewsHasLike;
 use App\Models\NewsSubCategory;
@@ -392,5 +393,23 @@ class NewsController extends Controller
         return back();
     }
 
+    public function showmynews(Request $request, NewsCategory $newsCategories)
+    {
+        // $query = $request->input('search');
+        $id = auth()->user()->id;
+        $author_id = Author::where('user_id', $id)->value('id');
+        $news = $this->newsCategory->searchAuthor($author_id, $request);
 
+        return view('pages.author.news.index', compact('news'));
+    }
+
+    public function showstatusnews(Request $request, NewsCategory $newsCategories)
+    {
+        // $news = $this->newsCategory->get();
+        $id = auth()->user()->id;
+        $author_id = Author::where('user_id', $id)->value('id');
+        $news = $this->newsCategory->searchStatus($author_id, $request);
+        // dd($news);
+        return view('pages.author.status.index', compact('news'));
+    }
 }
