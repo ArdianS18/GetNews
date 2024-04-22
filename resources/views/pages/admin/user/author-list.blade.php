@@ -61,11 +61,11 @@
             <table class="table border text-nowrap customize-table mb-0 align-middle">
                 <thead>
                     <tr>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px">No</th>
-                        <th class="text-white" style="background-color: #175A95; ">Name</th>
-                        <th class="text-white" style="background-color: #175A95; ">Email</th>
-                        <th class="text-white" style="background-color: #175A95; ">Status</th>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0 ">Actions</th>
+                        <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px">No</th>
+                        <th style="background-color: #D9D9D9;">Name</th>
+                        <th style="background-color: #D9D9D9;">Email</th>
+                        <th style="background-color: #D9D9D9;">Status</th>
+                        <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0 ">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="data">
@@ -224,8 +224,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" style="background-color: #C9C9C9;" class="btn"
-                            data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>

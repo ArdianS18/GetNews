@@ -60,7 +60,7 @@
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="120px" height="120px"
                                 style="border-radius: 5px; object-fit:cover;" alt="Image" />
-                               
+                            
                             </div>
                             <div class="news-card-info">
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
@@ -85,7 +85,7 @@
                 <div class="news-card-three">
                     <div class="news-card-img">
                         <img src="assets/img/news/news-4.webp" alt="Image" />
-                        <a href="business.html" class="news-cat">Fashion</a>
+                        <a href="business.html" class="news-cat"></a>
 
                     </div>
                     <div class="news-card-info">

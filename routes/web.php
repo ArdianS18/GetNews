@@ -16,6 +16,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubcribeController;
 use App\Models\Category;
 
 /*
@@ -337,9 +338,10 @@ Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
 
-Route::get('user-berlangganan', function(){
-    return view('pages.user.berlangganan.index');
-})->name('user.berlangganan');
+// Route::get('user-berlangganan', function(){
+//     return view('pages.user.berlangganan.index');
+// })->name('user.berlangganan');
+Route::get('user-berlangganan', [SubcribeController::class, 'index'])->name('user.berlangganan');
 
 Route::get('berlangganan', function(){
     return view('pages.admin.berlangganan.index');

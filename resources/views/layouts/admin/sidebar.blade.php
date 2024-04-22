@@ -1,7 +1,7 @@
-<aside class="left-sidebar">
+<aside class="left-sidebar" style="background-color: #0E2336;">
     <!-- Sidebar scroll-->
-    <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between" style="background-color: #0E2336;">
+    <div  style="background-color: #0E2336;">
+        <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="Javascript:void(0)" class="text-nowrap logo-img">
                 <img src="{{asset('assets/img/logo-get-media.png')}}" class="dark-logo" width="180" alt="" />
             </a>
@@ -10,7 +10,7 @@
             </div>
         </div>
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" style="background-color: #0E2336;" data-simplebar>
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar>
             <ul id="sidebarnav">
                 <!-- ============================= -->
                 <!-- Home -->
@@ -27,7 +27,7 @@
                         href="{{ route('dashboard.admin') }}" aria-expanded="false">
                     {{-- <a class="sidebar-link {{ request()->routeIs('home' ? 'active' : '') }}"
                         href="javascript:void(0)" aria-expanded="false"> --}}
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-white" width="25" height="25" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2">
                                 <path d="M4 10a6 6 0 1 0 12 0a6 6 0 1 0-12 0" />

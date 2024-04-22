@@ -54,12 +54,12 @@
             <table class="table">
                 <thead class="table">
                     <tr>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
-                        <th class="text-white" style="background-color: #175A95;">Penulis</th>
-                        <th class="text-white" style="background-color: #175A95;">Email</th>
-                        <th class="text-white" style="background-color: #175A95;">Judul berita</th>
-                        <th class="text-white" style="background-color: #175A95;">Tanggal Upload</th>
-                        <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Option</th>
+                        <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">No</th>
+                        <th style="background-color: #D9D9D9;">Penulis</th>
+                        <th style="background-color: #D9D9D9;">Email</th>
+                        <th style="background-color: #D9D9D9;">Judul berita</th>
+                        <th style="background-color: #D9D9D9;">Tanggal Upload</th>
+                        <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0;">Option</th>
                     </tr>
                 </thead>
                 <tbody id="data">
