@@ -67,11 +67,13 @@ class ProfileController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();
-        $news = $this->news->get();
+        // $news = $this->news->get()->where('status', "active");
+        $news = $this->news->search($request);
+
         $news_panding = $this->news->get()->wherein('status', "panding")->count();
         $news_active = $this->news->get()->wherein('status', "active")->count();
         $news_reject = $this->news->get()->wherein('status', "nonactive")->count();
@@ -190,7 +192,7 @@ class ProfileController extends Controller
 
     public function editnews($newsId)
     {
-        $news = $this->news->where($newsId);
+        $news = $this->news->showWithSlug($newsId);
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();

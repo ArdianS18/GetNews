@@ -15,6 +15,17 @@
             background-color: #fff;
         }
     </style> --}}
+
+    <style>
+        .tag {
+            display: inline-block;
+            background-color: #183249;
+            color: white;
+            padding: 5px 10px;
+            margin: 3px;
+            border-radius: 5px;
+        }
+    </style>
 @endsection
 
 <head>
@@ -31,25 +42,17 @@
                 <div class="d-flex justify-content-between mt-4 ms-4 me-4">
 
                     <div class="d-flex justify-content-start gap-2">
-
-                        {{-- @if ($news->status === 'panding')
+                        @if ( $news->status === "active")
                             <div>
-                                @if ($news->status === "panding")
-                                <div>
-                                    <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
-                                </div>
-                                @else
-                                <div>
-                                    <a href="{{ route('news.approve.admin') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
-                                </div>
-                                @endif
+                                <a href="/mynews" class="btn btn-lg px-3 text-white"
+                                    style="background-color: #5D87FF;">Kembali</a>
                             </div>
                         @else
                             <div>
-                                <a href="{{ route('list.approved.index') }}" class="btn btn-lg px-3 text-white"
+                                <a href="/status-author" class="btn btn-lg px-3 text-white"
                                     style="background-color: #5D87FF;">Kembali</a>
                             </div>
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
 
@@ -92,56 +95,46 @@
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Tags</label>
-                                <select class="form-control select2 tags" name="tags[]" multiple="multiple">
-                                    <option>pilih tags</option>
-                                    @foreach ($tags as $tag)
-                                        <option value="{{ $tag->name }}"
-                                            {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
-                                            {{ $tag->name }}
-                                        </option>
+                                <div class="tags-container">
+                                    @foreach ($newsTags as $tag)
+                                    <p class="tag">
+                                        {{ $tag->tag->name }}
+                                    </p>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Kategori</label>
-                                <select id="category_id"
-                                    class="select2 form-control category @error('category') is-invalid @enderror"
-                                    name="category[]" multiple="true" value="" aria-label="Default select example">
-                                    <option>pilih kategori</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                            {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
-                                            {{ $category->name }}
-                                        </option>
+                                <div class="kat-container">
+                                    @foreach ($newsCategories as $category)
+                                    <p class="tag">
+                                        {{$category->category->name}}
+                                    </p>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <select id="sub_category_id"
-                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                    name="sub_category[]" multiple="true" value="" aria-label="Default select example">
-                                    <option>pilih sub kategori</option>
-                                    @foreach ($subCategories as $subCategory)
-                                        <option value="{{ $subCategory->id }}"
-                                            {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
-                                            {{ $subCategory->name }}
-                                        </option>
+                                <div class="sub-container">
+                                    @foreach ($newsSubCategories as $subCategory)
+                                    <p class="tag">
+                                        {{$subCategory->subCategory->name}}
+                                    </p>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row justify-content-between mt-2">
                             <div class="">
-                                <label class="form-label" for="content">Content</label>
-                                <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
+                                <label class="form-label">Content</label>
+                                <textarea class="form-control" name="content" rows="10" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-    </div>
-    </div>
+            </div>
+        </div>
     </div>
     </div>
 @endsection
@@ -152,21 +145,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
-        // var edit = function() {
-        //     $('#content').summernote({
-        //         height: 400,
-        //         toolbar: [
-        //             ['style', ['style']],
-        //             ['font', ['bold', 'underline', 'clear']],
-        //             ['color', ['color']],
-        //             ['para', ['ul', 'ol', 'paragraph']],
-        //             ['table', ['table']],
-        //             ['insert', ['link', 'picture', 'video']],
-        //             ['view', ['fullscreen', 'codeview', 'help']]
-        //         ]
-        //     });
-        // };
-
         $(document).ready(function() {
             $('#content').summernote({
                 height: 400,
@@ -179,14 +157,8 @@
                     ['insert', ['link', 'picture', 'video']],
                     ['view', ['fullscreen', 'codeview', 'help']]
                 ]
-
             });
         });
-
-        // var save = function() {
-        //     var markup = $('#content').summernote('code');
-        //     $('#content').summernote('destroy');
-        // }
     </script>
 
     <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>

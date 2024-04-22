@@ -18,6 +18,11 @@
     }
   </style>
 @endsection
+
+<head>
+    <title> Author | Profile </title>
+</head>
+
 @section('content')
 <head>
     <!-- --------------------------------------------------- -->
@@ -96,12 +101,13 @@
                       <div class="d-flex align-items-center justify-content-center mb-2">
                         <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
                           <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;";>
-                            <img src="{{asset('assets/img/profile.svg')}}" alt="" class="w-100 h-100">
+                            <img src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
+                            {{-- <img src="{{ asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/> --}}
                           </div>
                         </div>
                       </div>
                       <div class="text-center">
-                        <h5 class="fs-5 mb-0 fw-semibold">Daffa Prasetya</h5>
+                        <h5 class="fs-5 mb-0 fw-semibold">{{ auth()->user()->name }}</h5>
                         <p class="mb-0 fs-4">Penulis</p>
                       </div>
                     </div>
@@ -169,22 +175,28 @@
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active card-detail" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
               <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <div class="">
-                  <form class="d-flex">
-                    <div class="input-group">
-                        <input type="text" name="query" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
-                    </div>
-                  </form>
-                </div>
-                <div class="">
-                  <select class="form-select">
-                      <option value="">Terbaru</option>
-                      <option value="">Terpopuler</option>
-                      <option value="">Terlama</option>
-                  </select>
-              </div>
+                <form class="d-flex">
+                        <div class="">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
+                                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                                <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="d-flex">
+                                <select class="form-select" name="filter">
+                                    <option selected disabled>Pilih Option</option>
+                                    <option value="terbaru">Terbaru</option>
+                                    <option value="terlama">Terlama</option>
+                                    <option value="">Tampilkan Semua</option>
+                                </select>
+                                <button>
+                                    Pilih
+                                </button>
+                            </div>
+                        </div>
+                </form>
               </div>
 
               <!-- Row -->
@@ -313,7 +325,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="nomor">Nama</label>
                     <input type="text" id="name" name="name" placeholder="name"
-                        value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror">
+                        value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror" readonly>
                     @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -323,7 +335,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="nomor">No Hp</label>
                     <input type="text" id="name" name="name" placeholder="name"
-                        value="{{ auth()->user()->phone_number }}" class="form-control @error('name') is-invalid @enderror">
+                        value="{{ auth()->user()->phone_number }}" class="form-control @error('name') is-invalid @enderror" readonly>
                     @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -333,7 +345,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Email</label>
                     <input type="text" id="email" name="email" placeholder="email"
-                        value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror">
+                        value="{{ auth()->user()->email }}" class="form-control @error('email') is-invalid @enderror" readonly>
                     @error('email')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -343,7 +355,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="password"
-                        value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror">
+                        value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror" readonly>
                     @error('password')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -353,7 +365,7 @@
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Tanggal Lahir</label>
                     <input type="text" id="email" name="email" placeholder="Tanggal lahir"
-                        value="{{ auth()->user()->birth_date }}" class="form-control @error('email') is-invalid @enderror">
+                        value="{{ auth()->user()->birth_date }}" class="form-control @error('email') is-invalid @enderror" readonly>
                     @error('email')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -362,8 +374,7 @@
                 </div>
                 <div class="col-md-12 col-lg-12 mb-4">
                   <label class="form-label" for="email">Alamat</label>
-                  <textarea name="alamat" class="form-control" id="" cols="30" rows="10">{{ auth()->user()->address }}</textarea>
-
+                  <textarea name="alamat" class="form-control" id="" cols="30" rows="10" readonly>{{ auth()->user()->address }}</textarea>
                 </div>
               </div>
             </div>

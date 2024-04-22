@@ -93,15 +93,17 @@
                         </div>
 
                         <div class="mt-3 d-flex justify-content-end">
-                            <a href="{{ route('profile.news.edit', ['id' => $item->news->id]) }}" class="btn btn-sm m-1" style="background-color: #0F4D8A;">
+                            <a href="{{ route('profile.news.edit', ['id' => $item->news->slug]) }}" class="btn btn-sm m-1" style="background-color: #0F4D8A;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z" fill="#ffffff"/>
                                 </svg>
                             </a>
                             <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
-                                    <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
-                                </svg>
+                                <a href="{{ route('detail.news', ['news' => $item->news->slug]) }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                        <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
+                                    </svg>
+                                </a>
                             </button>
 
                             <form action="{{ route('profile.news.delete', ['news' => $item->news->id]) }}" method="POST">

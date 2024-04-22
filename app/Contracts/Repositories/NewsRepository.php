@@ -56,8 +56,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%');
-            })->when($request->status, function ($query) use ($request) {
-                $query->where('status', 'LIKE', '%' . $request->status . '%');
+            })->when($request->filter, function ($query) use ($request) {
+                $query->when($request->filter === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+                $query->when($request->filter === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
             })->when($request->category_id, function ($query) use ($request) {
                 $query->where('category_id', $request->category_id);
             })->when($request->sub_category_id, function ($query) use ($request) {
