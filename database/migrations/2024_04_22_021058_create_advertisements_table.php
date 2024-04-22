@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscribes', function (Blueprint $table) {
+        Schema::create('advertisements', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('user_id')->constrained();
+            $table->enum('type' , ['foto', 'vidio']);
+            $table->enum('page', ['news_post', 'sub_category']);
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscribes');
+        Schema::dropIfExists('advertisements');
     }
 };

@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscribes', function (Blueprint $table) {
+        Schema::create('advertisements_photo', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('advertisement_id')->constrained();
+            $table->text('multi_photo')->nullable();
             $table->timestamps();
         });
     }
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscribes');
+        Schema::dropIfExists('advertisements_photo');
     }
 };
