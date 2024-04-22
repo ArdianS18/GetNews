@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,6 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SubcribeController;
 use App\Http\Controllers\SubscribeController;
 use App\Models\Category;
 
@@ -312,6 +312,8 @@ Route::get('iklan-upload', function(){
     return view('pages.user.iklan.pengajuan');
 })->name('iklan.pengajuan');
 
+Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
+
 Route::get('iklan-biodata', function(){
     return view('pages.user.iklan.upload');
 })->name('iklan.biodata');
@@ -348,4 +350,12 @@ Route::get('berlangganan', function(){
 Route::get('user-inbox', function(){
     return view('pages.user.inbox.index');
 })->name('user.inbox');
+
+Route::get('statistik-pendapatan', function(){
+    return view('pages.author.statistic.income');
+})->name('statistik.income');
+
+Route::get('statistik-berita', function(){
+    return view('pages.author.statistic.news');
+})->name('statistik.news');
 ?>
