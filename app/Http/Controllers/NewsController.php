@@ -369,9 +369,9 @@ class NewsController extends Controller
      */
     public function update(NewsUpdateRequest $request, News $news)
     {
-        $data = $this->NewsService->update($request, $news);
-        $this->news->update($news->id, $data);
-        return back()->with('success', trans('alert.update_success'));
+        // $data = $this->NewsService->update($request, $news);
+        // $this->news->update($news->id, $data);
+        // return back()->with('success', trans('alert.update_success'));
     }
 
     /**

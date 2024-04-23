@@ -218,7 +218,7 @@
                         icon: 'success',
                         text: "Berhasil Menambahkan Data"
                     })
-                    $('#modal-create').modal('hide')
+                    $('#tambahdataLabel').modal('hide')
                     emptyForm('form-create')
                 },
                 error: function(response) {
