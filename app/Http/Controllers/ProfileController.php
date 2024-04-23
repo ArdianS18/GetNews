@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
@@ -20,6 +22,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\NewsCategory;
+use App\Models\NewsHasLike;
 use App\Models\NewsPhoto;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
@@ -39,6 +42,8 @@ class ProfileController extends Controller
 {
     private UserInterface $user;
     private NewsInterface $news;
+    private FollowerInterface $followers;
+    private NewsHasLikeInterface $newsHasLike;
     private AuthorInterface $author;
     private SubCategoryInterface $subCategory;
     private NewsService $NewsService;
@@ -50,12 +55,14 @@ class ProfileController extends Controller
     private NewsSubCategoryInterface $newsSubCategory;
     private NewsTagInterface $newsTag;
 
-    public function __construct(TagInterface $tag, NewsTagInterface $newsTag, NewsSubCategoryInterface $newsSubCategory, NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
+    public function __construct(NewsHasLikeInterface $newsHasLike, FollowerInterface $followers, TagInterface $tag, NewsTagInterface $newsTag, NewsSubCategoryInterface $newsSubCategory, NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news,SubCategoryInterface $subCategory, NewsService $NewsService, CategoryInterface $category, NewsPhotoInterface $newsPhoto)
     {
         $this->newsCategory = $newsCategory;
         $this->newsTag = $newsTag;
         $this->newsSubCategory = $newsSubCategory;
 
+        $this->newsHasLike = $newsHasLike;
+        $this->followers = $followers;
         $this->tag = $tag;
         $this->user = $user;
         $this->news = $news;
@@ -73,13 +80,19 @@ class ProfileController extends Controller
         $category = $this->category->get();
         $news = $this->news->search($request)->where('status', "active");
 
-        $news_panding = $this->news->get()->wherein('status', "panding")->count();
-        $news_active = $this->news->get()->wherein('status', "active")->count();
-        $news_reject = $this->news->get()->wherein('status', "nonactive")->count();
-        $authors = $this->author->get();
+        $news_panding = $this->news->get()->where('author_id', auth()->user()->author->id)->wherein('status', "panding")->count();
+        $news_active = $this->news->get()->where('author_id', auth()->user()->author->id)->wherein('status', "active")->count();
+        $news_reject = $this->news->get()->where('author_id', auth()->user()->author->id)->wherein('status', "nonactive")->count();
 
+        $news_post = $this->news->get()->where('author_id', auth()->user()->author->id)->count();
+        $followers = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
+
+        $news_id = News::where('author_id', auth()->user()->author->id)->pluck('id');
+        $news_like = $this->newsHasLike->get()->where('news_id', $news_id)->count();
+
+        $authors = $this->author->get();
         // return view('pages.author.index', compact('news', 'news_status'));
-        return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject'));
+        return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like'));
     }
 
     public function profilestatus()

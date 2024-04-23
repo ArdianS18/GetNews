@@ -161,9 +161,10 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return DB::table('authors')
             ->join('news', 'authors.id', '=', 'news.author_id')
             ->join('users', 'authors.user_id', '=', 'users.id')
+            ->leftJoin('followers', 'authors.id', '=', 'followers.author_id')
             ->leftJoin('news_has_likes', 'news.id', '=', 'news_has_likes.news_id')
             ->where('authors.status', "approved")
-            ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'))
+            ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'), DB::raw('COUNT(followers.author_id) as follow_id'))
             ->groupBy('authors.id', 'users.name', 'users.photo')
             ->get();
     }
@@ -173,11 +174,12 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return DB::table('authors')
             ->join('news', 'authors.id', '=', 'news.author_id')
             ->join('users', 'authors.user_id', '=', 'users.id')
+            ->leftJoin('followers', 'authors.id', '=', 'followers.author_id')
             ->leftJoin('news_has_likes', 'news.id', '=', 'news_has_likes.news_id')
-            ->where('authors.status', "approved")
+            ->where('authors.status', 'approved')
             ->when($request->input('name'), function($query) use ($request) {
                 $query->where('users.name', 'LIKE', '%'.$request->input('name').'%');
-            })->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'))
+            })->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'), DB::raw('COUNT(followers.author_id) as follow_id'))
             ->groupBy('authors.id', 'users.name', 'users.photo')
             ->get();
     }

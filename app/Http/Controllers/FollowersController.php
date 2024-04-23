@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\FollowerInterface;
+use App\Models\Author;
 use App\Models\Followers;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,13 @@ class FollowersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Author $author)
     {
-        //
+        $data['user_id'] = auth()->user()->id;
+        $data['author_id'] = $author->id;
+        $this->followers->store($data);
+
+        return back();
     }
 
     /**
@@ -67,8 +72,12 @@ class FollowersController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Followers $followers)
+    public function destroy(Followers $followers, Author $author)
     {
-        //
+        $data['user_id'] = auth()->user()->id;
+        $data['author_id'] = $author->id;
+        $this->followers->destroy($data);
+
+        return back();
     }
 }

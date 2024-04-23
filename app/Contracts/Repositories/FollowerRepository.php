@@ -40,6 +40,12 @@ class FollowerRepository extends BaseRepository implements FollowerInterface
         ->delete();
     }
 
+    public function destroy(array $data): mixed
+    {
+        return $this->model->query()
+        ->delete($data);
+    }
+
     /**
      * Handle get the specified data by id from models.
      *

@@ -74,13 +74,12 @@ class DashboardController extends Controller
 
     public function userProfile(User $user){
         // $users = $this->user->get();
-        $categories = $this->category->get();
-        $subCategories = $this->subCategory->get();
-        return view('pages.user.profile.index', compact('user', 'categories', 'subCategories'));
+        return view('pages.user.profile.index', compact('user'));
     }
 
     public function authoruser(Request $request) {
         $authors = $this->author->showWhithCountSearch($request);
+        // dd($authors);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.author.index', compact('categories', 'subCategories', 'authors'));

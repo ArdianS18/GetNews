@@ -76,12 +76,12 @@
                     <div class="d-flex align-items-center justify-content-between m-4">
                       <div class="text-center">
                         <i class="ti ti-file-description fs-6 d-block mb-2"></i>
-                        <h5 class="mb-0 fw-semibold lh-1">938</h5>
+                        <h5 class="mb-0 fw-semibold lh-1">{{ $news_post }}</h5>
                         <p class="mb-0 fs-4">Posts</p>
                       </div>
                       <div class="text-center">
                         <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                        <h5 class="mb-0 fw-semibold lh-1">3,586</h5>
+                        <h5 class="mb-0 fw-semibold lh-1">{{ $followers }}</h5>
                         <p class="mb-0 fs-4">Followers</p>
                       </div>
                       <div class="text-center">
@@ -91,7 +91,7 @@
                       </div>
                       <div class="text-center">
                           <i class="ti ti-thumb-up fs-6 d-block mb-2"></i>
-                          <h5 class="mb-0 fw-semibold lh-1">3.212</h5>
+                          <h5 class="mb-0 fw-semibold lh-1">{{ $news_like }}</h5>
                           <p class="mb-0 fs-4">Like</p>
                         </div>
                     </div>

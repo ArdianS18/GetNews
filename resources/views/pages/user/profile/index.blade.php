@@ -30,7 +30,6 @@
                     </a>
                 </div>
 
-
                 <div class="align-items-center">
                     <div class="d-flex justify-content-between">
                         <div class="col-lg-3 mt-n3 order-lg-2 order-1 justify-content-start">
@@ -40,12 +39,11 @@
                                         style="width: 110px; height: 110px;";>
                                         <div class="border border-4 mt-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
                                             style="width: 100px; height: 100px;";>
-                                            <img src="{{ asset('assets/img/profile.svg') }}" alt=""
-                                                class="w-100 h-100">
+                                            <img src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
                                         </div>
                                     </div>
                                     <div class="mt-5 ms-3">
-                                        <h5 class="fs-5 mt-2 mb-0 fw-semibold">Muhammad budi</h5>
+                                        <h5 class="fs-5 mt-2 mb-0 fw-semibold">{{ auth()->user()->name }}</h5>
                                         <p class="mt-2 fs-4">Penggguna</p>
                                     </div>
                                 </div>
@@ -124,7 +122,7 @@
 
             <div class="d-flex justify-content-end">
                 <button class="btn btn-sm px-4 py-2 text-white m-4" type="button" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal{{ $user->id }}" style="background-color: #175A95;">Daftar Jadi
+                    data-bs-target="#exampleModal{{ auth()->user()->id }}" style="background-color: #175A95;">Daftar Jadi
                     Penulis</button>
             </div>
 
@@ -180,10 +178,7 @@
 
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="email">Nama</label>
-                        <input id="name" type="text" placeholder=""
-                            class="form-control form-control-lg @error('name') is-invalid @enderror" name="name"
-                            value="{{ $user->name }}" readonly required autocomplete="name" autofocus>
-
+                        <h4><small>{{ auth()->user()->name }}</small></h4>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -192,11 +187,7 @@
                     </div>
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="phone_number">No Hp</label>
-                        <input id="phone_number" type="text" placeholder=""
-                            class="form-control form-control-lg @error('phone_number') is-invalid @enderror"
-                            name="phone_number" value="{{ $user->phone_number }}" readonly required autocomplete="name"
-                            autofocus>
-
+                        <h4><small>{{ auth()->user()->phone_number }}</small></h4>
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -205,10 +196,7 @@
                     </div>
                     <div class="col-md-12 col-lg-6 mb-3">
                         <label class="form-label" for="email">Email</label>
-                        <input id="email" type="text" placeholder=""
-                            class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"
-                            value="{{ $user->email }}" readonly required autocomplete="name" autofocus>
-
+                        <h4><small>{{ auth()->user()->email }}</small></h4>
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -216,12 +204,8 @@
                         @enderror
                     </div>
                     <div class="col-md-12 col-lg-6 mb-3">
-                        <label class="form-label" for="email">Date</label>
-                        <input id="name" type="date" placeholder=""
-                            class="form-control form-control-lg @error('created_at') is-invalid @enderror"
-                            name="created_at" value="{{ $user->created_at }}" readonly required autocomplete="name"
-                            autofocus>
-
+                        <label class="form-label" for="email">Tanggal Lahir</label>
+                        <h4><small>{{ auth()->user()->birth_date }}</small></h4>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -230,13 +214,7 @@
                     </div>
                     <div class="col-md-12 col-lg-12 mb-3">
                         <label class="form-label" for="email">Alamat</label>
-                        <textarea name="alamat" placeholder="{{ $user->address }}" readonly class="form-control" id=""
-                            rows="7"></textarea>
-                    </div>
-
-                    <div class="d-flex justify-content-end mb-5 mt-3">
-                        <button class="btn btn-lg px-4 py-2 text-black" style="background-color: #D9D9D9;">Edit
-                            Profile</button>
+                        <h4><small>{{ auth()->user()->address }}</small></h4>
                     </div>
                 </div>
             </div>
@@ -246,15 +224,15 @@
 
     </div>
 
-    <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1"
-        aria-labelledby="exampleModalLabel{{ $user->id }}" aria-hidden="true">
+    <div class="modal fade" id="exampleModal{{ auth()->user()->id }}" tabindex="-1"
+        aria-labelledby="exampleModalLabel{{ auth()->user()->id }}" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ $user->id }}">Daftar Author</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel{{ auth()->user()->id }}">Daftar Author</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form method="post" action="{{ route('user.author', ['user' => $user->id]) }}"
+                <form method="post" action="{{ route('user.author', ['user' => auth()->user()->id]) }}"
                     enctype="multipart/form-data">
                     @csrf
                     @method('put')

@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
@@ -226,26 +227,35 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
-
+    //author
     Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
+    Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
+    Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
+
     Route::get('author-detail', [DashboardController::class, 'authordetail'])->name('author.detail');
 
     Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
-
     Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
-
     Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
+
+    Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
+    Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
+    Route::post('photo/{user}', [UserController::class, 'store'])->name('update-photo');
+
+    Route::get('profile-user-update', function () {
+        return view('pages.user.profile.update');
+    })->name('profile.user.update');
+    
 });
 
 Route::middleware(['role:user'])->group(function () {
-    Route::get('profile-user/{user}', [DashboardController::class, 'userProfile'])->name('profile.user');
+    Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
     Route::get('user-beranda', function () {
         return view('pages.user.home');
     })->name('user.home');
 });
 
-Route::post('photo/{user}', [UserController::class, 'store'])->name('update-photo');
 
 
 
@@ -262,10 +272,6 @@ Route::get('statistic', function () {
 Route::get('status', function () {
     return view('pages.author.status.index');
 })->name('status.author');
-
-Route::get('profile-user-update', function () {
-    return view('pages.user.profile.update');
-})->name('profile.user.update');
 
 Route::get('news-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
 
