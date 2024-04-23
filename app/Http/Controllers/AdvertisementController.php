@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Http\Requests\AdvertisementRequest;
 use App\Http\Requests\AdvetisementRequest;
 use App\Models\Advertisement;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 class AdvertisementController extends Controller
 {
     private AdvertisementInterface $advertisement;
+    private AdvertisementService $advertisement;
 
     public function __construct(AdvertisementInterface $advertisement)
     {
@@ -34,7 +36,7 @@ class AdvertisementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AdvetisementRequest $request)
+    public function store(AdvertisementRequest $request)
     {
         dd($request);
         $this->advertisement->store(($request->validated()));

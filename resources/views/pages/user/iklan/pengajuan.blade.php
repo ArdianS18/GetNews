@@ -27,12 +27,12 @@
 <div class="d-flex justify-content-between">
     <h5>Isi form dibawah ini untuk konten iklan</h5>
 
-    <a href="{{route('iklan.ajukan')}}" class="btn btn-md text-white" style="background-color: #175A95">
-        Berikutnya
-    </a>
+    <button type="submit" class="btn btn-md text-white px-5" style="background-color: #175A95">
+        Ajukan
+    </button>
 </div>
 
-<div class="card mt-4 p-4 shadow-sm">
+<div class="card mt-4 p-4 pb-5 shadow-sm">
     <div class="row mt-3 mb-4">
         <div class="row col-lg-8 col-md-12 from-outline">
             <div class="col-lg-6 mb-4">

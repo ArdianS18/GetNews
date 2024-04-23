@@ -2,19 +2,14 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\AdvertisementInterface;
-use App\Contracts\Interfaces\SubscribeInterface;
-use App\Models\Advertisement;
-use App\Models\Subscribe;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
+use App\Contracts\Interfaces\AdvertisementPhotoInterface;
+use App\Models\AdvertisementPhoto;
 
-class AdvertisementRepository extends BaseRepository implements AdvertisementInterface
+class AdvertisementPhotoRepository extends BaseRepository implements AdvertisementPhotoInterface
 {
-    public function __construct(Advertisement $advertisement)
+    public function __construct(AdvertisementPhoto $advertisementPhoto)
     {
-        $this->model = $advertisement;
+        $this->model = $advertisementPhoto;
     }
 
     /**
@@ -31,12 +26,9 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
         ->delete();
     }
 
-
-    public function paginate(): mixed
+    public function exists(array $conditions): bool
     {
-        return $this->model->query()
-            ->latest()
-            ->paginate(5);
+        return $this->model->where($conditions)->exists();
     }
 
     /**
@@ -51,18 +43,11 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
 
     }
 
-    public function search(mixed $request): mixed
-    {
-        return $this->model->where('question', 'LIKE', '%' . $request->question . '%')->get();
-    }
-
-    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
+    public function where(mixed $id): mixed
     {
         return $this->model->query()
-            ->when($request->question, function ($query) use ($request) {
-                $query->where('question', 'LIKE', '%' .  $request->question . '%');
-            })
-            ->fastPaginate($pagination);
+            ->where('news_id', $id)
+            ->get();
     }
 
     /**

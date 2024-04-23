@@ -359,4 +359,8 @@ Route::get('berlangganan', function(){
 Route::get('user-inbox', function(){
     return view('pages.user.inbox.index');
 })->name('user.inbox');
+
+Route::get('tukarkan-coin', function(){
+    return view('pages.user.coins.tukar-coin');
+})->name('user.tukar.coin');
 ?>

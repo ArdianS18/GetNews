@@ -3,16 +3,16 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\SubscribeInterface;
-use App\Models\Subcribe;
+use App\Models\Subscribe;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class SubscribeRepository extends BaseRepository implements SubscribeInterface
 {
-    public function __construct(Subcribe $subcribe)
+    public function __construct(Subscribe $subscribe)
     {
-        $this->model = $subcribe;
+        $this->model = $subscribe;
     }
 
     /**
