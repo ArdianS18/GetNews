@@ -67,11 +67,13 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
                 $findid->where('author_id', $id);
             })
             ->whereHas('news', function($findid) use ($request) {
+                $findid->where('status', "active");
                 $findid->when($request->search, function($query) use ($request){
                     $query->where('name', 'LIKE', '%'.$request->search.'%');
                 });
             })
             ->when($request->opsilatest, function($query) use ($request){
+                $query->where('status', "active");
                 $query->when($request->opsilatest === 'terbaru', function ($terbaru) {
                     $terbaru->latest()->get();
                 });
@@ -81,6 +83,7 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
                 });
             })
             ->when($request->perpage, function ($query) use ($request) {
+                $query->where('status', "active");
                 $query->when($request->perpage === '10', function ($var) {
                     $var->take(10);
                 });

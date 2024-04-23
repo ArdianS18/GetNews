@@ -176,22 +176,22 @@
             <div class="tab-pane fade show active card-detail" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
               <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                 <form class="d-flex">
-                        <div class="">
+                        <div class="me-3">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
                                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                                <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
+                                <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
                             </div>
                         </div>
-                        <div class="">
-                            <div class="d-flex">
+                        <div class="d-flex">
+                            <div class="input-group">
                                 <select class="form-select" name="filter">
                                     <option selected disabled>Pilih Option</option>
                                     <option value="terbaru">Terbaru</option>
                                     <option value="terlama">Terlama</option>
                                     <option value="">Tampilkan Semua</option>
                                 </select>
-                                <button>
+                                <button class="btn btn-outline-primary">
                                     Pilih
                                 </button>
                             </div>

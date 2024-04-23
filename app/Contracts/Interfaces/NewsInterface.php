@@ -20,6 +20,7 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 {
     public function showWhithCount() : mixed;
     public function showCountMonth() : mixed;
+    public function showNewsStatistic() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 
     public function getAll() : mixed;

@@ -71,8 +71,7 @@ class ProfileController extends Controller
     {
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();
-        // $news = $this->news->get()->where('status', "active");
-        $news = $this->news->search($request);
+        $news = $this->news->search($request)->where('status', "active");
 
         $news_panding = $this->news->get()->wherein('status', "panding")->count();
         $news_active = $this->news->get()->wherein('status', "active")->count();

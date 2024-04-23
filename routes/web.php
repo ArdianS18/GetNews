@@ -207,6 +207,9 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('statistic', function () {
         return view('pages.author.statistic.index');
     })->name('statistic.author');
+
+    Route::get('income-statistics', [AuthorController::class, 'incomestatistics'])->name('statistik.income');
+    Route::get('news-statistics', [AuthorController::class, 'newsstatistics'])->name('statistik.news');
 });
 
 
@@ -350,12 +353,4 @@ Route::get('berlangganan', function(){
 Route::get('user-inbox', function(){
     return view('pages.user.inbox.index');
 })->name('user.inbox');
-
-Route::get('statistik-pendapatan', function(){
-    return view('pages.author.statistic.income');
-})->name('statistik.income');
-
-Route::get('statistik-berita', function(){
-    return view('pages.author.statistic.news');
-})->name('statistik.news');
 ?>

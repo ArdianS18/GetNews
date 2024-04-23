@@ -24,8 +24,10 @@ use App\Http\Requests\AuthorsRequest;
 use App\Http\Resources\AuthorResource;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\NewsHasLike;
 use App\Models\SubCategory;
 use App\Models\User;
+use App\Models\View;
 use App\Services\Auth\RegisterService;
 use App\Services\AuthorBannedService;
 use Carbon\Carbon;
@@ -243,5 +245,21 @@ class AuthorController extends Controller
     {
         $this->author->delete($author->id);
         return ResponseHelper::success(null, trans('alert.delete_success'));
+    }
+
+    public function incomestatistics()
+    {
+        return view('pages.author.statistic.income');
+    }
+
+    public function newsstatistics()
+    {
+        $news = $this->news->showWhithCount();
+        //statistik
+        $data = $this->news->showNewsStatistic();
+        $view = View::count();
+        $like = NewsHasLike::count();
+
+        return view('pages.author.statistic.news', compact('news', 'view', 'like'));
     }
 }

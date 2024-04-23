@@ -38,4 +38,9 @@ class Author extends Model
     {
         return $this->hasMany(News::class);
     }
+
+    public function followers()
+    {
+        return $this->hasMany(Followers::class);
+    }
 }

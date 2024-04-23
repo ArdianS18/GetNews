@@ -79,10 +79,11 @@ class DashboardController extends Controller
         return view('pages.user.profile.index', compact('user', 'categories', 'subCategories'));
     }
 
-    public function authoruser() {
+    public function authoruser(Request $request) {
+        $authors = $this->author->showWhithCountSearch($request);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        return view('pages.user.author.index', compact('categories', 'subCategories'));
+        return view('pages.user.author.index', compact('categories', 'subCategories', 'authors'));
     }
 
     public function aboutus() {

@@ -161,7 +161,23 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return DB::table('authors')
             ->join('news', 'authors.id', '=', 'news.author_id')
             ->join('users', 'authors.user_id', '=', 'users.id')
-            ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(*) as count'))
+            ->leftJoin('news_has_likes', 'news.id', '=', 'news_has_likes.news_id')
+            ->where('authors.status', "approved")
+            ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'))
+            ->groupBy('authors.id', 'users.name', 'users.photo')
+            ->get();
+    }
+
+    public function showWhithCountSearch(Request $request): mixed
+    {
+        return DB::table('authors')
+            ->join('news', 'authors.id', '=', 'news.author_id')
+            ->join('users', 'authors.user_id', '=', 'users.id')
+            ->leftJoin('news_has_likes', 'news.id', '=', 'news_has_likes.news_id')
+            ->where('authors.status', "approved")
+            ->when($request->input('name'), function($query) use ($request) {
+                $query->where('users.name', 'LIKE', '%'.$request->input('name').'%');
+            })->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'))
             ->groupBy('authors.id', 'users.name', 'users.photo')
             ->get();
     }

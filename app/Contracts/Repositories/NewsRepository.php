@@ -217,20 +217,52 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showWhithCount(): mixed
     {
         return $this->model->query()
-            ->select('news.id', 'news.name', 'news.photo', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d, %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
+            ->select('news.id', 'news.name', 'news.photo', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->groupBy('news.id', 'news.name')
             ->orderBy('views_count', 'desc')
-            ->take(6);
-            // ->get();
+            ->take(3)
+            ->get();
+    }
+
+    public function showNewsStatistic(): mixed
+    {
+        $year = date('Y');
+        $result =  $this->model->query()
+            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'))
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->whereYear('news.created_at', $year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $found = false;
+            foreach ($result as $row) {
+                if ($row->month == $i) {
+                    $newsCount = $row->news_count;
+                    $monthlyData[] = $newsCount;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $monthlyData[] = 0;
+            }
+        }
+
+        return $monthlyData;
     }
 
     public function showCountMonth(): mixed
     {
         $year = date('Y');
         $result = $this->model->query()
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(id) as news_count'))
-            ->whereYear('created_at', $year)
+            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'),  DB::raw('COUNT(views.news_id) as views_count'))
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->whereYear('news.created_at', $year)
             ->groupBy('month')
             ->orderBy('month')
             ->get();
