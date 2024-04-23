@@ -1,5 +1,13 @@
 @extends('layouts.user.sidebar')
 
+@section('style')
+    <style>
+    .card.active {
+        border: 1px solid #175A95;
+        box-shadow: 0 3px 20px #175A95;
+    }
+    </style>
+@endsection
 @section('content')
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #183249;">
     <div class="card-body">
@@ -29,28 +37,28 @@
         <div class="col-lg-6">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card p-4">
+                    <div class="card p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h5><b>Rp.500</b></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card p-4">
-                        <div class="d-flex justify-content-center ">
+                    <div class="card p-4" onclick="selectCard(this)">
+                        <div class="d-flex justify-content-center">
                             <h5><b>Rp.10.000</b></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card p-4">
+                    <div class="card p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h5><b>Rp.50.000</b></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card p-4">
+                    <div class="card p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center ">
                             <h5><b>Rp.100.000</b></h5>
                         </div>
@@ -82,3 +90,17 @@
 
 @endsection
 
+@section('script')
+    <script>
+function selectCard(selectedCard) {
+    var cards = document.querySelectorAll('.card');
+    
+    cards.forEach(function(card) {
+        card.classList.remove('active');
+    });
+
+    selectedCard.classList.add('active');
+}
+
+    </script>
+@endsection

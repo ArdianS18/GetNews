@@ -22,7 +22,13 @@ class AdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // 'user_id' => 'required',
+            'type' => 'required',
+            'page' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'url' => 'required',
+            'multi_photo' => 'nullable',
         ];
     }
 }

@@ -363,4 +363,8 @@ Route::get('user-inbox', function(){
 Route::get('tukarkan-coin', function(){
     return view('pages.user.coins.tukar-coin');
 })->name('user.tukar.coin');
+
+Route::get('riwayat-berita', function(){
+    return view('pages.user.news.hfistory');
+})->name('user.history.news');
 ?>
