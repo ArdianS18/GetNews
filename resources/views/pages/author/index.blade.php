@@ -86,7 +86,7 @@
                       </div>
                       <div class="text-center">
                         <i class="ti ti-user-check fs-6 d-block mb-2"></i>
-                        <h5 class="mb-0 fw-semibold lh-1">2,659</h5>
+                        <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
                         <p class="mb-0 fs-4">Following</p>
                       </div>
                       <div class="text-center">
@@ -352,7 +352,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-12 col-lg-6 mb-4">
+                {{-- <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="password">Password</label>
                     <input type="password" id="password" name="password" placeholder="password"
                         value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror" readonly>
@@ -361,7 +361,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Tanggal Lahir</label>
                     <input type="text" id="email" name="email" placeholder="Tanggal lahir"

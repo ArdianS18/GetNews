@@ -20,14 +20,16 @@
 
 @section('content')
     <div class="">
-        <div class="card-profile">
+        <div class="card">
             <div class="card-body p-0">
                 <img src="{{ asset('assets/img/profile-bg.svg') }}" width="100%" height="150px"
                     style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">
                 <div class="top-right">
-                    <a href="{{ route('profile.user.update') }}">
-                        <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
-                    </a>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-sm px-4 py-2 text-white m-4" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{ auth()->user()->id }}" style="background-color: #175A95;">Daftar Jadi
+                            Penulis</button>
+                    </div>
                 </div>
 
                 <div class="align-items-center">
@@ -50,7 +52,7 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-4 order-lg-3 order-2 justify-content-end me-5">
+                        <div class="col-lg-2 order-lg-2 order-2 justify-content-end me-5">
                             <div class="d-flex align-items-center justify-content-between m-4">
                                 <div class="text-center">
                                     <i class="ti ti-coins fs-6 d-block mb-2"></i>
@@ -59,14 +61,14 @@
                                 </div>
                                 <div class="text-center">
                                     <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                                    <h5 class="mb-0 fw-semibold lh-1">3,586</h5>
+                                    <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
                                     <p class="mb-0 fs-4">Mengikuti</p>
                                 </div>
-                                <div class="text-center">
+                                {{-- <div class="text-center">
                                     <i class="ti ti-user-check fs-6 d-block mb-2"></i>
                                     <h5 class="mb-0 fw-semibold lh-1">2,659</h5>
                                     <p class="mb-0 fs-4">Pengikut</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -75,7 +77,7 @@
 
             <div class="shadow-sm" style="background-color: #ECF1F4;">
                 <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 rounded-2" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
+                    {{-- <li class="nav-item" role="presentation">
                         <button
                             class="nav-link position-relative active rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
                             id="pills-berlangganan-tab" data-bs-toggle="pill" data-bs-target="#pills-berlangganan"
@@ -104,10 +106,10 @@
                             </svg>
                             <span class="d-none d-md-block">Pendapatan</span>
                         </button>
-                    </li>
+                    </li> --}}
                     <li class="nav-item" role="presentation">
                         <button
-                            class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
+                            class="nav-link position-relative active rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6"
                             id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button"
                             role="tab" aria-controls="pills-profile" aria-selected="true">
                             <i class="ti ti-user-circle me-2 fs-6"></i>
@@ -120,13 +122,13 @@
 
         <div class="tab-content" id="pills-tabContent">
 
-            <div class="d-flex justify-content-end">
+            {{-- <div class="d-flex justify-content-end">
                 <button class="btn btn-sm px-4 py-2 text-white m-4" type="button" data-bs-toggle="modal"
                     data-bs-target="#exampleModal{{ auth()->user()->id }}" style="background-color: #175A95;">Daftar Jadi
                     Penulis</button>
-            </div>
+            </div> --}}
 
-            <div class="tab-pane fade show active card p-4 shadow-sm" id="pills-berlangganan" role="tabpanel"
+            <div class="tab-pane fade card p-4 shadow-sm" id="pills-berlangganan" role="tabpanel"
                 aria-labelledby="pills-berlangganan-tab" tabindex="0">
 
                 <!-- Row -->
@@ -169,43 +171,43 @@
             </div>
 
 
-            <div class="tab-pane fade card-detail shadow-sm" id="pills-profile" role="tabpanel"
+            <div class="tab-pane fade show active card shadow-sm" id="pills-profile" role="tabpanel"
                 aria-labelledby="pills-profile-tab" tabindex="0">
-                <div class="row mt-5 ps-5 pe-5">
+                <div class="row p-4">
                     <div class="mb-4">
-                        <h5>Biodata</h5>
+                        <h4>Biodata</h4>
                     </div>
 
-                    <div class="col-md-12 col-lg-6 mb-3">
+                    <div class="col-md-12 col-lg-6 mb-4">
                         <label class="form-label" for="email">Nama</label>
-                        <h4><small>{{ auth()->user()->name }}</small></h4>
+                        <input type="text" class="form-control" readonly value="{{ auth()->user()->name }}">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-12 col-lg-6 mb-3">
+                    <div class="col-md-12 col-lg-6 mb-4">
                         <label class="form-label" for="phone_number">No Hp</label>
-                        <h4><small>{{ auth()->user()->phone_number }}</small></h4>
+                        <input type="text" class="form-control" readonly value="{{ auth()->user()->phone_number }}">
                         @error('phone_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-12 col-lg-6 mb-3">
+                    <div class="col-md-12 col-lg-6 mb-4">
                         <label class="form-label" for="email">Email</label>
-                        <h4><small>{{ auth()->user()->email }}</small></h4>
+                        <input type="text" class="form-control" readonly value="{{ auth()->user()->email }}">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-12 col-lg-6 mb-3">
+                    <div class="col-md-12 col-lg-6 mb-4">
                         <label class="form-label" for="email">Tanggal Lahir</label>
-                        <h4><small>{{ auth()->user()->birth_date }}</small></h4>
+                        <input type="text" class="form-control" readonly value="{{ auth()->user()->birth_date }}">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -214,8 +216,15 @@
                     </div>
                     <div class="col-md-12 col-lg-12 mb-3">
                         <label class="form-label" for="email">Alamat</label>
-                        <h4><small>{{ auth()->user()->address }}</small></h4>
+                        {{-- <textarea class="form-control" readonly value=""> --}}
+                        <textarea name="" class="form-control" placeholder="{{ auth()->user()->address }}" id="" cols="30" rows="10" readonly></textarea>
                     </div>
+                </div>
+
+                <div class="d-flex justify-content-end mb-5">
+                    <a href="{{ route('profile.user.update') }}">
+                        <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
+                    </a>
                 </div>
             </div>
 
@@ -243,7 +252,7 @@
                         <div class="form-check mt-4">
                             <input class="form-check-input test" type="checkbox" value="" id="test">
                             <label class="form-check-label" for="flexCheckChecked">
-                                saya telah membaca <a href="" style="color: #EA4949;">ketentuan & persyaratan</a>
+                                saya telah membaca <a href="{{route('privacy.policy')}}" style="color: #EA4949;">ketentuan & persyaratan</a>
                                 dan menyetujui, jika melanggar saya akan menanggung kosekuensinya
                             </label>
                         </div>
@@ -258,15 +267,25 @@
 @endsection
 
 @section('script')
-    <script>
-        $('.test').change(function() { // Attach a change event listener to the checkbox
-            if ($(this).prop('checked')) { // Check if the checkbox is checked
-                console.log(true);
-                $('#daftar').removeAttr('disabled'); // Enable the button
-            } else {
-                console.log(false);
-                $('#daftar').attr('disabled', 'disabled'); // Disable the button
-            }
-        });
-    </script>
+<script>
+    // Periksa status checkbox saat halaman dimuat
+    $(document).ready(function() {
+        checkCheckbox();
+    });
+
+    // Fungsi untuk memeriksa status checkbox dan mengaktifkan/menonaktifkan tombol Daftar
+    function checkCheckbox() {
+        if ($('#test').prop('checked')) {
+            $('#daftar').removeAttr('disabled'); // Enable the button
+        } else {
+            $('#daftar').attr('disabled', 'disabled'); // Disable the button
+        }
+    }
+
+    // Tambahkan event listener ke checkbox
+    $('.test').change(function() { 
+        checkCheckbox(); // Panggil fungsi untuk memeriksa status checkbox
+    });
+</script>
+
 @endsection
