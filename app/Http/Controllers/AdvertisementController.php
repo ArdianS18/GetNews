@@ -3,24 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Contracts\Interfaces\AdvertisementPhotoInterface;
+use App\Helpers\ResponseHelper;
+use App\Http\Requests\AdvertisementRequest;
 use App\Http\Requests\AdvetisementRequest;
 use App\Models\Advertisement;
+use App\Services\AdvertisementPhotoService;
+use App\Services\AdvertisementService;
 use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
 {
     private AdvertisementInterface $advertisement;
+    private AdvertisementService $advertisementService;
+    private AdvertisementPhotoInterface $advertisementPhoto;
 
-    public function __construct(AdvertisementInterface $advertisement)
+    public function __construct(
+    AdvertisementInterface $advertisement, 
+    AdvertisementService $advertisementService, 
+    AdvertisementPhotoInterface $advertisementPhoto, 
+    )
     {
         $this->advertisement = $advertisement;
+        $this->advertisementService = $advertisementService;
+        $this->advertisementPhoto = $advertisementPhoto;
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        return view('pages.user.iklan.pengajuan');
     }
 
     /**
@@ -34,11 +47,22 @@ class AdvertisementController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AdvetisementRequest $request)
+    public function store(AdvertisementRequest $request)
     {
-        dd($request);
-        $this->advertisement->store(($request->validated()));
-        return back();
+        $data = $this->advertisementService->store($request);
+        $advertisementId = $this->advertisement->store($data)->id;
+
+        foreach ($data['multi_photo'] as $img) {
+            $this->advertisementPhoto->store([
+                'advertisement_id' => $advertisementId,
+                'multi_photo' => $img,
+            ]);
+        }
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
+        
+        // $this->advertisement->store(($request->validated()));
+        // return back();
     }
 
     /**

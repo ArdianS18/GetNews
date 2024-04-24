@@ -23,45 +23,40 @@
     </div>
 </div>
 
-
+<form action="{{route('advertisement.store')}}" method="post">
+    @csrf
 <div class="d-flex justify-content-between">
     <h5>Isi form dibawah ini untuk konten iklan</h5>
 
-    <a href="{{route('iklan.ajukan')}}" class="btn btn-md text-white" style="background-color: #175A95">
-        Berikutnya
-    </a>
+    <button type="submit" class="btn btn-md text-white px-5" style="background-color: #175A95">
+        Ajukan
+    </button>
 </div>
 
-<div class="card mt-4 p-4 shadow-sm">
+<div class="card mt-4 p-4 pb-5 shadow-sm">
     <div class="row mt-3 mb-4">
         <div class="row col-lg-8 col-md-12 from-outline">
             <div class="col-lg-6 mb-4">
-                <label class="form-label" for="nomor">Jenis Iklan</label>
-                <input type="text" id="name" name="name" placeholder=""
-                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
-                    <span class="invalid-feedback" role="alert" style="color: red;">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <label class="form-label" for="type">Jenis Iklan</label>
+                <select name="type" class="form-select" id="">
+                    <option value="foto">Foto</option>
+                    <option value="vidio">Vidio</option>
+                </select>
             </div>
             
             <div class="col-lg-6 mb-4">
-                <label class="form-label" for="nomor">Halaman</label>
-                <input type="text" id="name" name="name" placeholder=""
-                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
-                    <span class="invalid-feedback" role="alert" style="color: red;">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <label class="form-label" for="page">Halaman</label>
+                <select name="page" class="form-select" id="">
+                    <option value="news_post">News Post</option>
+                    <option value="sub_category">Sub Kategori</option>
+                </select>
             </div>
 
             <div class="col-lg-6 mb-4">
-                <label class="form-label" for="nomor">Tanggal Awal</label>
-                <input type="text" id="name" name="name" placeholder=""
-                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
+                <label class="form-label" for="start_date">Tanggal Awal</label>
+                <input type="date" id="start_date" name="start_date" placeholder=""
+                    value="{{ old('start_date') }}" class="form-control @error('start_date') is-invalid @enderror">
+                @error('start_date')
                     <span class="invalid-feedback" role="alert" style="color: red;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -69,10 +64,10 @@
             </div>
             
             <div class="col-lg-6 mb-4">
-                <label class="form-label" for="nomor">Tanggal Akhir</label>
-                <input type="text" id="name" name="name" placeholder=""
-                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
+                <label class="form-label" for="end_date">Tanggal Akhir</label>
+                <input type="date" id="end_date" name="end_date" placeholder=""
+                    value="{{ old('end_date') }}" class="form-control @error('end_date') is-invalid @enderror">
+                @error('end_date')
                     <span class="invalid-feedback" role="alert" style="color: red;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -80,10 +75,10 @@
             </div>
 
             <div class="col-lg-12 mb-4">
-                <label class="form-label" for="nomor">URL</label>
-                <input type="text" id="name" name="name" placeholder=""
-                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
+                <label class="form-label" for="url">URL</label>
+                <input type="text" id="url" name="url" placeholder=""
+                    value="{{ old('url') }}" class="form-control @error('url') is-invalid @enderror">
+                @error('url')
                     <span class="invalid-feedback" role="alert" style="color: red;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -99,6 +94,7 @@
         </div>
     </div>
 </div>
+</form>
 @endsection
 
 @section('script')

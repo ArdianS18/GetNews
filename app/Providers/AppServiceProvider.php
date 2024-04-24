@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Contracts\Interfaces\AdvertisementPhotoInterface;
 use Illuminate\Support\ServiceProvider;
 
 use App\Contracts\Interfaces\FaqInterface;
@@ -34,6 +36,8 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\ViewInterface;
+use App\Contracts\Repositories\AdvertisementPhotoRepository;
+use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\CategoryRepository;
 use App\Contracts\Repositories\RegisterRepository;
 use App\Contracts\Repositories\ContactUsRepository;
@@ -73,7 +77,9 @@ class AppServiceProvider extends ServiceProvider
         NewsTagInterface::class => NewsTagRepository::class,
         NewsRejectInterface::class => NewsRejectRepository::class,
         SubscribeInterface::class => SubscribeRepository::class,
-    FollowerInterface::class => FollowerRepository::class
+        FollowerInterface::class => FollowerRepository::class,
+        AdvertisementInterface::class => AdvertisementRepository::class,
+        AdvertisementPhotoInterface::class => AdvertisementPhotoRepository::class,   
     ];
 
     /**

@@ -41,7 +41,7 @@
                     <li class="mb-2"><p>getmedia@gmail.com</p></li>
                     <li class="mb-2">+62 *** **** ****  </li>
                     <li class="mb-2"><span style="color: #92989F; font-size: 15px;">Berlangganaan</span></li>
-                    <li class="mb-2"><button type="button" class="btn btn-outline-danger px-5">Subcribe</button></li>
+                    <li class="mb-2"><button type="button" class="btn btn-outline-danger px-5">Subscribe</button></li>
                 </ul>
             </div>
 

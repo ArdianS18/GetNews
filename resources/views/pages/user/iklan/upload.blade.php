@@ -17,46 +17,52 @@
     </div>
 </div>
 
-<div class="">
-    <div class="card p-4">
-        <h4 class="mt-2">Biodata</h4>
-        <p class="mt-2 text-black">Pastikan biodata di isi dengan tepat</p>
+<div class="d-flex justify-content-between mb-3">
+    <div class="">
+        <h4 class="">Biodata</h4>
+    </div>
+    
 
-        <div class="row mt-4">
-            <div class="col-md-12 col-lg-6 mb-5">
-                <label class="form-label" for="nomor">Nama Lengkap</label>
-                <input type="text" id="name" name="name" placeholder="nama" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
-                <span class="invalid-feedback" role="alert" style="color: red;">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="col-md-12 col-lg-6 mb-5">
-                <label class="form-label" for="nomor">Email</label>
-                <input type="text" id="name" name="name" placeholder="email" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
-                <span class="invalid-feedback" role="alert" style="color: red;">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-            <div class="col-md-12 col-lg-6">
-                <label class="form-label" for="nomor">Nomor Telepon</label>
-                <input type="text" id="name" name="name" placeholder="nomor telepon" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                @error('name')
-                <span class="invalid-feedback" role="alert" style="color: red;">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="d-flex mt-5 mb-3 justify-content-end">
-            <a href="{{route('iklan.pengajuan')}}" class="btn btn-md px-3 text-white" style="background-color: #5D87FF">
-                Selanjutnya
-            </a>
-        </div>
+    <div class="">
+        <a href="{{route('iklan.pengajuan')}}" class="btn btn-md px-3 text-white" style="background-color: #5D87FF">
+            Selanjutnya
+        </a>
     </div>
 </div>
+
+<div class="card p-4 pb-5">
+    <h5 class="mt-2 text-black">Pastikan biodata di isi dengan tepat</h5>
+
+    <div class="row mt-4">
+        <div class="col-md-12 col-lg-6 mb-5">
+            <label class="form-label" for="nomor">Nama Lengkap</label>
+            <input type="text" id="name" name="name" placeholder="nama" value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror" readonly>
+            @error('name')
+            <span class="invalid-feedback" role="alert" style="color: red;">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="col-md-12 col-lg-6 mb-5">
+            <label class="form-label" for="nomor">Email</label>
+            <input type="text" id="name" name="name" placeholder="email" value="{{ auth()->user()->email }}" class="form-control @error('name') is-invalid @enderror" readonly>
+            @error('name')
+            <span class="invalid-feedback" role="alert" style="color: red;">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        <div class="col-md-12 col-lg-6 mb-5">
+            <label class="form-label" for="nomor">Nomor Telepon</label>
+            <input type="text" id="name" name="name" placeholder="nomor telepon" value="{{ auth()->user()->phone_number }}" class="form-control @error('name') is-invalid @enderror" readonly>
+            @error('name')
+            <span class="invalid-feedback" role="alert" style="color: red;">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    </div>
+
+</div>
+
 @endsection
