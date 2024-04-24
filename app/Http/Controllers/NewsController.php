@@ -172,9 +172,7 @@ class NewsController extends Controller
 
         $view = $this->view->store([
             'news_id' => $news->id,
-            'created_at' => now()
         ],[
-            'news_id' => $news->id,
             'created_at' => now()
         ]);
 
@@ -321,15 +319,7 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        // dd($request);
-        // $data['user_id'] = auth()->id();
-        dd($request);
-        $data = $this->NewsService->store($request);
-
-        $this->news->store($data);
-
-        // $this->news->store($store);
-        return to_route('news.index');
+        //
     }
 
     /**
@@ -360,7 +350,6 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         $news = $this->news->get();
-
         return view('auth.pages.news.news', compact('news'));
     }
 
@@ -369,9 +358,7 @@ class NewsController extends Controller
      */
     public function update(NewsUpdateRequest $request, News $news)
     {
-        // $data = $this->NewsService->update($request, $news);
-        // $this->news->update($news->id, $data);
-        // return back()->with('success', trans('alert.update_success'));
+       //
     }
 
     /**

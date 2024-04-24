@@ -78,21 +78,22 @@ class ProfileController extends Controller
     {
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();
-        $news = $this->news->search($request)->where('status', "active");
+        $news = $this->news->search($request)->where('author_id', auth()->user()->author->id)->wherein('status', "active");
 
-        $news_panding = $this->news->get()->where('author_id', auth()->user()->author->id)->wherein('status', "panding")->count();
-        $news_active = $this->news->get()->where('author_id', auth()->user()->author->id)->wherein('status', "active")->count();
-        $news_reject = $this->news->get()->where('author_id', auth()->user()->author->id)->wherein('status', "nonactive")->count();
+        $news_panding = $this->news->getAll()->where('author_id', auth()->user()->author->id)->wherein('status', "panding")->count();
+        $news_active = $this->news->getAll()->where('author_id', auth()->user()->author->id)->wherein('status', "active")->count();
+        $news_reject = $this->news->getAll()->where('author_id', auth()->user()->author->id)->wherein('status', "nonactive")->count();
 
-        $news_post = $this->news->get()->where('author_id', auth()->user()->author->id)->count();
+        $news_post = $this->news->getAll()->where('author_id', auth()->user()->author->id)->count();
         $followers = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
+        $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
 
         $news_id = News::where('author_id', auth()->user()->author->id)->pluck('id');
         $news_like = $this->newsHasLike->get()->where('news_id', $news_id)->count();
 
         $authors = $this->author->get();
         // return view('pages.author.index', compact('news', 'news_status'));
-        return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like'));
+        return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like', 'following'));
     }
 
     public function profilestatus()

@@ -255,8 +255,7 @@ class AuthorController extends Controller
     public function newsstatistics()
     {
         $news = $this->news->showWhithCount();
-        //statistik
-        $data = $this->news->showNewsStatistic();
+        $data_statistik = $this->news->showNewsStatistic();
         $view = View::count();
         $like = NewsHasLike::count();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\FaqInterface;
+use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
@@ -20,6 +21,7 @@ use Illuminate\View\View ;
 class DashboardController extends Controller
 {
     private NewsCategoryInterface $newsCategory;
+    private FollowerInterface $followers;
     private AuthorInterface $author;
     private UserInterface $user;
     private CategoryInterface $category;
@@ -28,7 +30,7 @@ class DashboardController extends Controller
     private FaqInterface $faq;
     private ViewInterface $view;
 
-    public function __construct(ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
+    public function __construct(FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
     {
         $this->user = $user;
         $this->author = $author;
@@ -36,6 +38,7 @@ class DashboardController extends Controller
         $this->subCategory = $subCategory;
         $this->news = $news;
         $this->faq = $faq;
+        $this->followers = $followers;
 
         $this->newsCategory = $newsCategory;
         $this->view = $view;
@@ -72,9 +75,9 @@ class DashboardController extends Controller
         return view('layouts.user.navbar-header', compact('categories', 'subCategories'));
     }
 
-    public function userProfile(User $user){
-        // $users = $this->user->get();
-        return view('pages.user.profile.index', compact('user'));
+    public function userProfile(){
+        $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
+        return view('pages.user.profile.index', compact('following'));
     }
 
     public function authoruser(Request $request) {

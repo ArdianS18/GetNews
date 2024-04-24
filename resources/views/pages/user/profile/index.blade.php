@@ -50,7 +50,7 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-4 order-lg-3 order-2 justify-content-end me-5">
+                        <div class="col-lg-2 order-lg-2 order-2 justify-content-end me-5">
                             <div class="d-flex align-items-center justify-content-between m-4">
                                 <div class="text-center">
                                     <i class="ti ti-coins fs-6 d-block mb-2"></i>
@@ -59,14 +59,14 @@
                                 </div>
                                 <div class="text-center">
                                     <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
-                                    <h5 class="mb-0 fw-semibold lh-1">3,586</h5>
+                                    <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
                                     <p class="mb-0 fs-4">Mengikuti</p>
                                 </div>
-                                <div class="text-center">
+                                {{-- <div class="text-center">
                                     <i class="ti ti-user-check fs-6 d-block mb-2"></i>
                                     <h5 class="mb-0 fw-semibold lh-1">2,659</h5>
                                     <p class="mb-0 fs-4">Pengikut</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
