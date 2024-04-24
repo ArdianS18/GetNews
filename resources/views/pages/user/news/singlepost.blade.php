@@ -107,11 +107,11 @@
                                                 <i class="fa {{ auth()->user() && $userLike->contains('user_id', auth()->user()->id ) ? 'fa-heart text-danger' : 'fa-heart' }}"></i>
                                             </button>
                                     </form> --}}
-                                    <button class="btn-like {{ $userLike->contains('user_id', auth()->user()) ? 'liked' : ' '}}"
+                                    {{-- <button class="btn-like {{ $userLike->contains('user_id', auth()->user()) ? 'liked' : ' '}}"
                                         data-post-id="{{ auth()->user()->id }}"
                                         data-liked="{{ $userLike->contains('user_id', auth()->user()) ? 'true' : 'false' }}">
                                     {{ $userLike->contains('user_id', auth()->user()) ? 'Unlike' : 'Like' }}
-                                    </button>
+                                    </button> --}}
 
                                     {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2M20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2"/></svg> --}}
                                     {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"

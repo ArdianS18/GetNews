@@ -229,8 +229,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         $year = date('Y');
         $result =  $this->model->query()
-            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'))
+            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'), DB::raw('COUNT(followers.author_id) as followers_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->leftJoin('followers', 'news.author_id', '=', 'followers.author_id')
             ->whereYear('news.created_at', $year)
             ->groupBy('month')
             ->orderBy('month')
