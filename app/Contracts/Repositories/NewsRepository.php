@@ -155,6 +155,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where(['slug' => $slug, 'status' => NewsStatusEnum::ACTIVE->value])
+            ->whereHas('newsCategories')
             ->with(['category', 'author'])
             ->firstOrFail();
     }
