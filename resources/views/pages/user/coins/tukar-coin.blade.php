@@ -37,28 +37,28 @@
         <div class="col-lg-6">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card p-4" onclick="selectCard(this)">
+                    <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h5><b>Rp.500</b></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card p-4" onclick="selectCard(this)">
+                    <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h5><b>Rp.10.000</b></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card p-4" onclick="selectCard(this)">
+                    <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h5><b>Rp.50.000</b></h5>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card p-4" onclick="selectCard(this)">
+                    <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center ">
                             <h5><b>Rp.100.000</b></h5>
                         </div>
@@ -69,7 +69,7 @@
             <h5 class="mt-5 fw-semibold mb-4">Tarik Uang Ke :</h5>
             <div class="d-flex">
                 <p class="fs-5">Metode Penarikan : </p>
-                <span class="fs-5 ms-4" style="color: #5D87FF;">Pilih Metode Penarikan</span>
+                <span class="fs-5 ms-4"  data-bs-toggle="modal" data-bs-target="#modal-create" style="color: #5D87FF;">Pilih Metode Penarikan</span>
             </div>
 
             <div class="mt-2 mb-4">
@@ -81,26 +81,164 @@
         <div class="col-lg-6 d-flex justify-content-center">
             <img src="{{asset('assets/img/bg-tukar-coin.svg')}}" width="400px" alt="">
         </div>
-
-
-
     </div>
 </div>
 
+<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center text-white rounded-top-3" style="background-color: #175A95;">
+                <h5 class="text-white">Pilih Metode Pembayaran</h5>
+            </div>
+            <form id="form-create" method="post">
+                <div class="modal-body">
+                    <span class="fw-semibold text-dark fs-4">Bank</span>
+
+                    <div class="row">
+                        <div class="col-lg-6 mt-2">
+                            <div class="card shadow-sm card p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">BRI Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-2">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">Marndiri Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">BCA Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">BNI Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark fs-5">BSI Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                    <span class="fw-semibold text-dark fs-4">E-Wallet</span>
+
+                    <div class="col-lg-6 mt-2">
+                        <div class="card shadow-sm border p-3">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Gopay</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-2">
+                        <div class="card card-modal shadow-sm border p-3" onclick="selectCard2(this)">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">OVO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card card-modal shadow-sm border p-3" onclick="selectCard2(this)">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Dana</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card card-modal shadow-sm border p-3" onclick="selectCard2(this)">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-indomaret.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Indomart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card card-moadal shadow-sm border p-3" onclick="selectCard2(this)">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Alfamart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> 
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                        data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @endsection
 
 @section('script')
-    <script>
-function selectCard(selectedCard) {
-    var cards = document.querySelectorAll('.card');
-    
-    cards.forEach(function(card) {
-        card.classList.remove('active');
-    });
+<script>
+    function selectCard(selectedCard) {
+        var cards = document.querySelectorAll('.card-act');
+        
+        cards.forEach(function(card) {
+            card.classList.remove('active');
+        });
 
-    selectedCard.classList.add('active');
-}
+        selectedCard.classList.add('active');
+    }
 
-    </script>
+    function selectCard2(selectedCard) {
+        var cards = document.querySelectorAll('.card-modal');
+        
+        cards.forEach(function(card) {
+            card.classList.remove('active');
+        });
+
+        selectedCard.classList.add('active');
+    }
+</script>
 @endsection
