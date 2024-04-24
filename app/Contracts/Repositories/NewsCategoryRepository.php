@@ -73,7 +73,6 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
                 });
             })
             ->when($request->opsilatest, function($query) use ($request){
-                $query->where('status', "active");
                 $query->when($request->opsilatest === 'terbaru', function ($terbaru) {
                     $terbaru->latest()->get();
                 });
@@ -83,19 +82,7 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
                 });
             })
             ->when($request->perpage, function ($query) use ($request) {
-                $query->where('status', "active");
-                $query->when($request->perpage === '10', function ($var) {
-                    $var->take(10);
-                });
-                $query->when($request->perpage === '20', function ($var) {
-                    $var->take(20);
-                });
-                $query->when($request->perpage === '50', function ($var) {
-                    $var->take(50);
-                });
-                $query->when($request->perpage === '100', function ($var) {
-                    $var->take(100);
-                });
+              $query->take($request->perpage);
             })
             ->paginate(10);
     }
@@ -144,6 +131,19 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
     public function get(): mixed
     {
         return $this->model->query()
+            ->get();
+    }
+
+    public function latest(): mixed
+    {
+        return $this->model->query()
+            ->leftJoin('views', 'news_categories.news_id', '=', 'views.news_id')
+            ->leftJoin('news', 'news_categories.news_id', '=', 'news.id')
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->select('news_categories.news_id','news_categories.category_id','news_categories.created_at', DB::raw('COUNT(views.news_id) as views'))
+            ->groupBy('news_id','category_id','created_at')
+            ->latest()
+            ->take(4)
             ->get();
     }
 

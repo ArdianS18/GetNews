@@ -12,7 +12,7 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
     public function __construct(ContactUs $contactUs)
     {
         $this->model = $contactUs;
-    }
+    }   
 
     public function getAllWithUser()
     {

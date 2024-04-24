@@ -49,14 +49,11 @@ class DashboardController extends Controller
         $authors = $this->author->get()->count();
         $news_count = $this->news->get()->count();
         $authors1 = $this->author->showWhithCount();
-        $news = $this->news->showWhithCount();
+        $news = $this->news->getAllNews();
         $categories = $this->category->showWhithCount();
         $news2 = $this->news->showCountMonth();
 
         $newsCategory = $this->newsCategory->trending();
-        // dd($newsCategory);
-
-        // return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
         return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1','news2'));
     }
 
@@ -66,7 +63,15 @@ class DashboardController extends Controller
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         $trendings = $this->view->trending();
-        return view('pages.index',compact('news', 'categories', 'subCategories','trendings'));
+
+        $populars = $this->news->getByPopular();
+        $popular_post = $this->news->showWhithCount();
+        $news_recent = $this->news->latest();
+        $editor_pick = $this->newsCategory->get();
+        $picks = $this->newsCategory->get();
+
+        $generals = $this->news->getByGeneral();
+        return view('pages.index',compact('news', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks'));
     }
 
     public function navbar(){

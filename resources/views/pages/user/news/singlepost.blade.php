@@ -52,20 +52,20 @@
 @section('content')
     <div class="news-details-wrap">
         <div class="container">
-
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <article>
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
-                                <img id="main-image" src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image">
-                                <a href="business.html" class="news-cat">Business</a>
+                                <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" alt="Image">
+                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
 
                             <div class="thumbnail-container d-flex justify-content-center">
                                 <div class="thumbnails">
                                     <div class="thumbnail">
-                                        <img src="{{ asset('assets/img/news/single-news-1.webp') }}" alt="Image"
+                                        <img src="{{ asset('storage/' . $news->photo) }}" alt="Image"
                                             onclick="changeImage(this)">
                                     </div>
                                     <div class="thumbnail">
@@ -76,7 +76,6 @@
                                         <img src="{{ asset('assets/img/news/single-news-3.webp') }}" alt="Image"
                                             onclick="changeImage(this)">
                                     </div>
-                                    <!-- Tambahkan thumbnail lainnya di sini -->
                                 </div>
                             </div>
                         </div>
@@ -85,8 +84,9 @@
                             <ul class="news-metainfo list-style">
                                 <li class="author">
                                     <span class="author-img">
-                                        <img src="{{ asset( $news->author->user->photo ? 'storage/'.$news->author->user->photo : "default.png")  }}" alt="Image" width="40px" height="30px" style="border-radius: 50%; object-fit:cover;"/>
-                                        {{-- <img src="{{ asset('default.png') }}" alt="Image"> --}}
+                                        <img src="{{ asset($news->author->user->photo ? 'storage/' . $news->author->user->photo : 'default.png') }}"
+                                            alt="Image" width="40px" height="30px"
+                                            style="border-radius: 50%; object-fit:cover;" />
                                     </span>
                                     <a href="author.html">{{ $news->author->user->name }}</a>
                                 </li>
@@ -98,32 +98,32 @@
                                             fill="#0F4D8A" />
                                         <a href=""></a>
                                     </svg>
-                                    <a href="news-by-date.html">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                                    <a
+                                        href="news-by-date.html">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
                                 <li>
-                                    {{-- <form class="like-form" action="{{ route('news.like.store', ['news' => $news->id]) }}" method="GET">
-                                        @csrf
-                                            <button class="like-button {{ auth()->user() && $userLike->contains('user_id', auth()->user()->id ) ? 'liked' : '' }}">
-                                                <i class="fa {{ auth()->user() && $userLike->contains('user_id', auth()->user()->id ) ? 'fa-heart text-danger' : 'fa-heart' }}"></i>
-                                            </button>
-                                    </form> --}}
-                                    {{-- <button class="btn-like {{ $userLike->contains('user_id', auth()->user()) ? 'liked' : ' '}}"
-                                        data-post-id="{{ auth()->user()->id }}"
-                                        data-liked="{{ $userLike->contains('user_id', auth()->user()) ? 'true' : 'false' }}">
-                                    {{ $userLike->contains('user_id', auth()->user()) ? 'Unlike' : 'Like' }}
-                                    </button> --}}
-
-                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2M20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2"/></svg> --}}
-                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                        viewBox="0 0 512 512">
-                                        <path fill-opacity=".9"
-                                            d="M256 43C137.789 43 43 138.851 43 256s94.789 213 213 213 213-95.851 213-213S373.149 43 256 43zm0 383.4c-93.718 0-170.4-76.683-170.4-170.4S162.282 85.6 256 85.6 426.4 162.282 426.4 256 349.718 426.4 256 426.4z"
-                                            fill="#0F4D8A" />
-                                        <path fill-opacity=".9"
-                                            d="M266.65 149.5H234.7v127.8l111.825 67.093 15.975-26.625-95.85-56.444z"
-                                            fill="#0F4D8A" />
-                                    </svg> --}}
-                                    {{-- 15 Min Read --}}
+                                    <a onclick="toggleLike()" class="like">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                            viewBox="0 0 24 24">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <path
+                                                    d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                                                <path fill="#000000"
+                                                    d="M9.821 3.212c.296-.69 1.06-1.316 2.024-1.13c1.474.283 3.039 1.401 3.149 3.214L15 5.5V8h2.405a4 4 0 0 1 3.966 4.522l-.03.194l-.91 5a4 4 0 0 1-3.736 3.28l-.199.004H6a3 3 0 0 1-2.995-2.824L3 18v-6a3 3 0 0 1 2.824-2.995L6 9h1.34zM7 11H6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1zm4.625-6.92l-2.544 5.937a1 1 0 0 0-.072.259L9 10.41V19h7.496a2 2 0 0 0 1.933-1.486l.035-.156l.91-5a2 2 0 0 0-1.82-2.353L17.405 10H15a2 2 0 0 1-1.995-1.85L13 8V5.5c0-.553-.434-1.116-1.205-1.37z" />
+                                            </g>
+                                        </svg>
+                                    </a>
+                                    <a onclick="toggleLike()" style="display: none" class="liked">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                            viewBox="0 0 24 24">
+                                            <g fill="none" fill-rule="evenodd">
+                                                <path
+                                                    d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                                                <path fill="red"
+                                                    d="M9.821 3.212c.296-.69 1.06-1.316 2.024-1.13c1.474.283 3.039 1.401 3.149 3.214L15 5.5V8h2.405a4 4 0 0 1 3.966 4.522l-.03.194l-.91 5a4 4 0 0 1-3.736 3.28l-.199.004H6a3 3 0 0 1-2.995-2.824L3 18v-6a3 3 0 0 1 2.824-2.995L6 9h1.34zM7 11H6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h1zm4.625-6.92l-2.544 5.937a1 1 0 0 0-.072.259L9 10.41V19h7.496a2 2 0 0 0 1.933-1.486l.035-.156l.91-5a2 2 0 0 0-1.82-2.353L17.405 10H15a2 2 0 0 1-1.995-1.85L13 8V5.5c0-.553-.434-1.116-1.205-1.37z" />
+                                            </g>
+                                        </svg>
+                                    </a>
                                 </li>
                             </ul>
 
@@ -537,59 +537,30 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 
-    @section('script')
+@section('script')
+    <script>
+        function toggleLike() {
+            var likeButton = document.querySelector('.like');
+            var likedButton = document.querySelector('.liked');
 
-        <script>
-            $('.btn-like').click(function(e) {
-                e.preventDefault();
-                var postId = $(this).data('post-id');
-                var liked = $(this).data('liked');
-                var $button = $(this);
+            if (likeButton.style.display !== 'none') {
+                likeButton.style.display = 'none';
+                likedButton.style.display = 'inline-block';
+                storeData()
+            } else {
+                likedButton.style.display = 'none';
+                likeButton.style.display = 'inline-block';
+            }
+        }
 
-                // Fungsi untuk menyimpan data ke database
-                function storeData() {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/news-like/' + postId,
-                        success: function(response) {
-                            $button.data('liked', 'true');
-                            $button.text('Unlike');
-                            $button.addClass('liked');
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                }
+        function storeData() {
+            
+        }
+    </script>
 
-                // Fungsi untuk menghapus data dari database
-                function deleteData() {
-                    $.ajax({
-                        type: 'DELETE',
-                        url: '/news-unlike/' + postId,
-                        success: function(response) {
-                            $button.data('liked', 'false');
-                            $button.text('Like');
-                            $button.removeClass('liked');
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
-                        }
-                    });
-                }
-
-                // Pilih tindakan berdasarkan status like
-                if (liked === 'true') {
-                    deleteData();
-                } else {
-                    storeData();
-                }
-            });
-        </script>
-
-        {{-- <script>
+    {{-- <script>
             $('.like-form').submit(function(e){
                     e.preventDefault();
                     var form = $(this);
@@ -615,39 +586,39 @@
                 });
         </script> --}}
 
-        <script>
-            function showReplyForm(commentId) {
-                var replyForm = document.getElementById('reply-form-' + commentId);
-                if (replyForm) {
-                    if (replyForm.style.display === 'block') {
-                        replyForm.style.display = 'none';
-                    } else {
-                        replyForm.style.display = 'block';
-                    }
+    <script>
+        function showReplyForm(commentId) {
+            var replyForm = document.getElementById('reply-form-' + commentId);
+            if (replyForm) {
+                if (replyForm.style.display === 'block') {
+                    replyForm.style.display = 'none';
+                } else {
+                    replyForm.style.display = 'block';
                 }
             }
-            const thumbnailContainer = document.querySelector('.thumbnail-container');
-            const prevButton = document.querySelector('#prev-button');
-            const nextButton = document.querySelector('#next-button');
+        }
+        const thumbnailContainer = document.querySelector('.thumbnail-container');
+        const prevButton = document.querySelector('#prev-button');
+        const nextButton = document.querySelector('#next-button');
 
-            prevButton.addEventListener('click', scrollThumbnails.bind(null, 'left'));
-            nextButton.addEventListener('click', scrollThumbnails.bind(null, 'right'));
+        prevButton.addEventListener('click', scrollThumbnails.bind(null, 'left'));
+        nextButton.addEventListener('click', scrollThumbnails.bind(null, 'right'));
 
-            function scrollThumbnails(direction) {
-                const scrollAmount = 300;
-                const containerWidth = thumbnailContainer.offsetWidth;
+        function scrollThumbnails(direction) {
+            const scrollAmount = 300;
+            const containerWidth = thumbnailContainer.offsetWidth;
 
-                if (direction === 'left') {
-                    thumbnailContainer.scrollLeft -= scrollAmount;
-                } else if (direction === 'right') {
-                    thumbnailContainer.scrollLeft += scrollAmount;
-                }
+            if (direction === 'left') {
+                thumbnailContainer.scrollLeft -= scrollAmount;
+            } else if (direction === 'right') {
+                thumbnailContainer.scrollLeft += scrollAmount;
             }
+        }
 
 
-            function changeImage(thumbnail) {
-                const mainImage = document.getElementById('main-image');
-                mainImage.src = thumbnail.src;
-            }
-        </script>
-    @endsection
+        function changeImage(thumbnail) {
+            const mainImage = document.getElementById('main-image');
+            mainImage.src = thumbnail.src;
+        }
+    </script>
+@endsection

@@ -78,7 +78,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        // $subCategory = $this->subCategory->showWithSlug($slug);
 
         $request->merge([
             'category_id' => $category->id
@@ -87,8 +86,6 @@ class CategoryController extends Controller
         $data = $request->input('query');
         $subCategory = $this->subCategory->whereIn($data, false, $request);
 
-        // $subCategory = $query ? $this->subCategory->search($query) : $this->subCategory->paginate();
-        // $subCategory = $this->subCategory->search($query);
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
     }
 
@@ -101,7 +98,7 @@ class CategoryController extends Controller
         ]);
     }
 
-        /**
+    /**
      * Display the specified resource.
      */
     public function getCategory(Category $category, Request $request)
@@ -115,7 +112,7 @@ class CategoryController extends Controller
         $newsSubCategories = $this->newsSubCategory->get();
 
         // return view('pages.user.news.subcategory', compact('subCategory','news', 'newsSubCategories'));
-        return ResponseHelper::success($subCategory,trans('alert.fetch_success'));
+        return ResponseHelper::success($subCategory, trans('alert.fetch_success'));
     }
 
     /**
@@ -141,7 +138,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->categori->delete($category->id);
-        return ResponseHelper::success(null, trans('alert.delete_success'));
+        try {
+            $this->categori->delete($category->id);
+            return ResponseHelper::success(null, trans('alert.delete_success'));
+        } catch (\Exception $e) {
+            return ResponseHelper::error(trans('alert.delete_failed'));
+        }
     }
 }

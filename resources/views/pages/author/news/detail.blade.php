@@ -128,7 +128,7 @@
                         <div class="row justify-content-between mt-2">
                             <div class="">
                                 <label class="form-label">Content</label>
-                                <textarea class="form-control" name="content" rows="10" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
+                              {!! $news->content !!}
                             </div>
                         </div>
                     </div>

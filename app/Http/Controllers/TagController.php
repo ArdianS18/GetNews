@@ -90,7 +90,11 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $this->tag->delete($tag->id);
-        return ResponseHelper::success(null, trans('alert.delete_success'));
+        try {
+            $this->tag->delete($tag->id);
+            return ResponseHelper::success(null, trans('alert.delete_success'));
+        } catch (\Exception $e) {
+            return ResponseHelper::error(trans('alert.delete_error'), 500);
+        }
     }
 }

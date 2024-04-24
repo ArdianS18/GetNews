@@ -257,6 +257,11 @@
                 },
                 error: function(response) {
                     $('.preloader').fadeOut()
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Gagal menghapus data,Data sedang di gunakan"
+                    })
                 }
             })
         })
@@ -281,6 +286,7 @@
                 },
                 error: function(response) {
                     $('.preloader').fadeOut()
+                    
                 }
             })
         })

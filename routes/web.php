@@ -51,7 +51,6 @@ Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
 Auth::routes();
 
-
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
@@ -173,6 +172,8 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
+    Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
+
 });
 
 Route::middleware(['auth', 'role:author'])->group(function () {
@@ -198,7 +199,6 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     // Update And Delete News
     Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
-    Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
     Route::get('status-author', [NewsController::class, 'showstatusnews'])->name('status.news.author');
 
@@ -246,7 +246,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('profile-user-update', function () {
         return view('pages.user.profile.update');
     })->name('profile.user.update');
-    
+
 });
 
 Route::middleware(['role:user'])->group(function () {

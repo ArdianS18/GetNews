@@ -82,8 +82,6 @@ class News extends Model
         return $this->hasMany(Report::class);
     }
 
-
-
     public function newsTags(): HasMany
     {
         return $this->hasMany(NewsTag::class);

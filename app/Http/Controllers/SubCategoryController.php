@@ -60,7 +60,7 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subcategory)
     {
-        //
+        
         if (!$this->subCategory->delete($subcategory->id)) {
             return back()->with('success', trans('alert.delete_success'));
         }

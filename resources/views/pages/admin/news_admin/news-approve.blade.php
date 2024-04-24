@@ -77,6 +77,8 @@
             <nav id="pagination">
             </nav>
         </div>
+        <x-delete-modal-component />
+
 @endsection
 
 @section('script')
@@ -200,7 +202,7 @@
             e.preventDefault()
             const id = $(this).data('id')
             $.ajax({
-                url: "list-news-approved/" + id,
+                url: "delete-news-profile/" + id,
                 type: 'DELETE',
                 data:$(this).serialize(),
                 success: function(response) {

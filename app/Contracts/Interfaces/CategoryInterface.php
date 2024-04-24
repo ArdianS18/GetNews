@@ -14,4 +14,5 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 interface CategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, ShowSlugInterface, PaginateInterface, CustomPaginationInterface
 {
     public function showWhithCount() : mixed;
+    public function showEditor() : mixed;
 }

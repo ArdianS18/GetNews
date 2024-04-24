@@ -12,6 +12,7 @@ class AuthorBannedService
             'banned' => true,
             'status' => 'reject'
         ]);
+        
     }
 
     public function unBanned(Author $author)
@@ -20,5 +21,6 @@ class AuthorBannedService
             'banned' => false,
             'status' => 'approved'
         ]);
+        
     }
 }

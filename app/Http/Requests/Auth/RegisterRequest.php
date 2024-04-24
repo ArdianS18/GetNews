@@ -24,7 +24,7 @@ class RegisterRequest extends BaseRequest
             'phone_number' => 'required|numeric|min:15',
             'address' => 'required|string|max:255',
             'birth_date' => 'nullable|date',
-            'cv' => 'nullable|image|mimes:jpg,png,jpeg'
+            'cv' => 'nullable|mimes:pdf'
         ];
     }
 
@@ -41,7 +41,8 @@ class RegisterRequest extends BaseRequest
             'phone_number.required' => 'Nomor mohon untuk diisi',
             'phone_number.numeric' => 'Nomor mohon berupa angka',
             'phone_number.min' => 'Nomor minimal 15 karakter',
-            'address.required' => 'Alamat mohon untuk diisi'
+            'address.required' => 'Alamat mohon untuk diisi',
+            'cv' => 'CV harus berupa PDF'
         ];
     }
 }
