@@ -69,7 +69,7 @@ class ProfileController extends Controller
         $this->author = $author;
         $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
-        $this->category = $category;
+        $this->category = $category;    
         $this->NewsService = $NewsService;
 
     }
@@ -113,7 +113,6 @@ class ProfileController extends Controller
 
     public function store(NewsRequest $request)
     {
-        // dd($request);
 
         $data = $this->NewsService->store($request);
         $newsId = $this->news->store($data)->id;

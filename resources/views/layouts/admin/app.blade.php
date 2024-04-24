@@ -270,7 +270,7 @@
         function showNoData(message) {
             return `<div class="d-flex justify-content-center" style="min-height:16rem">
                         <div class="my-auto ">
-                            <img src="{{ asset('no-data.svg') }}" width="400" height="400"/>
+                            <img src="{{ asset('assets/img/no-data.svg') }}" width="250" height="400"/>
                             <h4 class="text-center">${message}</h4>
                             </div>
                     </div>`

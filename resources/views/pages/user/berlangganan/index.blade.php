@@ -57,7 +57,7 @@
 <div class="container">
     <div class="row pb-4">
         <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
-            <div class="card">
+            <div class="card bg-transparent">
                 <div class="mt-5 text-center">
                     <h4 class="fw-semibold">Lorem Ipsum dolor</h4>
                 </div>
@@ -109,7 +109,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
-            <div class="card">
+            <div class="card bg-transparent">
                 <div class="mt-5 text-center">
                     <h4 class="fw-semibold">Lorem Ipsum dolor</h4>
                 </div>
@@ -160,7 +160,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 card-hover">
-            <div class="card">
+            <div class="card bg-transparent">
                 <div class="mt-5 text-center">
                     <h4 class="fw-semibold">Lorem Ipsum dolor</h4>
                 </div>

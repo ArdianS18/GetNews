@@ -8,7 +8,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
 use App\Http\Requests\SubscribeRequest;
-use App\Models\subcribe;
+use App\Models\Subscribe;
 use Illuminate\Http\Request;
 
 class SubscribeController extends Controller
@@ -32,9 +32,7 @@ class SubscribeController extends Controller
     {
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
-        // dd($newsCategory);
 
-        // return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1'));
         return view('pages.user.berlangganan.index', compact('categories', 'subCategories'));
     }
 
@@ -57,7 +55,7 @@ class SubscribeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(subcribe $subcribe)
+    public function show(Subscribe $subscribe)
     {
         //
     }
@@ -65,7 +63,7 @@ class SubscribeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(subcribe $subcribe)
+    public function edit(Subscribe $subscribe)
     {
         //
     }
@@ -73,16 +71,16 @@ class SubscribeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SubscribeRequest $request, subcribe $subcribe)
+    public function update(SubscribeRequest $request, Subscribe $subscribe)
     {
-        $this->subscribe->update(($request->validated()));
+        // $this->subscribe->update(($request->validated()));
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(subcribe $subcribe)
+    public function destroy(Subscribe $subscribe)
     {
         //
     }

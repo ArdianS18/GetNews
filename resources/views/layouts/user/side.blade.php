@@ -46,7 +46,7 @@
                       <li class="sidebar-item">
                         <a href="{{route('berita.upload')}}" class="sidebar-link">
                           <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
                           </div>
                           <span class="hide-menu">Unggah Berita</span>
                         </a>
@@ -54,9 +54,17 @@
                       <li class="sidebar-item">
                         <a href="{{route('status.berita')}}" class="sidebar-link">
                           <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 56 56"><path fill="#ffffff" d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906m0-3.984C16.937 47.922 8.1 39.062 8.1 28c0-11.04 8.813-19.922 19.876-19.922c11.039 0 19.921 8.883 19.945 19.922c.023 11.063-8.883 19.922-19.922 19.922m-.023-15.68c1.124 0 1.757-.633 1.78-1.851l.352-12.375c.024-1.196-.914-2.086-2.156-2.086c-1.266 0-2.156.867-2.133 2.062l.305 12.399c.023 1.195.68 1.851 1.852 1.851m0 7.617c1.335 0 2.53-1.078 2.53-2.437c0-1.383-1.171-2.438-2.53-2.438c-1.383 0-2.532 1.078-2.532 2.438c0 1.336 1.172 2.437 2.532 2.437"/></svg>
                           </div>
                           <span class="hide-menu">Status Berita</span>
+                        </a>
+                      </li>
+                      <li class="sidebar-item">
+                        <a href="{{route('user.history.news')}}" class="sidebar-link">
+                          <div class="round-16 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2M12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8"/><path fill="#ffffff" d="M12.5 7H11v6l5.25 3.15l.75-1.23l-4.5-2.67z"/></svg>
+                          </div>
+                          <span class="hide-menu">Riwayat Berita</span>
                         </a>
                       </li>
                     </ul>
@@ -70,7 +78,7 @@
                     <li class="sidebar-item">
                       <a href="{{route('iklan.biodata')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
-                          <i class="ti ti-circle"></i>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
                         </div>
                         <span class="hide-menu">Unggah Iklan</span>
                       </a>
@@ -78,7 +86,7 @@
                     <li class="sidebar-item">
                       <a href="{{route('iklan.status')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
-                          <i class="ti ti-circle"></i>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 56 56"><path fill="#ffffff" d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906m0-3.984C16.937 47.922 8.1 39.062 8.1 28c0-11.04 8.813-19.922 19.876-19.922c11.039 0 19.921 8.883 19.945 19.922c.023 11.063-8.883 19.922-19.922 19.922m-.023-15.68c1.124 0 1.757-.633 1.78-1.851l.352-12.375c.024-1.196-.914-2.086-2.156-2.086c-1.266 0-2.156.867-2.133 2.062l.305 12.399c.023 1.195.68 1.851 1.852 1.851m0 7.617c1.335 0 2.53-1.078 2.53-2.437c0-1.383-1.171-2.438-2.53-2.438c-1.383 0-2.532 1.078-2.532 2.438c0 1.336 1.172 2.437 2.532 2.437"/></svg>
                         </div>
                         <span class="hide-menu">Status Iklan</span>
                       </a>

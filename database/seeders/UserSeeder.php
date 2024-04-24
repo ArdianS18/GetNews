@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                     'phone_number' => '08934574332',
                     'address' => '-',
                     'password' => bcrypt('password'),
-                    'birth_date' => '-',
+                    'birth_date' => now(),
                     'email_verified_at' => now()
                 ]);
 
