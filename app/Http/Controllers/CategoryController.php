@@ -78,7 +78,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category, Request $request)
     {
-        // $subCategory = $this->subCategory->showWithSlug($slug);
 
         $request->merge([
             'category_id' => $category->id
@@ -87,8 +86,6 @@ class CategoryController extends Controller
         $data = $request->input('query');
         $subCategory = $this->subCategory->whereIn($data, false, $request);
 
-        // $subCategory = $query ? $this->subCategory->search($query) : $this->subCategory->paginate();
-        // $subCategory = $this->subCategory->search($query);
         return view('pages.admin.categories.subcategories.index', compact('subCategory', 'category'));
     }
 
@@ -145,7 +142,7 @@ class CategoryController extends Controller
             $this->categori->delete($category->id);
             return ResponseHelper::success(null, trans('alert.delete_success'));
         } catch (\Exception $e) {
-            return ResponseHelper::error(trans('alert.delete_failed'), 500);
+            return ResponseHelper::error(trans('alert.delete_failed'));
         }
     }
 }
