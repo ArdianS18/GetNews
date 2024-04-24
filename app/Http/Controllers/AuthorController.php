@@ -157,7 +157,7 @@ class AuthorController extends Controller
     {
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
-
+            
         } else {
             $this->authorBannedService->unBanned($author);
         }

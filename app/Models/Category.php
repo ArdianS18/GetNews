@@ -38,6 +38,4 @@ public function newsCategories(): HasMany
     return $this->hasMany(NewsCategory::class);
 }
 
-
-
 }

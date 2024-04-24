@@ -138,4 +138,15 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->take(6)
             ->get();
     }
+
+    public function showEditor(): mixed
+    {
+        return DB::table('categories')
+        ->select('categories.id', 'categories.name', 'categories.slug', DB::raw('COUNT(news_categories.category_id) as total'))
+        ->join('news_categories', 'categories.id', '=', 'news_categories.category_id')
+        ->groupBy('categories.id', 'categories.name', 'categories.slug')
+        ->orderBy('total', 'desc')
+        ->take(3)
+        ->get();
+    }
 }

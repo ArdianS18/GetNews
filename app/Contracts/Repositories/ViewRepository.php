@@ -7,6 +7,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\ViewInterface;
+use App\Enums\NewsStatusEnum;
 
 class ViewRepository extends BaseRepository implements ViewInterface
 {
@@ -88,19 +89,19 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     public function trending(): mixed
     {
-
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->addDays(10)->toDateString();
-        
+
         $trendingNews = $this->model->query()
+            ->whereRelation('news','status', NewsStatusEnum::ACTIVE->value)
             ->select('news_id', DB::raw('COUNT(*) as total'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
             ->limit(9)
             ->get();
-        
-   
+
+
         return $trendingNews;
     }
 }

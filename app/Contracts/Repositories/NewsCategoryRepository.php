@@ -134,6 +134,19 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
             ->get();
     }
 
+    public function latest(): mixed
+    {
+        return $this->model->query()
+            ->leftJoin('views', 'news_categories.news_id', '=', 'views.news_id')
+            ->leftJoin('news', 'news_categories.news_id', '=', 'news.id')
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->select('news_categories.news_id','news_categories.category_id','news_categories.created_at', DB::raw('COUNT(views.news_id) as views'))
+            ->groupBy('news_id','category_id','created_at')
+            ->latest()
+            ->take(4)
+            ->get();
+    }
+
     /**
      * Handle store data event to models.
      *
