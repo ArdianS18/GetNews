@@ -270,8 +270,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showWhithCount(): mixed
     {
         return $this->model->query()
-            ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->select('news.id', 'news.name', 'news.photo', 'news.content', 'news.created_at', DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
+            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->select('news.id', 'news.name', 'news.photo', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->groupBy('news.id', 'news.name', 'created_at')
             ->orderBy('views_count', 'desc')

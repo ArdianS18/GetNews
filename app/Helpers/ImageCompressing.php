@@ -15,8 +15,7 @@ use Illuminate\Support\Str;
  * @see https://www.php.net/manual/en/function.imagepng.php
  * @see https://www.abstractapi.com/guides/how-to-compress-images-in-php
  * @see https://phppot.com/php/php-compress-image/
- * @package hummatech
- * @author cakadi190
+
  */
 class ImageCompressing
 {

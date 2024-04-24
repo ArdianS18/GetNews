@@ -44,7 +44,7 @@
                                 </div>
                                 @else
                                 <div>
-                                    <a href="{{ route('news.approve.admin') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
+                                    <a href="news-approved-list" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
                                 </div>
                                 @endif
                             </div>

@@ -12,7 +12,7 @@
     <meta name="keywords" content="Mordenize" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!--  Favicon -->
-    <link rel="shortcut icon" type="{{ asset('image/png') }}" href="{{ env('APP_LOGO') }}" />
+    <link rel="shortcut icon" type="{{ asset('image/png') }}" href="{{ asset('assets/img/logo-get.png') }}" />
     <!-- Owl Carousel  -->
     <!-- Core Css -->
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
@@ -38,11 +38,11 @@
 <body>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="{{ env('APP_LOGO') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />
+        <img src="{{ asset('assets/img/logo-get.png') }}" width="100%" alt="loader" class="lds-ripple img-fluid animate-bounce" />
     </div>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="{{ env('APP_LOGO') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />
+        <img src="{{ asset('assets/img/logo-get.png')}}"  width="100%" alt="loader" class="lds-ripple img-fluid animate-bounce" />
     </div>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"

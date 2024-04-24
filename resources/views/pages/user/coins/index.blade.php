@@ -20,7 +20,7 @@
             <h5 class="text-white mt-1">Rp. 12.000</h5>
 
             <div class="d-flex">
-                <a href="" class="text-white fs-4">Riwayat</a>
+                <a href="{{route('user.history.coin')}}" class="text-white fs-4">Riwayat</a>
                 <span class="ms-3 me-3 text-white">|</span>
                 <a href="{{route('user.tukar.coin')}}" class="text-white fs-4">
                     <div class="d-flex">

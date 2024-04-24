@@ -28,7 +28,7 @@
                     <div class="position-relative d-flex">
                         <div class="input-group">
                             <input type="text" name="search"
-                                class="form-control search-chat py-2 ps-5" style="width: 200px" id="search-name" placeholder="Search" value="">
+                                class="form-control search-chat py-2 ps-5" style="width: 200px" id="search-name" placeholder="Search" value="{{ old('search') }}">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <button type="submit">Pilih</button>
+                <button type="submit" class="btn btn-outline-primary">Pilih</button>
             </form>
         </div>
     </div>
@@ -96,7 +96,7 @@
                 </tbody>
         </table>
 
-        <ul class="page-nav list-style text-right mt-20">
+        <ul class="page-nav list-style text-right d-flex justify-content-end mt-20">
             <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
             @for ($i = 1; $i <= $news->lastPage(); $i++)
                 <li><a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
