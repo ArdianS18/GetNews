@@ -25,6 +25,11 @@ class LoginService
     public function handleLogin(LoginRequest $request)
     {
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
+        $user = auth()->user();
+        if ($user->roles->pluck('name')[0] == 'author' && $user->author->status == 'reject') {
+            auth()->logout();
+            return redirect()->back()->withErrors(trans('auth.author_banned'))->withInput();
+        }
             $role = auth()->user()->roles->pluck('name')[0];
             switch ($role) {
                 case "user":
