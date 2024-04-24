@@ -112,7 +112,6 @@ class ProfileController extends Controller
 
     public function store(NewsRequest $request)
     {
-        // dd($request);
 
         $data = $this->NewsService->store($request);
         $newsId = $this->news->store($data)->id;
