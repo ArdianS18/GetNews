@@ -2,22 +2,23 @@
 
 namespace App\Services;
 
-use App\Base\Interfaces\uploads\CustomUploadValidation;
-use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
+use App\Models\Tag;
+use App\Models\News;
+use App\Models\NewsTag;
+use App\Models\NewsPhoto;
+use App\Traits\UploadTrait;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Enums\UploadDiskEnum;
 use App\Helpers\ImageCompressing;
-use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\NewsUpdateRequest;
-use App\Models\News;
-use App\Models\NewsPhoto;
-use App\Models\NewsTag;
-use App\Models\Tag;
-use App\Traits\UploadTrait;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-
 use function Laravel\Prompts\multisearch;
+use App\Http\Requests\Dashboard\Article\UpdateRequest;
+
+use App\Base\Interfaces\uploads\CustomUploadValidation;
+use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
 
 class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 {
@@ -71,14 +72,21 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 }
             }
 
-            $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));;
+            $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+
+            $domQuestion = new \DOMDocument();
+            libxml_use_internal_errors(true);
+            $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+
+            libxml_clear_errors();
 
         return [
             'author_id' => auth()->user()->author->id,
             'name' => $data['name'],
             'photo' => $image,
             'multi_photo' => $multi_photo,
-            'content' => $data['content'],
+            'content' => $domQuestion->saveHTML(),
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
             'sub_category' => $data['sub_category'],
@@ -202,5 +210,33 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'upload_date' => $data['upload_date'],
             'sub_category' => $data['sub_category'],
         ];
+    }
+
+    private function processImages(\DOMDocument $dom)
+    {
+        $images = $dom->getElementsByTagName('img');
+        foreach ($images as $img) {
+            $src = $img->getAttribute('src');
+            if (preg_match('#data:image/#', $src)) {
+                preg_match('#data:image/(?<mime>.*?)\;#', $src, $groups);
+                $mimetype = $groups['mime'];
+                $fileNameContent = uniqid();
+                $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
+                $filepath = $fileNameContentRand . '.' . $mimetype;
+        
+                $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $src));
+        
+                Storage::put(UploadDiskEnum::CONTENT->value . '/' . $filepath, $imageData);
+        
+                $baseUrl = config('app.url');
+
+                $new_src = str_replace('http://127.0.0.1:8000', $baseUrl, Storage::url(UploadDiskEnum::CONTENT->value . '/' . $filepath));
+                
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+                $img->setAttribute('class', 'img-responsive');
+            }
+        }
+        
     }
 }
