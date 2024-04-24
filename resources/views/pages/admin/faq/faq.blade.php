@@ -49,8 +49,9 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="question" class="form-label">Pertanyaan:</label>
-                            <input type="text" id="question" name="question" placeholder="Question"
+                            <textarea type="text" id="question" name="question" placeholder="Question"
                                 value="{{ old('question') }}" class="form-control @error('question') is-invalid @enderror">
+                            </textarea>
                             @error('question')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -59,8 +60,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="answer" class="form-label">Jawaban:</label>
-                            <input type="text" id="answer" name="answer" placeholder="Answer"
+                            <textarea type="text" id="answer" name="answer" placeholder="Answer"
                                 value="{{ old('answer') }}" class="form-control @error('answer') is-invalid @enderror">
+                            </textarea>
                             @error('answer')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -116,8 +118,9 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="question" class="form-label">Question:</label>
-                            <input type="text" id="question" name="question"
+                            <textarea  id="question" name="question"
                                 class="form-control @error('question') is-invalid @enderror" placeholder="Question">
+                            </textarea>
                             @error('question')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -126,8 +129,9 @@
                         </div>
                         <div class="mb-3">
                             <label for="answer" class="form-label">Answer:</label>
-                            <input type="text" id="update-answer" name="answer"
+                            <textarea  id="update-answer" name="answer"
                                 class="form-control @error('answer') is-invalid @enderror" placeholder="Answer">
+                            </textarea>
                             @error('answer')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
