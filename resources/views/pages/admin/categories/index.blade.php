@@ -289,7 +289,7 @@
                     Swal.fire({
                         title: 'Error!',
                         icon: 'error',
-                        text: "Gagal menghapus data"
+                        text: "Gagal menghapus data,Data sedang di gunakan"
                     })
                     $('.preloader').fadeOut()
 
