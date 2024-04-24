@@ -34,13 +34,62 @@
     <div class="container-fluid pb-75">
         <div class="news-col-wrap">
             <div class="news-col-one">
-                @forelse ($news as $news)
-                    @if ($loop->first)
+
+                @php $counter= 0; @endphp
+                @foreach ($news as $newss)
+                        @if ($counter < 3)
+                        <div class="news-card-three">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $newss->photo) }}" width="120px" height="120px"
+                                style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                            </div>
+                            <div class="news-card-info">
+                                <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
+                                <h3>
+                                    <a
+                                        href="{{ route('news.user', ['news' => $newss->slug, 'page' => 1]) }}">{{ $newss->name }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a></li>
+                                            <li><i class="fi fi-rr-eye"></i>{{  $newss->views->count() }}</li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        @else
+                        <div class="news-card-five">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $newss->photo) }}" width="120px" height="120px"
+                                style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                                <a href="business.html" class="news-cat">Fashion</a>
+                            </div>
+                            <div class="news-card-info">
+                                <h3><a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}">{{ $newss->newsCategories[0]->category->name }}</a></h3>
+                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web
+                                    desi…</p>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 08, 2023</a></li>
+                                    <li><i class="fi fi-rr-eye"></i>10 Min Read</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+
+                        @php $counter++; @endphp
+
+                        @if ($counter == 6)
+                            @php $counter = 0; @endphp
+                        @endif
+                @endforeach
+
+                {{-- @forelse ($news as $news)
+                    @if ($news->first)
                         <div class="news-card-two">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px"
                                     style="object-fit: cover;" alt="Image" />
-                                    
+
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
@@ -60,7 +109,7 @@
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $news->photo) }}" width="120px" height="120px"
                                 style="border-radius: 5px; object-fit:cover;" alt="Image" />
-                            
+
                             </div>
                             <div class="news-card-info">
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
@@ -77,10 +126,8 @@
                             </div>
                         </div>
                     @endif
-                    
-
                 @empty
-                @endforelse
+                @endforelse --}}
 
                 <div class="news-card-three">
                     <div class="news-card-img">
@@ -237,7 +284,15 @@
                             </div>
                             <div class="col-xl-6 col-md-6">
                                 <ul class="nav nav-tabs news-tablist" role="tablist">
+                                    @forelse ($editor_pick as $pick)
                                     <li class="nav-item">
+                                        <button class="nav-link" data-bs-toggle="tab{{ $pick->category->id }}" data-bs-target="#tab_1{{ $pick->category->id }}"
+                                        type="button" role="tab{{ $pick->category->id }}">{{ $pick->category->name }}
+                                        </button>
+                                    </li>
+                                    @empty
+                                    @endforelse
+                                    {{-- <li class="nav-item">
                                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_1"
                                             type="button" role="tab">Poilitics</button>
                                     </li>
@@ -248,18 +303,19 @@
                                     <li class="nav-item">
                                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_3"
                                             type="button" role="tab">Business</button>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>
                         <div class="tab-content editor-news-content">
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
+                                    @forelse ($picks as $pick)
                                     <div class="col-md-6">
                                         <div class="news-card-six">
                                             <div class="news-card-img">
                                                 <img src="assets/img/news/news-38.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Politics</a>
+                                                <a href="business.html" class="news-cat">{{ $pick->category->name }}</a>
                                             </div>
                                             <div class="news-card-info">
                                                 <div class="news-author">
@@ -268,8 +324,7 @@
                                                     </div>
                                                     <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
                                                 </div>
-                                                <h3><a href="business-details.html">How Maps Reshape American Politics In
-                                                        World</a></h3>
+                                                <h3><a href="business-details.html">{{ $pick->news->name }}</a></h3>
                                                 <ul class="news-metainfo list-style">
                                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                                             href="news-by-date.html">Apr 03, 2023</a></li>
@@ -279,6 +334,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @empty
+                                    @endforelse
                                     <div class="col-md-6">
                                         <div class="news-card-six">
                                             <div class="news-card-img">
@@ -568,9 +625,28 @@
                                     role="tab">Recent News</button>
                             </li>
                         </ul>
+
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
+                                @forelse ($populars as $popular)
                                 <div class="news-card-seven">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/'. $popular->photo) }}" alt="Image" />
+                                    </div>
+                                    <div class="news-card-info">
+                                        <a href="business.html" class="news-cat">{{ $popular->category_names }}</a>
+                                        <h3><a href="business-details.html">{{ $popular->name }}</a></h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03,
+                                                    2023</a></li>
+                                            <li><i class="fi fi-rr-comment"></i>03</li>
+                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                @empty
+                                @endforelse
+                                {{-- <div class="news-card-seven">
                                     <div class="news-card-img">
                                         <img src="assets/img/news/news-50.webp" alt="Image" />
                                     </div>
@@ -633,10 +709,27 @@
                                             <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
+                                @forelse ($news_recent as $recent)
                                 <div class="news-card-seven">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/'. $recent->photo) }}" alt="Image" />
+                                    </div>
+                                    <div class="news-card-info">
+                                        <a href="business.html" class="news-cat">{{ $recent->category_names }}</a>
+                                        <h3><a href="business-details.html">{{ $recent->name }}</a></h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 15, 2023</a></li>
+                                            <li><i class="fi fi-rr-comment"></i>03</li>
+                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                @empty
+                                @endforelse
+                                {{-- <div class="news-card-seven">
                                     <div class="news-card-img">
                                         <img src="assets/img/news/news-54.webp" alt="Image" />
                                     </div>
@@ -699,9 +792,10 @@
                                             <li><i class="fi fi-rr-eye"></i>12 Min Read</li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -722,7 +816,25 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
+                        @forelse ($generals as $general)
                         <div class="col-xl-6">
+                            <div class="news-card-twelve">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/'. $general->photo) }}" alt="Image" />
+                                    {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
+                                </div>
+                                <div class="news-card-info">
+                                    <a href="business.html" class="news-cat">{{ $general->category_names }}</a>
+                                    <h3><a href="business-details.html">{{ $general->name }}</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $general->upload_date }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        @empty
+                        @endforelse
+                        {{-- <div class="col-xl-6">
                             <div class="news-card-twelve">
                                 <div class="news-card-img">
                                     <img src="assets/img/news/news-20.webp" alt="Image" />
@@ -816,7 +928,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="ad-section">
                         <p>SPONSORED AD</p>
@@ -868,7 +980,23 @@
                     <div class="sidebar-widget">
                         <h3 class="sidebar-widget-title">Popular Posts</h3>
                         <div class="pp-post-wrap">
+                            @forelse ($popular_post as $post)
                             <div class="news-card-one">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/'. $post->photo) }}" alt="Image" />
+                                    {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
+                                </div>
+                                <div class="news-card-info">
+                                    <h3><a href="business-details.html">{{ $post->name }}</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
+                                                2023</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            @empty
+                            @endforelse
+                            {{-- <div class="news-card-one">
                                 <div class="news-card-img">
                                     <img src="assets/img/news/news-thumb-4.webp" alt="Image" />
                                 </div>
@@ -941,7 +1069,7 @@
                                                 2023</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

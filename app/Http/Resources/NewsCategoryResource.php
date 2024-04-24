@@ -17,7 +17,7 @@ class NewsCategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'category_id' => $this->category->id,
-            'total_category' => $this->newsCategory->news_id->count()             
+            'total_category' => $this->newsCategory->news_id->count()
         ];
     }
 }

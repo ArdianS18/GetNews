@@ -27,10 +27,14 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Http\Resources\NewsCategoryResource;
 use App\Models\Author;
 use App\Models\NewsCategory;
 use App\Models\NewsHasLike;
+use App\Models\NewsReject;
+use App\Models\NewsReport;
 use App\Models\NewsSubCategory;
+use App\Models\NewsTag;
 
 class NewsController extends Controller
 {
@@ -364,9 +368,33 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news, NewsPhoto $newsPhoto)
+    public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, NewsReport $newsReport)
     {
         $relatedPhotos = $newsPhoto->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        $relatedCategory = $newsCategory->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        $relatedSubCategory = $newsSubCategory->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        $relatedTag = $newsTag->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        $relatedHasLike = $newsHasLike->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        $relatedReject = $newsReject->whereHas('news', function ($query) use ($news) {
+            $query->where('id', $news->id);
+        })->get();
+
+        $relatedReport = $newsReport->whereHas('news', function ($query) use ($news) {
             $query->where('id', $news->id);
         })->get();
 
@@ -374,6 +402,8 @@ class NewsController extends Controller
             $this->NewsService->remove($photo->multi_photo);
             $photo->delete();
         }
+
+
 
         $news->delete();
 

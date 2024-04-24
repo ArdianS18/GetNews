@@ -24,4 +24,8 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 
     public function getAll() : mixed;
+    public function getAllNews() : mixed;
+    public function getByGeneral() : mixed;
+    public function getByPopular() : mixed;
+    public function latest() : mixed;
 }

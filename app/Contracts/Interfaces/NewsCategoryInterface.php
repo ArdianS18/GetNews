@@ -17,4 +17,5 @@ interface NewsCategoryInterface extends GetInterface, StoreInterface, UpdateInte
     public function searchAuthor(mixed $id, Request $request) : mixed;
     public function searchStatus(mixed $id, Request $request) : mixed;
     public function trending() : mixed;
+    public function latest() : mixed;
 }

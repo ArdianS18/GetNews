@@ -50,7 +50,6 @@ Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
 Auth::routes();
 
-
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
@@ -245,7 +244,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('profile-user-update', function () {
         return view('pages.user.profile.update');
     })->name('profile.user.update');
-    
+
 });
 
 Route::middleware(['role:user'])->group(function () {

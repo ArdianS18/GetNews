@@ -14,6 +14,7 @@ use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
+use App\Enums\NewsStatusEnum;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\NewsRequest;
@@ -69,7 +70,7 @@ class ProfileController extends Controller
         $this->author = $author;
         $this->newsPhoto = $newsPhoto;
         $this->subCategory = $subCategory;
-        $this->category = $category;    
+        $this->category = $category;
         $this->NewsService = $NewsService;
 
     }
@@ -151,6 +152,7 @@ class ProfileController extends Controller
     public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
         $data = $this->NewsService->update($request, $news, $newsPhoto);
+        $data['status'] = NewsStatusEnum::PANDING->value;
         $this->news->update($news->id, $data);
 
         if ($request->hasFile('multi_photo')) {
