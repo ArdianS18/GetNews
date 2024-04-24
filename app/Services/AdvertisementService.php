@@ -51,22 +51,19 @@ class AdvertisementService implements ShouldHandleFileUpload, CustomUploadValida
         // dd($request);
         $data = $request->validated();
 
-        $multi_photo = [];
-            if ($request->hasFile('multi_photo')) {
-                foreach ($request->file('multi_photo') as $image) {
-                    $stored_image = $image->store(UploadDiskEnum::ADVERTISEMENT_PHOTO->value , 'public');
-                    $multi_photo[] = $stored_image;
-                }
-            }
-            
+        $image = ImageCompressing::process( $request->file('photo'),UploadDiskEnum::ADVERTISEMENT->value);
+
         return [
             'user_id' => auth()->user()->id,
             'type' => $data['type'],
-            'multi_photo' => $multi_photo,
+            'photo' => $image,
             'page' => $data['page'],
+            'position' => $data['position'],
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
-            'url' => $data['url']
+            'url' => $data['url'],
+            'advertisement_id' => $data['advertisement_id'],
+            'payment_method' => $data['payment_method'],
         ];
     }
 
@@ -113,8 +110,9 @@ class AdvertisementService implements ShouldHandleFileUpload, CustomUploadValida
         return [
             'user_id' => $id,
             'type' => $data['type'],
-            'multi_photo' => $new_multi_photo ?: $old_multi_photo,
+            'photo' => $image,
             'page' => $data['page'],
+            'position' => $data['position'],
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'url' => $data['url'],

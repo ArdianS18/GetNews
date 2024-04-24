@@ -19,8 +19,8 @@ class AdvertisementPhoto extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function advertisement(): BelongsTo
-    {
-        return $this->belongsTo(Advertisement::class);
-    }
+    // public function advertisement(): BelongsTo
+    // {
+    //     return $this->belongsTo(Advertisement::class);
+    // }
 }

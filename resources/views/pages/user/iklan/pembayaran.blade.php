@@ -1,6 +1,8 @@
 @extends('layouts.user.sidebar')
 
 @section('style')
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
 <style>
     .card.active {
         border: 1px solid #175A95;
@@ -8,106 +10,156 @@
     }
 </style>
 @endsection
+
 @section('content')
-<div class="">
-
-    <div class="card bg-light-info shadow-sm position-relative overflow-hidden">
-        <div class="card-body px-4 py-4">
-            <div class="row align-items-center">
-                <div class="col-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 56 56">
-                        <path fill="#175A95" d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906m0-3.984C16.937 47.922 8.1 39.062 8.1 28c0-11.04 8.813-19.922 19.876-19.922c11.039 0 19.921 8.883 19.945 19.922c.023 11.063-8.883 19.922-19.922 19.922m-.023-15.68c1.124 0 1.757-.633 1.78-1.851l.352-12.375c.024-1.196-.914-2.086-2.156-2.086c-1.266 0-2.156.867-2.133 2.062l.305 12.399c.023 1.195.68 1.851 1.852 1.851m0 7.617c1.335 0 2.53-1.078 2.53-2.437c0-1.383-1.171-2.438-2.53-2.438c-1.383 0-2.532 1.078-2.532 2.438c0 1.336 1.172 2.437 2.532 2.437" />
-                    </svg>
-                </div>
-                <div class="col-7">
-                    <h4 class="fw-semibold mb-8" style="color: #175A95;">Pengajuan Berita</h4>
-                    <p style="color: #175A95;">proses pengunggahan berita ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
-                </div>
-            </div>
+<div class="card shadow-sm position-relative overflow-hidden"  style="background-color: #175A95;">
+    <div class="card-body px-4 py-4">
+      <div class="row justify-content-between">
+        <div class="col-8 text-white">
+          <h4 class="fw-semibold mb-3 mt-2 text-white">Pengisian Iklan</h4>
+            <p>Layanan pengiklanan di getmedia.id</p>
         </div>
+        <div class="col-3">
+          <div class="text-center mb-n4">
+            <img src="{{asset('assets/img/bg-ajuan.svg')}}" width="250px" alt="" class="img-fluid">
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12 col-lg-7">
-            <div class="card p-4 shadow-sm">
-                <h4>Data Diri</h4>
-                <p>Pastikan data diri anda di isi denga benar</p>
-                <div class="row">
-                    <div class="col-12 mb-4">
-                        <label class="form-label" for="nomor">Name</label>
-                        <input type="text" id="name" name="name" placeholder="nama" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="col-12 mb-4">
-                        <label class="form-label" for="nomor">Email</label>
-                        <input type="text" id="name" name="name" placeholder="email" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label" for="nomor">Nomor Telepon</label>
-                        <input type="text" id="name" name="name" placeholder="nomor telepon" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-lg-5">
-            <div class="card p-4 shadow-sm">
-                <h4>Pembayaran</h4>
-                <div class="row">
-                    <div class="col-12 mb-4 mt-5">
-                        <div class="input-group">
-                            <input type="text" style="color:#5D87FF;" id="name" name="name" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="form-control @error('name') is-invalid @enderror" readonly>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
-                        </div>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-12 mb-4">
-                        <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
-                        <input type="text" id="name" name="name" placeholder="kode voucher" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-
-                    <div class="d-flex mt-5 justify-content-between">
-                        <h5>Harga Upload</h5>
-
-                        <h5>Rp. 100.000</h5>
-                    </div>
-
-                    <div class="mt-4">
-                        <a href="{{route('pengajuan.berita')}}" type="submit" class="btn btn-md w-100 text-white" style="background-color: #0F4D8A;">
-                            Selanjutnya
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 </div>
+
+<form action="{{route('advertisement.store')}}" method="post">
+    @csrf
+
+<div class="row mt-4 ">
+    <div class="col-lg-7">
+        <div class="card p-4 pb-5 shadow-sm">
+            <h4>Detail Iklan</h4>
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <label class="form-label" for="content">Gambar</label>
+                    <div class="">
+                        <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="250" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <label class="form-label" for="page">Halaman</label>
+                    <select name="page" class="form-select" id="" readonly>
+                        <option value="dashboard"></option>
+                        <option value="news_post">News Post</option>
+                        <option value="sub_category">Sub Kategori</option>
+                    </select>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <label for="position" class="form-label">Posisi Iklan</label>
+                    <div class="">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal" checked>
+                            <label class="form-check-label" for="inlineRadio1">
+                                <img src="{{asset('assets/img/iklan-dash.svg')}}" width="200" height="120" alt="">
+                            </label>
+                        </div>
+                        {{-- <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
+                            <label class="form-check-label" for="inlineRadio2">
+                                <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="200" height="120" alt="">
+                            </label>
+                        </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
+                            <label class="form-check-label" for="inlineRadio3">
+                                <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="200" height="120" alt="">
+                            </label>
+                        </div> --}}
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4">
+                    <label class="form-label" for="type">Jenis Iklan</label>
+                    <select name="type" class="form-select" id="" readonly>
+                        <option value="foto">Foto</option>
+                        <option value="vidio">Vidio</option>
+                    </select>
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <label class="form-label" for="start_date">Tanggal Awal</label>
+                    <input type="date" id="start_date" name="start_date" placeholder=""
+                        value="{{ old('start_date') }}" class="form-control @error('start_date') is-invalid @enderror" readonly>
+                    @error('start_date')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                
+                <div class="col-lg-6 mb-4">
+                    <label class="form-label" for="end_date">Tanggal Akhir</label>
+                    <input type="date" id="end_date" name="end_date" placeholder=""
+                        value="{{ old('end_date') }}" class="form-control @error('end_date') is-invalid @enderror" readonly>
+                    @error('end_date')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="col-lg-12 mb-4">
+                    <label class="form-label" for="url">URL</label>
+                    <input type="text" id="url" name="url" placeholder=""
+                        value="{{ old('url') }}" class="form-control @error('url') is-invalid @enderror" readonly>
+                    @error('url')
+                        <span class="invalid-feedback" role="alert" style="color: red;">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-5">
+        <div class="card p-4 shadow-sm">
+            <h4>Pembayaran</h4>
+            <div class="row">
+                <div class="col-12 mb-4 mt-4">
+                    <label class="form-label" for="nomor">Metode Pembayaran</label>
+                    <div class="input-group">
+                        <input type="text" style="color:#5D87FF;" id="name" name="name" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="form-control @error('name') is-invalid @enderror" readonly>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
+                    </div>
+                    @error('name')
+                    <span class="invalid-feedback" role="alert" style="color: red;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="col-12 mb-4">
+                    <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
+                    <input type="text" id="name" name="name" placeholder="kode voucher" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                    @error('name')
+                    <span class="invalid-feedback" role="alert" style="color: red;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="d-flex mt-5 justify-content-between">
+                    <h5>Harga Upload</h5>
+
+                    <h5>Rp. 100.000</h5>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-md text-white w-100" style="background-color: #175A95">
+                        Unggah
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
 
 <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -123,10 +175,17 @@
                         <div class="col-lg-6 mt-2">
                             <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
                                 <div class="d-flex align-items-center">
-                                    <div class="d-flex">
-                                        <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
+                                    {{-- <input type="radio" name="payment" id="bri_va" value="bri" class="me-2" style="accent-color: #0056b3;">
+                                    <label for="bri_va" class="mb-0 d-flex">
+                                        <img src="{{ asset('assets/img/bank-bri.svg') }}" width="100px" alt="BRI Virtual Account">
                                         <div class="ms-4 mt-3">
-                                            <p class="text-dark">Marndiri Virtual Account</p>
+                                            <p class="text-dark">BRI Virtual Account</p>
+                                        </div>
+                                    </label> --}}
+                                    <div class="d-flex">
+                                        <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
+                                        <div class="ms-4 mt-3">
+                                            <p class="text-dark">BRI Virtual Account</p>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +196,7 @@
                                 <div class="d-flex">
                                     <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
                                     <div class="ms-4 mt-3">
-                                        <p class="text-dark">BRI Virtual Account</p>
+                                        <p class="text-dark">Marndiri Virtual Account</p>
                                     </div>
                                 </div>
                             </div>
@@ -246,58 +305,12 @@
 @endsection
 
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#content').summernote({
-            height: 200,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-
-        });
-    });
-</script>
-
+    
 <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 
 <script>
     $(document).ready(function() {
         $('#image-uploadify').imageuploadify();
-    })
-
-    $('.category').change(function() {
-        getSubCategory($(this).val())
-    })
-
-    function getSubCategory(id) {
-        $.ajax({
-            url: "sub-category-detail/" + id,
-            method: "GET",
-            dataType: "JSON",
-            beforeSend: function() {
-                $('.sub-category').html('')
-            },
-            success: function(response) {
-                $.each(response.data, function(index, data) {
-                    $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-                        '</option>');
-                });
-            }
-        })
-    }
-    $(".tags").select2({
-        tags: true,
-        tokenSeparators: [',', ' ']
     })
 
     function selectCard(selectedCard) {
@@ -308,11 +321,6 @@
         });
 
         selectedCard.classList.add('active');
-    }
-
-    function selectCard(element) {
-    var radioInput = element.querySelector('input[type="radio"]');
-    radioInput.checked = true;
     }
 </script>
 @endsection

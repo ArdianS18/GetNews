@@ -160,7 +160,8 @@
 
             <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Metode Pembayaran</p>
-                <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
+                {{-- <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt=""> --}}
+                <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button>
             </div>
 
             <div class="d-flex mt-4 justify-content-between">
@@ -177,4 +178,138 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center text-white rounded-top-3" style="background-color: #175A95;">
+                <h5 class="text-white">Pilih Metode Pembayaran</h5>
+            </div>
+            <form id="form-create" method="post">
+                <div class="modal-body">
+                    <span class="fw-semibold text-dark fs-4">Bank</span>
+
+                    <div class="row">
+                        <div class="col-lg-6 mt-2">
+                            <div class="card shadow-sm card p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">BRI Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mt-2">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">Marndiri Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">BCA Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark">BNI Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card shadow-sm border p-3">
+                                <div class="d-flex">
+                                    <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
+                                    <div class="ms-4 mt-3">
+                                        <p class="text-dark fs-5">BSI Virtual Account</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+
+                    <span class="fw-semibold text-dark fs-4">E-Wallet</span>
+
+                    <div class="col-lg-6 mt-2">
+                        <div class="card shadow-sm border p-3">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Gopay</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 mt-2">
+                        <div class="card shadow-sm border p-3">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">OVO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border p-3">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Dana</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border p-3">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-indomaret.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Indomart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm border p-3">
+                            <div class="d-flex">
+                                <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">
+                                <div class="ms-4 mt-3">
+                                    <p class="text-dark">Alfamart</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> 
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                        data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdvertisementRequest extends FormRequest
+class PaymentAdvertisementsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,9 @@ class AdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'user_id' => 'required',
-            'type' => 'required',
-            'page' => 'required',
-            'position' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'url' => 'required',
-            'photo' => 'required',
+            'advertisement_id' => 'required',
+            'payment_method' => 'required',
+            'voucher' => 'nullable',
         ];
     }
 }
