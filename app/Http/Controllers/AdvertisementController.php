@@ -68,7 +68,7 @@ class AdvertisementController extends Controller
         $data = $request->validated();
         $data['user_id'] = auth()->id();
         $this->advertisement->store($data);
-        return view('pages.user.iklan.pembayaran')->with('success', trans('alert.alert.add_success'));
+        return redirect('payment-upload')->with('success', trans('alert.alert.add_success'));
     }
 
     /**
