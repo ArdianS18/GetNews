@@ -187,17 +187,15 @@ class NewsController extends Controller
             'created_at' => now()
         ]);
 
-        $userLike = $this->newsHasLike->where($news->id);
-        $newsLike = $this->newsHasLike->where($news->id)->count();
+        $userLike = $this->newsHasLike->get();
+        $newsLike = $this->newsHasLike->where($news)->count();
         $comments = $this->comment->where($news);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
-        $likedByUser = $userLike->contains(auth()->user()->id);
 
-
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'userLike', 'pages', 'currentPage'));
     }
 
     /**
@@ -380,93 +378,32 @@ class NewsController extends Controller
     public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, Report $report)
     {
         $id = $news->id;
-        $this->news->delete($news);
+        // $this->news->delete($news);
 
-        $relatedPhotos = $newsPhoto->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $relatedReport = $newsReport->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $report = $report->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $relatedCategory = $newsCategory->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $relatedComment = $newsComment->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        });
-
-        $relatedSubCategory = $newsSubCategory->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $relatedTag = $newsTag->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $relatedHasLike = $newsHasLike->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
-        $relatedReject = $newsReject->whereHas('news', function ($query) use ($id) {
-            $query->where('news', $id);
-        })->get();
-
+        $newsCategory->where('news_id', $id)->delete();
+        $newsSubCategory->where('news_id', $id)->delete();
+        $newsTag->where('news_id', $id)->delete();
+        $newsHasLike->where('news_id', $id)->delete();
+        $newsReject->where('news_id', $id)->delete();
+        $newsComment->where('news_id', $id)->delete();
+        $newsReport->where('news_id', $id)->delete();
+        
+        $relatedPhotos = $newsPhoto->where('news_id', $id)->get();
         foreach ($relatedPhotos as $photo) {
             $this->NewsService->remove($photo->multi_photo);
             $photo->delete();
         }
-
-        foreach ($relatedReport as $newsReport) {
-            Report::deleted($newsReport);
-            $newsReport->delete();
+    
+        $relatedReports = $report->where('news_id', $id)->get();
+        foreach ($relatedReports as $relatedReport) {
+            $relatedReport->delete();
         }
-
-        foreach ($relatedReport as $report) {
-            NewsReport::deleted($report);
-            $report->delete();
-        }
-
-        foreach ($relatedCategory as $category) {
-            $this->newsCategory->delete($category);
-            $category->delete();
-        }
-
-        foreach ($relatedSubCategory as $subCategory) {
-            $this->subCategory->delete($subCategory);
-            $subCategory->delete();
-        }
-
-        foreach ($relatedHasLike as $newsLike) {
-            $this->newsHasLike->delete($newsLike);
-            $newsLike->delete();
-        }
-
-        foreach ($relatedReject as $newsReject) {
-            $this->newsReject->delete($newsReject);
-            $newsReject->delete();
-        }
-
-        foreach ($relatedComment as $comment) {
-            $this->comment->delete($comment);
-            $comment->delete();
-        }
-
-        foreach ($relatedTag as $newsTag) {
-            $this->newsTag->delete($newsTag);
-            $newsTag->delete();
-        }
-
-
-        return back();
+    
+        $news->delete();
+    
+        return back()->with('success', trans('alert.delete_success'));
     }
-
+  
     public function showmynews(Request $request, NewsCategory $newsCategories)
     {
         // $query = $request->input('search');
