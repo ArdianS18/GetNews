@@ -14,9 +14,9 @@
         </div>
     </div>
 
-    <div class="me">
-        <div class="sports-wrap ptb-100">
-            <div class="row justify-content-between">
+    <div class="sports-wrap ptb-100">
+        <div class="container">
+            <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <div class="row">
                         @forelse ($newsSubCategories as $newsSubCategory)
@@ -133,9 +133,9 @@
                     </div>
 
                 </div>
-
             </div>
 
         </div>
+
     </div>
 @endsection

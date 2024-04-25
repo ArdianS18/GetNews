@@ -15,6 +15,7 @@ use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
+use App\Http\Controllers\PaymentAdvertisementsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
@@ -323,6 +324,12 @@ Route::get('iklan-upload', function(){
 })->name('iklan.pengajuan');
 
 Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
+
+Route::get('payment-upload', function(){
+    return view('pages.user.iklan.pembayaran');
+})->name('payment.index');
+
+Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
 
 Route::get('iklan-biodata', function(){
     return view('pages.user.iklan.upload');

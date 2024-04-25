@@ -70,7 +70,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 {{-- <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a> --}}
-                                @if($categories->count() > 6)
+                                {{-- @if($categories->count() > 6) --}}
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                     @for ($i = 6; $i < $categories->count(); $i++)
                                         <div class="accordion-item">
@@ -91,7 +91,7 @@
                                         </div>
                                     @endfor
                                 </div>
-                                @endif
+                                {{-- @endif --}}
                             </ul>
                         </li>
 
