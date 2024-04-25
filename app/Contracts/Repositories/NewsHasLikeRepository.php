@@ -22,8 +22,8 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -35,7 +35,6 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
      */
     public function show(mixed $id): mixed
     {
-
     }
 
     /**
@@ -53,7 +52,15 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     {
         return $this->model->query()
             ->where('news_id', $id)
-            ->get();
+            ->pluck('user_id');
+    }
+
+    public function deleteLike(mixed $id, $newsId): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $id)
+            ->where('news_id', $newsId)
+            ->delete();
     }
 
     /**
@@ -66,7 +73,7 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     public function store(array $data): mixed
     {
         return $this->model->query()
-            ->store($data);
+            ->create($data);
 
         //     $existingLike = $this->model->query()
         // ->where('news_id', $data['news_id'])

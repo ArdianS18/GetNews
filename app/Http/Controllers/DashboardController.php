@@ -51,14 +51,11 @@ class DashboardController extends Controller
         $authors1 = $this->author->showWhithCount();
 
         $news = $this->news->getAllNews();
-        $baru = $this->news->getByMid();
-
         $categories = $this->category->showWhithCount();
         $news2 = $this->news->showCountMonth();
 
-
         $newsCategory = $this->newsCategory->trending();
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2', 'baru'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2'));
     }
 
     public function home(){
@@ -68,6 +65,11 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $trendings = $this->view->trending();
 
+        $news_left = $this->news->getAllNews();
+        $news_right = $this->news->getByRight();
+        // dd($news_right);
+        $news_mid = $this->news->getByMid();
+
         $populars = $this->news->getByPopular();
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
@@ -75,7 +77,7 @@ class DashboardController extends Controller
         $picks = $this->newsCategory->get();
 
         $generals = $this->news->getByGeneral();
-        return view('pages.index',compact('news', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks'));
+        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks'));
     }
 
     public function navbar(){
