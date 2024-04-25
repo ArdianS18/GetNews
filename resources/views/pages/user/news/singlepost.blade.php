@@ -556,7 +556,26 @@
         }
 
         function storeData() {
-            
+            fetch('/news-like/{{ $news->id }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({})
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {
+                    // Lakukan sesuatu dengan data yang diterima
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
         }
     </script>
 
