@@ -25,6 +25,7 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 
     public function getAll() : mixed;
     public function getAllNews() : mixed;
+    public function getByMid() : mixed;
     public function getByGeneral() : mixed;
     public function getByPopular() : mixed;
     public function latest() : mixed;

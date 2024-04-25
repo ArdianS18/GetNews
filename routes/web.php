@@ -173,8 +173,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
-    Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
-
+    Route::post('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 });
 
 Route::middleware(['auth', 'role:author'])->group(function () {

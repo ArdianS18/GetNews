@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\NewsHasLikeInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsLikeRequest;
 use App\Models\News;
 use App\Models\NewsHasLike;
@@ -43,11 +44,11 @@ class NewsHasLikeController extends Controller
      */
     public function store(NewsLikeRequest $request, News $news)
     {
+        dd(true);
         $data =$this->newsHasLikeService->store($request, $news->id);
-        $data['news_id'] = $news->id;
         $this->newsHasLike->store($data);
 
-        return back();
+        return ResponseHelper::success();
 
         // $likeData = [
         //     'news_id' => $news->id,
