@@ -62,12 +62,12 @@
 
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
-                                    href="javascript:void(0)" data-chat-id="{{ $idcontact }}"><i class="ti ti-inbox fs-5"></i>Pesan</a>
+                                    href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
                             </li>
 
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
-                                    href="javascript:void(0)"  data-chat-id="{{ $idreport }}"><i class="ti ti-flag fs-5"></i>Laporan</a>
+                                    href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
                             </li>
                             {{-- <li class="list-group-item border-0 p-0 mx-9">
                                 <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
