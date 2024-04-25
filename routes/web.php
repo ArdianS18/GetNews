@@ -45,6 +45,7 @@ use App\Models\Category;
 // Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
+Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->name('mobile.header');
 Route::get('/', [DashboardController::class, 'home'])->name('home');
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
@@ -370,4 +371,12 @@ Route::get('riwayat-berita', function(){
 Route::get('riwayat-tukar-coin', function(){
     return view('pages.user.coins.history');
 })->name('user.history.coin');
+
+Route::get('pembayaran-iklan', function(){
+    return view('pages.user.iklan.pembayaran');
+})->name('user.pembayaran.iklan');
+
+Route::get('rincian-pembayaran-iklan', function(){
+    return view('pages.user.iklan.rincian-pembayaran');
+})->name('user.rincian-pembayaran.iklan');
 ?>

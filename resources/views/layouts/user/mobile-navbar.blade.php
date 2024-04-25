@@ -1,8 +1,8 @@
 <div class="responsive-navbar offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
     <div class="offcanvas-header">
         <a href="index.html" class="logo d-inline-block">
-            <img class="logo-light" src="assets/img/logo-get-media.png" alt="logo" />
-            <img class="logo-dark" src="assets/img/logo-get-media.png" alt="logo" />
+            <img class="logo-light" src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="logo" />
+            {{-- <img class="logo-dark" src="assets/img/logo-get-media.png" alt="logo" /> --}}
         </a>
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="ri-close-line"></i>
@@ -10,6 +10,62 @@
     </div>
     <div class="offcanvas-body">
         <div class="accordion" id="navbarAccordion">
+            <ul class="navbar-nav mx-auto">
+            @foreach ($categories as $category)
+            @if ($loop->iteration <= 6)
+                <li class="nav-item">
+                    <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
+                    <ul class="dropdown-menu">
+                        @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                            <li class="nav-item">
+                                <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            @else
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="  nav-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
+                </a>
+                <ul class="dropdown-menu">
+                    {{-- <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a> --}}
+                    @if($categories->count() > 6)
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        @for ($i = 6; $i < $categories->count(); $i++)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-heading{{$i}}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$i}}" aria-expanded="false" aria-controls="flush-collapse{{$i}}">
+                                        {{$categories[$i]->name}}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$i}}" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        @foreach ($categories[$i]->subCategories as $subCategory)
+                                            <li class="nav-item">
+                                                <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+                    @endif
+                </ul>
+            </li>
+
+                @break
+            @endif
+        @endforeach
+
+        @empty($categories)
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
+            </li>
+        @endempty
+            </ul>
+
             <div class="accordion-item">
                 <button class="accordion-button collapsed active" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Home</button>
@@ -165,7 +221,7 @@
                 </div>
             </div>
         </div>
-        <div class="offcanvas-contact-info">
+        {{-- <div class="offcanvas-contact-info">
             <h4>Contact Info</h4>
             <ul class="contact-info list-style">
                 <li>
@@ -198,7 +254,7 @@
                     <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
         <div class="others-option d-flex d-lg-none align-items-center">
             <div class="option-item">
                 <a href="login.html" class="btn-two">Sign In</a>

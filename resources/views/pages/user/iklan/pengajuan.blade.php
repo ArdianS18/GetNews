@@ -3,7 +3,12 @@
 @section('style')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
-
+<style>
+    .card.active {
+        border: 1px solid #175A95;
+        box-shadow: 0 3px 20px #175A95;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -23,19 +28,25 @@
     </div>
 </div>
 
-<form action="{{route('advertisement.store')}}" method="post">
+<form action="{{route('advertisement.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-<div class="d-flex justify-content-between">
-    <h5>Isi form dibawah ini untuk konten iklan</h5>
+    <div class="d-flex justify-content-between">
+        <h5>Isi form dibawah ini untuk konten iklan</h5>
+        <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
+            Berikutnya
+        </button>
+    </div>
 
-    <button type="submit" class="btn btn-md text-white px-5" style="background-color: #175A95">
-        Ajukan
-    </button>
-</div>
-
-<div class="card mt-4 p-4 pb-5 shadow-sm">
-    <div class="row mt-3 mb-4">
-        <div class="row col-lg-8 col-md-12 from-outline">
+    <div class="card p-4 pb-5 shadow-sm">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <label class="form-label" for="page">Halaman</label>
+                <select name="page" class="form-select" id="">
+                    <option value="dashboard"></option>
+                    <option value="news_post">News Post</option>
+                    <option value="sub_category">Sub Kategori</option>
+                </select>
+            </div>
             <div class="col-lg-6 mb-4">
                 <label class="form-label" for="type">Jenis Iklan</label>
                 <select name="type" class="form-select" id="">
@@ -44,12 +55,28 @@
                 </select>
             </div>
             
-            <div class="col-lg-6 mb-4">
-                <label class="form-label" for="page">Halaman</label>
-                <select name="page" class="form-select" id="">
-                    <option value="news_post">News Post</option>
-                    <option value="sub_category">Sub Kategori</option>
-                </select>
+            <div class="col-lg-12 mb-4">
+                <label for="position" class="form-label">Posisi Iklan</label>
+                <div class="">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">
+                        <label class="form-check-label" for="inlineRadio1">
+                            <img src="{{asset('assets/img/iklan-dash.svg')}}" width="300" height="200" alt="">
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
+                        <label class="form-check-label" for="inlineRadio2">
+                            <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="300" height="200" alt="">
+                        </label>
+                    </div>
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
+                        <label class="form-check-label" for="inlineRadio3">
+                            <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="300" height="200" alt="">
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <div class="col-lg-6 mb-4">
@@ -84,17 +111,24 @@
                     </span>
                 @enderror
             </div>
-        </div>
-
-        <div class="row col-lg-4">
+            <div class="col-lg-12 mb-4">
+                <label class="form-label" for="photo">Kontent</label>
+                <input type="file" id="photo" name="photo" placeholder=""
+                    value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
+                @error('photo')
+                    <span class="invalid-feedback" role="alert" style="color: red;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
             <div class="">
-                <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
+                <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="250" alt="">
             </div>
         </div>
     </div>
-</div>
+
 </form>
+
 @endsection
 
 @section('script')
@@ -105,5 +139,15 @@
     $(document).ready(function() {
         $('#image-uploadify').imageuploadify();
     })
+
+    function selectCard(selectedCard) {
+        var cards = document.querySelectorAll('.card-act');
+        
+        cards.forEach(function(card) {
+            card.classList.remove('active');
+        });
+
+        selectedCard.classList.add('active');
+    }
 </script>
 @endsection

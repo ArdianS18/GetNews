@@ -12,9 +12,8 @@
             position: absolute;
             top: 8px;
             right: 16px;
-            margin-top: 70px;
+            margin-top: 5px;
         }
-
     </style>
 @endsection
 
@@ -25,11 +24,11 @@
                 <img src="{{ asset('assets/img/profile-bg.svg') }}" width="100%" height="150px"
                     style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">
                 <div class="top-right">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-sm px-4 py-2 text-white m-4" type="button" data-bs-toggle="modal"
+                    {{-- <div class=""> --}}
+                        <button class="btn btn-sm px-3 py-1 text-white" type="button" data-bs-toggle="modal"
                             data-bs-target="#exampleModal{{ auth()->user()->id }}" style="background-color: #175A95;">Daftar Jadi
                             Penulis</button>
-                    </div>
+                    {{-- </div> --}}
                 </div>
 
                 <div class="align-items-center">
@@ -39,7 +38,7 @@
                                 <div class="d-flex align-items-center justify-content-center mt-3 mb-2">
                                     <div class="d-flex align-items-center justify-content-center rounded-circle"
                                         style="width: 110px; height: 110px;";>
-                                        <div class="border border-4 mt-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
+                                        <div class="border-4 mt-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
                                             style="width: 100px; height: 100px;";>
                                             <img src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
                                         </div>

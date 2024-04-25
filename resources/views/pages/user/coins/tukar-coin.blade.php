@@ -32,35 +32,35 @@
 
 <div class="card p-4">
     <h4><b>Tarik Uang</b></h4>
-    <h5 class="mt-5 fw-semibold mb-4">Pilih Nominal</h5>
+    <h5 class="mt-4 fw-semibold mb-4">Pilih Nominal</h5>
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
-                            <h5><b>Rp.500</b></h5>
+                            <h4>Rp.500</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
-                            <h5><b>Rp.10.000</b></h5>
+                            <h4>Rp.10.000</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
-                            <h5><b>Rp.50.000</b></h5>
+                            <h4>Rp.50.000</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="card card-act p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center ">
-                            <h5><b>Rp.100.000</b></h5>
+                            <h4>Rp.100.000</h4>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
             <h5 class="mt-5 fw-semibold mb-4">Tarik Uang Ke :</h5>
             <div class="d-flex">
                 <p class="fs-5">Metode Penarikan : </p>
-                <span class="fs-5 ms-4"  data-bs-toggle="modal" data-bs-target="#modal-create" style="color: #5D87FF;">Pilih Metode Penarikan</span>
+                <span class="fs-5 ms-4" data-bs-toggle="modal" data-bs-target="#modal-create" style="color: #5D87FF;">Pilih Metode Penarikan</span>
             </div>
 
             <div class="mt-2 mb-4">
