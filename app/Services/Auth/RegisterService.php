@@ -2,16 +2,12 @@
 
 namespace App\Services\Auth;
 
-use App\Contracts\Interfaces\AuthorInterface;
 use App\Enums\RoleEnum;
-use SebastianBergmann\Type\VoidType;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Enums\UploadDiskEnum;
-use App\Enums\UserStatusEnum;
-use App\Http\Requests\AuthorRequest;
 use Carbon\Carbon;
 
 class RegisterService
@@ -48,7 +44,6 @@ class RegisterService
             $img = $request->file('cv');
             $stored_image = $img->store(UploadDiskEnum::AUTHOR_CV->value , 'public');
         }
-
 
         return [
             'name' => $data['name'],

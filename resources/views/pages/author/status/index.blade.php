@@ -90,7 +90,7 @@
                                     class="badge fw-bold fs-6 @if ($item->news->status == 'active') bg-light-success text-success
                                 @elseif($item->news->status == 'reject')
                                 bg-light-danger text-danger
-                                    
+
                                 @else
                                 bg-light-warning text-warning @endif">
                                     @if ($item->news->status == 'active')
@@ -136,7 +136,7 @@
                             </button>
 
                             <form action="{{ route('profile.news.delete', ['news' => $item->news->id]) }}" method="POST">
-                                @method('delete')
+                                @method('post')
                                 @csrf
                                 <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="23" height="30"
