@@ -176,10 +176,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->select('category_id', DB::raw('COUNT(*) as category_count'))
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
-            ->limit(2)
+            ->limit(1)
             ->get()
-            ->pluck('category_id')
-            ->toArray();
+            ->pluck('category_id');
 
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
@@ -188,7 +187,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->select('news.id', 'news.slug', 'news.photo', 'news.name', 'news.created_at', 'news.upload_date', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
             ->groupBy('id', 'created_at')
-            ->whereIn('news_categories.category_id', [$subquery[0]])
+            ->whereIn('news_categories.category_id', $subquery)
             ->orderByRaw('COUNT(news_categories.category_id) DESC')
             ->take(4)
             ->get();
@@ -203,7 +202,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->limit(2)
             ->get()
             ->pluck('category_id')
-            ->toArray();
+            ->skip(1)
+            ->take(1);
 
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
@@ -219,7 +219,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'),
             DB::raw('COUNT(views.news_id) as views'))
             ->groupBy('id', 'created_at')
-            ->whereIn('news_categories.category_id', [$subquery[1]])
+            ->whereIn('news_categories.category_id', $subquery)
             ->orderByRaw('COUNT(news_categories.category_id) DESC')
             ->take(4)
             ->get();
