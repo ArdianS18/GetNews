@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AdvertisementInterface;
+use App\Contracts\Interfaces\PaymentAdvertisementInterface;
+use App\Http\Requests\AdvertisementRequest;
+use App\Http\Requests\PaymentAdvertisementsRequest;
+use App\Models\Advertisement;
 use App\Models\PaymentAdvertisements;
 use Illuminate\Http\Request;
 
 class PaymentAdvertisementsController extends Controller
 {
+    private PaymentAdvertisementInterface $paymentAdvertisements;
+    private AdvertisementInterface $advertisement;
+
+    public function __construct(PaymentAdvertisementInterface $paymentAdvertisements, AdvertisementInterface $advertisement)
+    {
+        $this->paymentAdvertisements = $paymentAdvertisements;
+        $this->advertisement = $advertisement;
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +40,12 @@ class PaymentAdvertisementsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PaymentAdvertisementsRequest $request)
     {
-        //
+        dd($request);
+        $data = $request->validated();
+        $this->paymentAdvertisements->store($data);
+        return back()->with('success', 'berhasil menambahkan data');
     }
 
     /**

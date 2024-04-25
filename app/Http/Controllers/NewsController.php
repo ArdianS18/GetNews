@@ -27,14 +27,17 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Contracts\Interfaces\ReportInterface;
 use App\Http\Resources\NewsCategoryResource;
 use App\Models\Author;
+use App\Models\Comment;
 use App\Models\NewsCategory;
 use App\Models\NewsHasLike;
 use App\Models\NewsReject;
 use App\Models\NewsReport;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
+use App\Models\Report;
 
 class NewsController extends Controller
 {
@@ -59,20 +62,23 @@ class NewsController extends Controller
 
     public function __construct(
         TagInterface $tags,
-        NewsRejectInterface $newsReject,
-        NewsCategoryInterface $newsCategory,
-        NewsSubCategoryInterface $newsSubCategory,
-        NewsTagInterface $newsTag,
-        ViewInterface $view,
-        NewsHasLikeInterface $newsHasLike ,
-        CommentInterface $comment,
         UserInterface $user,
         NewsRepository $newsRepository,
         NewsInterface $news,
         SubCategoryInterface $subCategory,
         CategoryInterface $category,
+
         NewsService $NewsService,
         NewsTrendingService $newsTrendingService,
+
+        CommentInterface $comment,
+        ViewInterface $view,
+        NewsRejectInterface $newsReject,
+        NewsTagInterface $newsTag,
+        NewsHasLikeInterface $newsHasLike,
+        NewsCategoryInterface $newsCategory,
+        NewsSubCategoryInterface $newsSubCategory,
+
         NewsPhotoInterface $newsPhoto)
     {
         $this->newsCategory = $newsCategory;
@@ -89,8 +95,9 @@ class NewsController extends Controller
         $this->user = $user;
         $this->comment = $comment;
         $this->category = $category;
-        $this->NewsService = $NewsService;
         $this->category = $category;
+
+        $this->NewsService = $NewsService;
         $this->newsTrendingService = $newsTrendingService;
         $this->newsPhoto = $newsPhoto;
 
@@ -370,34 +377,45 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, NewsReport $newsReport)
+    public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, Report $report)
     {
-        $relatedPhotos = $newsPhoto->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $id = $news->id;
+        $this->news->delete($news);
+
+        $relatedPhotos = $newsPhoto->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
-        $relatedCategory = $newsCategory->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $relatedReport = $newsReport->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
-        $relatedSubCategory = $newsSubCategory->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $report = $report->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
-        $relatedTag = $newsTag->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $relatedCategory = $newsCategory->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
-        $relatedHasLike = $newsHasLike->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $relatedComment = $newsComment->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
+        });
+
+        $relatedSubCategory = $newsSubCategory->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
-        $relatedReject = $newsReject->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $relatedTag = $newsTag->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
-        $relatedReport = $newsReport->whereHas('news', function ($query) use ($news) {
-            $query->where('id', $news->id);
+        $relatedHasLike = $newsHasLike->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
+        })->get();
+
+        $relatedReject = $newsReject->whereHas('news', function ($query) use ($id) {
+            $query->where('news', $id);
         })->get();
 
         foreach ($relatedPhotos as $photo) {
@@ -405,9 +423,46 @@ class NewsController extends Controller
             $photo->delete();
         }
 
+        foreach ($relatedReport as $newsReport) {
+            Report::deleted($newsReport);
+            $newsReport->delete();
+        }
 
+        foreach ($relatedReport as $report) {
+            NewsReport::deleted($report);
+            $report->delete();
+        }
 
-        $news->delete();
+        foreach ($relatedCategory as $category) {
+            $this->newsCategory->delete($category);
+            $category->delete();
+        }
+
+        foreach ($relatedSubCategory as $subCategory) {
+            $this->subCategory->delete($subCategory);
+            $subCategory->delete();
+        }
+
+        foreach ($relatedHasLike as $newsLike) {
+            $this->newsHasLike->delete($newsLike);
+            $newsLike->delete();
+        }
+
+        foreach ($relatedReject as $newsReject) {
+            $this->newsReject->delete($newsReject);
+            $newsReject->delete();
+        }
+
+        foreach ($relatedComment as $comment) {
+            $this->comment->delete($comment);
+            $comment->delete();
+        }
+
+        foreach ($relatedTag as $newsTag) {
+            $this->newsTag->delete($newsTag);
+            $newsTag->delete();
+        }
+
 
         return back();
     }

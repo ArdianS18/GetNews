@@ -15,6 +15,7 @@ use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
+use App\Http\Controllers\PaymentAdvertisementsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
@@ -172,8 +173,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
-    Route::delete('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
-
+    Route::post('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 });
 
 Route::middleware(['auth', 'role:author'])->group(function () {
@@ -323,6 +323,12 @@ Route::get('iklan-upload', function(){
 })->name('iklan.pengajuan');
 
 Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
+
+Route::get('payment-upload', function(){
+    return view('pages.user.iklan.pembayaran');
+})->name('payment.index');
+
+Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
 
 Route::get('iklan-biodata', function(){
     return view('pages.user.iklan.upload');

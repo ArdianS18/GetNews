@@ -34,10 +34,29 @@
     <div class="container-fluid pb-75">
         <div class="news-col-wrap">
             <div class="news-col-one">
-
                 @php $counter= 0; @endphp
                 @foreach ($news as $newss)
-                        @if ($counter < 3)
+                        @if ($counter < 1)
+                        <div class="news-card-two">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $newss->photo) }}" width="450px" height="260px"
+                                    style="object-fit: cover;" alt="Image" />
+
+                                <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
+                            </div>
+                            <div class="news-card-info">
+                                <h3><a
+                                        href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $newss->name }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y')  }}</p></a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views->count() }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @elseif ($counter < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $newss->photo) }}" width="120px" height="120px"
@@ -58,78 +77,14 @@
                             </div>
                         </div>
                         @else
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" width="120px" height="120px"
-                                style="border-radius: 5px; object-fit:cover;" alt="Image" />
-                                <a href="business.html" class="news-cat">Fashion</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}">{{ $newss->newsCategories[0]->category->name }}</a></h3>
-                                <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web
-                                    desi…</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 08, 2023</a></li>
-                                    <li><i class="fi fi-rr-eye"></i>10 Min Read</li>
-                                </ul>
-                            </div>
-                        </div>
                         @endif
-
                         @php $counter++; @endphp
 
                         @if ($counter == 6)
                             @php $counter = 0; @endphp
                         @endif
                 @endforeach
-
-                {{-- @forelse ($news as $news)
-                    @if ($news->first)
-                        <div class="news-card-two">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $news->photo) }}" width="450px" height="260px"
-                                    style="object-fit: cover;" alt="Image" />
-
-                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
-                            </div>
-                            <div class="news-card-info">
-                                <h3><a
-                                        href="{{ route('news.user', ['news' => $news->slug, 'page' => '1']) }}">{{ $news->name }}</a>
-                                </h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y')  }}</p></a>
-                                    </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $news->views->count() }}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    @else
-                        <div class="news-card-three">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $news->photo) }}" width="120px" height="120px"
-                                style="border-radius: 5px; object-fit:cover;" alt="Image" />
-
-                            </div>
-                            <div class="news-card-info">
-                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
-                                <h3>
-                                    <a
-                                        href="{{ route('news.user', ['news' => $news->slug, 'page' => 1]) }}">{{ $news->name }}</a>
-                                </h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($news->created_at)->translatedFormat('d F Y') }}</a></li>
-                                            <li><i class="fi fi-rr-eye"></i>{{  $news->views->count() }}</li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                @empty
-                @endforelse --}}
-
-                <div class="news-card-three">
+                {{-- <div class="news-card-three">
                     <div class="news-card-img">
                         <img src="assets/img/news/news-4.webp" alt="Image" />
                         <a href="business.html" class="news-cat"></a>
@@ -169,7 +124,7 @@
                             <li><i class="fi fi-rr-eye"></i>8 Min Read</li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="news-col-two">
                 <div class="news-card-four">
@@ -214,6 +169,44 @@
                 </div>
             </div>
             <div class="news-col-three">
+                @php $counters= 0; @endphp
+                @foreach ($news as $barus)
+                        @if ($counters < 1)
+                            <div class="news-card-two">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" width="450px" height="260px" style="object-fit: cover;" alt="Image" />
+                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                </div>
+                                <div class="news-card-info">
+                                    <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">{{ $barus->name }}</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y')  }}</p></a></li>
+                                        <li><i class="fi fi-rr-eye"></i>{{ $barus->views->count() }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @elseif ($counters < 4)
+                            <div class="news-card-three">
+                                <div class="news-card-img">
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" width="120px" height="120px" style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                                </div>
+                                <div class="news-card-info">
+                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                    <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">{{ $barus->name }}</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a></li>
+                                        <li><i class="fi fi-rr-eye"></i>{{  $barus->views->count() }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @else
+                        @endif
+                        @php $counters++; @endphp
+
+                        @if ($counters == 6)
+                            @php $counters = 0; @endphp
+                        @endif
+                @endforeach
                 <div class="news-card-two">
                     <div class="news-card-img">
                         <img src="assets/img/news/news-2.webp" alt="Image" />
