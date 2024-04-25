@@ -10,12 +10,12 @@ class Advertisement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'type', 'page', 'start_date', 'end_date', 'url'];
+    protected $fillable = ['user_id', 'type', 'page', 'position', 'start_date', 'end_date', 'url', 'photo'];
     protected $table = 'advertisements';
 
 
-    public function advertisement(): HasMany
+    public function paymentAdvertisements(): HasMany
     {
-        return $this->hasMany(AdvertisementPhoto::class);
+        return $this->hasMany(PaymentAdvertisements::class);
     }
 }

@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained();
             $table->enum('type' , ['foto', 'vidio']);
-            $table->enum('page', ['news_post', 'sub_category']);
+            $table->enum('page', ['dashboard','news_post', 'sub_category']);
+            $table->enum('position', ['full_horizontal', 'horizontal', 'vertikal']);
             $table->date('start_date');
             $table->date('end_date');
             $table->string('url');
+            $table->string('photo');
             $table->timestamps();
         });
     }

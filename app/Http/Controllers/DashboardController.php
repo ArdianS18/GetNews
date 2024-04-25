@@ -80,6 +80,12 @@ class DashboardController extends Controller
         return view('layouts.user.navbar-header', compact('categories', 'subCategories'));
     }
 
+    public function mobileHeader(){
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        return view('layouts.user.mobile-navbar', compact('categories', 'subCategories'));
+    }
+
     public function userProfile(){
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
         return view('pages.user.profile.index', compact('following'));

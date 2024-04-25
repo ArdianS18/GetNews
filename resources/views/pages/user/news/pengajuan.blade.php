@@ -39,7 +39,7 @@
   <div class="ms-1 mt-5 d-flex justify-content-between">
     <h5>Isi form dibawah ini untuk mengunggah berita</h5>
 
-    <div class="mb-3">
+    <div class="">
         <button type="button" class="btn btn-md me-2 text-white"
             style="background-color: #1EBB9E;">
             Simpan Draf
@@ -51,12 +51,12 @@
     </div>
   </div>
 
-    <div class="card shadow-sm mt-1">
+    <div class="card shadow-sm mt-3">
         <div class="p-4 mb-4">
             <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row justify-content-between">
-                    <div class="col-lg-6 col-md-12 from-outline">
+                    <div class="col-lg-6 mb-4 col-md-12 from-outline">
                         <label class="form-label" for="nomor">Judul Berita</label>
                         <input type="text" id="name" name="name" placeholder="name"
                             value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
@@ -67,7 +67,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-lg-6 col-md-12 from-outline">
+                    <div class="col-lg-6 mb-4 col-md-12 from-outline">
                         <label class="form-label" for="photo">Thumbnail Berita</label>
                         <input type="file" id="photo" name="photo" placeholder="photo"
                             value="{{ old('photo') }}"
@@ -82,7 +82,7 @@
 
                 <div class="row justify-content-between mt-2">
                     <div class="col-lg-6 col-md-12 row-span-1 from-outline">
-                        <div class="">
+                        <div class="mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
                             <input type="date" id="upload_date" name="upload_date" placeholder="date"
                                 value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
@@ -93,7 +93,7 @@
                             @enderror
                         </div>
 
-                        <div class="mt-2">
+                        <div class="mb-4">
                             <label class="form-label" for="password_confirmation">Kategori</label>
                             <select id="category_id"
                                 class="select2 form-control category @error('category') is-invalid @enderror"
@@ -114,9 +114,9 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12 row-span-1 from-outline">
-                        <div class="">
+                        <div class="mb-4">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                            <select class="form-select select2 tags" name="tags[]" multiple="multiple">
                                 <option>pilih tags</option>
                                 {{-- @foreach ($tags as $tag)
                                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
@@ -124,7 +124,7 @@
                             </select>
                         </div>
 
-                        <div class="mt-2" style="max-width: 100%;">
+                        <div class="mb-4" style="max-width: 100%;">
                             <label class="form-label" for="password_confirmation">Sub Kategori</label>
                             <select id="sub_category_id"
                                 class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
@@ -141,9 +141,9 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-between mt-2">
+                <div class="row justify-content-between">
 
-                    <div class="col-lg-6 col-md-12 col-span-2 mt-2 from-outline" style="height: auto;">
+                    <div class="col-lg-6 col-md-12 col-span-2 from-outline" style="height: auto;">
                         <label class="form-label" for="content">Content</label>
                         <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
                         @error('content')
@@ -156,7 +156,7 @@
 
                     <div class="col-lg-6 col-md-12 row-span-1 from-outline">
 
-                        <div class="mt-2">
+                        <div class="">
                             <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                             <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*"
                                 multiple>
@@ -175,67 +175,42 @@
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"><span
-                                style="background-color: #0F4D8A; font-size: 12px; margin-right: 6px;">|</span>Ketentuan
-                            & Persyaratan</h5>
+                        <h4 class="modal-title" id="staticBackdropLabel">Ketentuan & Persyaratan</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="container p-2">
-                            <p>
-                                Ketentuan dan Persyaratan Sebelum Menulis Berita <br><br>
-                                1. Keaslian dan Orisinalitas
-                                Berita harus asli dan bukan hasil plagiasi.
-                                Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
-                                Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
-                                2. Keakuratan dan Kebenaran
-                                Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
-                                Sumber informasi harus jelas dan kredibel.
-                                Berita harus faktual dan tidak memihak. <br>
-                                3. Keseimbangan
-                                Berita harus menyajikan informasi secara seimbang dan tidak memihak.
-                                Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
-                                pendapatnya. <br>
-                                4. Objektivitas
-                                Berita harus ditulis secara objektif dan tidak memihak.
-                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                                5. Keaslian dan Orisinalitas
-                                Berita harus asli dan bukan hasil plagiasi.
-                                Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
-                                Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
-                                6. Keakuratan dan Kebenaran
-                                Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
-                                Sumber informasi harus jelas dan kredibel.
-                                Berita harus faktual dan tidak memihak. <br>
-                                7. Keseimbangan
-                                Berita harus menyajikan informasi secara seimbang dan tidak memihak.
-                                Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
-                                pendapatnya. <br>
-                                8. Objektivitas
-                                Berita harus ditulis secara objektif dan tidak memihak.
-                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                                4. Objektivitas
-                                Berita harus ditulis secara objektif dan tidak memihak.
-                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                                5. Keaslian dan Orisinalitas
-                                Berita harus asli dan bukan hasil plagiasi.
-                                Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.
-                                Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya. <br>
-                                6. Keakuratan dan Kebenaran
-                                Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.
-                                Sumber informasi harus jelas dan kredibel.
-                                Berita harus faktual dan tidak memihak. <br>
-                                7. Keseimbangan
-                                Berita harus menyajikan informasi secara seimbang dan tidak memihak.
-                                Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan
-                                pendapatnya. <br>
-                                8. Objektivitas
-                                Berita harus ditulis secara objektif dan tidak memihak.
-                                Penulis berita harus menghindari opini dan prasangka pribadi. <br>
-                            </p>
+                        <div class="card shadow-none border p-3">
+                            <p>Ketentuan dan Persyaratan Sebelum Menulis Berita</p>
+                            <ol>
+                                <li>Keaslian dan Orisinalitas
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus asli dan bukan hasil plagiasi</li>
+                                        <li>Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.</li>
+                                        <li>Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya.</li>
+                                    </ul>
+                                </li>
+                                <li>Keakuratan dan Kebenaran
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.</li>
+                                        <li>Sumber informasi harus jelas dan kredibel.</li>
+                                        <li>Berita harus faktual dan tidak memihak.</li>
+                                    </ul>
+                                </li>
+                                <li>Keseimbangan
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus menyajikan informasi secara seimbang dan tidak memihak.</li>
+                                        <li>Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya.</li>
+                                    </ul>
+                                </li>
+                                <li>Objektivitas
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus ditulis secara objektif dan tidak memihak.</li>
+                                        <li>Penulis berita harus menghindari opini dan prasangka pribadi.</li>
+                                    </ul>
+                                </li>
+                            </ol>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
@@ -244,8 +219,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 @endsection
 
@@ -257,7 +230,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
-                height: 200,
+                height: 250,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],

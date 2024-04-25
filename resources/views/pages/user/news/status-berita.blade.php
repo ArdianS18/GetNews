@@ -89,8 +89,8 @@
 
             <div class="d-flex mt-4 justify-content-between">
                 <p class="fw-semibold">Metode Pembayaran</p>
-                <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button>
-                {{-- <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt=""> --}}
+                {{-- <button type="button" class="btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create">Pilih metode pembayaran</button> --}}
+                <img src="{{asset('assets/img/bca.svg')}}" width="80px" alt="">
             </div>
 
             <div class="d-flex mt-4 justify-content-between">

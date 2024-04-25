@@ -16,6 +16,7 @@ use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Enums\NewsStatusEnum;
 use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
 use App\Helpers\ResponseHelper;
@@ -155,9 +156,10 @@ class AuthorController extends Controller
 
     public function banned(Author $author)
     {
+        $data['status'] = NewsStatusEnum::NONACTIVE->value;
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
-            
+            $this->news->StatusBanned($author->id, $data);
         } else {
             $this->authorBannedService->unBanned($author);
         }

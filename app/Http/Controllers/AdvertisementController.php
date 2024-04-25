@@ -49,20 +49,26 @@ class AdvertisementController extends Controller
      */
     public function store(AdvertisementRequest $request)
     {
-        $data = $this->advertisementService->store($request);
-        $advertisementId = $this->advertisement->store($data)->id;
+        
+        // $data = $this->advertisementService->store($request);
+        // $advertisementId = $this->advertisement->store($data)->id;
+        // $data = $request->validated();
+        // $this->advertisementService->store($data);
 
-        foreach ($data['multi_photo'] as $img) {
-            $this->advertisementPhoto->store([
-                'advertisement_id' => $advertisementId,
-                'multi_photo' => $img,
-            ]);
-        }
+        // foreach ($data['multi_photo'] as $img) {
+        //     $this->advertisementPhoto->store([
+        //         'advertisement_id' => $advertisementId,
+        //         'multi_photo' => $img,
+        //     ]);
+        // }
 
-        return ResponseHelper::success(null, trans('alert.add_success'));
+        // return ResponseHelper::success(null, trans('alert.add_success'));
         
         // $this->advertisement->store(($request->validated()));
-        // return back();
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
+        $this->advertisement->store($data);
+        return view('pages.user.iklan.pembayaran')->with('success', trans('alert.alert.add_success'));
     }
 
     /**

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Repositories\BaseRepository;
+use App\Models\Author;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class NewsRepository extends BaseRepository implements NewsInterface
@@ -330,5 +331,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
         }
 
         return $monthlyData;
+    }
+
+    public function StatusBanned($author, $data) : mixed
+    {
+        return $this->model->query()
+        ->where('author_id', $author)->update($data);
     }
 }
