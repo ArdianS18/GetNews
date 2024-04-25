@@ -8,10 +8,15 @@
         border: 1px solid #175A95;
         box-shadow: 0 3px 20px #175A95;
     }
+    .border-blue {
+        border: 2px solid #175A95 !important; 
+        box-shadow: 0 3px 20px #175A95;
+    }
 </style>
 @endsection
 
 @section('content')
+
 <div class="card shadow-sm position-relative overflow-hidden"  style="background-color: #175A95;">
     <div class="card-body px-4 py-4">
       <div class="row justify-content-between">
@@ -28,105 +33,130 @@
     </div>
 </div>
 
-<form action="{{route('advertisement.store')}}" method="post">
-    @csrf
+
 
 <div class="row mt-4 ">
-    <div class="col-lg-7">
-        <div class="card p-4 pb-5 shadow-sm">
-            <h4>Detail Iklan</h4>
-            <div class="row mt-3">
-                <div class="col-lg-12">
-                    <label class="form-label" for="content">Gambar</label>
-                    <div class="">
-                        <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="250" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-12 mb-4">
-                    <label class="form-label" for="page">Halaman</label>
-                    <select name="page" class="form-select" id="" readonly>
-                        <option value="dashboard"></option>
-                        <option value="news_post">News Post</option>
-                        <option value="sub_category">Sub Kategori</option>
-                    </select>
-                </div>
-                <div class="col-lg-12 mb-4">
-                    <label for="position" class="form-label">Posisi Iklan</label>
-                    <div class="">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal" checked>
-                            <label class="form-check-label" for="inlineRadio1">
-                                <img src="{{asset('assets/img/iklan-dash.svg')}}" width="200" height="120" alt="">
-                            </label>
-                        </div>
-                        {{-- <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
-                            <label class="form-check-label" for="inlineRadio2">
-                                <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="200" height="120" alt="">
-                            </label>
-                        </div>
-                            <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
-                            <label class="form-check-label" for="inlineRadio3">
-                                <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="200" height="120" alt="">
-                            </label>
-                        </div> --}}
-                    </div>
-                </div>
-                <div class="col-lg-12 mb-4">
-                    <label class="form-label" for="type">Jenis Iklan</label>
-                    <select name="type" class="form-select" id="" readonly>
-                        <option value="foto">Foto</option>
-                        <option value="vidio">Vidio</option>
-                    </select>
-                </div>
-                
-                <div class="col-lg-6 mb-4">
-                    <label class="form-label" for="start_date">Tanggal Awal</label>
-                    <input type="date" id="start_date" name="start_date" placeholder=""
-                        value="{{ old('start_date') }}" class="form-control @error('start_date') is-invalid @enderror" readonly>
-                    @error('start_date')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                
-                <div class="col-lg-6 mb-4">
-                    <label class="form-label" for="end_date">Tanggal Akhir</label>
-                    <input type="date" id="end_date" name="end_date" placeholder=""
-                        value="{{ old('end_date') }}" class="form-control @error('end_date') is-invalid @enderror" readonly>
-                    @error('end_date')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
 
-                <div class="col-lg-12 mb-4">
-                    <label class="form-label" for="url">URL</label>
-                    <input type="text" id="url" name="url" placeholder=""
-                        value="{{ old('url') }}" class="form-control @error('url') is-invalid @enderror" readonly>
-                    @error('url')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+    <div class="col-lg-7">
+        {{-- <form action="{{route('advertisement.store')}}" method="post">
+            @csrf --}}
+                <div class="card p-4 pb-5 shadow-sm">
+                    <h4>Detail Iklan</h4>
+                    <div class="row mt-3">
+                        <div class="col-lg-12">
+                            <label class="form-label" for="content">Gambar</label>
+                            <div class="">
+                                <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="250" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <label class="form-label" for="page">Halaman</label>
+                            <select name="page" class="form-select" id="" readonly>
+                                <option value="{{$advertisement->page}}" selected readonly>{{$advertisement->page}}</option>
+                                <option value="dashboard"></option>
+                                <option value="news_post">News Post</option>
+                                <option value="sub_category">Sub Kategori</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <label for="position" class="form-label">Posisi Iklan</label>
+                            <div class="">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal" checked>
+                                    <label class="form-check-label" for="inlineRadio1"> 
+                                        {{-- @if ($position == 'full_horizontal')
+                                        <img src="{{asset('assets/img/iklan-dash.svg')}}" width="200" height="120" alt="">
+                                        @elseif ($position == 'horizontal')
+                                        <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="200" height="120" alt="">
+                                        @else 
+                                        <img src="{{asset('assets/img/iklan-vertikal
+                                        .svg')}}" width="200" height="120" alt="">
+                                        @endif --}}
+                                    </label>
+                                </div>
+                                {{-- <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
+                                    <label class="form-check-label" for="inlineRadio2">
+                                        <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="200" height="120" alt="">
+                                    </label>
+                                </div>
+                                    <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
+                                    <label class="form-check-label" for="inlineRadio3">
+                                        <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="200" height="120" alt="">
+                                    </label>
+                                </div> --}}
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <label class="form-label" for="type">Jenis Iklan</label>
+                            <select name="type" class="form-select" id="" readonly>
+                                <option value="{{$advertisement->type}}">{{$advertisement->type}}</option>
+                                {{-- <option value="vidio">Vidio</option> --}}
+                            </select>
+                        </div>
+                        
+                        <div class="col-lg-6 mb-4">
+                            <label class="form-label" for="start_date">Tanggal Awal</label>
+                            <input type="date" id="start_date" name="start_date" placeholder=""
+                                value="{{ $advertisement->start_date }}" class="form-control @error('start_date') is-invalid @enderror" readonly>
+                            @error('start_date')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="col-lg-6 mb-4">
+                            <label class="form-label" for="end_date">Tanggal Akhir</label>
+                            <input type="date" id="end_date" name="end_date" placeholder=""
+                                value="{{ $advertisement->end_date }}" class="form-control @error('end_date') is-invalid @enderror" readonly>
+                            @error('end_date')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="col-lg-12 mb-4">
+                            <label class="form-label" for="url">URL</label>
+                            <input type="text" id="url" name="url" placeholder=""
+                                value="{{ $advertisement->url }}" class="form-control @error('url') is-invalid @enderror" readonly>
+                            @error('url')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+        {{-- </form>           --}}
     </div>
-    <div class="col-md-12 col-lg-5">
+
+
+ <div class="col-md-12 col-lg-5">
+    <form action="{{route('payment.store')}}" method="post" enctype="multipart/form-data">
+        @csrf
         <div class="card p-4 shadow-sm">
             <h4>Pembayaran</h4>
             <div class="row">
+                <input type="hidden" id="advertisement_id" name="advertisement_id" value="{{ $advertisement->id }}">
                 <div class="col-12 mb-4 mt-4">
                     <label class="form-label" for="nomor">Metode Pembayaran</label>
                     <div class="input-group">
-                        <input type="text" style="color:#5D87FF;" id="name" name="name" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="form-control @error('name') is-invalid @enderror" readonly>
+                        {{-- <input type="hidden" id="payment_method_input" name="payment_method" value=""> --}}
+                        <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
                     </div>
-                    @error('name')
+                    <div class="d-flex align-items-center">
+                        {{-- <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" id="bri" value="BRI" onclick="selectPayment(this)">
+                            <label class="form-check-label" for="bri">
+                                BRI Virtual Account
+                            </label>
+                        </div> --}}
+                    </div>
+                    @error('payment_method')
                     <span class="invalid-feedback" role="alert" style="color: red;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -135,8 +165,8 @@
 
                 <div class="col-12 mb-4">
                     <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
-                    <input type="text" id="name" name="name" placeholder="kode voucher" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                    @error('name')
+                    <input type="text" id="voucher" name="voucher" placeholder="kode voucher" value="{{ old('voucher') }}" class="form-control @error('voucher') is-invalid @enderror">
+                    @error('voucher')
                     <span class="invalid-feedback" role="alert" style="color: red;">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -156,152 +186,197 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-</form>
 
-<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5>Pilih Metode Pembayaran</h5>
+        <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Pilih Metode Pembayaran</h5>
+                    </div>
+                    <form id="form-create" method="post">
+                        <div class="modal-body">
+                            <span class="fw-semibold text-dark fs-4">Bank</span>
+        
+                            <div class="row">
+                                <div class="col-lg-6 mt-2">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bri" class="me-2" style="accent-color: #0056b3;">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BRI Virtual Account</p>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-lg-6 mt-2">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="mandiri" class="me-2" style="accent-color: #0056b3;">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">Marndiri Virtual Account</p>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bca" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BCA Virtual Account</p>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bni" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BNI Virtual Account</p>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card p-3 border" onclick="selectCard(this)">
+                                        <div class="d-flex align-items-center">
+                                            <input type="radio" name="payment_method" value="bsi" class="me-2">
+                                            <label for="bri_va" class="mb-0 d-flex">
+                                                <div class="d-flex">
+                                                    <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
+                                                    <div class="ms-4 mt-3">
+                                                        <p class="text-dark">BSI Virtual Account</p>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+        
+                            <span class="fw-semibold text-dark fs-4">E-Wallet</span>
+        
+                            <div class="col-lg-6 mt-2">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="gopay" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">GOPAY</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-6 mt-2">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="ovo" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">OVO</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-6">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="dana" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">DANA</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-6">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="indomart" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-indomart.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">indomart</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-lg-6">
+                                <div class="card p-3 border" onclick="selectCard(this)">
+                                    <div class="d-flex align-items-center">
+                                        <input type="radio" name="payment_method" value="alfamart" class="me-2">
+                                        <label for="bri_va" class="mb-0 d-flex">
+                                            <div class="d-flex">
+                                                <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">
+                                                <div class="ms-4 mt-3">
+                                                    <p class="text-dark">Alfamart</p>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div> 
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                                data-bs-dismiss="modal">Tutup</button>
+                            <button type="button" class="btn btn-rounded btn-light-success text-success" onclick="addPaymentMethod()">Tambah</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <form id="form-create" method="post">
-                <div class="modal-body">
-                    <span class="fw-semibold text-dark fs-4">Bank</span>
-
-                    <div class="row">
-                        <div class="col-lg-6 mt-2">
-                            <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                                <div class="d-flex align-items-center">
-                                    {{-- <input type="radio" name="payment" id="bri_va" value="bri" class="me-2" style="accent-color: #0056b3;">
-                                    <label for="bri_va" class="mb-0 d-flex">
-                                        <img src="{{ asset('assets/img/bank-bri.svg') }}" width="100px" alt="BRI Virtual Account">
-                                        <div class="ms-4 mt-3">
-                                            <p class="text-dark">BRI Virtual Account</p>
-                                        </div>
-                                    </label> --}}
-                                    <div class="d-flex">
-                                        <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
-                                        <div class="ms-4 mt-3">
-                                            <p class="text-dark">BRI Virtual Account</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mt-2">
-                            <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                                <div class="d-flex">
-                                    <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
-                                    <div class="ms-4 mt-3">
-                                        <p class="text-dark">Marndiri Virtual Account</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                                <div class="d-flex">
-                                    <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
-                                    <div class="ms-4 mt-3">
-                                        <p class="text-dark">BCA Virtual Account</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                                <div class="d-flex">
-                                    <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
-                                    <div class="ms-4 mt-3">
-                                        <p class="text-dark">BNI Virtual Account</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                                <div class="d-flex">
-                                    <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
-                                    <div class="ms-4 mt-3">
-                                        <p class="text-dark fs-5">BSI Virtual Account</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    
-
-                    <span class="fw-semibold text-dark fs-4">E-Wallet</span>
-
-                    <div class="col-lg-6 mt-2">
-                        <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                            <div class="d-flex">
-                                <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
-                                <div class="ms-4 mt-3">
-                                    <p class="text-dark">Gopay</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 mt-2">
-                        <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                            <div class="d-flex">
-                                <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
-                                <div class="ms-4 mt-3">
-                                    <p class="text-dark">OVO</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                            <div class="d-flex">
-                                <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
-                                <div class="ms-4 mt-3">
-                                    <p class="text-dark">Dana</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                            <div class="d-flex">
-                                <img src="{{asset('assets/img/wallet-indomaret.svg')}}" width="100px" alt="">
-                                <div class="ms-4 mt-3">
-                                    <p class="text-dark">Indomart</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="card card-act shadow-sm card p-3" onclick="selectCard(this)">
-                            <div class="d-flex">
-                                <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">
-                                <div class="ms-4 mt-3">
-                                    <p class="text-dark">Alfamart</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div> 
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-rounded btn-light-danger text-danger"
-                        data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
-                </div>
-            </form>
         </div>
-    </div>
+        
+    </form>
+</div> 
 </div>
+
 @endsection
 
 @section('script')
@@ -313,14 +388,46 @@
         $('#image-uploadify').imageuploadify();
     })
 
-    function selectCard(selectedCard) {
-        var cards = document.querySelectorAll('.card-act');
-        
-        cards.forEach(function(card) {
-            card.classList.remove('active');
-        });
+    function selectCard(card) {
+        // Mendapatkan radio button di dalam kartu yang diklik
+        var radioButton = card.querySelector('input[type="radio"]');
 
-        selectedCard.classList.add('active');
+        // Mengecek apakah radio button belum terpilih
+        if (!radioButton.checked) {
+            // Mengaktifkan radio button
+            radioButton.checked = true;
+
+            // Menghapus border biru dari semua kartu
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.classList.remove('border-blue');
+            });
+
+            // Menambahkan border biru pada kartu yang dipilih
+            card.classList.add('border-blue');
+        }
     }
+
+    function addPaymentMethod() {
+        var paymentMethod = $('input[name="payment_method"]:checked').val(); // Ambil nilai payment_method yang dipilih
+        $('#payment_method_input').val(paymentMethod); // Set nilai payment_method ke dalam input tersembunyi
+        $('#modal-create').modal('hide'); // Sembunyikan modal
+
+        // Setelah payment_method diatur, Anda dapat mengirimkan form atau melakukan operasi lainnya seperti yang Anda perlukan
+        // Misalnya, Anda dapat menyimpan data dengan mengirimkan form dengan JavaScript
+        $('#form-create').submit(); // Kirim form
+    }
+
+
+    function previewPayment(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imgElement = document.getElementByClass("preview");
+            imgElement.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
 </script>
 @endsection

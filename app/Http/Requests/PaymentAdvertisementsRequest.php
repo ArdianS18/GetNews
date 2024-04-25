@@ -22,7 +22,7 @@ class PaymentAdvertisementsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'advertisement_id' => 'required',
+            'advertisement_id' => 'required',
             'payment_method' => 'required',
             'voucher' => 'nullable',
         ];

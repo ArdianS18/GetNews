@@ -62,8 +62,8 @@
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">
                         <label class="form-check-label" for="inlineRadio1">
                             <img src="{{asset('assets/img/iklan-dash.svg')}}" width="300" height="200" alt="">
-                        </label>
-                    </div>
+                        </label>    
+                    </div>  
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
                         <label class="form-check-label" for="inlineRadio2">
@@ -113,7 +113,7 @@
             </div>
             <div class="col-lg-12 mb-4">
                 <label class="form-label" for="photo">Kontent</label>
-                <input type="file" id="photo" name="photo" placeholder=""
+                <input type="file" id="photo" name="photo" onchange="previewImage(event)" placeholder=""
                     value="{{ old('photo') }}" class="form-control @error('photo') is-invalid @enderror">
                 @error('photo')
                     <span class="invalid-feedback" role="alert" style="color: red;">
@@ -121,8 +121,8 @@
                     </span>
                 @enderror
             </div>
-            <div class="">
-                <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="250" alt="">
+            <div class="gambar-iklan">
+                <img id="preview" style="object-fit: cover;" width="250" height="180" alt="">
             </div>
         </div>
     </div>
@@ -148,6 +148,15 @@
         });
 
         selectedCard.classList.add('active');
+    }
+    function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imgElement = document.getElementById("preview");
+            imgElement.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
     }
 </script>
 @endsection

@@ -99,7 +99,7 @@
                                     @forelse ($news as $news)
                                         <div class="news-card-one">
                                             <div class="news-card-img">
-                                                <img src="{{ asset('storage/' . $news->photo) }}">
+                                                <img src="{{ asset('storage/' . $news->photo) }}" width="80" height="80">
                                             </div>
                                             <div class="news-card-info">
                                                 <h3><a href="business-details.html">{{ $news->name }}</a>
