@@ -6,7 +6,7 @@
                     <a href="{{route('user.berlangganan')}}" class="subscribe-btn">Berlangganan<i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/">
                         <img src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" />
                     </a>
                 </div>
