@@ -11,7 +11,7 @@
     <div class="offcanvas-body">
         <div class="accordion" id="navbarAccordion">
             @foreach ($categories as $category)
-                    @for ($i = 6; $i < $categories->count(); $i++)
+                    @for ($i = 7; $i < $categories->count(); $i++)
                     <div class="accordion-item">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse{{$i}}" aria-expanded="false" aria-controls="collapse{{$i}}">{{$categories[$i]->name}}</button>

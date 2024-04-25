@@ -44,6 +44,8 @@
     </button>
   </div>
 
+  <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
+    @csrf
   <div class="ms-1 mt-5 d-flex justify-content-between">
     <h5>Isi form dibawah ini untuk mengunggah berita</h5>
 
@@ -61,8 +63,7 @@
 
     <div class="card p-4 shadow-sm border mt-1">
         <div style="padding: 1%;">
-            <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
-                @csrf
+
                 <div class="row justify-content-between">
                     <div class="col-lg-6 col-md-12 from-outline">
                         <label class="form-label" for="nomor">Judul Berita</label>
@@ -192,9 +193,6 @@
                 
                 </div>
         </div>
-        </form>
-
-
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -247,8 +245,8 @@
             </div>
         </div>
 
-
     </div>
+</form>
 @endsection
 
 @section('script')
