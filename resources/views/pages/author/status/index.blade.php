@@ -78,7 +78,7 @@
 
                             <div class="order-md-1" style="margin-left:20px;">
                                 <h4>{{ $item->news->name }}</h4>
-                                <p>{{ Illuminate\Support\Str::limit($item->news->content, $limit = 200, $end = '...') }}</p>
+                                <p>{!! Illuminate\Support\Str::limit($item->news->content, $limit = 200, $end = '...')  !!}</p>
                             </div>
                         </div>
                     </div>

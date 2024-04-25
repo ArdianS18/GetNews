@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     @foreach ($categories as $category)
-                        @if ($loop->iteration <= 6)
+                        @if ($loop->iteration <= 7)
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
@@ -64,13 +64,11 @@
                                 </ul>
                             </li>
                         @else
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="javascript:void(0)" class="  nav-link">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
                             </a>
                             <ul class="dropdown-menu">
-                                {{-- <a href="javascript:void(0)" class="nav-link">{{ $category->name }}</a> --}}
-                                {{-- @if($categories->count() > 6) --}}
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
                                     @for ($i = 6; $i < $categories->count(); $i++)
                                         <div class="accordion-item">
@@ -91,9 +89,8 @@
                                         </div>
                                     @endfor
                                 </div>
-                                {{-- @endif --}}
                             </ul>
-                        </li>
+                        </li> --}}
 
                             @break
                         @endif
