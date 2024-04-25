@@ -132,7 +132,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
     {
         return DB::table('categories')
             ->join('news_categories', 'categories.id', '=', 'news_categories.category_id')
-            ->select('categories.id', 'categories.name', 'categories.slug', DB::raw('SUM(1) as total'))
+            ->select('categories.id', 'categories.name', 'categories.slug', DB::raw('COUNT(news_categories.category_id) as total'))
             ->groupBy('categories.id', 'categories.name', 'categories.slug')
             ->orderBy('total', 'desc')
             ->take(6)
