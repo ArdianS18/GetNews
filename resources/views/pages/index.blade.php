@@ -39,7 +39,7 @@
                         @if ($counter < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" width="450px" height="260px"
+                                <img src="{{ asset('storage/' . $newss->photo) }}"
                                     style="object-fit: cover;" alt="Image" />
 
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
@@ -59,8 +59,7 @@
                         @elseif ($counter < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" width="120px" height="120px"
-                                style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                                <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image"/>
                             </div>
                             <div class="news-card-info">
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
@@ -103,7 +102,7 @@
                         <div class="news-card-five">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" />
-                                <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}">{{ $mid->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => 1]) }}">{{ $mid->name }}</a></h3>
@@ -127,8 +126,8 @@
                         @if ($counters < 1)
                             <div class="news-card-two">
                                 <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" width="450px" height="260px" style="object-fit: cover;" alt="Image" />
-                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;" alt="Image" />
+                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}">{{ $barus->newsCategories[0]->category->name }}</a>
                                 </div>
                                 <div class="news-card-info">
                                     <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">{{ $barus->name }}</a></h3>
@@ -141,10 +140,10 @@
                         @elseif ($counters < 4)
                             <div class="news-card-three">
                                 <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" width="120px" height="120px" style="border-radius: 5px; object-fit:cover;" alt="Image" />
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" alt="Image" />
                                 </div>
                                 <div class="news-card-info">
-                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}">{{ $barus->newsCategories[0]->category->name }}</a>
                                     <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">{{ $barus->name }}</a></h3>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a></li>

@@ -262,7 +262,7 @@ class NewsController extends Controller
             $this->newsTrendingService->markAsNotTrending($news);
         }
 
-        return to_route('list.approved');
+        return to_route('news.approve.admin');
     }
 
     public function filter(Request $request)
