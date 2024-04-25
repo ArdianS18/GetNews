@@ -2,14 +2,27 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\NewsHasLikeInterface;
-use App\Models\NewsHasLike;
+use App\Contracts\Interfaces\PaymentAdvertisementInterface;
+use App\Models\PaymentAdvertisements;
+use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 
-class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterface
+class PaymentAdvertisementRepository extends BaseRepository implements PaymentAdvertisementInterface
 {
-    public function __construct(NewsHasLike $newsHasLike)
+    public function __construct(PaymentAdvertisements $paymentAdvertisements)
     {
-        $this->model = $newsHasLike;
+        $this->model = $paymentAdvertisements;
+    }   
+
+    public function getAllWithUser()
+    {
+        return $this->model->query()
+            ->get();
+    }
+
+    public function where(Request $request): mixed
+    {
+        return $this->model->whereIn('status_delete', $request)->get();
     }
 
     /**
@@ -22,8 +35,8 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-            ->findOrFail($id)
-            ->delete();
+        ->findOrFail($id)
+        ->delete();
     }
 
     /**
@@ -35,6 +48,8 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
      */
     public function show(mixed $id): mixed
     {
+        return $this->model->query()
+            ->findOrFail($id);
     }
 
     /**
@@ -45,22 +60,8 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     public function get(): mixed
     {
         return $this->model->query()
-            ->pluck('user_id');
-    }
-
-    public function where(mixed $id): mixed
-    {
-        return $this->model->query()
-            ->where('news_id', $id)
-            ->pluck('user_id');
-    }
-
-    public function deleteLike(mixed $id, $newsId): mixed
-    {
-        return $this->model->query()
-            ->where('user_id', $id)
-            ->where('news_id', $newsId)
-            ->delete();
+            ->latest()
+            ->get();
     }
 
     /**
@@ -74,19 +75,6 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     {
         return $this->model->query()
             ->create($data);
-
-        //     $existingLike = $this->model->query()
-        // ->where('news_id', $data['news_id'])
-        // ->where('user_id', auth()->id())
-        // ->first();
-
-        // if ($existingLike) {
-        //     $existingLike->status == 0 ? 1 : 0; // Toggle status
-        //     $existingLike->save();
-        //     return $existingLike;
-        // } else {
-        //     return $this->model->query()->create($data); // Buat baru dengan status 1 jika tidak ada
-        // }
     }
 
     /**

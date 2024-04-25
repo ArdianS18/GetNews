@@ -187,15 +187,17 @@ class NewsController extends Controller
             'created_at' => now()
         ]);
 
-        $userLike = $this->newsHasLike->get();
-        $newsLike = $this->newsHasLike->where($news)->count();
+        $userLike = $this->newsHasLike->where($news->id);
+        $newsLike = $this->newsHasLike->where($news->id)->count();
         $comments = $this->comment->where($news);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
+        $likedByUser = $userLike->contains(auth()->user()->id);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'userLike', 'pages', 'currentPage'));
+
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage'));
     }
 
     /**

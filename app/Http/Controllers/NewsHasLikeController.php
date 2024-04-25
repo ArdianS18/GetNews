@@ -42,10 +42,9 @@ class NewsHasLikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NewsLikeRequest $request, News $news)
+    public function store(News $news)
     {
-        dd(true);
-        $data =$this->newsHasLikeService->store($request, $news->id);
+        $data =$this->newsHasLikeService->store(auth()->user()->id, $news);
         $this->newsHasLike->store($data);
 
         return ResponseHelper::success();
@@ -93,8 +92,9 @@ class NewsHasLikeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NewsHasLike $newsHasLike, $newsId)
+    public function destroy($newsId)
     {
-        $this->newsHasLike->delete($newsHasLike)->where('news_id', $newsId);
+        $this->newsHasLike->deleteLike(auth()->user()->id,$newsId);
+        return ResponseHelper::success();
     }
 }
