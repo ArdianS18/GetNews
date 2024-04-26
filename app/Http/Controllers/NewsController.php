@@ -214,7 +214,7 @@ class NewsController extends Controller
     {
         $data['status'] = NewsStatusEnum::ACTIVE->value;
         $this->news->update($news->id, $data);
-        return redirect('approved-news');
+        return redirect('/news-list');
     }
 
     public function approvedall(Request $request, News $news)
@@ -464,23 +464,23 @@ class NewsController extends Controller
         $newsReject->where('news_id', $id)->delete();
         $newsComment->where('news_id', $id)->delete();
         $newsReport->where('news_id', $id)->delete();
-        
+
         $relatedPhotos = $newsPhoto->where('news_id', $id)->get();
         foreach ($relatedPhotos as $photo) {
             $this->NewsService->remove($photo->multi_photo);
             $photo->delete();
         }
-    
+
         $relatedReports = $report->where('news_id', $id)->get();
         foreach ($relatedReports as $relatedReport) {
             $relatedReport->delete();
         }
-    
+
         $news->delete();
-    
+
         return back()->with('success', trans('alert.delete_success'));
     }
-  
+
     public function showmynews(Request $request, NewsCategory $newsCategories)
     {
         // $query = $request->input('search');

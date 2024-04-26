@@ -98,11 +98,10 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     })->name('news.approve.admin');
 
     Route::delete('news-approved/{news-approved}', [NewsController::class, 'destroy'])->name('news.approved.destroy');
-
     // Detail News
     Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');
     // Approved All News
-    Route::patch('approved-news/{news}', [NewsController::class, 'approved'])->name('approved-news');
+    Route::patch('approved-news-admin/{news}', [NewsController::class, 'approved'])->name('approved.news.admin');
     Route::put('approved-all', [NewsController::class, 'approvedall'])->name('approved-all.news');
     // Reject All News
     Route::patch('reject-news/{news}', [NewsController::class, 'reject'])->name('reject-news');
