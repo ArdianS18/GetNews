@@ -388,4 +388,8 @@ Route::get('pembayaran-iklan', function(){
 Route::get('rincian-pembayaran-iklan', function(){
     return view('pages.user.iklan.rincian-pembayaran');
 })->name('user.rincian-pembayaran.iklan');
+
+Route::get('load-coin', function(){
+    return view('pages.user.load-coin.load');
+})
 ?>

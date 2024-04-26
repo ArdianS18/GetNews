@@ -42,7 +42,7 @@
             <div class="col-lg-6 mb-4">
                 <label class="form-label" for="page">Halaman</label>
                 <select name="page" class="form-select" id="">
-                    <option value="dashboard"></option>
+                    <option value="dashboard">Dashboard</option>
                     <option value="news_post">News Post</option>
                     <option value="sub_category">Sub Kategori</option>
                 </select>
@@ -61,7 +61,7 @@
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">
                         <label class="form-check-label" for="inlineRadio1">
-                            <img src="{{asset('assets/img/iklan-dash.svg')}}" width="300" height="200" alt="">
+                            <img src="{{asset('assets/img/full-horizontal.png')}}" width="300" height="200" alt="">
                         </label>    
                     </div>  
                     <div class="form-check form-check-inline">
@@ -103,7 +103,7 @@
 
             <div class="col-lg-12 mb-4">
                 <label class="form-label" for="url">URL</label>
-                <input type="text" id="url" name="url" placeholder=""
+                <input type="text" id="url" name="url" placeholder="masukan url"
                     value="{{ old('url') }}" class="form-control @error('url') is-invalid @enderror">
                 @error('url')
                     <span class="invalid-feedback" role="alert" style="color: red;">
