@@ -14,10 +14,13 @@ use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Http\Requests\ViewRequest;
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View ;
 
 class DashboardController extends Controller

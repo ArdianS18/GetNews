@@ -174,8 +174,7 @@ class AuthorController extends Controller
     {
         $data = $this->authorService->store($request, $user);
         $this->author->store($data);
-
-        return back();
+        return back()->with('success', trans('alert.add_success'));
     }
 
     /**

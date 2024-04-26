@@ -12,4 +12,6 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 interface FollowerInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, WhereInterface
 {
     public function destroy(mixed $id,$user_id) : mixed;
+    public function whereIn($user_id,$author_id) : mixed;
+    public function whereAuthor($author_id) : mixed;
 }

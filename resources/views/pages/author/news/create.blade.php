@@ -3,13 +3,8 @@
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
-
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <style>
-
-    </style>
 @endsection
 
 <head>
@@ -163,22 +158,36 @@
                             </select>
                         </div>
 
-                        <div class="col-lg-12">
-                            <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                            <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
+                            <div class="col-lg-12">
+                                <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
+                                <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="d-flex">
-                <button type="button" class="btn btn-md text-white m-2"
-                    style="background-color: #1EBB9E;">
-                    Simpan Draf
-                </button>
-            </div>
-
         </div>
+    </form>
+
+    <form method="POST" action="{{ route('news.draft')}}" enctype="multipart/form-data">
+        @method('post')
+        @csrf
+        <div class="d-flex">
+            <input type="hidden" id="copyName" name="name" value="{{ old('name') }}">
+            <input type="hidden" id="copyContent" name="content" value="{{ old('content') }}">
+            <input type="hidden" name="photo" value="{{ old('photo') }}">
+            <input type="hidden" name="upload_date" value="{{ old('upload_date') }}">
+            <input type="hidden" name="category" value="{{ serialize(old('category')) }}">
+            <input type="hidden" name="tags" value="{{ serialize(old('tags')) }}">
+            <input type="hidden" name="sub_category" value="{{ serialize(old('sub_category')) }}">
+            <input type="hidden" name="multi_photo" value="{{ serialize(old('multi_photo')) }}">
+
+            <button type="submit" class="btn btn-md text-white m-2"
+                style="background-color: #1EBB9E;">
+                Simpan Draf
+            </button>
+        </div>
+    </form>
 
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -237,8 +246,8 @@
 
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
     <script>
         $(document).ready(function() {

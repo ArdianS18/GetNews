@@ -26,6 +26,21 @@ class FollowerRepository extends BaseRepository implements FollowerInterface
         return $this->model->whereIn('status_delete', $request)->get();
     }
 
+    public function whereIn($user_id, $author_id): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user_id)
+            ->where('author_id', $author_id)
+            ->get();
+    }
+
+    public function whereAuthor($author_id): mixed
+    {
+        return $this->model->query()
+            ->where('author_id', $author_id)
+            ->get();
+    }
+
     /**
      * Handle show method and delete data instantly from models.
      *
