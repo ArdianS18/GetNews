@@ -17,7 +17,7 @@
              <div class="">
                  <div class="row align-items-center">
                      <div class="col-lg-6 col-md-12">
-                        <img src="{{asset('assets/img/register.svg')}}" width="500px"  alt="">
+                        <img src="assets/img/register.svg" width="500px"  alt="">
                      </div>
                      <div class="col-md-12 col-lg-6">
                          <form method="POST" action="{{ route('register') }}">
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-12 col-lg-6 mt-2">
                                     <label class="form-label" for="nomor">Nomor Hp</label>
-                                    <input id="nomor" type="number" placeholder="Nomor Hp" class="gap-8 form-control form-control-lg @error('nomor') is-invalid @enderror" name="phone_number" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="nomor" type="text" placeholder="Nomor Hp" class="gap-8 form-control form-control-lg @error('nomor') is-invalid @enderror" name="phone_number" value="{{ old('name') }}" required autocomplete="name" autofocus>
                            
                                     @error('nomor')
                                         <span class="invalid-feedback" role="alert">
