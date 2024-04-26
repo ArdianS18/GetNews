@@ -65,18 +65,18 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $trendings = $this->view->trending();
 
-        $news_left = $this->news->getAllNews();
+        $news_left = $this->news->getByLeft();
         $news_right = $this->news->getByRight();
-        // dd($news_right);
         $news_mid = $this->news->getByMid();
 
         $populars = $this->news->getByPopular();
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
-        $picks = $this->newsCategory->get();
-
+        $picks = $this->news->getByPick();
+        // dd($picks);
         $generals = $this->news->getByGeneral();
+
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks'));
     }
 
@@ -99,7 +99,6 @@ class DashboardController extends Controller
 
     public function authoruser(Request $request) {
         $authors = $this->author->showWhithCountSearch($request);
-        // dd($authors);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.author.index', compact('categories', 'subCategories', 'authors'));

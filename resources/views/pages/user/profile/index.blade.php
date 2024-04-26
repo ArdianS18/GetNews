@@ -246,7 +246,14 @@
                     @method('put')
                     <div class="modal-body">
                         <label class="form-label mt-2">Masukkan Cv</label>
-                        <input class="form-control" type="file" name="cv">
+                        <input class="form-control @error('cv')
+                            is-invalid
+                        @enderror" type="file" name="cv" itemtype="pdf">
+                        @error('cv')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
 
                         <div class="form-check mt-4">
                             <input class="form-check-input test" type="checkbox" value="" id="test">

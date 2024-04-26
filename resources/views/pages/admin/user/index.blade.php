@@ -2,12 +2,13 @@
 
 @section('style')
     <style>
-        .card-table{
+        .card-table {
             background-color: #fff;
             padding: 25px;
             border-radius: 10px;
         }
-        .table-border{
+
+        .table-border {
             border: 1px solid #DADADA;
             border-radius: 5px;
             /* padding: 25px; */
@@ -20,7 +21,6 @@
 </head>
 
 @section('content')
-
     <div class="d-flex justify-content-between">
 
         <div class="d-flex justify-content-start gap-2 ">
@@ -36,29 +36,28 @@
 
 
     <div class="mt-4 col-md-12 col-lg-12">
-    <div class="table-responsive rounded-2 mb-3">
-        <table class="table border text-nowrap customize-table mb-0 align-middle">
-            <thead>
-                <tr>
-                    <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px">No</th>
-                    <th style="background-color: #D9D9D9;">Name</th>
-                    <th style="background-color: #D9D9D9;">Email</th>
-                    <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0">Actions</th>
-                </tr>
-            </thead>
-            <tbody id="data">
+        <div class="table-responsive rounded-2 mb-3">
+            <table class="table border text-nowrap customize-table mb-0 align-middle">
+                <thead>
+                    <tr>
+                        <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px">No</th>
+                        <th style="background-color: #D9D9D9;">Name</th>
+                        <th style="background-color: #D9D9D9;">Email</th>
+                        <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="data">
 
-            </tbody>
-        </table>
-        <div id="loading"></div>
-        <div class="d-flex mt-2 justify-content-end">
-            <nav id="pagination">
-            </nav>
+                </tbody>
+            </table>
+            <div id="loading"></div>
+            <div class="d-flex mt-2 justify-content-end">
+                <nav id="pagination">
+                </nav>
+            </div>
         </div>
-    </div>
 
-        <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label"
-            aria-hidden="true">
+        <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Modal content -->
@@ -69,58 +68,59 @@
                     <!-- Modal body -->
                     {{-- <form method="post" id="form-detail"> --}}
 
-                        <div class="modal-body">
-                            <div class="d-flex justify-content-center">
-                                <img src="" class="rounded-circle mb-2" id="detail-photo" width="150"
-                                    alt="photo-siswa" height="150" />
-                            </div>
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item mb-3" style="font-weight: bold;">Nama : <span
-                                                    id="detail-name" style="font-weight: normal;"></span>
-                                            </li>
-                                            <li class="list-group-item mb-3" style="font-weight: bold;">Nomor Telepon: <span
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center">
+                            <img src="" class="rounded-circle mb-2" id="detail-photo" width="150"
+                                alt="photo-siswa" height="150" />
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item mb-3" style="font-weight: bold;">Nama : <span
+                                                id="detail-name" style="font-weight: normal;"></span>
+                                        </li>
+                                        <li class="list-group-item mb-3" style="font-weight: bold;">Nomor Telepon: <span
                                                 id="detail-phone_number" style="font-weight: normal;"></span></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <ul class="list-group list-group-flush">
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-group list-group-flush">
 
-                                            <li class="list-group-item mb-3" style="font-weight: bold;">Email: <span
+                                        <li class="list-group-item mb-3" style="font-weight: bold;">Email: <span
                                                 id="detail-email" style="font-weight: normal;"></span>
-                                            </li>
-                                            <li class="list-group-item" style="font-weight: bold;">Alamat: <span
+                                        </li>
+                                        <li class="list-group-item" style="font-weight: bold;">Alamat: <span
                                                 id="detail-address" style="font-weight: normal;"></span></li>
-                                        </ul>
-                                    </div>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <div class="d-flex justify-content-end">
-                                <a id="download-cv" target="_blank" download>
-                                    <span class="badge bg-light-primary text-primary me-2 fs-4 px-2 py-2">
-                                        Download CV
-                                    </span>
-                                </a>
-                                <form method="post" id="form-tolak">
-                                    @csrf
-                                    @method('patch')
-                                    <button type="submit" class="btn btn-sm btn-light-danger text-danger fs-4 me-2 px-2">
-                                        Tolak
-                                    </button>
-                                </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="d-flex justify-content-end">
+                            <a id="download-cv" target="_blank" download>
+                                <span class="badge bg-light-primary text-primary me-2 fs-4 px-2 py-2">
+                                    Download CV
+                                </span>
+                            </a>
+                            <form method="post" id="form-tolak">
+                                @csrf
+                                @method('patch')
+                                <button type="submit" class="btn btn-sm btn-light-danger text-danger fs-4 me-2 px-2">
+                                    Tolak
+                                </button>
+                            </form>
 
-                                <form method="post" id="form-terima">
-                                    @csrf
-                                    @method('patch')
-                                    <button id="terima" type="submit" class="btn btn-sm btn-light-success text-success fs-4 px-2">
-                                        Terima </button>
-                                </form>
-                            </div>
+                            <form method="post" id="form-terima">
+                                @csrf
+                                @method('patch')
+                                <button id="terima" type="submit"
+                                    class="btn btn-sm btn-light-success text-success fs-4 px-2">
+                                    Terima </button>
+                            </form>
                         </div>
+                    </div>
                     {{-- </form> --}}
                 </div>
             </div>
@@ -147,8 +147,8 @@
                 url: "{{ route('author.admin.index') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
-                data:{
-                    author:$('#search-name').val(),
+                data: {
+                    author: $('#search-name').val(),
                 },
                 beforeSend: function() {
                     $('#data').html("")
@@ -164,95 +164,122 @@
                         })
                         $('#pagination').html(handlePaginate(response.data.paginate))
                         $('.btn-detail').click(function() {
-                        var authorId = $(this).data('id');
-                        // Asumsikan 'category' adalah array objek penulis, pastikan itu didefinisikan dan dapat diakses di cakupan ini.
-                        var data = author.find(author => author.id === authorId);
+                            var authorId = $(this).data('id');
+                            // Asumsikan 'category' adalah array objek penulis, pastikan itu didefinisikan dan dapat diakses di cakupan ini.
+                            var data = author.find(author => author.id === authorId);
 
-                        if (data) { // Pastikan data ditemukan
-                            // Perbarui konten modal
-                            $('#detail-photo').attr('src', data.photo); // Foto
-                            $('#download-cv').attr('href', data.cv)
-                            $('#data-id').text(data.id);
-                            $('#form-terima').attr('data-id', data.id);
-                            $('#form-tolak').attr('data-id', data.id);
-                            $('#detail-name').text(data.name); // Nama
-                            $('#detail-email').text(data.email); // Email
-                            $('#detail-birth_date').text(data.birth_date); // Tanggal Lahir
-                            $('#detail-address').text(data.address); // Alamat
-                            $('#detail-cv').text(data.cv); // cv
-                            $('#detail-phone_number').text(data.phone_number);
+                            if (data) {
+                                $('#detail-photo').attr('src', data.photo); // Foto
+                                $('#download-cv').attr('href', data.cv)
+                                $('#data-id').text(data.id);
+                                $('#form-terima').attr('data-id', data.id);
+                                $('#form-tolak').attr('data-id', data.id);
+                                $('#detail-name').text(data.name); // Nama
+                                $('#detail-email').text(data.email); // Email
+                                $('#detail-birth_date').text(data.birth_date); // Tanggal Lahir
+                                $('#detail-address').text(data.address); // Alamat
+                                $('#detail-cv').text(data.cv); // cv
+                                $('#detail-phone_number').text(data.phone_number);
 
-                            // Jika Anda memutuskan untuk menampilkan phone_number dan status, pastikan untuk menambahkan elemen-elemen tersebut dalam HTML Anda dan memperbaruinya di sini juga.
+                                // Jika Anda memutuskan untuk menampilkan phone_number dan status, pastikan untuk menambahkan elemen-elemen tersebut dalam HTML Anda dan memperbaruinya di sini juga.
 
-                            // Tampilkan modal
-                            $('#modal-detail').modal('show');
-                        } else {
-                            console.error('Tidak ada data penulis yang ditemukan dengan id:', authorId);
-                        }
+                                // Tampilkan modal
+                                $('#modal-detail').modal('show');
+                            } else {
+                                console.error('Tidak ada data penulis yang ditemukan dengan id:',
+                                    authorId);
+                            }
 
-                    });
+                        });
 
-                        // $('.btn-delete').click(function() {
-                        //     $('#form-delete').data('id', $(this).data('id'))
-                        //       $('#modal-delete').modal('show')
-                        // })
+
                     } else {
                         $('#loading').html(showNoData('Tidak ada data'))
                     }
                 }
             })
         }
-        $('#form-terima').submit(function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-            $.ajax({
-                url: "approved-user/" + id,
-                method: 'PATCH',
-                data: $(this).serialize(),
-                dataType: "JSON",
-                success: function(response) {
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        text: response.message,
-                        icon: 'success',
-                        confirmButtonText: 'Oke'
-                    })
-                    get(1)
-                },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan, silakan coba lagi.',
-                        icon: 'error',
-                        confirmButtonText: 'Oke'
+        $('#form-terima').click(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menerima?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('.preloader').show()
+
+                    var id = $(this).closest('form').data('id');
+                    $.ajax({
+                        url: "approved-user/" + id,
+                        method: 'PATCH',
+                        data: $(this).closest('form').serialize(),
+                        dataType: "JSON",
+                        success: function(response) {
+                            $('#modal-detail').modal('hide');
+                            $('.preloader').hide()
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'Oke'
+                            });
+                            get(1);
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Terjadi kesalahan, silakan coba lagi.',
+                                icon: 'error',
+                                confirmButtonText: 'Oke'
+                            });
+                        }
                     });
                 }
             });
         });
 
         $('#form-tolak').submit(function(e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-            $.ajax({
-                url: "reject-user/" + id,
-                method: 'PATCH',
-                data: $(this).serialize(),
-                dataType: "JSON",
-                success: function(response) {
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: response.message,
-                    icon: 'success',
-                    confirmButtonText: 'Oke'
-                })
-                get(1)
-            },
-                error: function(xhr, status, error) {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'Terjadi kesalahan, silakan coba lagi.',
-                        icon: 'error',
-                        confirmButtonText: 'Oke'
+            e.preventDefault();
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apakah Anda yakin ingin menolak?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('.preloader').show()
+
+                    var id = $(this).data('id');
+                    $.ajax({
+                        url: "reject-user/" + id,
+                        method: 'PATCH',
+                        data: $(this).serialize(),
+                        dataType: "JSON",
+                        success: function(response) {
+                            $('#modal-detail').modal('hide');
+                            $('.preloader').hide()
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'Oke'
+                            });
+                            get(1);
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Terjadi kesalahan, silakan coba lagi.',
+                                icon: 'error',
+                                confirmButtonText: 'Oke'
+                            });
+                        }
                     });
                 }
             });
@@ -293,7 +320,7 @@
             $.ajax({
                 url: "list-news-approved/" + id,
                 type: 'DELETE',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -317,7 +344,7 @@
             $.ajax({
                 url: "kategori/" + id,
                 type: 'PUT',
-                data:$(this).serialize(),
+                data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
                     get(1)
@@ -333,6 +360,5 @@
                 }
             })
         })
-
     </script>
 @endsection

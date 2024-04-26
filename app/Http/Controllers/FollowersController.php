@@ -74,10 +74,7 @@ class FollowersController extends Controller
      */
     public function destroy(Followers $followers, Author $author)
     {
-        $data['user_id'] = auth()->user()->id;
-        $data['author_id'] = $author->id;
-        $this->followers->destroy($data);
-
+        $this->followers->destroy($author->id, auth()->user()->id);
         return back();
     }
 }
