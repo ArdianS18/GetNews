@@ -45,6 +45,9 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
      */
     public function show(mixed $id): mixed
     {
+        return $this->model->query()
+            ->where('news_id', $id)
+            ->get();
     }
 
     public function search(mixed $query): mixed
@@ -103,4 +106,5 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
             ->findOrFail($id)
             ->update($data);
     }
+
 }

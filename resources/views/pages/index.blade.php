@@ -79,7 +79,7 @@
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->upload_date)->translatedFormat('d F Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
 

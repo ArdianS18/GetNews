@@ -80,8 +80,10 @@ class DashboardController extends Controller
         $picks = $this->news->getByPick();
         $generals = $this->news->getByGeneral();
         $tags = $this->tag->get();
+        $totalCategories = $this->category->showWhithCount();
 
-        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags'));
+
+        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
     }
 
     public function navbar(){
