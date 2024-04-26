@@ -28,6 +28,7 @@ use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Http\Requests\NewsDraftRequest;
 use App\Http\Resources\NewsCategoryResource;
 use App\Models\Author;
 use App\Models\Comment;
@@ -332,7 +333,75 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
-        //
+        $data = $this->NewsService->store($request);
+        $newsId = $this->news->store($data)->id;
+
+        foreach ($data['category'] as $category) {
+            $this->newsCategory->store([
+                'news_id' => $newsId,
+                'category_id' => $category
+            ]);
+        }
+
+        foreach ($data['sub_category'] as $subCategory) {
+            $this->newsSubCategory->store([
+                'news_id' => $newsId,
+                'sub_category_id' => $subCategory
+            ]);
+        }
+
+        foreach ($data['tags'] as $tagId) {
+            $this->newsTag->store([
+                'news_id' => $newsId,
+                'tag_id' => $tagId
+            ]);
+        }
+
+        foreach ($data['multi_photo'] as $img) {
+            $this->newsPhoto->store([
+                'news_id' => $newsId,
+                'multi_photo' => $img,
+            ]);
+        }
+        return ResponseHelper::success(null, trans('alert.add_success'));
+    }
+
+    public function storeDraft(NewsRequest $request)
+    {
+        dd($request);
+        $data = $this->NewsService->store($request);
+        $data['status'] = NewsStatusEnum::NEWSDRAFT->value;
+        $newsId = $this->news->store($data)->id;
+
+        foreach ($data['category'] as $category) {
+            $this->newsCategory->store([
+                'news_id' => $newsId,
+                'category_id' => $category
+            ]);
+        }
+
+        foreach ($data['sub_category'] as $subCategory) {
+            $this->newsSubCategory->store([
+                'news_id' => $newsId,
+                'sub_category_id' => $subCategory
+            ]);
+        }
+
+        foreach ($data['tags'] as $tagId) {
+            $this->newsTag->store([
+                'news_id' => $newsId,
+                'tag_id' => $tagId
+            ]);
+        }
+
+        foreach ($data['multi_photo'] as $img) {
+            $this->newsPhoto->store([
+                'news_id' => $newsId,
+                'multi_photo' => $img,
+            ]);
+        }
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**

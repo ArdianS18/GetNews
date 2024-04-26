@@ -175,14 +175,14 @@
                             </div>
                             <div class="col-xl-6 col-md-6">
                                 <ul class="nav nav-tabs news-tablist" role="tablist">
-                                    @forelse ($editor_pick as $pick)
+                                    {{-- @forelse ($editor_pick as $pick)
                                     <li class="nav-item">
                                         <button class="nav-link" data-bs-toggle="tab{{ $pick->category->id }}" data-bs-target="#tab_1{{ $pick->category->id }}"
                                         type="button" role="tab{{ $pick->category->id }}">{{ $pick->category->name }}
                                         </button>
                                     </li>
                                     @empty
-                                    @endforelse
+                                    @endforelse --}}
                                 </ul>
                             </div>
                         </div>
@@ -193,29 +193,29 @@
                                     <div class="col-md-6">
                                         <div class="news-card-six">
                                             <div class="news-card-img">
-                                                <img src="assets/img/news/news-38.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">{{ $pick->category->name }}</a>
+                                                <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
+                                                <a href="{{ route('categories.show.user', ['category' => $pick->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $pick->newsCategories[0]->category->name }}</a>
                                             </div>
                                             <div class="news-card-info">
                                                 <div class="news-author">
                                                     <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
+                                                        <img src="{{ asset( $pick->author->user->photo ? 'storage/'.$pick->author->user->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                                        {{-- <img src="assets/img/author/author-thumb-1.webp" alt="Image" /> --}}
                                                     </div>
-                                                    <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
+                                                    <h5>By <a href="author.html">{{ $pick->author->user->name }}</a></h5>
                                                 </div>
-                                                <h3><a href="business-details.html">{{ $pick->news->name }}</a></h3>
+                                                <h3><a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a></h3>
                                                 <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 03, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($pick->created_at)->translatedFormat('d F Y') }}</a></li>
+                                                    {{-- <li><i class="fi fi-rr-comment"></i>03</li> --}}
+                                                    <li><i class="fi fi-rr-eye"></i>{{ $pick->views }}</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                     @empty
                                     @endforelse
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="news-card-six">
                                             <div class="news-card-img">
                                                 <img src="assets/img/news/news-39.webp" alt="Image" />
@@ -286,7 +286,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab_2" role="tabpanel">

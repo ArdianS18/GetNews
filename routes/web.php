@@ -189,7 +189,8 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
-    Route::post('profilecreatenews', [ProfileController::class, 'store'])->name('profile.berita.store');
+    Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
+    Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     //
     Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.author.update');
     Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
