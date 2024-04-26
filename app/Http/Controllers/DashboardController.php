@@ -8,7 +8,9 @@ use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Http\Requests\ViewRequest;
@@ -32,8 +34,9 @@ class DashboardController extends Controller
     private SubCategoryInterface $subCategory;
     private FaqInterface $faq;
     private ViewInterface $view;
+    private NewsTagInterface $tag;
 
-    public function __construct(FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq)
+    public function __construct(FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $tag)
     {
         $this->user = $user;
         $this->author = $author;
@@ -42,6 +45,7 @@ class DashboardController extends Controller
         $this->news = $news;
         $this->faq = $faq;
         $this->followers = $followers;
+        $this->tag = $tag;
 
         $this->newsCategory = $newsCategory;
         $this->view = $view;
@@ -77,10 +81,12 @@ class DashboardController extends Controller
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
         $picks = $this->news->getByPick();
-        // dd($picks);
         $generals = $this->news->getByGeneral();
+        $tags = $this->tag->get();
+        $totalCategories = $this->category->showWhithCount();
 
-        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks'));
+
+        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
     }
 
     public function navbar(){

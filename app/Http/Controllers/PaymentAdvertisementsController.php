@@ -57,7 +57,7 @@ class PaymentAdvertisementsController extends Controller
         
 
         $this->paymentAdvertisements->store($data);
-        return back()->with('success', 'berhasil menambahkan data');
+        return redirect('status-iklan')->with('success', 'berhasil menambahkan data');
     }
 
     /**
@@ -65,7 +65,7 @@ class PaymentAdvertisementsController extends Controller
      */
     public function show(PaymentAdvertisements $paymentAdvertisements)
     {
-        //
+        return view('pages.user.iklan.status-iklan',);
     }
 
     /**

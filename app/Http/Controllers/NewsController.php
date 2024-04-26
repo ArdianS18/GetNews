@@ -57,6 +57,8 @@ class NewsController extends Controller
     private ViewInterface $view;
     private TagInterface $tags;
     private NewsService $NewsService;
+    private NewsTagInterface $tag;
+
     private $newsTrendingService;
 
     protected $newsRepositoty;
@@ -79,6 +81,7 @@ class NewsController extends Controller
         NewsHasLikeInterface $newsHasLike,
         NewsCategoryInterface $newsCategory,
         NewsSubCategoryInterface $newsSubCategory,
+        NewsTagInterface $tag,
 
         NewsPhotoInterface $newsPhoto)
     {
@@ -96,7 +99,7 @@ class NewsController extends Controller
         $this->user = $user;
         $this->comment = $comment;
         $this->category = $category;
-        $this->category = $category;
+        $this->tag = $tag;
 
         $this->NewsService = $NewsService;
         $this->newsTrendingService = $newsTrendingService;
@@ -179,7 +182,7 @@ class NewsController extends Controller
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;
-        $pages = str_split($content, 1000000);
+        $pages = str_split($content, 100000);
         $currentPage = $page-1;
 
         $view = $this->view->store([
@@ -196,9 +199,12 @@ class NewsController extends Controller
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
         $likedByUser = $userLike->contains(auth()->user()->id);
+        $populars = $this->news->getByPopular();
+        $tags = $this->tag->show($news->id);
+        $totalCategories = $this->category->showWhithCount();
 
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage','tags','populars','totalCategories'));
     }
 
     /**
@@ -487,11 +493,9 @@ class NewsController extends Controller
 
     public function showstatusnews(Request $request, NewsCategory $newsCategories)
     {
-        // $news = $this->newsCategory->get();
         $id = auth()->user()->id;
         $author_id = Author::where('user_id', $id)->value('id');
         $news = $this->newsCategory->searchStatus($author_id, $request);
-        // dd($news);
         return view('pages.author.status.index', compact('news'));
     }
 }

@@ -46,7 +46,7 @@
                         <div class="col-lg-12">
                             <label class="form-label" for="content">Gambar</label>
                             <div class="">
-                                <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="250" alt="">
+                                <img src="{{ asset('storage/' . $advertisement->photo) }}" width="250" alt="">
                             </div>
                         </div>
                         <div class="col-lg-12 mb-4">

@@ -5,7 +5,7 @@
         <div class="breadcrumb-wrap">
             <h2 class="breadcrumb-title">{{ $subCategory->name }}</h2>
             <ul class="breadcrumb-menu list-style">
-                <li><a href="/">Home</a></li>
+                <li><a href="{{ route('user.home') }}">Home</a></li>
                 <li><a
                         href="{{ route('categories.show.user', ['category' => $subCategory->category->slug]) }}">{{ $subCategory->category->name }}</a>
                 </li>
@@ -99,7 +99,7 @@
                                     @forelse ($news as $news)
                                         <div class="news-card-one">
                                             <div class="news-card-img">
-                                                <img src="{{ asset('storage/' . $news->photo) }}" width="80" height="80">
+                                                <img src="{{ asset('storage/' . $news->photo) }}" width="100%" height="80">
                                             </div>
                                             <div class="news-card-info">
                                                 <h3><a href="business-details.html">{{ $news->name }}</a>
