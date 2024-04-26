@@ -188,8 +188,7 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
-    Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
-    Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
+    Route::post('profilecreatenews', [NewsController::class, 'store'])->name('profile.berita.store');
     //
     Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.author.update');
     Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
@@ -212,6 +211,7 @@ Route::middleware(['auth', 'role:author'])->group(function () {
 
     Route::get('income-statistics', [AuthorController::class, 'incomestatistics'])->name('statistik.income');
     Route::get('news-statistics', [AuthorController::class, 'newsstatistics'])->name('statistik.news');
+    Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
 });
 
 
