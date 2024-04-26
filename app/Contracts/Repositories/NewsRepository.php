@@ -172,6 +172,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function getAllNews(): mixed
     {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->select('news.id','news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'))
+            ->orderBy('views', 'DESC')
+            ->groupBy('id')
+            ->take(4)
+            ->get();
+    }
+
+    public function getByLeft(): mixed
+    {
         $subquery = DB::table('news_categories')
             ->select('category_id', DB::raw('COUNT(*) as category_count'))
             ->groupBy('category_id')
@@ -236,6 +248,20 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->select('news.id', 'news.photo','news.slug','news.name','news.created_at','news.upload_date',DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names') ,DB::raw('COUNT(views.news_id) as views'))
             ->groupBy('id','created_at')
             ->take(3)
+            ->get();
+    }
+
+    public function getByPick(): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
+            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
+            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->select('news.id', 'news.author_id','news.photo','news.slug','news.name','news.created_at','news.upload_date',DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names') ,DB::raw('COUNT(views.news_id) as views'))
+            ->groupBy('id','created_at')
+            ->take(6)
             ->get();
     }
 

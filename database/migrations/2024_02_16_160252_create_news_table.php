@@ -14,16 +14,13 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('author_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->string('name');
-            $table->text('photo');
-            $table->longText('content');
-            $table->date('upload_date');
+            $table->string('name')->nullable()->default('-');
+            $table->text('photo')->nullable();
+            $table->longText('content')->nullable();
+            $table->date('upload_date')->nullable();
             $table->boolean('is_primary')->default(0);
-            // $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            // $table->foreignId('sub_category_id')->nullable()->constrained()->cascadeOnUpdate()->restrictOnDelete();
-            $table->string('slug')->unique();
-            $table->enum('status', ['active', 'nonactive', 'panding', 'primary'])->default('panding');
-            // $table->string('tags');
+            $table->string('slug')->unique()->nullable()->default('-');
+            $table->enum('status', ['active', 'nonactive', 'panding', 'primary', 'draft'])->default('panding');
             $table->timestamps();
         });
     }

@@ -112,41 +112,9 @@ class ProfileController extends Controller
         return view('pages.author.news.create', compact('news', 'subCategories', 'categories'));
     }
 
-    public function store(NewsRequest $request)
+    public function store()
     {
-
-        $data = $this->NewsService->store($request);
-        $newsId = $this->news->store($data)->id;
-
-        foreach ($data['category'] as $category) {
-            $this->newsCategory->store([
-                'news_id' => $newsId,
-                'category_id' => $category
-            ]);
-        }
-
-        foreach ($data['sub_category'] as $subCategory) {
-            $this->newsSubCategory->store([
-                'news_id' => $newsId,
-                'sub_category_id' => $subCategory
-            ]);
-        }
-
-        foreach ($data['tags'] as $tagId) {
-            $this->newsTag->store([
-                'news_id' => $newsId,
-                'tag_id' => $tagId
-            ]);
-        }
-
-        foreach ($data['multi_photo'] as $img) {
-            $this->newsPhoto->store([
-                'news_id' => $newsId,
-                'multi_photo' => $img,
-            ]);
-        }
-
-        return ResponseHelper::success(null, trans('alert.add_success'));
+        //
     }
 
     public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)

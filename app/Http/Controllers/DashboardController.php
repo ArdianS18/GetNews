@@ -65,7 +65,7 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $trendings = $this->view->trending();
 
-        $news_left = $this->news->getAllNews();
+        $news_left = $this->news->getByLeft();
         $news_right = $this->news->getByRight();
         $news_mid = $this->news->getByMid();
 
@@ -73,9 +73,10 @@ class DashboardController extends Controller
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
-        $picks = $this->newsCategory->get();
-
+        $picks = $this->news->getByPick();
+        // dd($picks);
         $generals = $this->news->getByGeneral();
+
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks'));
     }
 

@@ -19,6 +19,7 @@ use App\Http\Requests\Dashboard\Article\UpdateRequest;
 
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
+use App\Http\Requests\NewsDraftRequest;
 
 class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 {
@@ -48,7 +49,54 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      */
     public function store(NewsRequest $request)
     {
-        // dd($request);
+        $data = $request->validated();
+
+        if ($request->has('tags')) {
+            $newTags = [];
+            foreach ($request->input('tags') as $tagName) {
+                $tag = Tag::updateOrCreate(
+                    ['name' => $tagName],
+                    ['slug' => Str::slug($tagName)]
+                );
+                $newTags[] = $tag->id;
+            }
+
+            $data['tags'] = $newTags;
+        }
+
+        $multi_photo = [];
+            if ($request->hasFile('multi_photo')) {
+                foreach ($request->file('multi_photo') as $image) {
+                    $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
+                    $multi_photo[] = $stored_image;
+                }
+            }
+
+            $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+
+            $domQuestion = new \DOMDocument();
+            libxml_use_internal_errors(true);
+            $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+
+            libxml_clear_errors();
+
+        return [
+            'author_id' => auth()->user()->author->id,
+            'name' => $data['name'],
+            'photo' => $image,
+            'multi_photo' => $multi_photo,
+            'content' => $domQuestion->saveHTML(),
+            'slug' => Str::slug($data['name']),
+            'category' => $data['category'],
+            'sub_category' => $data['sub_category'],
+            'tags' => $data['tags'],
+            'upload_date' => $data['upload_date']
+        ];
+    }
+
+    public function storeDraft(NewsDraftRequest $request)
+    {
         $data = $request->validated();
 
         if ($request->has('tags')) {
@@ -223,20 +271,20 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 $fileNameContent = uniqid();
                 $fileNameContentRand = substr(md5($fileNameContent), 6, 6) . '_' . time();
                 $filepath = $fileNameContentRand . '.' . $mimetype;
-        
+
                 $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $src));
-        
+
                 Storage::put(UploadDiskEnum::CONTENT->value . '/' . $filepath, $imageData);
-        
+
                 $baseUrl = config('app.url');
 
                 $new_src = str_replace('http://127.0.0.1:8000', $baseUrl, Storage::url(UploadDiskEnum::CONTENT->value . '/' . $filepath));
-                
+
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
                 $img->setAttribute('class', 'img-responsive');
             }
         }
-        
+
     }
 }
