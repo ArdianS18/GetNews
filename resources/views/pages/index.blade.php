@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 @section('style')
     <style>
-        
+
     </style>
 @endsection
 @section('content')
@@ -17,17 +17,17 @@
                     <div class="trending-news-slider swiper">
                         <div class="swiper-wrapper">
                             @foreach ($trendings as $trending)
-                            <div class="swiper-slide news-card-one">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/'. $trending->news->photo ) }}" alt="Image" />
+                                <div class="swiper-slide news-card-one">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">{{ $trending->news->name }}</a></h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">{{  $trending->news->name }}</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
-                                    </ul>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -41,11 +41,11 @@
             <div class="news-col-one">
                 @php $counter= 0; @endphp
                 @foreach ($news_left as $newss)
-                        @if ($counter < 1)
+                    @if ($counter < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}"
-                                    style="object-fit: cover;" alt="Image" height="250"/>
+                                <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;" alt="Image"
+                                    height="250" />
 
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
@@ -55,113 +55,143 @@
                                         href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $newss->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y')  }}</p></a>
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
+                                            <p>{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}
+                                            </p>
+                                        </a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
                                 </ul>
                             </div>
                         </div>
-                        @elseif ($counter < 4)
+                    @elseif ($counter < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100" width="100%" style="object-fit: cover"/>
+                                <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100"
+                                    width="100%" style="object-fit: cover" />
                             </div>
                             <div class="news-card-info">
-                                <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                                 <h3>
                                     <a
                                         href="{{ route('news.user', ['news' => $newss->slug, 'page' => 1]) }}">{{ $newss->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a></li>
-                                            <li><i class="fi fi-rr-eye"></i>{{  $newss->views }}</li>
+                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
 
                                 </ul>
                             </div>
                         </div>
-                        @else
-                        @endif
-                        @php $counter++; @endphp
+                    @else
+                    @endif
+                    @php $counter++; @endphp
 
-                        @if ($counter == 5)
-                            @php $counter = 0; @endphp
-                        @endif
+                    @if ($counter == 5)
+                        @php $counter = 0; @endphp
+                    @endif
                 @endforeach
             </div>
             <div class="news-col-two">
                 @php $counter= 0; @endphp
                 @foreach ($news_mid as $mid)
-                        @if ($counter < 1)
+                    @if ($counter < 1)
                         <div class="news-card-four">
-                            <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" style="object-fit: cover" height="450"/>
+                            <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" style="object-fit: cover"
+                                height="450" />
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">{{ $mid->name }}</a></h3>
+                                <h3><a
+                                        href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">{{ $mid->name }}</a>
+                                </h3>
                                 <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html"><p>{{  \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y')  }}</p></a></li>
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">
+                                            <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
+                                        </a></li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $mid->views }}</li>
                                 </ul>
                             </div>
                         </div>
-                        @elseif ($counter < 3)
+                    @elseif ($counter < 3)
                         <div class="news-card-five">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" height="150" width="100%"/>
-                                <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
+                                <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" height="150"
+                                    width="100%" />
+                                <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => 1]) }}">{{ $mid->name }}</a></h3>
+                                <h3><a
+                                        href="{{ route('news.user', ['news' => $mid->slug, 'page' => 1]) }}">{{ $mid->name }}</a>
+                                </h3>
                                 <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{  $newss->views }}</li>
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
                                 </ul>
                             </div>
                         </div>
-                        @else
-                        @endif
-                        @php $counter++; @endphp
-                        @if ($counter == 4)
-                            @php $counter = 0; @endphp
-                        @endif
+                    @else
+                    @endif
+                    @php $counter++; @endphp
+                    @if ($counter == 4)
+                        @php $counter = 0; @endphp
+                    @endif
                 @endforeach
             </div>
             <div class="news-col-three">
                 @php $counters= 0; @endphp
                 @foreach ($news_right as $barus)
-                        @if ($counters < 1)
-                            <div class="news-card-two">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;" alt="Image" height="250" width="100%"/>
-                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">{{ $barus->name }}</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)"><p>{{  \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y')  }}</p></a></li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $barus->views }}</li>
-                                    </ul>
-                                </div>
+                    @if ($counters < 1)
+                        <div class="news-card-two">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;"
+                                    alt="Image" height="250" width="100%" />
+                                <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
-                        @elseif ($counters < 4)
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" height="100" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}">{{ $barus->newsCategories[0]->category->name }}</a>
-                                    <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">{{ $barus->name }}</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{  $barus->views }}</li>
-                                    </ul>
-                                </div>
+                            <div class="news-card-info">
+                                <h3><a
+                                        href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">{{ $barus->name }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
+                                            <p>{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}
+                                            </p>
+                                        </a></li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views }}</li>
+                                </ul>
                             </div>
-                        @else
-                        @endif
-                        @php $counters++; @endphp
-                        @if ($counters == 5)
-                            @php $counters = 0; @endphp
-                        @endif
+                        </div>
+                    @elseif ($counters < 4)
+                        <div class="news-card-three">
+                            <div class="news-card-img">
+                                <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" height="100"
+                                    alt="Image" />
+                            </div>
+                            <div class="news-card-info">
+                                <a
+                                    href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}">{{ $barus->newsCategories[0]->category->name }}</a>
+                                <h3><a
+                                        href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">{{ $barus->name }}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    @else
+                    @endif
+                    @php $counters++; @endphp
+                    @if ($counters == 5)
+                        @php $counters = 0; @endphp
+                    @endif
                 @endforeach
             </div>
         </div>
@@ -180,11 +210,12 @@
                             <div class="col-xl-6 col-md-6">
                                 <ul class="nav nav-tabs news-tablist" role="tablist">
                                     @forelse ($editor_pick as $pick)
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab{{ $pick->category->id }}" data-bs-target="#tab_1{{ $pick->category->id }}"
-                                        type="button" role="tab{{ $pick->category->id }}">{{ $pick->category->name }}
-                                        </button>
-                                    </li>
+                                        <li class="nav-item">
+                                            <button class="nav-link" data-bs-toggle="tab{{ $pick->category->id }}"
+                                                data-bs-target="#tab_1{{ $pick->category->id }}" type="button"
+                                                role="tab{{ $pick->category->id }}">{{ $pick->category->name }}
+                                            </button>
+                                        </li>
                                     @empty
                                     @endforelse
                                 </ul>
@@ -194,29 +225,34 @@
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
                                     @forelse ($picks as $pick)
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-38.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">{{ $pick->category->name }}</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
+                                        <div class="col-md-6">
+                                            <div class="news-card-six">
+                                                <div class="news-card-img">
+                                                    <img src="assets/img/news/news-38.webp" alt="Image" />
+                                                    <a href="business.html"
+                                                        class="news-cat">{{ $pick->category->name }}</a>
                                                 </div>
-                                                <h3><a href="business-details.html">{{ $pick->news->name }}</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 03, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
+                                                <div class="news-card-info">
+                                                    <div class="news-author">
+                                                        <div class="news-author-img">
+                                                            <img src="{{ asset($pick->news->author->user->photo ? 'storage/' . $pick->news->author->user->photo : 'default.png') }}"
+                                                                class="rounded-circle mb-3" style="object-fit: cover"
+                                                                width="40" height="40" alt="Image" />
+                                                        </div>
+                                                        <h5>By <a
+                                                                href="author.html">{{ $pick->news->author->user->name }}</a>
+                                                        </h5>
+                                                    </div>
+                                                    <h3><a href="business-details.html">{{ $pick->news->name }}</a></h3>
+                                                    <ul class="news-metainfo list-style">
+                                                        <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                                href="news-by-date.html">Apr 03, 2023</a></li>
+                                                        <li><i class="fi fi-rr-comment"></i>03</li>
+                                                        <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     @empty
                                     @endforelse
                                     <div class="col-md-6">
@@ -512,21 +548,22 @@
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="{{ asset('storage/'. $popular->photo) }}" alt="Image" />
+                                    <div class="news-card-seven">
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" />
+                                        </div>
+                                        <div class="news-card-info">
+                                            <a href="business.html" class="news-cat">{{ $popular->category_names }}</a>
+                                            <h3><a href="business-details.html">{{ $popular->name }}</a></h3>
+                                            <ul class="news-metainfo list-style">
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb
+                                                        03,
+                                                        2023</a></li>
+                                                <li><i class="fi fi-rr-comment"></i>03</li>
+                                                <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">{{ $popular->category_names }}</a>
-                                        <h3><a href="business-details.html">{{ $popular->name }}</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 @empty
                                 @endforelse
                                 {{-- <div class="news-card-seven">
@@ -596,20 +633,21 @@
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
                                 @forelse ($news_recent as $recent)
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="{{ asset('storage/'. $recent->photo) }}" alt="Image" />
+                                    <div class="news-card-seven">
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" />
+                                        </div>
+                                        <div class="news-card-info">
+                                            <a href="business.html" class="news-cat">{{ $recent->category_names }}</a>
+                                            <h3><a href="business-details.html">{{ $recent->name }}</a></h3>
+                                            <ul class="news-metainfo list-style">
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb
+                                                        15, 2023</a></li>
+                                                <li><i class="fi fi-rr-comment"></i>03</li>
+                                                <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">{{ $recent->category_names }}</a>
-                                        <h3><a href="business-details.html">{{ $recent->name }}</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 15, 2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 @empty
                                 @endforelse
                                 {{-- <div class="news-card-seven">
@@ -700,21 +738,22 @@
                     </div>
                     <div class="row justify-content-center">
                         @forelse ($generals as $general)
-                        <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/'. $general->photo) }}" alt="Image" />
-                                    {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">{{ $general->category_names }}</a>
-                                    <h3><a href="business-details.html">{{ $general->name }}</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $general->upload_date }}</a></li>
-                                    </ul>
+                            <div class="col-xl-6">
+                                <div class="news-card-twelve">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $general->photo) }}" alt="Image" />
+                                        {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
+                                    </div>
+                                    <div class="news-card-info">
+                                        <a href="business.html" class="news-cat">{{ $general->category_names }}</a>
+                                        <h3><a href="business-details.html">{{ $general->name }}</a></h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                    href="news-by-date.html">{{ $general->upload_date }}</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @empty
                         @endforelse
                         {{-- <div class="col-xl-6">
@@ -864,19 +903,19 @@
                         <h3 class="sidebar-widget-title">Popular Posts</h3>
                         <div class="pp-post-wrap">
                             @forelse ($popular_post as $post)
-                            <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="{{ asset('storage/'. $post->photo) }}" alt="Image" />
-                                    {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
+                                <div class="news-card-one">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" />
+                                        {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">{{ $post->name }}</a></h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
+                                                    2023</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">{{ $post->name }}</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                             @empty
                             @endforelse
                             {{-- <div class="news-card-one">
@@ -973,7 +1012,7 @@
                 1024: {
                     slidesPerView: 2
                 },
-                1440:{
+                1440: {
                     slidesPerView: 3,
                 }
             }

@@ -67,7 +67,6 @@ class DashboardController extends Controller
 
         $news_left = $this->news->getAllNews();
         $news_right = $this->news->getByRight();
-        // dd($news_right);
         $news_mid = $this->news->getByMid();
 
         $populars = $this->news->getByPopular();
@@ -99,7 +98,6 @@ class DashboardController extends Controller
 
     public function authoruser(Request $request) {
         $authors = $this->author->showWhithCountSearch($request);
-        // dd($authors);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.author.index', compact('categories', 'subCategories', 'authors'));
