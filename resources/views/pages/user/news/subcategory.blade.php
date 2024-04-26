@@ -5,7 +5,7 @@
         <div class="breadcrumb-wrap">
             <h2 class="breadcrumb-title">{{ $subCategory->name }}</h2>
             <ul class="breadcrumb-menu list-style">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a
                         href="{{ route('categories.show.user', ['category' => $subCategory->category->slug]) }}">{{ $subCategory->category->name }}</a>
                 </li>

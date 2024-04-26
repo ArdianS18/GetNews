@@ -99,7 +99,6 @@ class DashboardController extends Controller
 
     public function authoruser(Request $request) {
         $authors = $this->author->showWhithCountSearch($request);
-        // dd($authors);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.author.index', compact('categories', 'subCategories', 'authors'));
