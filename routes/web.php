@@ -356,9 +356,6 @@ Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
 
-// Route::get('user-berlangganan', function(){
-//     return view('pages.user.berlangganan.index');
-// })->name('user.berlangganan');
 Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
 
 Route::get('berlangganan', function(){

@@ -12,5 +12,5 @@ use App\Contracts\Interfaces\Eloquent\UpdateOrCreateInterface;
 
 interface NewsTagInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, UpdateOrCreateInterface
 {
-
+    
 }

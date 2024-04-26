@@ -193,17 +193,16 @@ class NewsController extends Controller
 
         $userLike = $this->newsHasLike->where($news->id);
         $newsLike = $this->newsHasLike->where($news->id)->count();
-        $comments = $this->comment->where($news);
+        $comments = $this->comment->where($newsId);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
         $likedByUser = $userLike->contains(auth()->user()->id);
         $populars = $this->news->getByPopular();
-        $tags = $this->tag->show($news->id);
         $totalCategories = $this->category->showWhithCount();
 
-
+        $tags = $this->newsTag->show($newsId);
         return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage','tags','populars','totalCategories'));
     }
 

@@ -50,7 +50,7 @@ class TagRepository extends BaseRepository implements TagInterface
      */
     public function show(mixed $id): mixed
     {
-
+        //
     }
 
     public function search(mixed $query): mixed
