@@ -45,17 +45,17 @@
         </div>
     </div>
     
-    <div class="row gp-5">
-    <div class="mt-5 gap-5">
+    <div class="">
     <div class="sports-wrap ptb-100">
+    <div class="ps-5 pe-5">
     <div class="row gx-55 gx-5">
         <div class="col-lg-8">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    @forelse ($news as $item)
+            <div class="row">
+                @forelse ($news as $item)
+                <div class="col-md-6">   
                     <div class="news-card-thirteen">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="234" style="width: 100%;height:100%;">
+                            <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="300" style="width: 100%;object-fit:cover;">
                             @foreach ($subCategories as $subCategory)
                                 <p class="tag">
                                     {{-- <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->subCategory->slug]) }}" class="news-cat">{{ $subCategory->subCategory->name }}</a> --}}
@@ -73,18 +73,17 @@
                             </ul>
                         </div>
                     </div>
-                    @empty
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <img src="{{ asset('no-data.svg') }}" width="550px" alt="">
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h4>Tidak ada data</h4>
-                        </div>
-                    @endforelse
-                    
                 </div>
+                @empty
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <img src="{{ asset('no-data.svg') }}" width="550px" alt="">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h4>Tidak ada data</h4>
+                    </div>
+                @endforelse
                 {{-- <ul class="page-nav list-style text-right d-flex justify-content-end mt-20">
                     <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
                     @for ($i = 1; $i <= $news->lastPage(); $i++)
