@@ -172,15 +172,17 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function showWhithCountSearch(Request $request): mixed
     {
         return DB::table('authors')
-            ->join('news', 'authors.id', '=', 'news.author_id')
-            ->join('users', 'authors.user_id', '=', 'users.id')
-            ->leftJoin('followers', 'authors.id', '=', 'followers.author_id')
-            ->leftJoin('news_has_likes', 'news.id', '=', 'news_has_likes.news_id')
+            ->leftJoin('news', 'authors.id', '=', 'news.author_id')
+            ->leftJoin('users', 'authors.user_id', '=', 'users.id')
             ->where('authors.status', 'approved')
+            ->where('news.status', 'active')
             ->when($request->input('name'), function($query) use ($request) {
                 $query->where('users.name', 'LIKE', '%'.$request->input('name').'%');
-            })->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.author_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'), DB::raw('COUNT(followers.author_id) as follow_id'))
-            ->groupBy('authors.id', 'users.name', 'users.photo')
+            })->select('authors.id', 'users.name', 'users.photo',
+                DB::raw('(SELECT COUNT(*) FROM news_has_likes WHERE news_has_likes.news_id = news.id) as count_like'),
+                DB::raw('(SELECT COUNT(*) FROM followers WHERE followers.author_id = authors.id) as count_follow'),
+                DB::raw('COUNT(news.author_id) as count'))
+            ->groupBy('authors.id', 'count_like', 'count_follow')
             ->get();
     }
 }

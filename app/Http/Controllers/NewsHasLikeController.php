@@ -48,21 +48,6 @@ class NewsHasLikeController extends Controller
         $this->newsHasLike->store($data);
 
         return ResponseHelper::success();
-
-        // $likeData = [
-        //     'news_id' => $news->id,
-        //     'user_id' => auth()->id(),
-        // ];
-
-        // $like = $this->newsHasLike->store($likeData);
-
-        // if ($like->wasRecentlyCreated) {
-        //     return redirect()->back()->with('success', 'Like added successfully.');
-        // } else {
-        //     $status = $like->status ? 0 : 1;
-        //     $like->update(['status' => $status]);
-        //     return redirect()->back()->with('success', 'Like status updated successfully.');
-        // }
     }
 
     /**
