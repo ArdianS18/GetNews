@@ -9,6 +9,7 @@ use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Enums\UserStatusEnum;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AuthorRepository extends BaseRepository implements AuthorInterface
@@ -177,7 +178,8 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->where('authors.status', 'approved')
             ->when($request->input('name'), function($query) use ($request) {
                 $query->where('users.name', 'LIKE', '%'.$request->input('name').'%');
-            })->select('authors.id', 'users.name', 'users.photo',
+            })
+            ->select('authors.id', 'users.name', 'users.photo', 'users.id as user_id',
                 DB::raw('(SELECT COUNT(*) FROM news_has_likes WHERE news_has_likes.news_id = news.id) as count_like'),
                 DB::raw('(SELECT COUNT(*) FROM followers WHERE followers.author_id = authors.id) as count_follow'),
                 DB::raw('(SELECT COUNT(*) FROM news WHERE news.author_id = authors.id AND news.status = "active") as count'))

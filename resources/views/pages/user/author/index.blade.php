@@ -61,12 +61,14 @@
                                 <img src="{{asset($item->photo ? 'storage/'.$item->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
                                 <h5>{{ $item->name }}</h5>
                                 @php
-                                    $user_id = Auth::user()->id;
+                                    $user_id = auth()->user()->id;
                                     $author_id = $item->id;
                                     $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
+                                    $author = DB::table('authors')->where('user_id', $user_id)->where('id', auth()->user()->author->id);
                                 @endphp
 
-                                @if($isFollowing)
+                                @if($author)
+                                @elseif ($isFollowing)
                                     <form action="{{ route('unfollow.author', ['author' => $item->id]) }}" method="POST">
                                         @method('delete')
                                         @csrf
@@ -79,6 +81,7 @@
                                         <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                                     </form>
                                 @endif
+
                                 <div class="d-flex align-items-center justify-content-between mt-4">
                                     <div class="text-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#a0a0a0" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm0 2h7v5h5v11H6zm2 8v2h8v-2zm0 4v2h5v-2z"/></svg>

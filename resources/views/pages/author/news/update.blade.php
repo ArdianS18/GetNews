@@ -18,7 +18,7 @@
         }
     </style>
 @endsection
-@section('content') 
+@section('content')
 <div class="card shadow-sm position-relative overflow-hidden"  style="background-color: #175A95;">
     <div class="card-body px-4 py-4">
       <div class="row justify-content-between">
@@ -49,7 +49,7 @@
 
             <div class="ms-1 mt-5 mb-2 d-flex justify-content-between">
                 <h5>Isi form dibawah ini untuk mengunggah berita</h5>
-            
+
                 <div class="">
                     <button type="button" class="btn btn-md me-2 text-black"
                         style="background-color: #C9C9C9;">
@@ -61,11 +61,11 @@
                     </button>
                 </div>
             </div>
-            
+
 
             <div class="news-card-a mt-1">
                 <div style="padding: 1%;">
-                    
+
                         <div class="row justify-content-between">
                             <div class="col-lg-6 col-md-12 from-outline">
                                 <label class="form-label" for="nomor">Judul Berita</label>
@@ -189,29 +189,11 @@
                                     Simpan Draf
                                 </button>
                             </div>
-
-                            {{-- <div class="d-flex justify-content-between mt-5">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                    class="btn btn-md text-black m-2 d-flex justify-content-start"
-                                    style="padding-left: 1rem; padding-right: 1rem; background-color: #C9C9C9;">
-                                    Ketentuan & Persyaratan
-                                </button>
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-md text-black m-2"
-                                        style="padding-left: 2rem; padding-right: 2rem; background-color: #C9C9C9;">
-                                        Simpan Draf
-                                    </button>
-                                    <button type="submit" class="btn btn-md text-white m-2"
-                                        style="padding-left: 3rem; padding-right: 3rem; background-color: #0F4D8A;">
-                                        Update
-                                    </button>
-                                </div>
-                            </div> --}}
                         </div>
                 </div>
-                
+
             </div>
-    
+
     </div>
 </form>
             <!-- Modal -->
