@@ -24,8 +24,8 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
 
@@ -45,21 +45,20 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
      */
     public function show(mixed $id): mixed
     {
-
     }
 
     public function search(mixed $query): mixed
     {
-        return $this->model->where('question','LIKE', '%'.$query.'%')->paginate(5);
+        return $this->model->where('question', 'LIKE', '%' . $query . '%')->paginate(5);
     }
 
     public function updateOrCreate(array $data): mixed
     {
         return $this->model->query()
-        ->updateOrCreate([
-            'news_id' => $data['news_id'],
-            'tag_id' => $data['tag_id']
-        ],$data);
+            ->updateOrCreate([
+                'news_id' => $data['news_id'],
+                'tag_id' => $data['tag_id']
+            ], $data);
     }
 
 
@@ -71,6 +70,9 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
     public function get(): mixed
     {
         return $this->model->query()
+            ->withCount('tag')
+            ->orderByDesc('tag_id')
+            ->take(10)
             ->get();
     }
 

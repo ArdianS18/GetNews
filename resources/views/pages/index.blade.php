@@ -224,102 +224,39 @@
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
                                     @forelse ($picks as $pick)
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
-                                                <a href="{{ route('categories.show.user', ['category' => $pick->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $pick->newsCategories[0]->category->name }}</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="{{ asset( $pick->author->user->photo ? 'storage/'.$pick->author->user->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
-                                                        {{-- <img src="assets/img/author/author-thumb-1.webp" alt="Image" /> --}}
-                                                    </div>
-                                                    <h5>By <a href="author.html">{{ $pick->author->user->name }}</a></h5>
+                                        <div class="col-md-6">
+                                            <div class="news-card-six">
+                                                <div class="news-card-img">
+                                                    <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
+                                                    <a href="{{ route('categories.show.user', ['category' => $pick->newsCategories[0]->category->slug]) }}"
+                                                        class="news-cat">{{ $pick->newsCategories[0]->category->name }}</a>
                                                 </div>
-                                                <h3><a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($pick->created_at)->translatedFormat('d F Y') }}</a></li>
-                                                    {{-- <li><i class="fi fi-rr-comment"></i>03</li> --}}
-                                                    <li><i class="fi fi-rr-eye"></i>{{ $pick->views }}</li>
-                                                </ul>
+                                                <div class="news-card-info">
+                                                    <div class="news-author">
+                                                        <div class="news-author-img">
+                                                            <img src="{{ asset($pick->author->user->photo ? 'storage/' . $pick->author->user->photo : 'default.png') }}"
+                                                                alt="Image" width="40px" height="40px"
+                                                                style="border-radius: 50%; object-fit:cover;" />
+                                                            {{-- <img src="assets/img/author/author-thumb-1.webp" alt="Image" /> --}}
+                                                        </div>
+                                                        <h5>By <a href="author.html">{{ $pick->author->user->name }}</a>
+                                                        </h5>
+                                                    </div>
+                                                    <h3><a
+                                                            href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
+                                                    </h3>
+                                                    <ul class="news-metainfo list-style">
+                                                        <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                                href="news-by-date.html">{{ \Carbon\Carbon::parse($pick->created_at)->translatedFormat('d F Y') }}</a>
+                                                        </li>
+                                                        {{-- <li><i class="fi fi-rr-comment"></i>03</li> --}}
+                                                        <li><i class="fi fi-rr-eye"></i>{{ $pick->views }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @empty
+                                        @empty
                                     @endforelse
-                                    {{-- <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-39.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Politics</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-2.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">ELIJAH JAMES</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Will Humans be able to live in Mars in
-                                                        the future?</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Mar 22, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>10 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-40.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Politics</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-3.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By<a href="author.html">BANKS GAIN</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Here’s the proof momentum strategy
-                                                        work</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 15, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-41.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Politics</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-4.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">HARPAR LUNA</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">The Promise And Potential Of Synthetic
-                                                        Assets</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 14, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> --}}
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab_2" role="tabpanel">
@@ -559,70 +496,7 @@
                                     </div>
                                 @empty
                                 @endforelse
-                                {{-- <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-50.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Lifestyle</a>
-                                        <h3><a href="business-details.html">Jiraiya Banks Wants to Teach You How to Build a
-                                                House</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-51.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Photography</a>
-                                        <h3><a href="business-details.html">The Secret Math Behind Mind Reading Magic
-                                                Tricks</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-52.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Business</a>
-                                        <h3><a href="business-details.html">Recovery and Cleanup in Florida After Hurricane
-                                                Ian</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Msr 15,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-53.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Sports</a>
-                                        <h3><a href="business-details.html">6 Romantic places You Want to Visit with Your
-                                                Partner</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 22,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
+
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
                                 @forelse ($news_recent as $recent)
@@ -986,6 +860,16 @@
                                 </div>
                             </div> --}}
                         </div>
+                    </div>
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-widget-title">Popular Tags</h3>
+                        <ul class="tag-list list-style">
+                            @forelse ($tags as $tag)
+                            <li><a href="news-by-tags.html">{{ $tag->tag->name }}</a></li>
+                            @empty
+                                
+                            @endforelse
+                        </ul>
                     </div>
                 </div>
             </div>
