@@ -23,8 +23,8 @@
     <div class="card-body px-4 py-4">
       <div class="row justify-content-between">
         <div class="col-8 text-white">
-          <h4 class="fw-semibold mb-3 mt-2 text-white">Pengisian Iklan</h4>
-            <p>Layanan pengiklanan di getmedia.id</p>
+          <h4 class="fw-semibold mb-3 mt-2 text-white">Pengisian Berita</h4>
+            <p>Tuliskan beritamu di getmedia</p>
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
@@ -48,7 +48,6 @@
         @csrf
         <div class="ms-1 mt-5 d-flex justify-content-between">
             <h5>Isi form dibawah ini untuk mengunggah berita</h5>
-
             <div class="">
                 <button type="button" class="btn btn-md me-2 text-black"
                     style="background-color: #C9C9C9;">
@@ -59,6 +58,125 @@
                     Berikutnya
                 </button>
             </div>
+        </div>
+
+    <div class="card p-4 shadow-sm border mt-1">
+        <div style="padding: 1%;">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12 mb-4 mt-2">
+                            <label class="form-label" for="nomor">Judul Berita</label>
+                            <input type="text" id="name" name="name" placeholder="name"
+                                value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <div class="">
+                                <label class="form-label" for="password_confirmation">Kategori</label>
+                                <select id="category_id"
+                                    class="select2 form-control category @error('category') is-invalid @enderror"
+                                    name="category[]" multiple="true" value="{{ old('category') }}"
+                                    aria-label="Default select example">
+                                    <option selected>pilih kategori</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <div class="mt-2" style="max-width: 100%;">
+                                <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                                <select id="sub_category_id"
+                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                    name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
+                                    aria-label="Default select example">
+                                    <option selected>pilih sub kategori</option>
+                                </select>
+                                @error('sub_category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-4" style="height: auto;">
+                            <label class="form-label" for="content">Content</label>
+                            <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
+                            @error('content')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="gambar-iklan mb-4">
+                                <img id="preview" style="object-fit: cover;" width="230" height="120" alt="">
+                            </div>
+
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label" for="photo">Thumbnail Berita</label>
+                                <input type="file" id="photo" name="photo" onchange="previewImage(event)" placeholder="photo"
+                                    value="{{ old('photo') }}"
+                                    class="text-center form-control @error('photo') is-invalid @enderror">
+                                @error('photo')
+                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
+                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                            @error('date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-lg-12 mb-4">
+                            <label class="form-label" for="password_confirmation">Tags</label>
+                            <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                                <option disabled>pilih tags</option>
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
+                            <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <button type="button" class="btn btn-md text-white m-2"
+                    style="background-color: #1EBB9E;">
+                    Simpan Draf
+                </button>
+            </div>
+
+>>>>>>> c2902b6a45831b6e9c3c1abf7ab3c7d0c8a71a31
         </div>
         <div class="card p-4 shadow-sm border mt-1">
                 <div style="padding: 1%;">
@@ -182,7 +300,7 @@
             <input type="hidden" name="tags" value="{{ serialize(old('tags')) }}">
             <input type="hidden" name="sub_category" value="{{ serialize(old('sub_category')) }}">
             <input type="hidden" name="multi_photo" value="{{ serialize(old('multi_photo')) }}">
-            
+
             <button type="submit" class="btn btn-md text-white m-2"
                 style="background-color: #1EBB9E;">
                 Simpan Draf
@@ -262,7 +380,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
-                height: 250,
+                height: 350,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],
@@ -308,5 +426,15 @@
             tags: true,
             tokenSeparators: [',', ' ']
         })
+
+        function previewImage(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imgElement = document.getElementById("preview");
+            imgElement.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
     </script>
 @endsection

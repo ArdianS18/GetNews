@@ -42,8 +42,20 @@ class PaymentAdvertisementsController extends Controller
      */
     public function store(PaymentAdvertisementsRequest $request)
     {
-        dd($request);
+        // dd($request);
         $data = $request->validated();
+        // $advertisement = $this->news->store($data)->id;
+        // $advertisement = Advertisement::first();
+
+        // Buat data untuk disimpan
+        // $data = [
+        //     'advertisement_id' => $advertisement->id,
+        //     'payment_method' => $request->payment_method,
+        //     'voucher' => $request->voucher,
+        // ];
+
+        
+
         $this->paymentAdvertisements->store($data);
         return back()->with('success', 'berhasil menambahkan data');
     }

@@ -67,8 +67,9 @@ class AdvertisementController extends Controller
         // $this->advertisement->store(($request->validated()));
         $data = $request->validated();
         $data['user_id'] = auth()->id();
-        $this->advertisement->store($data);
-        return redirect('payment-upload')->with('success', trans('alert.alert.add_success'));
+        $advertisement = $this->advertisement->store($data);
+
+        return to_route('payment.advertisement.show', $advertisement->id)->with('success', trans('alert.alert.add_success'));
     }
 
     /**
@@ -76,7 +77,7 @@ class AdvertisementController extends Controller
      */
     public function show(Advertisement $advertisement)
     {
-        //
+        return view('pages.user.iklan.pembayaran', compact('advertisement'));
     }
 
     /**

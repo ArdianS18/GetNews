@@ -103,4 +103,6 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->findOrFail($id)
             ->update($data);
     }
+
+    
 }

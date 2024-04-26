@@ -6,7 +6,7 @@
                     <a href="{{route('user.berlangganan')}}" class="subscribe-btn">Berlangganan<i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/">
                         <img src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" />
                     </a>
                 </div>
@@ -64,34 +64,6 @@
                                 </ul>
                             </li>
                         @else
-                        {{-- <li class="nav-item">
-                            <a href="javascript:void(0)" class="  nav-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    @for ($i = 6; $i < $categories->count(); $i++)
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-heading{{$i}}">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$i}}" aria-expanded="false" aria-controls="flush-collapse{{$i}}">
-                                                    {{$categories[$i]->name}}
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapse{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$i}}" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">
-                                                    @foreach ($categories[$i]->subCategories as $subCategory)
-                                                        <li class="nav-item">
-                                                            <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}" class="nav-link">{{ $subCategory->name }}</a>
-                                                        </li>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            </ul>
-                        </li> --}}
-
                             @break
                         @endif
                     @endforeach

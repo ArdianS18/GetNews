@@ -325,9 +325,11 @@ Route::get('iklan-upload', function(){
 
 Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
 
-Route::get('payment-upload', function(){
-    return view('pages.user.iklan.pembayaran');
-})->name('payment.index');
+// Route::get('payment-upload', function(){
+//     return view('pages.user.iklan.pembayaran');
+// })->name('payment.index');
+
+Route::get('payment-upload/{advertisement}', [AdvertisementController::class, 'show'])->name('payment.advertisement.show');
 
 Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
 
