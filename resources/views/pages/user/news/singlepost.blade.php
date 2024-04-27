@@ -58,29 +58,32 @@
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
                                 <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" alt="Image">
-                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
+                            @if ($newsPhoto)
+                                <div class="thumbnail-container d-flex justify-content-center">
+                                    <div class="thumbnails">
+                                        <div class="thumbnail">
+                                            <img src="{{ asset('storage/' . $news->photo) }}" alt="Image"
+                                                onclick="changeImage(this)">
+                                        </div>
 
-                            <div class="thumbnail-container d-flex justify-content-center">
-                                <div class="thumbnails">
-                                    <div class="thumbnail">
-                                        <img src="{{ asset('storage/' . $news->photo) }}" alt="Image"
-                                            onclick="changeImage(this)">
+                                        @foreach ($newsPhoto as $photo)
+                                            <div class="thumbnail">
+                                                <img src="{{ asset('storage/' . $photo->multi_photo) }}" alt="Image"
+                                                    onclick="changeImage(this)">
+                                                {{-- <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image" onclick="changeImage(this)"> --}}
+                                            </div>
+                                        @endforeach
+                                        {{-- <div class="thumbnail">
+            <img src="{{ asset('assets/img/news/single-news-3.webp') }}" alt="Image"
+                onclick="changeImage(this)">
+        </div> --}}
                                     </div>
-
-                                    @foreach ($newsPhoto as $photo)
-
-                                    <div class="thumbnail">
-                                        <img src="{{ asset('storage/' . $photo->multi_photo) }}" alt="Image" onclick="changeImage(this)">
-                                        {{-- <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image" onclick="changeImage(this)"> --}}
-                                    </div>
-                                    @endforeach
-                                    {{-- <div class="thumbnail">
-                                        <img src="{{ asset('assets/img/news/single-news-3.webp') }}" alt="Image"
-                                            onclick="changeImage(this)">
-                                    </div> --}}
                                 </div>
-                            </div>
+                            @endif
+
                         </div>
 
                         <div class="d-flex justify-content-between">
@@ -231,7 +234,9 @@
                             <div class="comment-item">
                                 @forelse ($comments as $comment)
                                     <div class="comment-author-img">
-                                        <img src="{{ asset( $comment->user->photo ? 'storage/'.$comment->user->photo : "default.png")  }}" alt="Image" width="80px" height="80px" style="border-radius: 50%; object-fit:cover;"/>
+                                        <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
+                                            alt="Image" width="80px" height="80px"
+                                            style="border-radius: 50%; object-fit:cover;" />
                                     </div>
 
                                     <div class="comment-author-wrap">
@@ -240,7 +245,8 @@
                                                 <div class="col-md-9 col-sm-12 col-12 order-md-1 order-sm-1 order-1">
                                                     <div class="comment-author-name">
                                                         <h5>{{ $comment->user->name }}</h5>
-                                                        <span class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
+                                                        <span
+                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
                                                     </div>
                                                 </div>
                                                 <div
@@ -296,7 +302,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3">
-                                        <button type="submit" class="btn-two" style="background-color: #0F4D8A">Kirim Komentar</button>
+                                        <button type="submit" class="btn-two" style="background-color: #0F4D8A">Kirim
+                                            Komentar</button>
                                     </div>
                                 </div>
                             </form>
