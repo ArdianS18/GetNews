@@ -8,7 +8,6 @@ use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
-use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
@@ -34,9 +33,9 @@ class DashboardController extends Controller
     private SubCategoryInterface $subCategory;
     private FaqInterface $faq;
     private ViewInterface $view;
-    private NewsTagInterface $tag;
+    private TagInterface $tag;
 
-    public function __construct(FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $tag)
+    public function __construct(FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq, TagInterface $tag)
     {
         $this->user = $user;
         $this->author = $author;
@@ -72,8 +71,9 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $trendings = $this->view->trending();
 
-        $news_left = $this->news->getByLeft();
+        $news_left = $this->news->getAllNews();
         $news_right = $this->news->getByRight();
+        // dd($news_right);
         $news_mid = $this->news->getByMid();
 
         $populars = $this->news->getByPopular();
@@ -85,8 +85,8 @@ class DashboardController extends Controller
         $tags = $this->tag->get();
         $totalCategories = $this->category->showWhithCount();
 
-
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
+
     }
 
     public function navbar(){
@@ -108,6 +108,7 @@ class DashboardController extends Controller
 
     public function authoruser(Request $request) {
         $authors = $this->author->showWhithCountSearch($request);
+        // dd($authors);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         return view('pages.user.author.index', compact('categories', 'subCategories', 'authors'));
@@ -122,7 +123,10 @@ class DashboardController extends Controller
     public function newspost() {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        return view('pages.user.news.news', compact('categories', 'subCategories'));
+        $news = $this->news->get();
+        $totalCategories = $this->category->showWhithCount();
+
+        return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories'));
     }
 
     public function authordetail() {
