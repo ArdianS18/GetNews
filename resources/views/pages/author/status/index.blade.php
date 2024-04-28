@@ -69,16 +69,19 @@
                 <div class="row card-detail">
                     <div class="col-md-12 col-lg-3">
                         <div class="" style="margin-left: 2%;">
-                            <img src="{{ asset('storage/' . $item->news->photo) }}" alt="{{ $item->news->photo }}"
-                                style="width: 100%;" width="290px" height="170px" class="img-status">
+                            @if ($item->photo)
+                                <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
+                            @else
+                                Tidak Ada Foto
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-7">
                         <div class="d-flex">
 
                             <div class="order-md-1" style="margin-left:20px;">
-                                <h4>{{ $item->news->name }}</h4>
-                                <p>{!! Illuminate\Support\Str::limit($item->news->content, $limit = 300, $end = '...')  !!}</p>
+                                <h4>{{ $item->name }}</h4>
+                                <p>{!! Illuminate\Support\Str::limit($item->content, $limit = 300, $end = '...')  !!}</p>
                             </div>
                         </div>
                     </div>
@@ -87,16 +90,18 @@
                         <div class="d-flex justify-content-end">
                             <div class="text-md-right mt-md-0">
                                 <span
-                                    class="badge fw-bold fs-6 @if ($item->news->status == 'active') bg-light-success text-success
-                                @elseif($item->news->status == 'reject')
+                                    class="badge fw-bold fs-6 @if ($item->status == 'active') bg-light-success text-success
+                                @elseif($item->status == 'reject')
                                 bg-light-danger text-danger
 
                                 @else
                                 bg-light-warning text-warning @endif">
-                                    @if ($item->news->status == 'active')
+                                    @if ($item->status == 'active')
                                         Aktif
-                                    @elseif ($item->news->status == 'reject')
+                                    @elseif ($item->status == 'reject')
                                         Ditolak
+                                    @elseif ($item->status == 'draft')
+                                        Draft
                                     @else
                                     Panding
                                     @endif
@@ -114,7 +119,7 @@
                         </div>
 
                         <div class="mt-3 d-flex justify-content-end">
-                            <a href="{{ route('profile.news.edit', ['id' => $item->news->slug]) }}" class="btn btn-sm m-1"
+                            <a href="{{ route('profile.news.edit', ['id' => $item->slug]) }}" class="btn btn-sm m-1"
                                 style="background-color: #0F4D8A;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
                                     <path
@@ -123,7 +128,7 @@
                                 </svg>
                             </a>
                             <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
-                                <a href="{{ route('detail.news', ['news' => $item->news->slug]) }}">
+                                <a href="{{ route('detail.news', ['news' => $item->slug]) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
                                         viewBox="0 0 512 512">
                                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -135,7 +140,7 @@
                                 </a>
                             </button>
 
-                            <form action="{{ route('profile.news.delete', ['news' => $item->news->id]) }}" method="POST">
+                            <form action="{{ route('profile.news.delete', ['news' => $item->id]) }}" method="POST">
                                 @method('post')
                                 @csrf
                                 <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg

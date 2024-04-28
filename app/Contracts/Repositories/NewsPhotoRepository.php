@@ -78,6 +78,12 @@ class NewsPhotoRepository extends BaseRepository implements NewsPhotoInterface
             ->create($data);
     }
 
+    public function updateOrCreate(array $data): mixed
+    {
+        return $this->model->query()
+            ->updateOrCreate($data);
+    }
+
     /**
      * Handle show method and update data instantly from models.
      *

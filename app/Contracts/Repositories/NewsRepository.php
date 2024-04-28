@@ -71,6 +71,26 @@ class NewsRepository extends BaseRepository implements NewsInterface
             })->get();
     }
 
+    public function searchStatus(mixed $id, Request $request): mixed
+    {
+        return $this->model->query()
+        ->where('author_id', $id)
+        ->when($request->search, function($query) use ($request){
+            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        })
+        ->when($request->stat, function ($query) use ($request){
+            $query->when($request->stat === 'panding', function ($var) {
+                $var->where('status', 'panding');
+            });
+            $query->when($request->stat === 'active', function ($var) {
+                $var->where('status', 'active');
+            });
+            $query->when($request->stat === 'nonactive', function ($var) {
+                $var->where('status', 'nonactive');
+            });
+        })
+        ->get();
+    }
 
     /**
      * Handle get the specified data by id from models.
@@ -144,8 +164,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showWithSlug(string $slug): mixed
     {
         return $this->model->query()
-            ->where(['slug' => $slug, 'status' => NewsStatusEnum::ACTIVE->value])
-            ->whereHas('newsCategories')
+            ->where('slug', $slug)
             ->with(['category', 'author'])
             ->firstOrFail();
     }
@@ -339,6 +358,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->findOrFail($id)
             ->update($data);
+    }
+
+    public function updateOrCreate(array $data): mixed
+    {
+        return $this->model->query()
+            ->updateOrCreate($data);
     }
 
     public function showWhithCount(): mixed

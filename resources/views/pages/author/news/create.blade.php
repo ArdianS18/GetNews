@@ -39,151 +39,135 @@
     </button>
   </div>
 
-  <form method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
-    @csrf
-  <div class="ms-1 mt-5 d-flex justify-content-between">
-    <h5>Isi form dibawah ini untuk mengunggah berita</h5>
+    <form id="myForm" method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="ms-1 mt-5 d-flex justify-content-between">
+            <h5>Isi form dibawah ini untuk mengunggah berita</h5>
 
-    <div class="">
-        <button type="button" class="btn btn-md me-2 text-black"
-            style="background-color: #C9C9C9;">
-            Kembali
-        </button>
-        <button type="submit" class="btn btn-md text-white"
-            style="background-color: #0F4D8A;">
-            Berikutnya
-        </button>
-    </div>
-  </div>
+            <div class="">
+                {{-- <button type="button" class="btn btn-md me-2 text-black"
+                    style="background-color: #C9C9C9;">
+                    Kembali
+                </button> --}}
+                <button type="submit" class="btn btn-md text-white" style="background-color: #0F4D8A;" id="submitButton1">
+                    Rilis
+                </button>
+            </div>
+        </div>
 
-    <div class="card p-4 shadow-sm border mt-1">
-        <div style="padding: 1%;">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-12 mb-4">
-                            <label class="form-label" for="nomor">Judul Berita</label>
-                            <input type="text" id="name" name="name" placeholder="name"
-                                value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="col-lg-12 mb-4">
-                            <div class="">
-                                <label class="form-label" for="password_confirmation">Kategori</label>
-                                <select id="category_id"
-                                    class="select2 form-control category @error('category') is-invalid @enderror"
-                                    name="category[]" multiple="true" value="{{ old('category') }}"
-                                    aria-label="Default select example">
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mb-4">
-                            <div class="mt-2" style="max-width: 100%;">
-                                <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                <select id="sub_category_id"
-                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                    name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
-                                    aria-label="Default select example">
-                                </select>
-                                @error('sub_category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mb-4" style="height: auto;">
-                            <label class="form-label" for="content">Content</label>
-                            <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
-                            @error('content')
-                                <span class="invalid-feedback" role="alert" style="color: red;">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label class="form-label" for="photo">Preview</label>
-                            <div class="gambar-iklan mb-4">
-                                <img id="preview" style="object-fit: cover;" width="230" height="120" alt="">
-                            </div>
-
+        <div class="card p-4 shadow-sm border mt-1">
+            <div style="padding: 1%;">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row">
                             <div class="col-lg-12 mb-4">
-                                <label class="form-label" for="photo">Thumbnail Berita</label>
-                                <input type="file" id="photo" name="photo" onchange="previewImage(event)" placeholder="photo"
-                                    value="{{ old('photo') }}"
-                                    class="text-center form-control @error('photo') is-invalid @enderror">
-                                @error('photo')
+                                <label class="form-label" for="nomor">Judul Berita</label>
+                                <input type="text" id="name" name="name" placeholder="name"
+                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <div class="">
+                                    <label class="form-label" for="password_confirmation">Kategori</label>
+                                    <select id="category_id"
+                                        class="select2 form-control category @error('category') is-invalid @enderror"
+                                        name="category[]" multiple="true" value="{{ old('category') }}"
+                                        aria-label="Default select example">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <div class="mt-2" style="max-width: 100%;">
+                                    <label class="form-label" for="password_confirmation">Sub Kategori</label>
+                                    <select id="sub_category_id"
+                                        class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                        name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
+                                        aria-label="Default select example">
+                                    </select>
+                                    @error('sub_category_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mb-4" style="height: auto;">
+                                <label class="form-label" for="content">Content</label>
+                                <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
+                                @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
-                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
-                            @error('date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="col-lg-12 mb-4">
-                            <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control select2 tags" name="tags[]" multiple="multiple">
-                                <option disabled>pilih tags</option>
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->name }}">{{ $tag->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
                             <div class="col-lg-12">
-                                <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
-                                <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
+                                <label class="form-label" for="photo">Preview</label>
+                                <div class="gambar-iklan mb-4">
+                                    <img id="preview" style="object-fit: cover;" width="230" height="120" alt="">
+                                </div>
+
+                                <div class="col-lg-12 mb-4">
+                                    <label class="form-label" for="photo">Thumbnail Berita</label>
+                                    <input type="file" id="photo" name="photo" onchange="previewImage(event)" placeholder="photo"
+                                        value="{{ old('photo') }}"
+                                        class="text-center form-control @error('photo') is-invalid @enderror">
+                                    @error('photo')
+                                        <span class="invalid-feedback" role="alert" style="color: red;">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                                <input type="date" id="upload_date" name="upload_date" placeholder="date"
+                                    value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                                @error('date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                                <label class="form-label" for="password_confirmation">Tags</label>
+                                <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                                    <option disabled>pilih tags</option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                                <div class="col-lg-12">
+                                    <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
+                                    <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-
-    <form method="POST" action="{{ route('news.draft')}}" enctype="multipart/form-data">
-        @method('post')
-        @csrf
-        <div class="d-flex">
-            <input type="hidden" id="copyName" name="name" value="{{ old('name') }}">
-            <input type="hidden" id="copyContent" name="content" value="{{ old('content') }}">
-            <input type="hidden" name="photo" value="{{ old('photo') }}">
-            <input type="hidden" name="upload_date" value="{{ old('upload_date') }}">
-            <input type="hidden" name="category" value="{{ serialize(old('category')) }}">
-            <input type="hidden" name="tags" value="{{ serialize(old('tags')) }}">
-            <input type="hidden" name="sub_category" value="{{ serialize(old('sub_category')) }}">
-            <input type="hidden" name="multi_photo" value="{{ serialize(old('multi_photo')) }}">
-
-            <button type="submit" class="btn btn-md text-white m-2"
-                style="background-color: #1EBB9E;">
-                Simpan Draf
-            </button>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;" id="submitButton2">
+                    Simpan Draf
+                </button>
+            </div>
         </div>
     </form>
 
@@ -243,6 +227,23 @@
 @endsection
 
 @section('script')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('myForm');
+            var submitButton1 = document.getElementById('submitButton1');
+            var submitButton2 = document.getElementById('submitButton2');
+
+            submitButton1.addEventListener('click', function() {
+                form.action = "{{ route('profile.berita.store') }}";
+            });
+
+            submitButton2.addEventListener('click', function() {
+                form.action = "{{ route('news.draft') }}";
+            });
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>

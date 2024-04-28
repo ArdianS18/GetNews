@@ -371,42 +371,100 @@ class NewsController extends Controller
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
-    public function storeDraft(NewsRequest $request)
+    public function storeDraft(NewsDraftRequest $request)
     {
-        dd($request);
-        $data = $this->NewsService->store($request);
+        $data = $this->NewsService->storeDraft($request);
         $data['status'] = NewsStatusEnum::NEWSDRAFT->value;
         $newsId = $this->news->store($data)->id;
 
-        foreach ($data['category'] as $category) {
-            $this->newsCategory->store([
-                'news_id' => $newsId,
-                'category_id' => $category
-            ]);
+        if ($data['category']) {
+            foreach ($data['category'] as $category) {
+                $this->newsCategory->store([
+                    'news_id' => $newsId,
+                    'category_id' => $category
+                ]);
+            }
         }
 
-        foreach ($data['sub_category'] as $subCategory) {
-            $this->newsSubCategory->store([
-                'news_id' => $newsId,
-                'sub_category_id' => $subCategory
-            ]);
+        if ($data['sub_category']) {
+            foreach ($data['sub_category'] as $subCategory) {
+                $this->newsSubCategory->store([
+                    'news_id' => $newsId,
+                    'sub_category_id' => $subCategory
+                ]);
+            }
         }
 
-        foreach ($data['tags'] as $tagId) {
-            $this->newsTag->store([
-                'news_id' => $newsId,
-                'tag_id' => $tagId
-            ]);
+        if ($data['tags']) {
+            foreach ($data['tags'] as $tagId) {
+                $this->newsTag->store([
+                    'news_id' => $newsId,
+                    'tag_id' => $tagId
+                ]);
+            }
         }
 
-        foreach ($data['multi_photo'] as $img) {
-            $this->newsPhoto->store([
-                'news_id' => $newsId,
-                'multi_photo' => $img,
-            ]);
+        if ($data['multi_photo']) {
+            foreach ($data['multi_photo'] as $img) {
+                $this->newsPhoto->store([
+                    'news_id' => $newsId,
+                    'multi_photo' => $img,
+                ]);
+            }
         }
 
         return ResponseHelper::success(null, trans('alert.add_success'));
+    }
+
+    public function updateDraft(NewsDraftRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
+    {
+        $data = $this->NewsService->updateDraft($request, $news, $newsPhoto);
+        $data['status'] = NewsStatusEnum::NEWSDRAFT->value;
+        $this->news->update($news->id, $data);
+
+        if ($request->hasFile('multi_photo')) {
+            $newsPhoto->where('news_id', $news->id)->delete();
+            foreach ($data['multi_photo'] as $photo) {
+                $newsPhoto->create([
+                    'news_id' => $news->id,
+                    'multi_photo' => $photo
+                ]);
+            }
+        }
+
+        $newsCategory->where('news_id', $news->id)->delete();
+        if ($data['category']) {
+            foreach ($data['category'] as $category) {
+                $this->newsCategory->store([
+                    'news_id' => $news->id,
+                    'category_id' => $category
+                ]);
+            }
+        }
+
+        $newsSubCategory->where('news_id', $news->id)->delete();
+        if ($data['sub_category']) {
+            foreach ($data['sub_category'] as $subCategory) {
+                $this->newsSubCategory->store([
+                    'news_id' => $news->id,
+                    'sub_category_id' => $subCategory
+                ]);
+            }
+        }
+
+        $newsTag->where('news_id', $news->id)->delete();
+        if ($data['tags']) {
+            foreach ($data['tags'] as $tagId) {
+                $this->newsTag->store([
+                    'news_id' => $news->id,
+                    'tag_id' => $tagId
+                ]);
+            }
+        }
+
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
+
     }
 
     /**
@@ -494,7 +552,7 @@ class NewsController extends Controller
     {
         $id = auth()->user()->id;
         $author_id = Author::where('user_id', $id)->value('id');
-        $news = $this->newsCategory->searchStatus($author_id, $request);
+        $news = $this->news->searchStatus($author_id, $request);
         return view('pages.author.status.index', compact('news'));
     }
 }

@@ -10,13 +10,14 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\ShowSlugInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
+use App\Contracts\Interfaces\Eloquent\UpdateOrCreateInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInterface;
 use Illuminate\Foundation\Mix;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface
+interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface, UpdateOrCreateInterface
 {
     public function showWhithCount() : mixed;
     public function showCountMonth() : mixed;
@@ -33,4 +34,6 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function getByPopular() : mixed;
     public function latest() : mixed;
     public function StatusBanned($author, $data) : mixed;
+
+    public function searchStatus(mixed $id, Request $request) : mixed;
 }

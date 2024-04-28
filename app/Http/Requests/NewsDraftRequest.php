@@ -18,11 +18,11 @@ class NewsDraftRequest extends FormRequest
             'photo' => 'nullable|mimes:jpg,png,jpeg',
             'multi_photo' => 'nullable',
             'content' => 'nullable',
-            'category' => 'array|nullable',
+            'category' => 'nullable|array',
             'category.*' => 'nullable',
-            'sub_category' => 'array|nullable',
+            'sub_category' => 'nullable|array',
             'sub_category.*' => 'nullable',
-            'tags' => 'array|nullable',
+            'tags' => 'nullable|array',
             'tags.*' => 'nullable',
             'upload_date' => 'nullable'
         ];

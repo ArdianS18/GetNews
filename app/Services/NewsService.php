@@ -95,11 +95,11 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         ];
     }
 
-    public function storeDraft(NewsDraftRequest $request)
+    public function storeDraft(?NewsDraftRequest $request = null)
     {
-        $data = $request->validated();
+        $data = $request ? $request->validated() : null;
 
-        if ($request->has('tags')) {
+        if ($request && $request->has('tags')) {
             $newTags = [];
             foreach ($request->input('tags') as $tagName) {
                 $tag = Tag::updateOrCreate(
@@ -108,38 +108,97 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 );
                 $newTags[] = $tag->id;
             }
-
             $data['tags'] = $newTags;
         }
 
         $multi_photo = [];
-            if ($request->hasFile('multi_photo')) {
-                foreach ($request->file('multi_photo') as $image) {
-                    $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-                    $multi_photo[] = $stored_image;
-                }
+        if ($request && $request->hasFile('multi_photo')) {
+            foreach ($request->file('multi_photo') as $image) {
+                $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
+                $multi_photo[] = $stored_image;
             }
+        }
 
-            $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+            $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
 
             $domQuestion = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-            $this->processImages($domQuestion);
-
+            $content = $data['content'] ?? '-';
+            if (!$content) {
+                $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+                $this->processImages($domQuestion);
+            }
             libxml_clear_errors();
 
         return [
             'author_id' => auth()->user()->author->id,
-            'name' => $data['name'],
-            'photo' => $image,
-            'multi_photo' => $multi_photo,
-            'content' => $domQuestion->saveHTML(),
+            'name' => $data['name'] ??  null,
+            'photo' => $image ?? null,
+            'multi_photo' => $multi_photo ?? null,
+            'content' => $domQuestion->saveHTML() ?: null,
             'slug' => Str::slug($data['name']),
-            'category' => $data['category'],
-            'sub_category' => $data['sub_category'],
-            'tags' => $data['tags'],
-            'upload_date' => $data['upload_date']
+            'category' => $data['category'] ?? null,
+            'sub_category' => $data['sub_category'] ?? null,
+            'tags' => $data['tags'] ?? null,
+            'upload_date' => $data['upload_date'] ?? null
+        ];
+    }
+
+    public function updateDraft(?NewsDraftRequest $request = null, News $news, NewsPhoto $newsPhoto)
+    {
+        $data = $request ? $request->validated() : null;
+
+        if ($request && $request->has('tags')) {
+            $newTags = [];
+            foreach ($request->input('tags') as $tagName) {
+                $tag = Tag::updateOrCreate(
+                    ['name' => $tagName],
+                    ['slug' => Str::slug($tagName)]
+                );
+                $newTags[] = $tag->id;
+            }
+            $data['tags'] = $newTags;
+        }
+
+        $old_photo = $news->photo;
+        $new_photo= "";
+
+        $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
+        $new_multi_photo = [];
+
+        if ($request->hasFile('multi_photo')) {
+            foreach ($request->file('multi_photo') as $image) {
+                $this->remove($image);
+                $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
+                $new_multi_photo[] = $stored_image;
+            }
+        }
+
+        if ($request->hasFile('photo')) {
+            $this->remove($old_photo);
+            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+        }
+
+        $domQuestion = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $content = $data['content'] ?? '-';
+        if (!$content) {
+            $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+        }
+        libxml_clear_errors();
+
+        return [
+            'author_id' => auth()->user()->author->id,
+            'name' => $data['name'] ??  null,
+            'photo' => $old_photo ?: $new_photo ?? null,
+            'multi_photo' => $old_multi_photo ?: $new_multi_photo ?? null,
+            'content' => $domQuestion->saveHTML() ?: null,
+            'slug' => Str::slug($data['name']),
+            'category' => $data['category'] ?? null,
+            'sub_category' => $data['sub_category'] ?? null,
+            'tags' => $data['tags'] ?? null,
+            'upload_date' => $data['upload_date'] ?? null
         ];
     }
 
@@ -182,12 +241,19 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             }
         }
 
-
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
         }
 
+        $domQuestion = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $content = $data['content'] ?? '-';
+        if (!$content) {
+            $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+        }
+        libxml_clear_errors();
 
         $id = "";
         if (auth()->user()->roles->pluck('name')->contains("admin")) {
