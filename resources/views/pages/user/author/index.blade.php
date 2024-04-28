@@ -60,35 +60,28 @@
                             <div class="p-4 text-center">
                                 <img src="{{asset($item->photo ? 'storage/'.$item->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
                                 <h5>{{ $item->name }}</h5>
-                                @if (auth()->user()->author->id != $item->id)
-                                    <form action="{{ route('follow.author', ['author' => $item->id]) }}" method="POST">
-                                        @method('post')
-                                        @csrf
-                                        <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                    </form>
-                                @else
-                                    
-                                @endif
-                                @php
-                                    $user_id = auth()->user()->id;
-                                    $author_id = $item->id;
-                                    $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
-                                    $author = DB::table('authors')->where('user_id', $user_id)->where('id', auth()->user()->author->id);
-                                @endphp
+                                @if (auth()->user()->id != $item->user_id)
+                                    @php
+                                        $user_id = auth()->user()->id;
+                                        $author_id = $item->id;
+                                        $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
+                                    @endphp
 
-                                @if($author)
-                                @elseif ($isFollowing)
-                                    <form action="{{ route('unfollow.author', ['author' => $item->id]) }}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
-                                    </form>
+                                    @if ($isFollowing)
+                                        <form action="{{ route('unfollow.author', ['author' => $item->id]) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow.author', ['author' => $item->id]) }}" method="POST">
+                                            @method('post')
+                                            @csrf
+                                            <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                        </form>
+                                    @endif
                                 @else
-                                    <form action="{{ route('follow.author', ['author' => $item->id]) }}" method="POST">
-                                        @method('post')
-                                        @csrf
-                                        <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                    </form>
+                                    Ini akun Anda
                                 @endif
 
                                 <div class="d-flex align-items-center justify-content-between mt-4">

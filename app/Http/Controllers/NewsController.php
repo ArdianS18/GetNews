@@ -39,6 +39,7 @@ use App\Models\NewsReport;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\Report;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -195,7 +196,11 @@ class NewsController extends Controller
         $categories = $this->category->get();
         $users = $this->user->get();
         $newsPhoto = $this->newsPhoto->where($newsId);
-        $likedByUser = $userLike->contains(auth()->user()->id);
+        if (Auth::check()) {
+            $likedByUser = $userLike->contains(auth()->user()->id);
+        } else {
+            $likedByUser = null;
+        }
         $populars = $this->news->getByPopular();
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
