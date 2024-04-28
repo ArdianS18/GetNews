@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="row">
-                        <div class="col-lg-12 mb-4 mt-2">
+                        <div class="col-lg-12 mb-4">
                             <label class="form-label" for="nomor">Judul Berita</label>
                             <input type="text" id="name" name="name" placeholder="name"
                                 value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
@@ -120,7 +120,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="gambar-iklan mb-4">
-                                <img id="preview" style="object-fit: cover;" width="230" height="120" alt="">
+                                <label class="form-label" for="photo">Preview</label>
+                                <div>
+                                    <img id="preview" style="object-fit: cover;" width="190" height="90" alt="">
+                                </div>
                             </div>
 
                             <div class="col-lg-12 mb-4">
@@ -250,7 +253,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
-                height: 350,
+                height: 370,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],
