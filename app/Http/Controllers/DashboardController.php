@@ -16,6 +16,7 @@ use App\Http\Requests\ViewRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View ;
 
@@ -76,7 +77,7 @@ class DashboardController extends Controller
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
-        $picks = $this->news->getByPick();
+        $picks = $this->newsCategory->get();
         $generals = $this->news->getByGeneral();
         $tags = $this->tag->get();
         $totalCategories = $this->category->showWhithCount();
@@ -120,7 +121,9 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);
         $totalCategories = $this->category->showWhithCount();
-        return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories'));
+        $newsByDate = $this->news->whereDate(Carbon::now());
+        $populars = $this->news->getByPopular();
+        return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
 
     public function authordetail() {
