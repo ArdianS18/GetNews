@@ -446,4 +446,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
         ->where('author_id', $author)->update($data);
     }
+
+    public function whereDate($date) : mixed
+
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereDate('created_at', '<', $date)
+            ->withCount('views')
+            ->get();
+    }
 }

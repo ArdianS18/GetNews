@@ -15,7 +15,7 @@
     </div>
 
     <div class="sports-wrap ptb-100">
-        <div class="container">
+        <div class="ps-5 pe-5">
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <div class="row">
@@ -24,8 +24,7 @@
                                 <div class="news-card-thirteen">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $newsSubCategory->news->photo) }}"
-                                            alt="{{ $newsSubCategory->news->photo }}" style="width: 100%;height:100%;"
-                                            width="400px" height="234" class="img-status">
+                                            alt="{{ $newsSubCategory->news->photo }}" height="400" style="width: 100%;object-fit:cover;" class="img-status">
                                         {{-- <img src="{{ asset('assets/img/test1.svg') }}" width="400px" height="234"
                                         style="width: 100%;height:100%;" alt="Iamge"> --}}
                                         <a href="{{ route('subcategories.show.user', ['subCategory' => $newsSubCategory->subCategory->slug]) }}"
@@ -37,7 +36,7 @@
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="news-by-date.html">{{ $newsSubCategory->news->created_at->format('M d, Y') }}</a>
+                                                    href="javascript:void(0)">{{ $newsSubCategory->news->created_at->format('M d, Y') }}</a>
                                             </li>
                                             <li><i
                                                     class="fi fi-rr-eye"></i>{{ $newsSubCategory->news->views->count() }}
@@ -102,7 +101,7 @@
                                                 <img src="{{ asset('storage/' . $news->photo) }}" width="100%" height="80">
                                             </div>
                                             <div class="news-card-info">
-                                                <h3><a href="business-details.html">{{ $news->name }}</a>
+                                                <h3><a href="#">{{ $news->name }}</a>
                                                 </h3>
                                                 <ul class="news-metainfo list-style">
                                                     <li>
@@ -113,11 +112,11 @@
                                                                     d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
                                                                     fill="#E93314" />
                                                             </svg></i><a
-                                                            href="news-by-date.html">{{ $news->created_at_formatted }}</a>
+                                                            href="javascript:void(0)">{{ $news->created_at_formatted }}</a>
                                                     </li>
                                                     <li>
                                                         <i class="fi fi-rr-eye">
-                                                        </i><a href="news-by-date.html">{{ $news->views_count }}</a>
+                                                        </i><a href="news-by-dateus">{{ $news->views_count }}</a>
                                                     </li>
                                                 </ul>
                                             </div>

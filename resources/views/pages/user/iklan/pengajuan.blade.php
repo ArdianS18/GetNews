@@ -6,7 +6,7 @@
 <style>
     .card.active {
         border: 1px solid #175A95;
-        box-shadow: 0 3px 20px #175A95;
+        box-shadow: 0 1px 5px #175A95;
     }
 </style>
 @endsection
@@ -122,7 +122,10 @@
                 @enderror
             </div>
             <div class="gambar-iklan">
-                <img id="preview" style="object-fit: cover;" width="250" height="180" alt="">
+                <label class="form-label" for="preview">Preview</label>
+                <div class="">
+                    <img id="preview" style="object-fit: cover;" width="240" height="160" alt="">
+                </div>
             </div>
         </div>
     </div>

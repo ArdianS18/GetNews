@@ -38,7 +38,7 @@
         Ketentuan & Persyaratan
     </button>
   </div>
-
+  
     <form id="myForm" method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="ms-1 mt-5 d-flex justify-content-between">

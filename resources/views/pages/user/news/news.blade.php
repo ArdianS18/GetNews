@@ -51,7 +51,7 @@
     <div class="row gx-55 gx-5">
         <div class="col-lg-8">
             <div class="row">
-                @forelse ($news as $item)
+                @forelse ($newsByDate as $item)
                 <div class="col-md-6">   
                     <div class="news-card-thirteen">
                         <div class="news-card-img">
@@ -68,7 +68,7 @@
                             </h3>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                        href="news-by-date.html">{{ $item->created_at->format('M d, Y') }}</a>
+                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($item->create_at)->format('M d Y') }}</a>
                                 </li>
                                 <li><i
                                         class="fi fi-rr-eye"></i>{{ $item->views->count() }}
@@ -127,13 +127,14 @@
                 <div class="sidebar-widget">
                     <h3 class="sidebar-widget-title">Berita Popular</h3>
                     <div class="pp-post-wrap">
-                        @forelse ($news as $news)
+                        @forelse ($populars as $popular)
                         <div class="news-card-one">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $news->photo) }}"width="100%" height="80">
+                                <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" height="80">
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="business-details.html">{{ $news->name }}</a>
+                                <h3><a
+                                        href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{{ $popular->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li>
@@ -141,15 +142,19 @@
                                         <i><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                 height="20" viewBox="0 0 512 512">
                                                 <path
-                                                    d=
-                                                    "M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
+                                                    d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
                                                     fill="#E93314" />
                                             </svg></i><a
-                                            href="news-by-date.html">{{ $news->created_at_formatted }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->upload_date)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li>
-                                        <i class="fi fi-rr-eye">
-                                        </i><a href="news-by-date.html">{{ $news->views_count }}</a>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                        viewBox="0 0 24 24">
+                                        <path fill="#e93314"
+                                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                                    </svg>
+                                    </i><a href="javascript:void(0)">{{ $popular->views }}</a></li>
+
                                     </li>
                                 </ul>
                             </div>

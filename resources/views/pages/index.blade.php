@@ -22,7 +22,7 @@
                                         <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="business-details.html">{{ $trending->news->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, 'page' => '1']) }}">{{ $trending->news->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
                                         </ul>
@@ -79,7 +79,7 @@
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->upload_date)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
 
@@ -107,7 +107,7 @@
                                         href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">{{ $mid->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $mid->views }}</li>
@@ -128,7 +128,7 @@
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
                                 </ul>
@@ -180,7 +180,7 @@
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="news-by-date.html">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $barus->views }}</li>
                                 </ul>
@@ -203,24 +203,24 @@
                 <div class="col-xl-6">
                     <div class="editor-box">
                         <div class="row align-items-end mb-40">
-                            <div class="col-xl-6 col-md-6">
-                                <h2 class="section-title">Editor's Pick<img class="section-title-img"
-                                        src="assets/img/section-img.webp" alt="Image" /></h2>
+                            <div class="col-md-6">
+                                <h2 class="section-title">Editor's Pick
+                                    <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
+                                </h2>
                             </div>
-                            <div class="col-xl-6 col-md-6">
+                            <div class="col-md-6">
                                 <ul class="nav nav-tabs news-tablist" role="tablist">
-                                    {{-- @forelse ($editor_pick as $pick)
-                                    <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab{{ $pick->category->id }}" data-bs-target="#tab_1{{ $pick->category->id }}"
-                                        type="button" role="tab{{ $pick->category->id }}">{{ $pick->category->name }}
-                                        </button>
-                                    </li>
+                                    @forelse ($editor_pick as $pick)
+                                        <li class="nav-item">
+                                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_{{ $pick->category->id }}"
+                                                type="button" role="tab">{{ $pick->category->name }}</button>
+                                        </li>
                                     @empty
-                                    @endforelse --}}
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
-                        <div class="tab-content editor-news-content">
+                        <div class="tab-content col-md-12 editor-news-content">
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
                                     @forelse ($picks as $pick)
@@ -228,235 +228,31 @@
                                             <div class="news-card-six">
                                                 <div class="news-card-img">
                                                     <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
-                                                    <a href="{{ route('categories.show.user', ['category' => $pick->newsCategories[0]->category->slug]) }}"
-                                                        class="news-cat">{{ $pick->newsCategories[0]->category->name }}</a>
                                                 </div>
                                                 <div class="news-card-info">
-                                                    <div class="news-author">
+                                                    {{-- <div class="news-author">
                                                         <div class="news-author-img">
                                                             <img src="{{ asset($pick->author->user->photo ? 'storage/' . $pick->author->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="40px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
-                                                            {{-- <img src="assets/img/author/author-thumb-1.webp" alt="Image" /> --}}
                                                         </div>
                                                         <h5>By <a href="author.html">{{ $pick->author->user->name }}</a>
                                                         </h5>
-                                                    </div>
-                                                    <h3><a
-                                                            href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
+                                                    </div> --}}
+                                                    <h3>
+                                                        {{-- <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a> --}}
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
                                                         <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                                href="news-by-date.html">{{ \Carbon\Carbon::parse($pick->created_at)->translatedFormat('d F Y') }}</a>
+                                                                href="javascript:void(0)">{{ \Carbon\Carbon::parse($pick->created_at)->translatedFormat('d F Y') }}</a>
                                                         </li>
-                                                        {{-- <li><i class="fi fi-rr-comment"></i>03</li> --}}
                                                         <li><i class="fi fi-rr-eye"></i>{{ $pick->views }}</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                        @empty
+                                        </div>
+                                    @empty
                                     @endforelse
-
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab_2" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-42.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Sports</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-5.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Joe Gibbs discusses Ty Gibbs incident
-                                                        at Martinsville</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 07, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>12 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-43.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Sports</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-2.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">ELIJAH JAMES</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">The Heart of a Champion: Mental
-                                                        Toughness in Sports</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 03, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-44.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Sports</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-3.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By<a href="author.html">BANKS GAIN</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Breaking Barriers: Inspiring Stories in
-                                                        Sports</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Feb 03, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>12 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-45.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Sports</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-4.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">HARPAR LUNA</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Unleashing Your Inner Athlete: The
-                                                        Power of Sports</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 03, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>14 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="tab_3" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-46.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Business</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Navigating the Entrepreneurial Journey:
-                                                        Tips for Success</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Apr 15, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-47.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Business</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-2.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">ELIJAH JAMES</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Revolutionizing Business: The Power of
-                                                        Innovation</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Mar 03, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>10 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-48.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Business</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-3.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By<a href="author.html">BANKS GAIN</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">From Start-Up to Scale-Up: Growing Your
-                                                        Business</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Feb 22, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="news-card-six">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-49.webp" alt="Image" />
-                                                <a href="business.html" class="news-cat">Business</a>
-                                            </div>
-                                            <div class="news-card-info">
-                                                <div class="news-author">
-                                                    <div class="news-author-img">
-                                                        <img src="assets/img/author/author-thumb-4.webp" alt="Image" />
-                                                    </div>
-                                                    <h5>By <a href="author.html">HARPAR LUNA</a></h5>
-                                                </div>
-                                                <h3><a href="business-details.html">Building a Thriving Business:
-                                                        Strategies for Success</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                            href="news-by-date.html">Feb 05, 2023</a></li>
-                                                    <li><i class="fi fi-rr-comment"></i>03</li>
-                                                    <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -466,15 +262,15 @@
                     <div class="pp-news-box">
                         <ul class="nav nav-tabs news-tablist-two" role="tablist">
                             <li class="nav-item">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_10"
-                                    type="button" role="tab">Popular News</button>
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_10" type="button"
+                                    role="tab">Popular News</button>
                             </li>
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_11" type="button"
                                     role="tab">Recent News</button>
                             </li>
                         </ul>
-
+    
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
@@ -483,20 +279,18 @@
                                             <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="business.html" class="news-cat">{{ $popular->category_names }}</a>
-                                            <h3><a href="business-details.html">{{ $popular->name }}</a></h3>
+                                            <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->category_names }}</a>
+                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, 'page' => '1']) }}">{{ $popular->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
-                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb
-                                                        03,
-                                                        2023</a></li>
-                                                <li><i class="fi fi-rr-comment"></i>03</li>
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
+                                                </li>
                                                 <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
                                             </ul>
                                         </div>
                                     </div>
                                 @empty
                                 @endforelse
-
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
                                 @forelse ($news_recent as $recent)
@@ -505,90 +299,28 @@
                                             <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="business.html" class="news-cat">{{ $recent->category_names }}</a>
-                                            <h3><a href="business-details.html">{{ $recent->name }}</a></h3>
+                                            <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->category_names }}</a>
+                                            <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
-                                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb
-                                                        15, 2023</a></li>
-                                                <li><i class="fi fi-rr-comment"></i>03</li>
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->created_at)->translatedFormat('d F Y') }}</a>
+                                                </li>
                                                 <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
                                             </ul>
                                         </div>
                                     </div>
                                 @empty
                                 @endforelse
-                                {{-- <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-54.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Lifestyle</a>
-                                        <h3><a href="business-details.html">Discovering Your Personal Bliss: A Guide to a
-                                                Fulfilling Lifestyle</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 15,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-55.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Photography</a>
-                                        <h3><a href="business-details.html">Capturing Life's Moments: Tips for Better
-                                                Photography</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 14,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-56.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Business</a>
-                                        <h3><a href="business-details.html">Empowering Your Business: Strategies for
-                                                Growth</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 18,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-seven">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-57.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Sports</a>
-                                        <h3><a href="business-details.html">Unleashing Your Inner Champion: The Excitement
-                                                of Sports Competition</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 22,
-                                                    2023</a></li>
-                                            <li><i class="fi fi-rr-comment"></i>03</li>
-                                            <li><i class="fi fi-rr-eye"></i>12 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
-
+    
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    
 
     <div class="general-news ptb-100">
         <div class="container-fluid">
@@ -612,11 +344,11 @@
                                         {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">{{ $general->category_names }}</a>
-                                        <h3><a href="business-details.html">{{ $general->name }}</a></h3>
+                                        <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->category_names }}</a>
+                                        <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="news-by-date.html">{{ $general->upload_date }}</a></li>
+                                                    href="javascript:void(0)">{{ $general->upload_date }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -742,8 +474,8 @@
                         <div class="contact-widget">
                             <img src="assets/img/contact-bg.svg" alt="Image" class="contact-shape" />
                             <a href="index.html" class="logo">
-                                <img class="logo-light" src="assets/img/logo.webp" alt="Image" />
-                                <img class="logo-dark" src="assets/img/logo-white.webp" alt="Image" />
+                                <img class="logo-light" src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="Image" />
+                                <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" />
                             </a>
                             <p>Mauris mattis auctor cursus. Phasellus iso tellus tellus, imperdiet ut imperdiet eu,
                                 noiaculis a sem Donec vehicula luctus nunc in laoreet Aliquam</p>
@@ -772,7 +504,7 @@
                             @forelse ($popular_post as $post)
                                 <div class="news-card-one">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" />
+                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" width="100%" height="80"/>
                                         {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
@@ -865,7 +597,7 @@
                         <h3 class="sidebar-widget-title">Popular Tags</h3>
                         <ul class="tag-list list-style">
                             @forelse ($tags as $tag)
-                            <li><a href="news-by-tags.html">{{ $tag->tag->name }}</a></li>
+                            <li><a href="#">{{ $tag->tag->name }}</a></li>
                             @empty
                                 
                             @endforelse

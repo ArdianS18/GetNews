@@ -9,8 +9,8 @@
         box-shadow: 0 3px 20px #175A95;
     }
     .border-blue {
-        border: 2px solid #175A95 !important; 
-        box-shadow: 0 3px 20px #175A95;
+        /* border: 2px solid #175A95 !important;  */
+        box-shadow: 0 1px 5px #175A95;
     }
 </style>
 @endsection
@@ -202,7 +202,7 @@
                                 <div class="col-lg-6 mt-2">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bri" class="me-2" style="accent-color: #0056b3;">
+                                            <input type="radio" name="payment_method" value="bri" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bri.svg')}}" width="100px" alt="">
@@ -218,7 +218,7 @@
                                 <div class="col-lg-6 mt-2">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="mandiri" class="me-2" style="accent-color: #0056b3;">
+                                            <input type="radio" name="payment_method" value="mandiri" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-mandiri.svg')}}" width="100px" alt="">
@@ -234,7 +234,7 @@
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bca" class="me-2">
+                                            <input type="radio" name="payment_method" value="bca" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bca.svg')}}" width="100px" alt="">
@@ -249,7 +249,7 @@
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bni" class="me-2">
+                                            <input type="radio" name="payment_method" value="bni" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bni.svg')}}" width="100px" alt="">
@@ -264,7 +264,7 @@
                                 <div class="col-lg-6">
                                     <div class="card p-3 border" onclick="selectCard(this)">
                                         <div class="d-flex align-items-center">
-                                            <input type="radio" name="payment_method" value="bsi" class="me-2">
+                                            <input type="radio" name="payment_method" value="bsi" style="display: none;" class="me-2">
                                             <label for="bri_va" class="mb-0 d-flex">
                                                 <div class="d-flex">
                                                     <img src="{{asset('assets/img/bank-bsi.svg')}}" width="100px" alt="">
@@ -283,7 +283,7 @@
                             <div class="col-lg-6 mt-2">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="gopay" class="me-2">
+                                        <input type="radio" name="payment_method" value="gopay" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-gopay.svg')}}" width="100px" alt="">
@@ -299,7 +299,7 @@
                             <div class="col-lg-6 mt-2">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="ovo" class="me-2">
+                                        <input type="radio" name="payment_method" value="ovo" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-ovo.svg')}}" width="100px" alt="">
@@ -315,7 +315,7 @@
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="dana" class="me-2">
+                                        <input type="radio" name="payment_method" value="dana" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-dana.svg')}}" width="100px" alt="">
@@ -331,7 +331,7 @@
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="indomart" class="me-2">
+                                        <input type="radio" name="payment_method" value="indomart" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-indomart.svg')}}" width="100px" alt="">
@@ -347,7 +347,7 @@
                             <div class="col-lg-6">
                                 <div class="card p-3 border" onclick="selectCard(this)">
                                     <div class="d-flex align-items-center">
-                                        <input type="radio" name="payment_method" value="alfamart" class="me-2">
+                                        <input type="radio" name="payment_method" value="alfamart" style="display: none;" class="me-2">
                                         <label for="bri_va" class="mb-0 d-flex">
                                             <div class="d-flex">
                                                 <img src="{{asset('assets/img/wallet-alfamart.svg')}}" width="100px" alt="">

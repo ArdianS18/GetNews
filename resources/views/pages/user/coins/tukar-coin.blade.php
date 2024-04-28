@@ -3,8 +3,8 @@
 @section('style')
     <style>
     .card.active {
-        border: 1px solid #175A95;
-        box-shadow: 0 3px 20px #175A95;
+        /* border: 1px solid #175A95; */
+        box-shadow: 0 1px 5px #175A95;
     }
     </style>
 @endsection
@@ -69,7 +69,9 @@
             <h5 class="mt-5 fw-semibold mb-4">Tarik Uang Ke :</h5>
             <div class="d-flex">
                 <p class="fs-5">Metode Penarikan : </p>
-                <span class="fs-5 ms-4" data-bs-toggle="modal" data-bs-target="#modal-create" style="color: #5D87FF;">Pilih Metode Penarikan</span>
+                <div class="">
+                    <button class="ms-3 btn btn-outline-light text-primary" data-bs-toggle="modal" data-bs-target="#modal-create" style="color: #5D87FF;">Pilih Metode Penarikan</button>
+                </div>
             </div>
 
             <div class="mt-2 mb-4">

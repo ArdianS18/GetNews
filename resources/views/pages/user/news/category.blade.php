@@ -12,7 +12,7 @@
 </div>
 
 <div class="sports-wrap ptb-100">
-    <div class="container">
+    <div class="ps-5 pe-5">
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
                 <div class="row justify-content-center">
@@ -20,14 +20,14 @@
                         <div class="col-md-6">
                             <div class="news-card-thirteen">
                                 <div class="news-card-img">
-                                    <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="{{ $newsCategory->news->photo }}" style="width: 100%;height:100%;" width="400px" height="234">
+                                    <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="{{ $newsCategory->news->photo }}" width="400px" height="300" style="width: 100%;object-fit:cover;">
                                     {{-- <img src="{{asset('assets/img/test1.svg')}}" width="400px" height="234" style="width: 100%;height:100%;" alt="Iamge"> --}}
-                                    <a href="kesehatan.html" class="news-cat">{{ $newsCategory->category->name }}</a>
+                                    <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newsCategory->category->name }}</a>
                                 </div>
                                 <div class="news-card-info">
-                                    <h3><a href="kesehatan-details.html">{{ $newsCategory->news->name }}</a></h3>
+                                    <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{{ $newsCategory->news->name }}</a></h3>
                                     <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ $newsCategory->news->created_at->format('M d, Y') }}</a></li>
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ $newsCategory->news->created_at->format('M d, Y') }}</a></li>
                                         <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views->count() }}</li>
                                     </ul>
                                 </div>
@@ -83,7 +83,7 @@
                                         <img src="{{ asset('storage/' . $news->photo) }}"width="100%" height="80">
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="business-details.html">{{ $news->name }}</a>
+                                        <h3><a href="#">{{ $news->name }}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li>
@@ -94,11 +94,11 @@
                                                             d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
                                                             fill="#E93314" />
                                                     </svg></i><a
-                                                    href="news-by-date.html">{{ $news->created_at_formatted }}</a>
+                                                    href="javascript:void(0)">{{ $news->created_at_formatted }}</a>
                                             </li>
                                             <li>
                                                 <i class="fi fi-rr-eye">
-                                                </i><a href="news-by-date.html">{{ $news->views_count }}</a>
+                                                </i><a href="javascript:void(0)">{{ $news->views_count }}</a>
                                             </li>
                                         </ul>
                                     </div>
