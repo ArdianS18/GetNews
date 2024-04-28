@@ -58,18 +58,21 @@
                             <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="300" style="width: 100%;object-fit:cover;">
                             @foreach ($subCategories as $subCategory)
                                 <p class="tag">
-                                    {{-- <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->subCategory->slug]) }}" class="news-cat">{{ $subCategory->subCategory->name }}</a> --}}
+                                    <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
                                 </p>
                             @endforeach
                         </div>
                         <div class="news-card-info">
-                            <h3>
-                                <a
-                                    href="{{ route('news.user', ['news' => $item->slug, 'page' => '1']) }}">{{ $item->name }}</a>
+                            <h3><a
+                                href="{{ route('news.user', ['news' => $item->slug, 'page' => '1']) }}">{{ $item->name }}</a>
                             </h3>
                             <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</a></li>
-                                <li><i class="fi fi-rr-clock-three"></i>{{ $item->views }}</li>
+                                <li><i class="fi fi-rr-calendar-minus"></i><a
+                                        href="news-by-date.html">{{ $item->created_at->format('M d, Y') }}</a>
+                                </li>
+                                <li><i
+                                        class="fi fi-rr-eye"></i>{{ $item->views->count() }}
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -100,8 +103,8 @@
         <div class="col-lg-4">
             <div class="sidebar">
                 <div class="sidebar-widget-two">
-                    <form action="#" class="search-box-widget">
-                        <input type="search" placeholder="Search">
+                    <form class="search-box-widget">
+                        <input type="search" name="search" placeholder="Search">
                         <button type="submit">
                             <i class="fi fi-rr-search"></i>
                         </button>

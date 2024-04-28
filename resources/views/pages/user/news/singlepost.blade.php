@@ -278,11 +278,11 @@
                             </div>
                         </div>
                         <div class="post-pagination">
-                            <a class="prev-post" href="business-details.html">
+                            <a class="prev-post" href="/">
                                 <span>Berita Lainya</span>
                                 <h6>The Future Of Business: Predictions And Trends To Watch</h6>
                             </a>
-                            <a class="next-post" href="business-details.html">
+                            <a class="next-post" href="/">
                                 <span>NEXT</span>
                                 <h6>From Start-up To Scale-up: Navigating Growth In Your Business</h6>
                             </a>
@@ -331,7 +331,7 @@
                                 @forelse ($populars as $popular)
                                     <div class="news-card-one">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image">
+                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a
@@ -367,6 +367,16 @@
                         </div>
                         <div class="sidebar-widget" style="height: 700px">
                             <h3 class="sidebar-widget-title">iklan</h3>
+                        </div>
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Popular Tags</h3>
+                            <ul class="tag-list list-style">
+                                @forelse ($tags as $tag)
+                                <li><a href="#">{{ $tag->tag->name }}</a></li>
+                                @empty
+                                    
+                                @endforelse
+                            </ul>
                         </div>
                     </div>
                 </div>

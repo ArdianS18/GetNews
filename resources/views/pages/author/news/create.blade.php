@@ -252,7 +252,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
-                height: 350,
+                height: 370,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],

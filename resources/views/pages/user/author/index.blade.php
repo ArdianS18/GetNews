@@ -60,6 +60,15 @@
                             <div class="p-4 text-center">
                                 <img src="{{asset($item->photo ? 'storage/'.$item->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
                                 <h5>{{ $item->name }}</h5>
+                                @if (auth()->user()->author->id != $item->id)
+                                    <form action="{{ route('follow.author', ['author' => $item->id]) }}" method="POST">
+                                        @method('post')
+                                        @csrf
+                                        <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                    </form>
+                                @else
+                                    
+                                @endif
                                 @php
                                     $user_id = auth()->user()->id;
                                     $author_id = $item->id;

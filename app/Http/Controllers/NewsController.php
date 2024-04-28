@@ -57,8 +57,6 @@ class NewsController extends Controller
     private ViewInterface $view;
     private TagInterface $tags;
     private NewsService $NewsService;
-    private NewsTagInterface $tag;
-
     private $newsTrendingService;
 
     protected $newsRepositoty;
@@ -81,7 +79,6 @@ class NewsController extends Controller
         NewsHasLikeInterface $newsHasLike,
         NewsCategoryInterface $newsCategory,
         NewsSubCategoryInterface $newsSubCategory,
-        NewsTagInterface $tag,
 
         NewsPhotoInterface $newsPhoto)
     {
@@ -99,7 +96,7 @@ class NewsController extends Controller
         $this->user = $user;
         $this->comment = $comment;
         $this->category = $category;
-        $this->tag = $tag;
+        $this->category = $category;
 
         $this->NewsService = $NewsService;
         $this->newsTrendingService = $newsTrendingService;
@@ -201,9 +198,9 @@ class NewsController extends Controller
         $likedByUser = $userLike->contains(auth()->user()->id);
         $populars = $this->news->getByPopular();
         $totalCategories = $this->category->showWhithCount();
-
         $tags = $this->newsTag->show($newsId);
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage','tags','populars','totalCategories'));
+
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage','tags','totalCategories','populars'));
     }
 
     /**
@@ -213,7 +210,7 @@ class NewsController extends Controller
     {
         $data['status'] = NewsStatusEnum::ACTIVE->value;
         $this->news->update($news->id, $data);
-        return redirect('/news-list');
+        return redirect('approved-news');
     }
 
     public function approvedall(Request $request, News $news)
@@ -550,6 +547,7 @@ class NewsController extends Controller
 
     public function showstatusnews(Request $request, NewsCategory $newsCategories)
     {
+        // $news = $this->newsCategory->get();
         $id = auth()->user()->id;
         $author_id = Author::where('user_id', $id)->value('id');
         $news = $this->news->searchStatus($author_id, $request);
