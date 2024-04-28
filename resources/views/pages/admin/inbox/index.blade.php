@@ -1,6 +1,8 @@
 @extends('layouts.admin.app')
 
 @section('style')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     <style>
         .card-profile {
             box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
@@ -9,6 +11,13 @@
             border-radius: 10px;
             /* width: 400px;
                 height: 130px; */
+        }
+
+        .badge {
+            width: fit-content;
+            height: fit-content;
+            padding: 0.25em 0.5em;
+            font-size: inherit;
         }
     </style>
 @endsection
@@ -60,23 +69,21 @@
                         </div>
                         <ul class="list-group" style="height: calc(100vh - 400px)" data-simplebar>
 
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
+                            <li class="list-group-item border-0 d-flex p-0 mx-9">
+                                    <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
+                                    @if ($countContact > 0)
+                                        <span class="badge ms-auto bg-danger">{{$countContact}}</span>
+                                    @endif
                             </li>
 
-                            <li class="list-group-item border-0 p-0 mx-9">
+                            <li class="list-group-item border-0 d-flex p-0 mx-9">
                                 <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
+                                    @if ($countReport > 0)
+                                        <span class="badge ms-auto bg-danger">{{$countReport}}</span>
+                                    @endif
                             </li>
-                            {{-- <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-file-text fs-5"></i>Draft</a>
-                                </li>
-                                <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Spam</a>
-                            </li> --}}
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
                                     href="javascript:void(0)"><i class="ti ti-trash fs-5"></i>Sampah</a>
@@ -89,17 +96,15 @@
                             <div class="border-end user-chat-box h-100">
                                 <div class="px-4 pt-9 pb-6 d-none d-lg-block">
                                     <form class="position-relative">
-                                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
-                                            placeholder="Cari" />
-                                        <i
-                                            class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Cari" />
+                                        <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                     </form>
                                 </div>
                                 <div class="app-chat">
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
                                         @forelse ($contactUs as $contact)
                                             <li class="contact">
-                                                <a href="javascript:void(0)"
+                                                <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('contact.read', ['contact' => $contact->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                     id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}" data-chat-id="{{ $contact->id }}">
                                                     <div class="form-check mb-0">
@@ -109,8 +114,9 @@
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
-                                                            <span class="badge fs-2 rounded-4 py-1 px-4"
-                                                                style="background-color: #175A95;">Pesan</span>
+                                                            @if ($contact->status == "unread")
+                                                                <span class="badge ms-auto bg-danger">!</span>
+                                                            @endif
                                                         </div>
                                                         <h6 class="text-dark">{{ $contact->message }}</h6>
                                                         <div class="d-flex align-items-center justify-content-between">
@@ -157,7 +163,7 @@
 
                                         @forelse ($reports as $report)
                                             <li class="report">
-                                                <a href="javascript:void(0)"
+                                                <a href="javascript:void(0)" onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
                                                     id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
                                                     <div class="form-check mb-0">
@@ -168,8 +174,11 @@
                                                         <div
                                                             class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
-                                                            <span class="badge fs-2 rounded-4 py-1 px-3"
-                                                                style="background-color: #FA896B;">Laporan</span>
+                                                            {{-- <span class="badge fs-2 rounded-4 py-1 px-3"
+                                                                style="background-color: #FA896B;">Laporan</span> --}}
+                                                            @if ($report->status == "unread")
+                                                                <span class="badge ms-auto bg-danger">!</span>
+                                                            @endif
                                                         </div>
                                                         <h6 class="text-dark">{{ $report->message }}</h6>
                                                         <div class="d-flex align-items-center justify-content-between">
@@ -597,6 +606,39 @@
 @endsection
 
 @section('script')
+
+    <script>
+        function loadRouteContent(event, route) {
+            event.preventDefault();
+
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (response) {
+                    $('#content-container').html(response);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        function loadRouteReport(event, route) {
+            event.preventDefault();
+
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (response) {
+                    $('#content-container').html(response);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    </script>
+
     <script src="{{ asset('admin/dist/js/apps/chat.js') }}"></script>
 
     <script>
@@ -720,8 +762,6 @@
                 $('.chat-content').hide();
                 $('.chat-report').hide();
             });
-
-
 
             $('.show-contact').click(function() {
                 var chatId = $(this).data('chat-id');

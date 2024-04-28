@@ -11,5 +11,6 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 
 interface ContactUsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, WhereInterface
 {
-
+    public function count($data) : mixed;
+    public function countAll($data) : mixed;
 }

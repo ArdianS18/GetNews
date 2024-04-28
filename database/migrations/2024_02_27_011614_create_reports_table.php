@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('news_id')->constrained();
             $table->text('message');
             $table->boolean('status_delete')->default(0);
+            $table->enum('status', ['read', 'unread'])->default('unread');
             $table->timestamps();
         });
     }

@@ -34,17 +34,6 @@ use App\Models\Category;
 |
 */
 
-// Route::get('/', function () {
-
-//     return view('pages.index');
-// });
-
-
-// Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
-// Route::get('/', [DashboardC ontroller::class,'home'])->name('home')->middleware('verified');
-
-// Route::get('/', [App\Http\Controllers\NewsController::class, 'showViews'])->name('popular.news');
-
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->name('mobile.header');
 Route::get('/', [DashboardController::class, 'home'])->name('home');
@@ -148,7 +137,10 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
+    Route::get('contact-read/{contact}', [ContactUsController::class, 'read'])->name('contact.read');
+
     Route::delete('report/{report}', [ReportController::class, 'destroy'])->name('report.destroy.');
+    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('report.read');
 
     Route::delete('contact-recovery/{contact}', [ContactUsController::class, 'recovery'])->name('contact.recovery');
     Route::delete('report-recovery/{report}', [ReportController::class, 'recovery'])->name('report.recovery');

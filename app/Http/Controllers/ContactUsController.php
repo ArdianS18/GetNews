@@ -7,6 +7,8 @@ use App\Contracts\Interfaces\ContactUsInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\ReportInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Enums\MessageStatusEnum;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\ContactUsRequest;
 use App\Models\ContactUs;
 use App\Models\Faq;
@@ -51,7 +53,12 @@ class ContactUsController extends Controller
         $reportsDelete = $this->report->get()->whereIn('status_delete', 1);
         $reportsDelete2 = $this->report->get()->whereIn('status_delete', 1);
 
-        return view('pages.admin.inbox.index', compact('contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2'));
+        $countContact = $this->contactUs->count('unread');
+        $countReport = $this->report->count('unread');
+        $all = $this->contactUs->countAll('unread');
+        dd($all);
+
+        return view('pages.admin.inbox.index', compact('contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
     }
 
     public function contact(Faq $faq){
@@ -71,6 +78,14 @@ class ContactUsController extends Controller
         $data['user_id'] = auth()->id();
         $this->contactUs->store($data);
         return back()->with('success', 'berhasil menambahkan data');
+    }
+
+    public function read(ContactUs $contact)
+    {
+        $data['status'] = MessageStatusEnum::READ->value;
+        $this->contactUs->update($contact->id, $data);
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**

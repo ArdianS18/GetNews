@@ -11,5 +11,5 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 
 interface ReportInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, WhereInterface
 {
-
+    public function count($data) : mixed;
 }

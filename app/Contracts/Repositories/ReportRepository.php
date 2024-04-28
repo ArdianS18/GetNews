@@ -53,6 +53,14 @@ class ReportRepository extends BaseRepository implements ReportInterface
             ->findOrFail($id);
     }
 
+    public function count($data): mixed
+    {
+        return $this->model->query()
+            ->where('status', $data)
+            ->get()
+            ->count();
+    }
+
     /**
      * Handle the Get all data event from models.
      *

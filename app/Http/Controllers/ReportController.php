@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Enums\MessageStatusEnum;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\ReportRequest;
 use App\Models\News;
 use App\Models\Report;
@@ -63,6 +65,14 @@ class ReportController extends Controller
         $data['news_id'] = $news->id;
         $this->report->store($data);
         return back()->with('success', 'berhasil menambahkan data');
+    }
+
+    public function read(Report $report)
+    {
+        $data['status'] = MessageStatusEnum::READ->value;
+        $this->report->update($report->id, $data);
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**

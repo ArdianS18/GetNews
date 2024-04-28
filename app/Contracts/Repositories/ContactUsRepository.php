@@ -6,13 +6,14 @@ use App\Contracts\Interfaces\ContactUsInterface;
 use App\Models\ContactUs;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContactUsRepository extends BaseRepository implements ContactUsInterface
 {
     public function __construct(ContactUs $contactUs)
     {
         $this->model = $contactUs;
-    }   
+    }
 
     public function getAllWithUser()
     {
@@ -23,6 +24,28 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
     public function where(Request $request): mixed
     {
         return $this->model->whereIn('status_delete', $request)->get();
+    }
+
+    public function count($data): mixed
+    {
+        return $this->model->query()
+            ->where('status', $data)
+            ->get()
+            ->count();
+    }
+
+    public function countAll($data): mixed
+    {
+        return $this->model->query()
+            ->select('status')
+            ->where('status', $data)
+            ->union(DB::table('reports')
+                ->select('status')
+                ->where('status', $data)
+            )
+            // ->join('reports', 'contact_us.status', '=' , 'reports.status')
+            // ->where('contact_us.status', $data)
+            ->count();
     }
 
     /**

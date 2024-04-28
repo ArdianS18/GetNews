@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('contact_us', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->constrained();
+            $table->enum('status', ['read', 'unread'])->default('unread');
             $table->string('message');
             $table->boolean('status_delete')->default(0);
             $table->timestamps();

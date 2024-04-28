@@ -464,7 +464,6 @@ class NewsController extends Controller
             }
         }
 
-
         return ResponseHelper::success(null, trans('alert.add_success'));
 
     }
