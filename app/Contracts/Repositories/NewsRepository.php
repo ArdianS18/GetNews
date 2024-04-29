@@ -318,7 +318,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
             ->join('categories', 'news_categories.category_id', '=', 'categories.id')
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.photo', 'news.name', 'news.created_at', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
+            ->select('news.id', 'news.photo', 'news.slug','news.name', 'news.created_at', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
             ->groupBy('id', 'created_at')
             ->latest()
             ->take(4)

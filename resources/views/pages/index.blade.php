@@ -270,7 +270,7 @@
                                     role="tab">Recent News</button>
                             </li>
                         </ul>
-    
+
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
@@ -300,7 +300,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->category_names }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
+                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->created_at)->translatedFormat('d F Y') }}</a>
@@ -313,14 +313,14 @@
                                 @endforelse
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <div class="general-news ptb-100">
         <div class="container-fluid">
@@ -599,7 +599,7 @@
                             @forelse ($tags as $tag)
                             <li><a href="#">{{ $tag->tag->name }}</a></li>
                             @empty
-                                
+
                             @endforelse
                         </ul>
                     </div>

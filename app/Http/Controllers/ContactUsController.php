@@ -56,7 +56,6 @@ class ContactUsController extends Controller
         $countContact = $this->contactUs->count('unread');
         $countReport = $this->report->count('unread');
         $all = $this->contactUs->countAll('unread');
-        dd($all);
 
         return view('pages.admin.inbox.index', compact('contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
     }
