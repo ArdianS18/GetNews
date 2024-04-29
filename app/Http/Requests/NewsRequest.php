@@ -15,7 +15,7 @@ class NewsRequest extends FormRequest
         return [
             'name' => 'required',
             'photo' => 'required|mimes:jpg,png,jpeg',
-            'multi_photo' => 'nullable',
+            // 'multi_photo' => 'nullable',
             'content' => 'required',
             'category' => 'array|required',
             'category.*' => 'required',

@@ -10,27 +10,14 @@
         }
         .card-category{
             box-shadow: 0  5px 2px rgba(0, 0, 0, 0.1);
-            border: 1px solid #f4f4f4; 
+            border: 1px solid #f4f4f4;
             padding: 4%;
-            border-radius: 10px;   
+            border-radius: 10px;
         }
     </style>
 @endsection
 
 @section('content')
-    <div class="mb-3 row">
-        <div class="col-lg-3">
-            <form>
-                <div class="input-group">
-                    <input type="text" name="query" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                    <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
-                </div>
-            </form>     
-        </div>    
-    </div>
-
-
     <div class="">
         <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -44,7 +31,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="">
     <div class="sports-wrap ptb-100">
     <div class="ps-5 pe-5">
@@ -52,7 +39,7 @@
         <div class="col-lg-8">
             <div class="row">
                 @forelse ($newsByDate as $item)
-                <div class="col-md-6">   
+                <div class="col-md-6">
                     <div class="news-card-thirteen">
                         <div class="news-card-img">
                             <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="300" style="width: 100%;object-fit:cover;">
@@ -97,7 +84,7 @@
             </div>
             <div class="text-center item-center d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
                 <h5 class="mt-5">Iklan</h5>
-            </div> 
+            </div>
         </div>
 
         <div class="col-lg-4">
@@ -118,7 +105,7 @@
                                     href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                         src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                         alt="Image">{{ $category->name }}
-                                    <span>({{ $category->total }})</span>  
+                                    <span>({{ $category->total }})</span>
                                 </a>
                             </li>
                         @endforeach

@@ -270,7 +270,7 @@
                                     role="tab">Recent News</button>
                             </li>
                         </ul>
-    
+
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
@@ -313,14 +313,14 @@
                                 @endforelse
                             </div>
                         </div>
-    
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <div class="general-news ptb-100">
         <div class="container-fluid">
@@ -332,7 +332,7 @@
                                     src="assets/img/section-img.webp" alt="Image" /></h2>
                         </div>
                         <div class="col-md-5 text-md-end">
-                            <a href="/news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                            <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -599,7 +599,7 @@
                             @forelse ($tags as $tag)
                             <li><a href="#">{{ $tag->tag->name }}</a></li>
                             @empty
-                                
+
                             @endforelse
                         </ul>
                     </div>

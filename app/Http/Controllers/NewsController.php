@@ -39,6 +39,7 @@ use App\Models\NewsReport;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
@@ -363,13 +364,7 @@ class NewsController extends Controller
             ]);
         }
 
-        foreach ($data['multi_photo'] as $img) {
-            $this->newsPhoto->store([
-                'news_id' => $newsId,
-                'multi_photo' => $img,
-            ]);
-        }
-        return ResponseHelper::success(null, trans('alert.add_success'));
+        return to_route('status.news.author');
     }
 
     public function storeDraft(NewsDraftRequest $request)
@@ -405,33 +400,33 @@ class NewsController extends Controller
             }
         }
 
-        if ($data['multi_photo']) {
-            foreach ($data['multi_photo'] as $img) {
-                $this->newsPhoto->store([
-                    'news_id' => $newsId,
-                    'multi_photo' => $img,
-                ]);
-            }
-        }
+        // if ($data['multi_photo']) {
+        //     foreach ($data['multi_photo'] as $img) {
+        //         $this->newsPhoto->store([
+        //             'news_id' => $newsId,
+        //             'multi_photo' => $img,
+        //         ]);
+        //     }
+        // }
 
-        return ResponseHelper::success(null, trans('alert.add_success'));
+        return to_route('status.news.author');
     }
 
     public function updateDraft(NewsDraftRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
-        $data = $this->NewsService->updateDraft($request, $news, $newsPhoto);
+        $data = $this->NewsService->updateDraft($request, $news);
         $data['status'] = NewsStatusEnum::NEWSDRAFT->value;
         $this->news->update($news->id, $data);
 
-        if ($request->hasFile('multi_photo')) {
-            $newsPhoto->where('news_id', $news->id)->delete();
-            foreach ($data['multi_photo'] as $photo) {
-                $newsPhoto->create([
-                    'news_id' => $news->id,
-                    'multi_photo' => $photo
-                ]);
-            }
-        }
+        // if ($request->hasFile('multi_photo')) {
+        //     $newsPhoto->where('news_id', $news->id)->delete();
+        //     foreach ($data['multi_photo'] as $photo) {
+        //         $newsPhoto->create([
+        //             'news_id' => $news->id,
+        //             'multi_photo' => $photo
+        //         ]);
+        //     }
+        // }
 
         $newsCategory->where('news_id', $news->id)->delete();
         if ($data['category']) {
@@ -462,9 +457,7 @@ class NewsController extends Controller
                 ]);
             }
         }
-
-        return ResponseHelper::success(null, trans('alert.add_success'));
-
+        return to_route('status.news.author');
     }
 
     public function createUserNews()
@@ -502,13 +495,14 @@ class NewsController extends Controller
             ]);
         }
 
-        foreach ($data['multi_photo'] as $img) {
-            $this->newsPhoto->store([
-                'news_id' => $newsId,
-                'multi_photo' => $img,
-            ]);
-        }
-        return ResponseHelper::success(null, trans('alert.add_success'));
+        // foreach ($data['multi_photo'] as $img) {
+        //     $this->newsPhoto->store([
+        //         'news_id' => $newsId,
+        //         'multi_photo' => $img,
+        //     ]);
+        // }
+
+        return to_route('status.news.author');
     }
 
     /**
@@ -566,11 +560,12 @@ class NewsController extends Controller
         $newsComment->where('news_id', $id)->delete();
         $newsReport->where('news_id', $id)->delete();
 
-        $relatedPhotos = $newsPhoto->where('news_id', $id)->get();
-        foreach ($relatedPhotos as $photo) {
-            $this->NewsService->remove($photo->multi_photo);
-            $photo->delete();
-        }
+        // $relatedPhotos = $newsPhoto->where('news_id', $id)->get();
+
+        // foreach ($relatedPhotos as $photo) {
+        //     $this->NewsService->remove($photo->multi_photo);
+        //     $photo->delete();
+        // }
 
         $relatedReports = $report->where('news_id', $id)->get();
         foreach ($relatedReports as $relatedReport) {
@@ -596,8 +591,7 @@ class NewsController extends Controller
     {
         // $news = $this->newsCategory->get();
         $id = auth()->user()->id;
-        $author_id = Author::where('user_id', $id)->value('id');
-        $news = $this->news->searchStatus($author_id, $request);
+        $news = $this->news->searchStatus($id, $request);
         return view('pages.author.status.index', compact('news'));
     }
 }
