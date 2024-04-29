@@ -32,7 +32,10 @@ class UserRepository extends BaseRepository implements UserInterface
 
     public function whereRelation(): mixed
     {
-        //
+        return $this->model->query()
+            ->whereRelation('roles', 'name', 'user')
+            ->get()
+            ->count();
     }
 
     /**
