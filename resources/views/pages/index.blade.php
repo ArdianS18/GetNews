@@ -230,7 +230,7 @@
                                                     <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
                                                 </div>
                                                 <div class="news-card-info">
-                                                    <div class="news-author">
+                                                    {{-- <div class="news-author">
                                                         <div class="news-author-img">
                                                             <img src="{{ asset($pick->author->user->photo ? 'storage/' . $pick->author->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="40px"
@@ -238,9 +238,9 @@
                                                         </div>
                                                         <h5>By <a href="author.html">{{ $pick->author->user->name }}</a>
                                                         </h5>
-                                                    </div>
+                                                    </div> --}}
                                                     <h3>
-                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
+                                                        {{-- <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a> --}}
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
                                                         <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -270,7 +270,7 @@
                                     role="tab">Recent News</button>
                             </li>
                         </ul>
-
+    
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
@@ -285,7 +285,7 @@
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $popular->views }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -303,9 +303,9 @@
                                             <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->created_at)->translatedFormat('d F Y') }}</a>
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>15 Min Read</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $recent->views }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -313,14 +313,14 @@
                                 @endforelse
                             </div>
                         </div>
-
+    
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
+    
+    
 
     <div class="general-news ptb-100">
         <div class="container-fluid">
@@ -345,10 +345,10 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->category_names }}</a>
-                                        <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ $general->upload_date }}</a></li>
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($general->upload_date)->translatedFormat('d F Y') }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -599,7 +599,7 @@
                             @forelse ($tags as $tag)
                             <li><a href="#">{{ $tag->tag->name }}</a></li>
                             @empty
-
+                                
                             @endforelse
                         </ul>
                     </div>
