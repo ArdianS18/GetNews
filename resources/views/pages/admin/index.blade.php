@@ -115,7 +115,7 @@
                                         <div class="row g-2">
                                             <div class="col-md-4">
                                                 <img src="{{ asset('storage/' . $news->photo) }}"
-                                                    style="width: 100%; height: auto;" alt="">
+                                                    style="width: 100%; height: 100; object-fit:cover;" alt="">
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
@@ -214,6 +214,17 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Statistik Jumlah Pengunjung</h4>
+                    <div class="" id="chart-pengunjung"></div>
+                    <div class="" id="name"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <h3 class="mb-3">Fitur Berlangganan</h3>
@@ -436,5 +447,52 @@
 
         var chart = new ApexCharts(document.querySelector("#chart-writer"), options);
         chart.render();
+
+
+
+      
+        var options = {
+          series: [
+            {
+            name: "Pengunjung Umum",
+            data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 160, 190, 178]
+            },
+            {
+            name: "Pengunjung Unique",
+            data: [0, 59, 53, 78, 34, 76, 60, 55, 138, 110, 78, 67]
+          }
+        ],
+          chart: {
+          height: 350,
+          type: 'line',
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        title: {
+          text: 'Product Trends by Month',
+          align: 'left'
+        },
+        grid: {
+          row: {
+            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          },
+        },
+        xaxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-pengunjung"), options);
+        chart.render();
+              
     </script>
+    
 @endsection

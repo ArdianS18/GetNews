@@ -44,7 +44,7 @@
                     @if ($counter < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;" alt="Image"
+                                <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;" width="100%" alt="Image"
                                     height="250" />
 
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
@@ -100,7 +100,7 @@
                 @foreach ($news_mid as $mid)
                     @if ($counter < 1)
                         <div class="news-card-four">
-                            <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" style="object-fit: cover"
+                            <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover"
                                 height="450" />
                             <div class="news-card-info">
                                 <h3><a
@@ -169,7 +169,7 @@
                     @elseif ($counters < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" height="100"
+                                <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" width="100%" height="100"
                                     alt="Image" />
                             </div>
                             <div class="news-card-info">
@@ -276,7 +276,7 @@
                                 @forelse ($populars as $popular)
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" />
+                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
@@ -296,7 +296,7 @@
                                 @forelse ($news_recent as $recent)
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" />
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
@@ -340,7 +340,7 @@
                             <div class="col-xl-6">
                                 <div class="news-card-twelve">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $general->photo) }}" alt="Image" />
+                                        <img src="{{ asset('storage/' . $general->photo) }}" alt="Image" width="100%" height="130" style="object-fit: cover"/>
                                         {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
