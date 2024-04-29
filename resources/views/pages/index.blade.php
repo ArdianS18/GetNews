@@ -230,7 +230,7 @@
                                                     <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
                                                 </div>
                                                 <div class="news-card-info">
-                                                    {{-- <div class="news-author">
+                                                    <div class="news-author">
                                                         <div class="news-author-img">
                                                             <img src="{{ asset($pick->author->user->photo ? 'storage/' . $pick->author->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="40px"
@@ -238,9 +238,9 @@
                                                         </div>
                                                         <h5>By <a href="author.html">{{ $pick->author->user->name }}</a>
                                                         </h5>
-                                                    </div> --}}
+                                                    </div>
                                                     <h3>
-                                                        {{-- <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a> --}}
+                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
                                                         <li><i class="fi fi-rr-calendar-minus"></i><a

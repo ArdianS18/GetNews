@@ -228,7 +228,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
 
-    Route::get('author-detail', [DashboardController::class, 'authordetail'])->name('author.detail');
+    Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
 
     Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
     Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
@@ -241,6 +241,9 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('profile-user-update', function () {
         return view('pages.user.profile.update');
     })->name('profile.user.update');
+    Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
+    Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
+    Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
 
 });
 
@@ -301,9 +304,9 @@ Route::get('tukar-coin', function () {
     return view('pages.user.coins.index');
 })->name('tukar.coin');
 
-Route::get('pengajuan-berita', function () {
-    return view('pages.user.news.pengajuan');
-})->name('pengajuan.berita');
+// Route::get('pengajuan-berita', function () {
+//     return view('pages.user.news.pengajuan');
+// })->name('pengajuan.berita');
 
 Route::get('status-berita', function () {
     return view('pages.user.news.status');
