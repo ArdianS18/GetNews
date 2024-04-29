@@ -8,15 +8,18 @@
             </li>
         </ul>
         <ul class="navbar-nav quick-links d-none d-lg-flex">
+            <div class="d-flex">
+                <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                </button>
 
+                <a href="/" class="toggler" style="color: #000000">
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 19.923c-2.202-2.81-4.157-4.406-5.866-4.785c-1.709-.38-3.336-.436-4.88-.172V20L3 11.786L10.253 4v4.784C13.11 8.808 15.54 9.88 17.54 12s3.154 4.761 3.461 7.923"/></svg>
+                    </div>
+                </a>
+            </div>
         </ul>
-
-
-        <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-
-        </button>
-
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
@@ -31,7 +34,6 @@
                             <span class="text-dark fs-3 fw-semibold lh-1 mb-1 username"></span>
                             <span class="text-dark fs-3 fw-bold lh-1 role"></span>
                         </div>
-
                     </li>
                     <li class="nav item">
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
