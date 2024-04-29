@@ -215,7 +215,7 @@ class NewsController extends Controller
     {
         $data['status'] = NewsStatusEnum::ACTIVE->value;
         $this->news->update($news->id, $data);
-        return redirect('approved-news');
+        return redirect('/news-approved-list');
     }
 
     public function approvedall(Request $request, News $news)
