@@ -14,5 +14,5 @@ use App\Contracts\Interfaces\Eloquent\UpdateOrCreateInterface;
 
 interface TagInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, UpdateOrCreateInterface, CustomPaginationInterface, GetidbyNameInterface
 {
-
+    public function getByPopular() :mixed;
 }

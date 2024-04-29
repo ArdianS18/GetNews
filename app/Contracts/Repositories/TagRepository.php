@@ -78,6 +78,13 @@ class TagRepository extends BaseRepository implements TagInterface
             ->get();
     }
 
+    public function getByPopular(): mixed
+    {
+        return $this->model->query()
+            ->withCount('newsTags')
+            ->get();
+    }
+
     /**
      * Handle store data event to models.
      *

@@ -60,7 +60,7 @@
                                             </p>
                                         </a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views_count }}</li>
 
                                 </ul>
                             </div>
@@ -110,7 +110,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $mid->views }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $mid->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $mid->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                                             <p>{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}
                                             </p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -230,23 +230,23 @@
                                                     <img src="{{ asset('storage/' . $pick->photo) }}" alt="Image" />
                                                 </div>
                                                 <div class="news-card-info">
-                                                    {{-- <div class="news-author">
+                                                    <div class="news-author">
                                                         <div class="news-author-img">
-                                                            <img src="{{ asset($pick->author->user->photo ? 'storage/' . $pick->author->user->photo : 'default.png') }}"
+                                                            <img src="{{ asset($pick->user->photo ? 'storage/' . $pick->user->photo : 'default.png') }}"
                                                                 alt="Image" width="40px" height="40px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
                                                         </div>
-                                                        <h5>By <a href="author.html">{{ $pick->author->user->name }}</a>
+                                                        <h5>By <a href="author.html">{{ $pick->user->name }}</a>
                                                         </h5>
-                                                    </div> --}}
+                                                    </div>
                                                     <h3>
-                                                        {{-- <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a> --}}
+                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
                                                         <li><i class="fi fi-rr-calendar-minus"></i><a
                                                                 href="javascript:void(0)">{{ \Carbon\Carbon::parse($pick->created_at)->translatedFormat('d F Y') }}</a>
                                                         </li>
-                                                        <li><i class="fi fi-rr-eye"></i>{{ $pick->views }}</li>
+                                                        <li><i class="fi fi-rr-eye"></i>{{ $pick->views_count }}</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -279,13 +279,13 @@
                                             <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->category_names }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
                                             <h3><a href="{{ route('news.user', ['news' => $popular->slug, 'page' => '1']) }}">{{ $popular->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>{{ $popular->views }}</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $popular->views_count }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -299,13 +299,13 @@
                                             <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->category_names }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
                                             <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>{{ $recent->views }}</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $recent->views_count }}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -344,7 +344,7 @@
                                         {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->category_names }}</a>
+                                        <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
                                         <h3><a href="{{ route('news.user', ['news' => $general->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -517,87 +517,13 @@
                                 </div>
                             @empty
                             @endforelse
-                            {{-- <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-thumb-4.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Bernie Nonummy Pelopai Iatis Eum Litora</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-thumb-5.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">How Youth Viral Diseases May The Year 2023</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 23,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-thumb-6.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Man Wearing Black Pullover Hoodie To Smoke</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 14,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-thumb-7.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">First Prototype Flight Using Kinetic Launch
-                                            System</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 07,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-thumb-8.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Beauty Queens Need Material & Products</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-one">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-thumb-9.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">That Woman Comes From Heaven Look Like Angel</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 01,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                     <div class="sidebar-widget">
                         <h3 class="sidebar-widget-title">Popular Tags</h3>
                         <ul class="tag-list list-style">
                             @forelse ($tags as $tag)
-                            <li><a href="#">{{ $tag->tag->name }}</a></li>
+                            <li><a href="#">{{ $tag->name }}</a></li>
                             @empty
 
                             @endforelse

@@ -213,15 +213,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.slug', 'news.photo', 'news.name', 'news.created_at', 'news.upload_date', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id', 'created_at')
-            ->whereIn('news_categories.category_id', $subquery)
-            ->orderByRaw('COUNT(news_categories.category_id) DESC')
+            ->whereHas('newsCategories', function ($query) use ($subquery) {
+                $query->whereIn('category_id', $subquery);
+            })
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
             ->take(4)
-            ->get();
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date']);
     }
 
     public function getByRight(): mixed
@@ -238,22 +237,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id',
-            'news.slug',
-            'news.photo',
-            'news.name',
-            'news.created_at',
-            'news.upload_date',
-            DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'),
-            DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id', 'created_at')
-            ->whereIn('news_categories.category_id', $subquery)
-            ->orderByRaw('COUNT(news_categories.category_id) DESC')
+            ->whereHas('newsCategories', function ($query) use ($subquery) {
+                $query->whereIn('category_id', $subquery);
+            })
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
             ->take(4)
-            ->get();
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date']);
     }
 
     public function getByMid(): mixed
@@ -261,68 +252,58 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.photo','news.slug','news.name','news.created_at','news.upload_date',DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names') ,DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id','created_at')
+            ->with('newsCategories')
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
             ->take(3)
-            ->get();
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date']);
     }
 
     public function getByPick(): mixed
     {
         return $this->model->query()
-            ->where('status', NewsStatusEnum::ACTIVE->value)
+             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.user_id','news.photo','news.slug','news.name','news.created_at','news.upload_date',DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names') ,DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id','created_at')
-            ->take(6)
-            ->get();
+            ->with('newsCategories')
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
+            ->take(3)
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
     public function getByGeneral(): mixed
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.slug', 'news.photo', 'news.name', 'news.created_at', 'news.upload_date', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id', 'created_at')
+            ->with('newsCategories')
+            ->orderBy('created_at')
             ->take(6)
-            ->get();
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
     public function getByPopular(): mixed
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->select('news.id','news.slug', 'news.photo', 'news.name', 'news.created_at', 'news.upload_date', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->groupBy('id', 'created_at')
-            ->orderBy('views', 'desc')
+            ->with('newsCategories')
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
             ->take(6)
-            ->get();
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
     public function latest(): mixed
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.photo', 'news.slug','news.name','news.upload_date', 'news.created_at', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id', 'created_at','upload_date')
-            ->latest('upload_date')
+            ->with('newsCategories')
+            ->withCount('views')
+            ->latest()
             ->take(6)
-            ->get();
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
     /**
@@ -370,11 +351,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status',NewsStatusEnum::ACTIVE->value)
-            ->select('news.id', 'news.name', 'news.photo','news.slug', 'news.created_at', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->groupBy('news.id', 'news.name', 'created_at')
-            ->orderBy('views_count', 'desc')
-            ->latest()
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
             ->take(3)
             ->get();
     }

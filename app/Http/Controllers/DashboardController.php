@@ -10,6 +10,7 @@ use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Http\Requests\ViewRequest;
@@ -32,9 +33,10 @@ class DashboardController extends Controller
     private SubCategoryInterface $subCategory;
     private FaqInterface $faq;
     private ViewInterface $view;
-    private NewsTagInterface $tag;
+    private NewsTagInterface $newsTags;
+    private TagInterface $tag;
 
-    public function __construct(FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $tag)
+    public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags)
     {
         $this->user = $user;
         $this->author = $author;
@@ -44,6 +46,7 @@ class DashboardController extends Controller
         $this->faq = $faq;
         $this->followers = $followers;
         $this->tag = $tag;
+        $this->newsTags = $newsTags;
 
         $this->newsCategory = $newsCategory;
         $this->view = $view;
@@ -81,9 +84,8 @@ class DashboardController extends Controller
         $editor_pick = $this->newsCategory->get();
         $picks = $this->news->getByPick();
         $generals = $this->news->getByGeneral();
-        $tags = $this->tag->get();
+        $tags = $this->tag->getByPopular();
         $totalCategories = $this->category->showWhithCount();
-        // dd($categories);
 
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
     }
