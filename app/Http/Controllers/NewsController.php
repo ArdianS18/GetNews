@@ -199,11 +199,12 @@ class NewsController extends Controller
         } else {
             $likedByUser = null;
         }
+        $news_recents = $this->news->latest();
         $populars = $this->news->getByPopular();
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents'));
     }
 
     /**
