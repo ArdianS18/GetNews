@@ -50,9 +50,7 @@
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
 
-    <div class="ms-5 me-5">
     @yield('content')
-    </div>
 
     <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

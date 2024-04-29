@@ -55,6 +55,7 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <article>
+                        <h2 class="d-flex justify-content-start mb-4">{{ $news->name }}</h2>
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
                                 <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" alt="Image">
@@ -71,7 +72,11 @@
                                             alt="Image" width="40px" height="30px"
                                             style="border-radius: 50%; object-fit:cover;" />
                                     </span>
-                                    <a href="author.html">{{ $news->user->name }}</a>
+                                    <div>
+                                        <a style="display: inline;text-decoration:none"
+                                            href="author.html">{{ $news->user->name }}</a> - <span style="color: red">
+                                            {{ $news->newsCategories[0]->category->name }}</span>
+                                    </div>
                                 </li>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -84,22 +89,32 @@
                                     <a
                                         href="news-by-date.html">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
+                                <li> <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#0f4d8a"
+                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                                </svg><span class="ms-2">{{ $news->views->count() }}</span>
+                            </li>
                                 <li>
 
                                     <form id="form-like">
                                         @csrf
                                         @if (auth()->check())
-                                            <button type="submit" style="background: transparent;border:transparent" class="like">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                                            <button type="submit" style="background: transparent;border:transparent"
+                                                class="like">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                                                    viewBox="0 0 24 24">
                                                     <path fill="#0f4d8a"
-                                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                 </svg>
                                             </button>
                                         @else
-                                            <a href="/login" style="background: transparent;border:transparent" class="like">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 24 24">
+                                            <a href="/login" style="background: transparent;border:transparent"
+                                                class="like">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                                                    viewBox="0 0 24 24">
                                                     <path fill="#0f4d8a"
-                                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                 </svg>
                                             </a>
                                         @endif
@@ -123,6 +138,7 @@
                                     @endauth
 
                                 </li>
+                              
                             </ul>
 
                             <div class="">
@@ -203,7 +219,7 @@
                         </div>
                         Tag :
                         @forelse ($tags as $tag)
-                           <a href="#" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
+                            <a href="#" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
 
@@ -309,7 +325,8 @@
                                 @forelse ($populars as $popular)
                                     <div class="news-card-one">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" height="80">
+                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image"
+                                                width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a
@@ -350,11 +367,51 @@
                             <h3 class="sidebar-widget-title">Popular Tags</h3>
                             <ul class="tag-list list-style">
                                 @forelse ($tags as $tag)
-                                <li><a href="#">{{ $tag->tag->name }}</a></li>
+                                    <li><a href="#">{{ $tag->tag->name }}</a></li>
                                 @empty
-
                                 @endforelse
                             </ul>
+                        </div>
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Berita Terbaru</h3>
+                            <div class="pp-post-wrap">
+                                @forelse ($news_recents as $recent)
+                                    <div class="news-card-one">
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image"
+                                                width="100%" height="80">
+                                        </div>
+                                        <div class="news-card-info">
+                                            <h3><a
+                                                    href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{{ $recent->name }}</a>
+                                            </h3>
+                                            <ul class="news-metainfo list-style">
+                                                <li>
+
+                                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
+                                                                fill="#E93314" />
+                                                        </svg></i><a
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
+                                                </li>
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="#e93314"
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                                                </svg>
+                                                </i><a href="news-by-date.html">{{ $recent->views }}</a></li>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @empty
+                                @endforelse
+
+                            </div>
                         </div>
                     </div>
                 </div>
