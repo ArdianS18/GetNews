@@ -43,16 +43,6 @@
         @csrf
         <div class="ms-1 mt-5 d-flex justify-content-between">
             <h5>Isi form dibawah ini untuk mengunggah berita</h5>
-
-            <div class="">
-                {{-- <button type="button" class="btn btn-md me-2 text-black"
-                    style="background-color: #C9C9C9;">
-                    Kembali
-                </button> --}}
-                <button type="submit" class="btn btn-md text-white" style="background-color: #0F4D8A;" id="submitButton1">
-                    Rilis
-                </button>
-            </div>
         </div>
 
         {{-- <div class="card p-4 shadow-sm border mt-1">
@@ -94,11 +84,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex">
-                <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;" id="submitButton2">
-                    Simpan Draf
-                </button>
-            </div>
+           
         </div> --}}
 
         <div class="row">
@@ -115,7 +101,7 @@
                             <label for="image-upload" class="btn btn-primary">
                                 Unggah
                             </label>
-                            <input type="file" name="image" id="image-upload" class="hide"
+                            <input type="file" name="photo" id="image-upload" class="hide"
                                 onchange="previewImage(event)">
                         </div>
                         <div class="d-flex justify-content-center">
@@ -206,6 +192,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button type="button" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;" id="submitButton2">
+                    Simpan Draf
+                </button>
+            </div>
+            <div class="d-flex">
+                <button type="reset" class="btn btn-danger m-2" >
+                    Batal
+                </button>
+                <button type="button" class="btn btn-primary m-2" id="submitButton1">
+                    Simpan
+                </button>
             </div>
         </div>
     </form>
