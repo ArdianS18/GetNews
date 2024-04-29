@@ -56,11 +56,17 @@
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
-                                    @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                    @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                         <li class="nav-item">
                                             <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                         </li>
-                                    @endforeach
+                                    
+                                    @empty
+                                        <li class="nav-item">
+                                            {{-- @dd($category); --}}
+                                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
+                                        </li>
+                                    @endforelse
                                 </ul>
                             </li>
                         @else
@@ -68,11 +74,11 @@
                         @endif
                     @endforeach
 
-                    @empty($categories)
+                    {{-- @empty($categories)
                         <li class="nav-item">
                             <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
                         </li>
-                    @endempty
+                    @endempty --}}
                 </ul>
 
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
