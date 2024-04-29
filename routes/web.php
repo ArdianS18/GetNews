@@ -264,7 +264,7 @@ Route::get('status', function () {
     return view('pages.author.status.index');
 })->name('status.author');
 
-Route::get('news-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('/{news}', [NewsController::class, 'usernews'])->name('news.user');
 
 // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
 // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
@@ -280,7 +280,7 @@ Route::post('report-news/{news}', [ReportController::class, 'store'])->name('rep
 
 
 Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
-Route::get('detail-subcategory/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 
 
 

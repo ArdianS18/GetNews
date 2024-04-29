@@ -58,7 +58,7 @@
                                 <ul class="dropdown-menu">
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                         <li class="nav-item">
-                                            <a href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                         </li>
                                     
                                     @empty
