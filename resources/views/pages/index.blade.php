@@ -345,7 +345,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->category_names }}</a>
-                                        <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
                                                     href="javascript:void(0)">{{ \Carbon\Carbon::parse($general->upload_date)->translatedFormat('d F Y') }}</a></li>
