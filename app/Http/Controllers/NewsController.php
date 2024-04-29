@@ -180,8 +180,6 @@ class NewsController extends Controller
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;
-        $pages = str_split($content, 100000);
-        $currentPage = $page-1;
 
         $view = $this->view->store([
             'news_id' => $news->id,
@@ -205,7 +203,7 @@ class NewsController extends Controller
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser', 'pages', 'currentPage','tags','totalCategories','populars'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars'));
     }
 
     /**

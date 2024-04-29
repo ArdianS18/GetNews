@@ -17,10 +17,10 @@ class NewsResource extends JsonResource
     {
         return[
           'id' => $this->id,
-          'author_id' => $this->author->user->id,
+          'author_id' => $this->user->id,
           'name' => $this->name,
-          'author_name' => $this->author->user->name,
-          'email' => $this->author->user->email,
+          'author_name' => $this->user->name,
+          'email' => $this->user->email,
           'photo' =>$this->photo,
           'content' => $this->content,
           'upload_date' => Carbon::parse($this->upload_date)->isoFormat('D MMMM Y'),
