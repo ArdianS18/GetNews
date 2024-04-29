@@ -56,7 +56,6 @@
                                 <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
                                     </a>
-                                </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}
@@ -110,7 +109,6 @@
                                 <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
-                                </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
@@ -164,7 +162,6 @@
                                         {{-- {{ $barus->name }} --}}
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
                                     </a>
-                                </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}
