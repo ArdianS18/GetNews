@@ -194,11 +194,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id','news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'))
+            ->select('news.id', 'news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'))
             ->orderBy('views', 'DESC')
-            ->groupBy('id')
+            ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
             ->take(4)
             ->get();
+            
     }
 
     public function getByLeft(): mixed
@@ -426,14 +427,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->where('author_id', $author)->update($data);
     }
 
-    public function whereDate($date,$request) : mixed
+    public function whereDate($date) : mixed
 
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('created_at', '<', $date)
             ->withCount('views')
-            ->where('name', 'LIKE', '%' . $request->name . '%')
             ->get();
     }
 }
