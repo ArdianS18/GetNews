@@ -145,8 +145,9 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="date" id="upload_date" name="upload_date" placeholder="date"
-                                value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror">
+                            <input type="datetime-local" value="" id="upload_date" name="upload_date"
+                                placeholder="date" value="{{ old('date') }}"
+                                class="form-control @error('date') is-invalid @enderror">
                             @error('date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -196,12 +197,13 @@
         </div>
         <div class="d-flex justify-content-between">
             <div>
-                <button type="button" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;" id="submitButton2">
+                <button type="button" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
+                    id="submitButton2">
                     Simpan Draf
                 </button>
             </div>
             <div class="d-flex">
-                <button type="reset" class="btn btn-danger m-2" >
+                <button type="reset" class="btn btn-danger m-2">
                     Batal
                 </button>
                 <button type="button" class="btn btn-primary m-2" id="submitButton1">
@@ -335,6 +337,16 @@
                 }
             })
         }
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        var hours = ('0' + today.getHours()).slice(-2);
+        var minutes = ('0' + today.getMinutes()).slice(-2);
+
+        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.getElementById('upload_date').value = formattedDate;
+
         $(".tags").select2({
             tags: true,
             tokenSeparators: [',', ' ']
