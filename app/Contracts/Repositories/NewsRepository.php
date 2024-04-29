@@ -199,6 +199,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
             ->take(4)
             ->get();
+            
     }
 
     public function getByLeft(): mixed
