@@ -318,10 +318,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
             ->join('categories', 'news_categories.category_id', '=', 'categories.id')
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.photo', 'news.slug','news.name', 'news.created_at', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
-            ->groupBy('id', 'created_at')
-            ->latest()
-            ->take(4)
+            ->select('news.id', 'news.photo', 'news.slug','news.name','news.upload_date', 'news.created_at', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
+            ->groupBy('id', 'created_at','upload_date')
+            ->latest('upload_date')
+            ->take(6)
             ->get();
     }
 
@@ -370,7 +370,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status',NewsStatusEnum::ACTIVE->value)
-            ->select('news.id', 'news.name', 'news.photo', 'news.created_at', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
+            ->select('news.id', 'news.name', 'news.photo','news.slug', 'news.created_at', 'news.content', DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'), DB::raw('COUNT(views.news_id) as views_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->groupBy('news.id', 'news.name', 'created_at')
             ->orderBy('views_count', 'desc')
