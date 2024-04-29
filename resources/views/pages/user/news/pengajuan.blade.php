@@ -36,10 +36,6 @@
     </button>
   </div>
 
-  <div class="ms-1 mt-5 d-flex justify-content-between">
-    <h5>Isi form dibawah ini untuk mengunggah berita</h5>
-  </div>
-
   <form id="myForm" method="post" action="{{ route('user.berita.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="ms-1 mt-5 d-flex justify-content-between">
@@ -171,6 +167,57 @@
         </div>
     </div>
 </form>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="staticBackdropLabel">Ketentuan & Persyaratan</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card shadow-none border p-3">
+                            <p>Ketentuan dan Persyaratan Sebelum Menulis Berita</p>
+                            <ol>
+                                <li>Keaslian dan Orisinalitas
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus asli dan bukan hasil plagiasi</li>
+                                        <li>Berita harus ditulis dengan gaya bahasa yang profesional dan mudah dipahami.</li>
+                                        <li>Berita harus bebas dari unsur SARA, fitnah, dan konten negatif lainnya.</li>
+                                    </ul>
+                                </li>
+                                <li>Keakuratan dan Kebenaran
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus akurat dan berdasarkan fakta yang dapat diverifikasi.</li>
+                                        <li>Sumber informasi harus jelas dan kredibel.</li>
+                                        <li>Berita harus faktual dan tidak memihak.</li>
+                                    </ul>
+                                </li>
+                                <li>Keseimbangan
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus menyajikan informasi secara seimbang dan tidak memihak.</li>
+                                        <li>Berita harus memberikan ruang kepada semua pihak yang terkait untuk menyampaikan pendapatnya.</li>
+                                    </ul>
+                                </li>
+                                <li>Objektivitas
+                                    <ul class="ms-4" style="list-style-type:disc">
+                                        <li>Berita harus ditulis secara objektif dan tidak memihak.</li>
+                                        <li>Penulis berita harus menghindari opini dan prasangka pribadi.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                        {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
 @endsection
 
 @section('script')
@@ -181,7 +228,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
-                height: 250,
+                height: 400,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'underline', 'clear']],

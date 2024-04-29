@@ -74,12 +74,16 @@
                         <h4>Tidak ada data</h4>
                     </div>
                 @endforelse
-                {{-- <ul class="page-nav list-style text-right d-flex justify-content-end mt-20">
-                    <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                    @for ($i = 1; $i <= $news->lastPage(); $i++)
-                        <li><a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                {{-- <ul class="page-nav list-style text-center mt-20">
+                    <li><a href="{{ $newsByDate->previousPageUrl() }}"><i
+                                class="flaticon-arrow-left"></i></a></li>
+                    @for ($i = 1; $i <= $newsByDate->lastPage(); $i++)
+                        <li><a href="{{ $newsByDate->url($i) }}"
+                                class="btn btn-black {{ $newsByDate->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                        </li>
                     @endfor
-                    <li><a href="{{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
+                    <li><a href="{{ $newsByDate->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a>
+                    </li>
                 </ul> --}}
             </div>
             <div class="text-center item-center d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">

@@ -508,7 +508,7 @@
                                         {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="business-details.html">{{ $post->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, 'page' => '1']) }}">{{ $post->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
                                                     2023</a></li>

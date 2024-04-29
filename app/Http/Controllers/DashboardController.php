@@ -82,6 +82,7 @@ class DashboardController extends Controller
         $generals = $this->news->getByGeneral();
         $tags = $this->tag->get();
         $totalCategories = $this->category->showWhithCount();
+        // dd($categories); 
 
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
     }
@@ -91,6 +92,7 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         return view('layouts.user.navbar-header', compact('categories', 'subCategories'));
     }
+    
 
     public function mobileHeader(){
         $categories = $this->category->get();
@@ -122,7 +124,7 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $news = $this->news->search($request);
         $totalCategories = $this->category->showWhithCount();
-        $newsByDate = $this->news->whereDate(Carbon::now());
+        $newsByDate = $this->news->whereDate(Carbon::now(),($request));
         $populars = $this->news->getByPopular();
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
@@ -132,7 +134,8 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         // $authors = $this->author->get();
         $authors = Author::with('user')->findOrFail($authorId);
-        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors'));
+        $totalCategories = $this->category->showWhithCount();
+        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories'));
     }
 
     public function privacypolicy() {
