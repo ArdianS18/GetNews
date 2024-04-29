@@ -13,6 +13,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Http\Requests\ViewRequest;
+use App\Models\Author;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\User;
@@ -77,7 +78,7 @@ class DashboardController extends Controller
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
-        $picks = $this->newsCategory->get();
+        $picks = $this->news->getByPick();
         $generals = $this->news->getByGeneral();
         $tags = $this->tag->get();
         $totalCategories = $this->category->showWhithCount();
@@ -126,10 +127,12 @@ class DashboardController extends Controller
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
 
-    public function authordetail() {
+    public function authordetail($authorId) {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        return view('pages.user.author.detail-author', compact('categories', 'subCategories'));
+        // $authors = $this->author->get();
+        $authors = Author::with('user')->findOrFail($authorId);
+        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors'));
     }
 
     public function privacypolicy() {
