@@ -165,7 +165,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('slug', $slug)
-            ->with(['category', 'author'])
+            ->with(['category', 'user'])
             ->firstOrFail();
     }
 

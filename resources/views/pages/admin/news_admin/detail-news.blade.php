@@ -116,7 +116,7 @@
                                 <div class="col-lg-6 col-md-12 from-outline mt-2">
                                     <label class="form-label" for="nomor">Penulis</label>
                                     <input type="text" class="form-control"
-                                        value="{{ $news->author->user->name }}" readonly>
+                                        value="{{ $news->user->name }}" readonly>
                                 </div>
                                 <div class="col-lg-6 col-md-12 from-outline mt-2">
                                     <label class="form-label" for="password_confirmation">Tanggal Upload</label>

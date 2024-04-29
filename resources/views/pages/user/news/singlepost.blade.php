@@ -61,36 +61,17 @@
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
-                            @if ($newsPhoto)
-                                <div class="thumbnail-container d-flex justify-content-center">
-                                    <div class="thumbnails">
-                                        <div class="thumbnail">
-                                            <img src="{{ asset('storage/' . $news->photo) }}" alt="Image"
-                                                onclick="changeImage(this)">
-                                        </div>
-
-                                        @foreach ($newsPhoto as $photo)
-                                            <div class="thumbnail">
-                                                <img src="{{ asset('storage/' . $photo->multi_photo) }}" alt="Image"
-                                                    onclick="changeImage(this)">
-                                                {{-- <img src="{{ asset('assets/img/news/single-news-2.webp') }}" alt="Image" onclick="changeImage(this)"> --}}
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            @endif
-
                         </div>
 
                         <div class="d-flex justify-content-between">
                             <ul class="news-metainfo list-style">
                                 <li class="author">
                                     <span class="author-img">
-                                        <img src="{{ asset($news->author->user->photo ? 'storage/' . $news->author->user->photo : 'default.png') }}"
+                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
                                             alt="Image" width="40px" height="30px"
                                             style="border-radius: 50%; object-fit:cover;" />
                                     </span>
-                                    <a href="author.html">{{ $news->author->user->name }}</a>
+                                    <a href="author.html">{{ $news->user->name }}</a>
                                 </li>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
@@ -218,21 +199,11 @@
                         {{-- @foreach ($pages as $index => $page) --}}
                         <div class="news-para">
                             {{-- <p>{!! $pages !!}</p> --}}
-                            <p>{!! $pages[$currentPage] !!}</p>
-                            <ul class="page-nav list-style mt-20">
-                                <li>Halaman : </li>
-                                @for ($i = 0; $i < count($pages); $i++)
-                                    <li><a class="{{ $i == $currentPage ? 'active' : '' }}"
-                                            href="{{ route('news.user', ['news' => $news->slug, 'page' => $i + 1]) }}">{{ $i + 1 }}</a>
-                                    </li>
-                                @endfor
-                                {{-- <li><a href="{{ route('news.user', ['news' => $news->slug, 'page' => $i]) }}">Semua</a> --}}
-                                </li>
-                            </ul>
+                            <p>{!! $news->content !!}</p>
                         </div>
-
+                        Tag :
                         @forelse ($tags as $tag)
-                            Tag : <a href="#" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
+                           <a href="#" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
 
