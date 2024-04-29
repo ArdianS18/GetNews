@@ -199,7 +199,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
             ->take(4)
             ->get();
-            
+
     }
 
     public function getByLeft(): mixed
@@ -448,8 +448,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->where('author_id', $author)->update($data);
     }
 
-    public function whereDate($date) : mixed
-
+    public function whereDate($date, $request): mixed
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
