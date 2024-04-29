@@ -22,7 +22,7 @@
                                         <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, 'page' => '1']) }}">{{ $trending->news->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug]) }}">{{ $trending->news->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
                                         </ul>
@@ -52,7 +52,7 @@
                             </div>
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $newss->name }}</a>
+                                        href="{{ route('news.user', ['news' => $newss->slug]) }}">{{ $newss->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
@@ -104,7 +104,7 @@
                                 height="450" />
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">{{ $mid->name }}</a>
+                                        href="{{ route('news.user', ['news' => $mid->slug]) }}">{{ $mid->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
@@ -155,7 +155,7 @@
                             </div>
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">{{ $barus->name }}</a>
+                                        href="{{ route('news.user', ['news' => $barus->slug]) }}">{{ $barus->name }}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
@@ -240,7 +240,7 @@
                                                         </h5>
                                                     </div>
                                                     <h3>
-                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
+                                                        <a href="{{ route('news.user', ['news' => $pick->slug]) }}">{{ $pick->name }}</a>
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
                                                         <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -280,7 +280,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, 'page' => '1']) }}">{{ $popular->name }}</a></h3>
+                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug]) }}">{{ $popular->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
@@ -300,7 +300,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
+                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug]) }}">{{ $recent->name }}</a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
@@ -345,7 +345,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
-                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $general->slug]) }}">{{ $general->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
                                                     href="javascript:void(0)">{{ \Carbon\Carbon::parse($general->upload_date)->translatedFormat('d F Y') }}</a></li>
@@ -508,7 +508,7 @@
                                         {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, 'page' => '1']) }}">{{ $post->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $post->slug]) }}">{{ $post->name }}</a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
                                                     2023</a></li>
