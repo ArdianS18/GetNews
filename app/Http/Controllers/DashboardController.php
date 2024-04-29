@@ -50,7 +50,8 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        $users = $this->user->get()->count();
+        $users = $this->user->whereRelation();
+
         $authors = $this->author->get()->count();
         $news_count = $this->news->get()->count();
         $authors1 = $this->author->showWhithCount();

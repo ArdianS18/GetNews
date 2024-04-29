@@ -341,6 +341,11 @@ class NewsController extends Controller
     public function store(NewsRequest $request)
     {
         $data = $this->NewsService->store($request);
+
+        if (auth()->user()->roles == "admin") {
+            $data['status'] = NewsStatusEnum::ACTIVE->value;
+        }
+
         $newsId = $this->news->store($data)->id;
 
         foreach ($data['category'] as $category) {
