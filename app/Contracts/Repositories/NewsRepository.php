@@ -211,22 +211,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get()
             ->pluck('category_id');
 
-            return $this->model->query()
+        return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
             ->join('categories', 'news_categories.category_id', '=', 'categories.id')
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select(
-                'news.id',
-                'news.slug',
-                'news.photo',
-                'news.name',
-                'news.created_at',
-                'news.upload_date',
-                DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'),
-                DB::raw('COUNT(views.news_id) as views')
-            )
-            ->groupBy('news.id', 'news.slug', 'news.created_at')
+            ->select('news.id', 'news.slug', 'news.photo', 'news.name', 'news.created_at', 'news.upload_date', DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names'), DB::raw('COUNT(views.news_id) as views'))
+            ->groupBy('id', 'created_at')
             ->whereIn('news_categories.category_id', $subquery)
             ->orderByRaw('COUNT(news_categories.category_id) DESC')
             ->take(4)
