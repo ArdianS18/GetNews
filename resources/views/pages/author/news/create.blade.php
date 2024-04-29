@@ -38,7 +38,7 @@
         Ketentuan & Persyaratan
     </button>
   </div>
-  
+
     <form id="myForm" method="post" action="{{ route('profile.berita.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="ms-1 mt-5 d-flex justify-content-between">
@@ -153,11 +153,10 @@
                                     @endforeach
                                 </select>
                             </div>
-
-                                <div class="col-lg-12">
+                                {{-- <div class="col-lg-12">
                                     <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                                     <input type="file" id="image-uploadify" accept="image/*" name="multi_photo[]" multiple>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -267,12 +266,12 @@
         });
     </script>
 
-    <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script> --}}
 
     <script>
-        $(document).ready(function() {
-            $('#image-uploadify').imageuploadify();
-        })
+        // $(document).ready(function() {
+        //     $('#image-uploadify').imageuploadify();
+        // })
 
         $('.category').change(function() {
             getSubCategory($(this).val())

@@ -119,19 +119,19 @@ class ProfileController extends Controller
 
     public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
-        $data = $this->NewsService->update($request, $news, $newsPhoto);
+        $data = $this->NewsService->update($request, $news);
         $data['status'] = NewsStatusEnum::PANDING->value;
         $this->news->update($news->id, $data);
 
-        if ($request->hasFile('multi_photo')) {
-            $newsPhoto->where('news_id', $news->id)->delete();
-            foreach ($data['multi_photo'] as $photo) {
-                $newsPhoto->create([
-                    'news_id' => $news->id,
-                    'multi_photo' => $photo
-                ]);
-            }
-        }
+        // if ($request->hasFile('multi_photo')) {
+        //     $newsPhoto->where('news_id', $news->id)->delete();
+        //     foreach ($data['multi_photo'] as $photo) {
+        //         $newsPhoto->create([
+        //             'news_id' => $news->id,
+        //             'multi_photo' => $photo
+        //         ]);
+        //     }
+        // }
 
         $newsCategory->where('news_id', $news->id)->delete();
         foreach ($data['category'] as $category) {
@@ -156,10 +156,7 @@ class ProfileController extends Controller
                 'tag_id' => $tagId
             ]);
         }
-
-
-        return ResponseHelper::success(null, trans('alert.add_success'));
-
+        return to_route('status.news.author');
     }
 
     /**

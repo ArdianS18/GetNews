@@ -231,7 +231,6 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
 
     Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
-    Route::get('news-post', [DashboardController::class, 'newspost'])->name('news.post');
     Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
 
     Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
@@ -255,14 +254,7 @@ Route::middleware(['role:user'])->group(function () {
     })->name('user.home');
 });
 
-
-
-
-// Route::get('aboutnews', function(){
-//     return view('pages.user.about.index');
-// })->name('about.user');
-
-
+Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
 Route::get('statistic', function () {
     return view('pages.author.statistic.index');

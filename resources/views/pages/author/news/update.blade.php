@@ -50,10 +50,6 @@
                 <h5>Isi form dibawah ini untuk mengunggah berita</h5>
 
                 <div class="">
-                    {{-- <button type="button" class="btn btn-md me-2 text-black"
-                        style="background-color: #C9C9C9;">
-                        Kembali
-                    </button> --}}
                     @if ($news->status == "draft")
                         <button type="submit" class="btn btn-md text-white" style="background-color: #0F4D8A;" id="submitButton1">
                             Rilis & Update
@@ -173,7 +169,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-lg-6 col-md-12 row-span-1 from-outline">
+                            {{-- <div class="col-lg-6 col-md-12 row-span-1 from-outline">
                                 <div class="mt-2">
                                     <label class="form-label" for="password_confirmation">Multi Gambar (Optional)</label>
                                     <input type="file" id="image-uploadify" name="multi_photo[]" accept="image/*" multiple>
@@ -183,7 +179,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="d-flex mt-3">
                                 <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;" id="submitButton2">
