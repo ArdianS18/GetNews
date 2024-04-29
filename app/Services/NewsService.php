@@ -64,14 +64,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $data['tags'] = $newTags;
         }
 
-        // $multi_photo = [];
-        //     if ($request->hasFile('multi_photo')) {
-        //         foreach ($request->file('multi_photo') as $image) {
-        //             $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-        //             $multi_photo[] = $stored_image;
-        //         }
-        //     }
-
             $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
 
             $domQuestion = new \DOMDocument();
@@ -85,7 +77,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => auth()->user()->id,
             'name' => $data['name'],
             'photo' => $image,
-            // 'multi_photo' => $multi_photo,
             'content' => $domQuestion->saveHTML(),
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
@@ -111,14 +102,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $data['tags'] = $newTags;
         }
 
-        // $multi_photo = [];
-        // if ($request && $request->hasFile('multi_photo')) {
-        //     foreach ($request->file('multi_photo') as $image) {
-        //         $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-        //         $multi_photo[] = $stored_image;
-        //     }
-        // }
-
             $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
 
             $domQuestion = new \DOMDocument();
@@ -134,7 +117,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => auth()->user()->id,
             'name' => $data['name'] ??  null,
             'photo' => $image ?? null,
-            // 'multi_photo' => $multi_photo ?? null,
             'content' => $domQuestion->saveHTML() ?: null,
             'slug' => Str::slug($data['name']),
             'category' => $data['category'] ?? null,
@@ -163,17 +145,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $old_photo = $news->photo;
         $new_photo= "";
 
-        // $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
-        // $new_multi_photo = [];
-
-        // if ($request->hasFile('multi_photo')) {
-        //     foreach ($request->file('multi_photo') as $image) {
-        //         $this->remove($image);
-        //         $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-        //         $new_multi_photo[] = $stored_image;
-        //     }
-        // }
-
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
@@ -192,7 +163,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => auth()->user()->id,
             'name' => $data['name'] ??  null,
             'photo' => $old_photo ?: $new_photo ?? null,
-            // 'multi_photo' => $old_multi_photo ?: $new_multi_photo ?? null,
             'content' => $domQuestion->saveHTML() ?: null,
             'slug' => Str::slug($data['name']),
             'category' => $data['category'] ?? null,
@@ -230,17 +200,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $old_photo = $news->photo;
         $new_photo= "";
 
-        // $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
-        // $new_multi_photo = [];
-
-        // if ($request->hasFile('multi_photo')) {
-        //     foreach ($request->file('multi_photo') as $image) {
-        //         $this->remove($image);
-        //         $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-        //         $new_multi_photo[] = $stored_image;
-        //     }
-        // }
-
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
@@ -255,18 +214,10 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
         libxml_clear_errors();
 
-        // $id = "";
-        // if (auth()->user()->roles->pluck('name')->contains("admin")) {
-        //     $id = $news->author_id;
-        // } else {
-        //     $id = auth()->user()->id;
-        // }
-
         return [
             'user_id' => auth()->user()->id,
             'name' => $data['name'],
             'photo' => $old_photo ?: $new_photo,
-            // 'multi_photo' => $new_multi_photo ?: $old_multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
@@ -296,17 +247,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $old_photo = $news->photo;
         $new_photo= "";
 
-        // $old_multi_photo = $newsPhoto->where('news_id', $news->id)->pluck('multi_photo')->toArray();
-        // $new_multi_photo = [];
-
-        // if ($request->hasFile('multi_photo')) {
-        //     foreach ($request->file('multi_photo') as $image) {
-        //         $this->remove($image);
-        //         $stored_image = $image->store(UploadDiskEnum::NEWS_PHOTO->value , 'public');
-        //         $new_multi_photo[] = $stored_image;
-        //     }
-        // }
-
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
@@ -316,7 +256,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => $news->user->id,
             'name' => $data['name'],
             'photo' => $old_photo ?: $new_photo,
-            // 'multi_photo' => $new_multi_photo ?: $old_multi_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],

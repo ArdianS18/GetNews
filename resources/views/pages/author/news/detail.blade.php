@@ -7,15 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    {{-- <style>
-        .news-card-a {
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            background-color: #fff;
-        }
-    </style> --}}
-
     <style>
         .tag {
             display: inline-block;
@@ -87,7 +78,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-4">
                                 <label class="form-label">Penulis</label>
-                                <h5>{{ $news->author->user->name }}</h5>
+                                <h5>{{ $news->user->name }}</h5>
                             </div>
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label">Tanggal Upload</label>
