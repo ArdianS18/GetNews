@@ -22,7 +22,9 @@
                                         <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, 'page' => '1']) }}">{{ $trending->news->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, 'page' => '1']) }}">
+                                            {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 50, $end = '...')  !!}
+                                        </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
                                         </ul>
@@ -51,8 +53,9 @@
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a
-                                        href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">{{ $newss->name }}</a>
+                                <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">
+                                        {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
+                                    </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
@@ -74,8 +77,9 @@
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                                 <h3>
-                                    <a
-                                        href="{{ route('news.user', ['news' => $newss->slug, 'page' => 1]) }}">{{ $newss->name }}</a>
+                                    <a href="{{ route('news.user', ['news' => $newss->slug, 'page' => 1]) }}">
+                                        {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
+                                    </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -103,8 +107,9 @@
                             <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" style="object-fit: cover"
                                 height="450" />
                             <div class="news-card-info">
-                                <h3><a
-                                        href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">{{ $mid->name }}</a>
+                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
+                                    </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
@@ -123,8 +128,9 @@
                                     class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a
-                                        href="{{ route('news.user', ['news' => $mid->slug, 'page' => 1]) }}">{{ $mid->name }}</a>
+                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => 1]) }}">
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 60, $end = '...')  !!}
+                                    </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -154,8 +160,10 @@
                                     class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a
-                                        href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">{{ $barus->name }}</a>
+                                <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">
+                                        {{-- {{ $barus->name }} --}}
+                                        {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
+                                    </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
@@ -175,8 +183,9 @@
                             <div class="news-card-info">
                                 <a
                                     href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}">{{ $barus->newsCategories[0]->category->name }}</a>
-                                <h3><a
-                                        href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">{{ $barus->name }}</a>
+                                <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">
+                                        {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
+                                    </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -208,17 +217,6 @@
                                     <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
                                 </h2>
                             </div>
-                            <div class="col-md-6">
-                                <ul class="nav nav-tabs news-tablist" role="tablist">
-                                    @forelse ($editor_pick as $pick)
-                                        <li class="nav-item">
-                                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_{{ $pick->category->id }}"
-                                                type="button" role="tab">{{ $pick->category->name }}</button>
-                                        </li>
-                                    @empty
-                                    @endforelse
-                                </ul>
-                            </div>
                         </div>
                         <div class="tab-content col-md-12 editor-news-content">
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
@@ -240,7 +238,9 @@
                                                         </h5>
                                                     </div>
                                                     <h3>
-                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">{{ $pick->name }}</a>
+                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">
+                                                            {!! Illuminate\Support\Str::limit($pick->name, $limit = 47, $end = '...')  !!}
+                                                        </a>
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
                                                         <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -280,7 +280,9 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, 'page' => '1']) }}">{{ $popular->name }}</a></h3>
+                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, 'page' => '1']) }}">
+                                                {!! Illuminate\Support\Str::limit($popular->name, $limit = 60, $end = '...')  !!}
+                                            </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
@@ -300,7 +302,9 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">{{ $recent->name }}</a></h3>
+                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">
+                                                {!! Illuminate\Support\Str::limit($recent->name, $limit = 60, $end = '...')  !!}
+                                            </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
                                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
@@ -345,7 +349,9 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
-                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, 'page' => '1']) }}">{{ $general->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, 'page' => '1']) }}">
+                                            {!! Illuminate\Support\Str::limit($general->name, $limit = 47, $end = '...')  !!}
+                                        </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
                                                     href="javascript:void(0)">{{ \Carbon\Carbon::parse($general->upload_date)->translatedFormat('d F Y') }}</a></li>
@@ -355,101 +361,6 @@
                             </div>
                         @empty
                         @endforelse
-                        {{-- <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-20.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Fashion</a>
-                                    <h3><a href="business-details.html">Is This The Beginning Of The End Of The
-                                            Internet?</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 22,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-21.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Politics</a>
-                                    <h3><a href="business-details.html">7 Steps To Get Professional Facial Results At
-                                            Home</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 25,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-22.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Inspiration</a>
-                                    <h3><a href="business-details.html">Creative Photography Ideas From Smart Devices</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 18,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-23.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Politics</a>
-                                    <h3><a href="business-details.html">6 Romantic Places You Should Visit In 2023</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 20,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-24.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Sports</a>
-                                    <h3><a href="business-details.html">The Best Place To Celebrate Birthday And Music</a>
-                                    </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 27,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-                            <div class="news-card-twelve">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-25.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Business</a>
-                                    <h3><a href="business-details.html">Splurge Or Save Last Minute Pampering Gift
-                                            Ideas</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 18,
-                                                2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                     <div class="ad-section">
                         <p>SPONSORED AD</p>
@@ -508,7 +419,9 @@
                                         {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, 'page' => '1']) }}">{{ $post->name }}</a></h3>
+                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, 'page' => '1']) }}">
+                                            {!! Illuminate\Support\Str::limit($post->name, $limit = 20, $end = '...')  !!}
+                                        </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22,
                                                     2023</a></li>
