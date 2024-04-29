@@ -58,8 +58,8 @@ class DashboardController extends Controller
         $news = $this->news->getAllNews();
         $categories = $this->category->showWhithCount();
         $news2 = $this->news->showCountMonth();
-
         $newsCategory = $this->newsCategory->trending();
+
         return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2'));
     }
 
@@ -82,7 +82,7 @@ class DashboardController extends Controller
         $generals = $this->news->getByGeneral();
         $tags = $this->tag->get();
         $totalCategories = $this->category->showWhithCount();
-        // dd($categories); 
+        // dd($categories);
 
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
     }
@@ -92,7 +92,7 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         return view('layouts.user.navbar-header', compact('categories', 'subCategories'));
     }
-    
+
 
     public function mobileHeader(){
         $categories = $this->category->get();
