@@ -74,7 +74,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function searchStatus(mixed $id, Request $request): mixed
     {
         return $this->model->query()
-        ->where('author_id', $id)
+        ->where('user_id', $id)
         ->when($request->search, function($query) use ($request){
             $query->where('name', 'LIKE', '%'.$request->search.'%');
         })
@@ -385,7 +385,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $result =  $this->model->query()
             ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'), DB::raw('COUNT(followers.author_id) as followers_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->leftJoin('followers', 'news.user_id', '=', 'followers.authors.user_id')
+            ->leftJoin('followers', 'news.user_id', '=', 'followers.author_id')
             ->whereYear('news.created_at', $year)
             ->groupBy('month')
             ->orderBy('month')

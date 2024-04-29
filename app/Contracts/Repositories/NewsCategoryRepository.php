@@ -64,7 +64,7 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
     {
         return $this->model->query()
             ->whereHas('news', function($findid) use ($id){
-                $findid->where('author_id', $id);
+                $findid->where('user_id', $id);
             })
             ->whereHas('news', function($findid) use ($request) {
                 $findid->where('status', "active");

@@ -89,7 +89,7 @@ class ProfileController extends Controller
         $followers = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
 
-        $news_id = News::where('author_id', auth()->user()->author->id)->pluck('id');
+        $news_id = News::where('user_id', auth()->user()->id)->pluck('id');
         $news_like = $this->newsHasLike->get()->where('news_id', $news_id)->count();
 
         $authors = $this->author->get();
