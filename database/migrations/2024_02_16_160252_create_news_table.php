@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('author_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('name')->nullable()->default('-');
             $table->text('photo')->nullable();
             $table->longText('content')->nullable();

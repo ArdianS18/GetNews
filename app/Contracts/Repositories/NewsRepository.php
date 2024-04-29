@@ -278,7 +278,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->join('news_categories', 'news.id', '=', 'news_categories.news_id')
             ->join('categories', 'news_categories.category_id', '=', 'categories.id')
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.author_id','news.photo','news.slug','news.name','news.created_at','news.upload_date',DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names') ,DB::raw('COUNT(views.news_id) as views'))
+            ->select('news.id', 'news.user_id','news.photo','news.slug','news.name','news.created_at','news.upload_date',DB::raw('SUBSTRING_INDEX(GROUP_CONCAT(categories.name SEPARATOR ", "), ", ", 1) as category_names') ,DB::raw('COUNT(views.news_id) as views'))
             ->groupBy('id','created_at')
             ->take(6)
             ->get();
@@ -385,7 +385,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $result =  $this->model->query()
             ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'), DB::raw('COUNT(followers.author_id) as followers_count'))
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->leftJoin('followers', 'news.author_id', '=', 'followers.author_id')
+            ->leftJoin('followers', 'news.user_id', '=', 'followers.authors.user_id')
             ->whereYear('news.created_at', $year)
             ->groupBy('month')
             ->orderBy('month')

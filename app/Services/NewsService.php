@@ -82,7 +82,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             libxml_clear_errors();
 
         return [
-            'author_id' => auth()->user()->author->id,
+            'user_id' => auth()->user()->id,
             'name' => $data['name'],
             'photo' => $image,
             'multi_photo' => $multi_photo,
@@ -131,7 +131,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             libxml_clear_errors();
 
         return [
-            'author_id' => auth()->user()->author->id,
+            'user_id' => auth()->user()->id,
             'name' => $data['name'] ??  null,
             'photo' => $image ?? null,
             'multi_photo' => $multi_photo ?? null,
@@ -189,7 +189,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         libxml_clear_errors();
 
         return [
-            'author_id' => auth()->user()->author->id,
+            'user_id' => auth()->user()->id,
             'name' => $data['name'] ??  null,
             'photo' => $old_photo ?: $new_photo ?? null,
             'multi_photo' => $old_multi_photo ?: $new_multi_photo ?? null,
@@ -255,15 +255,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
         libxml_clear_errors();
 
-        $id = "";
-        if (auth()->user()->roles->pluck('name')->contains("admin")) {
-            $id = $news->author_id;
-        } else {
-            $id = auth()->user()->author->id;
-        }
+        // $id = "";
+        // if (auth()->user()->roles->pluck('name')->contains("admin")) {
+        //     $id = $news->author_id;
+        // } else {
+        //     $id = auth()->user()->id;
+        // }
 
         return [
-            'author_id' => $id,
+            'user_id' => auth()->user()->id,
             'name' => $data['name'],
             'photo' => $old_photo ?: $new_photo,
             'multi_photo' => $new_multi_photo ?: $old_multi_photo,
@@ -313,7 +313,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
 
         return [
-            'author_id' => $news->author->id,
+            'user_id' => $news->user->id,
             'name' => $data['name'],
             'photo' => $old_photo ?: $new_photo,
             'multi_photo' => $new_multi_photo ?: $old_multi_photo,
