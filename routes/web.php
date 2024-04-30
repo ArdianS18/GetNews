@@ -165,6 +165,9 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
 
     Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
+    Route::get('detail-iklan', function(){
+        return view('pages.admin.iklan.detail-iklan');
+    })->name('admin.detail.iklan');
 });
 
 
@@ -259,130 +262,129 @@ Route::middleware(['role:user'])->group(function () {
         return view('pages.user.inbox.index');
     })->name('user.inbox');
 
-Route::get('berita-upload', function(){
-    return view('pages.user.news.upload');
-})->name('berita.upload');
+    Route::get('berita-upload', function(){
+        return view('pages.user.news.upload');
+    })->name('berita.upload');
 
-Route::get('status-berita', function () {
-    return view('pages.user.news.status');
-})->name('status.berita');
+    Route::get('status-berita', function () {
+        return view('pages.user.news.status');
+    })->name('status.berita');
 
-Route::get('riwayat-berita', function(){
-    return view('pages.user.news.history');
-})->name('user.history.news');
-Route::get('iklan-upload', function(){
-    return view('pages.user.iklan.pengajuan');
-})->name('iklan.pengajuan');
-Route::get('status-iklan', function(){
-    return view('pages.user.iklan.status');
-})->name('iklan.status');
+    Route::get('riwayat-berita', function(){
+        return view('pages.user.news.history');
+    })->name('user.history.news');
+    Route::get('iklan-upload', function(){
+        return view('pages.user.iklan.pengajuan');
+    })->name('iklan.pengajuan');
+    Route::get('status-iklan', function(){
+        return view('pages.user.iklan.status');
+    })->name('iklan.status');
 
-Route::get('tukar-coin', function () {
-    return view('pages.user.coins.index');
-})->name('tukar.coin');
+    Route::get('tukar-coin', function () {
+        return view('pages.user.coins.index');
+    })->name('tukar.coin');
 
-Route::get('iklan-biodata', function(){
-    return view('pages.user.iklan.upload');
-})->name('iklan.biodata');
+    Route::get('iklan-biodata', function(){
+        return view('pages.user.iklan.upload');
+    })->name('iklan.biodata');
 
-Route::get('tukarkan-coin', function(){
-    return view('pages.user.coins.tukar-coin');
-})->name('user.tukar.coin');
+    Route::get('tukarkan-coin', function(){
+        return view('pages.user.coins.tukar-coin');
+    })->name('user.tukar.coin');
 
-Route::get('riwayat-tukar-coin', function(){
-    return view('pages.user.coins.history');
-})->name('user.history.coin');
+    Route::get('riwayat-tukar-coin', function(){
+        return view('pages.user.coins.history');
+    })->name('user.history.coin');
 
-Route::get('status-detail-iklan', function(){
-    return view('pages.user.iklan.status-iklan');
-})->name('status.detail.iklan');
-Route::get('status-detail-berita', function () {
-    return view('pages.user.news.status-berita');
-})->name('status.detail.berita');
-Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
+    Route::get('status-detail-iklan', function(){
+        return view('pages.user.iklan.status-iklan');
+    })->name('status.detail.iklan');
+    Route::get('status-detail-berita', function () {
+        return view('pages.user.news.status-berita');
+    })->name('status.detail.berita');
+    Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
 
-// Route::get('payment-upload', function(){
-//     return view('pages.user.iklan.pembayaran');
-// })->name('payment.index');
+    // Route::get('payment-upload', function(){
+    //     return view('pages.user.iklan.pembayaran');
+    // })->name('payment.index');
 
-Route::get('payment-upload/{advertisement}', [AdvertisementController::class, 'show'])->name('payment.advertisement.show');
+    Route::get('payment-upload/{advertisement}', [AdvertisementController::class, 'show'])->name('payment.advertisement.show');
 
-Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
+    Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
 
-Route::get('iklan-ajukan', function(){
-    return view('pages.user.iklan.ajukan');
-})->name('iklan.ajukan');
-
-
-
-Route::get('status-selesai-iklan', function(){
-    return view('pages.user.iklan.status-selesa');
-})->name('status.selesai.iklan');
+    Route::get('iklan-ajukan', function(){
+        return view('pages.user.iklan.ajukan');
+    })->name('iklan.ajukan');
 
 
-Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
 
-Route::get('pembayaran-iklan', function(){
-    return view('pages.user.iklan.pembayaran');
-})->name('user.pembayaran.iklan');
+    Route::get('status-selesai-iklan', function(){
+        return view('pages.user.iklan.status-selesa');
+    })->name('status.selesai.iklan');
 
-Route::get('rincian-pembayaran-iklan', function(){
-    return view('pages.user.iklan.rincian-pembayaran');
-})->name('user.rincian-pembayaran.iklan');
 
-Route::get('load-coin', function(){
-    return view('pages.user.load-coin.load');
+    Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
+
+    Route::get('pembayaran-iklan', function(){
+        return view('pages.user.iklan.pembayaran');
+    })->name('user.pembayaran.iklan');
+
+    Route::get('rincian-pembayaran-iklan', function(){
+        return view('pages.user.iklan.rincian-pembayaran');
+    })->name('user.rincian-pembayaran.iklan');
+
+    Route::get('load-coin', function(){
+        return view('pages.user.load-coin.load');
+    });
+
+    Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
+    Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
+    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
+    Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
+
+    Route::get('statistic', function () {
+        return view('pages.author.statistic.index');
+    })->name('statistic.author');
+
+    Route::get('status', function () {
+        return view('pages.author.status.index');
+    })->name('status.author');
+
+    Route::get('/{news}', [NewsController::class, 'usernews'])->name('news.user');
+
+    // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
+    // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
+    // Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
+
+    Route::get('admin-inbox', function () {
+        return view('pages.admin.inbox.index');
+    })->name('admin.inbox');
+
+    // Inbox
+    Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
+    Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
+
+
+    Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+    Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
+
+
+    Route::get('confirm-email', function () {
+        return view('pages.auth.passwords.email');
+    })->name('confirm.email');
+
+    Route::get('confirm-password', function () {
+        return view('pages.auth.passwords.confirm');
+    })->name('confirm.password');
+
+
+    // Route::get('pengajuan-berita', function () {
+    //     return view('pages.user.news.pengajuan');
+    // })->name('pengajuan.berita');
+
 });
 
-Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
-Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
-Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
-Route::get('statistic', function () {
-    return view('pages.author.statistic.index');
-})->name('statistic.author');
-
-Route::get('status', function () {
-    return view('pages.author.status.index');
-})->name('status.author');
-
-Route::get('/{news}', [NewsController::class, 'usernews'])->name('news.user');
-
-// Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
-// Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
-// Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
-
-Route::get('admin-inbox', function () {
-    return view('pages.admin.inbox.index');
-})->name('admin.inbox');
-
-// Inbox
-Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
-Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
-
-
-Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
-Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
-
-
-
-Route::get('confirm-email', function () {
-    return view('pages.auth.passwords.email');
-})->name('confirm.email');
-
-Route::get('confirm-password', function () {
-    return view('pages.auth.passwords.confirm');
-})->name('confirm.password');
-
-
-// Route::get('pengajuan-berita', function () {
-//     return view('pages.user.news.pengajuan');
-// })->name('pengajuan.berita');
-
-
-
-
-
-});
 ?>
