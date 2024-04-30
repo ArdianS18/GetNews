@@ -6,8 +6,6 @@
         .news-card-a {
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border: 1px solid #ddd;
-            /* Memberi ruang di sekitar elemen */
-            /* margin-bottom: 20px;  */
             border-radius: 10px;
             padding: 2%;
             align-items: center;
@@ -65,18 +63,18 @@
     </form>
     <div class="tab-pane">
         @forelse ($news as $item)
-            <div class="news-card-a mt-4">
-                <div class="row card-detail">
-                    <div class="col-md-12 col-lg-3">
+            <div class="card p-4 mt-4">
+                <div class="row">
+                    <div class="col-lg-2">
                         <div class="" style="margin-left: 2%;">
                             @if ($item->photo)
-                                <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" style="width: 100%;" width="290px" height="170px" class="img-status">
+                                <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" style="object-fit:cover;" width="100%" height="120">
                             @else
                                 Tidak Ada Foto
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-7">
+                    <div class="col-md-12 col-lg-8">
                         <div class="d-flex">
 
                             <div class="order-md-1" style="margin-left:20px;">
@@ -90,12 +88,12 @@
                         <div class="d-flex justify-content-end">
                             <div class="text-md-right mt-md-0">
                                 <span
-                                    class="badge fw-bold fs-6 @if ($item->status == 'active') bg-light-success text-success
+                                    class="badge fw-bold fs-5 @if ($item->status == 'active') bg-light-success text-success
                                 @elseif($item->status == 'reject')
                                 bg-light-danger text-danger
 
                                 @else
-                                bg-light-warning text-warning @endif">
+                                bg-light-warning fs-2 text-warning @endif">
                                     @if ($item->status == 'active')
                                         Aktif
                                     @elseif ($item->status == 'reject')
@@ -103,22 +101,22 @@
                                     @elseif ($item->status == 'draft')
                                         Draft
                                     @else
-                                    Panding
+                                        Panding
                                     @endif
                                 </span>
                             </div>
                         </div>
 
-                        <div class="mt-3 d-flex justify-content-end">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512">
+                        <div class=" d-flex justify-content-end">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 512 512">
                                 <path
                                     d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
                                     fill="#0f4d89" />
                             </svg>
-                            <p class="ms-2"> Apr 25, 2023</p>
+                            <p class="ms-2 fs-3"> Apr 25, 2023</p>
                         </div>
 
-                        <div class="mt-3 d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">
                             <a href="{{ route('profile.news.edit', ['id' => $item->slug]) }}" class="btn btn-sm m-1"
                                 style="background-color: #0F4D8A;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">

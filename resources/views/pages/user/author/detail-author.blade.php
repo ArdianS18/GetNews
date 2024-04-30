@@ -26,16 +26,35 @@
             <div class="card shadow-sm p-5 mt-5">
                 <div class="row">
                     <div class="col-md-12 col-lg-1">
-                        <img src="assets/img/news/trending-3.webp" alt="Image" width="130px" style="border-radius: 50%;" />
+                        <img src="{{asset($authors->photo ? 'storage/'.$authors->photo : "default.png")}}" alt="Image" width="130px" style="border-radius: 50%;" />
                     </div>
                     <div class="col-md-12 col-lg-11">
-                        <div class="">
                             <div class="d-flex">
-                                <h3>Daffa Prasetya</h3>
-                                <div class="" style="">
-                                    <button class="btn btn-sm ms-3 text-white px-5"
-                                        style="background-color: #0F4D8A;">Ikuti</button>
-                                </div>
+                                <h3 class="me-2">{{ $authors->user->name }}</h3>
+                                @if (auth()->user()->id != $authors->user_id)
+                                @php
+                                    $user_id = auth()->user()->id;
+                                    $author_id = $authors->id;
+                                    $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
+                                @endphp
+
+                                @if ($isFollowing)
+                                    <form action="{{ route('unfollow.author', ['author' => $authors->id]) }}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('follow.author', ['author' => $authors->id]) }}" method="POST">
+                                        @method('post')
+                                        @csrf
+                                        <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                    </form>
+                                @endif
+                            @else
+                                Ini akun Anda
+                            @endif
+
                             </div>
 
                             <div class="col-10">
@@ -87,12 +106,12 @@
                                 </div>
                                 <div class="d-flex">
                                     <button class="btn btn-sm text-black px-5" style="background-color: #D9D9D9;">40
-                                        Berita</button>
+</button>
                                     <button class="btn btn-sm ms-3 text-black px-5" style="background-color: #D9D9D9;">50
                                         Coments</button>
                                 </div>
-                            </div>
-                        </div>
+                            </div>      
+
                     </div>
                 </div>
             </div>
@@ -223,19 +242,15 @@
                         <div class="card-category">
                             <h3 class="sidebar-widget-title">Kategori</h3>
                             <ul class="category-widget list-style">
-                                
-                                <li><a href="business.html"><img src="assets/img/icons/arrow-right.svg"
-                                            alt="Image">Culture<span>(3)</span></a></li>
-                                <li><a href="business.html"><img src="assets/img/icons/arrow-right.svg"
-                                            alt="Image">Fashion<span>(2)</span></a></li>
-                                <li><a href="business.html"><img src="assets/img/icons/arrow-right.svg"
-                                            alt="Image">Inspiration<span>(8)</span></a></li>
-                                <li><a href="business.html"><img src="assets/img/icons/arrow-right.svg"
-                                            alt="Image">Lifestyle<span>(6)</span></a></li>
-                                <li><a href="business.html"><img src="assets/img/icons/arrow-right.svg"
-                                            alt="Image">Politics<span>(2)</span></a></li>
-                                <li><a href="business.html"><img src="assets/img/icons/arrow-right.svg"
-                                            alt="Image">Trending<span>(4)</span></a></li>
+                                @foreach ($totalCategories as $category)
+                                    <li><a
+                                            href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
+                                                src="{{ asset('assets/img/icons/arrow-right.svg') }}"
+                                                alt="Image">{{ $category->name }}
+                                            <span>({{ $category->total }})</span>  
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
 

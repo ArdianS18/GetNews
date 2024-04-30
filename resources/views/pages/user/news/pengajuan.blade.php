@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="col-lg-12 mb-4" style="height: auto;">
-                            <label class="form-label" for="content">Content</label>
+                            <label class="form-label" for="content">Isi Berita</label>
                             <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
                             @error('content')
                                 <span class="invalid-feedback" role="alert" style="color: red;">

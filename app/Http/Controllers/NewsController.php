@@ -31,6 +31,7 @@ use App\Contracts\Interfaces\ReportInterface;
 use App\Http\Requests\NewsDraftRequest;
 use App\Http\Resources\NewsCategoryResource;
 use App\Models\Author;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\NewsCategory;
 use App\Models\NewsHasLike;
@@ -39,6 +40,7 @@ use App\Models\NewsReport;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\Report;
+use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,6 +62,7 @@ class NewsController extends Controller
     private TagInterface $tags;
     private NewsService $NewsService;
     private $newsTrendingService;
+    private NewsCategoryInterface $newsCategories;
 
     protected $newsRepositoty;
 
@@ -82,7 +85,8 @@ class NewsController extends Controller
         NewsCategoryInterface $newsCategory,
         NewsSubCategoryInterface $newsSubCategory,
 
-        NewsPhotoInterface $newsPhoto)
+        NewsPhotoInterface $newsPhoto,
+        NewsCategoryInterface $newsCategories)
     {
         $this->newsCategory = $newsCategory;
         $this->newsSubCategory = $newsSubCategory;
@@ -105,6 +109,7 @@ class NewsController extends Controller
         $this->newsPhoto = $newsPhoto;
 
         $this->newsRepositoty = $newsRepository;
+        $this->newsCategories = $newsCategories;
 
     }
 
@@ -176,7 +181,7 @@ class NewsController extends Controller
         return view('pages.news.index', compact('news','subCategories'));
     }
 
-    public function usernews(Request $request ,$slug, $page)
+    public function usernews(Request $request ,$slug)
     {
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
@@ -204,8 +209,9 @@ class NewsController extends Controller
         $populars = $this->news->getByPopular();
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
+        $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories'));
     }
 
     /**
@@ -316,13 +322,13 @@ class NewsController extends Controller
         return view('pages.user.news.category', compact('news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
-    public function showSubCategories($slug, Request $request, NewsSubCategory $newsSubCategory)
+    public function showSubCategories($category,$subCategory,Request $request)
     {
-        $request->merge([
-            'name' => $newsSubCategory->id,
-        ]);
+        // $request->merge([
+        //     'name' => $newsSubCategory->id,
+        // ]);
 
-        $subCategory = $this->subCategory->showWithSlug($slug);
+        $subCategory = $this->subCategory->showWithSlug($subCategory);
 
         $categories = $this->category->get()->take(6);
         $totalCategories = $this->category->showWhithCount();

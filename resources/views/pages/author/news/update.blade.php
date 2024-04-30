@@ -160,7 +160,7 @@
 
                         <div class="row justify-content-between mt-2">
                             <div class="col-lg-6 col-md-12 col-span-2 mt-2 from-outline" style="height: auto;">
-                                <label class="form-label" for="content">Content</label>
+                                <label class="form-label" for="content">Isi Berita</label>
                                 <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form">{{ $news->content }}</textarea>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">

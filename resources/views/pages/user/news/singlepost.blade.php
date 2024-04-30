@@ -58,7 +58,7 @@
                         <h2 class="d-flex justify-content-start mb-4">{{ $news->name }}</h2>
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
-                                <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" alt="Image">
+                                <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" width="100%" height="470" style="object-fit: cover" alt="Image">
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
@@ -87,7 +87,7 @@
                                         <a href=""></a>
                                     </svg>
                                     <a
-                                        href="news-by-date.html">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
                                 <li> <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
                                     viewBox="0 0 24 24">
@@ -223,6 +223,27 @@
                         @empty
                         @endforelse
 
+
+                        <div id="cmt-form">
+                            <div class="mb-30">
+                                <h3 class="comment-box-title">Tinggalkan Komentar</h3>
+                            </div>
+                            <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
+                                method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <textarea name="content" id="messages" cols="30" rows="10" placeholder="Isi komentar disini"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <button type="submit" class="btn-two" style="background-color: #0F4D8A">Komentar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
                         <h3 class="comment-box-title mt-4">3 Komentar</h3>
                         <div class="comment-item-wrap">
                             <div class="comment-item">
@@ -271,37 +292,30 @@
                                 @endforelse
                             </div>
                         </div>
-                        <div class="post-pagination">
-                            <a class="prev-post" href="/">
-                                <span>Berita Lainya</span>
-                                <h6>The Future Of Business: Predictions And Trends To Watch</h6>
-                            </a>
-                            <a class="next-post" href="/">
-                                <span>NEXT</span>
-                                <h6>From Start-up To Scale-up: Navigating Growth In Your Business</h6>
-                            </a>
-                        </div>
-                        <div id="cmt-form">
 
-                            <div class="mb-30">
-                                <h3 class="comment-box-title">Tinggalkan Komentar</h3>
-                            </div>
-                            <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
-                                method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <textarea name="content" id="messages" cols="30" rows="10" placeholder="Please Enter Your Comment Here"></textarea>
-                                        </div>
+                        <div class="mt-5">
+                            <div class="comment-box-title"><h1><b>Berita Relevan</b></h1></div>
+                            @forelse ($newsCategories as $newsCategory)
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="{{ $newsCategory->news->photo }}" width="100%" height="130" style="object-fit: cover"/>
+                                        <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newsCategory->category->name }}</a>
                                     </div>
-                                    <div class="col-md-12 mt-3">
-                                        <button type="submit" class="btn-two" style="background-color: #0F4D8A">Kirim
-                                            Komentar</button>
+                                    <div class="news-card-info">
+                                        <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{{ $newsCategory->news->name }}</a></h3>
+                                        <p>{!!$newsCategory->news->content !!}</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </form>
+                            @empty
+                            @endforelse
                         </div>
+
+                        
+                       
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar">
@@ -349,7 +363,7 @@
                                                     <path fill="#e93314"
                                                         d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
                                                 </svg>
-                                                </i><a href="news-by-date.html">{{ $popular->views }}</a></li>
+                                                </i><a href="news-by-date.html">{{ $popular->views->count() }}</a></li>
 
                                                 </li>
                                             </ul>
@@ -402,7 +416,7 @@
                                                     <path fill="#e93314"
                                                         d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
                                                 </svg>
-                                                </i><a href="news-by-date.html">{{ $recent->views }}</a></li>
+                                                </i><a href="news-by-date.html">{{ $recent->views->count() }}</a></li>
 
                                                 </li>
                                             </ul>

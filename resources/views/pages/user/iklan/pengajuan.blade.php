@@ -59,20 +59,23 @@
                 <label for="position" class="form-label">Posisi Iklan</label>
                 <div class="">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">  
                         <label class="form-check-label" for="inlineRadio1">
+                            <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
                             <img src="{{asset('assets/img/full-horizontal.png')}}" width="300" height="200" alt="">
                         </label>    
                     </div>  
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
                         <label class="form-check-label" for="inlineRadio2">
+                            <p class="ms-2">Posisi Kanan (456 x 654)</p>
                             <img src="{{asset('assets/img/iklan-vertikal.svg')}}" width="300" height="200" alt="">
                         </label>
                     </div>
                         <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio3" value="vertikal">
                         <label class="form-check-label" for="inlineRadio3">
+                            <p class="ms-2">Posisi Kiri (1245 x 295)</p>
                             <img src="{{asset('assets/img/iklan-horizontal.svg')}}" width="300" height="200" alt="">
                         </label>
                     </div>
