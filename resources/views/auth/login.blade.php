@@ -25,8 +25,17 @@
                             @csrf
                             <div
                                 class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <h2>Login Akun GetMedia.id</h2>
+                                <h2>Login Akun GetMedia.id </h2>
                             </div>
+                            @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
+                                        {{ $error }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                @endforeach
+                            @endif
 
                             <!-- Email input -->
                             <div class="form-outline mt-4 mb-4">
@@ -93,6 +102,7 @@
     </div>
     </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>
