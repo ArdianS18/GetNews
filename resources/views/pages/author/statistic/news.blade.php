@@ -110,10 +110,10 @@
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <h3>Berita</h3>
-                    @foreach ($news as $item)
+                    @forelse ($news as $item)
                         <div class="d-flex gap-3 ms-1 mb-3 mt-4">
                             <div class="my-auto">
-                                <span class="fs-5 ">
+                                <span class="fs-5">
                                     @if ($loop->iteration === 1)
                                         <span class="badge bg-light-danger text-danger">{{ $loop->iteration }}</span>
                                     @elseif ($loop->iteration === 2)
@@ -154,7 +154,13 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                            </div>
+                        </div>
+                    @endforelse
                     {{-- <div class="d-flex gap-3 mb-3">
                         <div class="my-auto">
                             <span class="fs-5 badge bg-light-warning text-warning">
