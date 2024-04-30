@@ -302,8 +302,8 @@
                                         <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newsCategory->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{{ $newsCategory->news->name }}</a></h3>
-                                        <p>{!!$newsCategory->news->content !!}</p>
+                                        <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 60, $end = '...')  !!}</a></h3>
+                                        <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a></li>
                                             <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
@@ -344,7 +344,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a
-                                                    href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{{ $popular->name }}</a>
+                                                    href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li>
@@ -397,7 +397,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a
-                                                    href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{{ $recent->name }}</a>
+                                                    href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li>
