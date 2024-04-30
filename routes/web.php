@@ -157,6 +157,10 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('create-tag', [TagController::class, 'store'])->name('tag.create');
     Route::put('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::delete('delete-tag/{tag}', [TagController::class, 'destroy'])->name('delete.tag');
+    
+    Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin.list');
+
+    Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
 });
 
 

@@ -36,6 +36,10 @@ class AdvertisementController extends Controller
         return view('pages.user.iklan.pengajuan');
     }
 
+    public function indexAdmin()
+    {
+        return view('pages.admin.iklan.index');
+    }
     /**
      * Show the form for creating a new resource.
      */

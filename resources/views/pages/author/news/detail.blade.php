@@ -118,7 +118,7 @@
 
                         <div class="row justify-content-between mt-2">
                             <div class="">
-                                <label class="form-label">Content</label>
+                                <label class="form-label">Isi Berita</label>
                               {!! $news->content !!}
                             </div>
                         </div>

@@ -1,4 +1,3 @@
-<!-- resources/views/rotate-icon.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,95 +7,87 @@
     <!-- Include Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        .rotating {
-            animation: rotate 5s linear infinite;
-            width: 100px;
-            height: 100px; 
+        /* Container utama untuk semua elemen */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Kontainer untuk gambar dan loader */
+        .rotating-container {
             position: relative;
-            margin-top: 10px;
+            width: 100px;
+            height: 100px;
         }
 
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Animasi garis berputar */
+        .rotating-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 100px;
+            border-top: 4px solid #3498db; /* Warna garis */
+            border-radius: 50%; /* Membuat garis menjadi lingkaran */
+            transform-origin: center;
+            animation: rotateLine 5s linear infinite; /* Animasi rotasi */
+            z-index: 2;
         }
 
-        /* Tampilan hitungan mundur */
+        /* Keyframes untuk animasi garis berputar */
+        @keyframes rotateLine {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Teks hitungan mundur */
         #countdown {
             font-size: 24px;
             margin-top: 10px;
         }
-
-        /* Tampilan garis loader */
-        .loader-wrapper {
-            width: 100px; /* Lebar garis loader */
-            height: 100px; /* Tinggi garis loader */
-            position: relative;
-            margin-top: 10px;
-        }
-
-        .loader {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            clip: rect(0px, 50px, 100px, 0px); /* Mengatur area yang terlihat untuk melingkari garis loader */
-            animation: fillLoader 10s linear; /* Ubah '10s' menjadi durasi hitungan mundur yang diinginkan */
-        }
-
-        @keyframes fillLoader {
-            0% {
-                transform: rotate(0deg);
-                clip: rect(0px, 50px, 100px, 0px);
-            }
-            50% {
-                transform: rotate(180deg);
-                clip: rect(0px, 100px, 100px, 0px);
-            }
-            100% {
-                transform: rotate(360deg);
-                clip: rect(0px, 100px, 100px, 0px);
-            }
-        }
     </style>
 </head>
 <body>
-    <div>
-        <!-- Icon yang akan diputar -->
-        <div class="">
-            <i id="rotatingIcon" class="fas fa-circle rotating"></i>
+    <div class="container">
+        <!-- Kontainer untuk gambar dan loader -->
+        <div class="rotating-container">
+            <!-- Garis yang berputar -->
+            <div class="rotating-line"></div>
+            <!-- Gambar -->
+            <div class="image">
+                <img src="{{asset('assets/img/coin-load.svg')}}" width="100" alt="Gambar">
+            </div>
         </div>
         
         <!-- Hitungan mundur -->
         <div id="countdown">Sisa waktu: <span id="countdownValue"></span> detik</div>
-        <!-- Garis Loader -->
-        <div class="loader-wrapper">
-            <div class="loader" id="loader"></div>
-        </div>
     </div>
 
+    <!-- Script untuk mengatur hitungan mundur -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var countdownTime = 5;
 
-            // Fungsi untuk mengatur dan menampilkan hitungan mundur
             function startCountdown() {
                 var countdownElement = document.getElementById('countdownValue');
                 var timer = setInterval(function() {
                     countdownElement.textContent = countdownTime;
                     countdownTime--;
 
-                    // Hentikan hitungan mundur jika waktu habis
                     if (countdownTime < 0) {
                         clearInterval(timer);
-                        countdownElement.textContent = 'anda mendapat 1 poin';
+                        countdownElement.textContent = 'Anda mendapat 1 poin';
                     }
-                }, 1000); // Update setiap 1 detik
+                }, 1000);
             }
 
-            // Panggil fungsi hitungan mundur saat halaman dimuat
             startCountdown();
         });
     </script>

@@ -154,4 +154,8 @@ class DashboardController extends Controller
 
         return view('pages.contact.faq',compact('faqs','categories', 'subCategories'));
     }
+
+    public function createAccount() {
+        return view('pages.admin.akun.index ');
+    }
 }

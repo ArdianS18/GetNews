@@ -166,7 +166,7 @@
 
                             <div class="row justify-content-between mt-2">
                                 <div class="">
-                                    <label class="form-label" for="content">Content</label>
+                                    <label class="form-label" for="content">Isi Berita</label>
                                     <div class="d-flex gap-2 mb-3">
                                         <a class="btn btn-warning" id="clickEdit" onclick="edit()">Edit</a>
                                         <a class="btn btn-success" id="clickSave" onclick="save()">Save</a>
