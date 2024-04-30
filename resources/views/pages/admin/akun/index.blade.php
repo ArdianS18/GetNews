@@ -57,16 +57,21 @@
 </div>
 
 <div class="row">
+    @forelse ($users as $user)
     <div class="col-md-12 col-lg-3 mb-4">
         <a href="">
             <div class="card border hover-img shadow-sm">
                 <div class="card-body">
                     <div class="p-4 text-center">
                         <img src="{{asset('assets/img/profile.svg')}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
-                        <h5>Daffa Prasetya</h5>
-                        <p class="fs-5">daffa@gmail.com</p>
+                        <h5>{{ $user->name }}</h5>
+                        <p class="fs-5">{{ $user->email }}</p>
                         <div class="">
-                            <button class="btn btn-light-primary px-4 text-primary">Admin</button>
+                            @if ($user->hasRole('admin'))
+                                <button class="btn btn-light-primary px-4 text-primary">Admin</button>
+                            @else
+                                <button class="btn btn-light-danger px-4 text-danger">User</button>
+                            @endif
                         </div>
 
                     </div>
@@ -74,7 +79,9 @@
             </div>
         </a>
     </div>
-    <div class="col-md-12 col-lg-3 mb-4">
+    @empty
+    @endforelse
+    {{-- <div class="col-md-12 col-lg-3 mb-4">
         <a href="">
             <div class="card border hover-img shadow-sm">
                 <div class="card-body">
@@ -124,7 +131,7 @@
                 </div>
             </div>
         </a>
-    </div>
+    </div> --}}
 </div>
 
 <div class="d-flex mt-2 mx-4 justify-content-center">
@@ -139,7 +146,9 @@
                 <h5 class="modal-title" id="tambahdataLabel">Tambah Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="form-create" method="post">
+            <form action="{{ route('create.account.admin') }}" method="post">
+                @method('post')
+                @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6 mb-3">
