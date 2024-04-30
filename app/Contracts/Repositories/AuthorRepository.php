@@ -172,21 +172,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
 
     public function showWhithCountSearch(Request $request): mixed
     {
-        return DB::table('authors')
+        return $this->model->query()
             ->where('authors.status', 'approved')
-            ->whereRelation('news', 'user_id', 'authors.user_id')
             ->withCount('followers')
-            ->with('users')
-            // ->leftJoin('news', 'authors.user_id', '=', 'news.user_id')
-            // ->leftJoin('users', 'authors.user_id', '=', 'users.id')
             ->when($request->input('name'), function($query) use ($request) {
                 $query->where('users.name', 'LIKE', '%'.$request->input('name').'%');
             })
-            // ->select('authors.id', 'users.name', 'users.photo', 'users.id as user_id',
-            //     DB::raw('(SELECT COUNT(*) FROM news_has_likes WHERE news_has_likes.news_id = news.id) as count_like'),
-            //     DB::raw('(SELECT COUNT(*) FROM followers WHERE followers.author_id = authors.id) as count_follow'),
-            //     DB::raw('(SELECT COUNT(*) FROM news WHERE news.user_id = authors.user_id AND news.status = "active") as count'))
-            // ->groupBy('authors.id', 'count_like', 'count_follow')
+            ->selectRaw('(SELECT COUNT(*) FROM news WHERE news.user_id = authors.user_id AND news.status = "active") as count')
             ->get();
     }
 }
