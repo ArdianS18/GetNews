@@ -59,8 +59,8 @@
                         <div class="card-detail hover-img shadow-sm">
                             <div class="card-body">
                                 <div class="p-4 text-center">
-                                    <img src="{{asset($item->photo ? 'storage/'.$item->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
-                                    <h5>{{ $item->name }}</h5>
+                                    <img src="{{asset($item->user->photo ? 'storage/'.$item->user->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
+                                    <h5>{{ $item->user->name }}</h5>
                                     @if (Auth::check() && auth()->user()->id != $item->user_id)
                                         @php
                                             $user_id = auth()->user()->id;
