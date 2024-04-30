@@ -105,7 +105,7 @@
                                     </a> --}}
                                 </div>
                                 {{-- {{ route('logout') }} --}}
-                                <form action="" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <div class="d-grid py-4 px-7 pt-8">
                                         <button class="btn btn-outline-primary" id="logoutBtn">Log Out</button>

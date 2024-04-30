@@ -39,7 +39,7 @@ Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->
 Route::get('/', [DashboardController::class, 'home'])->name('home');
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
-// Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
@@ -52,11 +52,11 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
 
     // Author admin
     Route::get('author-admin-approve', [AuthorController::class, 'index'])->name('author.admin.index');
-    Route::get('author-list', function(){
+    Route::get('author-list', function () {
         return view('pages.admin.user.index');
     })->name('author.admin');
 
-    Route::get('berlangganan', function(){
+    Route::get('berlangganan', function () {
         return view('pages.admin.berlangganan.index');
     })->name('berlangganan');
 
@@ -165,7 +165,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
 
     Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
-    Route::get('detail-iklan', function(){
+    Route::get('detail-iklan', function () {
         return view('pages.admin.iklan.detail-iklan');
     })->name('admin.detail.iklan');
 });
@@ -218,6 +218,12 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::get('income-statistics', [AuthorController::class, 'incomestatistics'])->name('statistik.income');
     Route::get('news-statistics', [AuthorController::class, 'newsstatistics'])->name('statistik.news');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
+
+
+    Route::get('status', function () {
+        return view('pages.author.status.index');
+    })->name('status.author');
+
 });
 
 
@@ -225,6 +231,16 @@ Route::middleware(['auth', 'role:author'])->group(function () {
 // Route::resource('user', UserController::class);
 
 Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
+    Route::get('tukar-coin', function () {
+        return view('pages.user.coins.index');
+    })->name('tukar.coin');
+    Route::get('tukarkan-coin', function () {
+        return view('pages.user.coins.tukar-coin');
+    })->name('user.tukar.coin');
+    Route::get('riwayat-tukar-coin', function () {
+        return view('pages.user.coins.history');
+    })->name('user.history.coin');
+
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
     // Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
     Route::post('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
@@ -249,23 +265,20 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
-    Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
-    Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
-
-
+   
 });
 
 Route::middleware(['role:user'])->group(function () {
     Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
-    Route::get('user-beranda', function () {
+    Route::get('ketentuan-dan-persyaratan', function () {
         return view('pages.user.home');
     })->name('user.home');
-    Route::get('user-inbox', function(){
+    Route::get('user-inbox', function () {
         return view('pages.user.inbox.index');
     })->name('user.inbox');
 
-    Route::get('berita-upload', function(){
+    Route::get('berita-upload', function () {
         return view('pages.user.news.upload');
     })->name('berita.upload');
 
@@ -273,33 +286,23 @@ Route::middleware(['role:user'])->group(function () {
         return view('pages.user.news.status');
     })->name('status.berita');
 
-    Route::get('riwayat-berita', function(){
+    Route::get('riwayat-berita', function () {
         return view('pages.user.news.history');
     })->name('user.history.news');
-    Route::get('iklan-upload', function(){
+    Route::get('iklan-upload', function () {
         return view('pages.user.iklan.pengajuan');
     })->name('iklan.pengajuan');
-    Route::get('status-iklan', function(){
+    Route::get('status-iklan', function () {
         return view('pages.user.iklan.status');
     })->name('iklan.status');
 
-    Route::get('tukar-coin', function () {
-        return view('pages.user.coins.index');
-    })->name('tukar.coin');
 
-    Route::get('iklan-biodata', function(){
+    Route::get('iklan-biodata', function () {
         return view('pages.user.iklan.upload');
     })->name('iklan.biodata');
 
-    Route::get('tukarkan-coin', function(){
-        return view('pages.user.coins.tukar-coin');
-    })->name('user.tukar.coin');
 
-    Route::get('riwayat-tukar-coin', function(){
-        return view('pages.user.coins.history');
-    })->name('user.history.coin');
-
-    Route::get('status-detail-iklan', function(){
+    Route::get('status-detail-iklan', function () {
         return view('pages.user.iklan.status-iklan');
     })->name('status.detail.iklan');
     Route::get('status-detail-berita', function () {
@@ -315,45 +318,34 @@ Route::middleware(['role:user'])->group(function () {
 
     Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
 
-    Route::get('iklan-ajukan', function(){
+    Route::get('iklan-ajukan', function () {
         return view('pages.user.iklan.ajukan');
     })->name('iklan.ajukan');
 
 
 
-    Route::get('status-selesai-iklan', function(){
+    Route::get('status-selesai-iklan', function () {
         return view('pages.user.iklan.status-selesa');
     })->name('status.selesai.iklan');
 
 
     Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
 
-    Route::get('pembayaran-iklan', function(){
+    Route::get('pembayaran-iklan', function () {
         return view('pages.user.iklan.pembayaran');
     })->name('user.pembayaran.iklan');
 
-    Route::get('rincian-pembayaran-iklan', function(){
+    Route::get('rincian-pembayaran-iklan', function () {
         return view('pages.user.iklan.rincian-pembayaran');
     })->name('user.rincian-pembayaran.iklan');
 
-    Route::get('load-coin', function(){
+    Route::get('load-coin', function () {
         return view('pages.user.load-coin.load');
     });
 
-    Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
-    Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
-    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
-    Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
-    Route::get('statistic', function () {
-        return view('pages.author.statistic.index');
-    })->name('statistic.author');
 
-    Route::get('status', function () {
-        return view('pages.author.status.index');
-    })->name('status.author');
-
-    Route::get('/{news}', [NewsController::class, 'usernews'])->name('news.user');
+   
 
     // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
     // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
@@ -371,13 +363,6 @@ Route::middleware(['role:user'])->group(function () {
 
 
 
-    Route::get('confirm-email', function () {
-        return view('pages.auth.passwords.email');
-    })->name('confirm.email');
-
-    Route::get('confirm-password', function () {
-        return view('pages.auth.passwords.confirm');
-    })->name('confirm.password');
 
 
     // Route::get('pengajuan-berita', function () {
@@ -386,6 +371,22 @@ Route::middleware(['role:user'])->group(function () {
 
 });
 
+Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
+Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
+Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
+Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+Route::get('{news}', [NewsController::class, 'usernews'])->name('news.user');
 
-?>
+
+
+Route::get('confirm-email', function () {
+    return view('pages.auth.passwords.email');
+})->name('confirm.email');
+
+Route::get('confirm-password', function () {
+    return view('pages.auth.passwords.confirm');
+})->name('confirm.password');
+
+Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
