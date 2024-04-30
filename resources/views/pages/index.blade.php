@@ -39,6 +39,9 @@
     </div>
 
     <div class="container-fluid pb-75">
+        <form action="{{ route('logout') }}" method="POST">
+            <button type="submit" class="btn btn-primary">kocak</button>
+        </form>
         <div class="news-col-wrap">
             <div class="news-col-one">
                 @php $counter= 0; @endphp

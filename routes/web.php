@@ -249,6 +249,9 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
+    Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+    Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
 
 });
 
@@ -365,8 +368,6 @@ Route::middleware(['role:user'])->group(function () {
     Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
 
 
-    Route::get('detail-category/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
-    Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 
 
 
