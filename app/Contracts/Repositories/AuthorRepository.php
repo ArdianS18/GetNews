@@ -175,10 +175,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
         return $this->model->query()
             ->where('authors.status', 'approved')
             ->withCount('followers')
+            ->leftJoin('news', 'news.user_id', '=', 'authors.user_id')
+            ->leftJoin('users', 'users.id', '=', 'authors.user_id')
             ->when($request->input('name'), function($query) use ($request) {
-                $query->where('users.name', 'LIKE', '%'.$request->input('name').'%');
+                $query->where('authors.users.name', 'LIKE', '%'.$request->input('name').'%');
             })
             ->selectRaw('(SELECT COUNT(*) FROM news WHERE news.user_id = authors.user_id AND news.status = "active") as count')
+            ->selectRaw('(SELECT COUNT(*) FROM news_has_likes WHERE news_has_likes.news_id = news.id) as count_like')
             ->get();
     }
 }
