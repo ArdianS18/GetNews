@@ -2,10 +2,8 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Models\User;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -36,6 +34,16 @@ class UserRepository extends BaseRepository implements UserInterface
             ->whereRelation('roles', 'name', 'user')
             ->get()
             ->count();
+    }
+
+    public function whereAccount(): mixed
+    {
+        return $this->model->query()
+            ->where(function ($query) {
+                $query->whereRelation('roles', 'name', 'admin')
+                    ->orWhereRelation('roles', 'name', 'user');
+            })
+            ->get();
     }
 
     /**

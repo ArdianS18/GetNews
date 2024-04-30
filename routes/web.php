@@ -39,12 +39,13 @@ Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->
 Route::get('/', [DashboardController::class, 'home'])->name('home');
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
+
     Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
     })->name('list.author.admin');
@@ -54,6 +55,10 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::get('author-list', function(){
         return view('pages.admin.user.index');
     })->name('author.admin');
+
+    Route::get('berlangganan', function(){
+        return view('pages.admin.berlangganan.index');
+    })->name('berlangganan');
 
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
 
@@ -108,8 +113,6 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
-
-
     // ==== Kategori ====
 
     Route::get('kategori-admin', [CategoryController::class, 'index'])->name('kategori.index');
@@ -157,8 +160,9 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('create-tag', [TagController::class, 'store'])->name('tag.create');
     Route::put('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::delete('delete-tag/{tag}', [TagController::class, 'destroy'])->name('delete.tag');
-    
+
     Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin.list');
+    Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
 
     Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
 });
@@ -170,6 +174,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
     Route::post('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
+    Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 });
 
@@ -184,7 +189,6 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     // Profile Author
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
-    Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
     // Route::post('profilecreatenews', [NewsController::class, 'store'])->name('profile.berita.store');
@@ -254,7 +258,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::get('user-inbox', function(){
         return view('pages.user.inbox.index');
     })->name('user.inbox');
-    
+
 Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
@@ -317,11 +321,6 @@ Route::get('status-selesai-iklan', function(){
 
 
 Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
-
-Route::get('berlangganan', function(){
-    return view('pages.admin.berlangganan.index');
-})->name('berlangganan');
-
 
 Route::get('pembayaran-iklan', function(){
     return view('pages.user.iklan.pembayaran');

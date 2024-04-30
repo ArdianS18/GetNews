@@ -49,10 +49,9 @@
     </div>
 </div>
 
-    <div class="mt-4">
-        <div class="table-border mb-3">
-            <table class="table">
-                <thead class="table">
+        <div class="table-responsive rounded-2 mt-4">
+            <table class="table border text-nowrap customize-table mb-0 align-middle">
+                <thead>
                     <tr>
                         <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">No</th>
                         <th style="background-color: #D9D9D9;">Penulis</th>

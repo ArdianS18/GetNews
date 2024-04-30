@@ -79,14 +79,14 @@ class ProfileController extends Controller
     {
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();
-        $news = $this->news->search($request)->where('author_id', auth()->user()->author->id)->wherein('status', "active");
+        $news = $this->news->search($request)->where('user_id', auth()->user()->id)->wherein('status', "active");
 
-        $news_panding = $this->news->getAll()->where('author_id', auth()->user()->author->id)->wherein('status', "panding")->count();
-        $news_active = $this->news->getAll()->where('author_id', auth()->user()->author->id)->wherein('status', "active")->count();
-        $news_reject = $this->news->getAll()->where('author_id', auth()->user()->author->id)->wherein('status', "nonactive")->count();
+        $news_panding = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "panding")->count();
+        $news_active = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "active")->count();
+        $news_reject = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "nonactive")->count();
 
-        $news_post = $this->news->getAll()->where('author_id', auth()->user()->author->id)->count();
-        $followers = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
+        $news_post = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
+        $followers = $this->followers->get()->where('user_id', auth()->user()->id)->count();
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
 
         $news_id = News::where('user_id', auth()->user()->id)->pluck('id');
@@ -117,21 +117,18 @@ class ProfileController extends Controller
         //
     }
 
-    public function updateberita(NewsUpdateRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
+    public function updateberita(NewsUpdateRequest $request, News $news, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
         $data = $this->NewsService->update($request, $news);
-        $data['status'] = NewsStatusEnum::PANDING->value;
-        $this->news->update($news->id, $data);
 
-        // if ($request->hasFile('multi_photo')) {
-        //     $newsPhoto->where('news_id', $news->id)->delete();
-        //     foreach ($data['multi_photo'] as $photo) {
-        //         $newsPhoto->create([
-        //             'news_id' => $news->id,
-        //             'multi_photo' => $photo
-        //         ]);
-        //     }
-        // }
+        if (auth()->user()->roles == "admin") {
+            $data['status'] = NewsStatusEnum::ACTIVE->value;
+        } else {
+            $data['status'] = NewsStatusEnum::PANDING->value;
+        }
+
+
+        $this->news->update($news->id, $data);
 
         $newsCategory->where('news_id', $news->id)->delete();
         foreach ($data['category'] as $category) {

@@ -1,4 +1,4 @@
-@extends('layouts.author.sidebar')
+@extends('layouts.admin.app')
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -8,9 +8,17 @@
 @endsection
 
 <head>
-    <title>
-        Author | Create News
-    </title>
+    @hasrole('admin')
+        <title>
+            Admin | Create News
+        </title>
+    @endrole
+
+    @hasrole('author')
+        <title>
+            Author | Create News
+        </title>
+    @endrole
 </head>
 
 @section('content')
@@ -177,7 +185,7 @@
                     Batal
                 </button>
                 <button type="submit" class="btn btn-primary m-2" id="submitButton1">
-                    Simpan
+                    Upload
                 </button>
             </div>
         </div>
@@ -279,14 +287,7 @@
             });
         });
     </script>
-
-    {{-- <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script> --}}
-
     <script>
-        // $(document).ready(function() {
-        //     $('#image-uploadify').imageuploadify();
-        // })
-
         $('.category').change(function() {
             getSubCategory($(this).val())
         })
