@@ -107,7 +107,7 @@
                             </div>
                         </div>
 
-                        <div class=" d-flex justify-content-end">
+                        <div class="mt-3 d-flex justify-content-end">
                             <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 512 512">
                                 <path
                                     d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
@@ -119,7 +119,7 @@
                         <div class="d-flex justify-content-end">
                             <a href="{{ route('profile.news.edit', ['id' => $item->slug]) }}" class="btn btn-sm m-1"
                                 style="background-color: #0F4D8A;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
                                     <path
                                         d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
                                         fill="#ffffff" />
@@ -127,7 +127,7 @@
                             </a>
                             <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
                                 <a href="{{ route('detail.news', ['news' => $item->slug]) }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
                                         viewBox="0 0 512 512">
                                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="32"
@@ -142,7 +142,7 @@
                                 @method('post')
                                 @csrf
                                 <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="23" height="30"
+                                        xmlns="http://www.w3.org/2000/svg" width="18" height="23"
                                         viewBox="0 0 512 512">
                                         <path
                                             d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
@@ -154,6 +154,14 @@
                 </div>
             </div>
         @empty
+            <div class="d-flex justify-content-center">
+                <div>
+                    <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                </div>
+            </div>
+            <div class="text-center">
+                <h5>Tidak ada data</h5>
+            </div>
         @endforelse
     </div>
 @endsection

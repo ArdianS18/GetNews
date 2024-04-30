@@ -67,7 +67,7 @@
                 @empty
                     <div class="d-flex justify-content-center">
                         <div>
-                            <img src="{{ asset('no-data.svg') }}" width="550px" alt="">
+                            <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
                         </div>
                     </div>
                     <div class="text-center">

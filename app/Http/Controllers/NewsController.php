@@ -248,7 +248,7 @@ class NewsController extends Controller
         $this->news->update($news->id, $data);
 
         $this->newsReject->store([
-            'user_id' => $news->author->user->id,
+            'user_id' => $news->user->id,
             'news_id' => $news->id,
             'massage' => $request->input('massage')
         ]);
