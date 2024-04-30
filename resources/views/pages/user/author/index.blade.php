@@ -61,7 +61,7 @@
                                 <div class="p-4 text-center">
                                     <img src="{{asset($item->photo ? 'storage/'.$item->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
                                     <h5>{{ $item->name }}</h5>
-                                    @if (auth()->user()->id != $item->user_id)
+                                    @if (Auth::check() && auth()->user()->id != $item->user_id)
                                         @php
                                             $user_id = auth()->user()->id;
                                             $author_id = $item->id;
@@ -81,6 +81,8 @@
                                                 <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                                             </form>
                                         @endif
+                                    @elseif (!Auth::check())
+                                        Mohon untuk login
                                     @else
                                         Ini akun Anda
                                     @endif

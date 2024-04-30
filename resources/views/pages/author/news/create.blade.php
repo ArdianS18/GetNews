@@ -45,48 +45,6 @@
             <h5>Isi form dibawah ini untuk mengunggah berita</h5>
         </div>
 
-        {{-- <div class="card p-4 shadow-sm border mt-1">
-            <div style="padding: 1%;">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row">
-                         
-                           
-                          
-                         
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label class="form-label" for="photo">Preview</label>
-                                <div class="gambar-iklan mb-4">
-                                    <img id="preview" style="object-fit: cover;" width="230" height="120" alt="">
-                                </div>
-
-                                <div class="col-lg-12 mb-4">
-                                    <label class="form-label" for="photo">Thumbnail Berita</label>
-                                    <input type="file" id="photo" name="photo" onchange="previewImage(event)" placeholder="photo"
-                                        value="{{ old('photo') }}"
-                                        class="text-center form-control @error('photo') is-invalid @enderror">
-                                    @error('photo')
-                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                          
-
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-        </div> --}}
-
         <div class="row">
             <div class="col-5">
                 <div class="card">
@@ -98,7 +56,7 @@
                                 width="350" height="200" alt="">
                         </div>
                         <div class="d-flex justify-content-center mt-3">
-                            <label for="image-upload" class="btn btn-primary">
+                            <label for="image-upload" class="btn btn-primary @error('photo') is-invalid @enderror   ">
                                 Unggah
                             </label>
                             <input type="file" name="photo" id="image-upload" class="hide"
@@ -107,6 +65,13 @@
                         <div class="d-flex justify-content-center">
                             <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
                         </div>
+
+                        @error('photo')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
                     </div>
                 </div>
                 <div class="card">
@@ -122,8 +87,8 @@
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            @error('category_id')
-                                <span class="invalid-feedback" role="alert">
+                            @error('category')
+                                <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -136,8 +101,8 @@
                                     name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
                                     aria-label="Default select example">
                                 </select>
-                                @error('sub_category_id')
-                                    <span class="invalid-feedback" role="alert">
+                                @error('sub_category')
+                                    <span class="invalid-feedback" role="alert" style="color: red">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -146,22 +111,27 @@
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
                             <input type="datetime-local" value="" id="upload_date" name="upload_date"
-                                placeholder="date" value="{{ old('date') }}"
-                                class="form-control @error('date') is-invalid @enderror">
-                            @error('date')
-                                <span class="invalid-feedback" role="alert">
+                                placeholder="date" value="{{ old('upload_date') }}"
+                                class="form-control @error('upload_date') is-invalid @enderror">
+                            @error('upload_date')
+                                <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="col-lg-12 mb-3">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                            <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]" multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
                                     <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
+                            @error('tags')
+                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -183,7 +153,7 @@
                             </div>
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
-                                <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form"></textarea>
+                                <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form  @error('content') is-invalid @enderror"></textarea>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
@@ -197,7 +167,7 @@
         </div>
         <div class="d-flex justify-content-between">
             <div>
-                <button type="button" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
+                <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
                     id="submitButton2">
                     Simpan Draf
                 </button>
@@ -206,7 +176,7 @@
                 <button type="reset" class="btn btn-danger m-2">
                     Batal
                 </button>
-                <button type="button" class="btn btn-primary m-2" id="submitButton1">
+                <button type="submit" class="btn btn-primary m-2" id="submitButton1">
                     Simpan
                 </button>
             </div>
