@@ -13,11 +13,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
-use App\Http\Requests\ViewRequest;
 use App\Models\Author;
-use App\Models\Category;
-use App\Models\SubCategory;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View ;
@@ -155,7 +151,9 @@ class DashboardController extends Controller
         return view('pages.contact.faq',compact('faqs','categories', 'subCategories'));
     }
 
-    public function createAccount() {
-        return view('pages.admin.akun.index ');
+    public function createAccount()
+    {
+        $users = $this->user->whereAccount();
+        return view('pages.admin.akun.index', compact('users'));
     }
 }

@@ -45,6 +45,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
+
     Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
     })->name('list.author.admin');
@@ -108,8 +109,6 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
-
-
     // ==== Kategori ====
 
     Route::get('kategori-admin', [CategoryController::class, 'index'])->name('kategori.index');
@@ -157,8 +156,9 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::post('create-tag', [TagController::class, 'store'])->name('tag.create');
     Route::put('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::delete('delete-tag/{tag}', [TagController::class, 'destroy'])->name('delete.tag');
-    
+
     Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin.list');
+    Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
 
     Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
 });

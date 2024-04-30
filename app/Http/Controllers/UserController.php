@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Services\UserPhotoService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -47,6 +48,15 @@ class UserController extends Controller
     {
         $data = $this->userPhoto->store($request, $user);
         $this->user->update($user->id, $data);
+        return back();
+    }
+
+    public function storeByAdmin(UserRequest $request)
+    {
+        $data = $request->validated();
+        $user = $this->user->store($data);
+        $user->assignRole($data['role']);
+
         return back();
     }
 
