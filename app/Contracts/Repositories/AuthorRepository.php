@@ -174,7 +174,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     {
         return DB::table('authors')
             ->where('authors.status', 'approved')
-            ->with('news')
+            ->whereRelation('news', 'user_id', 'authors.user_id')
             ->withCount('followers')
             ->with('users')
             // ->leftJoin('news', 'authors.user_id', '=', 'news.user_id')
