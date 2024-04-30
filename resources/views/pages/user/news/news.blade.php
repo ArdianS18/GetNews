@@ -51,7 +51,7 @@
                         </div>
                         <div class="news-card-info">
                             <h3><a
-                                href="{{ route('news.user', ['news' => $item->slug, 'page' => '1']) }}">{{ $item->name }}</a>
+                                href="{{ route('news.user', ['news' => $item->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a>
                             </h3>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -67,7 +67,7 @@
                 @empty
                     <div class="d-flex justify-content-center">
                         <div>
-                            <img src="{{ asset('assets/img/no-data.svg') }}" width="45 0px" alt="">
+                            <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
                         </div>
                     </div>
                     <div class="text-center">
@@ -121,11 +121,11 @@
                         @forelse ($populars as $popular)
                         <div class="news-card-one">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" height="80">
+                                <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" style="object-fit: cover;" height="80">
                             </div>
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{{ $popular->name }}</a>
+                                        href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 20, $end = '...')  !!}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li>
@@ -144,7 +144,7 @@
                                         <path fill="#e93314"
                                             d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
                                     </svg>
-                                    </i><a href="javascript:void(0)">{{ $popular->views }}</a></li>
+                                    </i><a href="javascript:void(0)">{{ $popular->views->count() }}</a></li>
 
                                     </li>
                                 </ul>

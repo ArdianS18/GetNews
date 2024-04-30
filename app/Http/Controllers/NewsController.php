@@ -541,7 +541,6 @@ class NewsController extends Controller
     public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, Report $report)
     {
         $id = $news->id;
-        // $this->news->delete($news);
 
         $newsCategory->where('news_id', $id)->delete();
         $newsSubCategory->where('news_id', $id)->delete();
@@ -550,13 +549,6 @@ class NewsController extends Controller
         $newsReject->where('news_id', $id)->delete();
         $newsComment->where('news_id', $id)->delete();
         $newsReport->where('news_id', $id)->delete();
-
-        // $relatedPhotos = $newsPhoto->where('news_id', $id)->get();
-
-        // foreach ($relatedPhotos as $photo) {
-        //     $this->NewsService->remove($photo->multi_photo);
-        //     $photo->delete();
-        // }
 
         $relatedReports = $report->where('news_id', $id)->get();
         foreach ($relatedReports as $relatedReport) {
