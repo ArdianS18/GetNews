@@ -1,21 +1,5 @@
 @extends('layouts.admin.app')
 
-@section('style')
-    <style>
-        .card-table {
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 10px;
-        }
-
-        .table-border {
-            border: 1px solid #DADADA;
-            border-radius: 5px;
-            /* padding: 25px; */
-        }
-    </style>
-@endsection
-
 <head>
     <title>Admin | News</title>
 </head>
@@ -59,21 +43,20 @@
         </div>
     </div>
 
-    <div class="mt-4">
-        <div class="mb-3">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th style="background-color: #D9D9D9;">No</th>
-                        <th style="background-color: #D9D9D9;">Penulis</th>
-                        <th style="background-color: #D9D9D9;">Email</th>
-                        <th style="background-color: #D9D9D9;">Judul berita</th>
-                        <th style="background-color: #D9D9D9;">Tanggal Upload</th>
-                        <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0;">Option</th>
-                    </tr>
-                </thead>
-                <tbody id="data">
-        </tbody>
+    <div class="table-responsive rounded-2 mt-4">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
+            <thead>
+                <tr>
+                    <th style="background-color: #D9D9D9;">No</th>
+                    <th style="background-color: #D9D9D9;">Penulis</th>
+                    <th style="background-color: #D9D9D9;">Email</th>
+                    <th style="background-color: #D9D9D9;">Judul berita</th>
+                    <th style="background-color: #D9D9D9;">Tanggal Upload</th>
+                    <th style="background-color: #D9D9D9; border-radius: 0 5px 5px 0;">Option</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+            </tbody>
         </table>
 
         <div id="loading"></div>

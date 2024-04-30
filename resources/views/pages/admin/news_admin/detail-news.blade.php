@@ -37,18 +37,31 @@
                         <div>
                             @if ($news->status === "panding")
                             <div>
+                                <div class="d-flex gap-2 mb-3">
                                 <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
+                                
+                                    <a class="btn btn-warning btn-lg" id="clickEdit" onclick="edit()">Edit</a>
+                                    <a class="btn btn-success btn-lg" id="clickSave" onclick="save()">Save</a>
+                                </div>
                             </div>
                             @else
                             <div>
+                                <div class="d-flex gap-2 mb-3">
                                 <a href="news-approved-list" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
+                                    <a class="btn btn-warning btn-lg" id="clickEdit" onclick="edit()">Edit</a>
+                                    <a class="btn btn-success btn-lg" id="clickSave" onclick="save()">Save</a>
+                                </div>
                             </div>
                             @endif
                         </div>
                     @else
                         <div>
+                            <div class="d-flex gap-2 mb-3">
                             <a href="{{ route('list.approved.index') }}" class="btn btn-lg px-3 text-white"
                                 style="background-color: #5D87FF;">Kembali</a>
+                                    <a class="btn btn-warning btn-lg" id="clickEdit" onclick="edit()">Edit</a>
+                                    <a class="btn btn-success btn-lg" id="clickSave" onclick="save()">Simpan</a>
+                            </div>
                         </div>
                     @endif
                 </div>
@@ -56,12 +69,15 @@
                 <div class="d-flex gap-2">
                     @if ($news->status === 'panding')
                         <div class="d-flex gap-2">
+                            <div class="">
                             <a class="btn btn-danger btn-lg px-3 btn-reject" id="btn-reject-{{ $news->id }}">Tolak</a>
+                            </div>
                             <form action="{{ route('approved.news.admin', ['news' => $news->id]) }}" method="post">
                                 @method('patch')
                                 @csrf
                                 <button type="submit" class="btn btn-success btn-lg px-3">Terima</button>
                             </form>
+                        
                         </div>
                     @else
                         <div>
@@ -69,7 +85,7 @@
                                 class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'primary' : 'dark' }}">
                                 <div class="d-flex gap-2">
                                     {{ $news->is_primary ? '' : '' }} <i><svg xmlns="http://www.w3.org/2000/svg"
-                                            width="20" height="20" viewBox="0 0 24 24">
+                                            width="23" height="23" viewBox="0 0 24 24">
                                             <path fill="currentColor" fill-rule="evenodd"
                                                 d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3" />
                                         </svg></i>
@@ -94,18 +110,6 @@
                                     <label class="form-label" for="photo">Thumbnail Berita</label>
                                     <div>
                                         <img width="350px" src="{{ asset('storage/' . $news->photo) }}">
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 col-md-12 row-span-1 from-outline mt-5">
-                                    <div class="mt-2">
-                                        <label class="form-label" for="password_confirmation">Multi Gambar</label>
-                                        <div class="d-flex gap-2">
-                                            @foreach ($newsPhoto as $photo)
-                                                <img width="320 px" src="{{ asset('storage/' . $photo->multi_photo) }}"
-                                                    alt="{{ $photo->multi_photo }}">
-                                            @endforeach
-                                        </div>
                                     </div>
                                 </div>
 
@@ -167,10 +171,6 @@
                             <div class="row justify-content-between mt-2">
                                 <div class="">
                                     <label class="form-label" for="content">Isi Berita</label>
-                                    <div class="d-flex gap-2 mb-3">
-                                        <a class="btn btn-warning" id="clickEdit" onclick="edit()">Edit</a>
-                                        <a class="btn btn-success" id="clickSave" onclick="save()">Save</a>
-                                    </div>
                                     <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
                                 </div>
 
