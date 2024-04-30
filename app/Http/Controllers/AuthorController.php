@@ -256,10 +256,11 @@ class AuthorController extends Controller
     public function newsstatistics()
     {
         $news = $this->news->showWhithCount();
+        $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
         $data_statistik = $this->news->showNewsStatistic();
         $view = View::count();
         $like = NewsHasLike::count();
 
-        return view('pages.author.statistic.news', compact('news', 'view', 'like'));
+        return view('pages.author.statistic.news', compact('news', 'view', 'like', 'count'));
     }
 }

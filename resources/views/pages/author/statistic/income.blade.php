@@ -40,7 +40,7 @@
                         <img src="{{ asset('assets/img/coin-ring.svg') }}" width="52px" alt="">
                     </div>
                     <div style="color: #e68888" class="ms-4 col-lg-11">
-                        <h4>Berita</h4>
+                        <h4>Pendapatan Keseluruhan</h4>
                         <h3 style="color: #FFD643">12344</h3>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
 
     <div class="card">
         <div class="card-body">
-           
+
             <div class="row">
                 <div class="">
                     <div class="d-flex justify-content-between">
@@ -66,7 +66,7 @@
                             </div>
                             <div>
                                 <select name="" id="year" class="form-select">
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
 
         for (var year = startYear; year <= endYear; year++) {
             var option = document.createElement("option");
-            option.value = year; 
+            option.value = year;
             option.text = year;
             dropdown.appendChild(option);
         }

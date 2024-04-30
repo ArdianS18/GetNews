@@ -39,8 +39,8 @@
                             <img src="{{ asset('assets/img/icon-pendapatan.svg') }}" width="52px" alt="">
                         </div>
                         <div style="color: #e68888" class="ms-4 col-lg-11">
-                            <h4>Pendapatan Keseluruhan</h4>
-                            <h3 style="color: #175A95">12344</h3>
+                            <h4>Berita Keseluruhan</h4>
+                            <h3 style="color: #175A95">{{ $count }}</h3>
                         </div>
                     </div>
                 </div>
