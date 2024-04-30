@@ -27,16 +27,16 @@
                                             alt="{{ $newsSubCategory->news->photo }}" height="400" style="width: 100%;object-fit:cover;" class="img-status">
                                         {{-- <img src="{{ asset('assets/img/test1.svg') }}" width="400px" height="234"
                                         style="width: 100%;height:100%;" alt="Iamge"> --}}
-                                        <a href="{{ route('subcategories.show.user', ['subCategory' => $newsSubCategory->subCategory->slug]) }}"
+                                        <a href="{{ route('subcategories.show.user', ['category'=>$subCategory->category->slug,'subCategory' => $newsSubCategory->subCategory->slug]) }}"
                                             class="news-cat">{{ $newsSubCategory->subCategory->name }}</a>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a
-                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug, 'page' => 1]) }}">{{ $newsSubCategory->news->name }}</a>
+                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug]) }}">{{ $newsSubCategory->news->name }}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ $newsSubCategory->news->created_at->format('M d, Y') }}</a>
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse( $newsSubCategory->news->upload_date)->translatedFormat('d F Y') }}</a>
                                             </li>
                                             <li><i
                                                     class="fi fi-rr-eye"></i>{{ $newsSubCategory->news->views->count() }}
