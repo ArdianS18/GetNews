@@ -39,7 +39,7 @@ Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->
 Route::get('/', [DashboardController::class, 'home'])->name('home');
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
-// Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
