@@ -54,6 +54,7 @@ class UserController extends Controller
     public function storeByAdmin(UserRequest $request)
     {
         $data = $request->validated();
+        $data['email_verified_at'] = now();
         $user = $this->user->store($data);
         $user->assignRole($data['role']);
 

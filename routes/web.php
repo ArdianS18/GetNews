@@ -39,7 +39,7 @@ Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->
 Route::get('/', [DashboardController::class, 'home'])->name('home');
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
@@ -55,6 +55,10 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::get('author-list', function(){
         return view('pages.admin.user.index');
     })->name('author.admin');
+
+    Route::get('berlangganan', function(){
+        return view('pages.admin.berlangganan.index');
+    })->name('berlangganan');
 
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
 
@@ -254,7 +258,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::get('user-inbox', function(){
         return view('pages.user.inbox.index');
     })->name('user.inbox');
-    
+
 Route::get('berita-upload', function(){
     return view('pages.user.news.upload');
 })->name('berita.upload');
@@ -317,11 +321,6 @@ Route::get('status-selesai-iklan', function(){
 
 
 Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
-
-Route::get('berlangganan', function(){
-    return view('pages.admin.berlangganan.index');
-})->name('berlangganan');
-
 
 Route::get('pembayaran-iklan', function(){
     return view('pages.user.iklan.pembayaran');

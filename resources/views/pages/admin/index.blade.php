@@ -119,7 +119,8 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
-                                                    <p class="card-text">{{ $news->name }}
+                                                    <p class="card-text">
+                                                        {!! Illuminate\Support\Str::limit($news->name, $limit = 20, $end = '...')  !!}
                                                     </p>
                                                     <div class="d-flex gap-3 align-items-center ms-0">
                                                         <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
@@ -450,7 +451,7 @@
 
 
 
-      
+
         var options = {
           series: [
             {
@@ -492,7 +493,7 @@
 
         var chart = new ApexCharts(document.querySelector("#chart-pengunjung"), options);
         chart.render();
-              
+
     </script>
-    
+
 @endsection

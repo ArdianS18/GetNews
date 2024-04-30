@@ -81,57 +81,6 @@
     </div>
     @empty
     @endforelse
-    {{-- <div class="col-md-12 col-lg-3 mb-4">
-        <a href="">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="p-4 text-center">
-                        <img src="{{asset('assets/img/profile.svg')}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
-                        <h5>Ardian Firmansyah</h5>
-                        <p class="fs-5">ardian@gmail.com</p>
-                        <div class="">
-                            <button class="btn btn-light-primary px-4 text-primary">Admin</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-12 col-lg-3 mb-4">
-        <a href="">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="p-4 text-center">
-                        <img src="{{asset('assets/img/profile.svg')}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
-                        <h5>Jovita Maharani</h5>
-                        <p class="fs-5">jovita@gmail.com</p>
-                        <div class="">
-                            <button class="btn btn-light-danger px-4 text-danger">Penulis</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-12 col-lg-3 mb-4">
-        <a href="">
-            <div class="card border hover-img shadow-sm">
-                <div class="card-body">
-                    <div class="p-4 text-center">
-                        <img src="{{asset('assets/img/profile.svg')}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
-                        <h5>Frendika Wildan</h5>
-                        <p class="fs-5">frendika@gmail.com</p>
-                        <div class="">
-                            <button class="btn btn-light-success px-4 text-success">Admin</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div> --}}
 </div>
 
 <div class="d-flex mt-2 mx-4 justify-content-center">

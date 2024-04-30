@@ -177,7 +177,7 @@
                     Batal
                 </button>
                 <button type="submit" class="btn btn-primary m-2" id="submitButton1">
-                    Simpan
+                    Upload
                 </button>
             </div>
         </div>

@@ -19,6 +19,7 @@ class UserRequest extends FormRequest
             'name' => 'required',
             'email' => 'required',
             'role' => 'required',
+            'email_verified_at' => 'nullable',
         ];
     }
 
