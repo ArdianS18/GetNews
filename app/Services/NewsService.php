@@ -214,8 +214,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
         libxml_clear_errors();
 
+        $id = '';
+        if (auth()->user()->roles == "admin") {
+            $id = $news->id;
+        } else {
+            $id = auth()->user()->id;
+        }
+
         return [
-            'user_id' => auth()->user()->id,
+            'user_id' => $id,
             'name' => $data['name'],
             'photo' => $old_photo ?: $new_photo,
             'content' => $data['content'],

@@ -47,7 +47,12 @@
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
+        @hasrole('admin')
         @include('layouts.admin.sidebar')
+        @endrole
+        @hasrole('author')
+        @include('layouts.author.sidebar')
+        @endrole
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">

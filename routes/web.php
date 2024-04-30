@@ -174,6 +174,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
     Route::post('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
+    Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 });
 
@@ -188,7 +189,6 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     // Profile Author
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
-    Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
     // Route::post('profilecreatenews', [NewsController::class, 'store'])->name('profile.berita.store');
