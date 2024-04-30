@@ -214,9 +214,7 @@ Route::middleware(['auth', 'role:author'])->group(function () {
 // Route::resource('user', UserController::class);
 
 Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
-    Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
-
     // Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
     Route::post('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
     Route::delete('news-unlike/{news}', [NewsHasLikeController::class, 'destroy'])->name('news.like.delete');
@@ -224,13 +222,10 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
     //author
-    Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
 
     Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
-
-    Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
     Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
 
     Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
@@ -254,6 +249,9 @@ Route::middleware(['role:user'])->group(function () {
     })->name('user.home');
 });
 
+Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
+Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
+Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
 Route::get('statistic', function () {
