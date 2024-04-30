@@ -375,9 +375,9 @@ Route::get('author', [DashboardController::class, 'authoruser'])->name('author-i
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
-Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+Route::get('kategori/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 Route::get('{category}/{subCategory}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
-Route::get('{news}', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('berita/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
 
 

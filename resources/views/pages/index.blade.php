@@ -22,7 +22,7 @@
                                         <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, 'page' => '1']) }}">
+                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
                                             {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 50, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
@@ -53,7 +53,7 @@
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $newss->slug, 'page' => '1']) }}">
+                                <h3><a href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -106,7 +106,7 @@
                             <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover"
                                 height="450" />
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => '1']) }}">
+                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -158,7 +158,7 @@
                                     class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => '1']) }}">
+                                <h3><a href="{{ route('news.user', ['news' => $barus->slug, ]) }}">
                                         {{-- {{ $barus->name }} --}}
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
                                     </a>
@@ -235,7 +235,7 @@
                                                         </h5>
                                                     </div>
                                                     <h3>
-                                                        <a href="{{ route('news.user', ['news' => $pick->slug, 'page' => '1']) }}">
+                                                        <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
                                                             {!! Illuminate\Support\Str::limit($pick->name, $limit = 47, $end = '...')  !!}
                                                         </a>
                                                     </h3>
@@ -277,7 +277,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, 'page' => '1']) }}">
+                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, ]) }}">
                                                 {!! Illuminate\Support\Str::limit($popular->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -299,7 +299,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, 'page' => '1']) }}">
+                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, ]) }}">
                                                 {!! Illuminate\Support\Str::limit($recent->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -346,7 +346,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
-                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, 'page' => '1']) }}">
+                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, ]) }}">
                                             {!! Illuminate\Support\Str::limit($general->name, $limit = 47, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
@@ -416,7 +416,7 @@
                                         {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, 'page' => '1']) }}">
+                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, ]) }}">
                                             {!! Illuminate\Support\Str::limit($post->name, $limit = 20, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
