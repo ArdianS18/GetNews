@@ -120,7 +120,14 @@ class ProfileController extends Controller
     public function updateberita(NewsUpdateRequest $request, News $news, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
         $data = $this->NewsService->update($request, $news);
-        $data['status'] = NewsStatusEnum::PANDING->value;
+
+        if (auth()->user()->roles == "admin") {
+            $data['status'] = NewsStatusEnum::ACTIVE->value;
+        } else {
+            $data['status'] = NewsStatusEnum::PANDING->value;
+        }
+
+
         $this->news->update($news->id, $data);
 
         $newsCategory->where('news_id', $news->id)->delete();
