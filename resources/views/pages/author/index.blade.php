@@ -232,7 +232,7 @@
                   <div class="col-md-12 col-lg-12">
                       <div class="d-flex justify-content-center">
                           <div>
-                              <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
+                              <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
                           </div>
                       </div>
                       <div class="text-center">
