@@ -10,6 +10,10 @@
             <div class="d-flex justify-content-center gap-2 mb-3">
                 <div class="trending-prev"><i class="flaticon-left-arrow"></i></div>
                 <h4>Trending Now</h4>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn btn-primary">kocak</button>
+                </form>
                 <div class="trending-next"><i class="flaticon-right-arrow"></i></div>
             </div>
             <div class="row gx-5">
