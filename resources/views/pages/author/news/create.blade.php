@@ -129,7 +129,7 @@
                             <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]" multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tage->name }}</option>
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tags')

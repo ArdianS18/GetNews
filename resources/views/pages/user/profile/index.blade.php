@@ -214,7 +214,7 @@
                         <div class="form-check mt-4">
                             <input class="form-check-input test" type="checkbox" value="" id="test">
                             <label class="form-check-label" for="flexCheckChecked">
-                                saya telah membaca <a href="{{route('privacy.policy')}}" style="color: #EA4949;">ketentuan & persyaratan</a>
+                                saya telah membaca <a href="{{route('user.home')}}" style="color: #EA4949;">ketentuan & persyaratan</a>
                                 dan menyetujui, jika melanggar saya akan menanggung kosekuensinya
                             </label>
                         </div>
