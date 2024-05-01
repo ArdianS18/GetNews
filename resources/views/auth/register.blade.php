@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-12 d-flex justify-content-center">
-                    <img width="600px" class="img-fluid" style="height:auto" src="{{ asset('favicon.ico') }}"
+                    <img width="600px" class="img-fluid" style="height:auto" src="{{ asset('assets/img/register.svg') }}"
                         alt="">
                 </div>
                 <div class="col-md-12 col-lg-5">
