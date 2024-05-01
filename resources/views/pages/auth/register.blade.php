@@ -17,7 +17,7 @@
              <div class="">
                  <div class="row align-items-center">
                      <div class="col-lg-6 col-md-12">
-                        <img src="assets/img/register.svg" width="500px"  alt="">
+                        <img src="{{asset('assets/img/register.svg')}}" width="500px"  alt="">
                      </div>
                      <div class="col-md-12 col-lg-6">
                          <form method="POST" action="{{ route('register') }}">
