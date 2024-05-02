@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news_has_likes', function (Blueprint $table) {
+        Schema::create('payment_news', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('news_id')->constrained();
-            $table->foreignUuid('user_id')->constrained();
+            $table->enum('payment_method', ['bri', 'mandiri', 'bca', 'bni', 'bsi', 'gopay', 'ovo', 'dana', 'indomaret', 'alfamart']);
+            $table->string('voucher')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_has_likes');
+        Schema::dropIfExists('payment_news');
     }
 };
