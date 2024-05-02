@@ -163,12 +163,15 @@
         }
 
         function rowTag(index, data) {
+            function limitString(str, maxLength) {
+                return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
+            }
             return `
             <tr>
                 <td>${index + 1}</td>
                 <td>${data.author_name}</td>
                 <td>${data.email}</td>
-                <td>${data.name}</td>
+                <td>${limitString(data.name, 25)}</td>
                 <td>${data.upload_date}</td>
                 <td>
                     <a href="/detail-news-admin/${data.id}" data-bs-toggle="tooltip"
