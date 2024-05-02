@@ -12,5 +12,4 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 interface NewsHasLikeInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, WhereInterface
 {
     public function deleteLike(mixed $id,$news) : mixed;
-    public function countLike($newsId) : mixed;
 }
