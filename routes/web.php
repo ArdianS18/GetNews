@@ -378,7 +378,10 @@ Route::get('kategori/{category}', [NewsController::class, 'showCategories'])->na
 Route::get('kategori/{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::get('berita/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
-
+Route::get('news-tag', [NewsController::class, 'showTag'])->name('tag.show.user');
+// Route::get('news-tag', function(){
+//     return view('pages.user.tag.index');
+// })->name('tag.user.shor');
 
 Route::get('confirm-email', function () {
     return view('pages.auth.passwords.email');

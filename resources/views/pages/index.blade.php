@@ -19,7 +19,7 @@
                             @foreach ($trendings as $trending)
                                 <div class="swiper-slide news-card-one">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
+                                        <img src="{{ asset('storage/' . $trending->news->photo) }}" width="100%" height="90" style="object-fit: cover;" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
