@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
@@ -31,8 +33,10 @@ class DashboardController extends Controller
     private ViewInterface $view;
     private NewsTagInterface $newsTags;
     private TagInterface $tag;
+    private NewsHasLikeInterface $newsHasLike;
+    private CommentInterface $comment;
 
-    public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags)
+    public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment)
     {
         $this->user = $user;
         $this->author = $author;
@@ -46,6 +50,8 @@ class DashboardController extends Controller
 
         $this->newsCategory = $newsCategory;
         $this->view = $view;
+        $this->newsHasLike = $newsHasLike;
+        $this->comment = $comment;
     }
 
     public function index(){
@@ -128,13 +134,16 @@ class DashboardController extends Controller
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
 
-    public function authordetail($authorId) {
+    public function authordetail($authorId, Request $request) {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         // $authors = $this->author->get();
         $authors = Author::with('user')->findOrFail($authorId);
         $totalCategories = $this->category->showWhithCount();
-        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories'));
+        $news = $this->news->search($request)->where('user_id', auth()->user()->id)->wherein('status', "active");
+        $comments = $this->comment->where($authorId);
+        $newsCount = $this->news->get();
+        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories','news' ,'comments','newsCount'));
     }
 
     public function privacypolicy() {

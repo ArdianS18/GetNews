@@ -68,7 +68,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->where('category_id', $request->category_id);
             })->when($request->sub_category_id, function ($query) use ($request) {
                 $query->where('sub_category_id', $request->sub_category_id);
-            })->get();
+            })
+            ->take(5)
+            ->get();
     }
 
     public function searchStatus(mixed $id, Request $request): mixed
@@ -431,7 +433,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->whereDate('created_at', '<', $date)
+            ->whereDate('upload_date', '<', $date)
             ->withCount('views')
             ->get();
     }
