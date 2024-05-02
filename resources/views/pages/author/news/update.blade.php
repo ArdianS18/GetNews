@@ -287,12 +287,16 @@
                 height: 250,
                 toolbar: [
                     ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontsize', ['fontsize']],
                     ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['para', ['ul', 'ol', 'paragraph', 'height']],
                     ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
+                    ['link', ['link']],
+                    ['picture', ['picture']],
+                    ['video', ['video']],
+                    ['codeview', ['codeview']],
+                    ['help', ['help']],
                 ]
 
             });
