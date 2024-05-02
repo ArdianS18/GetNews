@@ -40,7 +40,7 @@
             <div class="row">
                 @forelse ($newsByDate as $item)
                 <div class="col-md-6">
-                    <div class="news-card-thirteen">
+                    <div class="news-card-six">
                         <div class="news-card-img">
                             <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="300" style="width: 100%;object-fit:cover;">
                             @foreach ($subCategories as $subCategory)
@@ -50,6 +50,15 @@
                             @endforeach
                         </div>
                         <div class="news-card-info">
+                            <div class="news-author">
+                                <div class="news-author-img">
+                                    <img src="{{ asset($item->user->photo ? 'storage/' . $item->user->photo : 'default.png') }}"
+                                        alt="Image" width="40px" height="40px"
+                                        style="border-radius: 50%; object-fit:cover;" />
+                                </div>
+                                <h5>By <a href="{{ route('author.detail', ['id' => $item->user->author->id]) }}">{{ $item->user->name }}</a>
+                                </h5>
+                            </div>
                             <h3><a
                                 href="{{ route('news.user', ['news' => $item->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a>
                             </h3>
