@@ -350,7 +350,7 @@ class NewsController extends Controller
     {
         $data = $this->NewsService->store($request);
 
-        if (auth()->user()->roles == "admin") {
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsStatusEnum::ACTIVE->value;
         }
 
@@ -377,7 +377,7 @@ class NewsController extends Controller
             ]);
         }
 
-        if (auth()->user()->roles == "admin") {
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
             return to_route('news.approve.admin');
         } else {
             return to_route('status.news.author');

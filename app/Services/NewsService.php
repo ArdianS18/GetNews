@@ -60,7 +60,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 );
                 $newTags[] = $tag->id;
             }
-
             $data['tags'] = $newTags;
         }
 

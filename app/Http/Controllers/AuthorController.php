@@ -147,7 +147,7 @@ class AuthorController extends Controller
     return ResponseHelper::success($data);
     }
 
-    public function reject(Author $author, $authorId)
+    public function reject($authorId)
     {
         $data['status'] = UserStatusEnum::REJECT->value;
         $this->author->update($authorId, $data);
@@ -159,7 +159,7 @@ class AuthorController extends Controller
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
-            $this->news->StatusBanned($author->id, $data);
+            $this->news->StatusBanned($author->user_id, $data);
         } else {
             $this->authorBannedService->unBanned($author);
         }
