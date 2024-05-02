@@ -205,7 +205,7 @@
             const id = $(this).data('id')
             $.ajax({
                 url: "delete-news-profile/" + id,
-                type: 'DELETE',
+                type: 'POST',
                 data:$(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()

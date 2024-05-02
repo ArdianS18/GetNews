@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-sm">
         <form id="form-delete" method="POST" class="modal-content">
             @csrf
-            @method('DELETE')
+            @method('post')
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="myModalLabel">
                     Hapus data
