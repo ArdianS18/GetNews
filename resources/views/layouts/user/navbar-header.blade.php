@@ -93,7 +93,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form>
-                                    <input type="text" class="form-control" placeholder="Search here...." />
+                                    <input type="search" name="search"  class="form-control" placeholder="Search here...." />
                                     <button type="submit"><i class="fi fi-rr-search"></i></button>
                                 </form>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>

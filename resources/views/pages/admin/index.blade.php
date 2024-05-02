@@ -120,7 +120,7 @@
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
                                                     <p class="card-text">
-                                                        {!! Illuminate\Support\Str::limit($news->name, $limit = 20, $end = '...')  !!}
+                                                        {!! Illuminate\Support\Str::limit($news->name, $limit = 40, $end = '...')  !!}
                                                     </p>
                                                     <div class="d-flex gap-3 align-items-center ms-0">
                                                         <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"

@@ -437,4 +437,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->get();
     }
+
+    public function searchAll(Request $request){
+        return $this->model->query()
+        ->when($request->search, function ($query) use ($request) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        })->when($request->status, function ($query) use ($request) {
+            $query->where('content', 'LIKE', '%' . $request->content . '%');
+        })
+        ->get();
+    }
 }

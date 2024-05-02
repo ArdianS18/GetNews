@@ -92,10 +92,13 @@ class DashboardController extends Controller
         return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
     }
 
-    public function navbar(){
+    public function navbar(Request $request){
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        return view('layouts.user.navbar-header', compact('categories', 'subCategories'));
+        
+        $query = $request->input('search');
+        $newsSearch = $this->news->searchAll($query);
+        return view('layouts.user.navbar-header', compact('categories', 'subCategories','newsSearch'));
     }
 
 

@@ -101,7 +101,7 @@
                                                 <img src="{{ asset('storage/' . $news->photo) }}" width="100%" height="80">
                                             </div>
                                             <div class="news-card-info">
-                                                <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 20, $end = '...')  !!}</a>
+                                                <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...')  !!}</a>
                                                 </h3>
                                                 <ul class="news-metainfo list-style">
                                                     <li>
@@ -122,6 +122,14 @@
                                             </div>
                                         </div>
                                     @empty
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                                <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <h4>Tidak ada data</h4>
+                                        </div>
                                     @endforelse
                                 </div>
                             </div>
