@@ -51,7 +51,11 @@ class ViewRepository extends BaseRepository implements ViewInterface
     {
         return $this->model->query()
             ->get();
+    }
 
+    public function where(): mixed
+    {
+        
     }
 
     /**
