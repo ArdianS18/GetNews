@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('is_primary')->default(0);
             $table->string('slug')->unique()->nullable()->default('-');
             $table->enum('status', ['active', 'nonactive', 'panding', 'primary', 'draft'])->default('panding');
+            $table->foreignId('payment_news_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

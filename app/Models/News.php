@@ -25,7 +25,7 @@ class News extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }   
+    }
 
     /**
      * Get the category that owns the News
@@ -62,7 +62,7 @@ class News extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function newsHasLike(): HasMany
+    public function newsHasLikes(): HasMany
     {
         return $this->hasMany(NewsHasLike::class);
     }

@@ -16,6 +16,7 @@ use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\PaymentAdvertisementsController;
+use App\Http\Controllers\PaymentNewsController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
@@ -279,6 +280,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::get('berita-upload', function () {
         return view('pages.user.news.upload');
     })->name('berita.upload');
+    Route::post('payment-news', [PaymentNewsController::class, 'store'])->name('user.payment.news');
 
     Route::get('status-berita', function () {
         return view('pages.user.news.status');
@@ -290,6 +292,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::get('iklan-upload', function () {
         return view('pages.user.iklan.pengajuan');
     })->name('iklan.pengajuan');
+
     Route::get('status-iklan', function () {
         return view('pages.user.iklan.status');
     })->name('iklan.status');

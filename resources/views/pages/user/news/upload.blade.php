@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-12 mb-4">
                         <label class="form-label" for="nomor">Name</label>
-                        <input type="text" id="name" name="name" placeholder="nama" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        <input type="text" id="name" name="name" placeholder="nama" value="{{ auth()->user()->name }}" class="form-control @error('name') is-invalid @enderror">
                         @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-12 mb-4">
                         <label class="form-label" for="nomor">Email</label>
-                        <input type="text" id="name" name="name" placeholder="email" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        <input type="text" id="name" name="name" placeholder="email" value="{{ auth()->user()->email }}" class="form-control @error('name') is-invalid @enderror">
                         @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-12 mb-3">
                         <label class="form-label" for="nomor">Nomor Telepon</label>
-                        <input type="text" id="name" name="name" placeholder="nomor telepon" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        <input type="text" id="name" name="name" placeholder="nomor telepon" value="{{ auth()->user()->phone_number }}" class="form-control @error('name') is-invalid @enderror">
                         @error('name')
                         <span class="invalid-feedback" role="alert" style="color: red;">
                             <strong>{{ $message }}</strong>
@@ -65,44 +65,49 @@
         </div>
 
         <div class="col-md-12 col-lg-5">
-            <div class="card p-4 shadow-sm">
-                <h4>Pembayaran</h4>
-                <div class="row">
-                    <div class="col-12 mb-4 mt-5">
-                        <div class="input-group">
-                            <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
+
+            <form action="{{ route('user.payment.news') }}" method="POST">
+                @csrf
+                @method('post')
+                <div class="card p-4 shadow-sm">
+                    <h4>Pembayaran</h4>
+                    <div class="row">
+                        <div class="col-12 mb-4 mt-5">
+                            <div class="input-group">
+                                <input type="text" style="color:#5D87FF;" id="payment_method_input" name="payment_method"  onchange="previewPayment(event)" placeholder="pilih metode pembayaran" value="Pilih Metode Pembayaran" class="preview form-control @error('payment_method') is-invalid @enderror" readonly>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#modal-create" class="btn btn-sm text-white px-4" style="background-color: #5D87FF;">Pilih</button>
+                            </div>
+                            @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
 
-                    <div class="col-12 mb-4">
-                        <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
-                        <input type="text" id="name" name="name" placeholder="kode voucher" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
-                        @error('name')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label" for="nomor">Kode Voucher (opsional)</label>
+                            <input type="text" id="name" name="voucher" placeholder="kode voucher" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                            @error('name')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
 
-                    <div class="d-flex mt-5 justify-content-between">
-                        <h5>Harga Upload</h5>
+                        <div class="d-flex mt-5 justify-content-between">
+                            <h5>Harga Upload</h5>
 
-                        <h5>Rp. 100.000</h5>
-                    </div>
+                            <h5>Rp. 100.000</h5>
+                        </div>
 
-                    <div class="mt-4">
-                        <a href="{{route('pengajuan.berita')}}" type="submit" class="btn btn-md w-100 text-white" style="background-color: #0F4D8A;">
-                            Selanjutnya
-                        </a>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-md w-100 text-white" style="background-color: #0F4D8A;">
+                                Selanjutnya
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -134,7 +139,7 @@
                                     </label>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="col-lg-6 mt-2">
                             <div class="card p-3 border" onclick="selectCard(this)">
@@ -150,7 +155,7 @@
                                     </label>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="col-lg-6">
                             <div class="card p-3 border" onclick="selectCard(this)">
@@ -197,7 +202,7 @@
                                 </div>
                             </div>
                         </div>
-                    
+
 
                     <span class="fw-semibold text-dark fs-4">E-Wallet</span>
 
@@ -281,8 +286,8 @@
                         </div>
                     </div>
 
-                </div> 
-                    
+                </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-rounded btn-light-danger text-danger"
@@ -352,7 +357,7 @@
 
     function selectCard(selectedCard) {
         var cards = document.querySelectorAll('.card-act');
-        
+
         cards.forEach(function(card) {
             card.classList.remove('active');
         });
