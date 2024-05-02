@@ -96,8 +96,9 @@ class DashboardController extends Controller
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         
+        $news = $this->news->get();
         $query = $request->input('search');
-        $newsSearch = $this->news->searchAll($query);
+        $newsSearch = $this->news->searchAll($news->id, $query);
         return view('layouts.user.navbar-header', compact('categories', 'subCategories','newsSearch'));
     }
 
@@ -130,10 +131,12 @@ class DashboardController extends Controller
     public function newspost(Request $request) {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        $news = $this->news->search($request);
+        // $news = $this->news->search($request);
         $totalCategories = $this->category->showWhithCount();
+        $query = $request->input('search');
         $newsByDate = $this->news->whereDate(Carbon::now(),($request));
         $populars = $this->news->getByPopular();
+        $news = $this->news->get();
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
 

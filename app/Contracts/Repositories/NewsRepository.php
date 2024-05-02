@@ -54,6 +54,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function search(Request $request): mixed
     {
+        dd($request);
         return $this->model->query()
             ->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%');
@@ -68,6 +69,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->where('category_id', $request->category_id);
             })->when($request->sub_category_id, function ($query) use ($request) {
                 $query->where('sub_category_id', $request->sub_category_id);
+            })->when($request->news_id, function ($query) use ($request) {
+                $query->where('news_id', $request->news_id);
             })
             ->take(5)
             ->get();
@@ -433,6 +436,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function whereDate($date, $request) : mixed
     {
         return $this->model->query()
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            })
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('upload_date', '<', $date)
             ->withCount('views')
@@ -444,7 +450,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
         ->when($request->search, function ($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
-        })->when($request->status, function ($query) use ($request) {
+        })->when($request->content, function ($query) use ($request) {
             $query->where('content', 'LIKE', '%' . $request->content . '%');
         })
         ->get();

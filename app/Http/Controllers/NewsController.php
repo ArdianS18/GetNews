@@ -191,15 +191,14 @@ class NewsController extends Controller
     public function usernews(Request $request ,$slug)
     {
         $ip = $request->getClientIp();
-        
+
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;
 
         $view = $this->view->store([
             'news_id' => $news->id,
-        ],[
-            'created_at' => now()
+            'ip' => $ip,
         ]);
 
         $userLike = $this->newsHasLike->where($news->id);
