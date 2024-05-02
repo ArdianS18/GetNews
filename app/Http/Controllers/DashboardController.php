@@ -130,10 +130,9 @@ class DashboardController extends Controller
     public function newspost(Request $request) {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        // $news = $this->news->search($request);
         $totalCategories = $this->category->showWhithCount();
         $query = $request->input('search');
-        $newsByDate = $this->news->whereDate(Carbon::now(),($request));
+        $newsByDate = $this->news->whereDate($request);
         $populars = $this->news->getByPopular();
         $news = $this->news->get();
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
@@ -147,7 +146,17 @@ class DashboardController extends Controller
         $news = $this->news->authorGetNews($authors->user_id);
         $comments = $this->comment->where($authorId);
         $newsCount = $this->news->get();
-        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories','news' ,'comments','newsCount'));
+
+        if (auth()->check()) {
+            // Jika pengguna telah login, ambil berita yang dimiliki oleh pengguna dan memiliki status 'active'
+            $news = $this->news->search($request)
+                ->where('user_id', auth()->user()->id)
+                ->whereIn('status', ["active"])
+                ->get();
+        }else {
+            $news = $this->news->get();
+        }
+        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories','comments','newsCount','news'));
     }
 
     public function privacypolicy() {
