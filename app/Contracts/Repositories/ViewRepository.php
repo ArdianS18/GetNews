@@ -61,10 +61,10 @@ class ViewRepository extends BaseRepository implements ViewInterface
      *
      * @return mixed
      */
-    public function store(array $data, array $values = []): mixed
+    public function store(array $data): mixed
     {
         return $this->model->query()
-            ->UpdateOrCreate($data, $values);
+            ->create();
     }
 
     /**

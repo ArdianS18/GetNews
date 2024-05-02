@@ -91,7 +91,7 @@ class ProfileController extends Controller
 
         $news_id = News::where('user_id', auth()->user()->id)
                                 ->where('status', 'active')
-                                ->pluck('id');;
+                                ->pluck('id');
         $news_like = $this->newsHasLike->countLike($news_id);
 
         $authors = $this->author->get();
