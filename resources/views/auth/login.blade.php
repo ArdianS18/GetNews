@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="vie wport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -13,8 +13,8 @@
 </head>
 
 <body style="background-color: #F8FAFD">
-    <div class="container" style="margin-top:1%">
-        <section>
+    <div class="container">
+        <section class="align-item-center">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 col-lg-6 mt-5">
