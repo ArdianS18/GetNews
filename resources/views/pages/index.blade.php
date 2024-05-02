@@ -19,7 +19,7 @@
                             @foreach ($trendings as $trending)
                                 <div class="swiper-slide news-card-one">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $trending->news->photo) }}" alt="Image" />
+                                        <img src="{{ asset('storage/' . $trending->news->photo) }}" width="100%" height="90" style="object-fit: cover;" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
@@ -113,7 +113,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $mid->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye mt-2"></i>{{ $mid->views_count }}</li>
                                 </ul>
                             </div>
                         </div>

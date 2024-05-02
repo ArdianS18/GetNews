@@ -41,6 +41,7 @@ use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\Report;
 use App\Models\SubCategory;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
@@ -343,6 +344,28 @@ class NewsController extends Controller
 
         return view('pages.user.news.subcategory', compact('totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
     }
+
+    public function showTag(){
+
+        // $request->merge([
+        //     'name' => $tag->id,
+        // ]);
+
+        // $category = $this->category->showWithSlug($slug);
+        // $categoryId = $category->id;
+        // $subCategory = $this->subCategory->where($categoryId);
+
+        $categories = $this->category->get();
+        $totalCategories = $this->category->showWhithCount();
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->showWhithCount();
+
+        // $query = $request->input('search');
+        // $newsTags = $this->tags->search($tag->id, $query);
+
+        return view('pages.user.tag.index', compact('news', 'totalCategories','subCategories','categories',));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -350,7 +373,7 @@ class NewsController extends Controller
     {
         $data = $this->NewsService->store($request);
 
-        if (auth()->user()->roles == "admin") {
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsStatusEnum::ACTIVE->value;
         }
 
@@ -377,7 +400,7 @@ class NewsController extends Controller
             ]);
         }
 
-        if (auth()->user()->roles == "admin") {
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
             return to_route('news.approve.admin');
         } else {
             return to_route('status.news.author');

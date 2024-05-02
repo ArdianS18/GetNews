@@ -45,7 +45,6 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
-
     Route::get('list-author', function () {
         return view('pages.admin.user.author-list');
     })->name('list.author.admin');
@@ -265,7 +264,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
-   
+
 });
 
 Route::middleware(['role:user'])->group(function () {
@@ -345,7 +344,7 @@ Route::middleware(['role:user'])->group(function () {
 
 
 
-   
+
 
     // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
     // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
@@ -379,7 +378,10 @@ Route::get('kategori/{category}', [NewsController::class, 'showCategories'])->na
 Route::get('kategori/{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::get('berita/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
-
+Route::get('news-tag', [NewsController::class, 'showTag'])->name('tag.show.user');
+// Route::get('news-tag', function(){
+//     return view('pages.user.tag.index');
+// })->name('tag.user.shor');
 
 Route::get('confirm-email', function () {
     return view('pages.auth.passwords.email');

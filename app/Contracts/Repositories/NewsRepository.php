@@ -424,7 +424,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function StatusBanned($author, $data) : mixed
     {
         return $this->model->query()
-        ->where('author_id', $author)->update($data);
+        ->where('user_id', $author)->update($data);
     }
 
     public function whereDate($date, $request) : mixed

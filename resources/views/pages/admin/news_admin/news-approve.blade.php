@@ -176,12 +176,15 @@
         }
 
         function rowNewsApproved(index, data) {
+            function limitString(str, maxLength) {
+                return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
+            }
             return `
             <tr>
                 <td>${index + 1}</td>
                 <td>${data.author_name}</td>
                 <td>${data.email}</td>
-                <td>${data.name}</td>
+                <td>${limitString(data.name, 25)}</td>
                 <td>${data.upload_date}</td>
                 <td>
                     <button data-id="${data.id}" type="submit" style="background-color: #EF6E6E"
@@ -202,7 +205,7 @@
             const id = $(this).data('id')
             $.ajax({
                 url: "delete-news-profile/" + id,
-                type: 'DELETE',
+                type: 'POST',
                 data:$(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()

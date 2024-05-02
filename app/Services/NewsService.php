@@ -60,7 +60,6 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 );
                 $newTags[] = $tag->id;
             }
-
             $data['tags'] = $newTags;
         }
 
@@ -215,8 +214,8 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         libxml_clear_errors();
 
         $id = '';
-        if (auth()->user()->roles == "admin") {
-            $id = $news->id;
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            $id = $news->user_id;
         } else {
             $id = auth()->user()->id;
         }

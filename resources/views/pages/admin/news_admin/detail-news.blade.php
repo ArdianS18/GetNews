@@ -38,18 +38,13 @@
                             @if ($news->status === "panding")
                             <div>
                                 <div class="d-flex gap-2 mb-3">
-                                <a href="{{ route('approved-news.index') }}" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
-                                
-                                    <a class="btn btn-warning btn-lg" id="clickEdit" onclick="edit()">Edit</a>
-                                    <a class="btn btn-success btn-lg" id="clickSave" onclick="save()">Save</a>
+                                <a href="/news-list" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
                                 </div>
                             </div>
                             @else
                             <div>
                                 <div class="d-flex gap-2 mb-3">
-                                <a href="news-approved-list" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
-                                    <a class="btn btn-warning btn-lg" id="clickEdit" onclick="edit()">Edit</a>
-                                    <a class="btn btn-success btn-lg" id="clickSave" onclick="save()">Save</a>
+                                <a href="/news-approved-list" class="btn btn-lg px-3 text-white" style="background-color: #5D87FF;">Kembali</a>
                                 </div>
                             </div>
                             @endif
@@ -59,8 +54,6 @@
                             <div class="d-flex gap-2 mb-3">
                             <a href="{{ route('list.approved.index') }}" class="btn btn-lg px-3 text-white"
                                 style="background-color: #5D87FF;">Kembali</a>
-                                    <a class="btn btn-warning btn-lg" id="clickEdit" onclick="edit()">Edit</a>
-                                    <a class="btn btn-success btn-lg" id="clickSave" onclick="save()">Simpan</a>
                             </div>
                         </div>
                     @endif
@@ -77,7 +70,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-success btn-lg px-3">Terima</button>
                             </form>
-                        
+
                         </div>
                     @else
                         <div>
@@ -97,91 +90,164 @@
                 </div>
             </div>
 
-                <form method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
+                <form id="myForm" method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
                     @method('put')
                     @csrf
-
                     <div class="container p-4">
-
                         <div class="card border shadow-none p-3">
-                            <div class="row justify-content-between mt-2">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-lg-5">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 for="" class="form-label">Thumbnail</h3>
 
-                                <div class="col-lg-12 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="photo">Thumbnail Berita</label>
-                                    <div>
-                                        <img width="350px" src="{{ asset('storage/' . $news->photo) }}">
+                                            <div class="gambar-iklan mb-4 d-flex justify-content-center">
+                                                <img id="preview" class="hide" style="object-fit: cover; border: transparent;"
+                                                    width="350" height="200" alt="">
+                                                <img width="350" height="200" src="{{ asset( $news->photo ? 'storage/'.$news->photo : "")  }}" alt="">
+
+                                            </div>
+                                            @if ($news->user->roles->pluck('name')[0] == "admin")
+                                                <div class="d-flex justify-content-center mt-3">
+                                                    <label for="image-upload" class="btn btn-primary @error('photo') is-invalid @enderror">
+                                                        Unggah
+                                                    </label>
+                                                    <input type="file" name="photo" id="image-upload" class="hide"
+                                                        onchange="previewImage(event)">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
+                                                </div>
+                                            @endif
+
+                                            @error('photo')
+                                                <span class="invalid-feedback" role="alert" style="color: red;">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="mb-3">Detail Lainya</h3>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label" for="password_confirmation">Penulis</label>
+                                                <input type="text" class="form-control" value="{{ $news->user->name }}" readonly>
+                                                @error('category')
+                                                    <span class="invalid-feedback" role="alert" style="color: red">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label" for="password_confirmation">Kategori</label>
+
+                                                <select id="category_id"
+                                                    class="select2 form-control category @error('category') is-invalid @enderror"
+                                                    name="category[]" multiple="true" value="" aria-label="Default select example">
+                                                    <option>pilih kategori</option>
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}"
+                                                            {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('category')
+                                                    <span class="invalid-feedback" role="alert" style="color: red">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <div class="mt-2" style="max-width: 100%;">
+                                                    <label class="form-label" for="password_confirmation">Sub Kategori</label>
+
+                                                    <select id="sub_category_id"
+                                                        class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
+                                                        name="sub_category[]" multiple="true" value="" aria-label="Default select example">
+                                                        <option>pilih sub kategori</option>
+                                                        @foreach ($subCategories as $subCategory)
+                                                            <option value="{{ $subCategory->id }}"
+                                                                {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
+                                                                {{ $subCategory->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('sub_category')
+                                                        <span class="invalid-feedback" role="alert" style="color: red">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 mb-4">
+                                                <label class="form-label" for="password_confirmation">Tanggal Upload</label>
+                                                <input type="datetime-local" id="upload_date" name="upload_date"
+                                                    placeholder="date" value="{{ $news->upload_date }}"
+                                                    class="form-control @error('upload_date') is-invalid @enderror">
+                                                @error('upload_date')
+                                                    <span class="invalid-feedback" role="alert" style="color: red">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-lg-12 mb-3">
+                                                <label class="form-label" for="password_confirmation">Tags</label>
+
+                                                <select class="form-control select2 tags" name="tags[]" multiple="multiple">
+                                                    <option>pilih tags</option>
+                                                    @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->name }}"
+                                                            {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('tags')
+                                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="nomor">Judul Berita</label>
-                                    <input type="text" name="name" class="form-control" value="{{ $news->name }}">
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="nomor">Penulis</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ $news->user->name }}" readonly>
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                                    <input type="date" name="upload_date" class="form-control" value="{{ $news->upload_date }}">
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation">Tags</label>
-                                    <select class="form-control select2 tags" name="tags[]" multiple="multiple">
-                                        <option>pilih tags</option>
-                                        @foreach ($tags as $tag)
-                                            <option value="{{ $tag->name }}"
-                                                {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
-                                                {{ $tag->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation">Kategori</label>
-                                    <select id="category_id"
-                                        class="select2 form-control category @error('category') is-invalid @enderror"
-                                        name="category[]" multiple="true" value="" aria-label="Default select example">
-                                        <option>pilih kategori</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}"
-                                                {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-6 col-md-12 from-outline mt-2">
-                                    <label class="form-label" for="password_confirmation">Sub Kategori</label>
-                                    <select id="sub_category_id"
-                                        class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                        name="sub_category[]" multiple="true" value="" aria-label="Default select example">
-                                        <option>pilih sub kategori</option>
-                                        @foreach ($subCategories as $subCategory)
-                                            <option value="{{ $subCategory->id }}"
-                                                {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
-                                                {{ $subCategory->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-12 col-md-6 col-lg-7">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h3 class="mb-3">Isi Berita</h3>
+                                            <div>
+                                                <div class="col-lg-12 mb-4">
+                                                    <label class="form-label" for="nomor">Judul Berita</label>
+                                                    <input type="text" id="name" name="name" placeholder="name"
+                                                        value="{{ $news->name }}" class="form-control @error('name') is-invalid @enderror">
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert" style="color: red;">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-lg-12 mb-4" style="height: auto;">
+                                                    <label class="form-label" for="content">Isi Berita</label>
+                                                    <textarea id="content" name="content" placeholder="content" value="{{ $news->content }}" style="resize: none; height: 400;" class="form @error('content') is-invalid @enderror">{{ $news->content }}</textarea>
+                                                    @error('content')
+                                                        <span class="invalid-feedback" role="alert" style="color: red;">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="row justify-content-between mt-2">
-                                <div class="">
-                                    <label class="form-label" for="content">Isi Berita</label>
-                                    <textarea class="form-control" name="content" rows="10" value="{{ old('content') }}" id="content" style="resize: none; height: 400;">{!! $news->content !!}</textarea>
-                                </div>
-
-                                <div class="justify-content-start mt-2">
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </div>
                 </form>
         </div>
-
     </div>
     </div>
     </div>
@@ -231,19 +297,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+
+$(document).ready(function() {
             $('#content').summernote({
-                height: 400,
+                height: 520,
                 toolbar: [
                     ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontsize', ['fontsize']],
                     ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['para', ['ul', 'ol', 'paragraph', 'height']],
                     ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
+                    ['link', ['link']],
+                    ['picture', ['picture']],
+                    ['video', ['video']],
+                    ['codeview', ['codeview']],
+                    ['help', ['help']],
                 ]
-
             });
         });
     </script>
@@ -275,6 +345,33 @@
                 }
             })
         }
+
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        var hours = ('0' + today.getHours()).slice(-2);
+        var minutes = ('0' + today.getMinutes()).slice(-2);
+
+        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.getElementById('upload_date').value = formattedDate;
+
+        function previewImage(event) {
+            var input = event.target;
+            var previewImg = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.classList.remove('hide');
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewImg.src = '';
+                previewImg.classList.add('hide');
+            }
+        }
+
     </script>
 
     <script>
