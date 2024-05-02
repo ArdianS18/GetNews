@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\AuthorInterface;
 use App\Models\News;
 use App\Models\NewsPhoto;
 use Illuminate\Http\Request;
@@ -65,6 +66,7 @@ class NewsController extends Controller
     private NewsService $NewsService;
     private $newsTrendingService;
     private NewsCategoryInterface $newsCategories;
+    private AuthorInterface $author;
 
     protected $newsRepositoty;
 
@@ -88,7 +90,8 @@ class NewsController extends Controller
         NewsSubCategoryInterface $newsSubCategory,
 
         NewsPhotoInterface $newsPhoto,
-        NewsCategoryInterface $newsCategories)
+        NewsCategoryInterface $newsCategories,
+        AuthorInterface $author)
     {
         $this->newsCategory = $newsCategory;
         $this->newsSubCategory = $newsSubCategory;
@@ -112,6 +115,7 @@ class NewsController extends Controller
 
         $this->newsRepositoty = $newsRepository;
         $this->newsCategories = $newsCategories;
+        $this->author = $author;
 
     }
 
@@ -213,8 +217,9 @@ class NewsController extends Controller
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
         $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
+        $authors = $this->author->get();
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories','authors'));
     }
 
     /**
