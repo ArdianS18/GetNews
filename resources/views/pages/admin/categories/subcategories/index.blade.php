@@ -214,7 +214,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: "{{ route('subkategori.store') }}",
+                url: "{{ route('subkategori.store',['category'=>$category]) }}",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function(response) {
