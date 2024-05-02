@@ -15,6 +15,7 @@ use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
+use App\Http\Controllers\NewsTagController;
 use App\Http\Controllers\PaymentAdvertisementsController;
 use App\Http\Controllers\PaymentNewsController;
 use App\Http\Controllers\ReportController;
@@ -381,7 +382,7 @@ Route::get('kategori/{category}', [NewsController::class, 'showCategories'])->na
 Route::get('kategori/{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::get('berita/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
-Route::get('news-tag', [NewsController::class, 'showTag'])->name('tag.show.user');
+Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 // Route::get('news-tag', function(){
 //     return view('pages.user.tag.index');
 // })->name('tag.user.shor');

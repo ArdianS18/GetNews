@@ -557,21 +557,21 @@
                 likeCount.setAttribute('data-like', likeData);
             });
         });
-        const notLoginElements = document.querySelectorAll('.not-login');
+            const notLoginElements = document.querySelectorAll('.not-login');
 
-        notLoginElements.forEach(function(element) {
-            element.addEventListener('click', function() {
-                Swal.fire({
-                    title: 'Error!!',
-                    icon: 'error',
-                    text: 'Anda Belum Login Silahkan Login Terlebih Dahulu'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '{{ route('login') }}';
-                    }
+            notLoginElements.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    Swal.fire({
+                        title: 'Error!!',
+                        icon: 'error',
+                        text: 'Anda Belum Login Silahkan Login Terlebih Dahulu'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '{{ route('login') }}';
+                        }
+                    });
                 });
             });
-        });
 
         document.getElementById('form-like').addEventListener('submit', function(event) {
             event.preventDefault();
