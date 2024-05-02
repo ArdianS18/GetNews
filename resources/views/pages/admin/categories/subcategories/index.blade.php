@@ -32,7 +32,7 @@
             </form>
 
             <div class="">
-                <a href="{{ route('categories.index') }}" class="btn mr-2 me-2" style="background-color: #D9D9D9"> <svg
+                <a href="{{ route('kategori.admin') }}" class="btn mr-2 me-2" style="background-color: #D9D9D9"> <svg
                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M20 11H6.83l2.88-2.88A.996.996 0 1 0 8.3 6.71L3.71 11.3a.996.996 0 0 0 0 1.41L8.3 17.3a.996.996 0 1 0 1.41-1.41L6.83 13H20c.55 0 1-.45 1-1s-.45-1-1-1" />
@@ -201,7 +201,7 @@
                         </button>
                         <button data-id="${data.id}" type="submit" style="background-color: #EF6E6E"
                             class="btn btn-sm btn-delete text-white me-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>
                         </button>
                     </td>
         </tr>
@@ -214,7 +214,7 @@
             e.preventDefault();
 
             $.ajax({
-                url: "{{ route('subkategori.store') }}",
+                url: "{{ route('subkategori.store',['category'=>$category]) }}",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function(response) {
