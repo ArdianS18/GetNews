@@ -141,7 +141,7 @@
                                 multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                    <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tags')
