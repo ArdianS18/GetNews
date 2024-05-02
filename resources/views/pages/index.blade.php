@@ -53,7 +53,7 @@
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}" href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
