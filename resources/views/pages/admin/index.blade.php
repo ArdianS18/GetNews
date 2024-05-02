@@ -111,7 +111,7 @@
                         <div class="row">
                             @forelse ($news as $news)
                                 <div class="col-md-12 col-lg-6 mb-3">
-                                    <div class="" style="max-width: 540px;">
+                                    <div class="mb-2" style="max-width: 540px;">
                                         <div class="row g-2">
                                             <div class="col-md-4">
                                                 <img src="{{ asset('storage/' . $news->photo) }}"
@@ -155,7 +155,7 @@
                     <h4>Kategori Trending</h4>
                     <div>
                         @forelse ($categories as $category)
-                            <div class="fs-5 mb-3 mt-4 d-flex justify-content-between">
+                            <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
                                 <div>
                                     {{ $category->name }}
                                 </div>
@@ -178,7 +178,7 @@
                     <h4 class="mb-3">Penulis Terbanyak</h4>
                     @forelse ($authors1 as $author)
                         <div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mb-3">
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset($author->photo ? 'storage/' . $author->photo : 'default.png') }}"
                                         class="rounded-circle mb-3 img" style="object-fit: cover" alt="Image" width="40px" height="40px" />

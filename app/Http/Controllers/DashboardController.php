@@ -98,7 +98,7 @@ class DashboardController extends Controller
         
         $news = $this->news->get();
         $query = $request->input('search');
-        $newsSearch = $this->news->searchAll($news->id, $query);
+        $newsSearch = $this->news->searchAll($request, $query);
         return view('layouts.user.navbar-header', compact('categories', 'subCategories','newsSearch'));
     }
 

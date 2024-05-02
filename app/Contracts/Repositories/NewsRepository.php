@@ -54,7 +54,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function search(Request $request): mixed
     {
-        dd($request);
+        // dd($request);
         return $this->model->query()
             ->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%');
@@ -435,8 +435,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function whereDate($date, $request) : mixed
     {
         return $this->model->query()
-            ->when($request->search, function ($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            // ->when($request->search, function ($query) use ($request) {
+            //     $query->where('name', 'LIKE', '%' . $request->search . '%');
+            // })
+            ->where(function($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%')
+                      ->orWhere('content', 'LIKE', '%' . $request->search . '%')
+                      ->orWhereHas('user', function ($query) use ($request) {
+                          $query->where('name', 'LIKE', '%' . $request->search . '%');
+                      });
             })
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('upload_date', '<', $date)
@@ -447,10 +454,21 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function searchAll(Request $request) : mixed
     {
         return $this->model->query()
-        ->when($request->search, function ($query) use ($request) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%');
-        })->when($request->content, function ($query) use ($request) {
-            $query->where('content', 'LIKE', '%' . $request->content . '%');
+        // ->when($request->search, function ($query) use ($request) {
+        //     $query->where('name', 'LIKE', '%' . $request->search . '%');
+        // })->when($request->content, function ($query) use ($request) {
+        //     $query->where('content', 'LIKE', '%' . $request->content . '%');
+        // })->when($request->author, function ($query) use ($request) {
+        //     $query->whereHas('author', function ($query) use ($request) {
+        //         $query->where('name', 'LIKE', '%' . $request->author . '%');
+        //     });
+        // })
+        ->where(function($query) use ($request) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%')
+                  ->orWhere('content', 'LIKE', '%' . $request->search . '%')
+                  ->orWhereHas('user', function ($query) use ($request) {
+                      $query->where('name', 'LIKE', '%' . $request->search . '%');
+                  });
         })
         ->get();
     }

@@ -92,7 +92,7 @@
                     <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form>
+                                <form action="{{route('news.post')}}" method="GET">
                                     <input type="search" name="search"  class="form-control" placeholder="Search here...." />
                                     <button type="submit"><i class="fi fi-rr-search"></i></button>
                                 </form>
