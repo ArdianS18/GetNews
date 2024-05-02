@@ -23,7 +23,7 @@
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
-            <img src="{{asset('assets/img/bg-coin.svg')}}" width="210px" alt="" class="img-fluid">
+            <img src="{{asset('assets/img/bg-coin.svg')}}" width="210px" alt="">
           </div>
         </div>
       </div>
