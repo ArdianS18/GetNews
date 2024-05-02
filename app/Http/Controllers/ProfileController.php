@@ -174,7 +174,7 @@ class ProfileController extends Controller
 
     public function editnews($newsId)
     {
-        $news = $this->news->showWithSlug($newsId);
+        $news = $this->news->show($newsId);
 
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();

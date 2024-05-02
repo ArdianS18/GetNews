@@ -204,7 +204,7 @@ Route::middleware(['auth', 'role:author'])->group(function () {
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     // Update And Delete News
-    Route::get('edit-news-profile/{id}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
+    Route::get('edit-news-profile/{newsId}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
 
     Route::get('status-author', [NewsController::class, 'showstatusnews'])->name('status.news.author');
 

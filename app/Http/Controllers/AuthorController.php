@@ -198,7 +198,7 @@ class AuthorController extends Controller
 
     public function detailnews ($newsId)
     {
-        $news = $this->news->showWithSlug($newsId);
+        $news = $this->news->show($newsId);
 
         $subCategories = $this->subCategories->get();
         $categories = $this->categories->get();
