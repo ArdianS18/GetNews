@@ -55,6 +55,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['email_verified_at'] = now();
+        $data['phone_number'] = '-';
         $user = $this->user->store($data);
         $user->assignRole($data['role']);
 
