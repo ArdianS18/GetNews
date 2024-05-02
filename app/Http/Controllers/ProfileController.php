@@ -87,7 +87,7 @@ class ProfileController extends Controller
 
         $news_post = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
         $followers = $this->followers->get()->where('user_id', auth()->user()->id)->count();
-        $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
+        $following = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
 
         $news_id = News::where('user_id', auth()->user()->id)
                                 ->where('status', 'active')
