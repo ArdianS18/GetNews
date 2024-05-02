@@ -39,7 +39,7 @@
     </div>
 
     <div class="row" id="data">
-       
+
 
     </div>
 
@@ -116,14 +116,26 @@
 @section('script')
     <script>
         get(1)
+        let debounceTimer;
 
+        $('#search-name').keyup(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+        $('#search-role').change(function() {
+            get(1)
+        })
         function get(page) {
             $.ajax({
                 url: "{{ route('account.admin') }}?page" + page,
                 method: "GET",
                 dataType: "JSON",
                 data: {
-                    name: $('#search-name').val()
+                    name: $('#search-name').val(),
+                    role: $('#search-role').val()
                 },
                 beforeSend: function() {
                     $('#data').html('')

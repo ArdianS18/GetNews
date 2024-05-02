@@ -40,10 +40,17 @@ class UserRepository extends BaseRepository implements UserInterface
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-            ->whereRelation('roles', 'name', 'admin')
-            ->orWhereRelation('roles', 'name', 'user')
-            ->when($request->name,function ($query) use ($request) {
-                $query->where('LIKE', '%' . $request->name . '%');
+            ->where(function ($query) {
+                $query->whereRelation('roles', 'name', 'admin')
+                    ->orWhereRelation('roles', 'name', 'user');
+            })
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            })
+            ->when($request->role, function ($query) use ($request) {
+                return $query->whereHas('roles', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->role . '%');
+                });
             })
             ->fastPaginate($pagination);
     }
