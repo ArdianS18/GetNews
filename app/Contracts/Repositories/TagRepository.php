@@ -82,6 +82,7 @@ class TagRepository extends BaseRepository implements TagInterface
     {
         return $this->model->query()
             ->withCount('newsTags')
+            ->take(10)
             ->get();
     }
 
