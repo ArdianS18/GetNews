@@ -207,7 +207,7 @@
                       <div class="row">
                         <div class="col-md-12 col-lg-5">
                           <div>
-                            <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%; height: 100%;" class="img-fluid" height="160px">
+                            <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%;height:150;object-fiit:cover;" class="img-fluid" height="160px">
                           </div>
                         </div>
                         <div class="col-md-12 col-lg-7 align-items-center">

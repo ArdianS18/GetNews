@@ -77,7 +77,7 @@
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                                 <h3>
                                     <a href="{{ route('news.user', ['news' => $newss->slug, 'page' => 1]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
+                                        {!! Illuminate\Support\Str::limit($newss->name, $limit = 40, $end = '...')  !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -127,7 +127,7 @@
                             </div>
                             <div class="news-card-info">
                                 <h3><a href="{{ route('news.user', ['news' => $mid->slug, 'page' => 1]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 60, $end = '...')  !!}
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -179,9 +179,9 @@
                             </div>
                             <div class="news-card-info">
                                 <a
-                                    href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}">{{ $barus->newsCategories[0]->category->name }}</a>
+                                    href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                                 <h3><a href="{{ route('news.user', ['news' => $barus->slug, 'page' => 1]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
+                                        {!! Illuminate\Support\Str::limit($barus->name, $limit = 40, $end = '...')  !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">

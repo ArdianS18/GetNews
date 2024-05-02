@@ -190,6 +190,8 @@ class NewsController extends Controller
 
     public function usernews(Request $request ,$slug)
     {
+        $ip = $request->getClientIp();
+        
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;
