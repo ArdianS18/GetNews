@@ -1,10 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('style')
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 @endsection
 
 <head>
@@ -132,7 +129,7 @@
                             <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]" multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
-                                    <option value="{{ $tag->name }}">{{ $tag->name }}</option>
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
                             @error('tags')
@@ -241,11 +238,11 @@
         </div>
     </div>
 
-    </div>
-    </form>
 @endsection
 
 @section('script')
+<script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var form = document.getElementById('myForm');
@@ -261,10 +258,6 @@
             });
         });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
 
 
     <script>

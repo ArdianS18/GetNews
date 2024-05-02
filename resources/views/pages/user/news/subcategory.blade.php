@@ -27,16 +27,16 @@
                                             alt="{{ $newsSubCategory->news->photo }}" height="400" style="width: 100%;object-fit:cover;" class="img-status">
                                         {{-- <img src="{{ asset('assets/img/test1.svg') }}" width="400px" height="234"
                                         style="width: 100%;height:100%;" alt="Iamge"> --}}
-                                        <a href="{{ route('subcategories.show.user', ['subCategory' => $newsSubCategory->subCategory->slug]) }}"
+                                        <a href="{{ route('subcategories.show.user', ['category'=>$subCategory->category->slug,'subCategory' => $newsSubCategory->subCategory->slug]) }}"
                                             class="news-cat">{{ $newsSubCategory->subCategory->name }}</a>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a
-                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug, 'page' => 1]) }}">{{ $newsSubCategory->news->name }}</a>
+                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug]) }}">{{ $newsSubCategory->news->name }}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ $newsSubCategory->news->created_at->format('M d, Y') }}</a>
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse( $newsSubCategory->news->upload_date)->translatedFormat('d F Y') }}</a>
                                             </li>
                                             <li><i
                                                     class="fi fi-rr-eye"></i>{{ $newsSubCategory->news->views->count() }}
@@ -48,7 +48,7 @@
                         @empty
                             <div class="d-flex justify-content-center">
                                 <div>
-                                    <img src="{{ asset('no-data.svg') }}" width="550px" alt="">
+                                    <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
                                 </div>
                             </div>
                             <div class="text-center">
@@ -101,7 +101,7 @@
                                                 <img src="{{ asset('storage/' . $news->photo) }}" width="100%" height="80">
                                             </div>
                                             <div class="news-card-info">
-                                                <h3><a href="#">{{ $news->name }}</a>
+                                                <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 20, $end = '...')  !!}</a>
                                                 </h3>
                                                 <ul class="news-metainfo list-style">
                                                     <li>
@@ -112,7 +112,7 @@
                                                                     d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
                                                                     fill="#E93314" />
                                                             </svg></i><a
-                                                            href="javascript:void(0)">{{ $news->created_at_formatted }}</a>
+                                                            href="javascript:void(0)">{{  \Carbon\Carbon::parse($news->upload_date)->translatedFormat('d F Y') }}</a>
                                                     </li>
                                                     <li>
                                                         <i class="fi fi-rr-eye">

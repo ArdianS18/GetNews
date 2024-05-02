@@ -20,7 +20,7 @@
                                 <div class="accordion" id="navbarAccordion{{$i}}">
                                     @foreach ($categories[$i]->subCategories as $subCategory)
                                         <div class="accordion-item">
-                                            <a class="accordion-link" href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}">{{ $subCategory->name }}</a>
+                                            <a class="accordion-link" href="{{ route('subcategories.show.user', ['category'=>$subCategory->category->slug,'subCategory' => $subCategory->name]) }}">{{ $subCategory->name }}</a>
                                         </div>
                                     @endforeach
                                 </div>

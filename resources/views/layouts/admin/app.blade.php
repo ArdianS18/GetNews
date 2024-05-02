@@ -51,7 +51,7 @@
         @include('layouts.admin.sidebar')
         @endrole
         @hasrole('author')
-        @include('layouts.author.sidebar')
+        @include('layouts.author.side')
         @endrole
         <!--  Sidebar End -->
         <!--  Main wrapper -->
@@ -69,7 +69,6 @@
     <script src="{{ asset('admin/dist/libs/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('admin/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <!--  core files -->
-    <script src="{{ asset('admin/dist/js/dashboard.js') }}"></script>
     <script src="{{ asset('admin/dist/js/app.min.js') }}"></script>
     <script src="{{ asset('admin/dist/js/app.init.js') }}"></script>
     <script src="{{ asset('admin/dist/js/app-style-switcher.js') }}"></script>
