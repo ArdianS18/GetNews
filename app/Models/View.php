@@ -10,7 +10,7 @@ class View extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['news_id'];
+    protected $fillable = ['news_id', 'ip'];
 
     /**
      * Get the news that owns the View

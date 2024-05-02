@@ -197,7 +197,7 @@ class NewsController extends Controller
         $content = $news->content;
 
         $view = $this->view->store([
-            'news_id' => $news->id,
+            'news_id' => $newsId,
             'ip' => $ip,
         ]);
 

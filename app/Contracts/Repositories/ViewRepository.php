@@ -64,7 +64,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
     public function store(array $data): mixed
     {
         return $this->model->query()
-            ->create();
+            ->create($data);
     }
 
     /**
