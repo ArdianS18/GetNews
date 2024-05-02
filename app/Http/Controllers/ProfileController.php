@@ -121,7 +121,7 @@ class ProfileController extends Controller
     {
         $data = $this->NewsService->update($request, $news);
 
-        if (auth()->user()->roles == "admin") {
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsStatusEnum::ACTIVE->value;
         } else {
             $data['status'] = NewsStatusEnum::PANDING->value;
@@ -153,7 +153,12 @@ class ProfileController extends Controller
                 'tag_id' => $tagId
             ]);
         }
-        return to_route('status.news.author');
+
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            return to_route('news.approve.admin');
+        } else {
+            return to_route('status.news.author');
+        }
     }
 
     /**
