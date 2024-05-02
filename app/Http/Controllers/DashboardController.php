@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\AuthorInterface;
-use App\Contracts\Interfaces\CategoryInterface;
-use App\Contracts\Interfaces\CommentInterface;
+use Carbon\Carbon;
+use App\Models\Author;
+use Illuminate\View\View ;
+use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
+use App\Traits\CustomPaginateTrait;
+use App\Http\Resources\UserResource;
 use App\Contracts\Interfaces\FaqInterface;
-use App\Contracts\Interfaces\FollowerInterface;
-use App\Contracts\Interfaces\NewsCategoryInterface;
-use App\Contracts\Interfaces\NewsHasLikeInterface;
-use App\Contracts\Interfaces\NewsInterface;
-use App\Contracts\Interfaces\NewsTagInterface;
-use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
-use App\Models\Author;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\View\View ;
+use App\Contracts\Interfaces\AuthorInterface;
+use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\NewsTagInterface;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\FollowerInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
+use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Contracts\Interfaces\NewsCategoryInterface;
+
 
 class DashboardController extends Controller
 {
@@ -35,6 +39,9 @@ class DashboardController extends Controller
     private TagInterface $tag;
     private NewsHasLikeInterface $newsHasLike;
     private CommentInterface $comment;
+
+    use CustomPaginateTrait;
+
 
     public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment)
     {
@@ -173,9 +180,11 @@ class DashboardController extends Controller
         return view('pages.contact.faq',compact('faqs','categories', 'subCategories'));
     }
 
-    public function createAccount()
+    public function createAccount(Request $request)
     {
-        $users = $this->user->whereAccount();
-        return view('pages.admin.akun.index', compact('users'));
+        $users = $this->user->customPaginate($request,10);
+        $data['paginate'] = $this->customPaginate($users->currentPage(), $users->lastPage());
+        $data['data'] = UserResource::collection($users);
+        return ResponseHelper::success($data);
     }
 }
