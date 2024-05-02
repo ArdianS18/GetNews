@@ -19,9 +19,9 @@ class AdvertisementController extends Controller
     private AdvertisementPhotoInterface $advertisementPhoto;
 
     public function __construct(
-    AdvertisementInterface $advertisement, 
-    AdvertisementService $advertisementService, 
-    AdvertisementPhotoInterface $advertisementPhoto, 
+    AdvertisementInterface $advertisement,
+    AdvertisementService $advertisementService,
+    AdvertisementPhotoInterface $advertisementPhoto,
     )
     {
         $this->advertisement = $advertisement;
@@ -53,22 +53,6 @@ class AdvertisementController extends Controller
      */
     public function store(AdvertisementRequest $request)
     {
-        
-        // $data = $this->advertisementService->store($request);
-        // $advertisementId = $this->advertisement->store($data)->id;
-        // $data = $request->validated();
-        // $this->advertisementService->store($data);
-
-        // foreach ($data['multi_photo'] as $img) {
-        //     $this->advertisementPhoto->store([
-        //         'advertisement_id' => $advertisementId,
-        //         'multi_photo' => $img,
-        //     ]);
-        // }
-
-        // return ResponseHelper::success(null, trans('alert.add_success'));
-        
-        // $this->advertisement->store(($request->validated()));
         $data = $request->validated();
         $data['user_id'] = auth()->id();
         $advertisement = $this->advertisement->store($data);

@@ -54,8 +54,6 @@
                                         </form>
                                     @endif
                                 @endif
-
-                            @else
                                 <div class="">
                                     <button class="btn btn-sm py-1 px-5 text-white not-login" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                                 </div>
@@ -70,9 +68,9 @@
                             <div class="d-flex justify-content-end">
                                 <div class="d-flex">
                                     <button class="btn btn-sm px-5" style="background-color: #D9D9D9;">{{$newsCount->count()}} Berita</button>
-                                    <button class="btn btn-sm ms-3 px-5" style="background-color: #D9D9D9;">{{ $comments->count() }} Komentar</button>                                        
+                                    <button class="btn btn-sm ms-3 px-5" style="background-color: #D9D9D9;">{{ $comments->count() }} Komentar</button>
                                 </div>
-                            </div>      
+                            </div>
 
                     </div>
                 </div>
@@ -114,12 +112,12 @@
                                                         fill="#0F4D8A" />
                                                     <path d="M48 224h64v224H48z" fill="#0F4D8A" />
                                                 </svg>
-                                            </i><a href="javascript:void(0sing)">{{ $item->count_like }}</a></li>
+                                            </i><a href="javascript:void(0sing)">{{ $item->news_has_likes_count }}</a></li>
 
                                             </li>
                                         </ul>
                                     </div>
-                                </div>                                
+                                </div>
                             @empty
                                 <div class="d-flex justify-content-center">
                                     <div>
@@ -148,7 +146,7 @@
                                             href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                                 src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                                 alt="Image">{{ $category->name }}
-                                            <span>({{ $category->total }})</span>  
+                                            <span>({{ $category->total }})</span>
                                         </a>
                                     </li>
                                 @endforeach

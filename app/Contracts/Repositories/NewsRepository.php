@@ -189,6 +189,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function authorGetNews($user): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->withCount('newsHasLikes')
+            ->get();
+    }
+
     public function getAll(): mixed
     {
         return $this->model->query()

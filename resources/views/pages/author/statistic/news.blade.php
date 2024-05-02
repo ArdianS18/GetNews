@@ -30,6 +30,23 @@
 @endsection
 
 @section('content')
+
+<div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
+    <div class="card-body px-4 py-4">
+        <div class="row justify-content-between">
+            <div class="col-8 text-white">
+                <h4 class="fw-semibold mb-3 mt-2 text-white">Statistik Berita</h4>
+                <p>Terus tingkatkan kualitas berita</p>
+            </div>
+            <div class="col-3">
+                <div class="text-center mb-n4">
+                    <img src="{{ asset('assets/img/bg-ajuan.svg') }}" width="250px" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="row">
         <div class="col-lg-4">
             <div class="card border-left border-primary">
@@ -123,16 +140,15 @@
                                     @endif
                                 </span>
                             </div>
-                            <div class="" style="max-width: 540px;">
+                            <div class="">
                                 <div class="row g-2">
                                     <div class="col-md-4">
-                                        <img style="width: 100%; height: auto;" alt=""
+                                        <img style="object-fit:cover;" width="100%" height="90" alt=""
                                             src="{{ asset('storage/' . $item->photo) }}">
-                                        {{-- <img src="{{ asset('assets/img/news/news-1.webp') }}"> --}}
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body p-2">
-                                            <p class="card-text">{{ $item->name }}
+                                            <p class="card-text">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}
                                             </p>
                                             <div class="d-flex gap-3 align-items-center ms-0">
                                                 <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +156,7 @@
                                                         <path fill="#EF6E6E"
                                                             d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
                                                     </svg><small
-                                                        class="ms-1">{{ $item->created_at_formatted }}</small>
+                                                        class="ms-1">{{ \Carbon\Carbon::parse($item->upload_date)->format('M d Y') }}</small>
                                                 </p>
                                                 <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                         height="20" viewBox="0 0 24 24">
