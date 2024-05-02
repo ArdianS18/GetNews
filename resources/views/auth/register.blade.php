@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-12 d-flex justify-content-center">
-                    <img width="500px" class="img-fluid" style="height:auto; object-fit:cover" src="{{ asset('assets/img/register.svg') }}"
+                    <img width="500px" class="img-fluid" style="height:auto; object-fit:cover" src="{{ asset('bg-regi') }}"
                         alt="">
                 </div>
                 <div class="col-md-12 col-lg-5">

@@ -28,11 +28,8 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
-use App\Contracts\Interfaces\ReportInterface;
 use App\Http\Requests\NewsDraftRequest;
-use App\Http\Resources\NewsCategoryResource;
 use App\Models\Author;
-use App\Models\Category;
 use App\Models\Comment;
 use App\Models\NewsCategory;
 use App\Models\NewsHasLike;
@@ -41,10 +38,7 @@ use App\Models\NewsReport;
 use App\Models\NewsSubCategory;
 use App\Models\NewsTag;
 use App\Models\Report;
-use App\Models\SubCategory;
-use App\Models\Tag;
-use App\Models\User;
-use Illuminate\Auth\Events\Login;
+use App\Models\View as ModelsView;
 use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
@@ -545,7 +539,7 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, Report $report)
+    public function destroy(News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, ModelsView $view ,Report $report)
     {
         $id = $news->id;
 
@@ -556,6 +550,7 @@ class NewsController extends Controller
         $newsReject->where('news_id', $id)->delete();
         $newsComment->where('news_id', $id)->delete();
         $newsReport->where('news_id', $id)->delete();
+        $view->where('news_id', $id)->delete();
 
         $relatedReports = $report->where('news_id', $id)->get();
         foreach ($relatedReports as $relatedReport) {

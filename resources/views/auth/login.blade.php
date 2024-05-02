@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 
-<body>
+<body style="background-color: #F8FAFD;">
     <div class="container" style="margin-top: 10%;">
         <section>
             <div class="container-fluid h-custom">
@@ -25,7 +25,7 @@
                             @csrf
                             <div
                                 class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                                <h2>Login Akun GetMedia.id </h2>
+                                <h2>Logiin Akun GetMedia.id </h2>
                             </div>
                             @if ($errors->any())
                                 @foreach ($errors->all() as $error)

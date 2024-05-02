@@ -84,7 +84,7 @@
                                     @elseif (!Auth::check())
                                         Mohon untuk login
                                     @else
-                                        
+                                        Ini akun anda
                                     @endif
 
                                     <div class="d-flex align-items-center justify-content-between mt-4">

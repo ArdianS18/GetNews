@@ -41,6 +41,7 @@ class SubCategoryController extends Controller
 
     public function store(SubCategoryRequest $request , Category $category)
     {
+        // dd($request);
         $data = $this->subCategoryService->store($request);
         $data['category_id'] = $category->id;
         $this->subCategory->store($data);
@@ -60,7 +61,7 @@ class SubCategoryController extends Controller
      */
     public function destroy(SubCategory $subcategory)
     {
-        
+
         if (!$this->subCategory->delete($subcategory->id)) {
             return back()->with('success', trans('alert.delete_success'));
         }
