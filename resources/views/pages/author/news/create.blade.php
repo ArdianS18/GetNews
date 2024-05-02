@@ -171,12 +171,14 @@
             </div>
         </div>
         <div class="d-flex justify-content-between">
+            @if (auth()->user()->roles->pluck('name')[0] == "author")
             <div>
                 <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
                     id="submitButton2">
                     Simpan Draf
                 </button>
             </div>
+            @endif
             <div class="d-flex">
                 <button type="reset" class="btn btn-danger m-2">
                     Batal
@@ -301,7 +303,7 @@
                 }
             })
         }
-        
+
         var today = new Date();
         var year = today.getFullYear();
         var month = ('0' + (today.getMonth() + 1)).slice(-2);
