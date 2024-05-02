@@ -100,7 +100,7 @@
                     <div class="mt-n5">
                       <div class="d-flex align-items-center justify-content-center mb-2">
                         <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
-                          <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
+                          <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
                             <img style="object-fit: cover" src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
                             {{-- <img src="{{ asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/> --}}
                           </div>
@@ -244,79 +244,7 @@
               </div>
               <!-- End Row -->
             </div>
-            {{-- <div class="tab-pane fade card-detail" id="pills-status" role="tabpanel" aria-labelledby="pills-status-tab" tabindex="0">
-              <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <div class="">
-                  <form class="d-flex">
-                    <div class="input-group">
-                        <input type="text" name="query" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-                        <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                        <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
-                    </div>
-                  </form>
-                </div>
-                <div class="">
-                  <select class="form-select">
-                      <option value="">Terbaru</option>
-                      <option value="">Terpopuler</option>
-                      <option value="">Terlama</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Row -->
-              <div class="">
-                <table class="table">
-                  <thead>
-                      <tr>
-                          <th class="text-white" style="background-color: #175A95; border-radius: 5px 0 0 5px;">No</th>
-                          <th class="text-white" style="background-color: #175A95;">Judul Berita</th>
-                          <th class="text-white" style="background-color: #175A95;">Kategori</th>
-                          <th class="text-white" style="background-color: #175A95;">Sub Kategori</th>
-                          <th class="text-white" style="background-color: #175A95;">Tanggal Upload</th>
-                          <th class="text-white" style="background-color: #175A95;">Status</th>
-                          <th class="text-white" style="background-color: #175A95; border-radius: 0 5px 5px 0;">Aksi</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      @forelse ($news as $news_status)
-                          <tr>
-                              <td>{{ $loop->iteration }}</td>
-                              <td>{{ $news_status->name }}</td>
-                              <td>{{ $news_status->category->name }}</td>
-                              <td>{{ $news_status->subCategory->name }}</td>
-                              <td>{{ \Carbon\Carbon::parse($news_status->upload_date)->format('d / M / Y') }}</td>
-                              <td>{{ $news_status->status }}</td>
-                              <td>
-                                  <button style="background-color: #FFD643;" class="btn btn-edit text-white me-2" data-id="{{ $news_status->id }}"
-                                      data-question="{{ $news_status->question }}" data-answer="{{ $news_status->answer }}"
-                                      id="btn-edit-{{ $news_status->id }}">
-                                      Edit
-                                  </button>
-
-
-                                  <button type="submit" style="background-color: #EF6E6E" class="btn btn-delete text-white"
-                                      data-id="{{ $news_status->id }}">Hapus</button>
-                              </td>
-                          </tr>
-                      @empty
-                          <tr>
-                              <td colspan="7">
-                                  <div class="d-flex justify-content-center">
-                                      <div>
-                                          <img src="{{ asset('no-data.svg') }}" width="200px" alt="">
-                                      </div>
-                                  </div>
-                                  <div class="text-center">
-                                      <h5>Tidak ada data</h5>
-                                  </div>
-                              </td>
-                          </tr>
-                      @endforelse
-                  </tbody>
-                </table>
-              </div>
-            </div> --}}
+      
 
             <div class="tab-pane fade card-detail" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
               <div class="row p-2">

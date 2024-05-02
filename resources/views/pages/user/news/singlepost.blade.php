@@ -47,6 +47,33 @@
         #next-button {
             margin-top: 10px;
         }
+
+        .breadcrumb {
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb a {
+            text-decoration: none;
+        }
+
+        .breadcrumb .separator {
+            margin: 0 5px;
+            color: #000000;
+        }
+
+        .last {
+            color: #E93314 !important;
+        }
+        .breadcrumb-menu list-style:last-child{
+            color: #E93314 !important
+        }
+        .breadcrumb-wrap{
+            background-color: transparent !important;
+            padding: 0px !important
+        }
+        .breadcrumb-menu{
+            text-align: start !important
+        }
     </style>
 @endsection
 @section('content')
@@ -55,10 +82,23 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <article>
-                        <h2 class="d-flex justify-content-start mb-4">{{ $news->name }}</h2>
+                        <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
+                        <div class="breadcrumb-wrap mb-3" >
+                            <ul class="breadcrumb-menu list-style">
+                                <li><a href="/">
+                                    Home</a></li>
+                                <li><a
+                                    href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}">{{ $news->newsCategories[0]->category->name }} </a>
+                                </li>
+                                <li> <a class="last"
+                                    href="{{ route('subcategories.show.user', ['category' => $news->newsCategories[0]->category->slug, 'subCategory' => $news->newsSubCategories[0]->subCategory->slug]) }}">{{ $news->newsSubCategories[0]->subCategory->name }}</a></li>
+                            </ul>
+                        </div>
+
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
-                                <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" width="100%" height="470" style="object-fit: cover" alt="Image">
+                                <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" width="100%"
+                                    height="470" style="object-fit: cover" alt="Image">
                                 <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
@@ -83,62 +123,77 @@
                                         viewBox="0 0 512 512">
                                         <path
                                             d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                            fill="#0F4D8A" />
+                                            fill="#E93314" />
                                         <a href=""></a>
                                     </svg>
                                     <a
                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
                                 <li> <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#0f4d8a"
-                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                </svg><span class="ms-2">{{ $news->views->count() }}</span>
-                            </li>
+                                        viewBox="0 0 24 24">
+                                        <path fill="#E93314"
+                                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                                    </svg><span class="ms-2">{{ $news->views->count() }}</span>
+                                </li>
                                 <li>
+                                    @auth()
+                                        <form id="form-like">
+                                            @csrf
+                                            @if (auth()->check())
+                                                <button type="submit" style="background: transparent;border:transparent"
+                                                    class="like">
+                                                    <svg class="last" xmlns="http://www.w3.org/2000/svg" width="27"
+                                                        height="27" viewBox="0 0 24 24">
+                                                        <path fill="#E93314"
+                                                            d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                    </svg>
+                                                </button>
+                                            @endif
 
-                                    <form id="form-like">
-                                        @csrf
-                                        @if (auth()->check())
+                                        </form>
+
+                                        <form id="form-liked" style="display: none;">
+                                            @csrf
                                             <button type="submit" style="background: transparent;border:transparent"
-                                                class="like">
+                                                class="liked">
+                                                <svg class="last" xmlns="http://www.w3.org/2000/svg" width="27"
+                                                    height="27" viewBox="0 0 24 24">
+                                                    <path fill="red"
+                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form id="form-like">
+                                            @csrf
+                                            <button type="button" style="background: transparent;border:transparent"
+                                                class="like not-login">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
                                                     viewBox="0 0 24 24">
-                                                    <path fill="#0f4d8a"
+                                                    <path fill="#E93314"
                                                         d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                 </svg>
                                             </button>
-                                        @else
-                                            <a href="/login" style="background: transparent;border:transparent"
-                                                class="like">
+
+                                        </form>
+
+                                        <form id="form-liked" style="display: none;">
+                                            @csrf
+                                            <button type="submit" style="background: transparent;border:transparent"
+                                                class="liked">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
                                                     viewBox="0 0 24 24">
-                                                    <path fill="#0f4d8a"
-                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                    <path fill="red"
+                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
                                                 </svg>
-                                            </a>
-                                        @endif
-
-                                    </form>
-
-                                    <form id="form-liked" style="display: none;">
-                                        @csrf
-                                        <button type="submit" style="background: transparent;border:transparent"
-                                            class="liked">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
-                                                viewBox="0 0 24 24">
-                                                <path fill="red"
-                                                    d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                            </svg>
-                                        </button>
-                                    </form>
-
-                                    @auth
-                                        <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
+                                            </button>
+                                        </form>
                                     @endauth
 
+                                    <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
+
                                 </li>
-                              
+
                             </ul>
 
                             <div class="">
@@ -146,14 +201,15 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                         viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3"
-                                            d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                            stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                     </svg>
                                 </a>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li>
-                                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
+                                        <button class="btn btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#tambahdataLabel">
                                             Laporkan
                                         </button>
                                     </li>
@@ -237,14 +293,22 @@
                                             <textarea name="content" id="messages" cols="30" rows="10" placeholder="Isi komentar disini"></textarea>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end mt-3">
-                                        <button type="submit" class="btn-two" style="background-color: #0F4D8A">Komentar</button>
-                                    </div>
+                                    @auth
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="submit" class="btn-two"
+                                                style="background-color: #0F4D8A">Komentar</button>
+                                        </div>
+                                    @else
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="button" class="btn-two not-login"
+                                                style="background-color: #0F4D8A">Komentar</button>
+                                        </div>
+                                    @endauth
                                 </div>
                             </form>
                         </div>
 
-                        <h3 class="comment-box-title mt-4">3 Komentar</h3>
+                        <h3 class="comment-box-title mt-4">{{ $comments->count() }} Komentar</h3>
                         <div class="comment-item-wrap">
                             <div class="comment-item">
                                 @forelse ($comments as $comment)
@@ -294,18 +358,27 @@
                         </div>
 
                         <div class="mt-5">
-                            <div class="comment-box-title"><h1><b>Berita Relevan</b></h1></div>
+                            <div class="comment-box-title">
+                                <h1><b>Berita Relevan</b></h1>
+                            </div>
                             @forelse ($newsCategories as $newsCategory)
                                 <div class="news-card-five">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="{{ $newsCategory->news->photo }}" width="100%" height="130" style="object-fit: cover"/>
-                                        <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newsCategory->category->name }}</a>
+                                        <img src="{{ asset('storage/' . $newsCategory->news->photo) }}"
+                                            alt="{{ $newsCategory->news->photo }}" width="100%" height="130"
+                                            style="object-fit: cover" />
+                                        <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
+                                            class="news-cat">{{ $newsCategory->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 60, $end = '...')  !!}</a></h3>
+                                        <h3><a
+                                                href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 60, $end = '...') !!}</a>
+                                        </h3>
                                         <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a></li>
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                                            </li>
                                             <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
                                         </ul>
                                     </div>
@@ -314,8 +387,8 @@
                             @endforelse
                         </div>
 
-                        
-                       
+
+
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar">
@@ -339,8 +412,8 @@
                                 @forelse ($populars as $popular)
                                     <div class="news-card-one">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image"
-                                                width="100%" height="80">
+                                            <img src="{{ asset('storage/' . $popular->photo) }}"
+                                                style="object-fit: cover" alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a
@@ -392,8 +465,8 @@
                                 @forelse ($news_recents as $recent)
                                     <div class="news-card-one">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image"
-                                                width="100%" height="80">
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
+                                                alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a
@@ -469,8 +542,21 @@
                 likeCount.setAttribute('data-like', likeData);
             });
         });
+        const notLoginElements = document.querySelectorAll('.not-login');
 
-
+        notLoginElements.forEach(function(element) {
+            element.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Error!!',
+                    icon: 'error',
+                    text: 'Anda Belum Login Silahkan Login Terlebih Dahulu'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '{{ route('login') }}';
+                    }
+                });
+            });
+        });
 
         document.getElementById('form-like').addEventListener('submit', function(event) {
             event.preventDefault();

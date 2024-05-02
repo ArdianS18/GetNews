@@ -2,6 +2,17 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
+    <style>
+        .note-editable ul {
+            list-style: disc !important;
+            list-style-position: inside !important;
+        }
+
+        .note-editable ol {
+            list-style: decimal !important;
+            list-style-position: inside !important;
+        }
+    </style>
 @endsection
 
 <head>
@@ -126,7 +137,8 @@
                         </div>
                         <div class="col-lg-12 mb-3">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]" multiple="multiple">
+                            <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]"
+                                multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
                                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
@@ -158,7 +170,8 @@
                             </div>
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
-                                <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}" class="form  @error('content') is-invalid @enderror"></textarea>
+                                <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}"
+                                    class="form  @error('content') is-invalid @enderror"></textarea>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
@@ -171,13 +184,13 @@
             </div>
         </div>
         <div class="d-flex justify-content-between">
-            @if (auth()->user()->roles->pluck('name')[0] == "author")
-            <div>
-                <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
-                    id="submitButton2">
-                    Simpan Draf
-                </button>
-            </div>
+            @if (auth()->user()->roles->pluck('name')[0] == 'author')
+                <div>
+                    <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
+                        id="submitButton2">
+                        Simpan Draf
+                    </button>
+                </div>
             @endif
             <div class="d-flex">
                 <button type="reset" class="btn btn-danger m-2">
@@ -239,11 +252,10 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')
-<script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
+    <script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -265,6 +277,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
+
                 height: 520,
                 toolbar: [
                     ['style', ['style']],
@@ -278,6 +291,7 @@
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
+                    ['insert', ['ul']]
                 ]
             });
         });

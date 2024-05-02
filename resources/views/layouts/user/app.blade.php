@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
+
     <title>GetMedia</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
@@ -70,6 +72,7 @@
     <!-- current page js files -->
     <script src="{{ asset('assets/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script>
+    <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
     @include('layouts.user.footer')
     @yield('script')
