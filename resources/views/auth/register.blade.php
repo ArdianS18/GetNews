@@ -49,7 +49,7 @@
                                 <label class="form-label" for="nomor">Nomor Hp<span class="important">*</span></label>
                                 <input id="nomor" type="text" placeholder="Nomor Hp"
                                     class="gap-8 form-control @error('nomor') is-invalid @enderror" name="phone_number"
-                                    value="{{ old('name') }}" autocomplete="name" autofocus>
+                                    value="{{ old('phone_number') }}" autocomplete="name" autofocus>
 
                                 @error('nomor')
                                     <span class="invalid-feedback" role="alert">
