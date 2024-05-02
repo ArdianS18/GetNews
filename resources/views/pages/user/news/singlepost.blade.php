@@ -85,12 +85,12 @@
                         <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
                         <div class="breadcrumb-wrap mb-3" >
                             <ul class="breadcrumb-menu list-style">
-                                <li><a href="/">
+                                <li><a data-toggle="tooltip" data-placement="top" title="Beranda" href="/">
                                     Home</a></li>
-                                <li><a
+                                <li><a data-toggle="tooltip" data-placement="top" title="{{ $news->newsCategories[0]->category->name }}"
                                     href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}">{{ $news->newsCategories[0]->category->name }} </a>
                                 </li>
-                                <li> <a class="last"
+                                <li> <a class="last" data-toggle="tooltip" data-placement="top" title="{{ $news->newsSubCategories[0]->subCategory->name }}"
                                     href="{{ route('subcategories.show.user', ['category' => $news->newsCategories[0]->category->slug, 'subCategory' => $news->newsSubCategories[0]->subCategory->slug]) }}">{{ $news->newsSubCategories[0]->subCategory->name }}</a></li>
                             </ul>
                         </div>
@@ -99,7 +99,7 @@
                             <div class="slideshow news-img">
                                 <img id="main-image" src="{{ asset('storage/' . $news->photo) }}" width="100%"
                                     height="470" style="object-fit: cover" alt="Image">
-                                <a href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $news->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                             </div>
                         </div>
@@ -113,9 +113,10 @@
                                             style="border-radius: 50%; object-fit:cover;" />
                                     </span>
                                     <div>
-                                        <a style="display: inline;text-decoration:none"
-                                            href="{{ route('author.detail', ['id' => $news->user->author->id]) }}">{{ $news->user->name }}</a> - <span style="color: red">
-                                            {{ $news->newsCategories[0]->category->name }}</span>
+                                        <a style="display: inline;text-decoration:none" data-toggle="tooltip" data-placement="top" title="author - {{ $news->user->name }}"
+                                            href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a> - <span style="color: red">
+                                                {{ $news->newsCategories[0]->category->name }}
+                                        </span>
                                     </div>
                                 </li>
                                 <li>
@@ -275,7 +276,7 @@
                         </div>
                         Tag :
                         @forelse ($tags as $tag)
-                            <a href="#" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
+                            <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tag->name }}" href="{{ route('tag.show.user', ['tag' => $tag->tag->slug]) }}" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
                         <h3 class="comment-box-title mt-6">{{ $comments->count() }} Komentar</h3>
@@ -370,12 +371,11 @@
                                         <img src="{{ asset('storage/' . $newsCategory->news->photo) }}"
                                             alt="{{ $newsCategory->news->photo }}" width="100%" height="130"
                                             style="object-fit: cover" />
-                                        <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->category->name }}" href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
                                             class="news-cat">{{ $newsCategory->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a
-                                                href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
                                         </h3>
                                         <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
@@ -400,7 +400,7 @@
                             <h3 class="sidebar-widget-title">Kategori</h3>
                             <ul class="category-widget list-style">
                                 @foreach ($totalCategories as $category)
-                                    <li><a href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
+                                    <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                                 src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                                 alt="Image">{{ $category->name }}
                                             <span>({{ $category->total }})</span></a></li>
@@ -419,8 +419,7 @@
                                                 style="object-fit: cover" alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a
-                                                    href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li>
@@ -457,7 +456,7 @@
                             <h3 class="sidebar-widget-title">Popular Tags</h3>
                             <ul class="tag-list list-style">
                                 @forelse ($tags as $tag)
-                                    <li><a href="#">{{ $tag->tag->name }}</a></li>
+                                    <li><a data-toggle="tooltip" data-placement="top" title="{{ $tag->tag->name }}" href="{{ route('tag.show.user', ['tag' => $tag->tag->slug]) }}">{{ $tag->tag->name }}</a></li>
                                 @empty
                                 @endforelse
                             </ul>
@@ -472,7 +471,7 @@
                                                 alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a
+                                            <h3><a  data-toggle="tooltip" data-placement="top" title="{{ $recent->name }}"
                                                     href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">

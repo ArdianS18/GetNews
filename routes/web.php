@@ -167,6 +167,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
     })->name('account.admin.list');
     Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin');
     Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
+    Route::delete('delete-account/{user}', [UserController::class, 'destroy'])->name('delete.account.admin');
 
     Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
     Route::get('detail-iklan', function () {

@@ -112,6 +112,10 @@
             </div>
         </div>
     </div>
+
+
+    <x-delete-modal-component />
+
 @endsection
 @section('script')
     <script>
@@ -188,7 +192,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li>
-                                <button class="dropdown-item btn-edit" id="btn-edit-${data.id}" 
+                                <button class="dropdown-item btn-edit" id="btn-edit-${data.id}"
                                     >Edit</button>
                             </li>
                             <li>
@@ -212,5 +216,34 @@
         </div>
             `
         }
+
+        $('#form-delete').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            $.ajax({
+                url: "delete-account/" + id,
+                type: 'DELETE',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-delete').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Gagal menghapus data,Data sedang di gunakan"
+                    })
+                }
+            })
+        })
     </script>
 @endsection
