@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsLikeRequest;
+use App\Models\Author;
 use App\Models\News;
 use App\Models\NewsHasLike;
 use App\Services\NewsHasLikeService;

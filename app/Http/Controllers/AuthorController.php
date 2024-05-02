@@ -159,7 +159,7 @@ class AuthorController extends Controller
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
-            $this->news->StatusBanned($author->user_id, $data);
+            $this->news->StatusBanned($author->user_id);
         } else {
             $this->authorBannedService->unBanned($author);
         }

@@ -46,7 +46,6 @@ class NewsHasLikeService implements ShouldHandleFileUpload, CustomUploadValidati
      */
     public function store($id,$news)
     {
-
         return [
             'user_id' => $id,
             'news_id' => $news->id
