@@ -18,7 +18,7 @@
 
 <body style="background-color: #F8FAFD;">
     <section>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-12" style="margin-top: 3%">
                     <div class="d-flex justify-content-center mt-5">

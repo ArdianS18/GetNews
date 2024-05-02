@@ -13,7 +13,7 @@
 </head>
 
 <body style="background-color: #F8FAFD">
-    <div class="container" style="margin-top:1%">
+    <div class="" style="margin-top:1%">
         <section>
             <div class="container-fluid">
                 <div class="row">
@@ -28,7 +28,7 @@
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="">
-                                        <h4>Selamat Datang di GetMedia</h4>
+                                        <h4>Selamaat Datang di GetMedia</h4>
                                     </div>
         
                                     <!-- Email input -->

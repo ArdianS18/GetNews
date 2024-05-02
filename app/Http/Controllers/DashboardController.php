@@ -95,8 +95,9 @@ class DashboardController extends Controller
         $generals = $this->news->getByGeneral();
         $tags = $this->tag->getByPopular();
         $totalCategories = $this->category->showWhithCount();
+        $authors = $this->author->get();
 
-        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories'));
+        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories','authors'));
     }
 
     public function navbar(Request $request){
@@ -148,21 +149,21 @@ class DashboardController extends Controller
     public function authordetail($authorId, Request $request) {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        $authors = Author::with('user')->findOrFail($authorId);
+        // $authors = Author::with('user')->where($authorId);
         $totalCategories = $this->category->showWhithCount();
-        $news = $this->news->authorGetNews($authors->user_id);
+        // $news = $this->news->authorGetNews($authors->user_id);
         $comments = $this->comment->where($authorId);
         $newsCount = $this->news->get();
-
-        if (auth()->check()) {
-            // Jika pengguna telah login, ambil berita yang dimiliki oleh pengguna dan memiliki status 'active'
-            $news = $this->news->search($request)
-                ->where('user_id', auth()->user()->id)
-                ->whereIn('status', ["active"])
-                ->get();
-        }else {
-            $news = $this->news->get();
-        }
+        $authors = $this->author->get();
+        $news = $this->news->get();
+        // if (auth()->check()) {
+        //     $news = $this->news->search($request)
+        //         ->where('user_id', auth()->user()->id)
+        //         ->whereIn('status', ["active"]);
+        //         // ->get();
+        // }else {
+        //     $news = $this->news->get();
+        // }
         return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories','comments','newsCount','news'));
     }
 

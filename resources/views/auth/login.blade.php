@@ -13,21 +13,26 @@
 </head>
 
 <body style="background-color: #F8FAFD">
-    <div class="container">
+    <div class="mt-3">
         <section class="align-item-center">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12 col-lg-6 mt-5">
-                        <div class="d-flex justify-content-center mt-4">
-                            <img width="480px" src="{{asset('assets/img/auth/bg-login.svg')}}" alt="">
+                    <div class="col-md-12 col-lg-6 mt-2">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#393939" d="M9.904 17.308L4.596 12l5.308-5.308l.708.72L6.523 11.5h12.88v1H6.524l4.089 4.088z"/></svg>
+                            <img src="{{asset('assets/img/logo-getmedia-dark.svg')}}" width="140" alt="">
+                        </div>
+                        <div class="d-flex justify-content-center p-5 mt-5">
+                            <img width="480px" src="{{
+                                asset('assets/img/auth/bg-login.svg')}}" alt="">
                         </div>
                     </div>
-                    <div class="col-md-12 col-lg-6">
+                    <div class="col-md-12 col-lg-6 mt-4">
                         <div class="d-flex card p-5 m-5 border-none">
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
-                                    <div class="">
+                                    <div class="pt-4 pb-4">
                                         <h4>Selamat Datang di GetMedia</h4>
                                     </div>
         
@@ -61,7 +66,7 @@
                                         @enderror
                                     </div>
         
-                                    <div class="d-flex justify-content-end align-items-center">
+                                    <div class="d-flex justify-content-end align-items-center mt-3 mb-4">
                                         <a href="{{ route('confirm.email') }}" class="text-body">Lupa password?</a>
                                     </div>
 
@@ -72,7 +77,7 @@
                                         </button>
                                     </div>
         
-                                    <div class="text-center mt-4 pt-2">
+                                    <div class="text-center mt-2 pb-5 pt-2">
                                         <p class="small mt-2 pt-1 mb-0">Belum memiliki akun? <a href="{{ route('register') }}"
                                                 class="link-primary">Daftar Sekarang</a></p>
                                     </div>
