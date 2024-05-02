@@ -438,7 +438,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function searchAll(Request $request){
+    public function searchAll(Request $request) : mixed
+    {
         return $this->model->query()
         ->when($request->search, function ($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
