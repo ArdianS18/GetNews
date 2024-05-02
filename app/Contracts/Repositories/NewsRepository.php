@@ -455,13 +455,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('upload_date', '<=', Carbon::now())
             ->withCount('views')
-            ->get();
+            ->paginate(8);
     }
 
     public function searchAll(Request $request) : mixed
     {
         return $this->model->query()
-       
+
         ->where(function($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%')
                   ->orWhere('content', 'LIKE', '%' . $request->search . '%')
