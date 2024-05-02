@@ -134,7 +134,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
         return view('pages.admin.categories.subcategories.index', compact('category'));
     })->name('sub.category.admin');
 
-    Route::post('SubKategori', [SubCategoryController::class, 'store'])->name('subkategori.store');
+    Route::post('SubKategori/{category}', [SubCategoryController::class, 'store'])->name('subkategori.store');
     Route::put('SubKategori/{subcategory}', [SubCategoryController::class, 'update'])->name('subkategori.update');
     Route::delete('SubKategori/{subcategory}', [SubCategoryController::class, 'destroy'])->name('subkategori.destroy');
 
