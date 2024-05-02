@@ -31,30 +31,35 @@
                     <div class="col-md-12 col-lg-11">
                             <div class="d-flex">
                                 <h3 class="me-2">{{ $authors->user->name }}</h3>
+
+                            @auth
                                 @if (auth()->user()->id != $authors->user_id)
-                                @php
-                                    $user_id = auth()->user()->id;
-                                    $author_id = $authors->id;
-                                    $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
-                                @endphp
+                                    @php
+                                        $user_id = auth()->user()->id;
+                                        $author_id = $authors->id;
+                                        $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
+                                    @endphp
 
-                                @if ($isFollowing)
-                                    <form action="{{ route('unfollow.author', ['author' => $authors->id]) }}" method="POST">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
-                                    </form>
-                                @else
-                                    <form action="{{ route('follow.author', ['author' => $authors->id]) }}" method="POST">
-                                        @method('post')
-                                        @csrf
-                                        <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                    </form>
+                                    @if ($isFollowing)
+                                        <form action="{{ route('unfollow.author', ['author' => $authors->id]) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow.author', ['author' => $authors->id]) }}" method="POST">
+                                            @method('post')
+                                            @csrf
+                                            <button class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                        </form>
+                                    @endif
                                 @endif
-                            @else
-                               
-                            @endif
 
+                            @else
+                                <div class="">
+                                    <button class="btn btn-sm py-1 px-5 text-white not-login" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                </div>
+                            @endauth
                             </div>
 
                             <div class="col-10">
@@ -167,4 +172,24 @@
         </div>
 
     </div>
+@endsection
+
+@section('script')
+    <script>
+         const notLoginElements = document.querySelectorAll('.not-login');
+
+        notLoginElements.forEach(function(element) {
+            element.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Error!!',
+                    icon: 'error',
+                    text: 'Anda Belum Login Silahkan Login Terlebih Dahulu'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '{{ route('login') }}';
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -278,7 +278,59 @@
                             <a href="#" class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
+                        <h3 class="comment-box-title mt-6">{{ $comments->count() }} Komentar</h3>
+                        @forelse ($comments as $comment)
+                        @if ($comment->parent_id == null)
+                            <div class="comment-item-wrap">
+                        @else
+                            <div class="comment-item-wrap ms-5">
+                        @endif
+                            <div class="comment-item">
+                                    <div class="comment-author-img">
+                                        <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
+                                            alt="Image" width="80px" height="80px"
+                                            style="border-radius: 50%; object-fit:cover;" />
+                                    </div>
 
+                                    <div class="comment-author-wrap">
+                                        <div class="comment-author-info">
+                                            <div class="row align-items-start">
+                                                <div class="col-md-9 col-sm-3 col-3 order-md-1 order-sm-1 order-1">
+                                                    <div class="comment-author-name">
+                                                        <h5>{{ $comment->user->name }}</h5>
+                                                        <span
+                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
+                                                    @if ($comment->parent_id == null)
+                                                    <a href="javascript:void(0)" class="reply-btn"
+                                                        onclick="showReplyForm({{ $comment->id }})">Reply</a>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
+                                                    <div class="comment-text">
+                                                        <p>{{ $comment->content }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="reply-form-{{ $comment->id }}" class="reply-form" style="display: none;">
+                                        <form
+                                            action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}"
+                                            method="post">
+                                            @csrf
+                                            <textarea name="content" placeholder="Type your reply here"></textarea>
+                                            <input type="submit" value="Submit Reply">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                        @endforelse
 
                         <div id="cmt-form">
                             <div class="mb-30">
@@ -306,55 +358,6 @@
                                     @endauth
                                 </div>
                             </form>
-                        </div>
-
-                        <h3 class="comment-box-title mt-4">{{ $comments->count() }} Komentar</h3>
-                        <div class="comment-item-wrap">
-                            <div class="comment-item">
-                                @forelse ($comments as $comment)
-                                    <div class="comment-author-img">
-                                        <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
-                                            alt="Image" width="80px" height="80px"
-                                            style="border-radius: 50%; object-fit:cover;" />
-                                    </div>
-
-                                    <div class="comment-author-wrap">
-                                        <div class="comment-author-info">
-                                            <div class="row align-items-start">
-                                                <div class="col-md-9 col-sm-12 col-12 order-md-1 order-sm-1 order-1">
-                                                    <div class="comment-author-name">
-                                                        <h5>{{ $comment->user->name }}</h5>
-                                                        <span
-                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="col-md-3 col-sm-12 col-12 text-md-end order-md-2 order-sm-3 order-3">
-                                                    {{-- <a href="#cmt-form" class="reply-btn">Reply</a> --}}
-                                                    <a href="javascript:void(0)" class="reply-btn"
-                                                        onclick="showReplyForm({{ $comment->id }})">Reply</a>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
-                                                    <div class="comment-text">
-                                                        <p>{{ $comment->content }}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="reply-form-{{ $comment->id }}" class="reply-form" style="display: none;">
-                                        <form
-                                            action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}"
-                                            method="post">
-                                            @csrf
-                                            <textarea name="content" placeholder="Type your reply here"></textarea>
-                                            <input type="submit" value="Submit Reply">
-                                        </form>
-                                    </div>
-                                @empty
-                                @endforelse
-                            </div>
                         </div>
 
                         <div class="mt-5">
@@ -508,6 +511,18 @@
 @endsection
 
 @section('script')
+
+    <script>
+        function toggleReplyForm(commentId) {
+        var replyForm = document.getElementById("reply-form-" + commentId);
+            if (replyForm.style.display === "none") {
+                replyForm.style.display = "block";
+            } else {
+                replyForm.style.display = "none";
+            }
+        }
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var formLike = document.getElementById('form-like');

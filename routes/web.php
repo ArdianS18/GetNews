@@ -252,7 +252,6 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
 
-    Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
     Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
 
     Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
@@ -372,6 +371,7 @@ Route::middleware(['role:user'])->group(function () {
 });
 
 Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
+Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');

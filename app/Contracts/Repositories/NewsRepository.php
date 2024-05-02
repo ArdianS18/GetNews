@@ -433,10 +433,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->where('user_id', $author)->update(['status' => NewsStatusEnum::PANDING->value]);
     }
 
-    public function whereDate($date, $request) : mixed
+    public function whereDate($request) : mixed
     {
         return $this->model->query()
-  
             ->where(function($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%')
                       ->orWhere('content', 'LIKE', '%' . $request->search . '%')
@@ -445,7 +444,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                       });
             })
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->whereDate('upload_date', '<=', $date)
+            ->whereDate('upload_date', '<=', Carbon::now())
             ->withCount('views')
             ->get();
     }
