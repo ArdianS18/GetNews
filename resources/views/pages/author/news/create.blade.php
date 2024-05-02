@@ -2,6 +2,17 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
+    <style>
+        .note-editable ul {
+            list-style: disc !important;
+            list-style-position: inside !important;
+        }
+
+        .note-editable ol {
+            list-style: decimal !important;
+            list-style-position: inside !important;
+        }
+    </style>
 @endsection
 
 <head>
@@ -173,13 +184,13 @@
             </div>
         </div>
         <div class="d-flex justify-content-between">
-            @if (auth()->user()->roles->pluck('name')[0] == "author")
-            <div>
-                <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
-                    id="submitButton2">
-                    Simpan Draf
-                </button>
-            </div>
+            @if (auth()->user()->roles->pluck('name')[0] == 'author')
+                <div>
+                    <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
+                        id="submitButton2">
+                        Simpan Draf
+                    </button>
+                </div>
             @endif
             <div class="d-flex">
                 <button type="reset" class="btn btn-danger m-2">
@@ -266,6 +277,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
+
                 height: 520,
                 toolbar: [
                     ['style', ['style']],
@@ -279,8 +291,7 @@
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
-                    ['insert', ['ul']] 
-
+                    ['insert', ['ul']]
                 ]
             });
         });

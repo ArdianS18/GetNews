@@ -42,7 +42,7 @@
 @endsection
 @section('content')
 
-        <div>
+        <div class="p-5">
             <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                 <form class="d-flex mb-2">
                     <div class="input-group">

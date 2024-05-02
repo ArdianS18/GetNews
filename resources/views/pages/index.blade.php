@@ -58,7 +58,7 @@
                                     </a>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
-                                            <p>{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}
+                                            <p>{{ \Carbon\Carbon::parse($newss->upload_date)->translatedFormat('d F Y') }}
                                             </p>
                                         </a>
                                     </li>
