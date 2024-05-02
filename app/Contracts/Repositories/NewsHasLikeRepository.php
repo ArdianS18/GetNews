@@ -37,7 +37,7 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     {
     }
 
-    public function countLike($newsId): mixed
+    public function countLike(): mixed
     {
         
     }
