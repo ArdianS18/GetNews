@@ -93,7 +93,6 @@ class ProfileController extends Controller
                                 ->where('status', 'active')
                                 ->pluck('id');;
         $news_like = $this->newsHasLike->countLike($news_id);
-        // dd($news_like);
 
         $authors = $this->author->get();
         return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like', 'following'));

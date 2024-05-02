@@ -113,13 +113,9 @@
                                             style="border-radius: 50%; object-fit:cover;" />
                                     </span>
                                     <div>
-                                        @foreach ($authors as $author)
                                         <a style="display: inline;text-decoration:none"
-                                            href="{{ route('author.detail', ['id' => $author->id]) }}">{{ $news->user->name }}</a> - <span style="color: red">
+                                            href="{{ route('author.detail', ['id' => $news->user->author->id]) }}">{{ $news->user->name }}</a> - <span style="color: red">
                                             {{ $news->newsCategories[0]->category->name }}</span>
-                                        @endforeach
- 
-                                        
                                     </div>
                                 </li>
                                 <li>
