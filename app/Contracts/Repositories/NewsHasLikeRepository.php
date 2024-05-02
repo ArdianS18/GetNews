@@ -37,6 +37,12 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     {
     }
 
+    public function countLike($newsId): mixed
+    {
+        
+    }
+    
+
     /**
      * Handle the Get all data event from models.
      *
@@ -62,6 +68,7 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
             ->where('news_id', $newsId)
             ->delete();
     }
+
 
     /**
      * Handle store data event to models.
