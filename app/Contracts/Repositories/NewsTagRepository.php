@@ -2,9 +2,11 @@
 
 namespace App\Contracts\Repositories;
 
-use App\Contracts\Interfaces\NewsTagInterface;
 use App\Models\NewsTag;
 use Illuminate\Http\Request;
+use App\Enums\NewsStatusEnum;
+use App\Contracts\Interfaces\NewsTagInterface;
+use Carbon\Carbon;
 
 class NewsTagRepository extends BaseRepository implements NewsTagInterface
 
@@ -50,9 +52,20 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
             ->get();
     }
 
-    public function search(mixed $query): mixed
+    public function search(mixed $request) : mixed
     {
-        return $this->model->where('question', 'LIKE', '%' . $query . '%')->paginate(5);
+        return $this->model->query()
+            ->where('tag_id', $request->tag_id)
+            ->whereHas('news', function ($query) use ($request) {
+                $query->when($request->search, function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->search . '%');
+                });
+                $query->where('status', NewsStatusEnum::ACTIVE->value);
+                $query->whereDate('upload_date', '<=', Carbon::now());
+                $query->withCount('views');
+            })
+            ->latest()
+            ->paginate(5);
     }
 
     public function updateOrCreate(array $data): mixed

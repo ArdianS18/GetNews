@@ -333,9 +333,6 @@ class NewsController extends Controller
 
     public function showSubCategories($category,$subCategory,Request $request)
     {
-        // $request->merge([
-        //     'name' => $newsSubCategory->id,
-        // ]);
 
         $subCategory = $this->subCategory->showWithSlug($subCategory);
 
@@ -351,26 +348,7 @@ class NewsController extends Controller
         return view('pages.user.news.subcategory', compact('totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
     }
 
-    public function showTag(){
 
-        // $request->merge([
-        //     'name' => $tag->id,
-        // ]);
-
-        // $category = $this->category->showWithSlug($slug);
-        // $categoryId = $category->id;
-        // $subCategory = $this->subCategory->where($categoryId);
-
-        $categories = $this->category->get();
-        $totalCategories = $this->category->showWhithCount();
-        $subCategories = $this->subCategory->get();
-        $news = $this->news->showWhithCount();
-
-        // $query = $request->input('search');
-        // $newsTags = $this->tags->search($tag->id, $query);
-
-        return view('pages.user.tag.index', compact('news', 'totalCategories','subCategories','categories',));
-    }
 
     /**
      * Store a newly created resource in storage.
