@@ -189,6 +189,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function authorGetNews($user): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->withCount('newsHasLikes')
+            ->get();
+    }
+
     public function getAll(): mixed
     {
         return $this->model->query()
@@ -455,15 +464,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function searchAll(Request $request) : mixed
     {
         return $this->model->query()
-        // ->when($request->search, function ($query) use ($request) {
-        //     $query->where('name', 'LIKE', '%' . $request->search . '%');
-        // })->when($request->content, function ($query) use ($request) {
-        //     $query->where('content', 'LIKE', '%' . $request->content . '%');
-        // })->when($request->author, function ($query) use ($request) {
-        //     $query->whereHas('author', function ($query) use ($request) {
-        //         $query->where('name', 'LIKE', '%' . $request->author . '%');
-        //     });
-        // })
         ->where(function($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%')
                   ->orWhere('content', 'LIKE', '%' . $request->search . '%')
