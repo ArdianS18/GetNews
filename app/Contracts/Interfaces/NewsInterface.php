@@ -39,4 +39,5 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 
     public function searchStatus(mixed $id, Request $request) : mixed;
     public function searchAll(Request $request) : mixed;
+
 }

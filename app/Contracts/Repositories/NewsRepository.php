@@ -106,7 +106,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->where('slug', $id)
+            ->with(['category', 'user'])
+            ->firstOrFail();
     }
 
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator

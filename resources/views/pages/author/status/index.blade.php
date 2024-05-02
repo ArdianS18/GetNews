@@ -117,7 +117,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('profile.news.edit', ['id' => $item->slug]) }}" class="btn btn-sm m-1"
+                            <a href="{{ route('profile.news.edit', ['newsId' => $item->slug]) }}" class="btn btn-sm m-1"
                                 style="background-color: #0F4D8A;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
                                     <path
