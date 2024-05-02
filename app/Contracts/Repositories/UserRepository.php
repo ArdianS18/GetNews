@@ -5,6 +5,7 @@ namespace App\Contracts\Repositories;
 use App\Contracts\Interfaces\UserInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository extends BaseRepository implements UserInterface
@@ -24,8 +25,8 @@ class UserRepository extends BaseRepository implements UserInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     public function whereRelation(): mixed
@@ -36,14 +37,15 @@ class UserRepository extends BaseRepository implements UserInterface
             ->count();
     }
 
-    public function whereAccount(): mixed
+    public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-            ->where(function ($query) {
-                $query->whereRelation('roles', 'name', 'admin')
-                    ->orWhereRelation('roles', 'name', 'user');
+            ->whereRelation('roles', 'name', 'admin')
+            ->orWhereRelation('roles', 'name', 'user')
+            ->when($request->name,function ($query) use ($request) {
+                $query->where('LIKE', '%' . $request->name . '%');
             })
-            ->get();
+            ->fastPaginate($pagination);
     }
 
     /**
@@ -55,7 +57,6 @@ class UserRepository extends BaseRepository implements UserInterface
      */
     public function show(mixed $id): mixed
     {
-
     }
 
     /**
@@ -72,13 +73,13 @@ class UserRepository extends BaseRepository implements UserInterface
     public function search(Request $request): mixed
     {
         return $this->model->query()
-        ->when($request->search,function($query) use ($request){
-            $query->where('name','LIKE', '%'.$request->search.'%');
-        })->when($request->status,function($query) use($request){
-            $query->where('status','LIKE', '%'.$request->status.'%');
-        })->when($request->sub_category_id,function($query) use($request){
-            $query->where('sub_category_id',$request->sub_category_id);
-        })->get();
+            ->when($request->search, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            })->when($request->status, function ($query) use ($request) {
+                $query->where('status', 'LIKE', '%' . $request->status . '%');
+            })->when($request->sub_category_id, function ($query) use ($request) {
+                $query->where('sub_category_id', $request->sub_category_id);
+            })->get();
     }
 
     /**
@@ -112,12 +113,12 @@ class UserRepository extends BaseRepository implements UserInterface
     public function showWhithCount(): mixed
     {
         return DB::table('user')
-        ->join('author', 'user.id', '=', 'author.user_id')
-        ->join('news', 'author.id', '=', 'news.author_id')
-        ->select('user.id', 'user.name', 'user.photo', DB::raw('SUM(1) as total'))
-        ->groupBy('user.id', 'user.name', 'user.photo')
-        ->orderBy('total', 'desc')
-        ->take(6)
-        ->get();
+            ->join('author', 'user.id', '=', 'author.user_id')
+            ->join('news', 'author.id', '=', 'news.author_id')
+            ->select('user.id', 'user.name', 'user.photo', DB::raw('SUM(1) as total'))
+            ->groupBy('user.id', 'user.name', 'user.photo')
+            ->orderBy('total', 'desc')
+            ->take(6)
+            ->get();
     }
 }
