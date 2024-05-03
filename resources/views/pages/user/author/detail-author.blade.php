@@ -26,7 +26,7 @@
             <div class="card shadow-sm p-5 mt-5">
                 <div class="row">
                     <div class="col-md-12 col-lg-1">
-                        <img src="{{asset($authors->photo ? 'storage/'.$authors->photo : "default.png")}}" alt="Image" width="130px" style="border-radius: 50%;" />
+                        <img src="{{asset($authors->user->photo ? 'storage/'.$authors->user->photo : "default.png")}}" alt="Image" width="130px" style="border-radius: 50%;" />
                     </div>
                     <div class="col-md-12 col-lg-11">
                             <div class="d-flex">

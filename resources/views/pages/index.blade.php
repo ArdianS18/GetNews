@@ -76,7 +76,7 @@
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                                 <h3>
-                                    <a href="{{ route('news.user', ['news' => $newss->slug]) }}">
+                                    <a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}" href="{{ route('news.user', ['news' => $newss->slug]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 40, $end = '...')  !!}
                                     </a>
                                 </h3>
@@ -106,7 +106,7 @@
                             <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover"
                                 height="450" />
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -126,7 +126,7 @@
                                     class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $mid->slug]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
@@ -158,8 +158,7 @@
                                     class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a href="{{ route('news.user', ['news' => $barus->slug, ]) }}">
-                                        {{-- {{ $barus->name }} --}}
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}" href="{{ route('news.user', ['news' => $barus->slug ]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -178,8 +177,7 @@
                                     alt="Image" />
                             </div>
                             <div class="news-card-info">
-                                <a
-                                    href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}" href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                                 <h3><a href="{{ route('news.user', ['news' => $barus->slug]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 40, $end = '...')  !!}
                                     </a>
@@ -231,11 +229,11 @@
                                                                 alt="Image" width="40px" height="40px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
                                                         </div>
-                                                        <h5>By <a href="author.html">{{ $pick->user->name }}</a>
+                                                        <h5>By <a href="{{ route('author.detail', ['id' => $pick->user->id]) }}">{{ $pick->user->name }}</a>
                                                         </h5>
                                                     </div>
                                                     <h3>
-                                                        <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                        <a data-toggle="tooltip" data-placement="top" title="{{ $pick->name }}" href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
                                                             {!! Illuminate\Support\Str::limit($pick->name, $limit = 47, $end = '...')  !!}
                                                         </a>
                                                     </h3>
@@ -277,7 +275,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $popular->slug, ]) }}">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug, ]) }}">
                                                 {!! Illuminate\Support\Str::limit($popular->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -299,7 +297,7 @@
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
-                                            <h3><a href="{{ route('news.user', ['news' => $recent->slug, ]) }}">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $recent->name }}" href="{{ route('news.user', ['news' => $recent->slug, ]) }}">
                                                 {!! Illuminate\Support\Str::limit($recent->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -346,7 +344,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
-                                        <h3><a href="{{ route('news.user', ['news' => $general->slug, ]) }}">
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}" href="{{ route('news.user', ['news' => $general->slug, ]) }}">
                                             {!! Illuminate\Support\Str::limit($general->name, $limit = 47, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
@@ -413,10 +411,9 @@
                                 <div class="news-card-one">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" width="100%" height="80"/>
-                                        {{-- <img src="assets/img/news/news-thumb-4.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $post->slug, ]) }}">
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}" href="{{ route('news.user', ['news' => $post->slug, ]) }}">
                                             {!! Illuminate\Support\Str::limit($post->name, $limit = 20, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
