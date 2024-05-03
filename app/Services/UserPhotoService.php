@@ -8,6 +8,7 @@ use App\Enums\UploadDiskEnum;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
+use App\Http\Requests\UserPhotoRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\News;
 use App\Models\NewsPhoto;
@@ -43,15 +44,9 @@ class UserPhotoService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(UserRequest $request, User $user)
+    public function store(UserPhotoRequest $request, User $user)
     {
         $data = $request->validated();
-
-        // if ($data['photo']) {
-        //     $old_file = $user->photo;
-        //     $this->remove($old_file);
-        // }
-
         if ($request->hasFile('photo')) {
             $photo = $this->upload(UploadDiskEnum::USER_PHOTO->value, $request->file('photo'));
         }

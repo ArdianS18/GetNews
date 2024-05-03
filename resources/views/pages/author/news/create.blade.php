@@ -183,7 +183,11 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-between">
+        @if (auth()->user()->roles->pluck('name')[0] == 'author')
+            <div class="d-flex justify-content-between">
+        @else
+            <div class="d-flex justify-content-end">
+        @endif
             @if (auth()->user()->roles->pluck('name')[0] == 'author')
                 <div>
                     <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
@@ -247,7 +251,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #C94F4F;">Kembali</button>
                 </div>
             </div>
         </div>

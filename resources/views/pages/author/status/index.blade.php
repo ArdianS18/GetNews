@@ -117,14 +117,6 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="{{ route('profile.news.edit', ['newsId' => $item->slug]) }}" class="btn btn-sm m-1"
-                                style="background-color: #0F4D8A;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
-                                    <path
-                                        d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
-                                        fill="#ffffff" />
-                                </svg>
-                            </a>
                             <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
                                 <a href="{{ route('detail.news', ['news' => $item->slug]) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
@@ -137,6 +129,15 @@
                                     </svg>
                                 </a>
                             </button>
+
+                            <a href="{{ route('profile.news.edit', ['newsId' => $item->slug]) }}" class="btn btn-sm m-1"
+                                style="background-color: #FFD643;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
+                                    <path
+                                        d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
+                                        fill="#ffffff" />
+                                </svg>
+                            </a>
 
                             <form action="{{ route('profile.news.delete', ['news' => $item->id]) }}" method="POST">
                                 @method('post')
