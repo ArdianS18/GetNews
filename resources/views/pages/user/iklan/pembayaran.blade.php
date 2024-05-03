@@ -366,7 +366,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                                 data-bs-dismiss="modal">Tutup</button>
-                            <button type="button" class="btn btn-rounded btn-light-success text-success" onclick="addPaymentMethod()">Tambah</button>
+                            <button type="button" class="btn btn-rounded btn-light-success text-success" onclick="addPaymentMethod()">Pilih</button>
                         </div>
                     </form>
                 </div>

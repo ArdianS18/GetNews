@@ -8,6 +8,10 @@
         border: 1px solid #175A95;
         box-shadow: 0 1px 5px #175A95;
     }
+    .selected-image {
+        box-shadow: 0 1px 5px #175A95;
+        border-radius: 10px;
+    }
 </style>
 @endsection
 
@@ -155,6 +159,23 @@
 
         selectedCard.classList.add('active');
     }
+
+    
+    function selectCard(card) {
+        var radioButton = card.querySelector('input[type="radio"]');
+
+        if (!radioButton.checked) {
+            radioButton.checked = true;
+
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.classList.remove('border-blue');
+            });
+
+            card.classList.add('border-blue');
+        }
+    }
+
     function previewImage(event) {
         var input = event.target;
         var reader = new FileReader();
@@ -164,5 +185,34 @@
         };
         reader.readAsDataURL(input.files[0]);
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var radios = document.querySelectorAll('.form-check-input');
+
+        function updateImageSelection() {
+            // Hilangkan class selected dari semua gambar
+            document.querySelectorAll('.selectable-image').forEach(img => {
+                img.classList.remove('selected-image');
+            });
+
+            // Tambahkan class selected hanya pada gambar yang terkait dengan radio button yang dipilih
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    const img = radio.nextElementSibling.querySelector('img');
+                    if (img) {
+                        img.classList.add('selected-image');
+                    }
+                }
+            });
+        }
+
+        // Tambahkan event listener untuk setiap radio button
+        radios.forEach(radio => {
+            radio.addEventListener('change', updateImageSelection);
+        });
+
+        // Update seleksi saat memuat halaman jika ada radio yang sudah dipilih
+        updateImageSelection();
+    });
 </script>
 @endsection

@@ -89,8 +89,8 @@
 <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center text-white rounded-top-3" style="background-color: #175A95;">
-                <h5 class="text-white">Pilih Metode Pembayaran</h5>
+            <div class="modal-header">
+                <h5>Pilih Metode Pembayaran</h5>
             </div>
             <form id="form-create" method="post">
                 <div class="modal-body">
