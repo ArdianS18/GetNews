@@ -55,11 +55,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tambahdataLabel">Tambah Data</h5>
+                    <h5 class="modal-title" id="tambahdataLabel">Tambah Akun</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('create.account.admin') }}" method="post">
-                    @method('post')
+                <form id="form-create" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -113,8 +112,68 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="updatedataLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updatedataLabel">Update Akun</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-update">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 mb-3">
+                                <label for="name" class="form-label">Nama:</label>
+                                <input type="text" id="name" name="name" placeholder="name"
+                                    value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label for="email" class="form-label">Email:</label>
+                                <input type="text" id="email" name="email" placeholder="email"
+                                    value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input type="password" id="password" name="password" placeholder="password"
+                                    class="form-control @error('password') is-invalid @enderror">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label for="role" class="form-label">Role:</label>
+                                <select name="role" class="form-select" id="role">
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-    <x-delete-modal-component />
+
+    <x-delete-user-component/>
 
 @endsection
 @section('script')
@@ -157,12 +216,10 @@
 
 
                         $('.btn-edit').click(function() {
-                            var SubCategoryId = $(this).data('id');
-                            var data = subcategory.find(subcategory => subcategory.id === SubCategoryId)
-
+                            var userId = $(this).data('id');
+                            var data = user.find(user => user.id === userId)
                             setFormValues('form-update', data)
                             $('#form-update').data('id', data['id'])
-
                             $('#modal-update').modal('show')
                         })
 
@@ -176,6 +233,68 @@
                 }
             })
         }
+
+        $('#form-create').submit(function(e) {
+            $('.preloader').show();
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                url: "{{ route('create.account.admin') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    get(1)
+                    $('.preloader').fadeOut();
+                    var response = response.responseJSON
+
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: "Berhasil Menambahkan Data"
+                    })
+                    $('#modal-create').modal('hide')
+                    emptyForm('form-create')
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut();
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Terdapat masalah saat input data"
+                    });
+                    handleValidate(response.responseJSON.errors, 'create')
+
+                }
+            })
+        })
+
+        $('#form-update').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            $.ajax({
+                url: "update-account/" + id,
+                type: 'PUT',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-update').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+
+                }
+            })
+        })
 
         function cardUser(data) {
             return `
@@ -192,8 +311,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li>
-                                <button class="dropdown-item btn-edit" id="btn-edit-${data.id}"
-                                    >Edit</button>
+                                <button class="dropdown-item btn-edit" data-bs-toggle="modal" data-bs-target="#modal-update" data-id="${data.id}" >Edit</button>
                             </li>
                             <li>
                                 <a class="dropdown-item btn-delete" data-id="${data.id}" style="color: red">Hapus</a>

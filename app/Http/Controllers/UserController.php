@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Author;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use App\Enums\UserStatusEnum;
 use App\Http\Requests\UserRequest;
-use App\Services\UserPhotoService;
-use Spatie\Permission\Models\Role;
-use Illuminate\Contracts\View\View;
+use App\Services\UserPhotoService;;
 use App\Contracts\Interfaces\UserInterface;
-use App\Contracts\Interfaces\AuthorInterface;
+use App\Helpers\ResponseHelper;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -56,11 +52,12 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['email_verified_at'] = now();
-        $data['slug'] = Str::slug($data['name']);
+        $slug = Str::slug($data['name']);
+        $data['slug'] = $slug;
         $user = $this->user->store($data);
         $user->assignRole($data['role']);
 
-        return back();
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**
@@ -84,15 +81,30 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        $data['email_verified_at'] = now();
+        $slug = Str::slug($data['name']);
+        $data['slug'] = $slug;
+        $this->user->update($user->id, $data);
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->where('id', $user)->delete();
-        return back();
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            $user->roles->destroy();
+            $user->permissions->destroy();
+
+            return ResponseHelper::success(null, trans('alert.add_success'));
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+        } catch (\Exception $exception) {
+        }
     }
 }
