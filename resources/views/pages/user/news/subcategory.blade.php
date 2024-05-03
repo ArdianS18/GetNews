@@ -5,8 +5,8 @@
         <div class="breadcrumb-wrap">
             <h2 class="breadcrumb-title">{{ $subCategory->name }}</h2>
             <ul class="breadcrumb-menu list-style">
-                <li><a href="/">Home</a></li>
-                <li><a
+                <li><a data-toggle="tooltip" data-placement="top" title="Beranda" href="/">Home</a></li>
+                <li><a data-toggle="tooltip" data-placement="top" title="{{ $subCategory->category->name }}"
                         href="{{ route('categories.show.user', ['category' => $subCategory->category->slug]) }}">{{ $subCategory->category->name }}</a>
                 </li>
                 <li>{{ $subCategory->name }}</li>
@@ -27,11 +27,11 @@
                                             alt="{{ $newsSubCategory->news->photo }}" height="400" style="width: 100%;object-fit:cover;" class="img-status">
                                         {{-- <img src="{{ asset('assets/img/test1.svg') }}" width="400px" height="234"
                                         style="width: 100%;height:100%;" alt="Iamge"> --}}
-                                        <a href="{{ route('subcategories.show.user', ['category'=>$subCategory->category->slug,'subCategory' => $newsSubCategory->subCategory->slug]) }}"
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $newsSubCategory->subCategory->name }}" href="{{ route('subcategories.show.user', ['category'=>$subCategory->category->slug,'subCategory' => $newsSubCategory->subCategory->slug]) }}"
                                             class="news-cat">{{ $newsSubCategory->subCategory->name }}</a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a
+                                        <h3><a  data-toggle="tooltip" data-placement="top" title="{{ $newsSubCategory->news->name }}"
                                                 href="{{ route('news.user', ['news' => $newsSubCategory->news->slug]) }}">{{ $newsSubCategory->news->name }}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
@@ -84,7 +84,7 @@
                                 <h3 class="sidebar-widget-title">Kategori</h3>
                                 <ul class="category-widget list-style">
                                     @foreach ($totalCategories as $category)
-                                        <li><a
+                                        <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
                                                 href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                                     src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                                     alt="Image">{{ $category->name }}
@@ -101,7 +101,8 @@
                                                 <img src="{{ asset('storage/' . $news->photo) }}" width="100%" height="80">
                                             </div>
                                             <div class="news-card-info">
-                                                <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...')  !!}</a>
+                                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news->name }}"
+                                                    href="{{ route('news.user', ['news' => $news->slug]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...')  !!}</a>
                                                 </h3>
                                                 <ul class="news-metainfo list-style">
                                                     <li>

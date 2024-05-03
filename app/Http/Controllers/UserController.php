@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequest;
 use App\Services\UserPhotoService;;
 use App\Contracts\Interfaces\UserInterface;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\UserPhotoRequest;
 use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
@@ -41,7 +42,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request, User $user)
+    public function store(UserPhotoRequest $request, User $user)
     {
         $data = $this->userPhoto->store($request, $user);
         $this->user->update($user->id, $data);

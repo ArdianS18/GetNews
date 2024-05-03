@@ -49,9 +49,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="question" class="form-label">Pertanyaan:</label>
-                            <textarea type="text" id="question" name="question" placeholder="Question"
-                                value="{{ old('question') }}" class="form-control @error('question') is-invalid @enderror">
-                            </textarea>
+                            <textarea id="question" name="question" value="{{ old('password') }}" placeholder="Question" class="form-control @error('question') is-invalid @enderror" style="height: 100px; resize: none"></textarea>
                             @error('question')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -60,9 +58,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="answer" class="form-label">Jawaban:</label>
-                            <textarea type="text" id="answer" name="answer" placeholder="Answer"
-                                value="{{ old('answer') }}" class="form-control @error('answer') is-invalid @enderror">
-                            </textarea>
+                            <textarea id="answer" name="answer" value="{{ old('answer') }}" placeholder="Answer" class="form-control @error('answer') is-invalid @enderror" style="height: 80px; resize: none"></textarea>
                             @error('answer')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -221,7 +217,7 @@
                         </button>
                         <button data-id="${data.id}" type="submit" style="background-color: #EF6E6E"
                             class="btn btn-sm btn-delete text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>
                         </button>
                     </td>
                 </tr>

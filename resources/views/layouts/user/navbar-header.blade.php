@@ -60,7 +60,7 @@
                                         <li class="nav-item">
                                             <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                         </li>
-                                    
+
                                     @empty
                                         <li class="nav-item">
                                             {{-- @dd($category); --}}
@@ -121,7 +121,7 @@
                                         </a>
                                         @endrole
                                 </div>
-                                
+
                             </ul>
                         </div>
                         @if (Auth::check() && Auth::user()->roles() == "author")
@@ -130,7 +130,7 @@
 
                         <div class="">
                             <div class="option-item">
-                                <a href="/login" class="btn-two" id="signInBtn">Sign In</a>
+                                <a href="/login" class="btn-two" id="signInBtn">Login</a>
                             </div>
                         </div>
                     @endauth
