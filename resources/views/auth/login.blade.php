@@ -1,111 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="vie wport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
     <title>Login | GetMedia.Id</title>
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
+    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://task.hummatech.com/assets/vendor/css/pages/page-auth.css">
+    <link rel="stylesheet" type="text/css" href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36" class="template-customizer-core-css"><link rel="stylesheet" type="text/css" href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9" class="template-customizer-theme-css">
 </head>
 
-<body style="background-color: #F8FAFD">
-    <div class="mt-3">
-        <section class="align-item-center">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 col-lg-6 mt-2">
-                        <div class="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#393939" d="M9.904 17.308L4.596 12l5.308-5.308l.708.72L6.523 11.5h12.88v1H6.524l4.089 4.088z"/></svg>
-                            <img src="{{asset('assets/img/logo-getmedia-dark.svg')}}" width="140" alt="">
-                        </div>
-                        <div class="d-flex justify-content-center p-5 mt-5">
-                            <img width="480px" src="{{
-                                asset('assets/img/auth/bg-login.svg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-6 mt-4">
-                        <div class="d-flex card p-5 m-5 border-none">
-                            <div class="card-body">
-                                <form method="POST" action="{{ route('login') }}">
-                                    @csrf
-                                    <div class="pt-4 pb-4">
-                                        <h4>Selamat Datang di GetMedia</h4>
-                                    </div>
-        
-                                    <!-- Email input -->
-                                    <div class="form-outline mt-4 mb-4">
-                                        <label class="form-label" for="email">Alamat Email</label>
-                                        <input type="text" id="email"
-                                            class=" @error('email') is-invalid @enderror form-control"
-                                            placeholder="Masukan Alamat Email" name="email" value="{{ old('email') }}"
-                                            required autocomplete="email" autofocus />
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-        
-                                    </div>
-        
-                                    <!-- Password input -->
-                                    <div class="form-outline mb-3">
-                                        <label class="form-label" for="form3Example4">Password</label>
-                                        <input id="password" type="password"
-                                            class="form-control @error('password') is-invalid @enderror"
-                                            name="password" required autocomplete="current-password"
-                                            placeholder="Masukan Password">
-        
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-        
-                                    <div class="d-flex justify-content-end align-items-center mt-3 mb-4">
-                                        <a href="{{ route('confirm.email') }}" class="text-body">Lupa password?</a>
-                                    </div>
 
-                                    <div class="mt-3">
-                                        <button type="submit" class="btn btn-lg text-white w-100"
-                                            style="background-color: #0F4D8A;">
-                                            {{ __('Login') }}
-                                        </button>
-                                    </div>
-        
-                                    <div class="text-center mt-2 pb-5 pt-2">
-                                        <p class="small mt-2 pt-1 mb-0">Belum memiliki akun? <a href="{{ route('register') }}"
-                                                class="link-primary">Daftar Sekarang</a></p>
-                                    </div>
-        
-                                </form>
+
+<body style="background-color: #F7F7F7">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
+        style="display: none; visibility: hidden"></iframe></noscript>
+<div class="authentication-wrapper authentication-cover authentication-bg">
+    <div class="authentication-inner row">
+        <div class="d-none d-lg-flex col-lg-7 p-0">
+            <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
+                <img src="{{asset('assets/img/auth/bg-login.svg')}}" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+            </div>
+        </div>
+        <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4" >
+            <div class="w-100 h-100" style="background-color: #FFFFFF;border-radius:20px">
+                <div class="w-px-400 mx-auto">
+                    <h3 class="mb-1" style="margin-top: 35%">Selamat datang di GetMedia</h3>
+                    <form id="formAuthentication" class="mb-3 py-5" action="{{route('login')}}" method="POST" novalidate="novalidate">
+                        @csrf                      
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan email Anda">
+
+                        <div class="my-4 form-password-toggle">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group input-group-merge has-validation">
+                                <input type="password" id="password" class="form-control" name="password" placeholder="············">
+                                <span class="input-group-text cursor-pointer"></span>
                             </div>
                         </div>
+                        
+                        <div class="text-end">
+                            <a href="">
+                                <p>Lupa Password?</p></a>
+                        </div>
+                        <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
+                            Masuk
+                        </button>
+                    <input type="hidden">
+                        </form>
+
+                    <div class="text-center mt-4">
+                            <p>Belum memiliki akun?<a href="{{route('register')}}"> Daftar Sekarang!</a></p>
                     </div>
+                    
+
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#!" class="text-white me-4">
-                <i class="fab fa-google"></i>
-            </a>
-            <a href="#!" class="text-white">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-    </div>
-    <!-- Right -->
-    </div>
-    </section>
-    </div>
 </body>
+
 
 </html>
