@@ -66,13 +66,13 @@
                 </tbody>
             </table>
             <div id="loading"></div>
-            <div class="d-flex justify-content-end">
+            <div class="d-flexmt-2 justify-content-end">
                 <nav id="pagination">
                 </nav>
             </div>
         </div>
         <div id="loading"></div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex mt-2 justify-content-end">
             <nav id="pagination">
             </nav>
         </div>

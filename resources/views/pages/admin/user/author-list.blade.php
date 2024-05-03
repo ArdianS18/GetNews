@@ -75,7 +75,7 @@
         </div>
         <div id="loading"></div>
         <div class="d-flex mt-2 justify-content-end">
-            <nav id="pagination" style="position: fixed; bottom: 10px; right: 10px py-5">
+            <nav id="pagination">
             </nav>
         </div>
 
@@ -196,7 +196,7 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="d-flex justify-content-center">
-                            <img src="" class="rounded-circle mb-2" id="detail-photo" width="150"
+                            <img src="" class="rounded-circle mb-4" id="detail-photo" width="150"
                                 alt="photo-siswa" height="150" />
                         </div>
                         <div class="container-fluid">
@@ -223,7 +223,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light-danger text-danger"
+                        <button type="button" class="btn btn-light-danger mt-3 text-danger"
                             data-bs-dismiss="modal">Tutup</button>
                     </div>
                 </div>

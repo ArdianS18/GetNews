@@ -26,7 +26,7 @@
                 <img src="{{ asset('assets/img/profile-bg.svg') }}" width="100%" height="150px"
                     style="border-radius: 10px 10px 0 0;" alt="" class="img-fluid">
                 <div class="top-right">
-                    <button class="btn btn-sm px-3 py-1 text-white" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ auth()->user()->id }}" style="background-color: #175A95;">Daftar Jadi Penulis</button>
+                    <button class="btn btn-sm px-3 py-1 mt-2 text-white" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal{{ auth()->user()->id }}" style="background-color: #175A95;">Daftar Jadi Penulis</button>
                 </div>
 
                 <div class="align-items-center">
