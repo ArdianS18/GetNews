@@ -2,13 +2,14 @@
 
 namespace App\Services\Auth;
 
+use Carbon\Carbon;
 use App\Enums\RoleEnum;
+use Illuminate\Support\Str;
+use App\Enums\UploadDiskEnum;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 use App\Contracts\Interfaces\RegisterInterface;
-use App\Enums\UploadDiskEnum;
-use Carbon\Carbon;
 
 class RegisterService
 {
@@ -31,6 +32,8 @@ class RegisterService
         $data = $request->validated();
         $password = bcrypt($data['password']);
         $data['password'] = $password;
+        $slug = Str::slug($data['name']);
+        $data['slug'] = $slug;
         $user = $register->store($data);
         $user->assignRole(RoleEnum::USER);
         return;
@@ -47,6 +50,7 @@ class RegisterService
 
         return [
             'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'phone_number' => $data['phone_number'],

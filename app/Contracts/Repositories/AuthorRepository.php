@@ -41,6 +41,13 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->paginate(5);
     }
 
+    public function where($user): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user->id)
+            ->first();
+    }
+
     public function search(Request $request): mixed
     {
         return $this->model->query()

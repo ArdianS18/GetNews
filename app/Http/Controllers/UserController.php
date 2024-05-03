@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\AuthorInterface;
-use App\Contracts\Interfaces\UserInterface;
+use App\Models\User;
+use App\Models\Author;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Enums\UserStatusEnum;
 use App\Http\Requests\UserRequest;
-use App\Models\Author;
-use App\Models\User;
 use App\Services\UserPhotoService;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Contracts\View\View;
+use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\AuthorInterface;
 
 class UserController extends Controller
 {
@@ -55,6 +56,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['email_verified_at'] = now();
+        $data['slug'] = Str::slug($data['name']);
         $user = $this->user->store($data);
         $user->assignRole($data['role']);
 

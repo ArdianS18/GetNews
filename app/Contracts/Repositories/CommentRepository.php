@@ -55,7 +55,7 @@ class CommentRepository extends BaseRepository implements CommentInterface
     public function where(mixed $id): mixed
     {
         return $this->model->query()
-            ->where('news_id', $id)
+            ->whereIn('news_id', $id)
             ->get();
     }
     /**

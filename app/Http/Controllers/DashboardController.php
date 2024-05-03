@@ -146,15 +146,16 @@ class DashboardController extends Controller
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
 
-    public function authordetail($authorId, Request $request) {
+    public function authordetail($authorId) {
+        $user = $this->user->showWithSlug($authorId);
+        $author = $this->author->where($user);
+
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        // $authors = Author::with('user')->where($authorId);
         $totalCategories = $this->category->showWhithCount();
-        // $news = $this->news->authorGetNews($authors->user_id);
-        $comments = $this->comment->where($authorId);
+        $news = $this->news->authorGetNews($user)->pluck('id');
+        $comments = $this->comment->where($news);
         $newsCount = $this->news->get();
-        $authors = $this->author->get();
         $news = $this->news->get();
         // if (auth()->check()) {
         //     $news = $this->news->search($request)
@@ -164,7 +165,7 @@ class DashboardController extends Controller
         // }else {
         //     $news = $this->news->get();
         // }
-        return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories','comments','newsCount','news'));
+        return view('pages.user.author.detail-author', compact('categories', 'subCategories','author','totalCategories','comments','newsCount','news', 'user'));
     }
 
     public function privacypolicy() {
