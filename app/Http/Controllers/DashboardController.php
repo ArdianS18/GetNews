@@ -157,15 +157,9 @@ class DashboardController extends Controller
         $news = $this->news->authorGetNews($user)->pluck('id');
         $comments = $this->comment->where($news);
         $newsCount = $this->news->get();
+        $authors = $this->author->get();
+        $news = $this->news->get();
 
-        if (auth()->check()) {
-            $news = $this->news->search($request)
-                ->where('user_id', auth()->user()->id)
-                ->whereIn('status', ["active"]);
-                // ->get();
-        }else {
-            $news = $this->news->get();
-        }
         return view('pages.user.author.detail-author', compact('categories', 'subCategories','authors','totalCategories','comments','newsCount','news'));
     }
 

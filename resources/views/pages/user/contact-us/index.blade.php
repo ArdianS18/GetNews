@@ -25,7 +25,7 @@
 
             <div class="col-md-12 col-lg-6">
                 <div class="contact-card">
-                    <h3> <span style="color: #0F4D8A;">|</span>Contact</h3>
+                    <h3><span style="color: #0F4D8A;" class="me-3">|</span>Contact</h3>
 
                     <div class="row mt-5">
                         <div class="col-md-12 col-lg-4 d-flex">
@@ -66,7 +66,7 @@
 
                     <div class="mt-3">
                         <div class="mb-2">
-                            <span style="font-size: 20px; color: #393939;">Tuliskan Pesanmu disini</span>
+                            <h5 style="font-size: 20px;">Tuliskan Pesanmu disini</h5>
                         </div>
                         <form action="{{ route('contact.store') }}" class="comment-form" method="POST">
                         @csrf
