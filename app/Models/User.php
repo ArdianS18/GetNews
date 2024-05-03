@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'id',
         'name',
+        'slug',
         'email',
         'password',
         'phone_number',
@@ -42,6 +43,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function author(): HasOne
     {
         return $this->hasOne(Author::class);
+    }
+
+    public function authors(): HasMany
+    {
+        return $this->hasMany(Author::class);
     }
 
     /**

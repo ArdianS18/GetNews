@@ -26,37 +26,34 @@
             <div class="card shadow-sm p-5 mt-5">
                 <div class="row">
                     <div class="col-md-12 col-lg-1">
-                        <img src="{{asset($authors->user->photo ? 'storage/'.$authors->user->photo : "default.png")}}" alt="Image" width="130px" style="border-radius: 50%;" />
+                        {{-- @dd( $author->user ) --}}
+                        <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" alt="Image" width="130px" style="border-radius: 50%;" />
                     </div>
                     <div class="col-md-12 col-lg-11">
                             <div class="d-flex">
-                                <h3 class="me-2">{{ $authors->user->name }}</h3>
-
+                                <h3 class="me-2">{{ $author->user->name }}</h3>
                             @auth
-                                @if (auth()->user()->id != $authors->user_id)
+                                @if (auth()->user()->id != $author->user_id)
                                     @php
                                         $user_id = auth()->user()->id;
-                                        $author_id = $authors->id;
+                                        $author_id = $author->id;
                                         $isFollowing = DB::table('followers')->where('user_id', $user_id)->where('author_id', $author_id)->exists();
                                     @endphp
 
                                     @if ($isFollowing)
-                                        <form action="{{ route('unfollow.author', ['author' => $authors->id]) }}" method="POST">
+                                        <form action="{{ route('unfollow.author', ['author' => $author->id]) }}" method="POST">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-sm btn-outline-secondary py-1 px-4" style="border-radius: 8px;">Mengikuti</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('follow.author', ['author' => $authors->id]) }}" method="POST">
+                                        <form action="{{ route('follow.author', ['author' => $author->id]) }}" method="POST">
                                             @method('post')
                                             @csrf
                                             <button class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                                         </form>
                                     @endif
                                 @endif
-                                <div class="">
-                                    <button class="btn btn-sm py-1 px-5 text-white not-login" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                </div>
                             @endauth
                             </div>
 

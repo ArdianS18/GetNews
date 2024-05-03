@@ -17,6 +17,7 @@ class UserRequest extends FormRequest
             'photo' => 'nullable|image|mimes:jpg,png,jpeg',
             'password' => 'required',
             'name' => 'required',
+            'slug' => 'required',
             'email' => 'required',
             'role' => 'required',
             'phone_number' => 'nullable',
