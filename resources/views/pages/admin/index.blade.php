@@ -119,9 +119,9 @@
                                             </div>
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
-                                                    <p class="card-text">
+                                                    <h5 class="">
                                                         {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...')  !!}
-                                                    </p>
+                                                    </h5>
                                                     <div class="d-flex gap-3 align-items-center ms-0">
                                                         <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
                                                                 width="14" height="14" viewBox="0 0 2048 2048">
