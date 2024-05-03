@@ -12,6 +12,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowersController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
@@ -177,7 +178,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
 });
 
 
-Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
+Route::middleware(['auth', 'role:admin|author|superadmin', 'verified'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
@@ -187,7 +188,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 });
 
-Route::middleware(['auth', 'role:author'])->group(function () {
+Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     // fungsi crud news
     Route::get('news', [NewsController::class, 'index'])->name('news.index');
     Route::post('news', [NewsController::class, 'store'])->name('news.store');
@@ -405,3 +406,5 @@ Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('new
 Route::get('pw-reset',function(){
     return view('pages.auth.passwords.reset');
 })->name('reset');
+
+Route::get('email-verify', [MailController::class, 'index'])->name('email.verify');

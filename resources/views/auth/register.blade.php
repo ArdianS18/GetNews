@@ -1,143 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>GetMedia | Register</title>
-    <style>
-        .important{
-            color: red;
-        }
-    </style>
+<head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title>Login | GetMedia.Id</title>
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
+    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://task.hummatech.com/assets/vendor/css/pages/page-auth.css">
+    <link rel="stylesheet" type="text/css" href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/core.css?id=9dd8321ea008145745a7d78e072a6e36" class="template-customizer-core-css"><link rel="stylesheet" type="text/css" href="https://demos.pixinvent.com/vuexy-html-laravel-admin-template/demo/assets/vendor/css/rtl/theme-default.css?id=a4539ede8fbe0ee4ea3a81f2c89f07d9" class="template-customizer-theme-css">
 </head>
 
-<body style="background-color: #F8FAFD;">
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 col-md-12 mt-2">
-                    <div class="mt-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#393939" d="M9.904 17.308L4.596 12l5.308-5.308l.708.72L6.523 11.5h12.88v1H6.524l4.089 4.088z"/></svg>
-                        <img src="{{asset('assets/img/logo-getmedia-dark.svg')}}" width="140" alt="">
+
+
+<body style="background-color: #F7F7F7">
+
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
+        style="display: none; visibility: hidden"></iframe></noscript>
+<div class="authentication-wrapper authentication-cover authentication-bg">
+    <div class="authentication-inner row">
+        <div class="d-none d-lg-flex col-lg-7 p-0">
+            <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
+                <img src="{{asset('assets/img/auth/bg-registrasi.svg')}}" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+            </div>
+        </div>
+        <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4" >
+            <div class="w-100 h-100" style="background-color: #FFFFFF;border-radius:20px">
+                <div class="w-px-500 mx-auto">
+                    <h3 class="mb-1" style="margin-top: 10%">Buat Akun GetMedia.id</h3>
+                    
+                        <form id="formAuthentication" class="mb-3 py-5" action="{{route('register')}}" method="POST">
+                            @csrf   
+                            <div class="row">                  
+                                <div class="my-1 col-12">
+                                    <label for="name" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan name Anda">
+                                </div>    
+                                <div class="my-1 col-lg-6">
+                                    <label for="phone_number" class="form-label">Nomor Hp</label>
+                                    <input type="text" id="phone_number" class="form-control" name="phone_number" placeholder="Masukkan email Anda">
+                                </div>
+                                <div class="my-1 col-lg-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="Masukkan email Anda">
+                                </div>
+                                <div class="my-1 col-lg-6">
+                                    <label for="password" class="form-label">Password</label>
+                                    <div class="input-group input-group-merge has-validation">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="············">
+                                        <span class="input-group-text cursor-pointer"></span>
+                                    </div>
+                                </div>
+                                <div class="my-1 col-lg-6">
+                                    <label for="password" class="form-label">Konfirmasi Password</label>
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Masukkan password Anda">
+                                </div>
+                                <div class="my-1 col-lg-12">
+                                    <label for="addres" class="form-label">Alamat</label>
+                                    <textarea type="text" id="address" rows="4" class="form-control" name="address" placeholder="Masukkan address Anda"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-end mt-2 mb-2">
+                                <a href="">
+                                    <p>Lupa Password?</p></a>
+                            </div>
+                            <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
+                                Masuk
+                            </button>
+                        </form>
+
+                    <div class="text-center">
+                            <p>Sudah memiliki akun?<a href="{{route('login')}}"> Masuk Sekarang!</a></p>
                     </div>
-                    <div class="d-flex justify-content-center mt-5 pt-5">
-                        <img width="480px" class="img-fluid" style="height:auto; object-fit:cover" src="{{ asset('assets/img/auth/bg-registrasi.svg') }}" alt="">
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6 mt-3">
-                    <div class="card p-5 m-5 border-none">
-                        <div class="card-body">
-                            <form method="POST" action="{{ route('register') }}">
-                                @csrf
-                                <div class="pt-4 pb-4">
-                                    <h4>Daftar Akun GetMedia.id</h4>
-                                </div>
+                    
 
-
-                                <div class="from-outline mt-2  mb-4">
-                                    <label class="form-label" for="email">Nama Lengkap<span class="important">*</span></label>
-                                    <input id="name" type="text" placeholder="Nama Lengkap"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name') }}" autocomplete="name" autofocus>
-
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="row justify-content-between mt-2">
-                                    <div class="col-lg-6 col-md-12 from-outline mb-2">
-                                        <label class="form-label" for="nomor">Nomor Hp<span class="important">*</span></label>
-                                        <input id="nomor" type="text" placeholder="Nomor Hp"
-                                            class="gap-8 form-control @error('nomor') is-invalid @enderror" name="phone_number"
-                                            value="{{ old('phone_number') }}" autocomplete="name" autofocus>
-
-                                        @error('nomor')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-12 from-outline mb-2 padding-right-2">
-                                        <label class="form-label" for="email">Email<span class="important">*</span></label>
-                                        <input id="email" type="email" placeholder="email"
-                                            class="gap-8 form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" autocomplete="email" autofocus>
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="row justify-content-between mt-2">
-                                    <div class="col-lg-6 col-md-12 from-outline mb-2">
-                                        <label class="form-label" for="password">Password<span class="important">*</span></label>
-                                        <input id="password" type="password" placeholder="Password"
-                                            class="form-control @error('password') is-invalid @enderror" name="password"
-                                            value="{{ old('password') }}" autocomplete="password" autofocus>
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-lg-6 col-md-12 from-outline mb-2">
-                                        <label class="form-label" for="password_confirmation">Konfirmasi Password<span class="important">*</span></label>
-                                        <input id="password" type="password" placeholder="Password"
-                                            class="form-control @error('password_confirmation') is-invalid @enderror"
-                                            name="password_confirmation" value="{{ old('password') }}"
-                                            autocomplete="password" autofocus>
-                                        @error('password_confirmation')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="btn btn-lg mt-3 text-white"
-                                    style="width:-webkit-fill-available;background-color: #0F4D8A;">
-                                    Daftar
-                                </button>
-
-                                <div class="text-center mt-2 pt-2  pb-5">
-                                    <p class="small mt-2 pt-1 mb-0">Sudah memiliki akun? <a href="{{ route('login') }}"
-                                            class="link-primary">Masuk Sekarang</a></p>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <a href="#!" class="text-white me-4">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#!" class="text-white me-4">
-            <i class="fab fa-twitter"></i>
-        </a>
-        <a href="#!" class="text-white me-4">
-            <i class="fab fa-google"></i>
-        </a>
-        <a href="#!" class="text-white">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        </div>
-        </div>
-    </section>
 </body>
+
 
 </html>
