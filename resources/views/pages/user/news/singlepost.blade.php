@@ -431,7 +431,7 @@
                                                 style="object-fit: cover" alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li>
