@@ -1,4 +1,16 @@
 @extends('layouts.user.app')
+<head>
+    <title>{{ $news->name }} | GetMedia</title>
+    <meta name="description" content=" {!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta property="og:title" content="{{ $news->name }} | GetMedia">
+    <meta property="og:image" content="{{ asset('storage/'.$news->photo) }}">
+    <meta property="og:url" content="{{ config('app.url') }}/berita/{{ $news->slug }}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="GetMedia">
+    <link rel="image_src" href="{{ asset('storage/'.$news->photo) }}">
+</head>
+
 @section('style')
     <style>
         body {
@@ -375,7 +387,7 @@
                                             class="news-cat">{{ $newsCategory->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
                                         </h3>
                                         <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
@@ -419,7 +431,7 @@
                                                 style="object-fit: cover" alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li>
