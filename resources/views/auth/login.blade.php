@@ -30,14 +30,29 @@
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">
         <div class="d-none d-lg-flex col-lg-7 p-0">
-            <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
-                <img src="{{asset('assets/img/auth/bg-login.svg')}}" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+            <div class="mt-3 ms-3">
+                <a href="/">
+                    <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
+                </a>
+            </div>
+            <div class="auth-cover-bg auth-cover-bg-color d-flex align-items-center">
+                <img src="{{asset('assets/img/auth/bg-login.svg')}}" width="550px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
             </div>
         </div>
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4" >
             <div class="w-100 h-100" style="background-color: #FFFFFF;border-radius:20px">
                 <div class="w-px-400 mx-auto">
                     <h3 class="mb-1" style="margin-top: 35%">Selamat datang di GetMedia</h3>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
+                                {{ $error }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endforeach
+                    @endif
+
                     <form id="formAuthentication" class="mb-3 py-5" action="{{route('login')}}" method="POST" novalidate="novalidate">
                         @csrf                      
                         <div class="mb-3">
@@ -53,7 +68,7 @@
                         </div>
                         
                         <div class="text-end">
-                            <a href="">
+                            <a href="{{ route('confirm.email') }}">
                                 <p>Lupa Password?</p></a>
                         </div>
                         <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">

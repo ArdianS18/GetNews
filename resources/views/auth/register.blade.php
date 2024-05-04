@@ -30,16 +30,29 @@
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">
         <div class="d-none d-lg-flex col-lg-7 p-0">
-            <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
-                <img src="{{asset('assets/img/auth/bg-registrasi.svg')}}" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+            <div class="mt-3 ms-3">
+                <a href="{{route('login')}}">
+                    <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
+                </a>
+            </div>
+            <div class="auth-cover-bg auth-cover-bg-color d-flex align-items-center">
+                <img src="{{asset('assets/img/auth/bg-registrasi.svg')}}" width="590px" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
             </div>
         </div>
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4" >
             <div class="w-100 h-100" style="background-color: #FFFFFF;border-radius:20px">
                 <div class="w-px-500 mx-auto">
-                    <h3 class="mb-1" style="margin-top: 10%">Buat Akun GetMedia.id</h3>
-                    
-                        <form id="formAuthentication" class="mb-3 py-5" action="{{route('register')}}" method="POST">
+                    <h3 class="mb-1" style="margin-top: 17%">Buat Akun GetMedia.id</h3>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
+                                {{ $error }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endforeach
+                    @endif
+                        <form id="formAuthentication" class="py-3" action="{{route('register')}}" method="POST">
                             @csrf   
                             <div class="row">                  
                                 <div class="my-1 col-12">
@@ -70,18 +83,15 @@
                                     <textarea type="text" id="address" rows="4" class="form-control" name="address" placeholder="Masukkan address Anda"></textarea>
                                 </div>
                             </div>
-                            <div class="text-end mt-2 mb-2">
-                                <a href="">
-                                    <p>Lupa Password?</p></a>
-                            </div>
-                            <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
+
+                            <button type="submit" class="btn mt-3 d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
                                 Masuk
                             </button>
                         </form>
 
-                    <div class="text-center">
-                            <p>Sudah memiliki akun?<a href="{{route('login')}}"> Masuk Sekarang!</a></p>
-                    </div>
+                        <div class="text-center">
+                                <p>Sudah memiliki akun?<a href="{{route('login')}}"> Masuk Sekarang!</a></p>
+                        </div>
                     
 
                 </div>

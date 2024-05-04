@@ -43,7 +43,7 @@ Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function () {
+Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
@@ -177,7 +177,7 @@ Route::middleware(['auth', 'role:admin|superadmin', 'verified'])->group(function
 });
 
 
-Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
+Route::middleware(['auth', 'role:admin|author|superadmin',])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
@@ -187,7 +187,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin'])->group(function () {
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 });
 
-Route::middleware(['auth', 'role:author'])->group(function () {
+Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     // fungsi crud news
     Route::get('news', [NewsController::class, 'index'])->name('news.index');
     Route::post('news', [NewsController::class, 'store'])->name('news.store');
@@ -273,7 +273,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
 
 });
 
-Route::middleware(['role:user'])->group(function () {
+Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
     Route::get('ketentuan-dan-persyaratan', function () {
