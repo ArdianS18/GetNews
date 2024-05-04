@@ -2,6 +2,7 @@
 <head>
     <title>{{ $news->name }} | GetMedia</title>
     <meta name="description" content=" {!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/'.$news->photo) }}">
     <meta property="og:url" content="{{ config('app.url') }}/berita/{{ $news->slug }}">
