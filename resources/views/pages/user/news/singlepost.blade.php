@@ -387,7 +387,7 @@
                                             class="news-cat">{{ $newsCategory->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
                                         </h3>
                                         <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">

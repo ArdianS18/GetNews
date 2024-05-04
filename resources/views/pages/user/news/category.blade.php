@@ -25,7 +25,7 @@
                                     <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $newsCategory->category->name }}</a>
                                 </div>
                                 <div class="news-card-info">
-                                    <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug, 'page' => '1']) }}">{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->name), 50, '...') !!}</a></h3>
+                                    <h3><a href="{{ route('news.user', ['news' => $newsCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->name), 50, '...') !!}</a></h3>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">{{ $newsCategory->news->created_at->format('M d, Y') }}</a></li>
                                         <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views->count() }}</li>
