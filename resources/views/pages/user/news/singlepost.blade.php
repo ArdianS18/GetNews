@@ -1,4 +1,15 @@
 @extends('layouts.user.app')
+<head>
+    <title>{{ $news->name }} | GetMedia</title>
+    <meta name="description" content=" {!! Illuminate\Support\Str::limit($news->content, $limit = 60, $end = '...')  !!}">
+    <meta property="og:title" content="{{ $news->name }} | GetMedia">
+    <meta property="og:image" content="{{ asset('storage/'.$news->photo) }}">
+    <meta property="og:url" content="{{ config('app.url') }}/berita/{{ $news->slug }}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="GetMedia">
+    <link rel="image_src" href="{{ asset('storage/'.$news->photo) }}">
+</head>
+
 @section('style')
     <style>
         body {
