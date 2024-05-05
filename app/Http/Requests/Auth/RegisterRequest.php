@@ -19,13 +19,13 @@ class RegisterRequest extends BaseRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'slug' => 'required',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'nullable|string|min:8',
             'phone_number' => 'required|numeric|min:15',
             'address' => 'required|string|max:255',
             'birth_date' => 'nullable|date',
-            'cv' => 'nullable|mimes:pdf'
+            'cv' => 'nullable|mimes:pdf',
+            'slug' => 'required',
         ];
     }
 
