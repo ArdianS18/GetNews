@@ -437,7 +437,7 @@
                                                             </svg>Discord</button>
                                                     </div>
                                                     <div class="col-md-6 col-12 mb-3">
-                                                        <button class="btn shadow-sm gap-3"
+                                                        <button id="tw" class="btn shadow-sm gap-3"
                                                             style="width:-webkit-fill-available !important"><svg
                                                                 xmlns="http://www.w3.org/2000/svg" width="32"
                                                                 height="32" viewBox="0 0 24 24">
@@ -844,7 +844,7 @@
 
         function shareOnWhatsapp(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
-            var text = "Lihat Selengkapnya di: " + url
+            var text = "Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
