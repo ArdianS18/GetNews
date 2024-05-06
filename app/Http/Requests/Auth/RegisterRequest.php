@@ -22,7 +22,7 @@ class RegisterRequest extends BaseRequest
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'nullable|string|min:8',
             'phone_number' => 'required|numeric|min:15',
-            'address' => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
             'birth_date' => 'nullable|date',
             'cv' => 'nullable|mimes:pdf',
         ];

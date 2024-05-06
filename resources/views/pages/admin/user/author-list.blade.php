@@ -229,7 +229,6 @@
                 </div>
             </div>
         </div>
-        <x-delete-modal-component />
     </div>
 
     <div class="modal fade" id="modal-blokir" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -243,9 +242,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
                     <p>Apakah anda yakin akan memblokir penulis ini? </p>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"

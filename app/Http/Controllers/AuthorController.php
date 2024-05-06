@@ -24,6 +24,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\AuthorsRequest;
 use App\Http\Resources\AuthorResource;
+use App\Mail\SendEmail;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\NewsHasLike;
@@ -35,6 +36,7 @@ use App\Services\AuthorBannedService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
 use function Laravel\Prompts\alert;
@@ -165,6 +167,16 @@ class AuthorController extends Controller
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
             $this->news->StatusBanned($author->user_id);
+
+            $user = $author->user;
+            $email = $user->email;
+            $subject = 'Pemberitahuan: Anda telah dibanned';
+            $message = 'Anda telah dibanned dari sistem kami. Mohon untuk hubungi kami jika ingin Tidak di Ban';
+
+            Mail::raw($message, function ($message) use ($email, $subject) {
+                $message->to($email)
+                    ->subject($subject);
+            });
         } else {
             $this->authorBannedService->unBanned($author);
         }
