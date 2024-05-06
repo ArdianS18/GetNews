@@ -580,7 +580,6 @@
                             @forelse ($tags as $tag)
                             <li><a href="{{ route('tag.show.user',['tag'=>$tag->slug]) }}">{{ $tag->name }}</a></li>
                             @empty
-
                             @endforelse
                         </ul>
                     </div>
@@ -607,7 +606,7 @@
                                 @forelse ($news_latests as $news_latest)
                                     <div class="news-card-five">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
+                                            <img src="{{ asset('storage/' . $news_latest->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
                                         </div>
                                         <div class="news-card-info">
@@ -679,34 +678,6 @@
                                     @php $counter = 0; @endphp
                                 @endif
                             @endforeach
-
-                            {{-- @forelse ($news_latests2 as $news_latest2) --}}
-                                {{-- <div class="news-card-three">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-18.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Travel</a>
-                                        <h3><a href="business-details.html">A Complimentary Day At Mandarin The Oriental</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 23, 2023</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-three">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-19.webp" alt="Image" />
-                                    </div>
-                                    <div class="news-card-info">
-                                        <a href="business.html" class="news-cat">Business</a>
-                                        <h3><a href="business-details.html">First prototype Flight Using Kinetic Launch System</a></h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 22, 2023</a></li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
-                            {{-- @empty
-                            @endforelse --}}
                         </div>
                     </div>
                 </div>
