@@ -817,32 +817,26 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Tombol Whatsapp
             document.getElementById('wa').addEventListener('click', function() {
                 shareOnWhatsapp('your_news_id_here');
             });
 
-            // Tombol Facebook
             document.getElementById('fb').addEventListener('click', function() {
                 shareOnFacebook('your_news_id_here');
             });
 
-            // Tombol Instagram
             document.getElementById('ig').addEventListener('click', function() {
                 shareOnInstagram('your_news_id_here');
             });
 
-            // Tombol Telegram
             document.getElementById('tele').addEventListener('click', function() {
                 shareOnTelegram('your_news_id_here');
             });
 
-            // Tombol Discord
             document.getElementById('dc').addEventListener('click', function() {
                 shareOnDiscord('your_news_id_here');
             });
 
-            // Tombol Twitter
             document.getElementById('tw').addEventListener('click', function() {
                 shareOnTwitter('your_news_id_here');
             });
@@ -856,6 +850,39 @@
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(message);
 
             window.open(whatsappLink, '_blank');
+        }
+
+        function shareOnFacebook(newsId) {
+            var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
+            var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+            window.open(facebookLink, '_blank');
+        }
+
+        function shareOnTwitter(newsId) {
+            var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = 'Lihat berita ini di: ' + url;
+            var twitterLink = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+            window.open(twitterLink, '_blank');
+        }
+
+        function shareOnDiscord(newsId) {
+            var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
+            var discordLink =
+                'https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=2048&redirect_uri=' +
+                encodeURIComponent(url);
+            window.open(discordLink, '_blank');
+        }
+
+        function shareOnTelegram(newsId) {
+            var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
+            var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(url);
+            window.open(telegramLink, '_blank');
+        }
+
+        function shareOnInstagram(newsId) {
+            var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
+            var instagramLink = 'https://www.instagram.com/?url=' + encodeURIComponent(url);
+            window.open(instagramLink, '_blank');
         }
     </script>
 
