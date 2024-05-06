@@ -166,3 +166,8 @@
         @endforelse
     </div>
 @endsection
+@section('script')
+    <script>
+        $('preloader').fadeOut()
+    </script>
+@endsection
