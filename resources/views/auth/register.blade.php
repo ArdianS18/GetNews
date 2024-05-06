@@ -70,16 +70,18 @@
                                 <div class="my-1 col-lg-6">
                                     <label for="password" class="form-label">Password</label>
                                     <div class="input-group input-group-merge has-validation">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="············">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Masukan password">
                                         <span class="input-group-text cursor-pointer"></span>
                                     </div>
+                                    <input type="checkbox" id="showPassword">
+                                    <label for="showPassword">Tampilkan Password</label>
                                 </div>
                                 <div class="my-1 col-lg-6">
                                     <label for="password" class="form-label">Konfirmasi Password</label>
                                     <input type="password" id="password" class="form-control" name="password" placeholder="Masukkan password Anda">
                                 </div>
                                 <div class="my-1 col-lg-12">
-                                    <label for="addres" class="form-label">Alamat</label>
+                                    <label for="addres" class="form-label">Alamat (Opsional)</label>
                                     <textarea type="text" id="address" rows="4" class="form-control" name="address" placeholder="Masukkan address Anda"></textarea>
                                 </div>
                             </div>
@@ -100,6 +102,16 @@
     </div>
 </div>
 
+<script>
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordInput = document.getElementById('password');
+        if (this.checked) {
+            passwordInput.type = 'text'; // Ubah tipe input menjadi 'text' untuk menampilkan password
+        } else {
+            passwordInput.type = 'password'; // Kembalikan tipe input menjadi 'password' untuk menyembunyikan password
+        }
+    });
+</script>
 </body>
 
 

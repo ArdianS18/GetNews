@@ -35,5 +35,6 @@ return [
     'modify_rating' => 'Berhasil modifikasi rating',
     'send_license_success' => 'Berhasil mengirim lisensi',
     'user_add_rating' => 'Berhasil menambahkan ulasan',
-    'user_update_rating' => 'Berhasil mengubah ulasan'
+    'user_update_rating' => 'Berhasil mengubah ulasan',
+    'email.verify' => 'Silakan verify email anda terlebih dahulu'
 ];

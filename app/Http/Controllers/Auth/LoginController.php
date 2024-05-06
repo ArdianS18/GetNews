@@ -38,5 +38,6 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         return  $this->service->handleLogin($request);
+        
     }
 }
