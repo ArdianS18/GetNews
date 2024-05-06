@@ -8,8 +8,12 @@
                     <li>
                         <p class="copyright-text mt-4" style="font-size: 20px">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p>
                     </li>
-                    <li></li>
-                    <li></li>
+                    <li>
+                    {{-- <ul style="list-style-type: none;" class="p-4"> --}}
+                        <span style="color: #92989F; font-size: 15px;">Pengiklanan</span>
+                        <li class="mb-2"><a href="{{route('iklan.biodata')}}" style="color: #FFFFFF">+ Unggah Iklan</a></li>
+                    {{-- </ul> --}}
+                </li>
                 </ul>
 
             </div>

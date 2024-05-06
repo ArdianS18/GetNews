@@ -90,7 +90,7 @@
                         </form>
 
                         <div class="text-center">
-                                <p>Sudah memiliki akun?<a href="{{route('login')}}"> Masuk Sekarang!</a></p>
+                                <p>Sudah memiliki akun?<a style="color: #438ac8" href="{{route('login')}}"> Masuk Sekarang!</a></p>
                         </div>
                     
 

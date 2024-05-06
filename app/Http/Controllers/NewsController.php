@@ -244,7 +244,6 @@ class NewsController extends Controller
 
     public function reject(News $news, Request $request)
     {
-        // dd($news);
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
         $this->news->update($news->id, $data);
 
@@ -254,7 +253,7 @@ class NewsController extends Controller
             'massage' => $request->input('massage')
         ]);
 
-        return back();
+        return redirect('/news-list');
     }
 
     public function rejectall(Request $request, News $news)

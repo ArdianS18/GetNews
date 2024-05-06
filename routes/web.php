@@ -90,6 +90,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('news-approved-list', function () {
         return view('pages.admin.news_admin.news-approve');
     })->name('news.approve.admin');
+    
     Route::delete('news-approved/{news-approved}', [NewsController::class, 'destroy'])->name('news.approved.destroy');
     // Detail News
     Route::get('detail-news-admin/{news}', [NewsController::class, 'detailnews'])->name('detail.news.admin');

@@ -65,14 +65,14 @@
                         <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
                             Kirim
                         </button>
-                        <a href="/login" class="btn btn-md col-md-11 w-100 mt-4 btn-light-primary text-primary" style="background-color: #d5e3ef;">
+                        <a href="/login" class="btn btn-md col-md-11 w-100 mt-4 btn-light-primary text-primary" style="background-color: #d5e3ef;color: #438ac8;">
                             Kembali Ke Login
                         </a>
                     <input type="hidden">
                         </form>
 
                     <div class="text-center mt-4">
-                            <p>Belum memiliki akun?<a href="{{route('register')}}"> Daftar Sekarang!</a></p>
+                            <p>Belum memiliki akun?<a style="color: #438ac8;" href="{{route('register')}}"> Daftar Sekarang!</a></p>
                     </div>
                     
 
