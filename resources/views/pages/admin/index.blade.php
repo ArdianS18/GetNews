@@ -107,7 +107,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="col-md-12 col-lg-12">
-                        <h4 class="mb-3">Berita Trending</h4>
+                        <h4 class="mb-5">Berita Trending</h4>
                         <div class="row">
                             @forelse ($news as $news)
                                 <div class="col-md-12 col-lg-6 mb-3">
@@ -121,7 +121,7 @@
                                                 <div class="card-body p-2">
                                                     <h5 class="card-text">
                                                         <strong>
-                                                            {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...')  !!}
+                                                            {!! Illuminate\Support\Str::limit($news->name, $limit = 65, $end = '...')  !!}
                                                         </strong>
                                                     </h5>
                                                     <div class="d-flex gap-3 align-items-center ms-0">
@@ -154,7 +154,7 @@
         <div class="col-md-3 col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4>Kategori Trending</h4>
+                    <h4 class="mb-5">Kategori Trending</h4>
                     <div>
                         @forelse ($categories as $category)
                             <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
@@ -401,6 +401,7 @@
         </div>
     </div>
 @endsection
+
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
     <script>
@@ -477,10 +478,6 @@
         },
         stroke: {
           curve: 'straight'
-        },
-        title: {
-          text: 'Product Trends by Month',
-          align: 'left'
         },
         grid: {
           row: {
