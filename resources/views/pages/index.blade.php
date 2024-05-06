@@ -338,7 +338,7 @@
                             <div class="col-12">
                                 <div class="news-card-eleven">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $most->photo) }}" width="100%" height="450" style="object-fit: cover;" alt="Image" />
+                                        <img src="{{ asset('storage/' . $most->photo) }}" width="100%" height="550" style="object-fit: cover;" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
                                         <div class="news-author">
