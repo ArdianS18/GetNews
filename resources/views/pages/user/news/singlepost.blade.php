@@ -437,7 +437,7 @@
                                                             </svg>Discord</button>
                                                     </div>
                                                     <div class="col-md-6 col-12 mb-3">
-                                                        <button class="btn shadow-sm gap-3"
+                                                        <button id="tw" class="btn shadow-sm gap-3"
                                                             style="width:-webkit-fill-available !important"><svg
                                                                 xmlns="http://www.w3.org/2000/svg" width="32"
                                                                 height="32" viewBox="0 0 24 24">
@@ -817,45 +817,80 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Tombol Whatsapp
             document.getElementById('wa').addEventListener('click', function() {
                 shareOnWhatsapp('your_news_id_here');
             });
 
-            // Tombol Facebook
             document.getElementById('fb').addEventListener('click', function() {
                 shareOnFacebook('your_news_id_here');
             });
 
-            // Tombol Instagram
             document.getElementById('ig').addEventListener('click', function() {
                 shareOnInstagram('your_news_id_here');
             });
 
-            // Tombol Telegram
             document.getElementById('tele').addEventListener('click', function() {
                 shareOnTelegram('your_news_id_here');
             });
 
-            // Tombol Discord
             document.getElementById('dc').addEventListener('click', function() {
                 shareOnDiscord('your_news_id_here');
             });
 
-            // Tombol Twitter
             document.getElementById('tw').addEventListener('click', function() {
                 shareOnTwitter('your_news_id_here');
             });
         });
 
         function shareOnWhatsapp(newsId) {
-            var url = '{{ config('app.url') }}/berita/{{ $news->slug }}';
+            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
 
-            var message = 'Lihat berita ini di: ' + url;
-
-            var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(message);
+            var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
             window.open(whatsappLink, '_blank');
+        }
+
+        function shareOnFacebook(newsId) {
+            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
+
+            var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
+            window.open(facebookLink, '_blank');
+        }
+
+        function shareOnTwitter(newsId) {
+            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
+
+            var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
+            window.open(twitterLink, '_blank');
+        }
+
+        function shareOnDiscord(newsId) {
+            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
+
+            var discordLink =
+                'https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=2048&redirect_uri=' +
+                encodeURIComponent(text);
+            window.open(discordLink, '_blank');
+        }
+
+        function shareOnTelegram(newsId) {
+            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
+
+            var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
+            window.open(telegramLink, '_blank');
+        }
+
+        function shareOnInstagram(newsId) {
+            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
+
+            var instagramLink = 'https://www.instagram.com/?url=' + encodeURIComponent(text);
+            window.open(instagramLink, '_blank');
         }
     </script>
 

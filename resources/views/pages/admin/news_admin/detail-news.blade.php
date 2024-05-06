@@ -59,6 +59,9 @@
                 </div>
 
                 <div class="d-flex gap-2">
+                    <div class="">
+                        <a href="{{ route('news.user', ['news' => $news->slug, ]) }}" class="btn btn-warning btn-lg px-3">Preview</a>
+                    </div>
                     @if ($news->status === 'panding')
                         <div class="d-flex gap-2">
                             <div class="">
@@ -245,7 +248,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </div>
                 </form>
