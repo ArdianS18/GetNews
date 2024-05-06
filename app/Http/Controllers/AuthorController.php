@@ -221,8 +221,8 @@ class AuthorController extends Controller
     public function inboxauthor()
     {
         $newsRejects = $this->newsReject->where(auth()->user()->id);
-        // dd($newsRejects);
-        return view('pages.author.inbox.index', compact('newsRejects'));
+        $newsRejectRead = $this->newsReject->where(auth()->user()->id);
+        return view('pages.author.inbox.index', compact('newsRejects', 'newsRejectRead'));
     }
 
     /**
