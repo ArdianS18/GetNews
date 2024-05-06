@@ -65,7 +65,7 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
                 $query->withCount('views');
             })
             ->latest()
-            ->paginate(5);
+            ->paginate(8);
     }
 
     public function updateOrCreate(array $data): mixed

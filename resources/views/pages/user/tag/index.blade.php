@@ -51,7 +51,6 @@
                         @endforelse
                     </div>
                     <ul class="page-nav list-style text-center mt-20">
-                        @if ($news->lastPage > 1)
                             <li><a href="{{ $news->previousPageUrl }}"><i class="flaticon-arrow-left"></i></a></li>
                             @for ($i = 1; $i <= $news->lastPage; $i++)
                                 <li><a href="{{ $news->url($i) }}"
@@ -59,7 +58,6 @@
                                 </li>
                             @endfor
                             <li><a href="{{ $news->nextPageUrl }}"><i class="flaticon-arrow-right"></i></a></li>
-                        @endif
                     </ul>
                 </div>
 
@@ -84,7 +82,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                      
+
                         <div class="sidebar-widget">
                             <h3 class="sidebar-widget-title">Berita Popular</h3>
                             <div class="pp-post-wrap">
@@ -132,11 +130,8 @@
                             <h3 class="sidebar-widget-title">iklan</h3>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </div>
 @endsection
