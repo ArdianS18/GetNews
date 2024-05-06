@@ -74,14 +74,18 @@
                     @else
                         <div>
                             <a href="{{ route('news.option.editor', ['news' => $news->id]) }}"
-                                class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'primary' : 'dark' }}">
+                                class="btn btn-lg px-3 btn-{{ $news->is_primary ? 'danger' : 'primary' }}">
                                 <div class="d-flex gap-2">
-                                    {{ $news->is_primary ? '' : '' }} <i><svg xmlns="http://www.w3.org/2000/svg"
-                                            width="23" height="23" viewBox="0 0 24 24">
-                                            <path fill="currentColor" fill-rule="evenodd"
-                                                d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3" />
-                                        </svg></i>
-                                    Pin Berita
+                                    @if ($news->is_primary)
+                                        <i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 3l18 18M15 4.5l-3.249 3.249m-2.57 1.433L7 10l-1.5 1.5l7 7L14 17l.82-2.186m1.43-2.563L19.5 9M9 15l-4.5 4.5M14.5 4L20 9.5"/></svg></i>
+                                        Hapus Pin
+                                    @else
+                                        <i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                                <path fill="currentColor" fill-rule="evenodd"
+                                                    d="M16 9V4h2V2H6v2h2v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1l1-1v-7H19v-2c-1.66 0-3-1.34-3-3" />
+                                            </svg></i>
+                                        Pin Berita
+                                    @endif
                                 </div>
                             </a>
                         </div>

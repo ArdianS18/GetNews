@@ -181,7 +181,7 @@
         <div class="col-md-4 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mb-3">Penulis Terbanyak</h4>
+                    <h4 class="mb-5">Penulis Terbanyak</h4>
                     @forelse ($authors1 as $author)
                         <div>
                             <div class="d-flex justify-content-between mb-3">
