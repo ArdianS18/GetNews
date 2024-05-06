@@ -23,6 +23,7 @@ class NewsResource extends JsonResource
           'email' => $this->user->email,
           'photo' =>$this->photo,
           'content' => $this->content,
+          'pin'=>$this->is_primary,
           'upload_date' => Carbon::parse($this->upload_date)->isoFormat('D MMMM Y'),
           'status' => $this->status
         ];
