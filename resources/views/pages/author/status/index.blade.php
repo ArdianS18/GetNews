@@ -87,9 +87,10 @@
                     <div class="col-md-12 col-lg-2 mt-3 mt-lg-0 ">
                         <div class="d-flex justify-content-end">
                             <div class="text-md-right mt-md-0">
-                                <span
-                                    class="badge fw-bold fs-5 @if ($item->status == 'active') bg-light-success text-success
-                                @elseif($item->status == 'reject')
+                                <span class="badge fw-bold fs-5
+                                @if ($item->status == 'active')
+                                bg-light-success text-success
+                                @elseif($item->status == 'nonactive')
                                 bg-light-danger text-danger
                                 @elseif ($item->status == 'draft')
                                 bg-light-secondary text-secondary
