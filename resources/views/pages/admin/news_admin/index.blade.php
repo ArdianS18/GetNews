@@ -21,10 +21,9 @@
                 <div>
                     <div class="d-flex gap-2">
                         <select class="form-select" id="opsi-latest" style="width: 200px">
-                            <option disabled selected>Pilih opsi</option>
+                            <option value="">Tampilkan semua</option>
                             <option value="terbaru">Terbaru</option>
                             <option value="terlama">Terlama</option>
-                            <option value="">Tampilkan semua</option>
                         </select>
                     </div>
                 </div>
@@ -67,40 +66,12 @@
 
     </div>
     </div>
-@endsection
+    
+    @endsection
 
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous">
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#synopsis').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-        });
-
-        $(document).ready(function() {
-            $('.sinop').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-        });
     </script>
 
     <script>
