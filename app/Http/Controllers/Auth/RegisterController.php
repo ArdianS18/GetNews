@@ -55,6 +55,6 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $this->service->handleRegister($request,$this->register);
-        return redirect('/login')->with('success',alert('trans.add_success'));
+        return redirect('/login')->with('success',alert('email.verify'));
     }
 }
