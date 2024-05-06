@@ -849,7 +849,7 @@
         });
 
         function shareOnWhatsapp(newsId) {
-            var url = 'media.mijurnal.com/berita/{{ $news->slug }}';
+            var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
 
             var message = 'Lihat berita ini di: ' + url;
 
