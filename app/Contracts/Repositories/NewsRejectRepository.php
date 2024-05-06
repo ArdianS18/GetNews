@@ -43,7 +43,9 @@ class NewsRejectRepository extends BaseRepository implements NewsRejectInterface
     public function where(mixed $id): mixed
     {
         return $this->model->query()
-            ->where('user_id', $id)
+            ->whereHas('news', function($query) use ($id){
+                $query->where('user_id', $id);
+            })
             ->get();
     }
 

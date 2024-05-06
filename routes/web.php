@@ -229,10 +229,6 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
 
 });
 
-
-// Route::resource('user', AuthorController::class);
-// Route::resource('user', UserController::class);
-
 Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('tukar-coin', function () {
         return view('pages.user.coins.index');
