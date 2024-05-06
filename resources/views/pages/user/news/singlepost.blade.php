@@ -647,28 +647,5 @@
                 }
             }
         }
-        const thumbnailContainer = document.querySelector('.thumbnail-container');
-        const prevButton = document.querySelector('#prev-button');
-        const nextButton = document.querySelector('#next-button');
-
-        prevButton.addEventListener('click', scrollThumbnails.bind(null, 'left'));
-        nextButton.addEventListener('click', scrollThumbnails.bind(null, 'right'));
-
-        function scrollThumbnails(direction) {
-            const scrollAmount = 300;
-            const containerWidth = thumbnailContainer.offsetWidth;
-
-            if (direction === 'left') {
-                thumbnailContainer.scrollLeft -= scrollAmount;
-            } else if (direction === 'right') {
-                thumbnailContainer.scrollLeft += scrollAmount;
-            }
-        }
-
-
-        function changeImage(thumbnail) {
-            const mainImage = document.getElementById('main-image');
-            mainImage.src = thumbnail.src;
-        }
     </script>
 @endsection
