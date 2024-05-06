@@ -85,7 +85,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         ];
     }
 
-    public function storeDraft(?NewsDraftRequest $request = null)
+    public function storeDraft(NewsDraftRequest $request)
     {
         $data = $request ? $request->validated() : null;
 
@@ -105,11 +105,9 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
             $domQuestion = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $content = $data['content'] ?? '-';
-            if (!$content) {
-                $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-                $this->processImages($domQuestion);
-            }
+            $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+
             libxml_clear_errors();
 
         return [
@@ -125,7 +123,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         ];
     }
 
-    public function updateDraft(?NewsDraftRequest $request = null, News $news)
+    public function updateDraft(NewsDraftRequest $request, News $news)
     {
         $data = $request ? $request->validated() : null;
 
@@ -162,7 +160,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => auth()->user()->id,
             'name' => $data['name'] ??  null,
             'photo' => $old_photo ?: $new_photo ?? null,
-            'content' => $domQuestion->saveHTML() ?: null,
+            'content' => $data['content'] ?: null,
             'slug' => Str::slug($data['name']),
             'category' => $data['category'] ?? null,
             'sub_category' => $data['sub_category'] ?? null,
@@ -257,6 +255,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $this->remove($old_photo);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
         }
+
+        $domQuestion = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $content = $data['content'] ?? '-';
+        if (!$content) {
+            $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+        }
+        libxml_clear_errors();
 
         return [
             'user_id' => $news->user->id,

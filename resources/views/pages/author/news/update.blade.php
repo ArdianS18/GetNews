@@ -315,4 +315,34 @@
             tokenSeparators: [',', ' ']
         })
     </script>
+
+
+    <script>
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        var hours = ('0' + today.getHours()).slice(-2);
+        var minutes = ('0' + today.getMinutes()).slice(-2);
+
+        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.getElementById('upload_date').value = formattedDate;
+
+
+          function previewImage(event) {
+            var input = event.target;
+            var previewImg = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.classList.remove('hide');
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewImg.src = '';
+                previewImg.classList.add('hide');
+            }
+        }
+    </script>
 @endsection
