@@ -605,7 +605,7 @@
                             <div class="scrollscreen">
                                 @forelse ($news_latests as $news_latest)
                                     <div class="news-card-five">
-                                        <div class="">
+                                        <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
                                         </div>
