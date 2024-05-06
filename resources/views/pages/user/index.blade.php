@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 @section('content')
-<div class="trending-news-box">
+{{-- <div class="trending-news-box">
     <div class="row gx-5">
         <div class="col-xxl-12 col-xl-3 col-lg-3 col-md-4 d-flex justify-content-center">
             <div class="trending-prev" style="margin-right: 2%;"><i class="flaticon-left-arrow"></i></div>                 
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <div class="container-fluid pb-75">

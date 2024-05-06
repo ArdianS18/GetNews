@@ -23,7 +23,7 @@ class NewsDraftRequest extends FormRequest
             'sub_category.*' => 'nullable',
             'tags' => 'nullable|array',
             'tags.*' => 'nullable',
-            'upload_date' => 'nullable'
+            'upload_date' => 'nullable|date|after_or_equal:'.now()->toDateString(),
         ];
     }
 

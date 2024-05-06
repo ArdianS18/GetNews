@@ -54,13 +54,13 @@
 
     @yield('content')
 
-    <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script>
+    {{-- <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    <script src="{{ asset('assets/dist/libs/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/dist/libs/simplebar/dist/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <!-- core files -->
@@ -68,10 +68,10 @@
     <script src="{{ asset('assets/dist/js/app.init.js') }}"></script>
     <script src="{{ asset('assets/dist/js/app-style-switcher.js') }}"></script>
     <script src="{{ asset('assets/dist/js/sidebarmenu.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/dist/js/custom.js') }}"></script> --}}
     <!-- current page js files -->
-    <script src="{{ asset('assets/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script>
+    {{-- <script src="{{ asset('assets/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script> --}}
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
     @include('layouts.user.footer')
