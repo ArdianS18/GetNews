@@ -605,7 +605,7 @@
                             <div class="scrollscreen">
                                 @forelse ($news_latests as $news_latest)
                                     <div class="news-card-five">
-                                        <div class="news-card-img">
+                                        <div class="">
                                             <img src="{{ asset('storage/' . $news_latest->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
                                         </div>
@@ -690,29 +690,7 @@
                                 href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><i class="flaticon-right-arrow"></i>{{ $category->name }}
                                 <span>({{ $category->total }})</span></a></li>
                             @empty
-
                             @endforelse
-                            {{-- <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Celebration <span>(6)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Culture<span>(3)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Fashion<span>(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Inspiration<span>(8)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Lifestyle<span>(6)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Politics<span>(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Trending<span>(4)</span></a>
-                            </li> --}}
                         </ul>
                     </div>
                     <div class="sidebar-widget">
