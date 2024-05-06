@@ -319,233 +319,6 @@
         </div>
     </div>
 
-    <div class="selected-news ptb-100">
-        <div class="container-fluid">
-            <div class="content-wrapper">
-                <div class="left-content">
-                    <div class="row align-items-end mb-40">
-                        <div class="col-md-7">
-                            <h2 class="section-title">Selected Posts<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
-                        </div>
-                        <div class="col-md-5 text-md-end">
-                            <a href="business.html" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
-                        </div>
-                    </div>
-                    <div class="row gx-45">
-                        <div class="col-xl-7">
-                            <div class="news-card-four">
-                                <img src="assets/img/news/news-31.webp" alt="Image" />
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Kyrgios And Djokovic Agree To Post-match Meal</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 25, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-five">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-32.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Sports</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Muga Nemo Aptent Quaerat Explicabo Urna Ni Like Ange</a></h3>
-                                    <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-five">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-33.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Fashion</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Selective Focus Photography Of Orange Fox Life</a></h3>
-                                    <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or web desi…</p>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5">
-                            <div class="news-card-two">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-34.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Politics</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Beyond Good & Evil 2 Has Been In Development Longer Than Literally Any Game, Ever</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-35.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Travel</a>
-                                    <h3><a href="business-details.html">World Trending Best 10 Website Travel Tips For Runners Groups Of</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-36.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Business</a>
-                                    <h3><a href="business-details.html">How To Find The Right Template For Your Specific Product</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-37.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Health</a>
-                                    <h3><a href="business-details.html">Life Health Continues To Spread Rapidly, Are Many People</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 16, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="promo-wrap">
-                                <div class="promo-card bg-f">
-                                    <img src="assets/img/promo-shape-2.webp" alt="Image" class="promo-shape" />
-                                    <div class="promo-content">
-                                        <a href="index.html" class="logo"><img src="assets/img/logo-white.webp" alt="Image" /></a>
-                                        <p>The European languages are members of the same family.</p>
-                                    </div>
-                                    <div class="promo-img">
-                                        <img src="assets/img/promo-img.webp" alt="Image" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar">
-                    <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Social Links</h3>
-                        <ul class="social-widget list-style">
-                            <li>
-                                <a href="https://www.fb.com/" target="_blank">
-                                    <span><img src="assets/img/icons/facebook.svg" alt="Image" /></span>
-                                    Facebook
-                                </a>
-                                <p>
-                                    28 <br />
-                                    Likes
-                                </p>
-                            </li>
-                            <li>
-                                <a href="https://www.twitter.com/" target="_blank">
-                                    <span><img src="assets/img/icons/twitter.svg" alt="Image" /></span>
-                                    Twitter
-                                </a>
-                                <p>289k Followers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.instagram.com/" target="_blank">
-                                    <span><img src="assets/img/icons/instagram.svg" alt="Image" /></span>
-                                    Instagram
-                                </a>
-                                <p>231k Followers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.pinterest.com/" target="_blank">
-                                    <span><img src="assets/img/icons/pinterest.svg" alt="Image" /></span>
-                                    Pinterest
-                                </a>
-                                <p>28k Followers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/" target="_blank">
-                                    <span><img src="assets/img/icons/youtube.svg" alt="Image" /></span>
-                                    Youtube
-                                </a>
-                                <p>159k Subscribers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.soundcloud.com/" target="_blank">
-                                    <span><img src="assets/img/icons/soundcloud.svg" alt="Image" /></span>
-                                    Soundcloud
-                                </a>
-                                <p>31k Followers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.behance.com/" target="_blank">
-                                    <span><img src="assets/img/icons/behance.svg" alt="Image" /></span>
-                                    Behance
-                                </a>
-                                <p>28 Followers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.vimeo.com/" target="_blank">
-                                    <span><img src="assets/img/icons/vimeo.svg" alt="Image" /></span>
-                                    Vimeo
-                                </a>
-                                <p>55k Followers</p>
-                            </li>
-                            <li>
-                                <a href="https://www.telegram.com/" target="_blank">
-                                    <span><img src="assets/img/icons/telegram.svg" alt="Image" /></span>
-                                    Telegram
-                                </a>
-                                <p>788k Followers</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="sidebar-widget">
-                        <div class="newsletter-widget">
-                            <h2>Newsletter</h2>
-                            <h6>Join 70,000 Subscribers</h6>
-                            <form action="#">
-                                <input type="email" placeholder="Email Address" />
-                                <button type="submit">Subscribe<i class="flaticon-right-arrow-1"></i></button>
-                            </form>
-                            <p>By signing up, you agree to our <a href="privacy-policy.html">Privacy Policy</a></p>
-                        </div>
-                    </div>
-                    <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Popular Tags</h3>
-                        <ul class="tag-list list-style">
-                            <li><a href="news-by-tags.html">BUSINESS</a></li>
-                            <li><a href="news-by-tags.html">FOOD</a></li>
-                            <li><a href="news-by-tags.html">SCIENCE</a></li>
-                            <li><a href="news-by-tags.html">LIFESTYLE</a></li>
-                            <li><a href="news-by-tags.html">SPORTS</a></li>
-                            <li><a href="news-by-tags.html">PHOTO</a></li>
-                            <li><a href="news-by-tags.html">TECHNOLOGY</a></li>
-                            <li><a href="news-by-tags.html">CONTENT</a></li>
-                            <li><a href="news-by-tags.html">FEATURED</a></li>
-                            <li><a href="news-by-tags.html">AUDIO</a></li>
-                            <li><a href="news-by-tags.html">FASHION</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="bg_gray popular-news ptb-100">
         <div class="container-fluid">
             <div class="row align-items-end mb-40">
@@ -696,8 +469,6 @@
         </div>
     </div>
 
-
-
     <div class="general-news ptb-100">
         <div class="container-fluid">
             <div class="content-wrapper">
@@ -817,6 +588,260 @@
             </div>
         </div>
     </div>
+
+    <div class="latest-news pb-100">
+        <div class="container-fluid">
+            <div class="content-wrapper">
+                <div class="left-content">
+                    <div class="row align-items-end mb-40">
+                        <div class="col-md-7">
+                            <h2 class="section-title">Latest News<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
+                        </div>
+                        <div class="col-md-5 text-md-end">
+                            <a href="business.html" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                        </div>
+                    </div>
+                    <div class="row gx-5">
+                        <div class="col-xl-7">
+                            <div class="scrollscreen">
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-9.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Lifestyle</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">Good Day To Take A Photo With Your Favorite Style</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-10.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Fashion</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">I Turned My Home Into A Fortress of Surveillance</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-11.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Science</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">Man Wearing Black Pullover Hoodie To Smoke Light In</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 17, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>8 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-12.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Photography</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">Recovery And Cleanup In Florida After Hurricane Ian</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 12, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>13 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-13.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Business</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">Apex Legends Season 11 Starting From August, 2023</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 07, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-14.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Travel</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">Creative Photography Ideas From Smart Devices</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 05, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-15.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Travel</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">6 Romantic Places You Want To Visit With Your Partner</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="assets/img/news/news-16.webp" alt="Image" />
+                                        <a href="business.html" class="news-cat">Fashion</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a href="business-details.html">7 Steps To Get Professional Facial Results At Home</a></h3>
+                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 02, 2023</a></li>
+                                            <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5">
+                            <div class="news-card-two">
+                                <div class="news-card-img">
+                                    <img src="assets/img/news/news-17.webp" alt="Image" />
+                                    <a href="business.html" class="news-cat">Technology</a>
+                                </div>
+                                <div class="news-card-info">
+                                    <h3><a href="business-details.html">Elijah James: The Nashville Photographer Shares Her Unique Journey</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 25, 2023</a></li>
+                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-card-three">
+                                <div class="news-card-img">
+                                    <img src="assets/img/news/news-18.webp" alt="Image" />
+                                </div>
+                                <div class="news-card-info">
+                                    <a href="business.html" class="news-cat">Travel</a>
+                                    <h3><a href="business-details.html">A Complimentary Day At Mandarin The Oriental</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 23, 2023</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="news-card-three">
+                                <div class="news-card-img">
+                                    <img src="assets/img/news/news-19.webp" alt="Image" />
+                                </div>
+                                <div class="news-card-info">
+                                    <a href="business.html" class="news-cat">Business</a>
+                                    <h3><a href="business-details.html">First prototype Flight Using Kinetic Launch System</a></h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 22, 2023</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-widget-title">Explore Topics</h3>
+                        <ul class="category-widget list-style">
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Celebration <span>(6)</span></a>
+                            </li>
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Culture<span>(3)</span></a>
+                            </li>
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Fashion<span>(2)</span></a>
+                            </li>
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Inspiration<span>(8)</span></a>
+                            </li>
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Lifestyle<span>(6)</span></a>
+                            </li>
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Politics<span>(2)</span></a>
+                            </li>
+                            <li>
+                                <a href="business.html"><i class="flaticon-right-arrow"></i>Trending<span>(4)</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-widget-title">Celebration</h3>
+                        <div class="featured-widget">
+                            <div class="featured-slider swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="news-card-one">
+                                            <div class="news-card-img">
+                                                <img src="assets/img/news/news-thumb-1.webp" alt="Image" />
+                                            </div>
+                                            <div class="news-card-info">
+                                                <h3><a href="business-details.html">How Youth Viral Diseases May The Year 2023</a></h3>
+                                                <ul class="news-metainfo list-style">
+                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 24, 2023</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="news-card-one">
+                                            <div class="news-card-img">
+                                                <img src="assets/img/news/news-thumb-2.webp" alt="Image" />
+                                            </div>
+                                            <div class="news-card-info">
+                                                <h3><a href="business-details.html">Nintendo Switch Online’s Next Wave of N64 Games</a></h3>
+                                                <ul class="news-metainfo list-style">
+                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 22, 2023</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="news-card-one">
+                                            <div class="news-card-img">
+                                                <img src="assets/img/news/news-thumb-3.webp" alt="Image" />
+                                            </div>
+                                            <div class="news-card-info">
+                                                <h3><a href="business-details.html">5 things We Know About GTA Definitive Edition</a></h3>
+                                                <ul class="news-metainfo list-style">
+                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 14, 2023</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="featured-prev"><i class="flaticon-left-arrow"></i></div>
+                                <div class="featured-next"><i class="flaticon-right-arrow"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 @section('script')
     <script>
