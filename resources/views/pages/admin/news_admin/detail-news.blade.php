@@ -52,7 +52,7 @@
                     @else
                         <div>
                             <div class="d-flex gap-2 mb-3">
-                            <a href="/list-news-approved" class="btn btn-lg px-3 text-white"
+                            <a href="/news-approved-list" class="btn btn-lg px-3 text-white"
                                 style="background-color: #5D87FF;">Kembali</a>
                             </div>
                         </div>
@@ -199,8 +199,7 @@
                                                 <select class="form-control select2 tags" name="tags[]" multiple="multiple">
                                                     <option>pilih tags</option>
                                                     @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->name }}"
-                                                            {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
+                                                        <option value="{{ $tag->name }}" {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
                                                             {{ $tag->name }}
                                                         </option>
                                                     @endforeach

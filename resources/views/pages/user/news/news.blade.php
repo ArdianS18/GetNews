@@ -56,7 +56,7 @@
                                         alt="Image" width="40px" height="40px"
                                         style="border-radius: 50%; object-fit:cover;" />
                                 </div>
-                                <h5>By <a href="{{ route('author.detail', ['id' => $item->user->author->id]) }}">{{ $item->user->name }}</a>
+                                <h5>By <a href="{{ route('author.detail', ['author' => $item->user->slug]) }}">{{ $item->user->name }}</a>
                                 </h5>
                             </div>
                             <h3><a

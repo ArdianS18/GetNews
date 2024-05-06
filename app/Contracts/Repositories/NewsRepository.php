@@ -150,7 +150,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         $pagination = $request->perpage;
         return $this->model->query()
-            ->where('status', "active")
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->when($request->category, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->category . '%');
             })
