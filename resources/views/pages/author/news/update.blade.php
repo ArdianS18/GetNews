@@ -134,11 +134,12 @@
                         <label class="form-label" for="password_confirmation">Tags</label>
                         <select class="form-control  @error('tags') is-invalid @enderror select2 tags" name="tags[]" multiple="multiple" value="">
                             <option>pilih tags</option>
+
                             @foreach ($tags as $tag)
-                                <option value="{{ $tag->name }}" {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
-                                    {{ $tag->name }}
-                                </option>
-                            @endforeach
+                            <option value="{{ $tag->name }}" {{ $newsTags->pluck('tag_id')->contains($tag->id) ? 'selected' : '' }}>
+                              {{ $tag->name }}
+                            </option>
+                          @endforeach
                         </select>
                         @error('tags')
                             <span class="invalid-feedback" role="alert" style="color: red;">

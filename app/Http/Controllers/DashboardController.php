@@ -87,7 +87,7 @@ class DashboardController extends Controller
         $news_right = $this->news->getByRight();
         $news_mid = $this->news->getByMid();
 
-        $populars = $this->news->getByPopular();
+        $populars = $this->news->getByPopular('up');
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
@@ -96,8 +96,18 @@ class DashboardController extends Controller
         $tags = $this->tag->getByPopular();
         $totalCategories = $this->category->showWhithCount();
         $authors = $this->author->get();
+        $news_latests = $this->news->latest();
+        $news_latests2 = $this->news->latest2();
 
-        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories','authors'));
+        $most_populer = $this->news->getByPopular('down');
+        $most_populer2 = $this->news->getByPopular('side');
+        $categorypopuler = $this->category->showWhithCount();
+
+        return view('pages.index',compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
+                                            'news_left', 'news_mid', 'news_right', 'categories',
+                                            'subCategories','trendings', 'news_recent', 'populars',
+                                            'editor_pick', 'generals', 'popular_post', 'picks','tags',
+                                            'totalCategories','authors', 'news_latests', 'news_latests2'));
     }
 
     public function navbar(Request $request){
@@ -141,7 +151,7 @@ class DashboardController extends Controller
         $totalCategories = $this->category->showWhithCount();
         $query = $request->input('search');
         $newsByDate = $this->news->whereDate($request);
-        $populars = $this->news->getByPopular();
+        $populars = $this->news->getByPopular('up');
         $news = $this->news->get();
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }

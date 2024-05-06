@@ -326,143 +326,100 @@
                     <h2 class="section-title">Most Popular<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                 </div>
                 <div class="col-md-5 text-md-end">
-                    <a href="business.html" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                    <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
                 </div>
             </div>
             <div class="row gx-55">
                 <div class="col-xl-6">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="news-card-eleven">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-26.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
+                        @php $counters= 0; @endphp
+                        @forelse ($most_populer as $most)
+                        @if ($counters < 1)
+                            <div class="col-12">
+                                <div class="news-card-eleven">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $most->photo) }}" width="100%" height="500" style="object-fit: cover;" alt="Image" />
                                     </div>
-                                    <h3><a href="business-details.html">Multiple Games & Updates For 2023 Holiday Season</a></h3>
+                                    <div class="news-card-info">
+                                        <div class="news-author">
+                                            <div class="news-author-img">
+                                                <img src="{{ asset($most->user->photo ? 'storage/' . $most->user->photo : 'default.png') }}"
+                                                    alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;" />
+                                            </div>
+                                            <h5>By<a href="{{ route('author.detail', ['id' => $most->user->slug]) }}">{{ $most->user->name }}</a></h5>
+                                        </div>
+                                        <h3>
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug, ]) }}">
+                                                {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...')  !!}
+                                            </a>
+                                        </h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                href="javascript:void(0)">{{ \Carbon\Carbon::parse($most->created_at)->translatedFormat('d F Y') }}</a>
+                                            </li>
+                                            <li><i class="fi fi-rr-eye"></i>{{ $most->views_count }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-md-6">
+                                <div class="news-card-ten">
+                                    <a href="{{ route('categories.show.user', ['category' => $most->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $most->newsCategories[0]->category->name }}</a>
+                                    <h3>
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug, ]) }}">
+                                            {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...')  !!}
+                                        </a>
+                                    </h3>
                                     <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-ten">
-                                <a href="business.html" class="news-cat">Business</a>
-                                <h3><a href="business-details.html">First Prototype Flight Using Kinetic Launch System</a></h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03, 2023</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-ten">
-                                <a href="business.html" class="news-cat">Inspiration</a>
-                                <h3><a href="business-details.html">A Comprehensive Guide To The Best Summer Dresses</a></h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 03, 2023</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
+                        @php $counters++; @endphp
+                        @if ($counters == 5)
+                            @php $counters = 0; @endphp
+                        @endif
+                        @empty
+                        @endforelse
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="row">
+                        @forelse ($most_populer2 as $most2)
                         <div class="col-md-6">
                             <div class="news-card-six">
                                 <div class="news-card-img">
-                                    <img src="assets/img/news/news-27.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Health</a>
+                                    <img src="{{ asset('storage/' . $most2->photo) }}" width="100%" height="250" style="object-fit: cover;" alt="Image" />
+                                    <a href="{{ route('categories.show.user', ['category' => $most2->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $most2->newsCategories[0]->category->name }}</a>
                                 </div>
                                 <div class="news-card-info">
                                     <div class="news-author">
                                         <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
+                                            <img src="{{ asset($most2->user->photo ? 'storage/' . $most2->user->photo : 'default.png') }}"
+                                                    alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;" />
                                         </div>
-                                        <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
+                                        <h5>By <a href="{{ route('author.detail', ['id' => $most2->user->slug]) }}">{{ $most2->user->name }}</a></h5>
                                     </div>
-                                    <h3><a href="business-details.html">I Thought I'd Found A Cheat Code For Parenting</a></h3>
+                                    <h3>
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most2->name }}" href="{{ route('news.user', ['news' => $most2->slug, ]) }}">
+                                            {!! Illuminate\Support\Str::limit($most2->name, $limit = 47, $end = '...')  !!}
+                                        </a>
+                                    </h3>
                                     <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($most2->created_at)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                        <li><i class="fi fi-rr-eye"></i>{{ $most2->views_count }}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-28.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Education</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-2.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">How To Make Your Life Routine More Fun And Eco-friendly</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 14, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-29.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Technology</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-3.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">CLAIRE AUDREY</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">You Can Read Any Of These Short Novels In A Weekend</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 17, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-30.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Fashion</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-4.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">ELENA NAOMI</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">Read 5 Best Novel In A Your Weekend Time</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 19, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        @empty
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -580,7 +537,6 @@
                             @forelse ($tags as $tag)
                             <li><a href="{{ route('tag.show.user',['tag'=>$tag->slug]) }}">{{ $tag->name }}</a></li>
                             @empty
-
                             @endforelse
                         </ul>
                     </div>
@@ -598,192 +554,100 @@
                             <h2 class="section-title">Latest News<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                         </div>
                         <div class="col-md-5 text-md-end">
-                            <a href="business.html" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                            <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                     <div class="row gx-5">
                         <div class="col-xl-7">
                             <div class="scrollscreen">
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-9.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Lifestyle</a>
+                                @forelse ($news_latests as $news_latest)
+                                    <div class="news-card-five">
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $news_latest->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
+                                            <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
+                                        </div>
+                                        <div class="news-card-info">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_latest->name }}" href="{{ route('news.user', ['news' => $news_latest->slug, ]) }}">
+                                                {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 60, $end = '...')  !!}
+                                            </a></h3>
+                                            <ul class="news-metainfo list-style">
+                                                <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($news_latest->upload_date)->translatedFormat('d F Y') }}</a>
+                                                </li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $news_latest->views_count }}</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">Good Day To Take A Photo With Your Favorite Style</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-10.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Fashion</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">I Turned My Home Into A Fortress of Surveillance</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 15, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-11.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Science</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">Man Wearing Black Pullover Hoodie To Smoke Light In</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 17, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>8 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-12.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Photography</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">Recovery And Cleanup In Florida After Hurricane Ian</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 12, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>13 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-13.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Business</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">Apex Legends Season 11 Starting From August, 2023</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 07, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-14.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Travel</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">Creative Photography Ideas From Smart Devices</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 05, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-15.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Travel</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">6 Romantic Places You Want To Visit With Your Partner</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="news-card-five">
-                                    <div class="news-card-img">
-                                        <img src="assets/img/news/news-16.webp" alt="Image" />
-                                        <a href="business.html" class="news-cat">Fashion</a>
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a href="business-details.html">7 Steps To Get Professional Facial Results At Home</a></h3>
-                                        <p>Lorem ipsum or lipsum as it is sometmes known is dum text used in laying print, graphic or desi…</p>
-                                        <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 02, 2023</a></li>
-                                            <li><i class="fi fi-rr-clock-three"></i>10 Min Read</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @empty
+                                @endforelse
                             </div>
                         </div>
                         <div class="col-xl-5">
-                            <div class="news-card-two">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-17.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Technology</a>
+
+                            @php $counter= 0; @endphp
+                            @foreach ($news_latests2 as $news_latest2)
+                                @if ($counter < 1)
+                                <div class="news-card-two">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $news_latest2->photo) }}" alt="Image" />
+                                        <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
+                                            class="news-cat">{{ $news_latest2->newsCategories[0]->category->name }}</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3>
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $news_latest2->name }}" href="{{ route('news.user', ['news' => $news_latest2->slug, ]) }}">
+                                                {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...')  !!}
+                                            </a>
+                                        </h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
+                                                <p>{{ \Carbon\Carbon::parse($news_latest2->created_at)->translatedFormat('d F Y') }}</p>
+                                            </a></li>
+                                            <li><i class="fi fi-rr-eye mt-2"></i>{{ $news_latest2->views_count }}</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="news-card-info">
-                                    <h3><a href="business-details.html">Elijah James: The Nashville Photographer Shares Her Unique Journey</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 25, 2023</a></li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
+                                @elseif ($counter < 3)
+
+                                <div class="news-card-three">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $news_latest2->photo) }}" alt="Image" />
+                                    </div>
+                                    <div class="news-card-info">
+                                        <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
+                                            class="news-cat">{{ $news_latest2->newsCategories[0]->category->name }}</a>
+                                        <h3>
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $news_latest2->name }}" href="{{ route('news.user', ['news' => $news_latest2->slug]) }}">
+                                                {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...')  !!}
+                                            </a>
+                                        </h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-18.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Travel</a>
-                                    <h3><a href="business-details.html">A Complimentary Day At Mandarin The Oriental</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 23, 2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="news-card-three">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-19.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <a href="business.html" class="news-cat">Business</a>
-                                    <h3><a href="business-details.html">First prototype Flight Using Kinetic Launch System</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 22, 2023</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                                @else
+                                @endif
+                                @php $counter++; @endphp
+                                @if ($counter == 4)
+                                    @php $counter = 0; @endphp
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="sidebar">
                     <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Explore Topics</h3>
+                        <h3 class="sidebar-widget-title">Kategori Populer</h3>
                         <ul class="category-widget list-style">
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Celebration <span>(6)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Culture<span>(3)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Fashion<span>(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Inspiration<span>(8)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Lifestyle<span>(6)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Politics<span>(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="business.html"><i class="flaticon-right-arrow"></i>Trending<span>(4)</span></a>
-                            </li>
+                            @forelse ($categorypopuler as $category)
+                            <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
+                                href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><i class="flaticon-right-arrow"></i>{{ $category->name }}
+                                <span>({{ $category->total }})</span></a></li>
+                            @empty
+                            @endforelse
                         </ul>
                     </div>
                     <div class="sidebar-widget">

@@ -208,7 +208,7 @@ class NewsController extends Controller
             $likedByUser = null;
         }
         $news_recents = $this->news->latest();
-        $populars = $this->news->getByPopular();
+        $populars = $this->news->getByPopular('up');
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
         $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
