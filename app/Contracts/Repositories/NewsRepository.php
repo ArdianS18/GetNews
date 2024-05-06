@@ -290,7 +290,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
-            ->take(3)
+            ->take(6)
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
