@@ -151,7 +151,7 @@ class DashboardController extends Controller
         $totalCategories = $this->category->showWhithCount();
         $query = $request->input('search');
         $newsByDate = $this->news->whereDate($request);
-        $populars = $this->news->getByPopular();
+        $populars = $this->news->getByPopular('up');
         $news = $this->news->get();
         return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
     }
