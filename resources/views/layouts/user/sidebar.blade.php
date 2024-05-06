@@ -50,7 +50,7 @@
             <span class="slider round"></span>
         </label>
     </div>
-    
+
     <!-- Preloader -->
     <div class="preloader">
         <img src="{{ env('APP_LOGO') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />
@@ -68,7 +68,9 @@
         <!--  Main wrapper -->
         <div class="body-wrapper">
             <!--  Header Start -->
-            @include('layouts.admin.header')
+            <div>
+                @include('layouts.admin.header')
+            </div>
             <!--  Header End -->
             <div class="container-fluid">
                 @yield('content')
