@@ -102,17 +102,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="from-outline mt-2 mb-4">
-                                    <label class="form-label" for="email">Alamat<span class="important">*</span></label>
-                                    <textarea name="address" id="alamat" placeholder="Masukan Alamat" cols="10" rows="5"
-                                        class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}"
-                                        autocomplete="alamat" autofocus></textarea>
-                                    @error('alamat')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div> --}}
 
                                 <button type="submit" class="btn btn-lg mt-3 text-white"
                                     style="width:-webkit-fill-available;background-color: #0F4D8A;">
