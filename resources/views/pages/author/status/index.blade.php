@@ -97,8 +97,8 @@
                                 bg-light-warning fs-2 text-warning @endif">
                                     @if ($item->status == 'active')
                                         Aktif
-                                    @elseif ($item->status == 'reject')
-                                        Ditolak
+                                    @elseif ($item->status == 'nonactive')
+                                        Tolak
                                     @elseif ($item->status == 'draft')
                                         Draft
                                     @else
