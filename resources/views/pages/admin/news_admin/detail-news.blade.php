@@ -203,12 +203,6 @@
                                                             {{ $tag->name }}
                                                         </option>
                                                     @endforeach
-                                                    {{-- @foreach ($tags as $tag)
-                                                        <option value="{{ $tag->name }}"
-                                                            {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
-                                                            {{ $tag->name }}
-                                                        </option>
-                                                    @endforeach --}}
                                                 </select>
                                                 @error('tags')
                                                     <span class="invalid-feedback" role="alert" style="color: red;">
