@@ -393,7 +393,7 @@
                                                             value="https://media.mijurnal.com/berita/{{ $news->slug }}"
                                                             id="copy-link" readonly="">
                                                         <span class="copyLink" onclick="copyToClipboard()" id="copy"
-                                                            tooltip="Copy to clipboard">
+                                                            tooltip="Salin Link">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                                 height="20" viewBox="0 0 32 32">
                                                                 <path fill="#000000"
