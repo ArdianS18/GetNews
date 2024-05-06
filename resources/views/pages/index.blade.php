@@ -338,7 +338,7 @@
                             <div class="col-12">
                                 <div class="news-card-eleven">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $most->photo) }}" width="100%" height="550" style="object-fit: cover;" alt="Image" />
+                                        <img src="{{ asset('storage/' . $most->photo) }}" width="100%" height="500" style="object-fit: cover;" alt="Image" />
                                     </div>
                                     <div class="news-card-info">
                                         <div class="news-author">
@@ -385,137 +385,41 @@
                         @endif
                         @empty
                         @endforelse
-                        {{-- <div class="col-12">
-                            <div class="news-card-eleven">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-26.webp" alt="Image" />
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">Multiple Games & Updates For 2023 Holiday Season</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div> --}}
-                        {{-- <div class="col-md-6">
-                            <div class="news-card-ten">
-                                <a href="business.html" class="news-cat">Business</a>
-                                <h3><a href="business-details.html">First Prototype Flight Using Kinetic Launch System</a></h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 03, 2023</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-ten">
-                                <a href="business.html" class="news-cat">Inspiration</a>
-                                <h3><a href="business-details.html">A Comprehensive Guide To The Best Summer Dresses</a></h3>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 03, 2023</a></li>
-                                </ul>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
                 <div class="col-xl-6">
                     <div class="row">
+                        @forelse ($most_populer2 as $most2)
                         <div class="col-md-6">
                             <div class="news-card-six">
                                 <div class="news-card-img">
-                                    <img src="assets/img/news/news-27.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Health</a>
+                                    <img src="{{ asset('storage/' . $most2->photo) }}" width="100%" height="250" style="object-fit: cover;" alt="Image" />
+                                    <a href="{{ route('categories.show.user', ['category' => $most2->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $most2->newsCategories[0]->category->name }}</a>
                                 </div>
                                 <div class="news-card-info">
                                     <div class="news-author">
                                         <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-1.webp" alt="Image" />
+                                            <img src="{{ asset($most2->user->photo ? 'storage/' . $most2->user->photo : 'default.png') }}"
+                                                    alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;" />
                                         </div>
-                                        <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
+                                        <h5>By <a href="{{ route('author.detail', ['id' => $most2->user->slug]) }}">{{ $most2->user->name }}</a></h5>
                                     </div>
-                                    <h3><a href="business-details.html">I Thought I'd Found A Cheat Code For Parenting</a></h3>
+                                    <h3>
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most2->name }}" href="{{ route('news.user', ['news' => $most2->slug, ]) }}">
+                                            {!! Illuminate\Support\Str::limit($most2->name, $limit = 47, $end = '...')  !!}
+                                        </a>
+                                    </h3>
                                     <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Apr 22, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($most2->created_at)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                        <li><i class="fi fi-rr-eye"></i>{{ $most2->views_count }}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-28.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Education</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-2.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">OLIVIA EMMA</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">How To Make Your Life Routine More Fun And Eco-friendly</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 14, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-29.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Technology</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-3.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">CLAIRE AUDREY</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">You Can Read Any Of These Short Novels In A Weekend</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 17, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="news-card-six">
-                                <div class="news-card-img">
-                                    <img src="assets/img/news/news-30.webp" alt="Image" />
-                                    <a href="business.html" class="news-cat">Fashion</a>
-                                </div>
-                                <div class="news-card-info">
-                                    <div class="news-author">
-                                        <div class="news-author-img">
-                                            <img src="assets/img/author/author-thumb-4.webp" alt="Image" />
-                                        </div>
-                                        <h5>By <a href="author.html">ELENA NAOMI</a></h5>
-                                    </div>
-                                    <h3><a href="business-details.html">Read 5 Best Novel In A Your Weekend Time</a></h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 19, 2023</a></li>
-                                        <li><i class="fi fi-rr-comment"></i>03</li>
-                                        <li><i class="fi fi-rr-clock-three"></i>15 Min Read</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        @empty
+                        @endforelse
                     </div>
                 </div>
             </div>

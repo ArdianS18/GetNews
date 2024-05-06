@@ -318,6 +318,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->when($data = "down", function($query){
                 $query->take(3);
             })
+            ->when($data = "side", function($query){
+                $query->take(4);
+            })
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
