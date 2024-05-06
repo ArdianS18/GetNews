@@ -120,9 +120,7 @@
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
                                                     <h5 class="card-text">
-                                                        <strong>
-                                                            {!! Illuminate\Support\Str::limit($news->name, $limit = 65, $end = '...')  !!}
-                                                        </strong>
+                                                        {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...')  !!}
                                                     </h5>
                                                     <div class="d-flex gap-3 align-items-center ms-0">
                                                         <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
@@ -156,13 +154,19 @@
                 <div class="card-body">
                     <h4 class="mb-5">Kategori Trending</h4>
                     <div>
-                        @forelse ($categories as $category)
+                        @forelse ($categories as $index => $category)
                             <div class="fs-5 mb-4 mt-5 d-flex justify-content-between">
                                 <div>
                                     {{ $category->name }}
                                 </div>
                                 <div>
-                                    <span class="badge bg-light-danger text-danger">{{ $category->total }}</span>
+                                    @if ($index == 1 || $index == 2)
+                                        <span class="badge bg-light-warning text-warning">{{ $category->total }}</span>
+                                    @elseif ($index == 3 || $index == 4)
+                                        <span class="badge bg-light-success text-success">{{ $category->total }}</span>
+                                    @else
+                                        <span class="badge bg-light-danger text-danger">{{ $category->total }}</span>
+                                    @endif
                                 </div>
                             </div>
                         @empty

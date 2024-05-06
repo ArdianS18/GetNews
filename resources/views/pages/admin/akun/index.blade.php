@@ -302,10 +302,10 @@
             <div class="card border hover-img shadow-sm">
                 <div class="card-body">
                     <div class="dropdown dropstart" style="margin-left: auto;">
-                        <a href="#" class="link" style="float: right;;"
+                        <a href="#" class="link" style="float: right;"
                             id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
-                                <path fill="currentColor"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 256">
+                                <path fill="#000000"
                                     d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28" />
                             </svg>
                         </a>
