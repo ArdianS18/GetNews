@@ -18,14 +18,13 @@ class RegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique|max:255',
+            'name' => 'required|string|unique:users,name|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'nullable|string|min:8',
             'phone_number' => 'required|numeric|min:15',
             'address' => 'required|string|max:255',
             'birth_date' => 'nullable|date',
             'cv' => 'nullable|mimes:pdf',
-            'slug' => 'required|unique',
         ];
     }
 

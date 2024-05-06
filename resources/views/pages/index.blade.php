@@ -229,7 +229,7 @@
                                                                 alt="Image" width="40px" height="40px"
                                                                 style="border-radius: 50%; object-fit:cover;" />
                                                         </div>
-                                                        <h5>By <a href="{{ route('author.detail', ['id' => $pick->user->id]) }}">{{ $pick->user->name }}</a>
+                                                        <h5>By <a href="{{ route('author.detail', ['id' => $pick->user->slug]) }}">{{ $pick->user->name }}</a>
                                                         </h5>
                                                     </div>
                                                     <h3>
