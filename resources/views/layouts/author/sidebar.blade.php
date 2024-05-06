@@ -304,8 +304,14 @@
 
     @yield('script')
     <script>
-        $('.preloader').fadeOut();
-    </script>
+  document.addEventListener('DOMContentLoaded', function() {
+        var preloader = document.querySelector('.preloader');
+        if (preloader) {
+            preloader.style.display = 'none';
+        }
+    }); 
+    
+</script>
 </body>
 
 </html>
