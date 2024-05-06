@@ -33,10 +33,12 @@ class LoginService
 
         if (!$user->email_verified_at) {
             auth()->logout();
-            return to_route('')->withErrors(trans('auth.author_banned'))->withInput();
+            return view('auth.verify');
+
         }
+
             $role = auth()->user()->roles->pluck('name')[0];
-            switch ($role) {
+            switch ($role) {    
                 case "user":
                     return redirect('/');
                     break;

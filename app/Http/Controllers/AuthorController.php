@@ -11,6 +11,7 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
+use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\RegisterInterface;
@@ -44,6 +45,8 @@ class AuthorController extends Controller
     private RegisterInterface $register;
     private NewsInterface $news;
 
+    private NewsRejectInterface $newsReject;
+
     private CategoryInterface $categories;
     private SubCategoryInterface $subCategories;
     private TagInterface $tags;
@@ -57,7 +60,7 @@ class AuthorController extends Controller
     private $authorBannedService;
 
 
-    public function __construct(NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+    public function __construct(NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
@@ -70,6 +73,8 @@ class AuthorController extends Controller
         $this->newsCategories = $newsCategories;
         $this->newsSubCategories = $newsSubCategories;
         $this->newsPhoto = $newsPhoto;
+
+        $this->newsReject = $newsReject;
 
         $this->authorService = $authorService;
         $this->authorBannedService = $authorBannedService;
@@ -211,6 +216,13 @@ class AuthorController extends Controller
         $newsTags = $this->newsTags->get()->whereIn('news_id', $news);
 
         return view('pages.author.news.detail', compact('news','tags','newsCategories','newsSubCategories','subCategories','newsTags','categories','newsPhoto'));
+    }
+
+    public function inboxauthor()
+    {
+        $newsRejects = $this->newsReject->where(auth()->user()->id);
+        // dd($newsRejects);
+        return view('pages.author.inbox.index', compact('newsRejects'));
     }
 
     /**

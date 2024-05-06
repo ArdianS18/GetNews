@@ -212,9 +212,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
 
     Route::get('status-author', [NewsController::class, 'showstatusnews'])->name('status.news.author');
 
-    Route::get('author-inbox', function () {
-        return view('pages.author.inbox.index');
-    })->name('author.inbox');
+    Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
 
     Route::get('statistic', function () {
         return view('pages.author.statistic.index');

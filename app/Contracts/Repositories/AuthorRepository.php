@@ -173,6 +173,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->leftJoin('news_has_likes', 'news.id', '=', 'news_has_likes.news_id')
             ->where('authors.status', "approved")
             ->select('authors.id', 'users.name', 'users.photo', DB::raw('COUNT(news.user_id) as count'), DB::raw('COUNT(news_has_likes.news_id) as count_like'), DB::raw('COUNT(followers.author_id) as follow_id'))
+            ->orderBy('count', 'desc')
             ->groupBy('authors.id', 'users.name', 'users.photo')
             ->get();
     }
