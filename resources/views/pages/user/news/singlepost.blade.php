@@ -853,33 +853,43 @@
 
         function shareOnFacebook(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
-            var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+            var text = "Baca Selengkapnya di: " + url
+
+            var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
             window.open(facebookLink, '_blank');
         }
 
         function shareOnTwitter(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
-            var twitterLink = 'https://twitter.com/intent/tweet?url=/' + encodeURIComponent(url);
+            var text = "Baca Selengkapnya di: " + url
+
+            var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
         }
 
         function shareOnDiscord(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Baca Selengkapnya di: " + url
+
             var discordLink =
                 'https://discord.com/api/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot&permissions=2048&redirect_uri=' +
-                encodeURIComponent(url);
+                encodeURIComponent(text);
             window.open(discordLink, '_blank');
         }
 
         function shareOnTelegram(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
-            var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(url);
+            var text = "Baca Selengkapnya di: " + url
+
+            var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
             window.open(telegramLink, '_blank');
         }
 
         function shareOnInstagram(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
-            var instagramLink = 'https://www.instagram.com/?url=' + encodeURIComponent(url);
+            var text = "Baca Selengkapnya di: " + url
+
+            var instagramLink = 'https://www.instagram.com/?url=' + encodeURIComponent(text);
             window.open(instagramLink, '_blank');
         }
     </script>
