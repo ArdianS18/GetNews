@@ -844,9 +844,9 @@
 
         function shareOnWhatsapp(newsId) {
             var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var text = "Lihat Selengkapnya di: " + url
 
-
-            var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(url);
+            var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
             window.open(whatsappLink, '_blank');
         }
