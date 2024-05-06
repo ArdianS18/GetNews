@@ -849,7 +849,7 @@
         });
 
         function shareOnWhatsapp(newsId) {
-            var url = '{{ config('app.url') }}/berita/{{ $news->slug }}';
+            var url = 'media.mijurnal.com/berita/{{ $news->slug }}';
 
             var message = 'Lihat berita ini di: ' + url;
 
