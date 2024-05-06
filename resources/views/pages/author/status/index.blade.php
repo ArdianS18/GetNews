@@ -91,7 +91,8 @@
                                     class="badge fw-bold fs-5 @if ($item->status == 'active') bg-light-success text-success
                                 @elseif($item->status == 'reject')
                                 bg-light-danger text-danger
-
+                                @elseif ($item->status == 'draft')
+                                bg-light-secondary text-secondary
                                 @else
                                 bg-light-warning fs-2 text-warning @endif">
                                     @if ($item->status == 'active')
