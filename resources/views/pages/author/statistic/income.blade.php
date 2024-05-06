@@ -1,4 +1,4 @@
-@extends('layouts.user.sidebar')
+@extends('layouts.author.sidebar')
 
 @section('content')
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #183249;">
