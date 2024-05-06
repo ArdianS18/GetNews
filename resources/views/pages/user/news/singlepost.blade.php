@@ -845,9 +845,8 @@
         function shareOnWhatsapp(newsId) {
             var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
 
-            var message = 'Lihat berita ini di: ' + url;
 
-            var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(message);
+            var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(url);
 
             window.open(whatsappLink, '_blank');
         }
@@ -860,8 +859,7 @@
 
         function shareOnTwitter(newsId) {
             var url = 'https://media.mijurnal.com/media.mijurnal.com/berita/{{ $news->slug }}';
-            var text = 'Lihat berita ini di: ' + url;
-            var twitterLink = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text);
+            var twitterLink = 'https://twitter.com/intent/tweet?url=/' + encodeURIComponent(url);
             window.open(twitterLink, '_blank');
         }
 
