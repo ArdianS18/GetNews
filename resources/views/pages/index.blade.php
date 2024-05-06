@@ -683,9 +683,16 @@
                 </div>
                 <div class="sidebar">
                     <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Explore Topics</h3>
+                        <h3 class="sidebar-widget-title">Kategori Populer</h3>
                         <ul class="category-widget list-style">
-                            <li>
+                            @forelse ($categorypopuler as $category)
+                            <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
+                                href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><i class="flaticon-right-arrow"></i>{{ $category->name }}
+                                <span>({{ $category->total }})</span></a></li>
+                            @empty
+
+                            @endforelse
+                            {{-- <li>
                                 <a href="business.html"><i class="flaticon-right-arrow"></i>Celebration <span>(6)</span></a>
                             </li>
                             <li>
@@ -705,7 +712,7 @@
                             </li>
                             <li>
                                 <a href="business.html"><i class="flaticon-right-arrow"></i>Trending<span>(4)</span></a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="sidebar-widget">
