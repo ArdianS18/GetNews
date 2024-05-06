@@ -99,7 +99,7 @@
                                     @if ($item->status == 'active')
                                         Aktif
                                     @elseif ($item->status == 'nonactive')
-                                        Ditolak
+                                        Tolak
                                     @elseif ($item->status == 'draft')
                                         Draft
                                     @else
