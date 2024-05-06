@@ -327,6 +327,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
+    public function latest2(): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->with('newsCategories')
+            ->withCount('views')
+            ->orderBy('views_count')
+            ->latest()
+            ->take(3)
+            ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
+    }
+
     /**
      * Handle store data event to models.
      *

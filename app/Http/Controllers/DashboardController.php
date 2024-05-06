@@ -96,8 +96,14 @@ class DashboardController extends Controller
         $tags = $this->tag->getByPopular();
         $totalCategories = $this->category->showWhithCount();
         $authors = $this->author->get();
+        $news_latests = $this->news->latest();
+        $news_latests2 = $this->news->latest2();
 
-        return view('pages.index',compact('news', 'news_left', 'news_mid', 'news_right', 'categories', 'subCategories','trendings', 'news_recent', 'populars', 'editor_pick', 'generals', 'popular_post', 'picks','tags','totalCategories','authors'));
+        return view('pages.index',compact('news',
+                                            'news_left', 'news_mid', 'news_right', 'categories',
+                                            'subCategories','trendings', 'news_recent', 'populars',
+                                            'editor_pick', 'generals', 'popular_post', 'picks','tags',
+                                            'totalCategories','authors', 'news_latests', 'news_latests2'));
     }
 
     public function navbar(Request $request){
