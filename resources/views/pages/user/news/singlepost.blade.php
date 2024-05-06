@@ -337,8 +337,6 @@
                                         @method('post')
                                         @csrf
                                         <div class="modal-body">
-
-                                            <div class="container">
                                                 <div class="mb-3 form-group">
                                                     <label for="message" class="form-label">Masukan Detail
                                                         Laporan:</label>
@@ -359,12 +357,13 @@
                                                         penghentian akun.
                                                     </p>
                                                 </div>
-                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        <div class="">
+                                            <div class="d-flex justify-content-end me-2">
+                                                <button type="button" class="me-2 btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
