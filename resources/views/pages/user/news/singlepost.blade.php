@@ -337,26 +337,26 @@
                                         @method('post')
                                         @csrf
                                         <div class="modal-body">
-                                                <div class="mb-3 form-group">
-                                                    <label for="message" class="form-label">Masukan Detail
-                                                        Laporan:</label>
-                                                    <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
-                                                    @error('message')
-                                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <p>
-                                                        Video dan pengguna yang dilaporkan akan ditinjau oleh staf
-                                                        YouTube 24/7 untuk menentukan apakah video dan pengguna
-                                                        tersebut melanggar Pedoman Komunitas kami atau tidak. Akun
-                                                        akan dikenai sanksi jika melanggar Pedoman Komunitas, dan
-                                                        pelanggaran serius atau berulang dapat berakibat pada
-                                                        penghentian akun.
-                                                    </p>
-                                                </div>
+                                            <div class="mb-3 form-group">
+                                                <label for="message" class="form-label">Masukan Detail
+                                                    Laporan:</label>
+                                                <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
+                                                @error('message')
+                                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <p>
+                                                    Video dan pengguna yang dilaporkan akan ditinjau oleh staf
+                                                    YouTube 24/7 untuk menentukan apakah video dan pengguna
+                                                    tersebut melanggar Pedoman Komunitas kami atau tidak. Akun
+                                                    akan dikenai sanksi jika melanggar Pedoman Komunitas, dan
+                                                    pelanggaran serius atau berulang dapat berakibat pada
+                                                    penghentian akun.
+                                                </p>
+                                            </div>
                                         </div>
                                         <div class="">
                                             <div class="d-flex justify-content-end me-2">
@@ -848,7 +848,6 @@
 
         function copyToClipboard() {
             var copyText = document.querySelector("#copy-link");
-            console.log(copyText);
             copyText.select();
             copyText.setSelectionRange(0, 99999);
             document.execCommand("copy");
@@ -856,14 +855,11 @@
                 icon: 'success',
                 title: 'Link disalin!',
                 text: 'Link telah disalin ke clipboard',
-                onClose: () => {
-                    var modal = document.getElementById('share');
-                    modal.style.display = 'none'; // Menyembunyikan modal
-                }
-
-            });
-
+                allowOutsideClick: false 
+            })
         }
+
+
 
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('wa').addEventListener('click', function() {
