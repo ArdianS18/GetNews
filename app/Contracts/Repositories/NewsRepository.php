@@ -304,7 +304,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
-    public function getByPopular(): mixed
+    public function getByPopular($data): mixed
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
@@ -312,7 +312,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
-            ->take(6)
+            ->when($data = "up", function($query){
+                $query->take(6);
+            })
+            ->when($data = "down", function($query){
+                $query->take(3);
+            })
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 

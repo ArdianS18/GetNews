@@ -332,7 +332,60 @@
             <div class="row gx-55">
                 <div class="col-xl-6">
                     <div class="row">
-                        <div class="col-12">
+                        @php $counters= 0; @endphp
+                        @forelse ($most_populer as $most)
+                        @if ($counters < 1)
+                            <div class="col-12">
+                                <div class="news-card-eleven">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $most->photo) }}" width="100%" height="220" style="object-fit: cover;" alt="Image" />
+                                    </div>
+                                    <div class="news-card-info">
+                                        <div class="news-author">
+                                            <div class="news-author-img">
+                                                <img src="{{ asset($most->user->photo ? 'storage/' . $most->user->photo : 'default.png') }}"
+                                                    alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;" />
+                                            </div>
+                                            <h5>By<a href="{{ route('author.detail', ['id' => $most->user->slug]) }}">{{ $most->user->name }}</a></h5>
+                                        </div>
+                                        <h3>
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug, ]) }}">
+                                                {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...')  !!}
+                                            </a>
+                                        </h3>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                href="javascript:void(0)">{{ \Carbon\Carbon::parse($most->created_at)->translatedFormat('d F Y') }}</a>
+                                            </li>
+                                            <li><i class="fi fi-rr-eye"></i>{{ $most->views_count }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-md-6">
+                                <div class="news-card-ten">
+                                    <a href="{{ route('categories.show.user', ['category' => $most->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $most->newsCategories[0]->category->name }}</a>
+                                    <h3>
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug, ]) }}">
+                                            {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...')  !!}
+                                        </a>
+                                    </h3>
+                                    <ul class="news-metainfo list-style">
+                                        <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+                        @php $counters++; @endphp
+                        @if ($counters == 5)
+                            @php $counters = 0; @endphp
+                        @endif
+                        @empty
+                        @endforelse
+                        {{-- <div class="col-12">
                             <div class="news-card-eleven">
                                 <div class="news-card-img">
                                     <img src="assets/img/news/news-26.webp" alt="Image" />
@@ -352,8 +405,8 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
+                        </div> --}}
+                        {{-- <div class="col-md-6">
                             <div class="news-card-ten">
                                 <a href="business.html" class="news-cat">Business</a>
                                 <h3><a href="business-details.html">First Prototype Flight Using Kinetic Launch System</a></h3>
@@ -370,7 +423,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 03, 2023</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-xl-6">

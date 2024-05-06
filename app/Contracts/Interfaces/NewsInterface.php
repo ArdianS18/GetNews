@@ -32,7 +32,7 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function getByMid() : mixed;
     public function getByPick() : mixed;
     public function getByGeneral() : mixed;
-    public function getByPopular() : mixed;
+    public function getByPopular($data) : mixed;
     public function latest() : mixed;
     public function latest2() : mixed;
     public function StatusBanned($author) : mixed;
