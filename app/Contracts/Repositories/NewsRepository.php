@@ -166,6 +166,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->when($request->perpage, function ($query) use ($request) {
                 $query->take($request->perpage);
             })
+            ->orderBy('is_primary', 'desc')
+            ->latest()
             ->fastPaginate($pagination);
     }
 
