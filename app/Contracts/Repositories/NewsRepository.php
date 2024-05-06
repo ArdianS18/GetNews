@@ -312,13 +312,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
-            ->when($data = "up", function($query){
+            ->when($data = 'up', function($query){
                 $query->take(6);
             })
-            ->when($data = "down", function($query){
+            ->when($data = 'down', function($query){
                 $query->take(3);
             })
-            ->when($data = "side", function($query){
+            ->when($data = 'side', function($query){
                 $query->take(4);
             })
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);

@@ -87,7 +87,7 @@ class DashboardController extends Controller
         $news_right = $this->news->getByRight();
         $news_mid = $this->news->getByMid();
 
-        $populars = $this->news->getByPopular("up");
+        $populars = $this->news->getByPopular('up');
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();
@@ -99,8 +99,8 @@ class DashboardController extends Controller
         $news_latests = $this->news->latest();
         $news_latests2 = $this->news->latest2();
 
-        $most_populer = $this->news->getByPopular("down");
-        $most_populer2 = $this->news->getByPopular("side");
+        $most_populer = $this->news->getByPopular('down');
+        $most_populer2 = $this->news->getByPopular('side');
         $categorypopuler = $this->category->showWhithCount();
 
         return view('pages.index',compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
