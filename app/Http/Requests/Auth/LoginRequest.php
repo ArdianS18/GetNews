@@ -15,7 +15,8 @@ class LoginRequest extends BaseRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            // 'email_verified_at' => 'required|email',
         ];
     }
 
@@ -24,7 +25,8 @@ class LoginRequest extends BaseRequest
         return [
             'email.required' => 'Email idak boleh kosong',
             'email.email' => 'Email harus valid',
-            'password' => 'Password tidak boleh kosong'
+            'password' => 'Password tidak boleh kosong',
+            // 'email_verified_at' => 'Email anda belum terferikasi'
         ];
 
     }

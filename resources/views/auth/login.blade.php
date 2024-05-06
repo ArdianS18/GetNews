@@ -47,14 +47,13 @@
                         @foreach ($errors->all() as $error)
                             <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
                                 {{ $error }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endforeach
                     @endif
 
                     <form id="formAuthentication" class="mb-3 py-5" action="{{route('login')}}" method="POST" novalidate="novalidate">
-                        @csrf                      
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Masukkan email Anda">
@@ -66,7 +65,7 @@
                                 <span class="input-group-text cursor-pointer"></span>
                             </div>
                         </div>
-                        
+
                         <div class="text-end">
                             <a style="color: #438ac8" href="{{ route('confirm.email') }}">
                                 <p>Lupa Password?</p></a>
@@ -80,7 +79,7 @@
                     <div class="text-center mt-4">
                             <p>Belum memiliki akun?<a style="color:#438ac8" href="{{route('register')}}"> Daftar Sekarang!</a></p>
                     </div>
-                    
+
 
                 </div>
             </div>

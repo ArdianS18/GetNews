@@ -67,14 +67,6 @@
                                 <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
                             </li>
-                            {{-- <li class="list-group-item border-0 p-0 mx-9">
-                  <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                    href="javascript:void(0)"><i class="ti ti-file-text fs-5"></i>Draft</a>
-                </li>
-                <li class="list-group-item border-0 p-0 mx-9">
-                  <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                    href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Spam</a>
-                </li> --}}
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
                                     href="javascript:void(0)"><i class="ti ti-trash fs-5"></i>Sampah</a>
