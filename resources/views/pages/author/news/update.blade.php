@@ -1,12 +1,9 @@
 @extends('layouts.author.sidebar')
 
 @section('style')
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('assets/dist/imageuploadify.min.css') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-
     <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
+
     <style>
         .news-card-a {
             box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
@@ -57,7 +54,7 @@
                     <h3 for="" class="form-label">Thumbnail</h3>
 
                     <div class="gambar-iklan mb-4 d-flex justify-content-center">
-                        <img id="preview" class="hide" style="object-fit: cover; border: transparent;"
+                        <img id="preview" src="{{ asset('storage/'.$news->photo) }}"  style="object-fit: cover; border: transparent;"
                             width="350" height="200" alt="">
                     </div>
                     <div class="d-flex justify-content-center mt-3">
@@ -260,6 +257,7 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -278,13 +276,11 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    
     <script>
         $(document).ready(function() {
             $('#content').summernote({
-                height: 250,
+                height: 520,
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
@@ -303,7 +299,6 @@
         });
     </script>
 
-    <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -318,31 +313,6 @@
 
 
     <script>
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = ('0' + (today.getMonth() + 1)).slice(-2);
-        var day = ('0' + today.getDate()).slice(-2);
-        var hours = ('0' + today.getHours()).slice(-2);
-        var minutes = ('0' + today.getMinutes()).slice(-2);
-
-        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        document.getElementById('upload_date').value = formattedDate;
-
-
-          function previewImage(event) {
-            var input = event.target;
-            var previewImg = document.getElementById('preview');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    previewImg.classList.remove('hide');
-                }
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                previewImg.src = '';
-                previewImg.classList.add('hide');
-            }
-        }
+     
     </script>
 @endsection
