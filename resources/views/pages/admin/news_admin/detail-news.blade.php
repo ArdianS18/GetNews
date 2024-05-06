@@ -22,10 +22,9 @@
 </head>
 
 @section('content')
-    <div class="container" style="margin-top: 3%;">
+    <div>
 
-
-        <div class="card border border-1 shadow-sm mt-5" style="background-color: #FFFFFF">
+        <div>
             <div class="px-4 py-3 border-bottom">
                 <h5 class="card-title fw-semibold mb-0 lh-sm">Detail Berita</h5>
             </div>
@@ -94,7 +93,7 @@
                     @method('put')
                     @csrf
                     <div class="container p-4">
-                        <div class="card border shadow-none p-3">
+                        <div class="">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-5">
                                     <div class="card">
