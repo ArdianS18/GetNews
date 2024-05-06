@@ -36,7 +36,7 @@
 
             <div>
                 <div class="d-flex gap-2">
-                    <select class="form-select" id="opsi-perpage" style="width: 200px">
+                    <select class="form-select" name="perpage" id="opsi-perpage" style="width: 200px">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
