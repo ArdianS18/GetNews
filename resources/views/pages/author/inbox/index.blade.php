@@ -87,25 +87,25 @@
                                 </div>
                                 <div class="app-chat">
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
-                                        {{-- @forelse ($contactUs as $contact)
+                                        @forelse ($newsRejects as $newsReject)
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
-                                                    id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}">
+                                                    id="chat_user_{{ $newsReject->id }}" data-user-id="{{ $newsReject->user_id }}">
                                                     <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
                                                     </div>
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
+                                                            <h6 class="mb-0 fw-semibold">{{ $newsReject->user->name }}</h6>
                                                             <span class="badge fs-2 rounded-4 py-1 px-4"
                                                                 style="background-color: #175A95;">Pesan</span>
                                                         </div>
-                                                        <h6 class="text-dark">{{ $contact->message }}</h6>
+                                                        <h6 class="text-dark">{{ $newsReject->massage }}</h6>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $contact->created_at }}
+                                                                <p class="mb-0 fs-2 text-muted">{{ $newsReject->created_at }}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -115,7 +115,7 @@
                                         @empty
                                         @endforelse
 
-                                        @forelse ($contactDelete as $contactDelete)
+                                        {{-- @forelse ($contactDelete as $contactDelete)
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
@@ -142,9 +142,9 @@
                                                 </a>
                                             </li>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
-                                        @forelse ($reports as $report)
+                                        {{-- @forelse ($reports as $report)
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start justify-content-between chat-user"
@@ -172,9 +172,9 @@
                                                 </a>
                                             </li>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
-                                        @forelse ($reportsDelete as $reportDelete)
+                                        {{-- @forelse ($reportsDelete as $reportDelete)
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start justify-content-between chat-user"
@@ -213,7 +213,7 @@
                             <div class="chat-container h-100 w-100">
                                 <div class="chat-box-inner-part h-100">
                                     <div class="chatting-box app-email-chatting-box">
-                                        {{-- @forelse ($contactUs2 as $contactUs)
+                                        @forelse ($newsRejectRead as $contactUs)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Pesan</h5>
                                             </div>
@@ -244,7 +244,7 @@
                                                                 <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
                                                                 </p>
                                                                 <p class="mb-3 text-dark">
-                                                                    {{ $contactUs->message }}
+                                                                    {{ $contactUs->massage }}
                                                                 </p>
                                                                 <p class="mb-0 text-dark">Regards,</p>
                                                                 <h6 class="fw-semibold mb-0 text-dark pb-1">
@@ -279,7 +279,7 @@
                                         @empty
                                         @endforelse
 
-                                        @forelse ($contactDelete2 as $contactDelete2)
+                                        {{-- @forelse ($contactDelete2 as $contactDelete2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Pesan</h5>
                                             </div>
@@ -351,10 +351,9 @@
                                                 </div>
                                             </div>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
-
-                                        @forelse ($reports2 as $report2)
+                                        {{-- @forelse ($reports2 as $report2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Laporan</h5>
                                             </div>
@@ -421,10 +420,9 @@
                                                 </div>
                                             </div>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
-
-                                        @forelse ($reportsDelete2 as $reportDelete2)
+                                        {{-- @forelse ($reportsDelete2 as $reportDelete2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Laporan</h5>
                                             </div>
@@ -576,59 +574,166 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('admin/dist/js/apps/chat.js') }}"></script>
+<script src="{{ asset('admin/dist/js/apps/chat.js') }}"></script>
 
-    <script>
-        $('.btn-delete-contactus').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/contact/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
+<script>
+    $('.btn-delete-contactus').click(function() {
+        id = $(this).data('id')
+        var actionUrl = `/contact/${id}`;
+        $('#form-delete').attr('action', actionUrl);
+        $('#modal-delete').modal('show')
+    })
+</script>
 
-    <script>
-        $('.btn-recovery-contactus').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/contact-recovery/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
+<script>
+    $('.btn-recovery-contactus').click(function() {
+        id = $(this).data('id')
+        var actionUrl = `/contact-recovery/${id}`;
+        $('#form-delete').attr('action', actionUrl);
+        $('#modal-delete').modal('show')
+    })
+</script>
 
-    <script>
-        $('.btn-release-contactus').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/contact-delete/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
+<script>
+    $('.btn-release-contactus').click(function() {
+        id = $(this).data('id')
+        var actionUrl = `/contact-delete/${id}`;
+        $('#form-delete').attr('action', actionUrl);
+        $('#modal-delete').modal('show')
+    })
+</script>
 
-    <script>
-        $('.btn-delete-report').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/report/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
+<script>
+    $('.btn-delete-report').click(function() {
+        id = $(this).data('id')
+        var actionUrl = `/report/${id}`;
+        $('#form-delete').attr('action', actionUrl);
+        $('#modal-delete').modal('show')
+    })
+</script>
 
-    <script>
-        $('.btn-recovery-report').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/report-recovery/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
+<script>
+    $('.btn-recovery-report').click(function() {
+        id = $(this).data('id')
+        var actionUrl = `/report-recovery/${id}`;
+        $('#form-delete').attr('action', actionUrl);
+        $('#modal-delete').modal('show')
+    })
+</script>
 
-    <script>
-        $('.btn-release-report').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/report-delete/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
+<script>
+    $('.btn-release-report').click(function() {
+        id = $(this).data('id')
+        var actionUrl = `/report-delete/${id}`;
+        $('#form-delete').attr('action', actionUrl);
+        $('#modal-delete').modal('show')
+    })
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const contactButton = document.getElementById("contactButton");
+        const reportButton = document.getElementById("reportButton");
+        const trashButton = document.getElementById("trashButton");
+
+        contactButton.addEventListener("click", function() {
+            toggleItems("contact");
+        });
+
+        reportButton.addEventListener("click", function() {
+            toggleItems("report");
+        });
+
+        trashButton.addEventListener("click", function() {
+            toggleItems("trash");
+        });
+
+        function toggleItems(category) {
+            const allItems = document.querySelectorAll(".chat-users li");
+            allItems.forEach(function(item) {
+                if (item.classList.contains(category)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.report').hide();
+        $('.trash').hide();
+
+        $('.chat-report').hide();
+        $('.chat-contactDel').hide();
+        $('.chat-reportDel').hide();
+        $('.chat-content').hide();
+
+        $('.buttonContact').click(function() {
+            var chatId = $(this).data('chat-id');
+            $('.chat-report').hide();
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-content').hide();
+            $('#chat_content_' + chatId).show();
+        });
+
+        $('.buttonReport').click(function() {
+            var chatId = $(this).data('chat-id');
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-content').hide();
+            $('.chat-report').hide();
+            $('#chat_report_' + chatId).show();
+        });
+
+        $('.buttonDelete').click(function() {
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-content').hide();
+            $('.chat-report').hide();
+        });
+
+        $('.show-contact').click(function() {
+            var chatId = $(this).data('chat-id');
+            $('.chat-report').hide();
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-content').hide();
+            $('#chat_content_' + chatId).show();
+        });
+
+        $('.show-report').click(function() {
+            var chatId = $(this).data('chat-id');
+            $('.chat-content').hide();
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-report').hide();
+            $('#chat_report_' + chatId).show();
+        });
+
+        $('.show-delete-contact').click(function() {
+            var chatId = $(this).data('chat-id');
+            $('.chat-content').hide();
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-report').hide();
+            $('#chat_contactDel_' + chatId).show();
+        });
+
+        $('.show-delete-report').click(function() {
+            var chatId = $(this).data('chat-id');
+            $('.chat-content').hide();
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-report').hide();
+            $('#chat_reportDel_' + chatId).show();
+        });
+    });
+</script>
+
 @endsection
