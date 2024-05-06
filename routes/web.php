@@ -398,3 +398,7 @@ Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('new
 Route::get('pw-reset',function(){
     return view('pages.auth.passwords.reset');
 })->name('reset');
+
+Route::get('load-coin', function () {
+    return view('pages.user.load-coin.load');
+});

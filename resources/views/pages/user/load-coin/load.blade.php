@@ -30,11 +30,11 @@
             left: 50%;
             width: 100px;
             height: 100px;
-            border-top: 4px solid #3498db; /* Warna garis */
+            border-top: 5px solid #3498db; /* Warna garis */
             border-radius: 50%; /* Membuat garis menjadi lingkaran */
             transform-origin: center;
             animation: rotateLine 5s linear infinite; /* Animasi rotasi */
-            z-index: 2;
+            /* z-index: 2; */
         }
 
         /* Keyframes untuk animasi garis berputar */

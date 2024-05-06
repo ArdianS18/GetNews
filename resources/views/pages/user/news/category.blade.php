@@ -80,7 +80,7 @@
                             @forelse ($news as $news)
                                 <div class="news-card-one">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $news->photo) }}"width="100%" height="80">
+                                        <img src="{{ asset('storage/' . $news->photo) }}"width="100%" height="80" style="object-fit: cover;">
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 20, $end = '...')  !!}</a>
