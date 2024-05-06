@@ -79,7 +79,7 @@
 
                             <div class="order-md-1" style="margin-left:20px;">
                                 <h4>{{ $item->name }}</h4>
-                                <p>{!! Illuminate\Support\Str::limit($item->content, $limit = 300, $end = '...')  !!}</p>
+                                <p>{!! implode(' ', array_slice(explode(' ', strip_tags($item->content)), 0, 40)) !!}{{ strlen(strip_tags($item->content)) > 10 ? '...' : '' }}</p>
                             </div>
                         </div>
                     </div>
@@ -166,3 +166,4 @@
         @endforelse
     </div>
 @endsection
+
