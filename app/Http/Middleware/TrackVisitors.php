@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,13 +17,18 @@ class TrackVisitors
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $ip = $request->ips();
+        $ipAddress = $request->ip();
+        $visitorsKey = 'visitors';
 
-        $visitors = Session::get('visitor', []);
+        if (!Cache::has($visitorsKey)) {
+            Cache::put($visitorsKey, []);
+        }
 
-        if (!in_array($ip, $visitors)) {
-            $visitors[] = $ip;
-            Session::put('visitor', $visitors);
+        $visitors = Cache::get($visitorsKey);
+
+        if (!in_array($ipAddress, $visitors)) {
+            $visitors[] = $ipAddress;
+            Cache::put($visitorsKey, $visitors);
         }
 
         return $next($request);
