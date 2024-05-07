@@ -23,6 +23,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\ViewController;
 use App\Models\Category;
 
 /*
@@ -38,13 +39,18 @@ use App\Models\Category;
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->name('mobile.header');
-Route::get('/', [DashboardController::class, 'home'])->name('home');
+
+Route::middleware('visitors')->group(function(){
+    Route::get('/', [DashboardController::class, 'home'])->name('home');
+});
+
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.admin'); //dashboard
+    Route::get('/visitors/count', [ViewController::class, 'index']);
     // Route::get('author-admin', [AuthorController::class, 'index'])->name('author.admin');
     Route::get('author-admin-list', [AuthorController::class, 'listauthor'])->name('author.admin.list'); //list author approved
     Route::get('list-author', function () {

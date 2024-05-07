@@ -18,6 +18,7 @@
         }
     </style>
     <link rel="stylesheet" href="{{ 'admin/dist/libs/prismjs/themes/prism-okaidia.min.css' }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
 
 
@@ -40,7 +41,7 @@
                         </div>
                         <div style="color: #41739e" class="ms-4 col-lg-11">
                             <h4>Jumlah Pengunjung</h4>
-                            <h3 style="color: #41739e">{{ $webVisitors }}</h3>
+                            <h3 style="color: #41739e"><span id="visitorCount">Loading..</span></h3>
                         </div>
                     </div>
                 </div>
@@ -408,6 +409,21 @@
 
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+
+    <script>
+         $(document).ready(function() {
+            function updateVisitorCount() {
+                $.ajax({
+                    url: '/visitors/count',
+                    method: 'GET',
+                    success: function(response) {
+                        $('#visitorCount').text(response.visitorCount);
+                    }
+                });
+            }
+        });
+    </script>
+
     <script>
         var monthlyData = <?php echo json_encode($news2); ?>;
 
@@ -457,8 +473,6 @@
         chart.render();
 
 
-
-
         var options = {
           series: [
             {
@@ -498,5 +512,6 @@
         chart.render();
 
     </script>
+
 
 @endsection

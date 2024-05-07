@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\ViewInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\ViewRequest;
 use App\Models\View;
 use App\Services\ViewService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ViewController extends Controller
 {
@@ -24,7 +26,8 @@ class ViewController extends Controller
      */
     public function index()
     {
-        //
+        $visitorCount = count(Session::get('visitors', []));
+        return response()->json(['visitorCount' => $visitorCount]);
     }
 
     /**
