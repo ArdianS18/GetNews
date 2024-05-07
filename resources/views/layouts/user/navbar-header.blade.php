@@ -105,21 +105,21 @@
                         <div class="ms-2">
                             <ul class="navbar-nav mx-auto">
                                 <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
-                                        @role('author')
-                                        <a href="{{ route('profile.index') }}">
-                                            <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
-                                        </a>
-                                        @endrole
-                                        @role('user')
-                                        <a href="{{ route('profile.user') }}">
-                                            <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
-                                        </a>
-                                        @endrole
-                                        @role('admin')
-                                        <a href="/dashboard">
-                                            <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
-                                        </a>
-                                        @endrole
+                                    @role('author')
+                                    <a href="{{ route('profile.index') }}">
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                    </a>
+                                    @endrole
+                                    @role('user')
+                                    <a href="{{ route('profile.user') }}">
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                    </a>
+                                    @endrole
+                                    @role('admin')
+                                    <a href="/dashboard">
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                    </a>
+                                    @endrole
                                 </div>
 
                             </ul>

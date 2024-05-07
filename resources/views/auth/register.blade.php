@@ -30,7 +30,7 @@
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">
         <div class="d-none d-lg-flex col-lg-7 p-0">
-            <div class="auth-cover-bg auth-cover-bg-color"  style="background-color: #F7F7F7">
+            <div class="auth-cover-bg auth-cover-bg-color" style="background-color: #F7F7F7">
                 <div class="mt-4 ms-4">
                     <a href="{{route('login')}}">
                         <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
@@ -39,7 +39,7 @@
 
                 <div class="d-flex justify-content-center align-items-center">
                     
-                    <img src="{{asset('assets/img/auth/bg-registrasi.svg')}}" width="590px" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+                    <img src="{{asset('assets/img/auth/bg-regis.svg')}}" width="590px" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
                 </div>
 
             </div>
