@@ -38,7 +38,11 @@ use App\Models\Category;
 
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->name('mobile.header');
-Route::get('/', [DashboardController::class, 'home'])->name('home');
+
+Route::middleware('web')->group(function(){
+    Route::get('/', [DashboardController::class, 'home'])->name('home');
+});
+
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
 
 Auth::routes(['verify' => true]);

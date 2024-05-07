@@ -22,7 +22,7 @@ use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
-
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -62,8 +62,7 @@ class DashboardController extends Controller
     }
 
     public function index(Request $request){
-        $visitors = $request->session()->get('web_visitors', []);
-        $webVisitors = count($visitors);
+        $webVisitors = count(Session::get('visitors', []));;
 
         $users = $this->user->whereRelation();
 
@@ -81,14 +80,6 @@ class DashboardController extends Controller
 
     public function home(Request $request)
     {
-        $ip = $request->ip();
-        $visitors = $request->session()->get('web_visitors',[]);
-
-        if (!in_array($ip, $visitors)) {
-            $visitors[] = $ip;
-            $request->session()->put('web_visitors', $visitors);
-        }
-
         $newsTrending = $this->news->get();
         $news = $this->news->get();
         $categories = $this->category->get();
