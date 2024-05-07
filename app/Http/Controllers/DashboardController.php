@@ -62,7 +62,9 @@ class DashboardController extends Controller
     }
 
     public function index(Request $request){
-        $webVisitors = $request->session()->get('web_visitors', []);
+        $visitors = $request->session()->get('web_visitors', []);
+        $webVisitors = count($visitors);
+
         $users = $this->user->whereRelation();
 
         $authors = $this->author->get()->count();
