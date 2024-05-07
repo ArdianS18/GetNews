@@ -38,6 +38,8 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function StatusBanned($author) : mixed;
     public function whereDate($request) : mixed;
 
+    public function getById($category_id) : mixed;
+
     public function searchStatus(mixed $id, Request $request) : mixed;
     public function searchAll(Request $request) : mixed;
 

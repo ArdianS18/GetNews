@@ -577,23 +577,23 @@
                             <div class="comment-box-title">
                                 <h1><b>Berita Relevan</b></h1>
                             </div>
-                            @forelse ($newsCategories as $newsCategory)
+                            @forelse ($newsCategories as $news)
                                 <div class="news-card-five">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $newsCategory->news->photo) }}"
-                                            alt="{{ $newsCategory->news->photo }}" width="100%" height="130"
+                                        <img src="{{ asset('storage/' . $news->photo) }}"
+                                            alt="{{ $news->photo }}" width="100%" height="130"
                                             style="object-fit: cover" />
                                         <a data-toggle="tooltip" data-placement="top"
-                                            title="{{ $newsCategory->category->name }}"
-                                            href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
-                                            class="news-cat">{{ $newsCategory->category->name }}</a>
+                                            title="{{ $news->newsCategories[0]->category->name  }}"
+                                            href="{{ route('categories.show.user', ['category' => $news->newsCategories[0]->category->slug]) }}"
+                                            class="news-cat">{{ $news->newsCategories[0]->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a data-toggle="tooltip" data-placement="top"
-                                                title="{{ $newsCategory->news->name }}"
-                                                href="{{ route('news.user', ['news' => $newsCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
+                                                title="{{ $news->name }}"
+                                                href="{{ route('news.user', ['news' => $news->slug]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...') !!}</a>
                                         </h3>
-                                        <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
+                                        <p>{!! Illuminate\Support\Str::limit(strip_tags($news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
                                                     href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>

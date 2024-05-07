@@ -211,7 +211,9 @@ class NewsController extends Controller
         $populars = $this->news->getByPopular('up');
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
-        $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
+        $category_id = $this->newsCategories->get()->whereIn('news_id', $news)->pluck('category_id')->first();
+        // $newsCategories = $this->newsCategories->get()->whereIn('category_id', $category_id);
+        $newsCategories = $this->news->getById($category_id);
         $authors = $this->author->get();
         $tagPopulars = $this->tags->getByPopular();
 

@@ -206,6 +206,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function getById($category_id): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('newsCategories', 'category_id' , $category_id)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->take(6)
+            ->get();
+    }
+
     public function getAllNews(): mixed
     {
         return $this->model->query()
