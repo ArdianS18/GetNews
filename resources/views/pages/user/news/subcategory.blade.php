@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         @forelse ($newsSubCategories as $newsSubCategory)
                             <div class="col-md-6">
                                 <div class="news-card-thirteen">
@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a  data-toggle="tooltip" data-placement="top" title="{{ $newsSubCategory->news->name }}"
-                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug]) }}">{{ $newsSubCategory->news->name }}</a>
+                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($newsSubCategory->news->name), 50, '...') !!}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="news-card-info">
                                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news->name }}"
-                                                    href="{{ route('news.user', ['news' => $news->slug]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...')  !!}</a>
+                                                    href="{{ route('news.user', ['news' => $news->slug]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 40, $end = '...')  !!}</a>
                                                 </h3>
                                                 <ul class="news-metainfo list-style">
                                                     <li><i class="fi fi-rr-calendar-minus"></i>

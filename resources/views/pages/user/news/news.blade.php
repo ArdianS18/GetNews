@@ -131,7 +131,7 @@
                             </div>
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 20, $end = '...')  !!}</a>
+                                        href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 40, $end = '...')  !!}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a

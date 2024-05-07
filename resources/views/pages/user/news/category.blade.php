@@ -82,7 +82,7 @@
                                         <img src="{{ asset('storage/' . $news->photo) }}"width="100%" height="80" style="object-fit: cover;">
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 20, $end = '...')  !!}</a>
+                                        <h3><a href="#">{!! Illuminate\Support\Str::limit($news->name, $limit = 40, $end = '...')  !!}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i>
