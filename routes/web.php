@@ -40,7 +40,7 @@ use App\Models\Category;
 Route::get('navbar-user', [DashboardController::class, 'navbar'])->name('navbar');
 Route::get('mobile-header-user', [DashboardController::class, 'mobileHeader'])->name('mobile.header');
 
-Route::middleware('web')->group(function () {
+Route::middleware(['visitor'])->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home');
 });
 
