@@ -497,55 +497,53 @@
                         <h3 class="comment-box-title mt-6">{{ $comments->count() }} Komentar</h3>
                         <div class="comment-item-wrap">
                             @forelse ($comments as $comment)
-                                @if ($comment->parent_id == null)
-                                    <div class="comment-item w-100">
-                                @else
-                                    <div class="comment-item reply w-100">
-                                @endif
-                                
-                                    <div class="comment-author-img">
-                                        <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
-                                            alt="Image" class="img-fluid" width="80px" height="80px"
-                                            style="border-radius: 50%; object-fit:cover;" />
-                                    </div>
-
-                                    <div class="comment-author-wrap">
-                                        <div class="comment-author-info">
-                                            <div class="row align-items-start">
-                                                <div class="col-md-9 col-sm-3 col-3 order-md-1 order-sm-1 order-1">
-                                                    <div class="comment-author-name">
-                                                        <h5>{{ $comment->user->name }}</h5>
-                                                        <span
-                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
-                                                    </div>
+                            @if ($comment->parent_id == null)
+                                <div class="comment-item w-100">
+                            @else
+                                <div class="comment-item reply w-100">
+                            @endif
+                                <div class="comment-author-img">
+                                    <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
+                                        alt="Image" class="img-fluid" width="80px" height="80px" style="border-radius: 50%; object-fit: cover;" />
+                                </div>
+                        
+                                <div class="comment-author-wrap">
+                                    <div class="comment-author-info">
+                                        <div class="row align-items-start">
+                                            <div class="col-md-9 col-sm-9 col-9 order-md-1 order-sm-1 order-1">
+                                                <div class="comment-author-name">
+                                                    <h5>{{ $comment->user->name }}</h5>
+                                                    <span class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
                                                 </div>
-                                                <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
-                                                    @if ($comment->parent_id == null)
-                                                        <a href="javascript:void(0)" class="reply-btn"
-                                                            onclick="showReplyForm({{ $comment->id }})">Reply</a>
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
-                                                    <div class="comment-text">
-                                                        <p>{{ $comment->content }}</p>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
+                                                @if ($comment->parent_id == null)
+                                                    <a href="javascript:void(0)" class="reply-btn" onclick="showReplyForm({{ $comment->id }})">Reply</a>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
+                                                <div class="comment-text">
+                                                    <p>{{ $comment->content }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div id="reply-form-{{ $comment->id }}" class="reply-form" style="display: none;">
-                                        <form
-                                            action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}"
-                                            method="post">
-                                            @csrf
-                                            <textarea name="content" placeholder="Type your reply here"></textarea>
-                                            <input type="submit" value="Submit Reply">
-                                        </form>
-                                    </div>
-                                
-                                @empty
-                            @endforelse
+                                </div>
+                        
+                                <div id="reply-form-{{ $comment->id }}" class="reply-form mt-3" style="display: none;">
+                                    <form action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}" method="post">
+                                        @csrf
+                                        <textarea name="content" cols="100" rows="3" placeholder="Type your reply here"></textarea>
+                                        <div>
+                                            <button type="submit" class="btn-two w-100 btn btn-sm"
+                                                style="background-color: #0F4D8A">Kirim Balasan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        @empty
+                        @endforelse
+                        
                         </div>
                         <div id="cmt-form">
                             <div class="mb-30">
