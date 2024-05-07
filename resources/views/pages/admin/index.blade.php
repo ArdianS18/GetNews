@@ -41,7 +41,7 @@
                         </div>
                         <div style="color: #41739e" class="ms-4 col-lg-11">
                             <h4>Jumlah Pengunjung</h4>
-                            <h3 style="color: #41739e"><span id="visitorCount">Loading...</span></h3>
+                            <h3 style="color: #41739e"><span id="visitorCount"></span></h3>
                         </div>
                     </div>
                 </div>
@@ -414,7 +414,7 @@
          $(document).ready(function() {
             function updateVisitorCount() {
                 $.ajax({
-                    url: '/visitor/count',
+                    url: '/visitors/count',
                     method: 'GET',
                     success: function(response) {
                         $('#visitorCount').text(response.visitorCount);
