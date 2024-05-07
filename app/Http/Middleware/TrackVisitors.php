@@ -17,8 +17,17 @@ class TrackVisitors
     public function handle(Request $request, Closure $next): Response
     {
         $ip = $request->getClientIp();
-        Session::push('visitor', $ip);
 
+        if ($request->method() === 'GET') {
+            Session::forget($ip);
+        }
+
+        $data = Session::get('visitor', []);
+
+        if (!in_array($ip, $data)) {
+            $data[] = $ip;
+            Session::put('visitor', $data);
+        }
         return $next($request);
     }
 }
