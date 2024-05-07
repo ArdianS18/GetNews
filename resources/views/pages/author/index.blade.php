@@ -223,8 +223,12 @@
                               <p class="ms-2">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d, Y') }}</p>
                             </div>
                             <div class="d-flex ms-4">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#e93314" d="M21 8q.8 0 1.4.6T23 10v2q0 .175-.038.375t-.112.375l-3 7.05q-.225.5-.75.85T18 21h-8q-.825 0-1.412-.587T8 19V8.825q0-.4.163-.762t.437-.638l5.425-5.4q.375-.35.888-.425t.987.175q.475.25.688.7t.087.925L15.55 8zM4 21q-.825 0-1.412-.587T2 19v-9q0-.825.588-1.412T4 8q.825 0 1.413.588T6 10v9q0 .825-.587 1.413T4 21"/></svg>
-                              <p class="ms-2">{{$news->count_like}}</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    viewBox="0 0 24 24">
+                                    <path fill="#E93314"
+                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                </svg>
+                              <p class="ms-2">{{$news->newsHasLikes->count()}}</p>
                             </div>
                           </div>
                         </div>
@@ -247,7 +251,7 @@
               </div>
               <!-- End Row -->
             </div>
-      
+
 
             <div class="tab-pane fade card-detail" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
               <div class="row p-2">

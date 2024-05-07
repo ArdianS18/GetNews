@@ -56,6 +56,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         // dd($request);
         return $this->model->query()
+            ->where('user_id', auth()->user()->id)
+            ->where('status', "active")
             ->when($request->search, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->search . '%');
             })->when($request->filter, function ($query) use ($request) {
@@ -65,14 +67,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->when($request->filter === 'terlama', function ($terlama) {
                     $terlama->oldest()->get();
                 });
-            })->when($request->category_id, function ($query) use ($request) {
-                $query->where('category_id', $request->category_id);
-            })->when($request->sub_category_id, function ($query) use ($request) {
-                $query->where('sub_category_id', $request->sub_category_id);
-            })->when($request->news_id, function ($query) use ($request) {
-                $query->where('news_id', $request->news_id);
             })
-            ->take(5)
+            ->latest()
+            ->take(8)
             ->get();
     }
 
@@ -199,7 +196,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('user_id', $user->id)
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->withCount('newsHasLikes')
             ->get();
     }
 
