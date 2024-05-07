@@ -16,13 +16,14 @@ class TrackVisitors
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $ip = $request->ips();
+        $ipList = $request->ips();
 
-        $visitors = Session::get('visitors', []);
+        $visitors = Session::get('visitor', []);
 
-        if (!in_array($ip, $visitors)) {
-            $visitors[] = $ip;
-            Session::put('visitors', $visitors);
+        foreach ($ipList as $ip) {
+            if (!in_array($ip, $visitors)) {
+                $visitors[] = $ip; // Menambahkan IP baru ke daftar pengunjung jika belum ada
+            }
         }
 
         return $next($request);
