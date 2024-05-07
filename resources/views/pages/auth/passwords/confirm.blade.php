@@ -23,64 +23,64 @@
 
 
 
-<body style="background-color: #F7F7F7">
+<body style="background-color: #FFFFFF">
 
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
         style="display: none; visibility: hidden"></iframe></noscript>
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">
         <div class="d-none d-lg-flex col-lg-7 p-0">
-            <div class="mt-3 ms-3">
-                <a href="{{route('login')}}">
-                    <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
-                </a>
-            </div>
-            <div class="auth-cover-bg auth-cover-bg-color d-flex align-items-center">
-                <img src="{{asset('assets/img/auth/bg-forget-password.svg')}}" width="520px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+            <div class="auth-cover-bg auth-cover-bg-color" style="background-color: #F7F7F7">
+                <div class="mt-3 ms-3">
+                    <a href="{{route('login')}}">
+                        <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
+                    </a>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{{asset('assets/img/auth/bg-forget-password.svg')}}" width="520px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
+                </div>
             </div>
         </div>
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4" >
-            <div class="w-100 h-100" style="background-color: #FFFFFF;border-radius:20px">
-                <div class="w-px-400 mx-auto">
-                    <h3 class="mb-3"  style="margin-top: 30%">Lupa Kata Sandi Anda?</h3>
-	                <p class="mt-4">Silakan masukkan alamat email yang terkait dengan akun Anda dan Kami akan mengirimkan email berisi tautan untuk mengatur ulang kata sandi Anda.</p>
-	
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
-                                {{ $error }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        @endforeach
-                    @endif
+            <div class="w-px-400 mx-auto">
+                <h3 class="mb-3">Lupa Kata Sandi Anda?</h3>
+                <p class="mb-5">Silakan masukkan alamat email yang terkait dengan akun Anda dan Kami akan mengirimkan email berisi tautan untuk mengatur ulang kata sandi Anda.</p>
 
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf                      
-                        <div class="mb-3">
-                            <label for="password" class=" form-label">{{ __('Password') }}</label>
-                            <input id="password" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
+                            {{ $error }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class=" form-label">{{ __('Confirm Password') }}</label>
-                            <input id="password" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                        </div>
-                        
-                        <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
-                            Kirim
-                        </button>
-                        <a href="/login" class="btn btn-md col-md-11 w-100 mt-4 btn-light-primary text-primary" style="background-color: #d5e3ef; color: #438ac8;">
-                            Kembali Ke Login
-                        </a>
-                    <input type="hidden">
-                        </form>
+                    @endforeach
+                @endif
 
-                    <div class="text-center mt-4">
-                            <p>Belum memiliki akun?<a style="color: #438ac8" href="{{route('register')}}"> Daftar Sekarang!</a></p>
+                <form method="POST" action="{{ route('password.update') }}">
+                    @csrf                      
+                    <div class="mb-3">
+                        <label for="password" class=" form-label">{{ __('Password') }}</label>
+                        <input id="password" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class=" form-label">{{ __('Confirm Password') }}</label>
+                        <input id="password" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                     </div>
                     
+                    <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
+                        Kirim
+                    </button>
+                    <a href="/login" class="btn btn-md col-md-11 w-100 mt-4" style="background-color: #d5e3ef; color: #438ac8;">
+                        Kembali Ke Login
+                    </a>
+                <input type="hidden">
+                    </form>
 
+                <div class="text-center mt-4">
+                        <p>Belum memiliki akun?<a style="color: #438ac8" href="{{route('register')}}"> Daftar Sekarang!</a></p>
                 </div>
+                
+
             </div>
         </div>
     </div>

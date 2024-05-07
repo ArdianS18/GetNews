@@ -485,7 +485,7 @@
                                 class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
-                        <h3 class="comment-box-title mt-5">{{ $comments->count() }} Komentar</h3>
+                        <h3 class="comment-title mt-5">{{ $comments->count() }} Komentar</h3>
                         <div class="comment-item-wrap">
                             @forelse ($comments as $comment)
                                 @if ($comment->parent_id == null)
@@ -509,10 +509,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
-                                                        {{-- @if ($comment->parent_id == null)
-                                                            <a href="javascript:void(0)" class="reply-btn"
-                                                                onclick="showReplyForm({{ $comment->id }})">Reply</a>
-                                                        @endif --}}
                                                         <div class="">
                                                             <i><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z"/></svg></i>
                                                         </div>
