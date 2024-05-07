@@ -16,25 +16,25 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <div class="row justify-content-center">
-                        @forelse ($news as $news)
+                        @forelse ($news as $item)
                             <div class="col-md-6">
                                 <div class="news-card-thirteen">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $news->news->photo) }}"
-                                            alt="{{ $news->news->photo }}" width="400px" height="300"
+                                        <img src="{{ asset('storage/' . $item->news->photo) }}"
+                                            alt="{{ $item->news->photo }}" width="400px" height="300"
                                             style="width: 100%;object-fit:cover;">
-                                        <a href="{{ route('categories.show.user', ['category' => $news->news->newsCategories[0]->category->slug]) }}"
-                                            class="news-cat">{{ $news->news->newsCategories[0]->category->name }}</a>
+                                        <a href="{{ route('categories.show.user', ['category' => $item->news->newsCategories[0]->category->slug]) }}"
+                                            class="news-cat">{{ $item->news->newsCategories[0]->category->name }}</a>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a
-                                                href="{{ route('news.user', ['news' => $news->news->slug]) }}">{{ $news->news->name }}</a>
+                                                href="{{ route('news.user', ['news' => $item->news->slug]) }}">{{ $item->news->name }}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ $news->news->created_at->format('M d, Y') }}</a>
+                                                    href="javascript:void(0)">{{ $item->news->created_at->format('M d, Y') }}</a>
                                             </li>
-                                            <li><i class="fi fi-rr-eye"></i>{{ $news->news->views->count() }}</li>
+                                            <li><i class="fi fi-rr-eye"></i>{{ $item->news->views->count() }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -51,13 +51,13 @@
                         @endforelse
                     </div>
                     <ul class="page-nav list-style text-center mt-20">
-                            <li><a href="{{ $news->previousPageUrl }}"><i class="flaticon-arrow-left"></i></a></li>
-                            @for ($i = 1; $i <= $news->lastPage; $i++)
+                            <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
+                            @for ($i = 1; $i <= $news->lastPage(); $i++)
                                 <li><a href="{{ $news->url($i) }}"
-                                        class="btn btn-black {{ $news->currentPage == $i ? 'active' : '' }}">{{ $i }}</a>
+                                        class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
                                 </li>
                             @endfor
-                            <li><a href="{{ $news->nextPageUrl }}"><i class="flaticon-arrow-right"></i></a></li>
+                            <li><a href="{{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
                     </ul>
                 </div>
 
