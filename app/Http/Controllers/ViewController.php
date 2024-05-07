@@ -26,7 +26,7 @@ class ViewController extends Controller
      */
     public function index()
     {
-        $visitorCount = count(Session::get('visitors', []));
+        $visitorCount = count(Session::get('visitor', []));
         return response()->json(['visitorCount' => $visitorCount]);
     }
 

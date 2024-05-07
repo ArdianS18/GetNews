@@ -16,13 +16,13 @@ class TrackVisitors
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $ip = $request->getClientIp();
+        $ip = $request->ips();
 
-        $visitors = Session::get('visitors', []);
+        $visitors = Session::get('visitor', []);
 
         if (!in_array($ip, $visitors)) {
             $visitors[] = $ip;
-            Session::put('visitors', $visitors);
+            Session::put('visitor', $visitors);
         }
 
         return $next($request);
