@@ -213,8 +213,9 @@ class NewsController extends Controller
         $tags = $this->newsTag->show($newsId);
         $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
         $authors = $this->author->get();
+        $tagPopulars = $this->tags->getByPopular();
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories','authors'));
+        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories','authors','tagPopulars'));
     }
 
     /**

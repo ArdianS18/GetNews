@@ -495,239 +495,237 @@
                         @empty
                         @endforelse
                         <h3 class="comment-box-title mt-6">{{ $comments->count() }} Komentar</h3>
-                        @forelse ($comments as $comment)
-                            @if ($comment->parent_id == null)
-                                <div class="comment-item-wrap">
+                        <div class="comment-item-wrap">
+                            @forelse ($comments as $comment)
+                                @if ($comment->parent_id == null)
+                                    <div class="comment-item w-100">
                                 @else
-                                    <div class="comment-item-wrap ms-5">
-                            @endif
-                            <div class="comment-item">
-                                <div class="comment-author-img">
-                                    <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
-                                        alt="Image" width="80px" height="80px"
-                                        style="border-radius: 50%; object-fit:cover;" />
-                                </div>
+                                    <div class="comment-item reply w-100">
+                                @endif
+                                
+                                    <div class="comment-author-img">
+                                        <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
+                                            alt="Image" class="img-fluid" width="80px" height="80px"
+                                            style="border-radius: 50%; object-fit:cover;" />
+                                    </div>
 
-                                <div class="comment-author-wrap">
-                                    <div class="comment-author-info">
-                                        <div class="row align-items-start">
-                                            <div class="col-md-9 col-sm-3 col-3 order-md-1 order-sm-1 order-1">
-                                                <div class="comment-author-name">
-                                                    <h5>{{ $comment->user->name }}</h5>
-                                                    <span
-                                                        class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
+                                    <div class="comment-author-wrap">
+                                        <div class="comment-author-info">
+                                            <div class="row align-items-start">
+                                                <div class="col-md-9 col-sm-3 col-3 order-md-1 order-sm-1 order-1">
+                                                    <div class="comment-author-name">
+                                                        <h5>{{ $comment->user->name }}</h5>
+                                                        <span
+                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
-                                                @if ($comment->parent_id == null)
-                                                    <a href="javascript:void(0)" class="reply-btn"
-                                                        onclick="showReplyForm({{ $comment->id }})">Reply</a>
-                                                @endif
-                                            </div>
-                                            <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
-                                                <div class="comment-text">
-                                                    <p>{{ $comment->content }}</p>
+                                                <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
+                                                    @if ($comment->parent_id == null)
+                                                        <a href="javascript:void(0)" class="reply-btn"
+                                                            onclick="showReplyForm({{ $comment->id }})">Reply</a>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
+                                                    <div class="comment-text">
+                                                        <p>{{ $comment->content }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div id="reply-form-{{ $comment->id }}" class="reply-form" style="display: none;">
-                                    <form
-                                        action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}"
-                                        method="post">
-                                        @csrf
-                                        <textarea name="content" placeholder="Type your reply here"></textarea>
-                                        <input type="submit" value="Submit Reply">
-                                    </form>
-                                </div>
-                            </div>
-                </div>
-            @empty
-                @endforelse
-
-                <div id="cmt-form">
-                    <div class="mb-30">
-                        <h3 class="comment-box-title">Tinggalkan Komentar</h3>
-                    </div>
-                    <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
-                        method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <textarea name="content" id="messages" cols="30" rows="10" placeholder="Isi komentar disini"></textarea>
-                                </div>
-                            </div>
-                            @auth
-                                <div class="d-flex justify-content-end mt-3">
-                                    <button type="submit" class="btn-two"
-                                        style="background-color: #0F4D8A">Komentar</button>
-                                </div>
-                            @else
-                                <div class="d-flex justify-content-end mt-3">
-                                    <button type="button" class="btn-two not-login"
-                                        style="background-color: #0F4D8A">Komentar</button>
-                                </div>
-                            @endauth
+                                    <div id="reply-form-{{ $comment->id }}" class="reply-form" style="display: none;">
+                                        <form
+                                            action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $comment->id]) }}"
+                                            method="post">
+                                            @csrf
+                                            <textarea name="content" placeholder="Type your reply here"></textarea>
+                                            <input type="submit" value="Submit Reply">
+                                        </form>
+                                    </div>
+                                
+                                @empty
+                            @endforelse
                         </div>
-                    </form>
-                </div>
-
-                <div class="mt-5">
-                    <div class="comment-box-title">
-                        <h1><b>Berita Relevan</b></h1>
-                    </div>
-                    @forelse ($newsCategories as $newsCategory)
-                        <div class="news-card-five">
-                            <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newsCategory->news->photo) }}"
-                                    alt="{{ $newsCategory->news->photo }}" width="100%" height="130"
-                                    style="object-fit: cover" />
-                                <a data-toggle="tooltip" data-placement="top"
-                                    title="{{ $newsCategory->category->name }}"
-                                    href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $newsCategory->category->name }}</a>
+                        <div id="cmt-form">
+                            <div class="mb-30">
+                                <h3 class="comment-box-title">Tinggalkan Komentar</h3>
                             </div>
-                            <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top"
-                                        title="{{ $newsCategory->news->name }}"
-                                        href="{{ route('news.user', ['news' => $newsCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
-                                </h3>
-                                <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
-                                <ul class="news-metainfo list-style">
-                                    <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                            <form action="{{ route('comment.create', ['news' => $news->id]) }}" class="comment-form"
+                                method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <textarea name="content" id="messages" cols="30" rows="10" placeholder="Isi komentar disini"></textarea>
+                                        </div>
+                                    </div>
+                                    @auth
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="submit" class="btn-two"
+                                                style="background-color: #0F4D8A">Komentar</button>
+                                        </div>
+                                    @else
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button type="button" class="btn-two not-login"
+                                                style="background-color: #0F4D8A">Komentar</button>
+                                        </div>
+                                    @endauth
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="mt-5">
+                            <div class="comment-box-title">
+                                <h1><b>Berita Relevan</b></h1>
+                            </div>
+                            @forelse ($newsCategories as $newsCategory)
+                                <div class="news-card-five">
+                                    <div class="news-card-img">
+                                        <img src="{{ asset('storage/' . $newsCategory->news->photo) }}"
+                                            alt="{{ $newsCategory->news->photo }}" width="100%" height="130"
+                                            style="object-fit: cover" />
+                                        <a data-toggle="tooltip" data-placement="top"
+                                            title="{{ $newsCategory->category->name }}"
+                                            href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
+                                            class="news-cat">{{ $newsCategory->category->name }}</a>
+                                    </div>
+                                    <div class="news-card-info">
+                                        <h3><a data-toggle="tooltip" data-placement="top"
+                                                title="{{ $newsCategory->news->name }}"
+                                                href="{{ route('news.user', ['news' => $newsCategory->news->slug]) }}">{!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...') !!}</a>
+                                        </h3>
+                                        <p>{!! Illuminate\Support\Str::limit(strip_tags($newsCategory->news->content), 150, '...') !!}</p>
+                                        <ul class="news-metainfo list-style">
+                                            <li><i class="fi fi-rr-calendar-minus"></i><a
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                                            </li>
+                                            <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @empty
+                            @endforelse
+                        </div>  
+                    </article>
+                </div>
+            
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Kategori</h3>
+                            <ul class="category-widget list-style">
+                                @foreach ($totalCategories as $category)
+                                    <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
+                                            href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
+                                                src="{{ asset('assets/img/icons/arrow-right.svg') }}"
+                                                alt="Image">{{ $category->name }}
+                                            <span>({{ $category->total }})</span></a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Berita Popular</h3>
+                            <div class="pp-post-wrap">
+                                @forelse ($populars as $popular)
+                                    <div class="news-card-one">
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $popular->photo) }}" style="object-fit: cover"
+                                                alt="Image" width="100%" height="80">
+                                        </div>
+                                        <div class="news-card-info">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}"
+                                                    href="{{ route('news.user', ['news' => $popular->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
+                                            </h3>
+                                            <ul class="news-metainfo list-style">
+                                                <li>
+
+                                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                            viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
+                                                                fill="#E93314" />
+                                                        </svg></i><a
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->upload_date)->translatedFormat('d F Y') }}</a>
+                                                </li>
+
+                                                <li>
+                                                <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="#e93314"
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                                                </svg></i>
+                                                <a href="javascript:void(0)">{{ $popular->views->count() }}</a>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @empty
+                                @endforelse
+
+                            </div>
+                        </div>
+                        <div class="sidebar-widget" style="height: 700px">
+                            <h3 class="sidebar-widget-title">iklan</h3>
+                        </div>
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Popular Tags</h3>
+                            <ul class="tag-list list-style">
+                                @forelse ($tagPopulars as $tag)
+                                    <li><a data-toggle="tooltip" data-placement="top" title="{{ $tag->name }}"
+                                            href="{{ route('tag.show.user', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
-                                </ul>
+                                @empty
+                                @endforelse
+                            </ul>
+                        </div>
+                        <div class="sidebar-widget">
+                            <h3 class="sidebar-widget-title">Berita Terbaru</h3>
+                            <div class="pp-post-wrap">
+                                @forelse ($news_recents as $recent)
+                                    <div class="news-card-one">
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
+                                                alt="Image" width="100%" height="80">
+                                        </div>
+                                        <div class="news-card-info">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $recent->name }}"
+                                                    href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
+                                            </h3>
+                                            <ul class="news-metainfo list-style">
+                                                <li>
+
+                                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                            viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
+                                                                fill="#E93314" />
+                                                        </svg></i><a
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
+                                                </li>
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="#e93314"
+                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                                                </svg>
+                                                </i>{{ $recent->views->count() }}</li>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                @empty
+                                @endforelse
+
                             </div>
-                        </div>
-                    @empty
-                    @endforelse
-                </div>
-
-
-
-            </div>
-            <div class="col-lg-4">
-                <div class="sidebar">
-
-                    <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Kategori</h3>
-                        <ul class="category-widget list-style">
-                            @foreach ($totalCategories as $category)
-                                <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
-                                        href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
-                                            src="{{ asset('assets/img/icons/arrow-right.svg') }}"
-                                            alt="Image">{{ $category->name }}
-                                        <span>({{ $category->total }})</span></a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-
-
-                    <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Berita Popular</h3>
-                        <div class="pp-post-wrap">
-                            @forelse ($populars as $popular)
-                                <div class="news-card-one">
-                                    <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $popular->photo) }}" style="object-fit: cover"
-                                            alt="Image" width="100%" height="80">
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}"
-                                                href="{{ route('news.user', ['news' => $popular->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
-                                        </h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li>
-
-                                                <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                        viewBox="0 0 512 512">
-                                                        <path
-                                                            d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                            fill="#E93314" />
-                                                    </svg></i><a
-                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->upload_date)->translatedFormat('d F Y') }}</a>
-                                            </li>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="0 0 24 24">
-                                                <path fill="#e93314"
-                                                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                            </svg>
-                                            </i><span class="text-muted">{{ $popular->views->count() }}</span></li>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @empty
-                            @endforelse
-
-                        </div>
-                    </div>
-                    <div class="sidebar-widget" style="height: 700px">
-                        <h3 class="sidebar-widget-title">iklan</h3>
-                    </div>
-                    <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Popular Tags</h3>
-                        <ul class="tag-list list-style">
-                            @forelse ($tags as $tag)
-                                <li><a data-toggle="tooltip" data-placement="top" title="{{ $tag->tag->name }}"
-                                        href="{{ route('tag.show.user', ['tag' => $tag->tag->slug]) }}">{{ $tag->tag->name }}</a>
-                                </li>
-                            @empty
-                            @endforelse
-                        </ul>
-                    </div>
-                    <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Berita Terbaru</h3>
-                        <div class="pp-post-wrap">
-                            @forelse ($news_recents as $recent)
-                                <div class="news-card-one">
-                                    <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
-                                            alt="Image" width="100%" height="80">
-                                    </div>
-                                    <div class="news-card-info">
-                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $recent->name }}"
-                                                href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
-                                        </h3>
-                                        <ul class="news-metainfo list-style">
-                                            <li>
-
-                                                <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                        viewBox="0 0 512 512">
-                                                        <path
-                                                            d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                            fill="#E93314" />
-                                                    </svg></i><a
-                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
-                                            </li>
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                viewBox="0 0 24 24">
-                                                <path fill="#e93314"
-                                                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                            </svg>
-                                            </i><span class="text-muted">{{ $recent->views->count() }}</span></li>
-
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @empty
-                            @endforelse
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
 
