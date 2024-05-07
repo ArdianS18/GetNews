@@ -40,7 +40,7 @@
                         </div>
                         <div style="color: #41739e" class="ms-4 col-lg-11">
                             <h4>Jumlah Pengunjung</h4>
-                            <h3 style="color: #41739e">530</h3>
+                            <h3 style="color: #41739e">{{ $webVisitors->count() }}</h3>
                         </div>
                     </div>
                 </div>
