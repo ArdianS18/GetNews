@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-6 col-5">
-                    <a href="{{route('user.berlangganan')}}" class="subscribe-btn">Berlangganan<i class="flaticon-right-arrow"></i></a>
+                    <a href="{{route('user.berlangganan')}}" class="subscribe-btn">Subscribe<i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
                     <a class="navbar-brand" href="/">

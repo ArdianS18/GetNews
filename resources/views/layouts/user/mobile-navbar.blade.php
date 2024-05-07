@@ -36,7 +36,7 @@
             @endforeach
         </div>
         <div class="offcanvas-contact-info">
-            <div class="option-item">
+            {{-- <div class="option-item">
                 <a href="/login" class="btn-two">Login</a>
             </div>
 
@@ -45,7 +45,41 @@
                 <div class="option-item">
                     <button class="btn-two" id="logoutBtn">Log Out</button>
                 </div>
-            </form>
+            </form> --}}
+
+            @auth
+                <div class="ms-2">
+                    <ul class="navbar-nav mx-auto">
+                        <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
+                            @role('author')
+                            <a href="{{ route('profile.index') }}">
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                            </a>
+                            @endrole
+                            @role('user')
+                            <a href="{{ route('profile.user') }}">
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                            </a>
+                            @endrole
+                            @role('admin')
+                            <a href="/dashboard">
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                            </a>
+                            @endrole
+                        </div>
+
+                    </ul>
+                </div>
+                @if (Auth::check() && Auth::user()->roles() == "author")
+                @endif
+                @else
+
+                <div class="">
+                    <div class="option-item">
+                        <a href="/login" class="btn-two" id="signInBtn">Login</a>
+                    </div>
+                </div>
+            @endauth
         </div>
     </div>
 </div>
