@@ -598,7 +598,7 @@
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
                                                     href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                             </li>
-                                            <li><i class="fi fi-rr-clock-three"></i>11 Min Read</li>
+                                            <li><i class="fi fi-rr-eye"></i>{{ $news->views_count }}</li>
                                         </ul>
                                     </div>
                                 </div>
