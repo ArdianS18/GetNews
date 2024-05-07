@@ -64,7 +64,6 @@ class DashboardController extends Controller
 
     public function index(Request $request){
         $visitorsCount = count(Session::get('visitor', []));
-        // dd($visitorsCount);
         $users = $this->user->whereRelation();
 
         $authors = $this->author->get()->count();
@@ -76,7 +75,7 @@ class DashboardController extends Controller
         $news2 = $this->news->showCountMonth();
         $newsCategory = $this->newsCategory->trending();
 
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2','visitorsCount'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2', 'visitorsCount'));
     }
 
     public function home(Request $request)
