@@ -165,12 +165,13 @@ class DashboardController extends Controller
         $authors = Author::with('user')->where($author);
         $totalCategories = $this->category->showWhithCount();
         $news = $this->news->authorGetNews($user);
-        $comments = $this->comment->where($news);
+        $newsId = $news->pluck('id');
+        $comments = $this->comment->where($newsId);
         $newsCount = $this->news->get();
         $authors = $this->author->get();
         $news = $this->news->get();
 
-        return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','comments','newsCount','news'));
+        return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments'));
     }
 
     public function privacypolicy() {

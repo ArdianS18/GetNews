@@ -65,7 +65,7 @@
                             <div class="d-flex justify-content-end">
                                 <div class="d-flex">
                                     <button class="btn btn-sm px-5" style="background-color: #D9D9D9;">{{$newsCount->count()}} Berita</button>
-                                    <button class="btn btn-sm ms-3 px-5" style="background-color: #D9D9D9;">{{ $comments->count() }} Komentar</button>
+                                    <button class="btn btn-sm ms-3 px-5" style="background-color: #D9D9D9;">{{ $comments }} Komentar</button>
                                 </div>
                             </div>
 
@@ -94,23 +94,16 @@
                                         </div>
                                         <ul class="news-metainfo list-style">
                                             <li>
-                                                <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                        viewBox="0 0 512 512">
-                                                        <path
-                                                            d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                            fill="#0F4D8A" />
-                                                    </svg></i><a href="javascript:view(0)">{{ \Carbon\Carbon::parse($item->upload_date)->format('M d Y') }}</a>
+                                                <i class="fi fi-rr-calendar-minus"></i><a href="javascript:view(0)">{{ \Carbon\Carbon::parse($item->upload_date)->format('M d Y') }}</a>
                                             </li>
 
-                                            <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 512 512">
-                                                    <path
-                                                        d="M198 448h172c15.7 0 28.6-9.6 34.2-23.4l57.1-135.4c1.7-4.4 2.6-9 2.6-14v-38.6c0-21.1-17-44.6-37.8-44.6H306.9l18-81.5.6-6c0-7.9-3.2-15.1-8.3-20.3L297 64 171 191.3c-6.8 6.9-11 16.5-11 27.1v192c0 21.1 17.2 37.6 38 37.6z"
-                                                        fill="#0F4D8A" />
-                                                    <path d="M48 224h64v224H48z" fill="#0F4D8A" />
-                                                </svg>
-                                            </i><a href="javascript:void(0sing)">{{ $item->news_has_likes_count }}</a></li>
-
+                                            <i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24">
+                                                <path fill="#E93314"
+                                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                            </svg>
+                                            </i><a href="javascript:void(0sing)">{{ $item->newsHasLikes->count() }}</a></li>
                                             </li>
                                         </ul>
                                     </div>

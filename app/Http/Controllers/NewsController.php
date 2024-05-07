@@ -197,7 +197,7 @@ class NewsController extends Controller
 
         $userLike = $this->newsHasLike->where($news->id);
         $newsLike = $this->newsHasLike->where($news->id)->count();
-        $comments = $this->comment->where($newsId);
+        $comments = $this->comment->whereIn($newsId);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();

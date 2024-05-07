@@ -11,5 +11,5 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 
 interface CommentInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, WhereInterface
 {
-
+    public function whereIn($id) : mixed;
 }
