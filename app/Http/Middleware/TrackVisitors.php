@@ -18,7 +18,6 @@ class TrackVisitors
     {
         $ip = $request->getClientIp();
 
-        dd($ip);
         $visitors = Session::get('visitors', []);
 
         if (!in_array($ip, $visitors)) {
