@@ -217,22 +217,13 @@
                                         </span>
                                     </div>
                                 </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                            fill="#E93314" />
-                                        <a href=""></a>
-                                    </svg>
+                                <li><i class="fi fi-rr-calendar-minus"></i>
                                     <a
                                         href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
                                 </li>
-                                <li> <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
-                                        viewBox="0 0 24 24">
-                                        <path fill="#E93314"
-                                            d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                    </svg><span class="ms-2">{{ $news->views->count() }}</span>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#e93314" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg> 
+                                    <span class="ms-1">{{ $news->views->count() }}</span>
                                 </li>
                                 <li>
                                     @auth()
@@ -241,8 +232,8 @@
                                             @if (auth()->check())
                                                 <button type="submit" style="background: transparent;border:transparent"
                                                     class="like">
-                                                    <svg class="last" xmlns="http://www.w3.org/2000/svg" width="27"
-                                                        height="27" viewBox="0 0 24 24">
+                                                    <svg class="last" xmlns="http://www.w3.org/2000/svg" width="20"
+                                                        height="20" viewBox="0 0 24 24">
                                                         <path fill="#E93314"
                                                             d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                     </svg>
@@ -255,8 +246,8 @@
                                             @csrf
                                             <button type="submit" style="background: transparent;border:transparent"
                                                 class="liked">
-                                                <svg class="last" xmlns="http://www.w3.org/2000/svg" width="27"
-                                                    height="27" viewBox="0 0 24 24">
+                                                <svg class="last" xmlns="http://www.w3.org/2000/svg" width="21"
+                                                    height="21" viewBox="0 0 24 24">
                                                     <path fill="red"
                                                         d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
                                                 </svg>
@@ -494,7 +485,7 @@
                                 class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
-                        <h3 class="comment-box-title mt-6">{{ $comments->count() }} Komentar</h3>
+                        <h3 class="comment-box-title mt-5">{{ $comments->count() }} Komentar</h3>
                         <div class="comment-item-wrap">
                             @forelse ($comments as $comment)
                                 @if ($comment->parent_id == null)
@@ -504,8 +495,7 @@
                                 @endif
                                         <div class="comment-author-img">
                                             <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
-                                                alt="Image" class="img-fluid"
-                                                style="object-fit:cover;" />
+                                                alt="Image" class="img-fluid" width="90" style="object-fit:cover;" />
                                         </div>
                                         <div class="comment-author-wrap">
                                             <div class="comment-author-info">
@@ -513,20 +503,36 @@
                                                     <div class="col-md-9 col-sm-3 col-3 order-md-1 order-sm-1 order-1">
                                                         <div class="comment-author-name">
                                                             <h5>{{ $comment->user->name }}</h5>
-                                                            <span
-                                                                class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d, Y | g:i A') }}</span>
+                                                            <div class="d-flex">
+                                                                <span class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d,Y | g:i A') }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-sm-3 col-3 text-md-end order-md-2 order-sm-3 order-3">
-                                                        @if ($comment->parent_id == null)
+                                                        {{-- @if ($comment->parent_id == null)
                                                             <a href="javascript:void(0)" class="reply-btn"
                                                                 onclick="showReplyForm({{ $comment->id }})">Reply</a>
-                                                        @endif
+                                                        @endif --}}
+                                                        <div class="">
+                                                            <i><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z"/></svg></i>
+                                                        </div>
+                                                        <div class="mt-3">
+                                                            <i><svg class="last" xmlns="http://www.w3.org/2000/svg" width="19"
+                                                                    height="19" viewBox="0 0 24 24">
+                                                                    <path fill="#E93314"
+                                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                                </svg>
+                                                            </i>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
                                                         <div class="comment-text">
                                                             <p>{{ $comment->content }}</p>
                                                         </div>
+                                                        @if ($comment->parent_id == null)
+                                                            <a href="javascript:void(0)" class="reply-btn mt-3"
+                                                                onclick="showReplyForm({{ $comment->id }})">Balas</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -637,23 +643,13 @@
                                                     href="{{ route('news.user', ['news' => $popular->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
-                                                <li>
-
-                                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                                fill="#E93314" />
-                                                        </svg></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->upload_date)->translatedFormat('d F Y') }}</a>
+                                                <li><i class="fi fi-rr-calendar-minus"></i>
+                                                    <a href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->upload_date)->translatedFormat('d F Y') }}</a>
                                                 </li>
 
                                                 <li>
-                                                <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="#e93314"
-                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                                </svg></i>
+                                                <i><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24"><path fill="#e93314" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg> 
+                                                </i>
                                                 <a href="javascript:void(0)">{{ $popular->views->count() }}</a>
 
                                                 </li>
@@ -693,22 +689,11 @@
                                                     href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
-                                                <li>
-
-                                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            viewBox="0 0 512 512">
-                                                            <path
-                                                                d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                                fill="#E93314" />
-                                                        </svg></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
+                                                <li><i class="fi fi-rr-calendar-minus"></i>
+                                                    <a href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
                                                 </li>
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="#e93314"
-                                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24"><path fill="#e93314" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg>
                                                 </i>{{ $recent->views->count() }}</li>
 
                                                 </li>

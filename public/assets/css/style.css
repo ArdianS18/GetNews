@@ -5520,8 +5520,8 @@ article {
   border-bottom: none;
 }
 .comment-item-wrap .comment-item .comment-author-img {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   position: relative;
   top: 4px;
@@ -5562,7 +5562,7 @@ article {
   font-family: var(--secondaryFont);
   font-size: 15px;
   transition: var(--transition);
-  color: var(--secondaryColor);
+  color: var(--color-active);
 }
 
 .comment-box-title h4 {

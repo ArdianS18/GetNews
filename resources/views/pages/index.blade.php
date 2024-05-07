@@ -439,13 +439,12 @@
                             <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
+                    <div class="row">
                         @forelse ($generals as $general)
                             <div class="col-xl-6">
                                 <div class="news-card-twelve">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $general->photo) }}" alt="Image" width="100%" height="130" style="object-fit: cover"/>
-                                        {{-- <img src="assets/img/news/news-20.webp" alt="Image" /> --}}
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>

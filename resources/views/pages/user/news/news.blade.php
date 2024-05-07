@@ -42,7 +42,7 @@
                 <div class="col-md-6">
                     <div class="news-card-six">
                         <div class="news-card-img">
-                            <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="300" style="width: 100%;object-fit:cover;">
+                            <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" width="400px" height="250" style="width: 100%;object-fit:cover;">
                             @foreach ($subCategories as $subCategory)
                                 <p class="tag">
                                     <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $item->newsCategories[0]->category->name }}</a>
@@ -134,14 +134,7 @@
                                         href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 20, $end = '...')  !!}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
-                                    <li>
-
-                                        <i><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                height="20" viewBox="0 0 512 512">
-                                                <path
-                                                    d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                    fill="#E93314" />
-                                            </svg></i><a
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->upload_date)->translatedFormat('d F Y') }}</a>
                                     </li>
 
