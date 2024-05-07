@@ -164,7 +164,7 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $authors = Author::with('user')->where($author);
         $totalCategories = $this->category->showWhithCount();
-        $news = $this->news->authorGetNews($user);
+        $news = $this->news->authorGetNews($user)->pluck('id');
         $comments = $this->comment->where($news);
         $newsCount = $this->news->get();
         $authors = $this->author->get();
