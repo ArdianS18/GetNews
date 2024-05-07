@@ -76,7 +76,19 @@ class DashboardController extends Controller
         return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2'));
     }
 
-    public function home(){
+    public function home(Request $request)
+    {
+        $ip = $request->ip();
+        $visitors = $request->session()->get('web_visitors',[]);
+
+        if (!in_array($ip, $visitors)) {
+            $visitors[] = $ip;
+            $request->session()->put('web_visitors', $visitors);
+        }
+
+        $webVisitors = count($visitors);
+        dd($webVisitors);
+
         $newsTrending = $this->news->get();
         $news = $this->news->get();
         $categories = $this->category->get();
