@@ -5,7 +5,7 @@
             <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
         </a>
 
-        
+
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="ri-close-line"></i>
         </button>
