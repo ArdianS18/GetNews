@@ -36,11 +36,9 @@
             @endforeach
         </div>
         <div class="offcanvas-contact-info">
-            {{-- <div class="others-option d-flex d-lg-none align-items-center"> --}}
-                <div class="option-item">
-                    <a href="login.html" class="btn-two">Sign In</a>
-                </div>
-            {{-- </div> --}}
+            <div class="option-item">
+                <a href="login.html" class="btn-two">Sign In</a>
+            </div>
         </div>
     </div>
 </div>
