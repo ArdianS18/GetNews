@@ -41,7 +41,7 @@
                         </div>
                         <div style="color: #41739e" class="ms-4 col-lg-11">
                             <h4>Jumlah Pengunjung</h4>
-                            <h3 style="color: #41739e"><span id="visitorCount">Loading..</span></h3>
+                            <h3 style="color: #41739e">{{ $visitorsCount }}</h3>
                         </div>
                     </div>
                 </div>
@@ -410,7 +410,7 @@
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 
-    <script>
+    {{-- <script>
          $(document).ready(function() {
             function updateVisitorCount() {
                 $.ajax({
@@ -423,7 +423,7 @@
             }
             updateVisitorCount();
         });
-    </script>
+    </script> --}}
 
     <script>
         var monthlyData = <?php echo json_encode($news2); ?>;

@@ -22,6 +22,7 @@ use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
@@ -62,6 +63,7 @@ class DashboardController extends Controller
     }
 
     public function index(Request $request){
+        $visitorsCount = count(Cache::get('visitors'));
         $users = $this->user->whereRelation();
 
         $authors = $this->author->get()->count();
@@ -73,7 +75,7 @@ class DashboardController extends Controller
         $news2 = $this->news->showCountMonth();
         $newsCategory = $this->newsCategory->trending();
 
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2','visitorsCount'));
     }
 
     public function home(Request $request)
