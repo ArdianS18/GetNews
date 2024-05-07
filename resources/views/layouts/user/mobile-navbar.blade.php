@@ -1,9 +1,11 @@
 <div class="responsive-navbar offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
     <div class="offcanvas-header">
         <a href="index.html" class="logo d-inline-block">
-            <img class="logo-light" src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="logo" />
-            {{-- <img class="logo-dark" src="assets/img/logo-get-media.png" alt="logo" /> --}}
+            <img src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="logo" />
+            <img class="logo-dark" src="assets/img/logo-get-media.png" alt="logo" />
         </a>
+
+        
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="ri-close-line"></i>
         </button>
@@ -11,7 +13,7 @@
     <div class="offcanvas-body">
         <div class="accordion" id="navbarAccordion">
             @foreach ($categories as $category)
-                    @for ($i = 7; $i < $categories->count(); $i++)
+                    @for ($i = 0; $i < $categories->count(); $i++)
                     <div class="accordion-item">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapse{{$i}}" aria-expanded="false" aria-controls="collapse{{$i}}">{{$categories[$i]->name}}</button>
@@ -20,7 +22,7 @@
                                 <div class="accordion" id="navbarAccordion{{$i}}">
                                     @foreach ($categories[$i]->subCategories as $subCategory)
                                         <div class="accordion-item">
-                                            <a class="accordion-link" href="{{ route('subcategories.show.user', ['subCategory' => $subCategory->name]) }}">{{ $subCategory->name }}</a>
+                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                         </div>
                                     @endforeach
                                 </div>
