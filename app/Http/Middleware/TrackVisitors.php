@@ -17,17 +17,17 @@ class TrackVisitors
     public function handle(Request $request, Closure $next): Response
     {
          // Mendapatkan IP pengguna
-         $ip = $request->ip();
+        $ip = $request->ip();
 
          // Mendapatkan semua IP yang sudah disimpan dalam sesi
-         $visitors = Session::get('visitors', []);
+        $visitors = Session::get('visitors', []);
 
          // Jika IP pengguna belum ada dalam sesi, tambahkan dan tambahkan satu ke jumlah pengunjung
-         if (!in_array($ip, $visitors)) {
-             $visitors[] = $ip;
-             Session::put('visitors', $visitors);
-         }
+        if (!in_array($ip, $visitors)) {
+            $visitors[] = $ip;
+            Session::put('visitors', $visitors);
+        }
 
-         return $next($request);
+        return $next($request);
     }
 }
