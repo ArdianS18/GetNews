@@ -2,7 +2,7 @@
     <div class="offcanvas-header">
         <a href="index.html" class="logo d-inline-block">
             <img class="logo-light" src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="logo" />
-            <img class="logo-dark" src="assets/img/logo-get-media.png" alt="logo" />
+            <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
         </a>
 
         

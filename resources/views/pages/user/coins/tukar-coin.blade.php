@@ -212,7 +212,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                         data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                    <button type="submit" class="btn btn-rounded btn-light-success text-success">Pililh</button>
                 </div>
             </form>
         </div>

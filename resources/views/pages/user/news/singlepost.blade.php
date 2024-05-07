@@ -504,8 +504,8 @@
                                 @endif
                                         <div class="comment-author-img">
                                             <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
-                                                alt="Image" class="img-fluid" width="80px" height="80px"
-                                                style="border-radius: 50%; object-fit:cover;" />
+                                                alt="Image" class="img-fluid"
+                                                style="object-fit:cover;" />
                                         </div>
                                         <div class="comment-author-wrap">
                                             <div class="comment-author-info">
