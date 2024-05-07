@@ -24,9 +24,7 @@
                                 <div class="news-card-thirteen">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $newsSubCategory->news->photo) }}"
-                                            alt="{{ $newsSubCategory->news->photo }}" height="400" style="width: 100%;object-fit:cover;" class="img-status">
-                                        {{-- <img src="{{ asset('assets/img/test1.svg') }}" width="400px" height="234"
-                                        style="width: 100%;height:100%;" alt="Iamge"> --}}
+                                            alt="{{ $newsSubCategory->news->photo }}" width="100%" height="250" style="width: 100%;object-fit:cover;">
                                         <a data-toggle="tooltip" data-placement="top" title="{{ $newsSubCategory->subCategory->name }}" href="{{ route('subcategories.show.user', ['category'=>$subCategory->category->slug,'subCategory' => $newsSubCategory->subCategory->slug]) }}"
                                             class="news-cat">{{ $newsSubCategory->subCategory->name }}</a>
                                     </div>
@@ -105,15 +103,8 @@
                                                     href="{{ route('news.user', ['news' => $news->slug]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...')  !!}</a>
                                                 </h3>
                                                 <ul class="news-metainfo list-style">
-                                                    <li>
-
-                                                        <i><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                                height="20" viewBox="0 0 512 512">
-                                                                <path
-                                                                    d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z"
-                                                                    fill="#E93314" />
-                                                            </svg></i><a
-                                                            href="javascript:void(0)">{{  \Carbon\Carbon::parse($news->upload_date)->translatedFormat('d F Y') }}</a>
+                                                    <li><i class="fi fi-rr-calendar-minus"></i>
+                                                        <a href="javascript:void(0)">{{  \Carbon\Carbon::parse($news->upload_date)->translatedFormat('d F Y') }}</a>
                                                     </li>
                                                     <li>
                                                         <i class="fi fi-rr-eye">
