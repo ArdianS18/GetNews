@@ -61,7 +61,8 @@ class DashboardController extends Controller
         $this->comment = $comment;
     }
 
-    public function index(){
+    public function index(Request $request){
+        $webVisitors = $request->session()->get('web_visitors', []);
         $users = $this->user->whereRelation();
 
         $authors = $this->author->get()->count();
@@ -73,7 +74,7 @@ class DashboardController extends Controller
         $news2 = $this->news->showCountMonth();
         $newsCategory = $this->newsCategory->trending();
 
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2', 'webVisitors'));
     }
 
     public function home(Request $request)
@@ -85,9 +86,6 @@ class DashboardController extends Controller
             $visitors[] = $ip;
             $request->session()->put('web_visitors', $visitors);
         }
-
-        $webVisitors = count($visitors);
-        dd($webVisitors);
 
         $newsTrending = $this->news->get();
         $news = $this->news->get();
