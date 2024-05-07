@@ -74,7 +74,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function searchStatus(mixed $id, Request $request): mixed
+    public function searchStatus(mixed $id, Request $request,int $pagination): LengthAwarePaginator
     {
         return $this->model->query()
         ->where('user_id', $id)
@@ -92,7 +92,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $var->where('status', 'nonactive');
             });
         })
-        ->get();
+        ->fastPaginate($pagination);
     }
 
     /**
