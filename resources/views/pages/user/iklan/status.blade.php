@@ -10,7 +10,7 @@
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
-            <img src="{{asset('assets/img/bg-ajuan.svg')}}" width="250px" alt="" class="img-fluid">
+            <img src="{{asset('assets/img/bg-ajuan.svg')}}" width="250px" alt="" >
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
 <div class="card shadow-sm p-4 mt-4">
     <div class="row">
         <div class="col-md-12 col-lg-3">
-            <div class="">
+            <div class="mb-2">
                 <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
             </div>
         </div>
