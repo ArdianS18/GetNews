@@ -37,7 +37,7 @@
         </div>
         <div class="offcanvas-contact-info">
             <div class="option-item">
-                <a href="/login" class="btn-two">Sign In</a>
+                <a href="/login" class="btn-two">Login</a>
             </div>
         </div>
     </div>
