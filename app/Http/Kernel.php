@@ -41,6 +41,10 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
+        'visitors' => [
+            \App\Http\Middleware\TrackVisitors::class,
+        ],
+
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
@@ -70,6 +74,5 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
-        'visitors' => \App\Http\Middleware\TrackVisitors::class,
     ];
 }

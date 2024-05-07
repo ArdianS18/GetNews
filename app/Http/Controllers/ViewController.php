@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\ViewInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\ViewRequest;
 use App\Models\View;
 use App\Services\ViewService;

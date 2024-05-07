@@ -421,8 +421,6 @@
                     }
                 });
             }
-            // Perbarui jumlah pengunjung setiap 5 detik
-            setInterval(updateVisitorCount, 5000);
         });
     </script>
 
