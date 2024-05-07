@@ -56,8 +56,7 @@ class CommentRepository extends BaseRepository implements CommentInterface
     {
         return $this->model->query()
             ->where('news_id', $id)
-            ->get()
-            ->count();
+            ->first();
     }
     /**
      * Handle store data event to models.
