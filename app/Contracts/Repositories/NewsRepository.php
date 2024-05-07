@@ -54,7 +54,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function search(Request $request): mixed
     {
-        // dd($request);
         return $this->model->query()
             ->where('user_id', auth()->user()->id)
             ->where('status', "active")
@@ -68,6 +67,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
                     $terlama->oldest()->get();
                 });
             })
+            ->withCount('views')
+            ->orderByDesc('views_count')
             ->latest()
             ->take(8)
             ->get();
