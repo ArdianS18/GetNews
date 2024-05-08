@@ -3,13 +3,13 @@
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-4 col-md-6 col-5">
-                    <a href="{{route('user.berlangganan')}}" class="subscribe-btn">Berlangganan<i class="flaticon-right-arrow"></i></a>
+                    <a href="{{route('user.berlangganan')}}" class="subscribe-btn"><span>Berlangganan</span><i class="flaticon-right-arrow"></i></a>
                 </div>
                 <div class="col-lg-4 col-md-6 md-none">
                     <a class="navbar-brand" href="/">
-                        {{-- <img src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" /> --}}
-                        <img class="logo-light" src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="logo" />
-                        <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
+                        <img src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" />
+                        {{-- <img class="logo-light" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
+                        <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" /> --}}
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6 col-7">
@@ -39,7 +39,7 @@
             </div>
             <a class="navbar-brand d-lg-none" href="/">
                 <img class="logo-light" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" />
-                {{-- <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" /> --}}
+                <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" />
             </a>
             <button type="button" class="search-btn d-lg-none mt-1" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>

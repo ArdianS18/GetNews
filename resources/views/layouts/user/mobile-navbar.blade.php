@@ -1,10 +1,9 @@
 <div class="responsive-navbar offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
     <div class="offcanvas-header">
         <a href="/" class="logo d-inline-block">
-            <img class="logo-light" src="{{asset('assets/img/logo-getmedia-dark.svg')}}" alt="logo" />
-            <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
+            <img class="logo-light" src="{{asset('assets/img/logo-getmedia.png')}}" alt="logo" />
+            <img class="logo-dark" src="{{asset('assets/img/logo-getmedia.png')}}" alt="logo" />
         </a>
-
 
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
             <i class="ri-close-line"></i>

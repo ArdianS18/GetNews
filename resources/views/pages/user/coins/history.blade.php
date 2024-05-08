@@ -66,7 +66,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="text-end mt-3 mt-md-0">
                 <h5 class="mb-0 text-mobile-header">Berhasil</h5>
             </div>
