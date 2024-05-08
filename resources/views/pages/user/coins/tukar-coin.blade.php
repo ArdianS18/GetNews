@@ -6,6 +6,11 @@
         /* border: 1px solid #175A95; */
         box-shadow: 0 1px 5px #175A95;
     }
+    @media (max-width: 768px) {
+      .bg-mobile {
+        width: 150px;
+      }
+    }
     </style>
 @endsection
 @section('content')
@@ -23,7 +28,7 @@
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
-            <img src="{{asset('assets/img/bg-coin.svg')}}" width="210px" alt="">
+            <img src="{{asset('assets/img/bg-coin.svg')}}" class="bg-mobile" width="210px" alt="">
           </div>
         </div>
       </div>

@@ -19,7 +19,9 @@
                             @foreach ($trendings as $trending)
                                 <div class="swiper-slide news-card-one">
                                     <div class="news-card-img">
+                                        <a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
                                         <img src="{{ asset('storage/' . $trending->news->photo) }}" width="100%" height="90" style="object-fit: cover;" alt="Image" />
+                                        </a>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
@@ -46,9 +48,10 @@
                     @if ($counter < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;" width="100%" alt="Image"
+                                <a href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
+                                    <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;" width="100%" alt="Image"
                                     height="250" />
-
+                                </a>
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                             </div>
@@ -69,8 +72,9 @@
                     @elseif ($counter < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100"
-                                    width="100%" style="object-fit: cover" />
+                                <a href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
+                                    <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100" width="100%" style="object-fit: cover" />
+                                </a>
                             </div>
                             <div class="news-card-info">
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
@@ -103,8 +107,9 @@
                 @foreach ($news_mid as $mid)
                     @if ($counter < 1)
                         <div class="news-card-four">
-                            <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover"
-                                height="450" />
+                            <a href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
+                                <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
+                            </a>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
@@ -120,8 +125,9 @@
                     @elseif ($counter < 3)
                         <div class="news-card-five">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" height="150"
-                                    width="100%" />
+                                <a href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
+                                    <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" height="150" width="100%" />
+                                </a>
                                 <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                             </div>
@@ -152,8 +158,9 @@
                     @if ($counters < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;"
-                                    alt="Image" height="250" width="100%" />
+                                <a href="{{ route('news.user', ['news' => $barus->slug, ]) }}">
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;" alt="Image" height="250" width="100%" />
+                                </a>
                                 <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
@@ -173,8 +180,9 @@
                     @elseif ($counters < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" width="100%" height="100"
-                                    alt="Image" />
+                                <a href="{{ route('news.user', ['news' => $barus->slug, ]) }}">
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" width="100%" height="100" alt="Image" />
+                                </a>
                             </div>
                             <div class="news-card-info">
                                 <a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}" href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
@@ -220,14 +228,18 @@
                                         <div class="col-md-6">
                                             <div class="news-card-six">
                                                 <div class="news-card-img">
-                                                    <img src="{{ asset('storage/' . $pick->photo) }}" width="100%" height="220" style="object-fit: cover;" alt="Image" />
+                                                    <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                        <img src="{{ asset('storage/' . $pick->photo) }}" width="100%" height="220" style="object-fit: cover;" alt="Image" />
+                                                    </a>
                                                 </div>
                                                 <div class="news-card-info">
                                                     <div class="news-author">
                                                         <div class="news-author-img">
-                                                            <img src="{{ asset($pick->user->photo ? 'storage/' . $pick->user->photo : 'default.png') }}"
-                                                                alt="Image" width="40px" height="40px"
-                                                                style="border-radius: 50%; object-fit:cover;" />
+                                                            <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                                <img src="{{ asset($pick->user->photo ? 'storage/' . $pick->user->photo : 'default.png') }}"
+                                                                    alt="Image" width="40px" height="40px"
+                                                                    style="border-radius: 50%; object-fit:cover;" />
+                                                            </a>
                                                         </div>
                                                         <h5>By <a href="{{ route('author.detail', ['id' => $pick->user->slug]) }}">{{ $pick->user->name }}</a>
                                                         </h5>
@@ -514,7 +526,7 @@
                             @forelse ($popular_post as $post)
                                 <div class="news-card-one">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" width="100%" height="80"/>
+                                        <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" style="object-fit: cover;" width="100%" height="80"/>
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}" href="{{ route('news.user', ['news' => $post->slug, ]) }}">

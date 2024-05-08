@@ -34,7 +34,6 @@
         </div>
     </div>
 
-
     <div class="modal fade" id="tambahdataLabel" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
