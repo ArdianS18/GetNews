@@ -2,7 +2,7 @@
     <div class="offcanvas-header">
         <a href="/" class="logo d-inline-block">
             <img class="logo-light" src="{{asset('assets/img/logo-getmedia.png')}}" alt="logo" />
-            <img class="logo-dark" src="{{asset('assets/img/logo-getmedia.png')}}" alt="logo" />
+            <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
         </a>
 
         <button type="button" class="close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
