@@ -46,6 +46,13 @@
         </div>
     </div>
 
+    @if(session('error'))
+        <div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    @endif
+
     <div class="ms-1">
         <h5>Baca ketentuan dan persyaratan sembelum mengunggah berita</h5>
         <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
@@ -97,10 +104,9 @@
                             <label class="form-label" for="password_confirmation">Kategori</label>
                             <select id="category_id"
                                 class="select2 form-control category @error('category') is-invalid @enderror"
-                                name="category[]" multiple="true" value="{{ old('category') }}"
-                                aria-label="Default select example">
+                                name="category[]" multiple="true" aria-label="Default select example">
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category')
@@ -114,8 +120,7 @@
                                 <label class="form-label" for="password_confirmation">Sub Kategori</label>
                                 <select id="sub_category_id"
                                     class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                    name="sub_category[]" multiple="true" value="{{ old('sub_category') }}"
-                                    aria-label="Default select example">
+                                    name="sub_category[]" multiple="true" aria-label="Default select example">
                                 </select>
                                 @error('sub_category')
                                     <span class="invalid-feedback" role="alert" style="color: red">
@@ -171,7 +176,7 @@
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
                                 <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}"
-                                    class="form  @error('content') is-invalid @enderror"></textarea>
+                                    class="form  @error('content') is-invalid @enderror">{{old('content')}}</textarea>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
@@ -259,6 +264,16 @@
 @endsection
 
 @section('script')
+
+    <script>
+        var errorAlert = document.getElementById('error-alert');
+        if (errorAlert) {
+            setTimeout(function() {
+                errorAlert.remove();
+            }, 5000);
+        }
+    </script>
+
     <script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
 
     <script>
@@ -276,6 +291,7 @@
             });
         });
     </script>
+
 
     <script>
         $(document).ready(function() {
@@ -301,28 +317,24 @@
     </script>
     <script>
         $('.category').change(function() {
-            var selectedCategories = $(this).val(); // Get the selected category IDs as an array
-            getSubCategory(selectedCategories);
+            getSubCategory($(this).val())
         })
 
-        function getSubCategory(ids) {
-
-            $('.sub-category').html('');
-
-            ids.forEach(function(id) {
-                $.ajax({
-                    url: "sub-category-detail/" + id,
-                    method: "GET",
-                    dataType: "JSON",
-                    success: function(response) {
-                        $.each(response.data, function(index, data) {
-                            $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-                                '</option>');
-                        });
-                    }
-                });
-            });
-
+        function getSubCategory(id) {
+            $.ajax({
+                url: "sub-category-detail/" + id,
+                method: "GET",
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('.sub-category').html('')
+                },
+                success: function(response) {
+                    $.each(response.data, function(index, data) {
+                        $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+                            '</option>');
+                    });
+                }
+            })
         }
 
         var today = new Date();

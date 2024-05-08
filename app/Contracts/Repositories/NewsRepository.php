@@ -178,6 +178,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->firstOrFail();
     }
 
+    public function findBySlug($slug): mixed
+    {
+        return $this->model->query()
+            ->where('slug', $slug)
+            ->first();
+    }
+
     /**
      * Handle the Get all data event from models.
      *

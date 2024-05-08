@@ -43,4 +43,6 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function searchStatus(mixed $id, Request $request,int $pagination) : LengthAwarePaginator;
     public function searchAll(Request $request) : mixed;
 
+    public function findBySlug($slug): mixed;
+
 }
