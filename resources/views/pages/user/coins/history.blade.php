@@ -1,5 +1,24 @@
 @extends('layouts.user.sidebar')
 
+@section('style')
+    <style>
+        @media (max-width: 768px) {
+            .text-mobile {
+                font-size: 9px;
+            }
+            .text-mobile-header {
+                font-size: 12px;
+            }
+            .img-mobile-payment{
+                width: 50px;
+            }
+            .mobile-status{
+                text-align: end;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="">
     <h4><b>Riwayat Penarikan</b></h4>
@@ -28,10 +47,10 @@
     
 
     <div class="card p-4">
-        <div class="d-flex justify-content-between flex-column flex-md-row">
+        <div class="d-flex justify-content-between flex-column flex-md-row text-mobile">
             <div class="d-flex">
                 <div>
-                    <h5>Penarikan Saldo</h5>
+                    <h5 class="text-mobile-header">Penarikan Saldo</h5>
                     <div class="mt-3">
                         <p>tanggal : 01/01/2022</p>
                     </div>
@@ -43,13 +62,13 @@
                     <p>Nominal: 50 Koin / Rp.500</p>
                     <div class="d-flex align-items-center">
                         <span>Metode Penarikan :</span>
-                        <img src="{{asset('assets/img/wallet-dana.svg')}}" class="ms-2" width="60px" alt="">
+                        <img src="{{asset('assets/img/wallet-dana.svg')}}" class="ms-2 img-mobile-payment" width="60px" alt="">
                     </div>
                 </div>
             </div>
     
-            <div class="text-center mt-3 mt-md-0">
-                <h5 class="mb-0">Berhasil</h5>
+            <div class="text-end mt-3 mt-md-0">
+                <h5 class="mb-0 text-mobile-header">Berhasil</h5>
             </div>
         </div>
     </div>

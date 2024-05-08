@@ -1,5 +1,17 @@
 @extends('layouts.author.sidebar')
 
+@section('style')
+  <style>
+    @media (max-width: 768px) {
+      .text-mobile {
+        font-size: 14px;
+        margin-left: 15px;
+        align-items: center;
+      }
+    }
+  </style>
+@endsection
+
 @section('content')
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #183249;">
     <div class="card-body">
@@ -20,22 +32,25 @@
         </div>
       </div>
     </div>
-    <div class="card-footer py-2" style="background-color: #222222;">
-        <div class="d-flex justify-content-between">
-            <h5 class="text-white mt-1">Rp.12.000</h5>
 
-            <div class="d-flex">
-                <a href="{{route('user.history.coin')}}" class="text-white fs-4">Riwayat</a>
-                <span class="ms-3 me-3 text-white">|</span>
-                <a href="{{route('user.tukar.coin')}}" class="text-white fs-4">
-                    <div class="d-flex">
-                        Tukarkan Koin
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"/></svg>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    <div class="card-footer py-2" style="background-color: #222222;">
+      <div class="d-flex flex-column flex-md-row justify-content-between justify-content-md-between">
+          <h5 class="text-white mt-1 d-none d-md-block">Rp.12.000</h5>
+  
+          <div class="d-flex justify-content-center">
+              <a href="{{route('user.history.coin')}}" class="text-white fs-4 text-mobile me-3 mb-2 mb-md-0">Riwayat</a>
+              <span class="text-white me-3">|</span>
+              <a href="{{route('user.tukar.coin')}}" class="text-white fs-4 tetxt-mobile">
+                  <div class="d-flex align-items-center">
+                      Tukarkan Koin
+                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+                          <path fill="#ffffff" d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z"/>
+                      </svg>
+                  </div>
+              </a>
+          </div>
+      </div>
+  </div>
 </div>
 
 <div class="card p-4">
