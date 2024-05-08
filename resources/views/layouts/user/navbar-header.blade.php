@@ -79,7 +79,7 @@
                 @endif
                 @else
 
-                <div class="">
+                <div class="d-md-none">
                     <div class="option-item">
                         <a href="/login" class="btn-two" id="signInBtn">Login</a>
                     </div>
