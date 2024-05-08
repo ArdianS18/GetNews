@@ -92,7 +92,7 @@
 
         function get(page) {
             $.ajax({
-                url: '{{ route('list.news.author') }}',
+                url: '{{ route('list.news.author') }}?page='+page,
                 methode: 'GET',
                 dataType: 'JSON',
                 data: {
