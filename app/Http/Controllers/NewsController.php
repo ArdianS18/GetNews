@@ -566,7 +566,6 @@ class NewsController extends Controller
 
     public function showmynews(Request $request, NewsCategory $newsCategories)
     {
-        // $query = $request->input('search');
         $id = auth()->user()->id;
         $author_id = Author::where('user_id', $id)->value('id');
         $news = $this->newsCategory->searchAuthor($author_id, $request);
@@ -574,15 +573,37 @@ class NewsController extends Controller
         return view('pages.author.news.index', compact('news'));
     }
 
-    public function showstatusnews(Request $request, NewsCategory $newsCategories)
+    public function showstatusnews(Request $request, News $news)
     {
+        // $id = auth()->user()->id;
+        // if ($request->has('page')) {
+        //     $news = $this->news->searchStatus($id, $request, 1);
+        //     $data['paginate'] = [
+        //         'current_page' => $news->currentPage(),
+        //         'last_page' => $news->lastPage(),
+        //     ];
+        //     $data['data'] = NewsResource::collection($news);
+        // } else {
+        //     $news = $this->news->searchStatus($id, $request, 1);
+        //     $data['data'] = NewsResource::collection($news);
+        // }
+
         $id = auth()->user()->id;
-        $news = $this->news->searchStatus($id, $request,10);
-        $data['paginate'] = [
-            'current_page' => $news->currentPage(),
-            'last_page' => $news->lastPage(),
-        ];
-        $data['data'] = NewsResource::collection($news);
+        if ($request->has('page')) {
+            $news = $this->news->searchStatus($id, $request, 10);
+            $data['paginate'] = [
+                'current_page' => $news->currentPage(),
+                'last_page' => $news->lastPage(),
+            ];
+            $data['data'] = NewsResource::collection($news);
+        } else {
+            $news = $this->news->searchStatus($id, $request, 10);
+            $data['paginate'] = [
+                'current_page' => $news->currentPage(),
+                'last_page' => $news->lastPage(),
+            ];
+            $data['data'] = NewsResource::collection($news);
+        }
         return ResponseHelper::success($data);
     }
 }

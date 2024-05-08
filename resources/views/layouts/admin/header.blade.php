@@ -14,9 +14,7 @@
                 </button>
 
                 <a href="/" class="toggler" style="color: #000000">
-                    <div class="d-flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 19.923c-2.202-2.81-4.157-4.406-5.866-4.785c-1.709-.38-3.336-.436-4.88-.172V20L3 11.786L10.253 4v4.784C13.11 8.808 15.54 9.88 17.54 12s3.154 4.761 3.461 7.923"/></svg>
-                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 36 36"><path fill="currentColor" d="M33 19a1 1 0 0 1-.71-.29L18 4.41L3.71 18.71A1 1 0 0 1 2.3 17.3l15-15a1 1 0 0 1 1.41 0l15 15A1 1 0 0 1 33 19" class="clr-i-solid clr-i-solid-path-1"/><path fill="currentColor" d="M18 7.79L6 19.83V32a2 2 0 0 0 2 2h7V24h6v10h7a2 2 0 0 0 2-2V19.76Z" class="clr-i-solid clr-i-solid-path-2"/><path fill="none" d="M0 0h36v36H0z"/></svg>
                 </a>
             </div>
         </ul>

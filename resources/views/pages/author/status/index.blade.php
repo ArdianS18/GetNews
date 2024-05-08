@@ -36,20 +36,19 @@
 </head>
 
 @section('content')
-    <form action="" class="d-flex gap-2">
+    <form class="d-flex gap-2">
         <div>
             <div class="position-relative d-flex">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control search-chat py-2 ps-5" style="width: 200px"
-                        id="search-name" placeholder="Search" value="">
+                    <input type="text" name="name" class="form-control search-chat py-2 ps-5" style="width: 200px"
+                        id="search-name" placeholder="Search">
                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                 </div>
             </div>
         </div>
-
         <div>
             <div class="d-flex gap-2">
-                <select class="form-select" id="status" style="width: 200px" name="stat">
+                <select class="form-select" id="status" style="width: 200px" name="status">
                     <option value="">Tampilkan semua</option>
                     <option value="panding">Panding</option>
                     <option value="active">Approved</option>
@@ -57,16 +56,39 @@
                 </select>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-outline-primary">Pilih</button>
+        {{-- <button type="submit" class="btn btn-outline-primary">Pilih</button> --}}
     </form>
+
     <div class="tab-pane" id="data">
+
     </div>
+
+    <div class="loading">
+        <div class="d-flex mt-2 justify-content-end">
+            <nav id="pagination">
+            </nav>
+        </div>
+    </div>
+
+
     <x-delete-modal-component />
 @endsection
 @section('script')
     <script>
         get(1)
+        let debounceTimer;
+
+        $('#search-name').keyup(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+
+        $('#status').change(function() {
+            get(1)
+        });
 
         function get(page) {
             $.ajax({
@@ -74,8 +96,8 @@
                 methode: 'GET',
                 dataType: 'JSON',
                 data: {
-                    status: $('#status').val(),
-                    name: $('#search-name').val()
+                    name: $('#search-name').val(),
+                    status: $('#status').val()
                 },
                 beforeSend: function() {
                     $('#data').html('')
@@ -216,26 +238,6 @@
                     </div>
                 </div>
             </div>
-        @empty
-            <div class="d-flex justify-content-center">
-                <div>
-                    <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                </div>
-            </div>
-            <div class="text-center">
-                <h5>Tidak ada data</h5>
-            </div>
-        @endforelse
-
-        <div class="d-flex justify-content-center">
-            <div class="d-flex">
-                <div><a href="{{ $news->previousPageUrl() }}" class="btn">Kembali</a></div>
-                @for ($i = 1; $i <= $news->lastPage(); $i++)
-                <div><a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></div>
-                @endfor
-                <siv><a href="{{ $news->nextPageUrl() }}" class="btn">Berikutnya</a></div>
-            </div>
-        </div>
             `
         }
     </script>

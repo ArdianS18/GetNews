@@ -108,8 +108,8 @@ class CategoryController extends Controller
         // ]);
 
         $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id);
-        $news = $this->news->get();
-        $newsSubCategories = $this->newsSubCategory->get();
+        // $news = $this->news->get();
+        // $newsSubCategories = $this->newsSubCategory->get();
 
         // return view('pages.user.news.subcategory', compact('subCategory','news', 'newsSubCategories'));
         return ResponseHelper::success($subCategory, trans('alert.fetch_success'));
