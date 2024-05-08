@@ -589,7 +589,7 @@ class NewsController extends Controller
         // }
 
         $id = auth()->user()->id;
-        $news = $this->news->searchStatus($id, $request, 1);
+        $news = $this->news->searchStatus($id, $request, 10);
         $data['paginate'] = [
             'current_page' => $news->currentPage(),
             'last_page' => $news->lastPage(),
