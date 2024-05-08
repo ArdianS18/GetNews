@@ -1,18 +1,23 @@
+<style>
+    @media (max-width: 768px) {
+        .logo-mobile {
+            width: 150px;
+        }
+    }
+</style>
 <div class="navbar-area header-one mb-5" id="navbar">
     <div class="header-top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-4 col-md-6 col-5">
+                <div class="col-lg-4 col-md-6 col-5 d-none d-md-block">
                     <a href="{{route('user.berlangganan')}}" class="subscribe-btn"><span>Berlangganan</span><i class="flaticon-right-arrow"></i></a>
                 </div>
-                <div class="col-lg-4 col-md-6 md-none">
+                <div class="col-lg-4 col-md-6">
                     <a class="navbar-brand" href="/">
-                        <img src="{{asset('assets/img/logo-get-media.png')}}" alt="Image" />
-                        {{-- <img class="logo-light" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
-                        <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" /> --}}
+                        <img src="{{asset('assets/img/logo-get-media.png')}}" class="logo-mobile" alt="Image" />
                     </a>
                 </div>
-                <div class="col-lg-4 col-md-6 col-7">
+                <div class="col-lg-4 col-md-6 col-7 d-none d-md-block">
                     <ul class="social-profile list-style">
                         <li>
                             <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
@@ -33,14 +38,9 @@
     </div>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
-            <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                {{-- <img src="{{asset('assets/img/logo-get-media.png')}}" width="150px" alt="Image" /> --}}
+            {{-- <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
-            </div>
-            <a class="navbar-brand d-lg-none" href="/">
-                <img class="logo-light" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" />
-                <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" />
-            </a>
+            </div> --}}
             <button type="button" class="search-btn d-lg-none mt-1" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     @foreach ($categories as $category)
-                        @if ($loop->iteration <= 7)
+                        @if ($loop->iteration <= 6)
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
@@ -65,7 +65,6 @@
 
                                     @empty
                                         <li class="nav-item">
-                                            {{-- @dd($category); --}}
                                             <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
                                         </li>
                                     @endforelse
@@ -76,11 +75,6 @@
                         @endif
                     @endforeach
 
-                    {{-- @empty($categories)
-                        <li class="nav-item">
-                            <a href="javascript:void(0)" class="nav-link">Tidak ada kategori yang ditampilkan</a>
-                        </li>
-                    @endempty --}}
                 </ul>
 
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
