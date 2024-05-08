@@ -1,7 +1,7 @@
 @extends('layouts.user.app')
 @section('content')
     <div class="d-flex justify-content-center">
-        <img src="{{ asset('faq.svg') }}" width="500px" alt="" srcset="">
+        <img src="{{ asset('faq.svg') }}" width="500px" alt="" class="img-fluid" srcset="">
     </div>
     <div class="text-center">
         <h3>

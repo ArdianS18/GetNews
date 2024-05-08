@@ -41,7 +41,7 @@
                 <img class="logo-light" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" />
                 {{-- <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" width="150" alt="logo" /> --}}
             </a>
-            <button type="button" class="search-btn d-lg-none mt-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+            <button type="button" class="search-btn d-lg-none mt-1" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
             <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">

@@ -116,7 +116,7 @@
                     <div class="d-flex align-items-center justify-content-between">
                       <div class="text-center">
                         <div class="">
-                          <span class="badge bg-light-warning text-warning fs-6 px-3 py-2">
+                          <span class="badge bg-light-warning text-warning fs-5 px-2 py-2">
                             {{ $news_panding }}
                           </span>
                         </div>
@@ -126,9 +126,9 @@
                       </div>
                       <div class="text-center">
                         <div class="">
-                          <span class="badge bg-light-danger text-danger fs-6 px-3 py-2">
+                          <span class="badge bg-light-danger text-danger fs-5 px-2 py-2">
                             {{ $news_reject }}
-                          </span>
+                          </span> 
                         </div>
                         <div class="">
                         <p class="mb-0 fs-4">Ditolak</p>
@@ -136,7 +136,7 @@
                       </div>
                       <div class="text-center">
                         <div class="">
-                          <span class="badge bg-light-success text-success fs-6 px-3 py-2">
+                          <span class="badge bg-light-success text-success fs-5 px-2 py-2">
                             {{ $news_active }}
                           </span>
                         </div>
@@ -170,28 +170,37 @@
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active card p-4" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
               <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <form class="d-flex">
-                        <div class="me-3">
-                            <div class="input-group">
-                                <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-                                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
-                                <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="input-group">
-                                <select class="form-select" name="filter">
-                                    <option selected disabled>Pilih Option</option>
-                                    <option value="terbaru">Terbaru</option>
-                                    <option value="terlama">Terlama</option>
-                                    <option value="">Tampilkan Semua</option>
-                                </select>
-                                <button class="btn btn-outline-primary">
-                                    Pilih
-                                </button>
-                            </div>
-                        </div>
-                </form>
+                <form class="d-flex flex-column flex-sm-row gap-2">
+                  <div class="me-3">
+                      {{-- <div class="input-group">
+                          <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
+                          <span class="input-group-text bg-transparent border-0">
+                              <i class="ti ti-search fs-6 text-dark"></i>
+                          </span>
+                          <button type="submit" class="btn btn-outline-primary flex-grow-1">Cari</button>
+                      </div> --}}
+                      <div class="input-group">
+                        <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
+                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                        <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
+                      </div>
+                  </div>
+                  <div class="me-3">
+                      <div class="input-group">
+                          <select class="form-select" name="filter">
+                              <option selected disabled>Pilih Option</option>
+                              <option value="terbaru">Terbaru</option>
+                              <option value="terlama">Terlama</option>
+                              <option value="">Tampilkan Semua</option>
+                          </select>
+                          <button class="btn btn-outline-primary">
+                              Pilih
+                          </button>
+                      </div>
+                  </div>
+                  
+              </form>
+              
               </div>
 
               <!-- Row -->
