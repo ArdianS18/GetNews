@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class UserProfileRequest extends FormRequest
 {
-    /**
+      /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -14,13 +14,12 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'role' => 'required',
+            'name' => 'nullable',
+            'slug' => 'nullable',
+            'email' => 'nullable',
             'phone_number' => 'nullable',
             'address' => 'nullable',
             'birth_date' => 'nullable',
-            'email_verified_at' => 'nullable',
         ];
     }
 

@@ -129,7 +129,7 @@
                                                 </a>
                                             </li>
                                         @empty
-                                            <tr>
+                                            {{-- <tr class="contact">
                                                 <td colspan="5">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
@@ -140,7 +140,7 @@
                                                         <h5>Tidak ada data</h5>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                         @endforelse
 
                                         @forelse ($contactDelete as $contactDelete)
@@ -171,6 +171,18 @@
                                                 </a>
                                             </li>
                                         @empty
+                                            {{-- <tr class="trash">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada data</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
 
                                         @forelse ($reports as $report)
@@ -203,6 +215,18 @@
                                                 </a>
                                             </li>
                                         @empty
+                                            {{-- <tr class="report">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada data</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
 
                                         @forelse ($reportsDelete as $reportDelete)
@@ -234,6 +258,18 @@
                                                 </a>
                                             </li>
                                         @empty
+                                            {{-- <tr class="trash">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada data</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
                                     </ul>
                                 </div>
@@ -312,7 +348,7 @@
                                             </div>
                                         </div>
                                         @empty
-                                            <tr>
+                                            {{-- <tr class="chat-content">
                                                 <td colspan="5">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
@@ -323,7 +359,7 @@
                                                         <h5>Tidak ada pesan</h5>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                         @endforelse
 
                                         @forelse ($contactDelete2 as $contactDelete2)
@@ -400,6 +436,18 @@
                                                 </div>
                                             </div>
                                         @empty
+                                            {{-- <tr class="chat-contactDel">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada pesan</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
 
 
@@ -474,6 +522,18 @@
                                             </div>
                                         </div>
                                         @empty
+                                            {{-- <tr class="chat-report">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada pesan</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
 
 
@@ -558,6 +618,18 @@
                                                 </div>
                                             </div>
                                         @empty
+                                            {{-- <tr class="chat-reportDel">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada pesan</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
                                     </div>
                                 </div>

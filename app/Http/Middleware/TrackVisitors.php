@@ -16,6 +16,7 @@ class TrackVisitors
      */
     public function handle(Request $request, Closure $next): Response
     {
+        session_start();
         $ip = $request->getClientIp();
 
         if ($request->method() === 'GET') {

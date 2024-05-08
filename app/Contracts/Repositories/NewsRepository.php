@@ -92,7 +92,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $var->where('status', 'nonactive');
             });
         })
-        ->get();
+        ->paginate(10);
     }
 
     /**

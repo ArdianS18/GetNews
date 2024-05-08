@@ -166,6 +166,16 @@
                 <h5>Tidak ada data</h5>
             </div>
         @endforelse
-    </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="d-flex">
+                <div><a href="{{ $news->previousPageUrl() }}" class="btn">Kembali</a></div>
+                @for ($i = 1; $i <= $news->lastPage(); $i++)
+                <div><a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></div>
+                @endfor
+                <siv><a href="{{ $news->nextPageUrl() }}" class="btn">Berikutnya</a></div>
+            </div>
+        </div>
+
 @endsection
 

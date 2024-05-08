@@ -20,6 +20,10 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UpdateProfile;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UserProfileRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\NewsCategory;
@@ -191,8 +195,15 @@ class ProfileController extends Controller
         return view('pages.author.profile.update');
     }
 
-    public function updateprofile(User $user, RegisterRequest $registerRequest){
-        $data = $registerRequest->validated();
+    public function updateprofile(User $user, UserProfileRequest $request){
+        $data = $request->validated();
+        // dd($data);
+        // $data['name'] = $data['name'];
+        // $data['email'] = $data['email'];
+        // $data['phone_number'] = $data['phone_number'];
+        // $data['address'] = $data['address'];
+        // $data['birth_date'] = $data['birth_date'];
+        $data['slug'] = Str::slug($data['name']);
         $this->user->update($user->id, $data);
         return back();
     }

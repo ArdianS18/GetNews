@@ -3,9 +3,8 @@
 @section('content')
 <div class="">
     <h4><b>Riwayat Penarikan</b></h4>
-    
-    <div class="d-flex mt-4 mb-3 justify-content-between">
 
+    <div class="d-flex mt-4 mb-3 justify-content-between">
         <div class="d-flex">
             <h5>Total Jumlah Penarikan :</h5>
             <div class="d-flex ms-3">

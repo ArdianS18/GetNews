@@ -207,7 +207,6 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     // Route::post('profilecreatenews', [NewsController::class, 'store'])->name('profile.berita.store');
     //
     Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.author.update');
-    Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
@@ -245,6 +244,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
         return view('pages.user.coins.history');
     })->name('user.history.coin');
 
+    Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');
     // Route::get('news-singgle-post/{news}/{page}', [NewsController::class, 'usernews'])->name('news.user');
     Route::post('news-like/{news}', [NewsHasLikeController::class, 'store'])->name('news.like.store');
@@ -257,14 +257,15 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
 
     Route::get('privacy-policy', [DashboardController::class, 'privacypolicy'])->name('privacy.policy');
-
-    Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     Route::post('photo/{user}', [UserController::class, 'store'])->name('update-photo');
 
     Route::get('profile-user-update', function () {
         return view('pages.user.profile.update');
     })->name('profile.user.update');
+
+    Route::post('update-profile/{user}', [ProfileController::class, 'updateprofile'])->name('update.author.profile');
+
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
@@ -362,14 +363,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
 
     // Inbox
     Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
-    Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
-
-
-
-
-
-
-
     // Route::get('pengajuan-berita', function () {
     //     return view('pages.user.news.pengajuan');
     // })->name('pengajuan.berita');
