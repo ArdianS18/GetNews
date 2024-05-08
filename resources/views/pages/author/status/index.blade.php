@@ -166,7 +166,7 @@
                 text = 'Draft'
             } else {
                 status = 'bg-light-warning fs-2 text-warning'
-                text = 'Pending'
+                text = 'Panding'
             }
             var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
             detail = detail.replace(':slug', data.slug);

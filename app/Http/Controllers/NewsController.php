@@ -353,6 +353,11 @@ class NewsController extends Controller
     {
         $data = $this->NewsService->store($request);
 
+        if ($this->news->findBySlug($data['slug'])) {
+            session()->flash('error', 'Judul sudah digunakan, Mohon untuk ubah judulnya');
+            return redirect()->back()->withInput();
+        }
+
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             $data['status'] = NewsStatusEnum::ACTIVE->value;
         }
