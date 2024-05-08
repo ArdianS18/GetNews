@@ -49,37 +49,120 @@
 
         <div>
             <div class="d-flex gap-2">
-                <select class="form-select" style="width: 200px" name="stat">
-                    <option disabled selected value="">Pilih opsi</option>
+                <select class="form-select" id="status" style="width: 200px" name="stat">
+                    <option value="">Tampilkan semua</option>
                     <option value="panding">Panding</option>
                     <option value="active">Approved</option>
                     <option value="nonactive">Reject</option>
-                    <option value="">Tampilkan semua</option>
                 </select>
             </div>
         </div>
 
         <button type="submit" class="btn btn-outline-primary">Pilih</button>
     </form>
-    <div class="tab-pane">
-        @forelse ($news as $item)
+    <div class="tab-pane" id="data">
+    </div>
+    <x-delete-modal-component />
+@endsection
+@section('script')
+    <script>
+        get(1)
+
+        function get(page) {
+            $.ajax({
+                url: '{{ route('list.news.author') }}',
+                methode: 'GET',
+                dataType: 'JSON',
+                data: {
+                    status: $('#status').val(),
+                    name: $('#search-name').val()
+                },
+                beforeSend: function() {
+                    $('#data').html('')
+                    $('#loading').html(showLoading())
+                    $('#pagination').html('')
+                },
+                success: function(response) {
+                    if (response.data.data.length > 0) {
+                        $.each(response.data.data, function(index, data) {
+                            $('#data').append(cardNews(data))
+                        })
+                        $('#pagination').html(handlePaginate(response.data.paginate))
+                    } else {
+                        $('#loading').html(showNoData('Tidak ada data'))
+                    }
+                    $('.btn-delete').click(function() {
+                        $('#form-delete').data('id', $(this).data('id'))
+                        $('#modal-delete').modal('show')
+                    })
+                }
+            })
+        }
+
+        $('#form-delete').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            var url = "{{ route('profile.news.delete', ['news' => ':id']) }}";
+            url = url.replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-delete').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Gagal menghapus data,Data sedang di gunakan"
+                    })
+                }
+            })
+        })
+
+        function cardNews(data) {
+            let status, text;
+            if (data.status == 'active') {
+                status = ' bg-light-success text-success',
+                    text = 'Aktif'
+            } else if (data.status == 'reject') {
+                status = ' bg-light-danger text-danger'
+                text = 'Tolak'
+            } else if (data.status == 'draft') {
+                status = 'bg-light-secondary text-secondary'
+                text = 'Draft'
+            } else {
+                status = 'bg-light-warning fs-2 text-warning'
+            }
+            var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
+            detail = detail.replace(':slug', data.slug);
+            var edit = "{{ route('profile.news.edit', ['newsId' => ':slug']) }}";
+            edit = edit.replace(':slug', data.slug);
+
+            return `
             <div class="card p-4 mt-4">
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="" style="margin-left: 2%;">
-                            @if ($item->photo)
-                                <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->photo }}" style="object-fit:cover;" width="100%" height="120">
-                            @else
-                                Tidak Ada Foto
-                            @endif
+                                <img src="${data.photo}" alt="" style="object-fit:cover;" width="100%" height="120">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-8">
                         <div class="d-flex">
-
                             <div class="order-md-1" style="margin-left:20px;">
-                                <h4>{{ $item->name }}</h4>
-                                <p>{!! implode(' ', array_slice(explode(' ', strip_tags($item->content)), 0, 40)) !!}{{ strlen(strip_tags($item->content)) > 10 ? '...' : '' }}</p>
+                                <h4>${data.name}</h4>
+                                <p>${data.content}</p>
                             </div>
                         </div>
                     </div>
@@ -87,25 +170,7 @@
                     <div class="col-md-12 col-lg-2 mt-3 mt-lg-0 ">
                         <div class="d-flex justify-content-end">
                             <div class="text-md-right mt-md-0">
-                                <span class="badge fw-bold fs-5
-                                @if ($item->status == 'active')
-                                bg-light-success text-success
-                                @elseif($item->status == 'nonactive')
-                                bg-light-danger text-danger
-                                @elseif ($item->status == 'draft')
-                                bg-light-secondary text-secondary
-                                @else
-                                bg-light-warning fs-2 text-warning @endif">
-                                    @if ($item->status == 'active')
-                                        Aktif
-                                    @elseif ($item->status == 'nonactive')
-                                        Tolak
-                                    @elseif ($item->status == 'draft')
-                                        Draft
-                                    @else
-                                        Panding
-                                    @endif
-                                </span>
+                                <span class="badge fw-bold ${status} fs-5">${text}</span>
                             </div>
                         </div>
 
@@ -120,7 +185,7 @@
 
                         <div class="d-flex justify-content-end">
                             <button class="btn btn-sm m-1" style="background-color: #0F4D8A;">
-                                <a href="{{ route('detail.news', ['news' => $item->slug]) }}">
+                                <a href="${detail}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
                                         viewBox="0 0 512 512">
                                         <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
@@ -132,7 +197,7 @@
                                 </a>
                             </button>
 
-                            <a href="{{ route('profile.news.edit', ['newsId' => $item->slug]) }}" class="btn btn-sm m-1"
+                            <a href="${edit}" class="btn btn-sm m-1"
                                 style="background-color: #FFD643;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
                                     <path
@@ -140,32 +205,18 @@
                                         fill="#ffffff" />
                                 </svg>
                             </a>
-
-                            <form action="{{ route('profile.news.delete', ['news' => $item->id]) }}" method="POST">
-                                @method('post')
-                                @csrf
-                                <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg
+                                <button type="submit" class="btn btn-sm m-1 btn-delete" data-id=${data.id} style="background-color: #C94F4F;"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="18" height="23"
                                         viewBox="0 0 512 512">
                                         <path
                                             d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
                                             fill="#ffffff" />
                                     </svg></button>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        @empty
-            <div class="d-flex justify-content-center">
-                <div>
-                    <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                </div>
-            </div>
-            <div class="text-center">
-                <h5>Tidak ada data</h5>
-            </div>
-        @endforelse
-    </div>
+            `
+        }
+    </script>
 @endsection
-

@@ -15,17 +15,19 @@ class NewsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return[
-          'id' => $this->id,
-          'author_id' => $this->user->id,
-          'name' => $this->name,
-          'author_name' => $this->user->name,
-          'email' => $this->user->email,
-          'photo' =>$this->photo,
-          'content' => $this->content,
-          'pin'=>$this->is_primary,
-          'upload_date' => Carbon::parse($this->upload_date)->isoFormat('D MMMM Y'),
-          'status' => $this->status
-        ];
+      return [
+        'id' => $this->id,
+        'author_id' => $this->user->id,
+        'name' => $this->name,
+        'author_name' => $this->user->name,
+        'email' => $this->user->email,
+        'photo' => asset('storage/'.$this->photo),
+        'content' => implode(' ', array_slice(explode(' ', strip_tags($this->content)), 0, 40)) . (strlen(strip_tags($this->content)) > 10 ? '...' : ''),
+        'pin' => $this->is_primary,
+        'upload_date' => Carbon::parse($this->upload_date)->isoFormat('D MMMM Y'),
+        'status' => $this->status,
+        'slug' => $this->slug
+    ];
+    
     }
 }

@@ -215,7 +215,10 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     // Update And Delete News
     Route::get('edit-news-profile/{newsId}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
 
-    Route::get('status-author', [NewsController::class, 'showstatusnews'])->name('status.news.author');
+    Route::get('status-author', function(){
+        return view('pages.author.status.index');
+    })->name('status.news.author');
+    Route::get('list-status-author', [NewsController::class, 'showstatusnews'])->name('list.news.author');
 
     Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
 
