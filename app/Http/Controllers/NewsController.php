@@ -576,9 +576,13 @@ class NewsController extends Controller
 
     public function showstatusnews(Request $request, NewsCategory $newsCategories)
     {
-        // $news = $this->newsCategory->get();
         $id = auth()->user()->id;
-        $news = $this->news->searchStatus($id, $request);
-        return view('pages.author.status.index', compact('news'));
+        $news = $this->news->searchStatus($id, $request,10);
+        $data['paginate'] = [
+            'current_page' => $news->currentPage(),
+            'last_page' => $news->lastPage(),
+        ];
+        $data['data'] = NewsResource::collection($news);
+        return ResponseHelper::success($data);
     }
 }

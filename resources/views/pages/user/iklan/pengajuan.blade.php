@@ -25,7 +25,7 @@
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
-            <img src="{{asset('assets/img/bg-ajuan.svg')}}" width="250px" alt="" class="img-fluid">
+            <img src="{{asset('assets/img/bg-ajuan.svg')}}" width="250px" alt="">
           </div>
         </div>
       </div>

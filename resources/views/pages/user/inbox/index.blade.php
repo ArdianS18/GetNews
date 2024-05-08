@@ -1,6 +1,7 @@
 @extends('layouts.user.sidebar')
 
 @section('style')
+
     <style>
         .card-profile {
             box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
@@ -14,7 +15,7 @@
 @endsection
 
 <head>
-    <title>Admin | Inbox</title>
+    <title>UIser | Inbox</title>
 </head>
 
 @section('content')
@@ -35,7 +36,7 @@
                         </div>
                         <div class="col-3">
                             <div class="text-center mb-n5">
-                                <img src="{{ asset('assets/img/em.png') }}" alt="" class="img-fluid mb-n4">
+                                <img src="{{ asset('assets/img/em.png') }}" alt="">
                             </div>
                         </div>
                     </div>
