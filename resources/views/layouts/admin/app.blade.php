@@ -31,27 +31,52 @@
         .important {
             color: red;
         }
+
+        .bounce2 {
+            animation: bounce2 2s ease infinite;
+        }
+
+        @keyframes bounce2 {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-30px);
+            }
+
+            60% {
+                transform: translateY(-15px);
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="{{ asset('assets/img/logo-get.png') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />
+        <img src="{{ asset('assets/img/logo-get.png') }}" style="width:150px !important" alt="loader"
+            class="lds-ripple img-fluid animate-bounce bounce2" />
     </div>
     <!-- Preloader -->
     <div class="preloader">
-        <img src="{{ asset('assets/img/logo-get.png') }}" alt="loader" class="lds-ripple img-fluid animate-bounce" />
+        <img src="{{ asset('assets/img/logo-get.png') }}" style="width:150px !important" alt="loader"
+            class="lds-ripple img-fluid animate-bounce bounce2" />
     </div>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         @hasrole('admin')
-        @include('layouts.admin.sidebar')
+            @include('layouts.admin.sidebar')
         @endrole
         @hasrole('author')
-        @include('layouts.author.side')
+            @include('layouts.author.side')
         @endrole
         <!--  Sidebar End -->
         <!--  Main wrapper -->
