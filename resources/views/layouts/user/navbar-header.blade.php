@@ -38,12 +38,6 @@
     </div>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
-            {{-- <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
-            </div> --}}
-            <button type="button" class="search-btn d-lg-none mt-1" data-bs-toggle="modal" data-bs-target="#searchModal">
-                <i class="flaticon-loupe"></i>
-            </button>
             <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <span class="burger-menu">
                     <span 4class="top-bar"></span>
@@ -51,6 +45,47 @@
                     <span class="bottom-bar"></span>
                 </span>
             </a>
+            <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
+            </div>
+            
+            <button type="button" class="search-btn d-lg-none mt-2" data-bs-toggle="modal" data-bs-target="#searchModal">
+                <i class="flaticon-loupe"></i>
+            </button>
+            @auth
+                <div class="ms-2 d-md-none">
+                    <ul class="navbar-nav mx-auto">
+                        <div class="news-card-img mb-2 ms-4">
+                            @role('author')
+                            <a href="{{ route('profile.index') }}">
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="37px" height="37px" style="border-radius: 50%; object-fit:cover;"/>
+                            </a>
+                            @endrole
+                            @role('user')
+                            <a href="{{ route('profile.user') }}">
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="37px" height="37px" style="border-radius: 50%; object-fit:cover;"/>
+                            </a>
+                            @endrole
+                            @role('admin')
+                            <a href="/dashboard">
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="37px" height="37px" style="border-radius: 50%; object-fit:cover;"/>
+                            </a>
+                            @endrole
+                        </div>
+
+                    </ul>
+                </div>
+                @if (Auth::check() && Auth::user()->roles() == "author")
+                @endif
+                @else
+
+                <div class="">
+                    <div class="option-item">
+                        <a href="/login" class="btn-two" id="signInBtn">Login</a>
+                    </div>
+                </div>
+            @endauth
+            
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     @foreach ($categories as $category)
