@@ -78,17 +78,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
         ->where('user_id', $id)
-        ->when($request->search, function($query) use ($request){
-            $query->where('name', 'LIKE', '%'.$request->search.'%');
+        ->when($request->name, function($query) use ($request){
+            $query->where('name', 'LIKE', '%'.$request->name.'%');
         })
-        ->when($request->stat, function ($query) use ($request){
-            $query->when($request->stat === 'panding', function ($var) {
+        ->when($request->status, function ($query) use ($request){
+            $query->when($request->status === 'panding', function ($var) {
                 $var->where('status', 'panding');
             });
-            $query->when($request->stat === 'active', function ($var) {
+            $query->when($request->status === 'active', function ($var) {
                 $var->where('status', 'active');
             });
-            $query->when($request->stat === 'nonactive', function ($var) {
+            $query->when($request->status === 'nonactive', function ($var) {
                 $var->where('status', 'nonactive');
             });
         })
