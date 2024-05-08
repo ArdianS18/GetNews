@@ -277,7 +277,6 @@
         });
     </script>
 
-
     <script>
         $(document).ready(function() {
             $('#content').summernote({
@@ -302,24 +301,28 @@
     </script>
     <script>
         $('.category').change(function() {
-            getSubCategory($(this).val())
+            var selectedCategories = $(this).val(); // Get the selected category IDs as an array
+            getSubCategory(selectedCategories);
         })
 
-        function getSubCategory(id) {
-            $.ajax({
-                url: "sub-category-detail/" + id,
-                method: "GET",
-                dataType: "JSON",
-                beforeSend: function() {
-                    $('.sub-category').html('')
-                },
-                success: function(response) {
-                    $.each(response.data, function(index, data) {
-                        $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-                            '</option>');
-                    });
-                }
-            })
+        function getSubCategory(ids) {
+
+            $('.sub-category').html('');
+
+            ids.forEach(function(id) {
+                $.ajax({
+                    url: "sub-category-detail/" + id,
+                    method: "GET",
+                    dataType: "JSON",
+                    success: function(response) {
+                        $.each(response.data, function(index, data) {
+                            $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+                                '</option>');
+                        });
+                    }
+                });
+            });
+
         }
 
         var today = new Date();

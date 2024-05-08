@@ -210,7 +210,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
-    Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
+    // Route::post('sub-category-detail', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     // Update And Delete News
     Route::get('edit-news-profile/{newsId}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
 

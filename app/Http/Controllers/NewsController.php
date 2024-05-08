@@ -589,12 +589,21 @@ class NewsController extends Controller
         // }
 
         $id = auth()->user()->id;
-        $news = $this->news->searchStatus($id, $request, 10);
-        $data['paginate'] = [
-            'current_page' => $news->currentPage(),
-            'last_page' => $news->lastPage(),
-        ];
-        $data['data'] = NewsResource::collection($news);
+        if ($request->has('page')) {
+            $news = $this->news->searchStatus($id, $request, 10);
+            $data['paginate'] = [
+                'current_page' => $news->currentPage(),
+                'last_page' => $news->lastPage(),
+            ];
+            $data['data'] = NewsResource::collection($news);
+        } else {
+            $news = $this->news->searchStatus($id, $request, 10);
+            $data['paginate'] = [
+                'current_page' => $news->currentPage(),
+                'last_page' => $news->lastPage(),
+            ];
+            $data['data'] = NewsResource::collection($news);
+        }
         return ResponseHelper::success($data);
     }
 }
