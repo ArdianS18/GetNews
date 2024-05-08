@@ -8,6 +8,9 @@
         margin-left: 15px;
         align-items: center;
       }
+      .bg-mobile {
+        width: 150px;
+      }
     }
   </style>
 @endsection
@@ -27,7 +30,7 @@
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
-            <img src="{{asset('assets/img/bg-coin.svg')}}" width="170px" alt="">
+            <img src="{{asset('assets/img/bg-coin.svg')}}" class="bg-mobile" width="170px" alt="">
           </div>
         </div>
       </div>

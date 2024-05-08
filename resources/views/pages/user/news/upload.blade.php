@@ -6,6 +6,14 @@
         /* border: 2px solid #175A95 !important;  */
         box-shadow: 0 1px 5px #175A95;
     }
+    @media (max-width: 768px) {
+        .text-mobile{
+            font-size: 12px;
+        }
+        .text-mobile-header{
+            font-size: 12px;
+        }
+    }
 </style>
 @endsection
 @section('content')
@@ -20,8 +28,8 @@
                     </svg>
                 </div>
                 <div class="col-lg-7 col-8">
-                    <h4 class="fw-semibold mb-3 mb-lg-0" style="color: #175A95;">Pengajuan Berita</h4>
-                    <p class="mb-0" style="color: #175A95;">proses pengunggahan berita ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
+                    <h4 class="fw-semibold mb-3 mb-lg-0 text-mobile-header" style="color: #175A95;">Pengajuan Berita</h4>
+                    <p class="mb-0 text-mobile" style="color: #175A95;">proses pengunggahan berita ada biaya yang dikenakan untuk memuat konten tersebut. Harap dipertimbangkan dan disiapkan sebelum melanjutkan</p>
                 </div>
             </div>
         </div>

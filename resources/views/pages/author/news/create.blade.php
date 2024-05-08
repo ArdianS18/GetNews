@@ -12,6 +12,11 @@
             list-style: decimal !important;
             list-style-position: inside !important;
         }
+        @media (max-width: 768px) {
+            .bg-mobile {
+                width: 150px;
+            }
+        }
     </style>
 @endsection
 
@@ -39,7 +44,7 @@
                 </div>
                 <div class="col-3">
                     <div class="text-center mb-n4">
-                        <img src="{{ asset('assets/img/bg-ajuan.svg') }}" width="250px" alt="" class="img-fluid">
+                        <img src="{{ asset('assets/img/bg-ajuan.svg') }}" width="250px" alt="" class="bg-mobile">
                     </div>
                 </div>
             </div>

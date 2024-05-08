@@ -7,6 +7,17 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
 <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media (max-width: 768px) {
+        .bg-mobile {
+            width: 150px;
+        }
+        .text-mobile{
+            font-size: 12px;
+        }
+    }
+</style>
 @endsection
 
 @section('content')
