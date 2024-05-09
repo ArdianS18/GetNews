@@ -414,74 +414,32 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function showNewsStatistic($user_id, $author_id): mixed
+    public function showNewsStatistic(): mixed
     {
         $year = date('Y');
         $result =  $this->model->query()
-            ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->withCount('views')
-            ->whereRelation('user.authors', 'user_id', $user_id)
-            ->select(
-                DB::raw('MONTH(news.created_at) as month'),
-                DB::raw('WEEK(news.created_at) as week'),
-                DB::raw('COUNT(news.id) as news_count'),
-                // DB::raw('COUNT(followers.author_id) as followers_count'),
-                // DB::raw('COUNT(views.news_id) as views_count')
-            )
-            // ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            // ->leftJoin('followers', 'news.user_id', '=', 'followers.author_id')
+            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'), DB::raw('COUNT(followers.author_id) as followers_count'))
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
+            ->leftJoin('followers', 'news.user_id', '=', 'followers.author_id')
             ->whereYear('news.created_at', $year)
-            ->groupBy('month', 'week')
+            ->groupBy('month')
             ->orderBy('month')
             ->get();
 
 
-        // $monthlyData = [];
-        // for ($i = 1; $i <= 12; $i++) {
-        //     $found = false;
-        //     foreach ($result as $row) {
-        //         if ($row->month == $i) {
-        //             $newsCount = $row->news_count;
-        //             $monthlyData[] = $newsCount;
-        //             $found = true;
-        //             break;
-        //         }
-        //     }
-        //     if (!$found) {
-        //         $monthlyData[] = 0;
-        //     }
-        // }
-
-        // return $monthlyData;
-
-
         $monthlyData = [];
-        $weeklyData = [];
-        $counter = 0; // Menambahkan counter untuk melacak jumlah berita yang sudah diambil per minggu
-        $currentMonth = null; // Menyimpan bulan saat ini
-        foreach ($result as $row) {
-            $month = $row->month;
-            if ($month != $currentMonth) {
-                $currentMonth = $month;
-                $weeklyData = []; // Reset data mingguan saat memasuki bulan baru
-                $counter = 0; // Reset counter saat memasuki bulan baru
+        for ($i = 1; $i <= 12; $i++) {
+            $found = false;
+            foreach ($result as $row) {
+                if ($row->month == $i) {
+                    $newsCount = $row->news_count;
+                    $monthlyData[] = $newsCount;
+                    $found = true;
+                    break;
+                }
             }
-            $week = $row->week;
-            $newsCount = $row->news_count;
-            $viewsCount = $row->views_count; // Jumlah views dari berita
-            $weeklyData[$week][] = ['news_count' => $newsCount, 'views_count' => $viewsCount];
-            if (count($weeklyData[$week]) >= 3) {
-                usort($weeklyData[$week], function ($a, $b) {
-                    return $b['views_count'] - $a['views_count']; // Mengurutkan data berdasarkan jumlah views secara descending
-                });
-                $weeklyData[$week] = array_slice($weeklyData[$week], 0, 3); // Mengambil 3 berita dengan jumlah views terbanyak
-                foreach ($weeklyData[$week] as $data) {
-                    $monthlyData[] = $data['news_count'];
-                }
-                $counter += count($weeklyData[$week]); // Menambahkan counter dengan jumlah berita per minggu yang diambil
-                if ($counter >= 12) {
-                    break; // Keluar dari loop jika sudah mengambil 3 berita per minggu selama 12 minggu
-                }
+            if (!$found) {
+                $monthlyData[] = 0;
             }
         }
 
