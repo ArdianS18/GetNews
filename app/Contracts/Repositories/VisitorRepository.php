@@ -4,8 +4,8 @@ namespace App\Contracts\Repositories;
 
 use App\Models\View;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-;
+use Illuminate\Support\Facades\DB;;
+
 use App\Contracts\Interfaces\VisitorInterface;
 use App\Enums\NewsStatusEnum;
 use App\Models\Visitor;
@@ -27,8 +27,8 @@ class VisitorRepository extends BaseRepository implements VisitorInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id)
-        ->delete();
+            ->findOrFail($id)
+            ->delete();
     }
 
     /**
@@ -40,7 +40,6 @@ class VisitorRepository extends BaseRepository implements VisitorInterface
      */
     public function show(mixed $id): mixed
     {
-
     }
 
     /**
@@ -56,7 +55,6 @@ class VisitorRepository extends BaseRepository implements VisitorInterface
 
     public function where(): mixed
     {
-        
     }
 
     /**
@@ -66,11 +64,35 @@ class VisitorRepository extends BaseRepository implements VisitorInterface
      *
      * @return mixed
      */
-    public function store( $data): mixed
+    public function store($data): mixed
     {
-            return $this->model->query()
-            ->updateOrCreate( ['visitor_id' => $data['visitor_id']],
-            $data
-        );
+        return $this->model->query()
+            ->updateOrCreate(
+                ['visitor_id' => $data['visitor_id']],
+                $data
+            );
+    }
+
+    public function countChart(): mixed
+    {
+        $year = date('Y');
+
+    $results = $this->model->query()
+        ->select(DB::raw('MONTH(created_at) as month'))
+        ->whereYear('created_at', $year)
+        ->orderBy('month')
+        ->get();
+
+    $monthlyVisitorData = [];
+
+    for ($i = 1; $i <= 12; $i++) {
+        $monthlyVisitorData[$i] = 0;
+    }
+
+    foreach ($results as $result) {
+        $monthlyVisitorData[$result->month]++;
+    }
+
+    return array_values($monthlyVisitorData);
     }
 }

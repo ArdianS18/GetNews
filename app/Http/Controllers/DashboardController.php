@@ -78,8 +78,10 @@ class DashboardController extends Controller
         $categories = $this->category->showWhithCount();
         $news2 = $this->news->showCountMonth();
         $newsCategory = $this->newsCategory->trending();
+        $visitor = $this->visitor->get()->count();
+        $visitorChart = $this->visitor->countChart();
 
-        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2', 'visitorsCount'));
+        return view('pages.admin.index', compact('authors', 'users', 'news_count', 'categories', 'news', 'authors1', 'news2', 'visitor','visitorChart'));
     }
 
     public function home(Request $request)
