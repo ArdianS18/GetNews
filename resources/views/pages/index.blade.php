@@ -661,7 +661,7 @@
                             @endforelse
                         </ul>
                     </div>
-                    <div class="sidebar-widget">
+                    {{-- <div class="sidebar-widget">
                         <h3 class="sidebar-widget-title">Celebration</h3>
                         <div class="featured-widget">
                             <div class="featured-slider swiper">
@@ -710,7 +710,7 @@
                                 <div class="featured-next"><i class="flaticon-right-arrow"></i></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
