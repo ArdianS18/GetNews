@@ -105,9 +105,11 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
             $domQuestion = new \DOMDocument();
             libxml_use_internal_errors(true);
-            $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-            $this->processImages($domQuestion);
-
+            $content = $data['content'] ?? '-';
+            if (!$content) {
+                $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+                $this->processImages($domQuestion);
+            }
             libxml_clear_errors();
 
         return [
