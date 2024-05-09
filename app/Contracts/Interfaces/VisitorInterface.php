@@ -10,5 +10,5 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
 interface VisitorInterface extends GetInterface, StoreInterface
 {
-
+    public function countChart() : mixed;
 }
