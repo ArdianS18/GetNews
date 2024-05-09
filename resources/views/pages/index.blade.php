@@ -661,56 +661,6 @@
                             @endforelse
                         </ul>
                     </div>
-                    {{-- <div class="sidebar-widget">
-                        <h3 class="sidebar-widget-title">Celebration</h3>
-                        <div class="featured-widget">
-                            <div class="featured-slider swiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="news-card-one">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-thumb-1.webp" alt="Image" />
-                                            </div>
-                                            <div class="news-card-info">
-                                                <h3><a href="business-details.html">How Youth Viral Diseases May The Year 2023</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 24, 2023</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="news-card-one">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-thumb-2.webp" alt="Image" />
-                                            </div>
-                                            <div class="news-card-info">
-                                                <h3><a href="business-details.html">Nintendo Switch Online’s Next Wave of N64 Games</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 22, 2023</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="news-card-one">
-                                            <div class="news-card-img">
-                                                <img src="assets/img/news/news-thumb-3.webp" alt="Image" />
-                                            </div>
-                                            <div class="news-card-info">
-                                                <h3><a href="business-details.html">5 things We Know About GTA Definitive Edition</a></h3>
-                                                <ul class="news-metainfo list-style">
-                                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Mar 14, 2023</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="featured-prev"><i class="flaticon-left-arrow"></i></div>
-                                <div class="featured-next"><i class="flaticon-right-arrow"></i></div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>

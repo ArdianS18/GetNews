@@ -31,10 +31,10 @@ class LoginService
             return redirect()->back()->withErrors(trans('auth.author_banned'))->withInput();
         }
 
-        if (!$user->email_verified_at) {
-            auth()->logout();
-            return view('auth.verify');
-        }
+        // if (!$user->email_verified_at) {
+        //     auth()->logout();
+        //     return view('auth.verify');
+        // }
 
             $role = auth()->user()->roles->pluck('name')[0];
             switch ($role) {

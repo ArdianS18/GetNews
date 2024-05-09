@@ -5,8 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Mail\VerificationEmail;
 use App\Services\Auth\RegisterService;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Mail;
 
 use function Laravel\Prompts\alert;
 

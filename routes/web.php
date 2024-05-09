@@ -45,6 +45,7 @@ Route::middleware(['visitor'])->group(function () {
 });
 
 Route::get('faq', [DashboardController::class, 'faq'])->name('faq.dashboard');
+
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
