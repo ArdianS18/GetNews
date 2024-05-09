@@ -206,7 +206,6 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
     // Route::post('profilecreatenews', [NewsController::class, 'store'])->name('profile.berita.store');
     //
-    Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.author.update');
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
@@ -246,6 +245,8 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     Route::get('riwayat-tukar-coin', function () {
         return view('pages.user.coins.history');
     })->name('user.history.coin');
+
+    Route::get('profile-update', [ProfileController::class, 'profileupdate'])->name('profile.author.update');
 
     Route::post('report-news/{news}', [ReportController::class, 'store'])->name('report.store');
     Route::post('contact', [ContactUsController::class, 'store'])->name('contact.store');

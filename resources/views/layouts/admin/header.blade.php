@@ -22,11 +22,6 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <div class="d-flex align-items-center justify-content-between">
                 <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
-                    {{-- <li class="nav-item ">
-                        <a style="font-size: 29px" class="nav-link notify-badge mr-5 nav-icon-hover" href="{{ route('cart') }}" aria-controls="offcanvasRight">
-                            <i class="ti ti-basket"></i>
-                        </a>
-                    </li> --}}
                     <li class="nav-item">
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
                             <span class="text-dark fs-3 fw-semibold lh-1 mb-1 username"></span>
@@ -68,41 +63,18 @@
                                     </div>
                                 </div>
                                 <div class="message-body">
-                                    <a class="py-8 px-7 mt-8 d-flex align-items-center">
+                                    <a class="py-8 px-7 mt-8 d-flex align-items-center" href="{{ route('profile.author.update') }}">
                                         <span
                                             class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                            <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg"
-                                                alt="" width="24" height="24">
+                                            {{-- <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg")  }}" width="24" height="24" alt="" /> --}}
+                                            <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg" alt="" width="24" height="24">
                                         </span>
                                         <div class="w-75 d-inline-block v-middle ps-3">
-                                            <h6 class="mb-1 bg-hover-primary fw-semibold"> My Profile </h6>
-                                            <span class="d-block text-dark">Account Settings</span>
+                                            <h6 class="mb-1 bg-hover-primary fw-semibold"> Profile Ku </h6>
+                                            <span class="d-block text-dark">Setting Akun</span>
                                         </div>
                                     </a>
-                                    {{-- <a href="app-email.html" class="py-8 px-7 d-flex align-items-center">
-                                        <span
-                                            class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                            <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-inbox.svg"
-                                                alt="" width="24" height="24">
-                                        </span>
-                                        <div class="w-75 d-inline-block v-middle ps-3">
-                                            <h6 class="mb-1 bg-hover-primary fw-semibold">My Inbox</h6>
-                                            <span class="d-block text-dark">Messages & Emails</span>
-                                        </div>
-                                    </a>
-                                    <a href="app-notes.html" class="py-8 px-7 d-flex align-items-center">
-                                        <span
-                                            class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
-                                            <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-tasks.svg"
-                                                alt="" width="24" height="24">
-                                        </span>
-                                        <div class="w-75 d-inline-block v-middle ps-3">
-                                            <h6 class="mb-1 bg-hover-primary fw-semibold">My Task</h6>
-                                            <span class="d-block text-dark">To-do and Daily Tasks</span>
-                                        </div>
-                                    </a> --}}
                                 </div>
-                                {{-- {{ route('logout') }} --}}
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <div class="d-grid py-4 px-7 pt-8">
