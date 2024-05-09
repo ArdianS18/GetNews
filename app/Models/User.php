@@ -49,6 +49,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Author::class);
     }
 
+    public function followers() : HasMany
+    {
+        return $this->hasMany(Followers::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
