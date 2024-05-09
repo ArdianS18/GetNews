@@ -8,6 +8,7 @@ use App\Enums\CategoryStatusEnum;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Enums\NewsStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -118,25 +119,15 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->update($data);
     }
 
-    // public function showWhithCount(): mixed
-    // {
-    //     return DB::table('categories')
-    //         ->select('categories.name', 'categories.slug', DB::raw('count(*) as total'))
-    //         ->groupBy('categories.name', 'categories.slug')
-    //         ->orderBy('total', 'desc')
-    //         ->take(6)
-    //         ->get();
-    // }
-
     public function showWhithCount(): mixed
     {
-        return DB::table('categories')
-            ->join('news_categories', 'categories.id', '=', 'news_categories.category_id')
-            ->select('categories.id', 'categories.name', 'categories.slug', DB::raw('COUNT(news_categories.category_id) as total'))
-            ->groupBy('categories.id', 'categories.name', 'categories.slug')
-            ->orderBy('total', 'desc')
+        return $this->model->query()
+            ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
+            ->withCount('newsCategories')
+            ->orderByDesc('news_categories_count')
             ->take(6)
             ->get();
+
     }
 
     public function showEditor(): mixed

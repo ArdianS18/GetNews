@@ -656,7 +656,7 @@
                             @forelse ($categorypopuler as $category)
                             <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
                                 href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><i class="flaticon-right-arrow"></i>{{ $category->name }}
-                                <span>({{ $category->total }})</span></a></li>
+                                <span>({{ $category->news_categories_count }})</span></a></li>
                             @empty
                             @endforelse
                         </ul>

@@ -67,7 +67,6 @@ class DashboardController extends Controller
     }
 
     public function index(Request $request){
-        $visitorsCount = count(Session::get('visitor', []));
         $users = $this->user->whereRelation();
 
         $authors = $this->author->get()->count();
@@ -111,8 +110,8 @@ class DashboardController extends Controller
         $most_populer = $this->news->getByPopular('down');
         $most_populer2 = $this->news->getByPopular('side');
         $categorypopuler = $this->category->showWhithCount();
-        $visitorId = $request->cookie('visitor_id');
 
+        $visitorId = $request->cookie('visitor_id');
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
@@ -121,7 +120,7 @@ class DashboardController extends Controller
             'subCategories', 'trendings', 'news_recent', 'populars',
             'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
             'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
-        }   
+        }
         $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
 
         return response()->view('pages.index', compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
