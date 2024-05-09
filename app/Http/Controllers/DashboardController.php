@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Author;
 use Illuminate\View\View ;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseHelper;
 use App\Traits\CustomPaginateTrait;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\NewsInterface;
@@ -17,13 +20,12 @@ use App\Contracts\Interfaces\ViewInterface;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
+use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -40,11 +42,12 @@ class DashboardController extends Controller
     private TagInterface $tag;
     private NewsHasLikeInterface $newsHasLike;
     private CommentInterface $comment;
+    private VisitorInterface $visitor;
 
     use CustomPaginateTrait;
 
 
-    public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment)
+    public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment,VisitorInterface $visitor)
     {
         $this->user = $user;
         $this->author = $author;
@@ -60,6 +63,7 @@ class DashboardController extends Controller
         $this->view = $view;
         $this->newsHasLike = $newsHasLike;
         $this->comment = $comment;
+        $this->visitor = $visitor;
     }
 
     public function index(Request $request){
@@ -105,12 +109,24 @@ class DashboardController extends Controller
         $most_populer = $this->news->getByPopular('down');
         $most_populer2 = $this->news->getByPopular('side');
         $categorypopuler = $this->category->showWhithCount();
+        $visitorId = $request->cookie('visitor_id');
 
-        return view('pages.index',compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
-                                            'news_left', 'news_mid', 'news_right', 'categories',
-                                            'subCategories','trendings', 'news_recent', 'populars',
-                                            'editor_pick', 'generals', 'popular_post', 'picks','tags',
-                                            'totalCategories','authors', 'news_latests', 'news_latests2'));
+        if (!$visitorId) {
+            $visitorId = Str::random(30);
+            $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
+            return response()->view('pages.index', compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
+            'news_left', 'news_mid', 'news_right', 'categories',
+            'subCategories', 'trendings', 'news_recent', 'populars',
+            'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
+            'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
+        }   
+        $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
+
+        return response()->view('pages.index', compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
+        'news_left', 'news_mid', 'news_right', 'categories',
+        'subCategories', 'trendings', 'news_recent', 'populars',
+        'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
+        'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
     }
 
     public function navbar(Request $request){

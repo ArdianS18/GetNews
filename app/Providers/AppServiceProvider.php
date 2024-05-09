@@ -39,6 +39,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\ViewInterface;
+use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Repositories\AdvertisementPhotoRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\CategoryRepository;
@@ -58,6 +59,7 @@ use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\SubscribeRepository;
 use App\Contracts\Repositories\TagRepository;
 use App\Contracts\Repositories\ViewRepository;
+use App\Contracts\Repositories\VisitorRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -87,6 +89,7 @@ class AppServiceProvider extends ServiceProvider
         AdvertisementPhotoInterface::class => AdvertisementPhotoRepository::class,
         PaymentAdvertisementInterface::class => PaymentAdvertisementRepository::class,
         PaymentNewsInterface::class => PaymentNewsRepository::class,
+        VisitorInterface::class => VisitorRepository::class,
     ];
 
     /**
