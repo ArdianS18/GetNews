@@ -35,7 +35,7 @@
                             <div class="mt-n5">
                                 <div class="d-flex align-items-center justify-content-center mt-5 mb-2">
                                     <div class="rounded-circle overflow-hidden border border-white" style="width: 110px; height: 110px;">
-                                        <img src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
+                                        <img src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100" style="object-fit: cover">
                                     </div>
                                     <div class="mt-5 mt-lg-0 ms-lg-3">
                                         <h5 class="fs-5 mt-2 mb-0 fw-semibold">{{ auth()->user()->name }}</h5>
@@ -60,10 +60,10 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
-            <div class="shadow-sm" style="background-color: #ECF1F4;">
+            {{-- <div class="shadow-sm" style="background-color: #ECF1F4;">
                 <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 rounded-2" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button
@@ -75,7 +75,7 @@
                         </button>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
 
         <div class="tab-content" id="pills-tabContent">
@@ -83,7 +83,7 @@
                 aria-labelledby="pills-berlangganan-tab" tabindex="0">
 
                 <!-- Row -->
-                <div class="">
+                {{-- <div class="">
                     <table class="table">
                         <thead>
                             <tr>
@@ -117,7 +117,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
                 <!-- End Row -->
             </div>
 
@@ -167,16 +167,15 @@
                     </div>
                     <div class="col-md-12 col-lg-12 mb-3">
                         <label class="form-label" for="email">Alamat</label>
-                        {{-- <textarea class="form-control" readonly value=""> --}}
-                        <textarea name="" class="form-control" placeholder="{{ auth()->user()->address }}" id="" cols="30" rows="10" readonly></textarea>
+                        <textarea name="" class="form-control" placeholder="{{ auth()->user()->address }}" id="" cols="30" rows="5" readonly style="resize: none"></textarea>
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-end mb-5">
+                {{-- <div class="d-flex justify-content-end mb-5">
                     <a href="{{ route('profile.user.update') }}">
                         <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
                     </a>
-                </div>
+                </div> --}}
             </div>
 
 

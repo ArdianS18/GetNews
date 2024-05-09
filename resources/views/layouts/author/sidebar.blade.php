@@ -72,7 +72,11 @@
     <div class="page-wrapper" id="main-wrapper" data-theme="blue_theme" data-layout="vertical" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
-        @include('layouts.author.side')
+        @if (auth()->user()->roles->pluck('name')[0] == "user")
+            @include('layouts.user.side')
+        @else
+            @include('layouts.author.side')
+        @endif
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -82,8 +86,8 @@
             <div class="container-fluid">
                 @yield('content')
             </div>
-            
-            
+
+
         </div>
     </div>
     <!--  Import Js Files -->
@@ -333,8 +337,8 @@
         if (preloader) {
             preloader.style.display = 'none';
         }
-    }); 
-    
+    });
+
 </script>
 </body>
 

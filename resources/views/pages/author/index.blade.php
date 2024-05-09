@@ -65,12 +65,8 @@
           <div class="card overflow-hidden">
             <div class="card-profile">
               <div class="card-body p-0">
+                {{-- <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile-bg.svg")  }}" width="100%" height="150px" style="border-radius:10px;" alt="" class="img-fluid" /> --}}
                 <img src="{{asset('assets/img/profile-bg.svg')}}" width="100%" height="150px" style="border-radius:10px;" alt="" class="img-fluid">
-                <div class="top-right">
-                  <a href="{{ route('profile.author.update') }}">
-                    <button class="btn btn-sm px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
-                  </a>
-                </div>
                 <div class="row align-items-center">
                   <div class="col-lg-5 order-lg-1 order-2">
                     <div class="d-flex align-items-center justify-content-between m-4">
@@ -128,7 +124,7 @@
                         <div class="">
                           <span class="badge bg-light-danger text-danger fs-5 px-2 py-2">
                             {{ $news_reject }}
-                          </span> 
+                          </span>
                         </div>
                         <div class="">
                         <p class="mb-0 fs-4">Ditolak</p>
@@ -200,13 +196,13 @@
                             </button>
                         </div>
                     </div>
-                    
+
                   </form>
-                
+
                 </div>
 
               </div>
-              
+
               <!-- Row -->
               <div class="row">
                 @forelse ($news as $news)
