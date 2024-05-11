@@ -1,7 +1,18 @@
 @extends('layouts.user.app')
+
+@section('style')
+  <style>
+    @media (max-width: 768px) {
+        .logo-mobile {
+            width: 600px;
+        }
+    }
+  </style>
+@endsection
+
 @section('content')
     <div class="d-flex justify-content-center">
-        <img src="{{ asset('faq.svg') }}" width="500px" alt="" class="img-fluid" srcset="">
+        <img src="{{ asset('faq.svg') }}"  alt="" class="logo-mobile" srcset="">
     </div>
     <div class="text-center">
         <h3>

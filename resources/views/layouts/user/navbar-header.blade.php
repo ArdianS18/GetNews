@@ -40,9 +40,9 @@
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <span class="burger-menu">
-                    <span 4class="top-bar"></span>
-                    <span class="middle-bar"></span>
-                    <span class="bottom-bar"></span>
+                    <span class="top-bar" style="height: 2px; width: 25px;"></span>
+                    <span class="middle-bar" style="height: 2px; width: 25px;"></span>
+                    <span class="bottom-bar" style="height: 2px; width: 25px;"></span>
                 </span>
             </a>
             <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
@@ -53,22 +53,22 @@
                 <i class="flaticon-loupe"></i>
             </button>
             @auth
-                <div class="ms-2 d-md-none">
+                <div class="ms-2 mt-1 d-md-none">
                     <ul class="navbar-nav mx-auto">
                         <div class="news-card-img mb-2 ms-4">
                             @role('author')
                             <a href="{{ route('profile.index') }}">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="37px" height="37px" style="border-radius: 50%; object-fit:cover;"/>
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
                             </a>
                             @endrole
                             @role('user')
                             <a href="{{ route('profile.user') }}">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="37px" height="37px" style="border-radius: 50%; object-fit:cover;"/>
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
                             </a>
                             @endrole
                             @role('admin')
                             <a href="/dashboard">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="37px" height="37px" style="border-radius: 50%; object-fit:cover;"/>
+                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
                             </a>
                             @endrole
                         </div>
@@ -84,6 +84,7 @@
                         <a href="/login" class="btn-two" id="signInBtn">Login</a>
                     </div>
                 </div>
+
             @endauth
             
             <div class="collapse navbar-collapse">
