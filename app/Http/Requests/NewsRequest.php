@@ -14,6 +14,7 @@ class NewsRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'slug' => 'unique:news,slug',
             'photo' => 'required|mimes:jpg,png,jpeg',
             'content' => 'required',
             'category' => 'array|required',
@@ -30,6 +31,7 @@ class NewsRequest extends FormRequest
     {
         return [
             'name.required' => 'Nama tidak boleh kosong',
+        'name.unique' => 'Judulnya tidak boleh ada yang sama',
             'photo.required' => 'Foto tidak boleh kosong',
             'content.required' => 'Konten tidak boleh kosong',
             'category.required' => 'Kategori tidak boleh kosong',

@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\TagInterface;
+use App\Enums\NewsStatusEnum;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -81,6 +82,7 @@ class TagRepository extends BaseRepository implements TagInterface
     public function getByPopular(): mixed
     {
         return $this->model->query()
+            ->whereRelation('newsTags.news', 'status', NewsStatusEnum::ACTIVE->value)
             ->withCount('newsTags')
             ->take(12)
             ->get();

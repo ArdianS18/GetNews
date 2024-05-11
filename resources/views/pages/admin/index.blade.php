@@ -41,7 +41,7 @@
                         </div>
                         <div style="color: #41739e" class="ms-4 col-lg-11">
                             <h4>Jumlah Pengunjung</h4>
-                            <h3 style="color: #41739e">{{ $visitorsCount }}</h3>
+                            <h3 style="color: #41739e">{{ $visitor }}</h3>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                                             <div class="col-md-8">
                                                 <div class="card-body p-2">
                                                     <h5 class="card-text">
-                                                        {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...')  !!}
+                                                        {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...') !!}
                                                     </h5>
                                                     <div class="d-flex gap-3 align-items-center ms-0">
                                                         <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
@@ -135,8 +135,7 @@
                                                                 width="18" height="18" viewBox="0 0 24 24">
                                                                 <path fill="#DD1818"
                                                                     d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                            </svg><small
-                                                                class="mt-1 ms-1">{{ $news->views }}</small></p>
+                                                            </svg><small class="mt-1 ms-1">{{ $news->views }}</small></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -188,7 +187,8 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div class="d-flex align-items-center">
                                     <img src="{{ asset($author->photo ? 'storage/' . $author->photo : 'default.png') }}"
-                                        class="rounded-circle mb-3 img" style="object-fit: cover" alt="Image" width="40px" height="40px" />
+                                        class="rounded-circle mb-3 img" style="object-fit: cover" alt="Image"
+                                        width="40px" height="40px" />
                                     <div class="ms-3">
                                         <p class="fs-4 fw-semibold fs-2 student-name">{{ $author->name }}</p>
                                     </div>
@@ -226,7 +226,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4>Statistik Jumlah Pengunjung</h4>
+                    <h4>Statistik Pertambahan Jumlah Pengunjung</h4>
                     <div class="" id="chart-pengunjung"></div>
                     <div class="" id="name"></div>
                 </div>
@@ -410,21 +410,6 @@
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 
-    {{-- <script>
-         $(document).ready(function() {
-            function updateVisitorCount() {
-                $.ajax({
-                    url: '/visitors/count',
-                    method: 'GET',
-                    success: function(response) {
-                        $('#visitorCount').text(response.visitorCount);
-                    }
-                });
-            }
-            updateVisitorCount();
-        });
-    </script> --}}
-
     <script>
         var monthlyData = <?php echo json_encode($news2); ?>;
 
@@ -474,45 +459,47 @@
         chart.render();
 
 
-        var options = {
-          series: [
-            {
-            name: "Pengunjung Umum",
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 160, 190, 178]
-            },
-            {
-            name: "Pengunjung Unique",
-            data: [0, 59, 53, 78, 34, 76, 60, 55, 138, 110, 78, 67]
-          }
-        ],
-          chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Des'],
+        var visitor = <?php echo json_encode($visitorChart); ?>;
+        var monthlVisitorString = JSON.stringify(visitor);
+        var monthlyDataVisitor = JSON.parse(monthlVisitorString);
+
+        var visitorUnique = [];
+        for (var key in monthlyDataVisitor) {
+            if (monthlyDataVisitor.hasOwnProperty(key)) {
+                visitorUnique.push(monthlyDataVisitor[key]); // Mengubah values menjadi visitorUnique
+            }
         }
+
+        var options = {
+            series: [{
+                name: "Pengunjung Unique",
+                data: visitorUnique
+            }],
+            chart: {
+                height: 350,
+                type: 'line',
+                zoom: {
+                    enabled: false
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'straight'
+            },
+            grid: {
+                row: {
+                    colors: ['#f3f3f3', 'transparent'],
+                    opacity: 0.5
+                },
+            },
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            }
         };
 
         var chart = new ApexCharts(document.querySelector("#chart-pengunjung"), options);
         chart.render();
-
     </script>
-
-
 @endsection

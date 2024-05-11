@@ -178,6 +178,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->firstOrFail();
     }
 
+    public function findBySlug($slug): mixed
+    {
+        return $this->model->query()
+            ->where('slug', $slug)
+            ->first();
+    }
+
     /**
      * Handle the Get all data event from models.
      *
@@ -209,6 +216,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function getById($category_id): mixed
     {
         return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereRelation('newsCategories', 'category_id' , $category_id)
             ->withCount('views')
             ->orderByDesc('views_count')

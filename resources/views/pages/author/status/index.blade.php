@@ -92,7 +92,7 @@
 
         function get(page) {
             $.ajax({
-                url: '{{ route('list.news.author') }}',
+                url: '{{ route('list.news.author') }}?page='+page,
                 methode: 'GET',
                 dataType: 'JSON',
                 data: {
@@ -166,8 +166,14 @@
                 text = 'Draft'
             } else {
                 status = 'bg-light-warning fs-2 text-warning'
+                text = 'Panding'
             }
-            var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
+
+            if (data.status == 'active') {
+                var detail = "{{ route('news.user', ['news' => ':slug']) }}";
+            } else {
+                var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
+            }
             detail = detail.replace(':slug', data.slug);
             var edit = "{{ route('profile.news.edit', ['newsId' => ':slug']) }}";
             edit = edit.replace(':slug', data.slug);

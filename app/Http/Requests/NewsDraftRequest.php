@@ -15,6 +15,7 @@ class NewsDraftRequest extends FormRequest
     {
         return [
             'name' => 'nullable',
+            'slug' => 'unique:news,slug',
             'photo' => 'nullable|mimes:jpg,png,jpeg',
             'content' => 'nullable',
             'category' => 'nullable|array',

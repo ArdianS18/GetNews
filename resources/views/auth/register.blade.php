@@ -34,11 +34,11 @@
                 <div class="mt-4 ms-4">
                     <a href="{{route('login')}}">
                         <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
-                    </a>  
+                    </a>
                 </div>
 
                 <div class="d-flex justify-content-center align-items-center">
-                    
+
                     <img src="{{asset('assets/img/auth/bg-regis.svg')}}" width="590px" alt="auth-login-cover" class="img-fluid my-5 auth-illustration" data-app-dark-img="illustrations/auth-login-illustration-dark.html">
                 </div>
 
@@ -57,12 +57,12 @@
                     @endforeach
                 @endif
                     <form id="formAuthentication" class="py-3" action="{{route('register')}}" method="POST">
-                        @csrf   
-                        <div class="row">                  
+                        @csrf
+                        <div class="row">
                             <div class="my-2 col-12">
                                 <label for="name" class="form-label mb-2">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="name" name="name">
-                            </div>    
+                            </div>
                             <div class="my-2 col-lg-12">
                                 <label for="phone_number" class="form-label mb-2">Nomor Hp</label>
                                 <input type="text" id="phone_number" class="form-control" name="phone_number">
@@ -81,7 +81,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                            
+
                             </div>
                             <div class="my-2 col-lg-6">
                                 <label for="password" class="form-label mb-2">Konfirmasi Password</label>
@@ -105,7 +105,7 @@
                     <div class="text-center">
                             <p>Sudah memiliki akun?<a style="color: #438ac8" href="{{route('login')}}"> Masuk Sekarang!</a></p>
                     </div>
-                
+
 
             </div>
         </div>
@@ -116,7 +116,7 @@
     function togglePasswordVisibility() {
         var passwordInput = document.getElementById('password');
         var togglePasswordIcon = document.getElementById('togglePasswordIcon');
-        
+
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             togglePasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 256 256"><path fill="#737373" d="M245.48 125.57c-.34-.78-8.66-19.23-27.24-37.81C201 70.54 171.38 50 128 50S55 70.54 37.76 87.76c-18.58 18.58-26.9 37-27.24 37.81a6 6 0 0 0 0 4.88c.34.77 8.66 19.22 27.24 37.8C55 185.47 84.62 206 128 206s73-20.53 90.24-37.75c18.58-18.58 26.9-37 27.24-37.8a6 6 0 0 0 0-4.88M128 194c-31.38 0-58.78-11.42-81.45-33.93A134.77 134.77 0 0 1 22.69 128a134.56 134.56 0 0 1 23.86-32.06C69.22 73.42 96.62 62 128 62s58.78 11.42 81.45 33.94A134.56 134.56 0 0 1 233.31 128C226.94 140.21 195 194 128 194m0-112a46 46 0 1 0 46 46a46.06 46.06 0 0 0-46-46m0 80a34 34 0 1 1 34-34a34 34 0 0 1-34 34"/></svg>';
@@ -129,7 +129,7 @@
     function togglePasswordVisibility2() {
         var passwordInput = document.getElementById('password-konfirm');
         var togglePasswordIcon = document.getElementById('togglePasswordIcon2');
-        
+
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             togglePasswordIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 256 256"><path fill="#737373" d="M245.48 125.57c-.34-.78-8.66-19.23-27.24-37.81C201 70.54 171.38 50 128 50S55 70.54 37.76 87.76c-18.58 18.58-26.9 37-27.24 37.81a6 6 0 0 0 0 4.88c.34.77 8.66 19.22 27.24 37.8C55 185.47 84.62 206 128 206s73-20.53 90.24-37.75c18.58-18.58 26.9-37 27.24-37.8a6 6 0 0 0 0-4.88M128 194c-31.38 0-58.78-11.42-81.45-33.93A134.77 134.77 0 0 1 22.69 128a134.56 134.56 0 0 1 23.86-32.06C69.22 73.42 96.62 62 128 62s58.78 11.42 81.45 33.94A134.56 134.56 0 0 1 233.31 128C226.94 140.21 195 194 128 194m0-112a46 46 0 1 0 46 46a46.06 46.06 0 0 0-46-46m0 80a34 34 0 1 1 34-34a34 34 0 0 1-34 34"/></svg>';

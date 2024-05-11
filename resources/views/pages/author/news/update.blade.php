@@ -54,11 +54,11 @@
                     <h3 for="" class="form-label">Thumbnail</h3>
 
                     <div class="gambar-iklan mb-4 d-flex justify-content-center">
-                        <img id="preview" src="{{ asset('storage/'.$news->photo) }}"  style="object-fit: cover; border: transparent;"
+                        <img id="preview" src="{{ asset('storage/'.$news->photo) }}" style="object-fit: cover; border: transparent;"
                             width="350" height="200" alt="">
                     </div>
                     <div class="d-flex justify-content-center mt-3">
-                        <label for="image-upload" class="btn btn-primary @error('photo') is-invalid @enderror   ">
+                        <label for="image-upload" class="btn btn-primary @error('photo') is-invalid @enderror">
                             Unggah
                         </label>
                         <input type="file" name="photo" id="image-upload" class="hide" value="{{ $news->photo }}"
@@ -277,7 +277,7 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
+
     <script>
         $(document).ready(function() {
             $('#content').summernote({
@@ -298,7 +298,31 @@
 
             });
         });
+
+        $('.category').change(function() {
+            var selectedCategories = $(this).val();
+            getSubCategory(selectedCategories);
+        })
+
+        function getSubCategory(ids) {
+            $('.sub-category').html('');
+            ids.forEach(function(id) {
+                $.ajax({
+                    url: "sub-category-detail/" + id,
+                    method: "GET",
+                    dataType: "JSON",
+                    success: function(response) {
+                        $.each(response.data, function(index, data) {
+                            $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+                                '</option>');
+                        });
+                    }
+                });
+            });
+        }
+
     </script>
+
 
 
     <script>
@@ -306,14 +330,40 @@
             $('#image-uploadify').imageuploadify();
         })
 
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        var hours = ('0' + today.getHours()).slice(-2);
+        var minutes = ('0' + today.getMinutes()).slice(-2);
+
+        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.getElementById('upload_date').value = formattedDate;
+
         $(".tags").select2({
             tags: true,
             tokenSeparators: [',', ' ']
         })
+
+        function previewImage(event) {
+            var input = event.target;
+            var previewImg = document.getElementById('preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewImg.classList.remove('hide');
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewImg.src = '';
+                previewImg.classList.add('hide');
+            }
+        }
     </script>
 
 
     <script>
-     
+
     </script>
 @endsection

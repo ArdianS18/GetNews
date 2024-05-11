@@ -280,6 +280,8 @@ class AuthorController extends Controller
     public function newsstatistics()
     {
         $news = $this->news->showWhithCount();
+        $user_id = $news->pluck('user_id');
+        $author_id = auth()->user()->author->id;
         $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
         $data_statistik = $this->news->showNewsStatistic();
         $view = View::count();
