@@ -237,7 +237,7 @@
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
                                     @forelse ($picks as $pick) @php
-                                    $dateParts = date_parse($pick->news->upload_date);
+                                    $dateParts = date_parse($pick->upload_date);
                                 @endphp
                                         <div class="col-md-6">
                                             <div class="news-card-six">

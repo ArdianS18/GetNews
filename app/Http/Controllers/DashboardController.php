@@ -124,10 +124,10 @@ class DashboardController extends Controller
         $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
 
         return response()->view('pages.index', compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
-        'news_left', 'news_mid', 'news_right', 'categories',
-        'subCategories', 'trendings', 'news_recent', 'populars',
-        'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
-        'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
+            'news_left', 'news_mid', 'news_right', 'categories',
+            'subCategories', 'trendings', 'news_recent', 'populars',
+            'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
+            'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
     }
 
     public function navbar(Request $request){
