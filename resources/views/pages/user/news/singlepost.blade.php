@@ -216,7 +216,6 @@
                                         <a style="display: inline;text-decoration:none" data-toggle="tooltip"
                                             data-placement="top" title="author - {{ $news->user->name }}"
                                             href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
-                                        - <span style="color: red">
                                             {{ $news->newsCategories[0]->category->name }}
                                         </span>
                                     </div>
