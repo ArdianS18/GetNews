@@ -222,7 +222,7 @@
                                 </li>
                                 <li><i class="fi fi-rr-calendar-minus"></i>
                                     <a
-                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }}</a>
+                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->formatLocalized('%A, %d %B %Y') }}</a>
                                 </li>
                                 <li>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
