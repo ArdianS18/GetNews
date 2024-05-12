@@ -89,10 +89,12 @@
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a href="/"  class="nav-link">Home</a>
+                    </li>
                     @foreach ($categories as $category)
-                        {{-- @if ($loop->iteration <= 7) --}}
                             <li class="nav-item">
-                                <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
+                                <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                         <li class="nav-item">
@@ -106,9 +108,6 @@
                                     @endforelse
                                 </ul>
                             </li>
-                        {{-- @else
-                            @break --}}
-                        {{-- @endif --}}
                     @endforeach
 
                 </ul>
@@ -121,7 +120,7 @@
                         </button>
                     </div>
 
-                    <div class="modal fade searchModal" id="searchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                    <div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <form action="{{route('news.post')}}" method="GET">
@@ -132,7 +131,6 @@
                             </div>
                         </div>
                     </div>
-
                     @auth
                         <div class="ms-2">
                             <ul class="navbar-nav mx-auto">

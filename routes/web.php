@@ -396,7 +396,6 @@ Route::get('confirm-password', function () {
     return view('pages.auth.passwords.confirm');
 })->name('confirm.password');
 
-Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
 Route::get('pw-reset',function(){
     return view('pages.auth.passwords.reset');
@@ -405,3 +404,6 @@ Route::get('pw-reset',function(){
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
+
+
+Route::get('error',[DashboardController::class,'notFound'])->name('not-found');

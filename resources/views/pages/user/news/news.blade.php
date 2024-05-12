@@ -39,6 +39,9 @@
         <div class="col-lg-8">
             <div class="row">
                 @forelse ($newsByDate as $item)
+                @php
+                    $dateParts = date_parse($item->upload_date);
+                @endphp
                 <div class="col-md-6">
                     <div class="news-card-six">
                         <div class="news-card-img">
@@ -60,7 +63,7 @@
                                 </h5>
                             </div>
                             <h3><a
-                                href="{{ route('news.user', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a>
+                                href="{{ route('news.user', ['news' => $item->slug, 'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a>
                             </h3>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -125,13 +128,16 @@
                     <h3 class="sidebar-widget-title">Berita Popular</h3>
                     <div class="pp-post-wrap">
                         @forelse ($populars as $popular)
+                        @php
+                            $dateParts = date_parse($popular->upload_date);
+                        @endphp
                         <div class="news-card-one">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" style="object-fit: cover;" height="80">
                             </div>
                             <div class="news-card-info">
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $popular->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 40, $end = '...')  !!}</a>
+                                        href="{{ route('news.user', ['news' => $popular->slug, 'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 40, $end = '...')  !!}</a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a

@@ -74,7 +74,7 @@
                                             href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                                 src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                                 alt="Image">{{ $category->name }}
-                                            <span>({{ $category->total }})</span></a></li>
+                                            <span>({{ $category->news_categories_count }})</span></a></li>
                                 @endforeach
                             </ul>
                         </div>
