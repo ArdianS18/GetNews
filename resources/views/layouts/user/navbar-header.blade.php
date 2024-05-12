@@ -48,7 +48,7 @@
             <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
             </div>
-            
+
             <button type="button" class="search-btn d-lg-none mt-2" data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
@@ -86,10 +86,10 @@
                 </div>
 
             @endauth
-            
+
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    @dd($categories);
+                    {{-- @dd($categories); --}}
                     @foreach ($categories as $category)
                         {{-- @if ($loop->iteration <= 7) --}}
                             <li class="nav-item">
