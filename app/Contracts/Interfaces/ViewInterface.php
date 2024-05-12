@@ -13,4 +13,5 @@ interface ViewInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function showCountView() : mixed;
     public function trending() : mixed;
     public function where() : mixed;
+    public function showNewsStatistic() : mixed;
 }
