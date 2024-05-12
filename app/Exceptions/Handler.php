@@ -3,6 +3,13 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Illuminate\Http\Response;
+use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Models\Category;
+use App\Models\News;
+use App\Models\SubCategory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -31,11 +38,18 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        if ($exception instanceof NotFoundHttpException) {
-            return redirect()->route('not-found');
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            $news = News::inRandomOrder()->take(10)->get();
+            $additionalData = [
+               'categories' => Category::all(),
+               'subCategories'=> SubCategory::all(),
+               'news'=>$news
+            ];
+    
+            return response()->view('error.404', $additionalData, 404);
         }
-
+    
         return parent::render($request, $exception);
     }
-
+    
 }

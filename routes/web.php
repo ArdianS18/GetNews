@@ -405,6 +405,3 @@ Route::get('pw-reset',function(){
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
-
-
-Route::get('error',[DashboardController::class,'notFound'])->name('not-found');
