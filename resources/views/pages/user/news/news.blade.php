@@ -39,6 +39,9 @@
         <div class="col-lg-8">
             <div class="row">
                 @forelse ($newsByDate as $item)
+                @php
+                    $dateParts = date_parse($item->upload_date);
+                @endphp
                 <div class="col-md-6">
                     <div class="news-card-six">
                         <div class="news-card-img">
@@ -60,7 +63,7 @@
                                 </h5>
                             </div>
                             <h3><a
-                                href="{{ route('news.user', ['news' => $item->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a>
+                                href="{{ route('news.user', ['news' => $item->slug, 'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</a>
                             </h3>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
