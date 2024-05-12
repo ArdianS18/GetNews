@@ -182,10 +182,10 @@ class NewsController extends Controller
         return view('pages.news.index', compact('news','subCategories'));
     }
 
-    public function usernews(Request $request ,$slug)
+    public function usernews(Request $request,$year,$mounth,$day,$slug)
     {
         $ip = $request->getClientIp();
-
+        
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;

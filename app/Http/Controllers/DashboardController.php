@@ -216,4 +216,11 @@ class DashboardController extends Controller
         $data['data'] = UserResource::collection($users);
         return ResponseHelper::success($data);
     }
+
+    public function notFound() {
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        dd($categories);
+        return view('errors.404',compact('categories', 'subCategories'));
+    }
 }
