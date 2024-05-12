@@ -132,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="modal-backdrop" data-bs-dismiss="modal" aria-label="Close"></div>
                     @auth
                         <div class="ms-2">
                             <ul class="navbar-nav mx-auto">
