@@ -89,6 +89,7 @@
             
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
+                    @dd($categories);
                     @foreach ($categories as $category)
                         {{-- @if ($loop->iteration <= 7) --}}
                             <li class="nav-item">
