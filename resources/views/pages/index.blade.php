@@ -237,7 +237,7 @@
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
                                     @forelse ($picks as $pick) @php
-                                    $dateParts = date_parse($pick->news->upload_date);
+                                    $dateParts = date_parse($pick->upload_date);
                                 @endphp
                                         <div class="col-md-6">
                                             <div class="news-card-six">
@@ -249,7 +249,7 @@
                                                 <div class="news-card-info">
                                                     <div class="news-author">
                                                         <div class="news-author-img">
-                                                            <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                            <a href="{{ route('news.user', ['news' => $pick->slug, 'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
                                                                 <img src="{{ asset($pick->user->photo ? 'storage/' . $pick->user->photo : 'default.png') }}"
                                                                     alt="Image" width="40px" height="40px"
                                                                     style="border-radius: 50%; object-fit:cover;" />

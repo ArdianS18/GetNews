@@ -16,7 +16,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
         $this->model = $view;
     }
 
-    /** 
+    /**
      * Handle show method and delete data instantly from models.
      *
      * @param mixed $id
@@ -55,7 +55,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     public function where(): mixed
     {
-        
+
     }
 
     /**
