@@ -77,22 +77,22 @@ class VisitorRepository extends BaseRepository implements VisitorInterface
     {
         $year = date('Y');
 
-    $results = $this->model->query()
-        ->select(DB::raw('MONTH(created_at) as month'))
-        ->whereYear('created_at', $year)
-        ->orderBy('month')
-        ->get();
+        $results = $this->model->query()
+            ->select(DB::raw('MONTH(created_at) as month'))
+            ->whereYear('created_at', $year)
+            ->orderBy('month')
+            ->get();
 
-    $monthlyVisitorData = [];
+        $monthlyVisitorData = [];
 
-    for ($i = 1; $i <= 12; $i++) {
-        $monthlyVisitorData[$i] = 0;
-    }
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyVisitorData[$i] = 0;
+        }
 
-    foreach ($results as $result) {
-        $monthlyVisitorData[$result->month]++;
-    }
+        foreach ($results as $result) {
+            $monthlyVisitorData[$result->month]++;
+        }
 
-    return array_values($monthlyVisitorData);
+        return array_values($monthlyVisitorData);
     }
 }

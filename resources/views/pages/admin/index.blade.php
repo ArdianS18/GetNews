@@ -410,21 +410,6 @@
 @section('script')
     <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 
-    {{-- <script>
-         $(document).ready(function() {
-            function updateVisitorCount() {
-                $.ajax({
-                    url: '/visitors/count',
-                    method: 'GET',
-                    success: function(response) {
-                        $('#visitorCount').text(response.visitorCount);
-                    }
-                });
-            }
-            updateVisitorCount();
-        });
-    </script> --}}
-
     <script>
         var monthlyData = <?php echo json_encode($news2); ?>;
 
