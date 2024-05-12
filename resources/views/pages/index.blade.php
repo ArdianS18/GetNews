@@ -7,10 +7,10 @@
 @section('content')
     <div class="">
         <div class="trending-news-box">
-            <div class="d-flex justify-content-center gap-2 mb-3">
+            <div class="d-flex justify-content-center gap-3 mb-3">
                 <div class="trending-prev"><i class="flaticon-left-arrow"></i></div>
-                <h4>Trending Now</h4>
-                <div class="trending-next"><i class="flaticon-right-arrow"></i></div>
+                <h4>Artikel Populer</h4>
+                <div class="trending-next ms-3"><i class="flaticon-right-arrow"></i></div>
             </div>
             <div class="row gx-5">
                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12">
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a href="{{ route('news.user', ['news' => $trending->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
-                                            {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 50, $end = '...')  !!}
+                                            {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 27, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
