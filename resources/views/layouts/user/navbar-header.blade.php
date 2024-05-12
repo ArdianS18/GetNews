@@ -90,7 +90,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     @foreach ($categories as $category)
-                        @if ($loop->iteration <= 6)
+                        {{-- @if ($loop->iteration <= 7) --}}
                             <li class="nav-item">
                                 <a href="javascript:void(0)" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
@@ -106,9 +106,9 @@
                                     @endforelse
                                 </ul>
                             </li>
-                        @else
-                            @break
-                        @endif
+                        {{-- @else
+                            @break --}}
+                        {{-- @endif --}}
                     @endforeach
 
                 </ul>
