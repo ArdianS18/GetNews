@@ -249,7 +249,7 @@
                                                 <div class="news-card-info">
                                                     <div class="news-author">
                                                         <div class="news-author-img">
-                                                            <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                            <a href="{{ route('news.user', ['news' => $pick->slug, 'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
                                                                 <img src="{{ asset($pick->user->photo ? 'storage/' . $pick->user->photo : 'default.png') }}"
                                                                     alt="Image" width="40px" height="40px"
                                                                     style="border-radius: 50%; object-fit:cover;" />
