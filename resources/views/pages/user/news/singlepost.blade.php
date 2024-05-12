@@ -221,13 +221,9 @@
                                     </div>
                                 </li>
                                 <li><i class="fi fi-rr-calendar-minus"></i>
-                                    <a
-                                        href="javascript:void(0)"> <?php
-                                        $uploadDate = \Carbon\Carbon::parse($news->upload_date);
-                                        \Carbon\Carbon::setLocale('id');
-                                        $formattedDate = $uploadDate->format('l, d F Y');
-                                        echo $formattedDate;
-                                        ?>
+                                    <a href="javascript:void(0)">
+                                        {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
+                                        <span id="formattedDate"></span>
                                     </a>
                                 </li>
                                 <li>
@@ -1020,5 +1016,13 @@
                 }
             }
         }
+    </script>
+
+    <script>
+        var uploadDate = new Date("{{ $news->upload_date }}");
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        var formattedDate = days[uploadDate.getDay()] + ', ' + uploadDate.getDate() + ' ' + months[uploadDate.getMonth()] + ' ' + uploadDate.getFullYear();
+        document.getElementById("formattedDate").textContent = formattedDate;
     </script>
 @endsection
