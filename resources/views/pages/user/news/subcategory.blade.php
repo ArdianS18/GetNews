@@ -23,7 +23,7 @@
                         @php
                         $dateParts = date_parse($newsSubCategory->upload_date);
                     @endphp
-             
+
                             <div class="col-md-6">
                                 <div class="news-card-thirteen">
                                     <div class="news-card-img">
@@ -90,7 +90,7 @@
                                                 href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                                     src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                                     alt="Image">{{ $category->name }}
-                                                <span>({{ $category->total }})</span></a></li>
+                                                <span>({{ $category->news_categories_count }})</span></a></li>
                                     @endforeach
                                 </ul>
                             </div>
