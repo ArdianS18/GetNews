@@ -17,14 +17,17 @@
                     <div class="trending-news-slider swiper">
                         <div class="swiper-wrapper">
                             @foreach ($trendings as $trending)
+                            @php
+                                $dateParts = date_parse($trending->news->upload_date);
+                            @endphp
                                 <div class="swiper-slide news-card-one">
                                     <div class="news-card-img">
-                                        <a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
+                                        <a href="{{ route('news.user', ['news' => $trending->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         <img src="{{ asset('storage/' . $trending->news->photo) }}" width="100%" height="90" style="object-fit: cover;" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug, ]) }}">
+                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
                                             {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 50, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
@@ -45,10 +48,13 @@
             <div class="news-col-one">
                 @php $counter= 0; @endphp
                 @foreach ($news_left as $newss)
+                @php
+                $dateParts = date_parse($newss->upload_date);
+            @endphp
                     @if ($counter < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
+                                <a href="{{ route('news.user', ['news' => $newss->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;" width="100%" alt="Image"
                                     height="250" />
                                 </a>
@@ -56,7 +62,7 @@
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}" href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}" href="{{ route('news.user', ['news' => $newss->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -72,7 +78,7 @@
                     @elseif ($counter < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $newss->slug, ]) }}">
+                                <a href="{{ route('news.user', ['news' => $newss->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100" width="100%" style="object-fit: cover" />
                                 </a>
                             </div>
@@ -80,7 +86,7 @@
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
                                 <h3>
-                                    <a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}" href="{{ route('news.user', ['news' => $newss->slug]) }}">
+                                    <a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}" href="{{ route('news.user', ['news' => $newss->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 40, $end = '...')  !!}
                                     </a>
                                 </h3>
@@ -105,13 +111,16 @@
             <div class="news-col-two">
                 @php $counter= 0; @endphp
                 @foreach ($news_mid as $mid)
+                @php
+                $dateParts = date_parse($mid->upload_date);
+            @endphp
                     @if ($counter < 1)
                         <div class="news-card-four">
-                            <a href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
+                            <a href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
                                 <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
                             </a>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -125,14 +134,14 @@
                     @elseif ($counter < 3)
                         <div class="news-card-five">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $mid->slug, ]) }}">
+                                <a href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" height="150" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
@@ -155,17 +164,20 @@
             <div class="news-col-three">
                 @php $counters= 0; @endphp
                 @foreach ($news_right as $barus)
+                @php
+                $dateParts = date_parse($barus->upload_date);
+            @endphp
                     @if ($counters < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $barus->slug, ]) }}">
+                                <a href="{{ route('news.user', ['news' => $barus->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}" href="{{ route('news.user', ['news' => $barus->slug ]) }}">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}" href="{{ route('news.user', ['news' => $barus->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...')  !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
@@ -180,13 +192,13 @@
                     @elseif ($counters < 4)
                         <div class="news-card-three">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $barus->slug, ]) }}">
+                                <a href="{{ route('news.user', ['news' => $barus->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;" width="100%" height="100" alt="Image" />
                                 </a>
                             </div>
                             <div class="news-card-info">
                                 <a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}" href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
-                                <h3><a href="{{ route('news.user', ['news' => $barus->slug]) }}">
+                                <h3><a href="{{ route('news.user', ['news' => $barus->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 40, $end = '...')  !!}
                                     </a>
                                 </h3>
@@ -224,11 +236,13 @@
                         <div class="tab-content col-md-12 editor-news-content">
                             <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
                                 <div class="row">
-                                    @forelse ($picks as $pick)
+                                    @forelse ($picks as $pick) @php
+                                    $dateParts = date_parse($pick->news->upload_date);
+                                @endphp
                                         <div class="col-md-6">
                                             <div class="news-card-six">
                                                 <div class="news-card-img">
-                                                    <a href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                    <a href="{{ route('news.user', ['news' => $pick->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                         <img src="{{ asset('storage/' . $pick->photo) }}" width="100%" height="220" style="object-fit: cover;" alt="Image" />
                                                     </a>
                                                 </div>
@@ -241,11 +255,11 @@
                                                                     style="border-radius: 50%; object-fit:cover;" />
                                                             </a>
                                                         </div>
-                                                        <h5>By <a href="{{ route('author.detail', ['id' => $pick->user->slug]) }}">{{ $pick->user->name }}</a>
+                                                        <h5>By <a href="{{ route('author.detail', ['id' => $pick->user->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{{ $pick->user->name }}</a>
                                                         </h5>
                                                     </div>
                                                     <h3>
-                                                        <a data-toggle="tooltip" data-placement="top" title="{{ $pick->name }}" href="{{ route('news.user', ['news' => $pick->slug, ]) }}">
+                                                        <a data-toggle="tooltip" data-placement="top" title="{{ $pick->name }}" href="{{ route('news.user', ['news' => $pick->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                             {!! Illuminate\Support\Str::limit($pick->name, $limit = 47, $end = '...')  !!}
                                                         </a>
                                                     </h3>
@@ -281,13 +295,16 @@
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
+                                @php
+                                $dateParts = date_parse($popular->upload_date);
+                            @endphp
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
-                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug, ]) }}">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $popular->name }}" href="{{ route('news.user', ['news' => $popular->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                 {!! Illuminate\Support\Str::limit($popular->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -303,13 +320,16 @@
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
                                 @forelse ($news_recent as $recent)
+                                @php
+                                $dateParts = date_parse($recent->upload_date);
+                            @endphp
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
-                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $recent->name }}" href="{{ route('news.user', ['news' => $recent->slug, ]) }}">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $recent->name }}" href="{{ route('news.user', ['news' => $recent->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                 {!! Illuminate\Support\Str::limit($recent->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -346,6 +366,9 @@
                     <div class="row">
                         @php $counters= 0; @endphp
                         @forelse ($most_populer as $most)
+                        @php
+                        $dateParts = date_parse($most->upload_date);
+                    @endphp
                         @if ($counters < 1)
                             <div class="col-12">
                                 <div class="news-card-eleven">
@@ -361,7 +384,7 @@
                                             <h5>By<a href="{{ route('author.detail', ['id' => $most->user->slug]) }}">{{ $most->user->name }}</a></h5>
                                         </div>
                                         <h3>
-                                            <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug, ]) }}">
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                 {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...')  !!}
                                             </a>
                                         </h3>
@@ -379,7 +402,7 @@
                                 <div class="news-card-ten">
                                     <a href="{{ route('categories.show.user', ['category' => $most->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $most->newsCategories[0]->category->name }}</a>
                                     <h3>
-                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug, ]) }}">
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                             {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...')  !!}
                                         </a>
                                     </h3>
@@ -402,6 +425,9 @@
                 <div class="col-xl-6">
                     <div class="row">
                         @forelse ($most_populer2 as $most2)
+                        @php
+                        $dateParts = date_parse($most2->upload_date);
+                    @endphp
                         <div class="col-md-6">
                             <div class="news-card-six">
                                 <div class="news-card-img">
@@ -414,10 +440,10 @@
                                             <img src="{{ asset($most2->user->photo ? 'storage/' . $most2->user->photo : 'default.png') }}"
                                                     alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;" />
                                         </div>
-                                        <h5>By <a href="{{ route('author.detail', ['id' => $most2->user->slug]) }}">{{ $most2->user->name }}</a></h5>
+                                        <h5>By <a href="{{ route('author.detail', ['id' => $most2->user->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{{ $most2->user->name }}</a></h5>
                                     </div>
                                     <h3>
-                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most2->name }}" href="{{ route('news.user', ['news' => $most2->slug, ]) }}">
+                                        <a data-toggle="tooltip" data-placement="top" title="{{ $most2->name }}" href="{{ route('news.user', ['news' => $most2->slug, 'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                             {!! Illuminate\Support\Str::limit($most2->name, $limit = 47, $end = '...')  !!}
                                         </a>
                                     </h3>
@@ -453,6 +479,9 @@
                     </div>
                     <div class="row">
                         @forelse ($generals as $general)
+                        @php
+                        $dateParts = date_parse($general->upload_date);
+                    @endphp
                             <div class="col-xl-6">
                                 <div class="news-card-twelve">
                                     <div class="news-card-img">
@@ -460,7 +489,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <a href="{{ route('categories.show.user', ['category' => $general->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
-                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}" href="{{ route('news.user', ['news' => $general->slug, ]) }}">
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}" href="{{ route('news.user', ['news' => $general->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                             {!! Illuminate\Support\Str::limit($general->name, $limit = 47, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
@@ -524,12 +553,15 @@
                         <h3 class="sidebar-widget-title">Popular Posts</h3>
                         <div class="pp-post-wrap">
                             @forelse ($popular_post as $post)
+                            @php
+                            $dateParts = date_parse($post->upload_date);
+                        @endphp
                                 <div class="news-card-one">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $post->photo) }}" alt="Image" style="object-fit: cover;" width="100%" height="80"/>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}" href="{{ route('news.user', ['news' => $post->slug, ]) }}">
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}" href="{{ route('news.user', ['news' => $post->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                             {!! Illuminate\Support\Str::limit($post->name, $limit = 20, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
@@ -572,13 +604,16 @@
                         <div class="col-xl-7">
                             <div class="scrollscreen">
                                 @forelse ($news_latests as $news_latest)
+                                @php
+                                $dateParts = date_parse($news_latest->upload_date);
+                            @endphp
                                     <div class="news-card-five">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest->photo) }}" alt="Image" width="100%" height="110" style="object-fit: cover"/>
-                                            <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug,]) }}" class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_latest->name }}" href="{{ route('news.user', ['news' => $news_latest->slug, ]) }}">
+                                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_latest->name }}" href="{{ route('news.user', ['news' => $news_latest->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                 {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 60, $end = '...')  !!}
                                             </a></h3>
                                             <ul class="news-metainfo list-style">
@@ -597,6 +632,9 @@
 
                             @php $counter= 0; @endphp
                             @foreach ($news_latests2 as $news_latest2)
+                            @php
+                            $dateParts = date_parse($news_latest2->upload_date);
+                        @endphp
                                 @if ($counter < 1)
                                 <div class="news-card-two">
                                     <div class="news-card-img">
@@ -606,7 +644,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <h3>
-                                            <a data-toggle="tooltip" data-placement="top" title="{{ $news_latest2->name }}" href="{{ route('news.user', ['news' => $news_latest2->slug, ]) }}">
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $news_latest2->name }}" href="{{ route('news.user', ['news' => $news_latest2->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                 {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...')  !!}
                                             </a>
                                         </h3>
@@ -628,7 +666,7 @@
                                         <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
                                             class="news-cat">{{ $news_latest2->newsCategories[0]->category->name }}</a>
                                         <h3>
-                                            <a data-toggle="tooltip" data-placement="top" title="{{ $news_latest2->name }}" href="{{ route('news.user', ['news' => $news_latest2->slug]) }}">
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $news_latest2->name }}" href="{{ route('news.user', ['news' => $news_latest2->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                                 {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...')  !!}
                                             </a>
                                         </h3>

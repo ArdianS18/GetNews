@@ -16,6 +16,7 @@ use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\NewsTagController;
+use App\Http\Controllers\NewsViewController;
 use App\Http\Controllers\PaymentAdvertisementsController;
 use App\Http\Controllers\PaymentNewsController;
 use App\Http\Controllers\ReportController;
@@ -225,6 +226,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
 
     Route::get('income-statistics', [AuthorController::class, 'incomestatistics'])->name('statistik.income');
     Route::get('news-statistics', [AuthorController::class, 'newsstatistics'])->name('statistik.news');
+    Route::get('chart-statistics-news', [NewsViewController::class, 'newsstatistics']);
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
 
 
@@ -377,9 +379,9 @@ Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
-Route::get('kategori/{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
-Route::get('kategori/{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
-Route::get('berita/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
+Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 // Route::get('news-tag', function(){
@@ -403,3 +405,6 @@ Route::get('pw-reset',function(){
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
+
+
+Route::get('error',[DashboardController::class,'notFound'])->name('not-found');

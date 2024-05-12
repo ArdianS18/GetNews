@@ -6,7 +6,11 @@
     <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
-    <meta property="og:url" content="{{ config('app.url') }}/berita/{{ $news->slug }}">
+    @php
+        $dateParts = date_parse($news->upload_date);
+    @endphp
+    <meta property="og:url"
+        content="{{ config('app.url') }}/berita/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="GetMedia">
     <link rel="image_src" href="{{ asset('storage/' . $news->photo) }}">
@@ -172,7 +176,6 @@
             <div class="row gx-55 gx-5">
                 <div class="col-lg-8">
                     <article>
-                        <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
                         <div class="breadcrumb-wrap mb-3">
                             <ul class="breadcrumb-menu list-style">
                                 <li><a data-toggle="tooltip" data-placement="top" title="Beranda" href="/">
@@ -188,6 +191,7 @@
                                 </li>
                             </ul>
                         </div>
+                        <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
 
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
@@ -567,7 +571,8 @@
                                             <textarea name="content" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"></textarea>
                                             <div>
                                                 <button type="submit" class="btn-two w-100 btn"
-                                                    style="background-color: #0F4D8A;padding:10px !important">Kirim Balasan</button>
+                                                    style="background-color: #0F4D8A;padding:10px !important">Kirim
+                                                    Balasan</button>
                                             </div>
                                         </form>
                                     </div>
@@ -616,7 +621,7 @@
                                                             <p>{{ $reply->content }}</p>
                                                         </div>
                                                     </div>
-                                                       
+
                                                 </div>
                                             </div>
                                         </div>
@@ -673,6 +678,9 @@
                                 <h1><b>Berita Relevan</b></h1>
                             </div>
                             @forelse ($newsCategories as $news)
+                                @php
+                                    $dateParts = date_parse($news->upload_date);
+                                @endphp
                                 <div class="news-card-five">
                                     <div class="news-card-img">
                                         <img src="{{ asset('storage/' . $news->photo) }}" alt="{{ $news->photo }}"
@@ -684,7 +692,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news->name }}"
-                                                href="{{ route('news.user', ['news' => $news->slug]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...') !!}</a>
+                                                href="{{ route('news.user', ['news' => $news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 50, $end = '...') !!}</a>
                                         </h3>
                                         <p>{!! Illuminate\Support\Str::limit(strip_tags($news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
@@ -720,6 +728,9 @@
                             <h3 class="sidebar-widget-title">Berita Popular</h3>
                             <div class="pp-post-wrap">
                                 @forelse ($populars as $popular)
+                                    @php
+                                        $dateParts = date_parse($popular->upload_date);
+                                    @endphp
                                     <div class="news-card-one">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $popular->photo) }}"
@@ -728,7 +739,7 @@
                                         <div class="news-card-info">
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $popular->name }}"
-                                                    href="{{ route('news.user', ['news' => $popular->slug]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
+                                                    href="{{ route('news.user', ['news' => $popular->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">{!! Illuminate\Support\Str::limit(strip_tags($popular->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i>
@@ -772,6 +783,9 @@
                             <h3 class="sidebar-widget-title">Berita Terbaru</h3>
                             <div class="pp-post-wrap">
                                 @forelse ($news_recents as $recent)
+                                    @php
+                                        $dateParts = date_parse($recent->upload_date);
+                                    @endphp
                                     <div class="news-card-one">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
@@ -780,7 +794,7 @@
                                         <div class="news-card-info">
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $recent->name }}"
-                                                    href="{{ route('news.user', ['news' => $recent->slug, 'page' => 1]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
+                                                    href="{{ route('news.user', ['news' => $recent->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i>
