@@ -378,7 +378,7 @@ Route::get('author', [DashboardController::class, 'authoruser'])->name('author-i
 Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
-Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
+Route::post('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
@@ -395,8 +395,6 @@ Route::get('confirm-email', function () {
 Route::get('confirm-password', function () {
     return view('pages.auth.passwords.confirm');
 })->name('confirm.password');
-
-Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 
 Route::get('pw-reset',function(){
     return view('pages.auth.passwords.reset');
