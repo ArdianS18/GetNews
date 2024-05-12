@@ -58,10 +58,6 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     }
 
-    public function showNewsStatistic(): mixed
-    {
-        //
-    }
     /**
      * Handle store data event to models.
      *
