@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-lg-8 offset-lg-2 mt-4">
-                <h3 align="center" class="mb-4">Berita yang Mungkin Anda Suka.
+                <h3 align="center" class="mb-4">Berita yang Mungkin Anda Suka : 
                 </h3>
                 <div class="row">
                     @foreach ($news as $news)
