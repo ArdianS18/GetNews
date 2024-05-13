@@ -7,6 +7,14 @@
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ asset('storage/' . $news->photo) }}">
+    <meta name="twitter:url"
+        content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
+        <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta name="twitter:title"
+        content="{{ $news->name }} | GetMedia" />
+    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}" />
+
 
     @php
         $dateParts = date_parse($news->upload_date);
@@ -223,8 +231,8 @@
                                 </li>
                                 <li><i class="fi fi-rr-calendar-minus"></i>
                                     {{-- <a href="javascript:void(0)"> --}}
-                                        {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
-                                        <span id="formattedDate"></span>
+                                    {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
+                                    <span id="formattedDate"></span>
                                     {{-- </a> --}}
                                 </li>
                                 <li>
@@ -972,7 +980,8 @@
         });
 
         function shareOnWhatsapp(newsId) {
-            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+            var url =
+                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
@@ -981,7 +990,8 @@
         }
 
         function shareOnFacebook(newsId) {
-            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+            var url =
+                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
@@ -989,7 +999,8 @@
         }
 
         function shareOnTwitter(newsId) {
-            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+            var url =
+                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
@@ -998,7 +1009,8 @@
 
 
         function shareOnTelegram(newsId) {
-            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+            var url =
+                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
@@ -1022,8 +1034,11 @@
     <script>
         var uploadDate = new Date("{{ $news->upload_date }}");
         var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-        var formattedDate = days[uploadDate.getDay()] + ', ' + uploadDate.getDate() + ' ' + months[uploadDate.getMonth()] + ' ' + uploadDate.getFullYear();
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+            'November', 'Desember'
+        ];
+        var formattedDate = days[uploadDate.getDay()] + ', ' + uploadDate.getDate() + ' ' + months[uploadDate.getMonth()] +
+            ' ' + uploadDate.getFullYear();
         document.getElementById("formattedDate").textContent = formattedDate;
     </script>
 @endsection
