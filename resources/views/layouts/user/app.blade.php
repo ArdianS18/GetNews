@@ -5,20 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/remixicon.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/uicons-regular-rounded.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/flaticon_baxo.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/swiper.bundle.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/aos.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
+    <meta name="description" content="Sebuah portal berita untuk membaca berita yang saedang trending dan hot">
+  @include('layouts.user.css')
 
-    <title>GetMedia</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
 
