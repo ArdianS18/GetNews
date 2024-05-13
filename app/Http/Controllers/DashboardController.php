@@ -219,8 +219,8 @@ class DashboardController extends Controller
 
     public function notFound() {
         $categories = $this->category->get();
-        $subCategories = $this->subCategory->get();
-        dd($categories);
+        $subCategories = $this->subCategory->get404();
+        // dd($categories);
         return view('errors.404',compact('categories', 'subCategories'));
     }
 }
