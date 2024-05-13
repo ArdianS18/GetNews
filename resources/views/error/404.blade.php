@@ -25,7 +25,7 @@
                             <img src="{{ asset('storage/'.$news->photo) }}" width="100%" height="100px" style="object-fit: cover;">
                         </div>
                         <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top" title="23" href="{{ route('news.user', ['news' => $news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{{ $news->name }}</a>
+                            <h3><a data-toggle="tooltip" data-placement="top" title="23" href="{{ route('news.user', ['news' => $news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{!! Illuminate\Support\Str::limit($news->name, $limit = 40, $end = '...')  !!}</a>
                             </h3>
                             <ul class="news-metainfo list-style">
                                 <li><i class="fi fi-rr-calendar-minus"></i>
