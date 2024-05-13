@@ -173,7 +173,8 @@ class DashboardController extends Controller
         $newsByDate = $this->news->whereDate($request);
         $populars = $this->news->getByPopular('up');
         $news = $this->news->get();
-        return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars'));
+
+        return view('pages.user.news.news', compact('categories', 'subCategories','news','totalCategories','newsByDate','populars', 'query'));
     }
 
     public function authordetail($id) {
@@ -219,6 +220,7 @@ class DashboardController extends Controller
     public function notFound() {
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
-        return view('error.404',compact('categories', 'subCategories'));
+        dd($categories);
+        return view('errors.404',compact('categories', 'subCategories'));
     }
 }

@@ -104,7 +104,7 @@
             <div class="sidebar">
                 <div class="sidebar-widget-two">
                     <form class="search-box-widget">
-                        <input type="search" name="search" placeholder="Search">
+                        <input type="search" name="search" placeholder="Search" value="{{ $query }}">
                         <button type="submit">
                             <i class="fi fi-rr-search"></i>
                         </button>

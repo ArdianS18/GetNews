@@ -73,7 +73,7 @@
                     </div>
 
                     <div class="text-end">
-                        <a style="color: #438ac8" href="{{ route('confirm.email') }}">
+                        <a style="color: #438ac8" href="{{ route('password.request') }}">
                             <p>Lupa Password?</p></a>
                     </div>
                     <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
