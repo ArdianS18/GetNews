@@ -327,6 +327,27 @@ class NewsController extends Controller
         return view('pages.user.news.category', compact('news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
+    public function showAllCategories($slug, Request $request, NewsCategory $newsCategory){
+
+        $request->merge([
+            'name' => $newsCategory->id,
+        ]);
+
+        $category = $this->category->showWithSlug($slug);
+        $categoryId = $category->id;
+        $subCategory = $this->subCategory->where($categoryId);
+
+        $categories = $this->category->get();
+        $totalCategories = $this->category->showWhithCount();
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->showWhithCount();
+
+        $query = $request->input('search');
+        $newsCategories = $this->newsCategory->search($category->id, $query);
+
+        return view('pages.user.news.all-category', compact('news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
+    }
+
     public function showSubCategories($category,$subCategory,Request $request)
     {
 

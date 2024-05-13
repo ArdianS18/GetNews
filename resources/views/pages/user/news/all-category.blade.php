@@ -21,24 +21,28 @@
                             $dateParts = date_parse($newsCategory->news->upload_date);
                         @endphp
 
-                        @if ($loop->first)
-                            <div class="news-card-four">
-                                <a href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
+                        <div class="news-card-five">
+                            <div class="news-card-img">
+                                <a href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
+                                    <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="Image" height="140" width="100%" />
                                 </a>
-                                <div class="news-card-info">
-                                    <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                            {!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...')  !!}
-                                        </a>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
-                                                <p>{{ \Carbon\Carbon::parse($newsCategory->news->created_at)->translatedFormat('d F Y') }}</p>
-                                            </a></li>
-                                        <li><i class="fi fi-rr-eye"></i><a href="" class="javascript:void(0)">{{ $newsCategory->news->views_count }}</a></li>
-                                    </ul>
-                                </div>
+                                <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $newsCategory->news->newsCategories[0]->category->name }}</a>
                             </div>
-                        @endif
+                            <div class="news-card-info">
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
+                                        {!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...')  !!}
+                                    </a>
+                                </h3>
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsCategory->news->created_at)->translatedFormat('d F Y') }}</a>
+                                    </li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views_count }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                       
                     @empty
                         <div class="d-flex justify-content-center">
                             <div>
