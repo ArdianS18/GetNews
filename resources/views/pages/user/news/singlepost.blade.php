@@ -2,6 +2,9 @@
 
 <head>
     <title>{{ $news->name }} | GetMedia</title>
+    @php
+        $dateParts = date_parse($news->upload_date);
+    @endphp
     <meta name="description" content=" {!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
@@ -16,9 +19,7 @@
     <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}" />
 
 
-    @php
-        $dateParts = date_parse($news->upload_date);
-    @endphp
+    
     <meta property="og:url"
         content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
     <meta property="og:type" content="article">
