@@ -5,17 +5,16 @@
     @php
         $dateParts = date_parse($news->upload_date);
     @endphp
-    <meta name="description" content=" {!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@GetMedia">
+    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 10)) !!}">
     <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@GetMedia">
     <meta property="og:url"
         content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="GetMedia">
-    <link rel="image_src" href="{{ asset('storage/' . $news->photo) }}">
 </head>
 
 @section('style')
