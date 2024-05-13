@@ -170,8 +170,8 @@
             }
 
             if (data.status == 'active') {
-                var detail = "{{ route('news.user', ['news' => ':slug']) }}";
-            } else {
+                var detail = "{{ route('news.user', ['news' => ':slug', 'year'=> ':upload_date', 'month'=> ':month','day'=> ':day']) }}";
+            } else {    
                 var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
             }
             detail = detail.replace(':slug', data.slug);

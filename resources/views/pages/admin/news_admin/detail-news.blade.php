@@ -62,9 +62,11 @@
                 </div>
 
                 <div class="d-flex gap-2">
+                    @if ($news->status === "active")
                     <div class="">
                         <a href="{{ route('news.user',  ['news' => $news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}" class="btn btn-warning btn-lg px-3">Preview</a>
                     </div>
+                    @endif
                     @if ($news->status === 'panding')
                         <div class="d-flex gap-2">
                             <div class="">
@@ -305,9 +307,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
-
-$(document).ready(function() {
+        $(document).ready(function() {
             $('#content').summernote({
+
                 height: 520,
                 toolbar: [
                     ['style', ['style']],
@@ -321,6 +323,7 @@ $(document).ready(function() {
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
+                    ['insert', ['ul']]
                 ]
             });
         });

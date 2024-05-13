@@ -281,6 +281,7 @@
     <script>
         $(document).ready(function() {
             $('#content').summernote({
+
                 height: 520,
                 toolbar: [
                     ['style', ['style']],
@@ -294,11 +295,13 @@
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
+                    ['insert', ['ul']]
                 ]
-
             });
         });
+    </script>
 
+    <script>
         $('.category').change(function() {
             var selectedCategories = $(this).val();
             getSubCategory(selectedCategories);
