@@ -10,6 +10,10 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Validation\ValidationException;
 use App\Contracts\Interfaces\RegisterInterface;
+use App\Models\User;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Notification;
 
 class RegisterService
 {
@@ -36,7 +40,18 @@ class RegisterService
         $data['slug'] = $slug;
         $user = $register->store($data);
         $user->assignRole(RoleEnum::USER);
+
+        if ($user instanceof MustVerifyEmail) {
+            $this->sendVerificationEmail($user);
+        }
+
+
         return;
+    }
+
+    protected function sendVerificationEmail(User $user)
+    {
+        Notification::send($user, new VerifyEmailNotification($user));
     }
 
     public function registerWithAdmin(RegisterRequest $request): array

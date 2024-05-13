@@ -1,4 +1,7 @@
 @extends('layouts.admin.app')
+@php
+    $dateParts = date_parse($news->upload_date);
+@endphp
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -60,7 +63,7 @@
 
                 <div class="d-flex gap-2">
                     <div class="">
-                        <a href="{{ route('news.user', ['news' => $news->slug, ]) }}" class="btn btn-warning btn-lg px-3">Preview</a>
+                        <a href="{{ route('news.user',  ['news' => $news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}" class="btn btn-warning btn-lg px-3">Preview</a>
                     </div>
                     @if ($news->status === 'panding')
                         <div class="d-flex gap-2">
