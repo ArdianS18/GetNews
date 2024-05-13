@@ -13,7 +13,6 @@
     <meta name="twitter:image" content="{{ asset('storage/' . $news->photo) }}">
     <meta name="twitter:url"
         content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
-    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta name="twitter:title" content="{{ $news->name }} | GetMedia" />
     <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}" />
 
