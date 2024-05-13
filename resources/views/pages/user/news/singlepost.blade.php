@@ -420,10 +420,7 @@
                                                 @enderror
                                             </div>
                                             <div class="mt-3">
-                                                <Label class="form-label">Atau Bagikan Melalui :</Label>
-                                                <div class="row">
-                                       
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
