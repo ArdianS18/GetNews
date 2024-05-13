@@ -971,7 +971,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-                var text = "{{ $news->name  }} Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
@@ -983,7 +983,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-                var text = "{{ $news->name  }} Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
             var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
             window.open(facebookLink, '_blank');
         }
@@ -993,7 +993,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "{{ $news->name  }} Baca Selengkapnya di: " + url
+            var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
@@ -1005,7 +1005,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
             window.open(telegramLink, '_blank');
