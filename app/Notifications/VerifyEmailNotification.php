@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -38,8 +37,7 @@ class VerifyEmailNotification extends Notification
             ->subject('Verifikasi Email')
             ->line('Silakan klik tombol di bawah untuk memverifikasi alamat email Anda.')
             ->action('Verifikasi Email', url('/verify-email/'.$notifiable->getKey()))
-            ->line('Terima kasih atas pendaftaran Anda!')
-            ->line('<img src="' . asset('assets/img/logo-get-media.png') . '" alt="Verifikasi Email" style="display:block; margin:0 auto;">');
+            ->line('Terima kasih atas pendaftaran Anda!');
     }
 
     /**
