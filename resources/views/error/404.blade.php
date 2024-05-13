@@ -4,15 +4,15 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <div class="error-content">
-                    <img src="{{ asset('assets/img/404.webp') }}" alt="Iamge" />
-                    <h2>MAAF KAMI TIDAK MENEMUKAN HALAMAN YANG ANDA CARI.
-                    </h2>
-                    <a href="/" class="btn-one"><i class="flaticon-left-arrow"></i> Kembali</a>
+                <div class="error-content justify-content-center">
+                    <img src="{{ asset('assets/img/404.webp') }}" alt="Iamge" style="height: 170px;"/>
+                    <h6 style="color: #888888">404 Not Found</h6>
+                    <h5>Maaf Kami Tidak Menemukan Halaman Yang Anda Cari.</h5>
+                    <a href="/" class="btn mt-3" style="background-color: #DD1818; color: white">Kembali ke beranda</a>
                 </div>
             </div>
             <div class="col-lg-8 offset-lg-2 mt-4">
-                <h3 align="center" class="mb-4">Berita yang Mungkin Anda Suka : 
+                <h3 align="center" class="mb-4">Berita Direkomendasikan
                 </h3>
                 <div class="row">
                     @foreach ($news as $news)
