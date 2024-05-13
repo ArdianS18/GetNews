@@ -389,7 +389,7 @@
                                                 <div class="shareLink">
                                                     <div class="permalink">
                                                         <input class="textLink" type="text" name="shortlink"
-                                                            value="https://media.mijurnal.com/berita/{{ $news->slug }}"
+                                                            value="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}"
                                                             id="copy-link" readonly="">
                                                         <span class="copyLink" onclick="copyToClipboard()" id="copy"
                                                             tooltip="Salin Link">
@@ -957,14 +957,9 @@
                 shareOnFacebook('your_news_id_here');
             });
 
-
-
             document.getElementById('tele').addEventListener('click', function() {
                 shareOnTelegram('your_news_id_here');
             });
-
-
-
 
             document.getElementById('tw').addEventListener('click', function() {
                 shareOnTwitter('your_news_id_here');
@@ -976,7 +971,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }} Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
@@ -988,7 +983,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }} Baca Selengkapnya di: " + url
             var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
             window.open(facebookLink, '_blank');
         }
@@ -998,7 +993,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+            var text = "{{ $news->name  }} Baca Selengkapnya di: " + url
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
