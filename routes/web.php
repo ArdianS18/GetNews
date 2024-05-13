@@ -384,25 +384,14 @@ Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSu
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
-
-// Route::get('confirm-email', function () {
-//     return view('auth.passwords.reset');
-// })->name('confirm.email');
-
-// Route::get('confirm-password', function () {
-//     return view('pages.auth.passwords.confirm');
-// })->name('confirm.password');
-
-// Route::get('pw-reset',function(){
-//     return view('pages.auth.passwords.reset');
-// })->name('reset');
-
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
 
+
 Route::get('all-category', function () {
     return view('pages.user.news.all-category');
 });
+
 
 Route::get('error',[DashboardController::class,'notFound'])->name('not-found');

@@ -170,11 +170,14 @@
             }
 
             if (data.status == 'active') {
-                var detail = "{{ route('news.user', ['news' => ':slug']) }}";
+                var detail = "{{ route('news.user', ['news' => ':slug', 'year'=> ':year', 'month'=> ':month','day'=> ':day']) }}";
             } else {
                 var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
             }
             detail = detail.replace(':slug', data.slug);
+            detail = detail.replace(':year', data.upload_date);
+            detail = detail.replace(':month', data.upload_date);
+            detail = detail.replace(':day', data.upload_date);
             var edit = "{{ route('profile.news.edit', ['newsId' => ':slug']) }}";
             edit = edit.replace(':slug', data.slug);
 
