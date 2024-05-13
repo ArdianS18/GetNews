@@ -6,6 +6,8 @@
     <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
+    <meta name="twitter:card" content="summary_large_image">
+
     @php
         $dateParts = date_parse($news->upload_date);
     @endphp
@@ -216,7 +218,6 @@
                                         <a style="display: inline;text-decoration:none" data-toggle="tooltip"
                                             data-placement="top" title="author - {{ $news->user->name }}"
                                             href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
-                                            {{ $news->newsCategories[0]->category->name }}
                                         </span>
                                     </div>
                                 </li>
