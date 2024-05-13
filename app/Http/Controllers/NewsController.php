@@ -332,7 +332,7 @@ class NewsController extends Controller
 
         $subCategory = $this->subCategory->showWithSlug($subCategory);
 
-        $categories = $this->category->get()->take(6);
+        $categories = $this->category->get();
         $totalCategories = $this->category->showWhithCount();
         $subCategories = $this->subCategory->get();
 
