@@ -401,5 +401,8 @@ Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
 
+Route::get('all-category', function () {
+    return view('pages.user.news.all-category');
+});
 
 Route::get('error',[DashboardController::class,'notFound'])->name('not-found');
