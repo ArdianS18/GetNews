@@ -13,7 +13,7 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInterface;
 
-interface SubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, ShowSlugInterface, WhereInterface, WhereInInterface,CustomPaginationInterface 
+interface SubCategoryInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, PaginateInterface, ShowSlugInterface, WhereInterface, WhereInInterface,CustomPaginationInterface
 {
-
+    public function get404() : mixed;
 }

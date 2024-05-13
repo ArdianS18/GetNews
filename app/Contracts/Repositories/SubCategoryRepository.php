@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use App\Contracts\Repositories\BaseRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Enums\NewsStatusEnum;
 
 class SubCategoryRepository extends BaseRepository implements SubCategoryInterface
 {
@@ -99,6 +100,13 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             ->get();
     }
 
+    public function get404(): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+            ->get();
+    }
+
     /**
      * Handle store data event to models.
      *
@@ -135,5 +143,5 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             $query->where('name', 'LIKE', '%' .  $request->name . '%');
         })
         ->fastPaginate($pagination);
-    }   
+    }
 }
