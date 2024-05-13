@@ -74,6 +74,8 @@
         <!-- Sidebar Start -->
         @if (auth()->user()->roles->pluck('name')[0] == "user")
             @include('layouts.user.side')
+        @elseif (auth()->user()->roles->pluck('name')[0] == "admin")
+            @include('layouts.admin.sidebar')
         @else
             @include('layouts.author.side')
         @endif
