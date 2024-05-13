@@ -98,15 +98,14 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
-        
         $trendingNews = $this->model->query()
-            ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->select('news_id', DB::raw('COUNT(*) as total'))
-            ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy('news_id')
-            ->orderBy('total', 'desc')
-            ->limit(9)
-            ->get();
-        return $trendingNews;
+        ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+        ->select('news_id', DB::raw('COUNT(*) as total'))
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->groupBy('news_id')
+        ->orderBy('total', 'desc')
+        ->take(9)
+        ->get();
+            return $trendingNews;
     }
 }
