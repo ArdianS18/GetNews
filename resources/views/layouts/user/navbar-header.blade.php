@@ -53,7 +53,7 @@
                 <i class="flaticon-loupe"></i>
             </button>
             @auth
-                <div class="ms-2 mt-1 d-md-none">
+                <div class="ms-2 mt-1 d-lg-none">
                     <ul class="navbar-nav mx-auto">
                         <div class="news-card-img mb-2 ms-4">
                             @role('author')
@@ -134,8 +134,8 @@
                         </div>
                     </div>
                     @auth
-                        <div class="ms-3">
-                            <ul class="navbar-nav mx-auto">
+                        <div class="option-item">
+                            <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a href="javascript:void(0)" class="nav-link">
                                         <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="mb-2" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
