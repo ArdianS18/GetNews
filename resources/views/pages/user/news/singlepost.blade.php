@@ -13,13 +13,12 @@
     <meta name="twitter:image" content="{{ asset('storage/' . $news->photo) }}">
     <meta name="twitter:url"
         content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
-        <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
-    <meta name="twitter:title"
-        content="{{ $news->name }} | GetMedia" />
+    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta name="twitter:title" content="{{ $news->name }} | GetMedia" />
     <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}" />
 
 
-    
+
     <meta property="og:url"
         content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
     <meta property="og:type" content="article">
@@ -421,7 +420,8 @@
                                                 <Label class="form-label">Atau Bagikan Melalui :</Label>
                                                 <div class="row">
                                                     <div class="col-md-6 col-12 mb-3">
-                                                        <button class="btn shadow-sm gap-3" id="wa"
+                                                        <button data-slug="{{ $news->slug }}"
+                                                            class="btn shadow-sm gap-3" id="wa"
                                                             style="width:-webkit-fill-available !important"><svg
                                                                 xmlns="http://www.w3.org/2000/svg" width="31.76"
                                                                 height="32" viewBox="0 0 256 258">
@@ -981,8 +981,10 @@
         });
 
         function shareOnWhatsapp(newsId) {
+            var element = document.getElementById('wa');
+            var dataSlug = element.dataset.slug;
             var url =
-                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
             var text = "Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
@@ -991,17 +993,20 @@
         }
 
         function shareOnFacebook(newsId) {
+            var element = document.getElementById('wa');
+            var dataSlug = element.dataset.slug;
             var url =
-                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
             var text = "Baca Selengkapnya di: " + url
-
             var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
             window.open(facebookLink, '_blank');
         }
 
         function shareOnTwitter(newsId) {
+            var element = document.getElementById('wa');
+            var dataSlug = element.dataset.slug;
             var url =
-                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
             var text = "Baca Selengkapnya di: " + url
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
@@ -1010,8 +1015,10 @@
 
 
         function shareOnTelegram(newsId) {
+            var element = document.getElementById('wa');
+            var dataSlug = element.dataset.slug;
             var url =
-                'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
+                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
             var text = "Baca Selengkapnya di: " + url
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
