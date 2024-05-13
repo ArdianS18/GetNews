@@ -56,7 +56,7 @@
                         </div>
                     @endforeach
                 @endif
-                    <form id="formAuthentication" class="py-3" action="{{route('register')}}" method="POST">
+                    <form method="POST" class="py-3" action="{{route('register')}}">
                         @csrf
                         <div class="row">
                             <div class="my-2 col-12">
