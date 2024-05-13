@@ -221,11 +221,13 @@
                                     </div>
                                 </li>
                                 <li><i class="fi fi-rr-calendar-minus"></i>
-                                    <a
-                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                                    {{-- <a href="javascript:void(0)"> --}}
+                                        {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
+                                        <span id="formattedDate"></span>
+                                    {{-- </a> --}}
                                 </li>
                                 <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24">
                                         <path fill="#e93314"
                                             d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
@@ -239,8 +241,8 @@
                                             @if (auth()->check())
                                                 <button type="submit" style="background: transparent;border:transparent"
                                                     class="like">
-                                                    <svg class="last" xmlns="http://www.w3.org/2000/svg" width="20"
-                                                        height="20" viewBox="0 0 24 24">
+                                                    <svg class="last" xmlns="http://www.w3.org/2000/svg" width="21"
+                                                        height="21" viewBox="0 0 24 24">
                                                         <path fill="#E93314"
                                                             d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                     </svg>
@@ -265,7 +267,7 @@
                                             @csrf
                                             <button type="button" style="background: transparent;border:transparent"
                                                 class="like not-login">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
                                                     viewBox="0 0 24 24">
                                                     <path fill="#E93314"
                                                         d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
@@ -277,7 +279,7 @@
                                             @csrf
                                             <button type="submit" style="background: transparent;border:transparent"
                                                 class="liked">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
                                                     viewBox="0 0 24 24">
                                                     <path fill="red"
                                                         d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
@@ -539,14 +541,6 @@
                                                                         d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
                                                                 </svg></i>
                                                         </div>
-                                                        {{-- <div class="mt-3">
-                                                            <i><svg class="last" xmlns="http://www.w3.org/2000/svg"
-                                                                    width="19" height="19" viewBox="0 0 24 24">
-                                                                    <path fill="#E93314"
-                                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                                </svg>
-                                                            </i>
-                                                        </div> --}}
                                                     </div>
                                                     <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
                                                         <div class="comment-text">
@@ -1022,5 +1016,13 @@
                 }
             }
         }
+    </script>
+
+    <script>
+        var uploadDate = new Date("{{ $news->upload_date }}");
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        var formattedDate = days[uploadDate.getDay()] + ', ' + uploadDate.getDate() + ' ' + months[uploadDate.getMonth()] + ' ' + uploadDate.getFullYear();
+        document.getElementById("formattedDate").textContent = formattedDate;
     </script>
 @endsection
