@@ -5,22 +5,16 @@
     @php
         $dateParts = date_parse($news->upload_date);
     @endphp
-    <meta name="description" content=" {!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@GetMedia">
+    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 10)) !!}">
     <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{{ asset('storage/' . $news->photo) }}">
-    <meta name="twitter:site" content="@GetMedia">
-    <meta name="twitter:url"
-        content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
-    <meta name="twitter:title" content="{{ $news->name }} | GetMedia" />
-    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}" />
     <meta property="og:url"
         content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="GetMedia">
-    <link rel="image_src" href="{{ asset('storage/' . $news->photo) }}">
 </head>
 
 @section('style')
@@ -395,7 +389,7 @@
                                                 <div class="shareLink">
                                                     <div class="permalink">
                                                         <input class="textLink" type="text" name="shortlink"
-                                                            value="https://media.mijurnal.com/berita/{{ $news->slug }}"
+                                                            value="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}"
                                                             id="copy-link" readonly="">
                                                         <span class="copyLink" onclick="copyToClipboard()" id="copy"
                                                             tooltip="Salin Link">
@@ -963,14 +957,9 @@
                 shareOnFacebook('your_news_id_here');
             });
 
-
-
             document.getElementById('tele').addEventListener('click', function() {
                 shareOnTelegram('your_news_id_here');
             });
-
-
-
 
             document.getElementById('tw').addEventListener('click', function() {
                 shareOnTwitter('your_news_id_here');
@@ -982,7 +971,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
@@ -994,7 +983,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
             var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
             window.open(facebookLink, '_blank');
         }
@@ -1004,7 +993,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+            var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
@@ -1016,7 +1005,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = "Baca Selengkapnya di: " + url
+                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
             window.open(telegramLink, '_blank');
