@@ -17,6 +17,11 @@
             padding: 4%;
             border-radius: 10px;
         }
+        @media only screen and (max-width: 768px) {
+            .text-mobile { 
+                font-size: 10px;
+            }
+        }
     </style>
 @endsection
 
@@ -58,7 +63,7 @@
                             </div>
 
                             <div class="col-10">
-                                <p class="fs-6">lorem oancone o nicygiu IVisu ub oiiuhcc oajicomec uhceb lorem oancone o
+                                <p class="fs-6 text-mobile">lorem oancone o nicygiu IVisu ub oiiuhcc oajicomec uhceb lorem oancone o
                                     nicygiu IVisu ub oii IVisu ub oiiuhcc oajicomec uhceb lorem oancone o nicygiu IVisu ub
                                     oiiuhcc oajicomec uhceb aiuhec...</p>
                             </div>
@@ -82,11 +87,11 @@
                         <div class="pp-post-wrap">
                             @forelse ($news as $item)
                                 <div class="row mt-3 mb-4">
-                                    <div class="col-3">
+                                    <div class="col-lg-3 col-md-12 mb-3">
                                         <img src="{{ asset('storage/' . $item->photo) }}" class="" width="100%"
                                             height="150px" style="object-fit: cover" alt="Image">
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-lg-9 col-md-12">
                                         <h5>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</h5>
 
                                         <div class="col-9">

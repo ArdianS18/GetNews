@@ -182,13 +182,13 @@
             <div class="card p-4 mt-4">
                 <div class="row">
                     <div class="col-lg-2">
-                        <div class="" style="margin-left: 2%;">
+                        <div class="">
                                 <img src="${data.photo}" alt="" style="object-fit:cover;" width="100%" height="120">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-8">
                         <div class="d-flex">
-                            <div class="order-md-1" style="margin-left:20px;">
+                            <div class="order-md-1">
                                 <h4>${data.name}</h4>
                                 <p>${data.content}</p>
                             </div>
