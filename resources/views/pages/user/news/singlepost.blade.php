@@ -10,7 +10,7 @@
         $dateParts = date_parse($news->upload_date);
     @endphp
     <meta property="og:url"
-        content="{{ config('app.url') }}/berita/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
+        content="https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="GetMedia">
     <link rel="image_src" href="{{ asset('storage/' . $news->photo) }}">
@@ -971,7 +971,7 @@
         });
 
         function shareOnWhatsapp(newsId) {
-            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
@@ -980,7 +980,7 @@
         }
 
         function shareOnFacebook(newsId) {
-            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
@@ -988,7 +988,7 @@
         }
 
         function shareOnTwitter(newsId) {
-            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
@@ -997,7 +997,7 @@
 
 
         function shareOnTelegram(newsId) {
-            var url = 'https://media.mijurnal.com/berita/{{ $news->slug }}';
+            var url = 'https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/{{ $news->slug }}';
             var text = "Baca Selengkapnya di: " + url
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);

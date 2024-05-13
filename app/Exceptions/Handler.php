@@ -39,7 +39,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
-            $news = News::inRandomOrder()->take(10)->get();
+            $news = News::latest()->take(10)->get();
             $additionalData = [
                'categories' => Category::all(),
                'subCategories'=> SubCategory::all(),
