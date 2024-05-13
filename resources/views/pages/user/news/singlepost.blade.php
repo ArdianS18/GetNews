@@ -575,8 +575,14 @@
                                             @csrf
                                             <textarea name="content" cols="100" rows="3" placeholder="Type your reply here"></textarea>
                                             <div>
-                                                <button type="submit" class="btn-two w-100 btn btn-sm"
-                                                    style="background-color: #0F4D8A">Kirim Balasan</button>
+                                                @auth
+                                                    <button type="submit" class="btn-two w-100 btn btn-sm"
+                                                        style="background-color: #0F4D8A">Kirim Balasan</button>
+                                                @else
+                                                <button type="submit" class="btn-two w-100 btn btn-sm not-login"
+                                                        style="background-color: #0F4D8A">Kirim Balasan</button>
+                                                @endauth
+                                                
                                             </div>
                                         </form>
                                     </div>
