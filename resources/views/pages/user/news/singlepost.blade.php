@@ -509,11 +509,22 @@
                                             method="post">
                                             @csrf
                                             <textarea name="content" class="form-control mb-2" cols="100" rows="2" placeholder="Balas Komentar"></textarea>
-                                            <div>
+                                            @auth
+                                                <div>
+                                                    <button type="submit" class="btn-two w-100 btn"
+                                                        style="background-color: #0F4D8A;padding:10px !important">Kirim Balasan</button>
+                                                </div>
+                                            @else
+                                                <div>
+                                                    <button type="button" class="btn-two w-100 btn not-login"
+                                                        style="background-color: #0F4D8A;padding:10px !important">Kirim Balasan</button>
+                                                </div>
+                                            @endauth
+                                            {{-- <div>
                                                 <button type="submit" class="btn-two w-100 btn"
                                                     style="background-color: #0F4D8A;padding:10px !important">Kirim
                                                     Balasan</button>
-                                            </div>
+                                            </div> --}}
                                         </form>
                                     </div>
                                 @endif
@@ -574,16 +585,20 @@
                                             method="post">
                                             @csrf
                                             <textarea name="content" cols="100" rows="3" placeholder="Type your reply here"></textarea>
-                                            <div>
+                                            
                                                 @auth
+                                                    <div>
                                                     <button type="submit" class="btn-two w-100 btn btn-sm"
                                                         style="background-color: #0F4D8A">Kirim Balasan</button>
+                                                    </div>
                                                 @else
-                                                <button type="submit" class="btn-two w-100 btn btn-sm not-login"
+                                                <div>
+                                                    <button type="submit" class="btn-two w-100 btn btn-sm not-login"
                                                         style="background-color: #0F4D8A">Kirim Balasan</button>
+                                                </div>
                                                 @endauth
                                                 
-                                            </div>
+                                            
                                         </form>
                                     </div>
                                 @endforeach

@@ -4,6 +4,7 @@
             width: 150px;
         }
     }
+
 </style>
 <div class="navbar-area header-one mb-5" id="navbar">
     <div class="header-top">
@@ -45,7 +46,7 @@
                     <span class="bottom-bar" style="height: 2px; width: 25px;"></span>
                 </span>
             </a>
-            <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
+            <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button"style="width: 17% !important;" aria-controls="navbarOffcanvas">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
             </div>
 
