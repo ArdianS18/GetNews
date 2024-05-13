@@ -27,7 +27,7 @@
                                         </a>
                                     </div>
                                     <div class="news-card-info">
-                                        <h3><a href="{{ route('news.user', ['news' => $trending->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
+                                        <h3><a data-toggle="tooltip" data-placement="top" title="{{ $trending->news->name }}"  href="{{ route('news.user', ['news' => $trending->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
                                             {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 27, $end = '...')  !!}
                                         </a></h3>
                                         <ul class="news-metainfo list-style">
