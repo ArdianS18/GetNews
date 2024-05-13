@@ -941,8 +941,7 @@
             var dataSlug = element.dataset.slug;
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-                var text = "{{ $news->name  }}, Baca Selengkapnya di: " + url
-            var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(text);
+            var facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
             window.open(facebookLink, '_blank');
         }
 
