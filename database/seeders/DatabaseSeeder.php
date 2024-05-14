@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             CategorySeeder::class,
-            SubCategorySeeder::class
+            SubCategorySeeder::class,
+            SocialMediaSeeder::class,
+            SloganSeeder::class,
+            ContactSeeder::class
         ]);
     }
 }

@@ -35,6 +35,7 @@ use App\Contracts\Interfaces\PaymentAdvertisementInterface;
 use App\Contracts\Interfaces\PaymentAdvertisementsInterface;
 use App\Contracts\Interfaces\PaymentNewsInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Contracts\Interfaces\SocialMediaInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
 use App\Contracts\Interfaces\TagInterface;
@@ -55,6 +56,7 @@ use App\Contracts\Repositories\NewsTagRepository;
 use App\Contracts\Repositories\PaymentAdvertisementRepository;
 use App\Contracts\Repositories\PaymentNewsRepository;
 use App\Contracts\Repositories\ReportRepository;
+use App\Contracts\Repositories\SocialMediaRepository;
 use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\SubscribeRepository;
 use App\Contracts\Repositories\TagRepository;
@@ -90,6 +92,7 @@ class AppServiceProvider extends ServiceProvider
         PaymentAdvertisementInterface::class => PaymentAdvertisementRepository::class,
         PaymentNewsInterface::class => PaymentNewsRepository::class,
         VisitorInterface::class => VisitorRepository::class,
+        SocialMediaInterface::class => SocialMediaRepository::class,
     ];
 
     /**
