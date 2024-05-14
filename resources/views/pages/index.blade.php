@@ -1,4 +1,5 @@
 @extends('layouts.user.app')
+<title>GetMedia</title>
 @section('style')
     <style>
 
