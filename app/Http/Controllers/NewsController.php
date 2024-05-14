@@ -185,7 +185,7 @@ class NewsController extends Controller
     public function usernews(Request $request,$year,$mounth,$day,$slug)
     {
         $ip = $request->getClientIp();
-        
+
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
         $content = $news->content;
@@ -324,7 +324,10 @@ class NewsController extends Controller
         $query = $request->input('search');
         $newsCategories = $this->newsCategory->search($category->id, $query);
 
-        return view('pages.user.news.category', compact('news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
+        $popular = $this->news->newsCategory($categoryId);
+        $new_news = $this->news->newsCategorySearch($category->id, $query, 'terbaru');
+        $trending = $this->news->newsCategorySearch($category->id, $query, 'trending');
+        return view('pages.user.news.category', compact('trending','new_news','popular','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
     public function showAllCategories($slug, Request $request, NewsCategory $newsCategory){

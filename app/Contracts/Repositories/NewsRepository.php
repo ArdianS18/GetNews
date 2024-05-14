@@ -511,4 +511,34 @@ class NewsRepository extends BaseRepository implements NewsInterface
         })
         ->get();
     }
+
+    public function newsCategory($category): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('newsCategories', 'category_id', $category)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->get()
+            ->take(1);
+    }
+
+    public function newsCategorySearch($category, $query, mixed $data): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->when($query, function($search) use ($query){
+                $search->where('name', 'LIKE', '%'.$query.'%');
+            })
+            ->whereRelation('newsCategories', 'category_id', $category)
+            ->when($data === "terbaru", function($query) {
+                $query->latest();
+            })
+            ->when($data === "trending", function($query) {
+                $query->withCount('newsHasLikes');
+                $query->orderByDesc('news_has_likes_count');
+            })
+            ->withCount('views')
+            ->paginate(5);
+    }
 }

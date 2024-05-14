@@ -123,7 +123,7 @@
                                     <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
                                 </a>
                             </div>
-                            
+
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
@@ -363,7 +363,7 @@
                     <h2 class="section-title">Most Popular<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                 </div>
                 <div class="col-md-5 text-md-end">
-                    <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                    <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>
                 </div>
             </div>
             <div class="row gx-55">
@@ -479,7 +479,7 @@
                                     src="assets/img/section-img.webp" alt="Image" /></h2>
                         </div>
                         <div class="col-md-5 text-md-end">
-                            <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                            <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -602,7 +602,7 @@
                             <h2 class="section-title">Latest News<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                         </div>
                         <div class="col-md-5 text-md-end">
-                            <a href="/all-news-post" class="link-one">View All News<i class="flaticon-right-arrow"></i></a>
+                            <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                     <div class="row gx-5">
