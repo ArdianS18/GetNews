@@ -29,14 +29,11 @@ class HelloMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Hello Mail',
+            to: $this->data['email'],
+            cc: $this->data['email'],
+            bcc: $this->data['email'],
+            subject: 'Verifikasi email untuk pendafataran pada sipjaki pasuruan',
         );
-    }
-
-    public function build()
-    {
-        return $this->form('getMedia@get.com', 'GetMedia')
-        ->subject($this->data['subject'])->view('pages.email.email')->with('data', $this->data);
     }
     /**
      * Get the message content definition.
@@ -44,7 +41,10 @@ class HelloMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'pages.email.email',
+            with: [
+                'data' => $this->data,
+            ],
         );
     }
 
