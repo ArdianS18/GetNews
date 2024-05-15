@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tracer Study SMKN 2 Penajam Paser Utara</title>
+    <title>GeetMedia | Verify</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style type="text/css">
@@ -81,7 +81,7 @@
             <!-- Header Section -->
             <div style="text-align: center; background-color: #eaf6e8; padding: 57px;">
                 <div style="cursor: auto; color: #1B3061; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-size: 36px; font-weight: 600; line-height: 36px; text-align: center;">
-                    <img src="https://i.postimg.cc/QCtQsQXG/smk.png" alt="" />
+                    <img src="{{asset('assets/img/logo-getmedia.png')}}" alt="" />
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
             <div style="text-align: center; background: #ffffff; padding: 40px 70px;">
                 <div style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 100%;">
                     <div style="word-break: break-word; font-size: 0px; padding: 0px 0px 20px;" align="left">
-                        <div style="cursor: auto; color: #737f8d; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-size: 16px; line-height: 24px; text-align: left;">
+                        <div style="cursor: auto; color: #b1ccea; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-size: 16px; line-height: 24px; text-align: left;">
                             <p></p>
                             <h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-weight: 500; font-size: 20px; color: #4f545c; letter-spacing: 0.27px;">
                                 Tautan ini aktif selama 4 jam
@@ -98,7 +98,7 @@
                                 Aktivasi Akun Anda
                             </h4>
                             <p>
-                                Terimakasih {{ $data['user'] }} telah mendaftar di <span style="color: #000000;">Tracer Study SMKN 2 PENAJAM,</span>
+                                Terimakasih {{ $data['user'] }} telah mendaftar di <span style="color: #000000;">Website GetMedia.id,</span>
                             </p>
                         </div>
                     </div>

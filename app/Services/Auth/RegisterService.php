@@ -52,7 +52,7 @@ class RegisterService
     protected function sendVerificationEmail(User $user)
     {
         Notification::send($user, new VerifyEmailNotification($user));
-    }
+    }   
 
     public function registerWithAdmin(RegisterRequest $request): array
     {
