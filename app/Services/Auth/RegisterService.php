@@ -44,8 +44,6 @@ class RegisterService
         $user->assignRole(RoleEnum::USER);
 
         Mail::to($user->email)->send(new Hellomail (['email' => $user->email, 'user' => $user->name,'id' => $user->id]));
-
-
         return;
     }
 
