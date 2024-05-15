@@ -29,6 +29,10 @@
     <link rel="stylesheet" href="{{ 'admin/dist/libs/prismjs/themes/prism-okaidia.min.css' }}">
 @endsection
 
+<title>
+    Author | News Statistik
+</title>
+
 @section('content')
 
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">

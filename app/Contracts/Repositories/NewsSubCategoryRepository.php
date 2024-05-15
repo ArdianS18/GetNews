@@ -20,6 +20,7 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
      *
      * @param mixed $id
      *
+     *
      * @return mixed
      */
     public function delete(mixed $id): mixed
@@ -54,11 +55,12 @@ class NewsSubCategoryRepository extends BaseRepository implements NewsSubCategor
     public function search(mixed $id, mixed $query): mixed
     {
         return $this->model->query()
-        ->where('sub_category_id', $id)
-        ->whereHas('news', function($cari) use ($query){
-            $cari->where('status',NewsStatusEnum::ACTIVE->value);
-            $cari->where('name', 'LIKE', '%'.$query.'%');
-        })->paginate(8);
+            ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+            ->where('sub_category_id', $id)
+            ->whereHas('news', function($cari) use ($query){
+                $cari->where('status',NewsStatusEnum::ACTIVE->value);
+                $cari->where('name', 'LIKE', '%'.$query.'%');
+            })->paginate(8);
     }
 
     public function updateOrCreate(array $data): mixed
