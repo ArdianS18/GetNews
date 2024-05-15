@@ -388,6 +388,4 @@ Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
 
-Route::get('all-category', [NewsController::class, 'showAllCategories'])->name('all.category');
-
-Route::get('error',[DashboardController::class,'notFound'])->name('not-found');
+Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->name('category.all');
