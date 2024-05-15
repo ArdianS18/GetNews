@@ -21,8 +21,8 @@
                     <div class="row">
                         @forelse ($newsSubCategories as $newsSubCategory)
                         @php
-                        $dateParts = date_parse($newsSubCategory->upload_date);
-                    @endphp
+                            $dateParts = date_parse($newsSubCategory->news->upload_date);
+                        @endphp
 
                             <div class="col-md-6">
                                 <div class="news-card-thirteen">
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="news-card-info">
                                         <h3><a  data-toggle="tooltip" data-placement="top" title="{{ $newsSubCategory->news->name }}"
-                                                href="{{ route('news.user', ['news' => $newsSubCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{!! Illuminate\Support\Str::limit(strip_tags($newsSubCategory->news->name), 50, '...') !!}</a>
+                                            href="{{ route('news.user', ['news' => $newsSubCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">{!! Illuminate\Support\Str::limit(strip_tags($newsSubCategory->news->name), 50, '...') !!}</a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
