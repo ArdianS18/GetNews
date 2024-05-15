@@ -14,6 +14,8 @@ use App\Models\User;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\HelloMail;
 
 class RegisterService
 {
@@ -41,9 +43,7 @@ class RegisterService
         $user = $register->store($data);
         $user->assignRole(RoleEnum::USER);
 
-        if ($user instanceof MustVerifyEmail) {
-            $this->sendVerificationEmail($user);
-        }
+        Mail::to($user->email)->send(new Hellomail (['email' => $user->email, 'user' => $user->name,'id' => $user->id]));
 
 
         return;
