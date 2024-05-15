@@ -161,11 +161,11 @@
                                 </div>
                                 <div>
                                     @if ($index == 1 || $index == 2)
-                                        <span class="badge bg-light-warning text-warning">{{ $category->total }}</span>
+                                        <span class="badge bg-light-warning text-warning">{{ $category->news_categories_count }}</span>
                                     @elseif ($index == 3 || $index == 4)
-                                        <span class="badge bg-light-success text-success">{{ $category->total }}</span>
+                                        <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
                                     @else
-                                        <span class="badge bg-light-danger text-danger">{{ $category->total }}</span>
+                                        <span class="badge bg-light-danger text-danger">{{ $category->news_categories_count }}</span>
                                     @endif
                                 </div>
                             </div>
