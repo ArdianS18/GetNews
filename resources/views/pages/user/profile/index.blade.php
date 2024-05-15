@@ -48,7 +48,7 @@
                             <div class="d-flex align-items-center justify-content-center justify-content-lg-between m-4 gap-5">
                                 <div class="text-center">
                                     <i class="ti ti-coins fs-6 d-block mb-2"></i>
-                                    <h5 class="mb-0 fw-semibold lh-1">938</h5>
+                                    <h5 class="mb-0 fw-semibold lh-1">0</h5>
                                     <p class="mb-0 fs-4">Poin</p>
                                 </div>
                                 <div class="text-center">
