@@ -12,6 +12,7 @@
             list-style: decimal !important;
             list-style-position: inside !important;
         }
+
         @media (max-width: 768px) {
             .bg-mobile {
                 width: 150px;
@@ -51,11 +52,11 @@
         </div>
     </div>
 
-    @if(session('error'))
+    @if (session('error'))
         <div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
+        </div>
     @endif
 
     <div class="ms-1">
@@ -111,7 +112,7 @@
                                 class="select2 form-control category @error('category') is-invalid @enderror"
                                 name="category[]" multiple="true" aria-label="Default select example">
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category')
@@ -181,7 +182,7 @@
                             <div class="col-lg-12 mb-4" style="height: auto;">
                                 <label class="form-label" for="content">Isi Berita</label>
                                 <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}"
-                                    class="form  @error('content') is-invalid @enderror">{{old('content')}}</textarea>
+                                    class="form  @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="invalid-feedback" role="alert" style="color: red;">
                                         <strong>{{ $message }}</strong>
@@ -195,25 +196,25 @@
         </div>
         @if (auth()->user()->roles->pluck('name')[0] == 'author')
             <div class="d-flex justify-content-between">
-        @else
-            <div class="d-flex justify-content-end">
+            @else
+                <div class="d-flex justify-content-end">
         @endif
-            @if (auth()->user()->roles->pluck('name')[0] == 'author')
-                <div>
-                    <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
-                        id="submitButton2">
-                        Simpan Draf
-                    </button>
-                </div>
-            @endif
-            <div class="d-flex">
-                <button type="reset" class="btn btn-danger m-2">
-                    Batal
-                </button>
-                <button type="submit" class="btn btn-primary m-2" id="submitButton1">
-                    Upload
+        @if (auth()->user()->roles->pluck('name')[0] == 'author')
+            <div>
+                <button type="submit" class="btn btn-md text-white m-2" style="background-color: #1EBB9E;"
+                    id="submitButton2">
+                    Simpan Draf
                 </button>
             </div>
+        @endif
+        <div class="d-flex">
+            <button type="reset" class="btn btn-danger m-2">
+                Batal
+            </button>
+            <button type="submit" class="btn btn-primary m-2" id="submitButton1">
+                Upload
+            </button>
+        </div>
         </div>
     </form>
 
@@ -261,7 +262,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #C94F4F;">Kembali</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="background-color: #C94F4F;">Kembali</button>
                 </div>
             </div>
         </div>
@@ -269,7 +271,6 @@
 @endsection
 
 @section('script')
-
     <script>
         var errorAlert = document.getElementById('error-alert');
         if (errorAlert) {
@@ -306,6 +307,7 @@
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontname', ['fontname']], // Menambahkan opsi untuk mengganti font
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph', 'height']],
@@ -316,6 +318,12 @@
                     ['codeview', ['codeview']],
                     ['help', ['help']],
                     ['insert', ['ul']]
+                ],
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
+                    'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+                ],
+                fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
+                    'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ]
             });
         });

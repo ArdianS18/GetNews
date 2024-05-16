@@ -381,10 +381,16 @@ Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
-Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 
-Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
+// Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
+Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+Route::prefix('tag')->name('tag.')->group(function(){
+    Route::get('{tag:slug}/', [NewsTagController::class, 'show'])->name('show.user');
+});
+Route::prefix('{category:slug}')->name('subcategories.')->group(function(){
+    Route::get('{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('show.user');
+});
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
