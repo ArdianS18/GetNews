@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('advertisements_photo', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('advertisement_id')->constrained();
+            $table->foreignUuid('advertisement_id')->constrained();
             $table->text('multi_photo')->nullable();
             $table->timestamps();
         });

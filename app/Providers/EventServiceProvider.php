@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Advertisement;
 use App\Models\Author;
 use App\Models\News;
 use App\Models\User;
+use App\Observers\AdvertismentObserver;
 use App\Observers\AuthorObserver;
 use App\Observers\NewsObserver;
 use App\Observers\UserObserver;
@@ -34,6 +36,7 @@ class EventServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         News::observe(NewsObserver::class);
         Author::observe(AuthorObserver::class);
+        Advertisement::observe(AdvertismentObserver::class);
     }
 
     /**

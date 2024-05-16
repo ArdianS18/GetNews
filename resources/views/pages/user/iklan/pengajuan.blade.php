@@ -37,7 +37,7 @@
     <div class="d-flex justify-content-between">
         <h5>Isi form dibawah ini untuk konten iklan</h5>
         <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
-            Berikutnya
+            Upload
         </button>
     </div>
 
@@ -58,17 +58,17 @@
                     <option value="vidio">Vidio</option>
                 </select>
             </div>
-            
+
             <div class="col-lg-12 mb-4">
                 <label for="position" class="form-label">Posisi Iklan</label>
                 <div class="">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">  
+                        <input class="form-check-input" type="radio" name="position" id="inlineRadio1" value="full_horizontal">
                         <label class="form-check-label" for="inlineRadio1">
                             <p class="ms-2">Posisi Tengah Full (1770 x 166)</p>
                             <img src="{{asset('assets/img/full-horizontal.png')}}" width="300" height="200" alt="">
-                        </label>    
-                    </div>  
+                        </label>
+                    </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="position" id="inlineRadio2" value="horizontal">
                         <label class="form-check-label" for="inlineRadio2">
@@ -96,7 +96,7 @@
                     </span>
                 @enderror
             </div>
-            
+
             <div class="col-lg-6 mb-4">
                 <label class="form-label" for="end_date">Tanggal Akhir</label>
                 <input type="date" id="end_date" name="end_date" placeholder=""
@@ -142,7 +142,7 @@
 @endsection
 
 @section('script')
-    
+
 <script src="{{ asset('assets/dist/imageuploadify.min.js') }}"></script>
 
 <script>
@@ -152,7 +152,7 @@
 
     function selectCard(selectedCard) {
         var cards = document.querySelectorAll('.card-act');
-        
+
         cards.forEach(function(card) {
             card.classList.remove('active');
         });
@@ -160,7 +160,7 @@
         selectedCard.classList.add('active');
     }
 
-    
+
     function selectCard(card) {
         var radioButton = card.querySelector('input[type="radio"]');
 

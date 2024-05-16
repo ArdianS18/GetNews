@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Advertisement;
-use App\Models\Author;
 use Faker\Provider\Uuid;
 
 class AdvertismentObserver

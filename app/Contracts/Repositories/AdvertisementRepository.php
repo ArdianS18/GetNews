@@ -73,6 +73,13 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function get(): mixed
     {
         return $this->model->query()
+            ->where('user_id', auth()->user()->id)
+            ->get();
+    }
+
+    public function where($id): mixed
+    {
+        return $this->model->query()
             ->get();
     }
 
@@ -104,5 +111,5 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->update($data);
     }
 
-    
+
 }

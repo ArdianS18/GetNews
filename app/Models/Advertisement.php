@@ -10,9 +10,11 @@ class Advertisement extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'type', 'page', 'position', 'start_date', 'end_date', 'url', 'photo'];
+    protected $fillable = ['id','user_id', 'type', 'page', 'position', 'start_date', 'end_date', 'url', 'photo', 'status'];
     protected $table = 'advertisements';
 
+    public $incrementing = false;
+    public $keyType = 'char';
 
     public function paymentAdvertisements(): HasMany
     {
