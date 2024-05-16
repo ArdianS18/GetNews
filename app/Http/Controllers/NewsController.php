@@ -306,8 +306,8 @@ class NewsController extends Controller
         return view('pages.user.index', compact('news','subCategories'));
     }
 
-    public function showCategories($slug, Request $request, NewsCategory $newsCategory){
-
+    public function showCategories($slug, Request $request, NewsCategory $newsCategory)
+    {
         $request->merge([
             'name' => $newsCategory->id,
         ]);

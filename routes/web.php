@@ -181,7 +181,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:admin|author|superadmin',])->group(function () {
+Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
@@ -189,6 +189,8 @@ Route::middleware(['auth', 'role:admin|author|superadmin',])->group(function () 
 
     Route::post('create-news', [NewsController::class, 'store'])->name('profile.berita.store');
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
+
+    Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
 });
 
 Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
@@ -280,6 +282,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
 Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
+
     Route::get('ketentuan-dan-persyaratan', function () {
         return view('pages.user.home');
     })->name('user.home');
@@ -306,7 +309,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
 
     Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
     Route::get('status-iklan', [AdvertisementController::class, 'advertisementStore'])->name('iklan.status');
-    Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
 
     Route::get('iklan-biodata', function () {
         return view('pages.user.iklan.upload');

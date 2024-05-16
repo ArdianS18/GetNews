@@ -155,18 +155,6 @@
                                     </ul>
 
                                 </div>
-
-                                <div class="col-md-12 col-lg-12 from-group mb-3">
-                                    <label class="form-label" for="address">Alamat</label>
-                                    <textarea name="address" id="create-address" rows="6" class=" @error('address') is-invalid @enderror form-control" style="resize: none"></textarea>
-                                    <ul class="error-text">
-                                        @error('address')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </ul>
-                                </div>
                             </div>
                         </div>
 
