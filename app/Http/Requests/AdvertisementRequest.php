@@ -22,7 +22,6 @@ class AdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'user_id' => 'required',
             'type' => 'required',
             'page' => 'required',
             'position' => 'required',

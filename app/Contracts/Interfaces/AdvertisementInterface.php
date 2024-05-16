@@ -9,11 +9,12 @@ use App\Contracts\Interfaces\Eloquent\SearchInterface;
 use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
+use App\Contracts\Interfaces\Eloquent\WhereInterface;
 use Illuminate\Foundation\Mix;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-interface AdvertisementInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, CustomPaginationInterface
+interface AdvertisementInterface extends GetInterface,StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, CustomPaginationInterface
 {
-
+    public function where($id) : mixed;
 }

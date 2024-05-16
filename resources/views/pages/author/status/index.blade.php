@@ -56,7 +56,6 @@
                 </select>
             </div>
         </div>
-        {{-- <button type="submit" class="btn btn-outline-primary">Pilih</button> --}}
     </form>
 
     <div class="tab-pane" id="data">

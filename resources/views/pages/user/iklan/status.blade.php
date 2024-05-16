@@ -39,87 +39,131 @@
 </div>
 
 <div class="card shadow-sm p-4 mt-4">
-    <div class="row">
-        <div class="col-md-12 col-lg-3">
-            <div class="mb-2">
-                <img src="{{asset('assets/img/about/about-img-1.webp')}}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
-            </div>
-        </div>
 
-        <div class="row col-md-12 col-lg-6">
-            <div class="row col-lg-6">
-                <div class="col-lg-6 mb-3">
-                    <div class="fs-4 text-black">
-                        Jenis Iklan:
-                    </div>
-                    <div class="fs-4 mt-2">Gambar</div>
+    @forelse ($advertisements as $advertisement)
+        <div class="row">
+            <div class="col-md-12 col-lg-3">
+                <div class="mb-2">
+                    <img src="{{ asset('storage/' . $advertisement->photo) }}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
                 </div>
-                <div class="col-lg-6 mb-3">
-                    <div class="fs-4 text-black">
-                        Tanggal Awal:
+            </div>
+
+            <div class="row col-md-12 col-lg-6">
+                <div class="row col-lg-6">
+                    <div class="col-lg-6 mb-3">
+                        <div class="fs-4 text-black">
+                            Jenis Iklan:
+                        </div>
+                        <div class="fs-4 mt-2">{{ $advertisement->type }}</div>
                     </div>
-                    <div class="fs-4 mt-2">1/1/2022</div>
+                    <div class="col-lg-6 mb-3">
+                        <div class="fs-4 text-black">
+                            Tanggal Awal:
+                        </div>
+                        <div class="fs-4 mt-2">{{ $advertisement->start_date }}</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="fs-4 text-black">
+                            Halaman:
+                        </div>
+                        <div class="fs-4 mt-2">{{ $advertisement->page }}</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="fs-4 text-black">
+                            Tanggal Akhir:
+                        </div>
+                        <div class="fs-4 mt-2">{{ $advertisement->end_date }}</div>
+                    </div>
                 </div>
+
                 <div class="col-lg-6">
-                    <div class="fs-4 text-black">
-                        Halaman:
+                    <div class="col-lg-12">
+                        <div class="fs-4 text-black">
+                            URL:
+                        </div>
+                        <div class="fs-4 mt-2">{{ $advertisement->url }}</div>
                     </div>
-                    <div class="fs-4 mt-2">Detail Berita</div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="fs-4 text-black">
-                        Tanggal Akhir:
-                    </div>
-                    <div class="fs-4 mt-2">1/2/2022</div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="col-lg-12">
-                    <div class="fs-4 text-black">
-                        URL:
-                    </div>
-                    <div class="fs-4 mt-2">loremipsumokicnojncoiroiiccerv...</div>
+
+            <div class="col-md-12 col-lg-3">
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    @if ($advertisement->status === "reject")
+                        <a href="" class="btn btn-sm m-0" style="background-color: #5D87FF;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                                <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
+                            </svg>
+                        </a>
+                    @else
+                        <div class="d-flex justify-content-end">
+                            <div class="text-md-right">
+                                <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
+                                    Belum Dibayar
+                                </span>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($advertisement->status === "pending")
+                        <div class="d-flex justify-content-end">
+                            <div class="text-md-right">
+                                <span class="badge bg-light-warning text-warning fs-4 px-3 py-2">
+                                    Pending
+                                </span>
+                            </div>
+                        </div>
+                    @elseif ($advertisement->status === "reject")
+                        <div class="d-flex justify-content-end">
+                            <div class="text-md-right">
+                                <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
+                                    Ditolak
+                                </span>
+                            </div>
+                        </div>
+                    @else
+                        <div class="d-flex justify-content-end">
+                            <div class="text-md-right">
+                                <span class="badge bg-light-success text-success fs-4 px-3 py-2">
+                                    Ditolak
+                                </span>
+                            </div>
+                        </div>
+                    @endif
                 </div>
+
+
+                <div class="mt-5 d-flex justify-content-end">
+                    <a href="{{route('status.detail.iklan')}}" class="btn btn-sm m-1 mt-5" style="background-color: #5D87FF;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
+                            <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
+                        </svg>
+                    </a>
+                    <button class="btn btn-sm m-1 mt-5" style="background-color: #FFD643;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4q0 .375-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z"/></svg>
+                    </button>
+
+                    <form action="{{ route('destroy.iklan' , ['id' => $advertisement->id]) }}" method="POST">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-sm m-1 mt-5" style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/></svg></button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    @empty
+        <div class="d-flex justify-content-center">
+            <div>
+                <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
             </div>
         </div>
-
-        
-        <div class="col-md-12 col-lg-3">
-
-            <div class="d-flex justify-content-end">
-                <div class="text-md-right">
-                    <span class="badge bg-light-danger text-danger fs-4 px-3 py-2">
-                        Belum Dibayar
-                    </span>
-                </div>
-            </div>
-
-            <div class="mt-3 d-flex justify-content-end">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M368.005 272h-96v96h96v-96zm-32-208v32h-160V64h-48v32h-24.01c-22.002 0-40 17.998-40 40v272c0 22.002 17.998 40 40 40h304.01c22.002 0 40-17.998 40-40V136c0-22.002-17.998-40-40-40h-24V64h-48zm72 344h-304.01V196h304.01v212z" fill="#0f4d89"/>
-                </svg>
-                <p class="ms-2"> Apr 25, 2023</p>
-            </div>
-
-            <div class="mt-2 d-flex justify-content-end">
-                <a href="{{route('status.detail.iklan')}}" class="btn btn-sm m-1" style="background-color: #5D87FF;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512">
-                        <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112"/><circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/>
-                    </svg>
-                </a>
-                <button class="btn btn-sm m-1" style="background-color: #FFD643;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h8.925l-2 2H5v14h14v-6.95l2-2V19q0 .825-.587 1.413T19 21zm4-6v-4.25l9.175-9.175q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4q0 .375-.137.738t-.438.662L13.25 15zM21.025 4.4l-1.4-1.4zM11 13h1.4l5.8-5.8l-.7-.7l-.725-.7L11 11.575zm6.5-6.5l-.725-.7zl.7.7z"/></svg>
-                </button>
-
-                <form action="" method="POST">
-                    @method('delete')
-                    @csrf
-                    <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/></svg></button>
-                </form>
-            </div>
+        <div class="text-center">
+            <h4>Tidak ada data</h4>
         </div>
-
-    </div>
+    @endforelse
 
 </div>
 
@@ -137,7 +181,7 @@
 
         </div>
 
-        
+
         <div class="col-md-12 col-lg-3">
 
             <div class="d-flex justify-content-end">
@@ -189,7 +233,7 @@
 
         </div>
 
-        
+
         <div class="col-md-12 col-lg-3">
 
             <div class="d-flex justify-content-end">
@@ -226,7 +270,7 @@
                     <button type="submit" class="btn btn-sm m-1" style="background-color: #C94F4F;"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="30" viewBox="0 0 512 512"><path d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z" fill="#ffffff"/></svg></button>
                 </form>
             </div>
-            
+
         </div>
 
     </div>
@@ -247,7 +291,7 @@
 
         </div>
 
-        
+
         <div class="col-md-12 col-lg-3">
 
             <div class="d-flex justify-content-end">

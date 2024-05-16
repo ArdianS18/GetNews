@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AdvertisementPhotoInterface;
+use App\Enums\AdvertisementStatusEnum;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\AdvertisementRequest;
 use App\Http\Requests\AdvetisementRequest;
@@ -38,7 +39,14 @@ class AdvertisementController extends Controller
 
     public function indexAdmin()
     {
-        return view('pages.admin.iklan.index');
+        $advertisements = $this->advertisement->where('admin');
+        return view('pages.admin.iklan.index', compact('advertisements'));
+    }
+
+    public function advertisementStore()
+    {
+        $advertisements = $this->advertisement->get();
+        return view('pages.user.iklan.status', compact('advertisements'));
     }
     /**
      * Show the form for creating a new resource.
@@ -53,11 +61,10 @@ class AdvertisementController extends Controller
      */
     public function store(AdvertisementRequest $request)
     {
-        $data = $request->validated();
-        $data['user_id'] = auth()->id();
-        $advertisement = $this->advertisement->store($data);
-
-        return to_route('payment.advertisement.show', $advertisement->id)->with('success', trans('alert.alert.add_success'));
+        $data = $this->advertisementService->store($request);
+        $data['status'] = AdvertisementStatusEnum::PENDING->value;
+        $this->advertisement->store($data);
+        return to_route('iklan.status')->with('success', trans('alert.alert.add_success'));
     }
 
     /**
@@ -87,8 +94,10 @@ class AdvertisementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Advertisement $advertisement)
+    public function destroy($id)
     {
-        //
+        // dd($advertisement);
+        $this->advertisement->delete($id);
+        return back();
     }
 }
