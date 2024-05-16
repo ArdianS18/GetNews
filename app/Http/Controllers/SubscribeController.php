@@ -30,10 +30,7 @@ class SubscribeController extends Controller
      */
     public function index()
     {
-        $subCategories = $this->subCategory->get();
-        $categories = $this->category->get();
-
-        return view('pages.user.berlangganan.index', compact('categories', 'subCategories'));
+        return view('pages.user.berlangganan.index');
     }
 
     /**

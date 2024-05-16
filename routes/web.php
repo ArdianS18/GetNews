@@ -195,8 +195,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
 
 Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     // fungsi crud news
-    Route::get('news', [NewsController::class, 'index'])->name('news.index');
-    Route::post('news', [NewsController::class, 'store'])->name('news.store');
+    Route::post('author-news-store', [NewsController::class, 'store'])->name('news.store');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
     Route::get('mynews', [NewsController::class, 'showmynews'])->name('my.news');
@@ -340,9 +339,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
         return view('pages.user.iklan.status-selesa');
     })->name('status.selesai.iklan');
 
-
-    Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
-
     Route::get('pembayaran-iklan', function () {
         return view('pages.user.iklan.pembayaran');
     })->name('user.pembayaran.iklan');
@@ -383,6 +379,9 @@ Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('new
 Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 Route::get('search',[DashboardController::class,'searchNews'])->name('search');
+
+Route::get('subscriber', [SubscribeController::class, 'index'])->name('user.berlangganan');
+
 // Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::prefix('tag')->name('tag.')->group(function(){
