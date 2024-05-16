@@ -33,6 +33,7 @@ class RegisterRequest extends BaseRequest
     {
         return [
             'name.required' => 'Nama mohon untuk diisi',
+            'name.unique' => 'Nama sudah digunakan',
             'email.required' => 'Email mohon untuk diisi',
             'email.email' => 'Mohon email berupa Gmail',
             'email.unique' => 'Email sudah digunakan!!',
