@@ -68,7 +68,8 @@
     <script>
           document.addEventListener("DOMContentLoaded", function() {
             var searchBtn = document.getElementById('search-btn');
-
+            var input = document.getElementById('search-input');
+            input.focus()
             searchBtn.addEventListener('click', function() {
                 window.scrollTo({
                     top: 0,
