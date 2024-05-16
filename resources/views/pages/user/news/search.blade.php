@@ -25,7 +25,8 @@
     <div class="container">
     <div class="row gx-55 gx-5">
         <div class="col-lg-8">
-            <h4 class="mb-3" style="border-bottom: 5px solid #175A95;display:inline-block">Pencarian "{{ $query }}"</h4>
+            <h4 class="mb-3" style="border-bottom: 5px solid #175A95;display:inline-block">Hasil Pencarian "{{ $query }}"</h4>
+            <p>Menampilkan {{ $newsByDate->count() }}</p>
             <div class="row">
                 @forelse ($newsByDate as $item)
                 @php
