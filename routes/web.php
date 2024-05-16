@@ -382,7 +382,7 @@ Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 
 Route::get('subscriber', [SubscribeController::class, 'index'])->name('user.berlangganan');
 
-// Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
+Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::prefix('tag')->name('tag.')->group(function(){
     Route::get('{tag:slug}/', [NewsTagController::class, 'show'])->name('show.user');
