@@ -39,7 +39,8 @@ class AdvertisementController extends Controller
 
     public function indexAdmin()
     {
-        return view('pages.admin.iklan.index');
+        $advertisements = $this->advertisement->where('admin');
+        return view('pages.admin.iklan.index', compact('advertisements'));
     }
 
     public function advertisementStore()

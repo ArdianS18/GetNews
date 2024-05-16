@@ -50,7 +50,7 @@ class RegisterService
     protected function sendVerificationEmail(User $user)
     {
         Notification::send($user, new VerifyEmailNotification($user));
-    }   
+    }
 
     public function registerWithAdmin(RegisterRequest $request): array
     {
@@ -67,7 +67,6 @@ class RegisterService
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'phone_number' => $data['phone_number'],
-            'address' => $data['address'],
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'cv' => $stored_image,
         ];

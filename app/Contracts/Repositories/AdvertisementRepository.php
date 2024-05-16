@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
+use App\Enums\AdvertisementStatusEnum;
 use App\Models\Advertisement;
 use App\Models\Subscribe;
 use Illuminate\Database\QueryException;
@@ -80,6 +81,9 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function where($id): mixed
     {
         return $this->model->query()
+            ->when($id === "admin", function($query) {
+                $query->where('status', AdvertisementStatusEnum::PENDING->value);
+            })
             ->get();
     }
 
