@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use App\Http\Requests\BaseRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends BaseRequest
 {
@@ -16,7 +17,7 @@ class LoginRequest extends BaseRequest
         return [
             'email' => 'required|email',
             'password' => 'required',
-            // 'email_verified_at' => 'required|email',
+            'email_verified_at' => 'required|date'
         ];
     }
 
@@ -26,7 +27,8 @@ class LoginRequest extends BaseRequest
             'email.required' => 'Email idak boleh kosong',
             'email.email' => 'Email harus valid',
             'password' => 'Password tidak boleh kosong',
-            // 'email_verified_at' => 'Email anda belum terferikasi'
+            'email_verified_at.required' => 'Email anda belum terverifikasi. Mohon untuk mengecek email anda',
+            'email_verified_at.date' => 'Format tanggal email_verified_at tidak valid'
         ];
 
     }

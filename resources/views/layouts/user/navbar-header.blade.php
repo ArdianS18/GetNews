@@ -12,10 +12,10 @@
         }
     }
 
+
     body {
         overflow-x: hidden;
     }
-
 
 </style>
 <div class="navbar-area header-one mb-5" id="navbar">
@@ -131,7 +131,7 @@
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
 
                     <div class="option-item">
-                        <button type="button" class="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <button type="button" class="search-btn" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="flaticon-loupe"></i>
                         </button>
                     </div>
@@ -139,8 +139,8 @@
                     <div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <form action="{{route('news.post')}}" method="GET">
-                                    <input type="search" name="search"  class="form-control" placeholder="Search here...." />
+                                <form action="{{route('search')}}" method="GET">
+                                    <input type="search" name="q" id="search-input"  class="form-control" placeholder="Search here...." />
                                     <button type="submit"><i class="fi fi-rr-search"></i></button>
                                 </form>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>
@@ -205,9 +205,9 @@
                                             </form>
                                             @endrole
                                         </li>
-                                    </ul>                                           
+                                    </ul>
                                 </li>
-                         
+
                             </ul>
                         </div>
                         @if (Auth::check() && Auth::user()->roles() == "author")

@@ -223,8 +223,21 @@ class DashboardController extends Controller
         // dd($categories);
         return view('errors.404',compact('categories', 'subCategories'));
     }
+
     
     public function aboutStore(){
         return view('pages.admin.about.index');
+    }
+
+
+    public function searchNews(Request $request){
+        $query  = $request->q;
+        $newsByDate = $this->news->whereDate($request);
+        $categories = $this->category->get();
+        $subCategories = $this->subCategory->get();
+        $totalCategories = $this->category->showWhithCount();
+        $populars = $this->news->getByPopular('up');
+
+        return view('pages.user.news.search',compact('categories', 'subCategories','newsByDate','query','totalCategories','populars'));
     }
 }

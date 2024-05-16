@@ -24,6 +24,7 @@ class LoginService
 
     public function handleLogin(LoginRequest $request)
     {
+        $data = $request->validated();
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
         $user = auth()->user();
         if ($user->roles->pluck('name')[0] == 'author' && $user->author->status == 'reject') {
@@ -31,10 +32,10 @@ class LoginService
             return redirect()->back()->withErrors(trans('auth.author_banned'))->withInput();
         }
 
-        // if (!$user->email_verified_at) {
-        //     auth()->logout();
-        //     return view('auth.verify');
-        // }
+        if (!$user->email_verified_at) {
+            auth()->logout();
+            return back();
+        }
 
             $role = auth()->user()->roles->pluck('name')[0];
             switch ($role) {

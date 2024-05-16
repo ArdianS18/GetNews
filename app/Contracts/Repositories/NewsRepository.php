@@ -486,10 +486,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where(function($query) use ($request) {
-                $query->where('name', 'LIKE', '%' . $request->search . '%')
-                      ->orWhere('content', 'LIKE', '%' . $request->search . '%')
+                $query->where('name', 'LIKE', '%' . $request->q . '%')
+                      ->orWhere('content', 'LIKE', '%' . $request->q . '%')
                       ->orWhereHas('user', function ($query) use ($request) {
-                          $query->where('name', 'LIKE', '%' . $request->search . '%');
+                          $query->where('name', 'LIKE', '%' . $request->q . '%');
                       });
             })
             ->where('status', NewsStatusEnum::ACTIVE->value)
