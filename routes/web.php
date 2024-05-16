@@ -9,6 +9,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentReportController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowersController;
@@ -260,6 +261,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
+    Route::post('comment-report/{comment}', [CommentReportController::class, 'store'])->name('comment.report');
     //author
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
@@ -294,6 +296,7 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('berita-upload', function () {
         return view('pages.user.news.upload');
     })->name('berita.upload');
+
     Route::post('payment-news', [PaymentNewsController::class, 'store'])->name('user.payment.news');
 
     Route::get('status-berita', function () {
@@ -383,7 +386,6 @@ Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews
 Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 
 Route::get('subscriber', [SubscribeController::class, 'index'])->name('user.berlangganan');
-
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::prefix('tag')->name('tag.')->group(function(){
