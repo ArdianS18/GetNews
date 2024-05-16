@@ -340,9 +340,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
         return view('pages.user.iklan.status-selesa');
     })->name('status.selesai.iklan');
 
-
-    Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
-
     Route::get('pembayaran-iklan', function () {
         return view('pages.user.iklan.pembayaran');
     })->name('user.pembayaran.iklan');
@@ -382,6 +379,7 @@ Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.u
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
+Route::get('user-berlangganan', [SubscribeController::class, 'index'])->name('user.berlangganan');
 
 // Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
