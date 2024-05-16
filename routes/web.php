@@ -382,7 +382,7 @@ Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.u
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
 Route::get('{category}', [NewsController::class, 'showCategories'])->name('categories.show.user');
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
-
+Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 // Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::prefix('tag')->name('tag.')->group(function(){

@@ -65,6 +65,18 @@
 
     @include('layouts.user.footer')
     @yield('script')
+    <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            var searchBtn = document.getElementById('search-btn');
+
+            searchBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
