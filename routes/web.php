@@ -195,8 +195,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
 
 Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     // fungsi crud news
-    Route::get('news', [NewsController::class, 'index'])->name('news.index');
-    Route::post('news', [NewsController::class, 'store'])->name('news.store');
+    Route::post('author-news-store', [NewsController::class, 'store'])->name('news.store');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
     Route::get('mynews', [NewsController::class, 'showmynews'])->name('my.news');

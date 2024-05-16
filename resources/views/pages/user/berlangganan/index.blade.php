@@ -1,7 +1,6 @@
 @extends('layouts.user.app')
 @section('style')
 <head>
-    <title>{{ env('APP_NAME') }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="handheldfriendly" content="true" />
@@ -32,6 +31,7 @@
     </style>
 </head>
 @endsection
+
 @section('content')
 <div class="ps-5 pe-5">
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
