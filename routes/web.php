@@ -386,6 +386,9 @@ Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSu
 Route::prefix('tag')->name('tag.')->group(function(){
     Route::get('{tag:slug}/', [NewsTagController::class, 'show'])->name('show.user');
 });
+Route::prefix('{category:slug}')->name('subcategories.')->group(function(){
+    Route::get('{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('show.user');
+});
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
