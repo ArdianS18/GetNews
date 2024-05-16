@@ -6,13 +6,14 @@
                     <img src="{{asset('assets/img/logo-get-media.png')}}" width="200px" alt="Image" />
                     <li></li>
                     <li>
-                        <p class="copyright-text mt-4" style="font-size: 20px">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p>
+                        <p class="copyright-text mt-4">Portal berita terlengkap dengan berita terbaru dan terpopuler.</p>
+                        {{-- <p class="copyright-text mt-4" style="font-size: 20px">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p> --}}
                     </li>
                     <li>
-                    {{-- <ul style="list-style-type: none;" class="p-4"> --}}
+                    {{-- <ul style="list-style-type: none;" class="p-4">
                         <span style="color: #92989F; font-size: 15px;">Pengiklanan</span>
                         <li class="mb-2"><a href="{{route('iklan.biodata')}}" style="color: #FFFFFF">+ Unggah Iklan</a></li>
-                    {{-- </ul> --}}
+                    </ul> --}}
                 </li>
                 </ul>
 
@@ -24,7 +25,7 @@
                     <span style="color: #92989F; font-size: 15px;">Halaman</span>
                     <li class="mb-2"><a href="/" style="color: #FFFFFF">Beranda</a></li>
                     <li class="mb-2"><a href="/aboutus" style="color: #FFFFFF">Tentang Kami</a></li>
-                    <li class="mb-2"><a href="/contact-us" style="color: #FFFFFF">Hubungi Kami</a></li>
+                    <li class="mb-2"><a href="/contact-us" style="color: #985858">Hubungi Kami</a></li>
                     <li class="mb-2"><a href="/author" style="color: #FFFFFF">Penulis</a></li>
                     <li class="mb-2"><a href="/faq" style="color: #FFFFFF">Faq</a></li>
                 </ul>
@@ -41,7 +42,7 @@
             </div>
             <div class="col-lg-4">
                 <ul style="list-style-type: none;" class="p-4">
-                    <span style="color: #92989F; font-size: 15px;">Contact Us</span>
+                    <span style="color: #92989F; font-size: 15px;">Kontak</span>
                     <li class="mb-2"><p>getmedia@gmail.com</p></li>
                     <li class="mb-2">+62 *** **** ****  </li>
                     <li class="mb-2"><span style="color: #92989F; font-size: 15px;">Berlangganaan</span></li>
