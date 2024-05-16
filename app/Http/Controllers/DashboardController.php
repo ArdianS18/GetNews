@@ -223,4 +223,8 @@ class DashboardController extends Controller
         // dd($categories);
         return view('errors.404',compact('categories', 'subCategories'));
     }
+    
+    public function aboutStore(){
+        return view('pages.admin.about.index');
+    }
 }

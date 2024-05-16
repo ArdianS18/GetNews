@@ -178,6 +178,8 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('detail-iklan', function () {
         return view('pages.admin.iklan.detail-iklan');
     })->name('admin.detail.iklan');
+
+    Route::get('about-create', [DashboardController::class, 'aboutStore'])->name('create.about');
 });
 
 
