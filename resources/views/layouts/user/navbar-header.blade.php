@@ -12,10 +12,10 @@
         }
     }
 
+
     body {
         overflow-x: hidden;
     }
-
 
 </style>
 <div class="navbar-area header-one mb-5" id="navbar">
@@ -205,9 +205,9 @@
                                             </form>
                                             @endrole
                                         </li>
-                                    </ul>                                           
+                                    </ul>
                                 </li>
-                         
+
                             </ul>
                         </div>
                         @if (Auth::check() && Auth::user()->roles() == "author")
