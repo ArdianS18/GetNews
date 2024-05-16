@@ -115,7 +115,6 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('faq-list', function () {
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
-
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
@@ -175,7 +174,12 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::put('update-account/{user}', [UserController::class, 'update'])->name('update.account.admin');
     Route::delete('delete-account/{user}', [UserController::class, 'destroy'])->name('delete.account.admin');
 
-    Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
+    Route::get('advertisement-approved', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.approved');
+    Route::get('advertisement-list', function () {
+        return view('pages.admin.iklan.index');
+    })->name('iklan.admin.list');
+
+
     Route::get('detail-iklan', function () {
         return view('pages.admin.iklan.detail-iklan');
     })->name('admin.detail.iklan');
