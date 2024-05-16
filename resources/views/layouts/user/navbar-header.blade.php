@@ -3,11 +3,18 @@
         .logo-mobile {
             width: 150px;
         }
+
     }
 
-body {
-    overflow-x: hidden;
-}
+    @media (max-width: 992px) {
+        .sidebar-toggler{
+            width: 1% !important ;
+        }
+    }
+
+    body {
+        overflow-x: hidden;
+    }
 
 
 </style>
@@ -51,7 +58,7 @@ body {
                     <span class="bottom-bar" style="height: 2px; width: 25px;"></span>
                 </span>
             </a>
-            <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" style="width: 15% !important;" aria-controls="navbarOffcanvas">
+            <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" style="width: 15%" aria-controls="navbarOffcanvas">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
             </div>
 
@@ -145,7 +152,7 @@ body {
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a href="javascript:void(0)" class="nav-link">
-                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="mb-2" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/>
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="mb-2" alt="Image" width="40" height="40" style="min-width: 40px;border-radius: 50%;object-fit:cover;min-height: 40px;"/>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
