@@ -118,8 +118,6 @@
                     @if ($counter < 1)
                         <div class="news-card-four">
                             <div class="news-card-img">
-                                <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                                 <a href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
                                     <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
                                 </a>
