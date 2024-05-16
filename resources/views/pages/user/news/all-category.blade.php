@@ -3,9 +3,16 @@
 @section('content')
 <div class="col-lg-12">
     <div class="breadcrumb-wrap">
-        <h2 class="breadcrumb-title">{{ $category->name }}</h2>
+        <h2 class="breadcrumb-title">{{ $category->name }}
+            @if ($data === "trending")
+                - Trending
+            @else
+                - Terbaru
+            @endif
+        </h2>
         <ul class="breadcrumb-menu list-style">
             <li><a href="/">Home</a></li>
+            <li><p>All</p></li>
             <li>{{ $category->name }}</li>
         </ul>
     </div>
@@ -15,34 +22,32 @@
     <div class="container">
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
-                <div class="row justify-content-center">
-                    @forelse ($newsCategories as $newsCategory)
+                <div class="mb-5">
+                    @forelse ($trending as $tren)
                         @php
-                            $dateParts = date_parse($newsCategory->news->upload_date);
+                            $dateParts = date_parse($tren->upload_date);
                         @endphp
-
                         <div class="news-card-five">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                    <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="Image" height="140" width="100%" />
+                                <a href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
+                                    <img src="{{ asset('storage/' . $tren->photo) }}" alt="Image" height="140" width="100%" />
                                 </a>
-                                <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $newsCategory->news->newsCategories[0]->category->name }}</a>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $tren->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $tren->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $tren->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                        {!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...')  !!}
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $tren->name }}" href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
+                                        {!! Illuminate\Support\Str::limit($tren->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsCategory->news->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($tren->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $tren->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
-                       
                     @empty
                         <div class="d-flex justify-content-center">
                             <div>
@@ -54,78 +59,20 @@
                         </div>
                     @endforelse
                 </div>
-                
-                <hr>
-
-                <div class="mb-5">
-                    <div class="d-flex justify-content-between mb-5">
-                        <h3>Trending Now</h3>
-                        <a href="">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
-                    </div>
- 
-                    <div class="news-card-five">
-                        <div class="news-card-img">
-                            <a href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="Image" height="140" width="100%" />
-                            </a>
-                            <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
-                                class="news-cat">{{ $newsCategory->news->newsCategories[0]->category->name }}</a>
-                        </div>
-                        <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                    {!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...')  !!}
-                                </a>
-                            </h3>
-                            <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a
-                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsCategory->news->created_at)->translatedFormat('d F Y') }}</a>
-                                </li>
-                                <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views_count }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center item-center d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
-                    <h5 class="mt-5">Iklan</h5>
-                </div>
-
-                <div class="mb-5 mt-5">
-                    <div class="d-flex justify-content-between mb-5">
-                        <h3>Terbaru</h3>
-                        <a href="">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
-                    </div>
- 
-                    <div class="news-card-five">
-                        <div class="news-card-img">
-                            <a href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                <img src="{{ asset('storage/' . $newsCategory->news->photo) }}" alt="Image" height="140" width="100%" />
-                            </a>
-                            <a href="{{ route('categories.show.user', ['category' => $newsCategory->news->newsCategories[0]->category->slug]) }}"
-                                class="news-cat">{{ $newsCategory->news->newsCategories[0]->category->name }}</a>
-                        </div>
-                        <div class="news-card-info">
-                            <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newsCategory->news->name }}" href="{{ route('news.user', ['news' => $newsCategory->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                    {!! Illuminate\Support\Str::limit($newsCategory->news->name, $limit = 50, $end = '...')  !!}
-                                </a>
-                            </h3>
-                            <ul class="news-metainfo list-style">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a
-                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($newsCategory->news->created_at)->translatedFormat('d F Y') }}</a>
-                                </li>
-                                <li><i class="fi fi-rr-eye"></i>{{ $newsCategory->news->views_count }}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
                 <ul class="page-nav list-style text-center mt-20">
-                    <li><a href="{{ $newsCategories->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-                    @for ($i = 1; $i <= $newsCategories->lastPage(); $i++)
-                    <li><a href="{{ $newsCategories->url($i) }}" class="btn btn-black {{ $newsCategories->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                    <li><a href="{{ $trending->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
+
+                    @for ($i = 1; $i <= $trending->lastPage(); $i++)
+                        <li><a href="{{ $trending->url($i) }}" class="btn btn-black {{ $trending->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
                     @endfor
-                    <li><a href="{{ $newsCategories->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
+
+                    <li><a href="{{ $trending->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
                 </ul>
+
+                <div class="text-center item-center d-flex justify-content-center mt-4" style="background-color:#F6F6F6; width:100%;height:200px;">
+                    <h5 class="mt-5">Iklan</h5>
+                </div>
             </div>
 
             <div class="col-lg-4">

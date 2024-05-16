@@ -99,7 +99,7 @@
                     <a class="sidebar-link {{ request()->routeIs('profile.berita.create' ? 'active' : '') }}"
                         href="{{route('profile.berita.create')}}" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M11 13H5v-2h6V5h2v6h6v2h-6v6h-2z"/></svg>
-                        <span class="hide-menu">Upload Berita</span>
+                        <span class="hide-menu">Upload Artkel</span>
                     </a>
                 </li>
 

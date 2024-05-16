@@ -299,14 +299,14 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('riwayat-berita', function () {
         return view('pages.user.news.history');
     })->name('user.history.news');
+
     Route::get('iklan-upload', function () {
         return view('pages.user.iklan.pengajuan');
     })->name('iklan.pengajuan');
 
-    Route::get('status-iklan', function () {
-        return view('pages.user.iklan.status');
-    })->name('iklan.status');
-
+    Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
+    Route::get('status-iklan', [AdvertisementController::class, 'advertisementStore'])->name('iklan.status');
+    Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
 
     Route::get('iklan-biodata', function () {
         return view('pages.user.iklan.upload');
@@ -319,7 +319,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('status-detail-berita', function () {
         return view('pages.user.news.status-berita');
     })->name('status.detail.berita');
-    Route::post('iklan-upload', [AdvertisementController::class, 'store'])->name('advertisement.store');
 
     // Route::get('payment-upload', function(){
     //     return view('pages.user.iklan.pembayaran');
@@ -391,6 +390,4 @@ Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
 
-Route::get('all-category', [NewsController::class, 'showAllCategories'])->name('all.category');
-
-Route::get('error',[DashboardController::class,'notFound'])->name('not-found');
+Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->name('category.all');

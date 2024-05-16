@@ -523,7 +523,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->take(1);
     }
 
-    public function newsCategorySearch($category, $query, mixed $data): mixed
+    public function newsCategorySearch($category, $query, mixed $data, $hal): mixed
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
@@ -539,6 +539,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->orderByDesc('news_has_likes_count');
             })
             ->withCount('views')
-            ->paginate(5);
+            ->paginate($hal);
     }
 }

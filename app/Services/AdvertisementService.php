@@ -48,10 +48,10 @@ class AdvertisementService implements ShouldHandleFileUpload, CustomUploadValida
      */
     public function store(AdvertisementRequest $request)
     {
-        // dd($request);
         $data = $request->validated();
-
-        $image = ImageCompressing::process( $request->file('photo'),UploadDiskEnum::ADVERTISEMENT->value);
+        $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+        $image = $this->upload(UploadDiskEnum::ADVERTISEMENT->value, $request->file('photo'));
+        // $image = ImageCompressing::process( $request->file('photo'), UploadDiskEnum::ADVERTISEMENT->value);
 
         return [
             'user_id' => auth()->user()->id,
@@ -62,8 +62,6 @@ class AdvertisementService implements ShouldHandleFileUpload, CustomUploadValida
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
             'url' => $data['url'],
-            'advertisement_id' => $data['advertisement_id'],
-            'payment_method' => $data['payment_method'],
         ];
     }
 

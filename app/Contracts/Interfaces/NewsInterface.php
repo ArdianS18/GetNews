@@ -45,5 +45,5 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 
     public function findBySlug($slug): mixed;
     public function newsCategory($category) : mixed;
-    public function newsCategorySearch($category, mixed $query, mixed $data) : mixed;
+    public function newsCategorySearch($category, mixed $query, mixed $data, $hal) : mixed;
 }

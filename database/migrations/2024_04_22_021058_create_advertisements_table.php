@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('advertisements', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained();
             $table->enum('type' , ['foto', 'vidio']);
-            $table->enum('page', ['dashboard','news_post', 'sub_category']);
+            $table->enum('page', ['dashboard','news_post','sub_category']);
             $table->enum('position', ['full_horizontal', 'horizontal', 'vertikal']);
             $table->date('start_date');
             $table->date('end_date');
             $table->string('url');
             $table->string('photo');
+            $table->enum('status', ['pending', 'reject', 'accepted']);
             $table->timestamps();
         });
     }
