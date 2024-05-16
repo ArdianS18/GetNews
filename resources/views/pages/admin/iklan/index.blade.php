@@ -104,7 +104,7 @@
 
         function get(page) {
             $.ajax({
-                url: "{{ route('approved-news.index') }}?page=" + page,
+                url: "{{ route('iklan.admin.approved') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data: {
@@ -141,10 +141,13 @@
             return `
             <tr>
                 <td>${index + 1}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>${data.type}</td>
+                <td>${data.page}</td>
+                <td>${data.position}</td>
+                <td>${data.position}</td>
+                <td>${data.start_date}</td>
+                <td>${data.end_date}</td>
+                <td>${data.url}</td>
                 <td>
                     <div class="d-flex gap-2">
                         <form action="" method="POST">
