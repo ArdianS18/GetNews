@@ -199,7 +199,6 @@
                         <div id="chart-writer">
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
