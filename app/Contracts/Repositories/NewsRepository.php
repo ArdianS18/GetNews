@@ -448,6 +448,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
         $year = date('Y');
         $result = $this->model->query()
+            ->withCount('views')
             ->select(
                 DB::raw('MONTH(created_at) as month'),
                 DB::raw('WEEK(created_at) as week'),
@@ -459,6 +460,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->groupBy('month', 'week')
             ->orderBy('month')
             ->orderBy('week')
+            ->orderBy('views_count')
             ->get();
 
             $monthlyData = [];
