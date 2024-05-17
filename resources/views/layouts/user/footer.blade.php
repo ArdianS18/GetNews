@@ -25,7 +25,7 @@
                     <span style="color: #92989F; font-size: 15px;">Halaman</span>
                     <li class="mb-2"><a href="/" style="color: #FFFFFF">Beranda</a></li>
                     <li class="mb-2"><a href="/aboutus" style="color: #FFFFFF">Tentang Kami</a></li>
-                    <li class="mb-2"><a href="/contact-us" style="color: #985858">Hubungi Kami</a></li>
+                    <li class="mb-2"><a href="/contact-us" style="color: #FFFFFF">Hubungi Kami</a></li>
                     <li class="mb-2"><a href="/author" style="color: #FFFFFF">Penulis</a></li>
                     <li class="mb-2"><a href="/faq" style="color: #FFFFFF">Faq</a></li>
                 </ul>
