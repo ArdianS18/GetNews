@@ -452,6 +452,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->select(
                 DB::raw('MONTH(news.created_at) as month'),
                 DB::raw('WEEK(news.created_at) as week'),
+                DB::raw('COUNT(*) as news_count'),
                 DB::raw('COUNT(DISTINCT views.news_id) as views_count')
             )
             ->where('news.user_id', auth()->user()->id)
