@@ -200,6 +200,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 
     Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
+    Route::delete('delete-iklan-admin/{id}', [AdvertisementController::class, 'delete'])->name('admin.destroy.iklan');
 });
 
 Route::middleware(['auth', 'role:author', 'verified'])->group(function () {

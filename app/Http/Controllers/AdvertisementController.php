@@ -114,4 +114,17 @@ class AdvertisementController extends Controller
         $this->advertisement->delete($id);
         return back();
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function delete($id)
+    {
+        try {
+            $this->advertisement->delete($id);
+            return ResponseHelper::success(null, trans('alert.delete_success'));
+        } catch (\Exception $e) {
+            return ResponseHelper::error(trans('alert.delete_error'), 500);
+        }
+    }
 }

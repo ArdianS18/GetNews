@@ -36,7 +36,7 @@
                                     {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...')  !!}
                                 </a></h3>
                                 <p>
-                                    {!! Illuminate\Support\Str::limit(strip_tags($news->content), 50, '...') !!}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($news->content), 20, '...') !!}
                                 </p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
