@@ -549,4 +549,34 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->paginate($hal);
     }
+
+    public function newsSubCategory($subCategory): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('newsSubCategories', 'sub_category_id', $subCategory)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->get()
+            ->take(1);
+    }
+
+    public function newsSubCategorySearch($subCategory, $query, mixed $data, $hal): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->when($query, function($search) use ($query){
+                $search->where('name', 'LIKE', '%'.$query.'%');
+            })
+            ->whereRelation('newsSubCategories', 'sub_category_id', $subCategory)
+            ->when($data === "terbaru", function($query) {
+                $query->latest();
+            })
+            ->when($data === "trending", function($query) {
+                $query->withCount('newsHasLikes');
+                $query->orderByDesc('news_has_likes_count');
+            })
+            ->withCount('views')
+            ->paginate($hal);
+    }
 }

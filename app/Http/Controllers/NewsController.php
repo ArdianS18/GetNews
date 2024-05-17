@@ -330,6 +330,26 @@ class NewsController extends Controller
         return view('pages.user.news.category', compact('trending','new_news','popular','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
 
+    public function showSubCategories($category,$subCategory,Request $request)
+    {
+
+        $subCategory = $this->subCategory->showWithSlug($subCategory);
+        $subCategoryId = $subCategory->id;
+
+        $categories = $this->category->get();
+        $totalCategories = $this->category->showWhithCount();
+        $subCategories = $this->subCategory->get();
+
+        $query = $request->input('search');
+        $newsSubCategories = $this->newsSubCategory->search($subCategory->id, $query);
+        $news = $this->news->showWhithCount();
+
+        $popular = $this->news->newsCategory($subCategoryId);
+        $new_news = $this->news->newsCategorySearch($subCategory->id, $query, 'terbaru', '5');
+        $trending = $this->news->newsCategorySearch($subCategory->id, $query, 'trending', '5');
+        return view('pages.user.news.subcategory', compact('trending','new_news','popular','totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
+    }
+
     public function showAllCategories($slug, $data, Request $request, NewsCategory $newsCategory){
         $request->merge([
             'name' => $newsCategory->id,
@@ -351,24 +371,6 @@ class NewsController extends Controller
         $trending = $this->news->newsCategorySearch($category->id, $query, $data, '10');
         return view('pages.user.news.all-category', compact('popular', 'data','trending','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
-
-    public function showSubCategories($category,$subCategory,Request $request)
-    {
-
-        $subCategory = $this->subCategory->showWithSlug($subCategory);
-
-        $categories = $this->category->get();
-        $totalCategories = $this->category->showWhithCount();
-        $subCategories = $this->subCategory->get();
-
-        $query = $request->input('search');
-        $newsSubCategories = $this->newsSubCategory->search($subCategory->id, $query);
-
-        $news = $this->news->showWhithCount();
-
-        return view('pages.user.news.subcategory', compact('totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
-    }
-
 
 
     /**
