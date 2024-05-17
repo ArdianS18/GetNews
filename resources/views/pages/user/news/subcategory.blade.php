@@ -60,7 +60,7 @@
                     <div class="mb-5">
                         <div class="d-flex justify-content-between mb-5">
                             <h3>Trending</h3>
-                            <a href="{{ route('category.all', ['slug' => $subCategory->slug, 'data' => 'trending'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
+                            <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'trending'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
                         </div>
                         @forelse ($trending as $tren)
                             @php
@@ -71,8 +71,8 @@
                                     <a href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         <img src="{{ asset('storage/' . $tren->photo) }}" alt="Image" height="140" width="100%" />
                                     </a>
-                                    <a data-toggle="tooltip" data-placement="top" title="{{ $tren->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $tren->newsCategories[0]->category->slug]) }}"
-                                        class="news-cat">{{ $tren->newsCategories[0]->category->name }}</a>
+                                    <a data-toggle="tooltip" data-placement="top" title="{{ $tren->newsCategories[0]->category->name }}" href="{{ route('subcategories.show.user', ['category' => $tren->newsCategories[0]->category->slug,'subCategory' => $tren->newsSubCategories[0]->subCategory->slug ]) }}"
+                                        class="news-cat">{{ $tren->newsSubCategories[0]->subCategory->name }}</a>
                                 </div>
                                 <div class="news-card-info">
                                     <h3><a data-toggle="tooltip" data-placement="top" title="{{ $tren->name }}" href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
@@ -106,7 +106,7 @@
                     <div class="mb-5 mt-5">
                         <div class="d-flex justify-content-between mb-5">
                             <h3>Terbaru</h3>
-                            <a href="{{ route('category.all', ['slug' => $subCategory->slug, 'data' => 'terbaru'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
+                            <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'terbaru'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
                         </div>
 
                         @forelse ($new_news as $new)
@@ -118,8 +118,8 @@
                                     <a href="{{ route('news.user', ['news' => $new->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         <img src="{{ asset('storage/' . $new->photo) }}" alt="Image" height="140" width="100%" />
                                     </a>
-                                    <a data-toggle="tooltip" data-placement="top" title="{{ $new->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $new->newsCategories[0]->category->slug]) }}"
-                                        class="news-cat">{{ $new->newsCategories[0]->category->name }}</a>
+                                    <a data-toggle="tooltip" data-placement="top" title="{{ $new->newsCategories[0]->category->name }}" href="{{ route('subcategories.show.user', ['category' => $new->newsCategories[0]->category->slug,'subCategory' => $new->newsSubCategories[0]->subCategory->slug ]) }}"
+                                        class="news-cat">{{ $new->newsSubCategories[0]->subCategory->name }}</a>
                                 </div>
                                 <div class="news-card-info">
                                     <h3><a data-toggle="tooltip" data-placement="top" title="{{ $new->name }}" href="{{ route('news.user', ['news' => $new->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">

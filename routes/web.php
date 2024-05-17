@@ -406,3 +406,4 @@ Route::get('load-coin', function () {
 });
 
 Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->name('category.all');
+Route::get('allsub/{subslug}/{data}', [NewsController::class, 'showAllSubCategories'])->name('subCategory.all');

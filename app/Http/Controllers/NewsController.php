@@ -350,7 +350,8 @@ class NewsController extends Controller
         return view('pages.user.news.subcategory', compact('trending','new_news','popular','totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
     }
 
-    public function showAllCategories($slug, $data, Request $request, NewsCategory $newsCategory){
+    public function showAllCategories($slug, $data, Request $request, NewsCategory $newsCategory)
+    {
         $request->merge([
             'name' => $newsCategory->id,
         ]);
@@ -371,6 +372,29 @@ class NewsController extends Controller
         $trending = $this->news->newsCategorySearch($category->id, $query, $data, '10');
         return view('pages.user.news.all-category', compact('popular', 'data','trending','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
     }
+
+    public function showAllSubCategories($subslug, $data, Request $request, NewsSubCategory $newsSubCategory)
+    {
+        $request->merge([
+            'name' => $newsSubCategory->id,
+        ]);
+
+        $category = $this->subCategory->showWithSlug($subslug);
+        $categoryId = $category->id;
+        $subCategory = $this->subCategory->where($categoryId);
+
+        $categories = $this->category->get();
+        $totalCategories = $this->category->showWhithCount();
+        $subCategories = $this->subCategory->get();
+        $news = $this->news->showWhithCount();
+
+        $query = $request->input('search');
+        $newsCategories = $this->newsCategory->search($category->id, $query);
+        $trending = $this->news->newsSubCategorySearch($category->id, $query, $data, '10');
+        return view('pages.user.news.all-subcategory', compact('data','trending','news', 'totalCategories','subCategories','categories','category', 'subCategory', 'newsCategories'));
+    }
+
+
 
 
     /**
