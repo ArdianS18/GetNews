@@ -345,8 +345,8 @@ class NewsController extends Controller
         $news = $this->news->showWhithCount();
 
         $popular = $this->news->newsCategory($subCategoryId);
-        $new_news = $this->news->newsCategorySearch($subCategory->id, $query, 'terbaru', '5');
-        $trending = $this->news->newsCategorySearch($subCategory->id, $query, 'trending', '5');
+        $new_news = $this->news->newsSubCategorySearch($subCategory->id, $query, 'terbaru', '5');
+        $trending = $this->news->newsSubCategorySearch($subCategory->id, $query, 'trending', '5');
         return view('pages.user.news.subcategory', compact('trending','new_news','popular','totalCategories','subCategories','categories','subCategory','newsSubCategories', 'news'));
     }
 
