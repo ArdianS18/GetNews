@@ -49,13 +49,15 @@
             <tr>
                 <th style="background-color: #D9D9D9;">No</th>
                 <th style="background-color: #D9D9D9;">Jenis Iklan</th>
+                <th style="background-color: #D9D9D9;">Halaman</th>
+                <th style="background-color: #D9D9D9;">Posisi Iklan</th>
                 <th style="background-color: #D9D9D9;">Tanggal Awal</th>
                 <th style="background-color: #D9D9D9;">Tanggal Akhir</th>
-                <th style="background-color: #D9D9D9;">Halaman</th>
+                <th style="background-color: #D9D9D9;">Url</th>
                 <th style="background-color: #D9D9D9;">Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="data">
         </tbody>
     </table>
 
@@ -123,6 +125,7 @@
                     var perpage = response.data.data
                     $('#loading').html("")
                     if (response.data.data.length > 0) {
+                        console.log(response.data.data);
                         $.each(response.data.data, function(index, data) {
                             $('#data').append(rowTag(index, data))
                         })
@@ -133,17 +136,18 @@
                 }
             })
         }
+        
+        function limitString(str, maxLength) {
+            return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
+        }
 
         function rowTag(index, data) {
-            function limitString(str, maxLength) {
-                return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
-            }
+            console.log(data);
             return `
             <tr>
                 <td>${index + 1}</td>
                 <td>${data.type}</td>
                 <td>${data.page}</td>
-                <td>${data.position}</td>
                 <td>${data.position}</td>
                 <td>${data.start_date}</td>
                 <td>${data.end_date}</td>
