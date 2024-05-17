@@ -16,6 +16,9 @@
     }
 </style>
 @endsection
+    <head>
+        <title>User | Upload News</title>
+    </head>
 @section('content')
 <div class="">
 
