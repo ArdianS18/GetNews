@@ -414,33 +414,32 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    // ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'))
+    // ->leftJoin('views', 'news.id', '=', 'views.news_id')
+    // ->whereYear('news.created_at', $year)
+    // ->groupBy('month')
+    // ->orderBy('month')
+
     public function showNewsStatistic(): mixed
     {
         $year = date('Y');
-        $result =  $this->model->query()
-            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'), DB::raw('COUNT(followers.author_id) as followers_count'))
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->leftJoin('followers', 'news.user_id', '=', 'followers.author_id')
-            ->whereYear('news.created_at', $year)
-            ->groupBy('month')
+        $result = $this->model->query()
+            ->select(
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('WEEK(created_at) as week'),
+                DB::raw('COUNT(*) as news_count')
+            )
+            ->where('user_id', auth()->user()->id)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereYear('created_at', $year)
+            ->groupBy('month', 'week')
             ->orderBy('month')
+            ->orderBy('week')
             ->get();
 
-
         $monthlyData = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $found = false;
-            foreach ($result as $row) {
-                if ($row->month == $i) {
-                    $newsCount = $row->news_count;
-                    $monthlyData[] = $newsCount;
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                $monthlyData[] = 0;
-            }
+        foreach ($result as $row) {
+            $monthlyData[$row->month][$row->week] = $row->news_count;
         }
 
         return $monthlyData;

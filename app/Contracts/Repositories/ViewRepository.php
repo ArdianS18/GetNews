@@ -106,6 +106,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
         ->orderBy('total', 'desc')
         ->take(9)
         ->get();
-            return $trendingNews;
+        
+        return $trendingNews;
     }
 }
