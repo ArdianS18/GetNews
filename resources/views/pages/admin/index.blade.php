@@ -197,7 +197,6 @@
                     <div class="col-12">
                         <h4>Statistik Banyak Berita</h4>
                         <div id="chart-writer">
-
                         </div>
                     </div>
 
@@ -414,7 +413,7 @@
     chart.render();
 
 
-    var visitor = <?php echo json_encode($visitorChart); ?>;
+    var visitor = <?php echo json_encode($news2); ?>;
     var monthlVisitorString = JSON.stringify(visitor);
     var monthlyDataVisitor = JSON.parse(monthlVisitorString);
 
