@@ -450,7 +450,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $year = date('Y');
         $result = $this->model->query()
             ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
-            // ->whereYear('news.created_at', $year)
             ->groupBy('month')
             ->orderBy('month')
             ->get();
