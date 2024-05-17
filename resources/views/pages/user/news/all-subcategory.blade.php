@@ -12,7 +12,6 @@
         </h2>
         <ul class="breadcrumb-menu list-style">
             <li><a href="/">Home</a></li>
-            <li><p>All</p></li>
             <li>{{ $category->name }}</li>
         </ul>
     </div>
@@ -32,8 +31,8 @@
                                 <a href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $tren->photo) }}" alt="Image" height="140" width="100%" />
                                 </a>
-                                <a data-toggle="tooltip" data-placement="top" title="{{ $tren->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $tren->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $tren->newsCategories[0]->category->name }}</a>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $tren->newsCategories[0]->category->name }}" href="{{ route('subcategories.show.user', ['category' => $tren->newsCategories[0]->category->slug,'subCategory' => $tren->newsSubCategories[0]->subCategory->slug ]) }}"
+                                    class="news-cat">{{ $tren->newsSubCategories[0]->subCategory->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $tren->name }}" href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
