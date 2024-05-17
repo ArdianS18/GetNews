@@ -422,6 +422,30 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showNewsStatistic(): mixed
     {
+        // $result = $this->model->query()
+        //     ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
+        //     ->groupBy('month')
+        //     ->orderBy('month')
+        //     ->get();
+
+        // $monthlyData = [];
+        // for ($i = 1; $i <= 12; $i++) {
+        //     $found = false;
+        //     foreach ($result as $row) {
+        //         if ($row->month == $i) {
+        //             $newsCount = $row->news_count;
+        //             $monthlyData[] = $newsCount;
+        //             $found = true;
+        //             break;
+        //         }
+        //     }
+        //     if (!$found) {
+        //         $monthlyData[] = 0;
+        //     }
+        // }
+
+        // return $monthlyData;
+
         $year = date('Y');
         $result = $this->model->query()
             ->select(
@@ -449,6 +473,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         $year = date('Y');
         $result = $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
             ->groupBy('month')
             ->orderBy('month')
