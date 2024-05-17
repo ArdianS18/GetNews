@@ -40,7 +40,6 @@ class AdvertisementController extends Controller
 
     public function indexAdmin(Request $request, Advertisement $advertisement)
     {
-
         if ($request->has('page')) {
             $advertisement = $this->advertisement->customPaginate2($request, 10);
             $data['paginate'] = [

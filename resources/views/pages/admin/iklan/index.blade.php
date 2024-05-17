@@ -55,7 +55,7 @@
                 <th style="background-color: #D9D9D9;">Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="data">
         </tbody>
     </table>
 

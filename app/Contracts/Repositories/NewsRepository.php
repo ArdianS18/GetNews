@@ -487,10 +487,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where(function($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%')
-                      ->orWhere('content', 'LIKE', '%' . $request->q . '%')
-                      ->orWhereHas('user', function ($query) use ($request) {
-                          $query->where('name', 'LIKE', '%' . $request->q . '%');
-                      });
+                    ->orWhere('content', 'LIKE', '%' . $request->q . '%')
+                    ->orWhereHas('user', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->q . '%');
+                });
+            })
+            ->when($request->opsi, function($query) use ($request) {
+                $query->when($request->opsi === "terbaru", function($opsi){
+                    $opsi->latest();
+                });
+                $query->when($request->opsi === "terlama", function($opsi){
+                    $opsi->oldest();
+                });
             })
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('upload_date', '<=', Carbon::now())

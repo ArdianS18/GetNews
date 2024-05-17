@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReportController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowersController;
@@ -179,12 +180,13 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         return view('pages.admin.iklan.index');
     })->name('iklan.admin.list');
 
-
     Route::get('detail-iklan', function () {
         return view('pages.admin.iklan.detail-iklan');
     })->name('admin.detail.iklan');
 
     Route::get('about-create', [DashboardController::class, 'aboutStore'])->name('create.about');
+    Route::post('contact-about-create', [ContactController::class, 'store'])->name('contact.create.about');
+    Route::put('contact-about-update/{contact}', [ContactController::class, 'update'])->name('contact.update.about');
 });
 
 

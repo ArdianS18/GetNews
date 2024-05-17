@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             SubCategorySeeder::class,
             SocialMediaSeeder::class,
             SloganSeeder::class,
-            ContactSeeder::class
         ]);
     }
 }

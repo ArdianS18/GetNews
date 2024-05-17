@@ -11,4 +11,5 @@ enum UploadDiskEnum: string
     case ADVERTISEMENT = 'advertisement';
     case ADVERTISEMENT_PHOTO = 'advertisement_photo';
     case CONTENT = 'content';
+    case LOGO = 'logo';
 }

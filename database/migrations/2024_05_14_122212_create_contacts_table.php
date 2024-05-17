@@ -13,9 +13,15 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('content');
-            $table->enum('status', ['active', 'nonactive']);
+            $table->string('logo');
+            $table->string('slogan');
+            $table->string('email');
+            $table->string('phone_number');
+            $table->string('address');
+            $table->string('url_facebook');
+            $table->string('url_twitter');
+            $table->string('url_instagram');
+            $table->string('url_linkedin');
             $table->timestamps();
         });
     }
