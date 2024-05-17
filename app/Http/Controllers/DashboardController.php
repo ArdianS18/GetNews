@@ -80,8 +80,9 @@ class DashboardController extends Controller
         $news = $this->news->getAllNews();
         $categories = $this->category->showWhithCount();
         $news2 = $this->news->showCountMonth();
+        dd($news2);
         $newsCategory = $this->newsCategory->trending();
-        
+
         $visitor = $this->visitor->get()->count();
         $visitorChart = $this->visitor->countChart();
 
