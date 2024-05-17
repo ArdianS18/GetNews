@@ -461,10 +461,21 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->orderBy('week')
             ->get();
 
-        $monthlyData = [];
-        foreach ($result as $row) {
-            $monthlyData[$row->month][$row->week] = $row->news_count;
-        }
+            $monthlyData = [];
+            for ($i = 1; $i <= 12; $i++) {
+                $found = false;
+                foreach ($result as $row) {
+                    if ($row->month == $i) {
+                        $newsCount = $row->news_count;
+                        $monthlyData[] = $newsCount;
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $monthlyData[] = 0;
+                }
+            }
 
         return $monthlyData;
     }
