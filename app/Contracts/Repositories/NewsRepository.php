@@ -448,19 +448,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
         $year = date('Y');
         $result = $this->model->query()
-            ->withCount('views')
+            ->leftJoin('views', 'news.id', '=', 'views.news_id')
             ->select(
-                DB::raw('MONTH(created_at) as month'),
-                DB::raw('WEEK(created_at) as week'),
-                DB::raw('COUNT(*) as news_count')
+                DB::raw('MONTH(news.created_at) as month'),
+                DB::raw('WEEK(news.created_at) as week'),
+                DB::raw('COUNT(DISTINCT views.news_id) as views_count')
             )
-            ->where('user_id', auth()->user()->id)
-            ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->whereYear('created_at', $year)
+            ->where('news.user_id', auth()->user()->id)
+            ->where('news.status', NewsStatusEnum::ACTIVE->value)
+            ->whereYear('news.created_at', $year)
             ->groupBy('month', 'week')
             ->orderBy('month')
             ->orderBy('week')
-            ->orderBy('views_count')
             ->get();
 
             $monthlyData = [];
