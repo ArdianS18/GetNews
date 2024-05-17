@@ -413,7 +413,7 @@
     chart.render();
 
 
-    var visitor = <?php echo json_encode($news2); ?>;
+    var visitor = <?php echo json_encode($visitorChart); ?>;
     var monthlVisitorString = JSON.stringify(visitor);
     var monthlyDataVisitor = JSON.parse(monthlVisitorString);
 
