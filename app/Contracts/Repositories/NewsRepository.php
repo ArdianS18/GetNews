@@ -418,7 +418,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->withCount('views')
-            ->whereBetween('created_at', [now()->subDays(7), now()])
             ->orderByDesc('views_count')
             ->take(3)
             ->get();
