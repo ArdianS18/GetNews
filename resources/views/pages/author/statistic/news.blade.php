@@ -181,72 +181,7 @@
                             </div>
                         </div>
                     @endforelse
-                    {{-- <div class="d-flex gap-3 mb-3">
-                        <div class="my-auto">
-                            <span class="fs-5 badge bg-light-warning text-warning">
-                                2
-                            </span>
-                        </div>
-                        <div class="" style="max-width: 540px;">
-                            <div class="row g-2">
-                                <div class="col-md-4">
-                                    <img src="{{ asset('assets/img/news/news-1.webp') }}" style="width: 100%; height: auto;"
-                                        alt="">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body p-2">
-                                        <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                        </p>
-                                        <div class="d-flex gap-3 align-items-center ms-0">
-                                            <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="15"
-                                                    height="15" viewBox="0 0 2048 2048">
-                                                    <path fill="#0f4d8a"
-                                                        d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                            <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                    height="20" viewBox="0 0 24 24">
-                                                    <path fill="#0f4d8a"
-                                                        d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex gap-3 mb-3">
-                        <div class="my-auto">
-                            <span class="fs-5 badge bg-light-primary text-primary">
-                                3
-                            </span>
-                        </div>
-                        <div class="" style="max-width: 540px;">
-                            <div class="row g-2">
-                                <div class="col-md-4">
-                                    <img src="{{ asset('assets/img/news/news-1.webp') }}"
-                                        style="width: 100%; height: auto;" alt="">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body p-2">
-                                        <p class="card-text">Lorem ipsum koakwi kkoalk coeocnoa olawok acec
-                                        </p>
-                                        <div class="d-flex gap-3 align-items-center ms-0">
-                                            <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg"
-                                                    width="15" height="15" viewBox="0 0 2048 2048">
-                                                    <path fill="#0f4d8a"
-                                                        d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                </svg><small style="color: #0f4d8a"> Apr 25, 2023</small></p>
-                                            <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                    height="20" viewBox="0 0 24 24">
-                                                    <path fill="#0f4d8a"
-                                                        d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                </svg><small style="color: #0f4d8a"> 1.203</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+
                 </div>
             </div>
         </div>

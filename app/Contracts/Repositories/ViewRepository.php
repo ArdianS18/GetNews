@@ -95,7 +95,6 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     public function trending(): mixed
     {
-
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
         $trendingNews = $this->model->query()
@@ -106,7 +105,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
         ->orderBy('total', 'desc')
         ->take(9)
         ->get();
-        
+
         return $trendingNews;
     }
 }

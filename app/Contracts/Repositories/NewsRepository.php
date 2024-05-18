@@ -414,71 +414,37 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    // ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'))
-    // ->leftJoin('views', 'news.id', '=', 'views.news_id')
-    // ->whereYear('news.created_at', $year)
-    // ->groupBy('month')
-    // ->orderBy('month')
-
     public function showNewsStatistic(): mixed
     {
-        // $result = $this->model->query()
-        //     ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
-        //     ->groupBy('month')
-        //     ->orderBy('month')
-        //     ->get();
+        $dailyStats = [];
+        $weeklyStats = [];
 
-        // $monthlyData = [];
-        // for ($i = 1; $i <= 12; $i++) {
-        //     $found = false;
-        //     foreach ($result as $row) {
-        //         if ($row->month == $i) {
-        //             $newsCount = $row->news_count;
-        //             $monthlyData[] = $newsCount;
-        //             $found = true;
-        //             break;
-        //         }
-        //     }
-        //     if (!$found) {
-        //         $monthlyData[] = 0;
-        //     }
-        // }
+        for ($day = 0; $day < 7; $day++) {
+            $date = now()->startOfWeek()->addDays($day);
+            $topNews = $this->model->query()
+                ->whereDate('created_at', $date)
+                ->withCount('views')
+                ->orderByDesc('views_count')
+                ->take(3)
+                ->get();
 
-        // return $monthlyData;
+            $dailyStats[$date->toDateString()] = $topNews;
 
-        $year = date('Y');
-        $result = $this->model->query()
-            ->withCount('views')
-            ->select(
-                DB::raw('MONTH(created_at) as month'),
-                DB::raw('WEEK(created_at) as week'),
-                DB::raw('COUNT(*) as news_count'),
-            )
-            ->where('user_id', auth()->user()->id)
-            ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->whereYear('created_at', $year)
-            ->groupBy('month', 'week')
-            ->orderBy('month')
-            ->orderBy('week')
-            ->get();
-
-            $monthlyData = [];
-            for ($i = 1; $i <= 12; $i++) {
-                $found = false;
-                foreach ($result as $row) {
-                    if ($row->month == $i) {
-                        $newsCount = $row->news_count;
-                        $monthlyData[] = $newsCount;
-                        $found = true;
-                        break;
-                    }
-                }
-                if (!$found) {
-                    $monthlyData[] = 0;
+            foreach ($topNews as $news) {
+                if (!isset($weeklyStats[$date->weekOfYear]) || $weeklyStats[$date->weekOfYear]['views_count'] < $news->views_count) {
+                    $weeklyStats[$date->weekOfYear] = [
+                        'news_id' => $news->id,
+                        'views_count' => $news->views_count,
+                        'date' => $date->toDateString()
+                    ];
                 }
             }
+        }
 
-        return $monthlyData;
+        return [
+            'daily' => $dailyStats,
+            'weekly' => $weeklyStats
+        ];
     }
 
     public function showCountMonth(): mixed
