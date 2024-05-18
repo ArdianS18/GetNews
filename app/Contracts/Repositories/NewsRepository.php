@@ -416,35 +416,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showNewsStatistic(): mixed
     {
-        $dailyStats = [];
-        $weeklyStats = [];
-
-        for ($day = 0; $day < 7; $day++) {
-            $date = now()->startOfWeek()->addDays($day);
-            $topNews = $this->model->query()
-                ->whereDate('created_at', $date)
-                ->withCount('views')
-                ->orderByDesc('views_count')
-                ->take(3)
-                ->get();
-
-            $dailyStats[$date->toDateString()] = $topNews;
-
-            foreach ($topNews as $news) {
-                if (!isset($weeklyStats[$date->weekOfYear]) || $weeklyStats[$date->weekOfYear]['views_count'] < $news->views_count) {
-                    $weeklyStats[$date->weekOfYear] = [
-                        'news_id' => $news->id,
-                        'views_count' => $news->views_count,
-                        'date' => $date->toDateString()
-                    ];
-                }
-            }
-        }
-
-        return [
-            'daily' => $dailyStats,
-            'weekly' => $weeklyStats
-        ];
+        return $this->model->query()
+            ->withCount('views')
+            ->whereBetween('created_at', [now()->subDays(7), now()])
+            ->orderByDesc('views_count')
+            ->take(3)
+            ->get();
     }
 
     public function showCountMonth(): mixed
