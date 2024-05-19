@@ -38,6 +38,20 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->when($request->category, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->category . '%');
             })
+            ->when($request->latest === "terbaru", function($query){
+                $query->latest()->get();
+            })
+            ->when($request->latest === "terlama", function($query){
+                $query->oldest()->get();
+            })
+            ->withCount('newsCategories')
+            ->when($request->many === "teratas" , function($query) {
+                $query->orderByDesc('news_categories_count');
+            })
+            ->when($request->many === "terbawah" , function($query) {
+                $query->orderBy('news_categories_count', 'asc');
+            })
+            ->orderByDesc('news_categories_count')
             ->fastPaginate($pagination);
     }
 

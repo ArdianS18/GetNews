@@ -14,9 +14,9 @@ class ContactSeeder extends Seeder
     public function run(): void
     {
         $contact = [
-            ['name' => 'phone', 'content' => '+62 000 0000 0000', 'status' => 'active'],
-            ['name' => 'email', 'content' => 'GetMedia@gmail.com', 'status' => 'active'],
-            ['name' => 'location', 'content' => 'Permata Regency', 'status' => 'active'],
+            ['logo' => '-', 'slogan' => 'Portal berita terlengkap dengan berita terbaru dan terpopuler.',
+            'email' => 'getmedia@gmail.com', 'phone_number' => '+62 000 0000 0000', 'address' => 'Permata Regency Nglijo', 'url_facebook' => 'facebook.com',
+            'url_twitter' => 'twitter.com', 'url_instagram' => 'instagram.com', 'url_linkedin' => 'likedin.com'],
         ];
 
         foreach($contact as $data)

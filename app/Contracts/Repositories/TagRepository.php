@@ -65,6 +65,7 @@ class TagRepository extends BaseRepository implements TagInterface
             ->when($request->name, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->name . '%');
             })
+            ->latest()
             ->fastPaginate($pagination);
     }
 

@@ -61,6 +61,7 @@ class FaqRepository extends BaseRepository implements FaqInterface
             ->when($request->question, function ($query) use ($request) {
                 $query->where('question', 'LIKE', '%' .  $request->question . '%');
             })
+            ->latest()
             ->fastPaginate($pagination);
     }
 
