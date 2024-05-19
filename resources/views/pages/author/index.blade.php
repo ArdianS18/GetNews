@@ -73,22 +73,22 @@
                       <div class="text-center">
                         <i class="ti ti-file-description fs-6 d-block mb-2"></i>
                         <h5 class="mb-0 fw-semibold lh-1">{{ $news_post }}</h5>
-                        <p class="mb-0 fs-4">Posts</p>
+                        <p class="mb-0 fs-3">Posts</p>
                       </div>
                       <div class="text-center">
                         <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
                         <h5 class="mb-0 fw-semibold lh-1">{{ $followers }}</h5>
-                        <p class="mb-0 fs-4">Followers</p>
+                        <p class="mb-0 fs-3">Followers</p>
                       </div>
                       <div class="text-center">
                         <i class="ti ti-user-check fs-6 d-block mb-2"></i>
                         <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
-                        <p class="mb-0 fs-4">Following</p>
+                        <p class="mb-0 fs-3">Following</p>
                       </div>
                       <div class="text-center">
                           <i class="ti ti-thumb-up fs-6 d-block mb-2"></i>
                           <h5 class="mb-0 fw-semibold lh-1">{{ $news_like }}</h5>
-                          <p class="mb-0 fs-4">Like</p>
+                          <p class="mb-0 fs-3">Like</p>
                         </div>
                     </div>
                   </div>
@@ -104,7 +104,7 @@
                       </div>
                       <div class="text-center">
                         <h5 class="fs-5 mb-0 fw-semibold">{{ auth()->user()->name }}</h5>
-                        <p class="mb-0 fs-4">Penulis</p>
+                        <p class="mb-0 fs-3">Penulis</p>
                       </div>
                     </div>
                   </div>
@@ -117,7 +117,7 @@
                           </span>
                         </div>
                         <div class="">
-                          <p class="mb-0 fs-4">Panding</p>
+                          <p class="mb-0 fs-3">Panding</p>
                         </div>
                       </div>
                       <div class="text-center">
@@ -127,7 +127,7 @@
                           </span>
                         </div>
                         <div class="">
-                        <p class="mb-0 fs-4">Ditolak</p>
+                        <p class="mb-0 fs-3">Ditolak</p>
                         </div>
                       </div>
                       <div class="text-center">
@@ -137,7 +137,7 @@
                           </span>
                         </div>
                         <div class="">
-                          <p class="mb-0 fs-4">Diterima</p>
+                          <p class="mb-0 fs-3">Diterima</p>
                         </div>
                       </div>
                     </div>
