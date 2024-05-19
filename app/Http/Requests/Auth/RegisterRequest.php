@@ -36,12 +36,12 @@ class RegisterRequest extends BaseRequest
             'name.unique' => 'Nama sudah digunakan',
             'email.required' => 'Email mohon untuk diisi',
             'email.email' => 'Mohon email berupa Gmail',
-            'email.unique' => 'Email sudah digunakan!!',
+            'email.unique' => 'Email sudah digunakan',
             'password.required' => 'Password mohon untuk diisi',
             'password.min' => 'Password minimal 8 karakter',
-            'phone_number.required' => 'Nomor mohon untuk diisi',
-            'phone_number.numeric' => 'Nomor mohon berupa angka',
-            'phone_number.min' => 'Nomor minimal 15 karakter',
+            'phone_number.required' => 'Nomer mohon untuk diisi',
+            'phone_number.numeric' => 'Mohon nomer berupa angka',
+            'phone_number.min' => 'Nomer minimal 15 karakter',
             'address.required' => 'Alamat mohon untuk diisi',
             'cv' => 'CV harus berupa PDF'
         ];
