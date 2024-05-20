@@ -172,6 +172,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         return view('pages.admin.akun.index');
     })->name('account.admin.list');
     Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin');
+
     Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
     Route::put('update-account/{user}', [UserController::class, 'update'])->name('update.account.admin');
     Route::delete('delete-account/{user}', [UserController::class, 'destroy'])->name('delete.account.admin');

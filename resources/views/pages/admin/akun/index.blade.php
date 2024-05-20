@@ -324,10 +324,8 @@
                         <h5>${data.name}</h5>
                         <p class="fs-5">${data.email}</p>
                         <div class="">
-                            <button class="btn btn-light-primary px-4 text-primary">Admin</button>
-                            <button class="btn btn-light-danger px-4 text-danger">User</button>
+                            ${data.role === 'admin' ? '<button class="btn btn-light-primary px-4 text-primary">Admin</button>' : '<button class="btn btn-light-danger px-4 text-danger">User</button>'}
                         </div>
-
                     </div>
                 </div>
             </div>
