@@ -35,6 +35,8 @@
                                     <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_popular->name }}" href="{{ route('news.user', ['news' => $news_popular->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                             {!! ($news_popular->name)  !!}
                                         </a>
+                                    </h3>
+                                    <p>{!! Illuminate\Support\Str::limit(strip_tags($news_popular->content), 160, '...') !!}</p>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                                 <p>{{ \Carbon\Carbon::parse($news_popular->created_at)->translatedFormat('d F Y') }}</p>

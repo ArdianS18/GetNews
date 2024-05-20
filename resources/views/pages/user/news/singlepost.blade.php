@@ -259,7 +259,7 @@
                         <div class="d-flex justify-content-between">
                             <ul class="news-metainfo list-style">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-3 mb-3">
+                                    <div class="col-md-12 col-lg-4 mb-3">
                                         <li class="author">
                                             <span class="author-img">
                                                 <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
@@ -275,12 +275,9 @@
                                         </li>
                                     </div>
 
-                                    <div class="col-md-12 col-lg-9">
+                                    <div class="col-md-12 col-lg-8">
                                         <li><i class="fi fi-rr-calendar-minus"></i>
-                                            {{-- <a href="javascript:void(0)"> --}}
-                                            {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
                                             <span id="formattedDate"></span>
-                                            {{-- </a> --}}
                                         </li>
                                         <li>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
