@@ -126,7 +126,6 @@
                         </div>
                     </div>
                     <div id="chart-trending">
-
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
@@ -387,4 +386,43 @@
         var chart1 = new ApexCharts(document.querySelector("#chart-trending"), options1);
         chart1.render();
     </script>
+
+    {{-- <script>
+         document.addEventListener('DOMContentLoaded', function () {
+        const newsStatistics = @json($newsStatistics);
+
+        // Siapkan data untuk grafik
+        let categories = [];
+        let dataViews = [];
+        let dataLikes = []; // Contoh, asumsikan Anda juga memiliki data likes
+
+        Object.keys(newsStatistics).forEach(day => {
+            categories.push(day);
+            dataViews.push(newsStatistics[day].reduce((acc, news) => acc + news.views_count, 0));
+            dataLikes.push(newsStatistics[day].reduce((acc, news) => acc + news.likes_count, 0)); // Contoh
+        });
+
+        // Opsi grafik
+        var options1 = {
+            series: [{
+                name: "Total Views",
+                data: dataViews
+            }, {
+                name: "Total Likes",
+                data: dataLikes
+            }],
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
+            xaxis: {
+                categories: categories,
+            },
+            // Konfigurasi lainnya...
+        };
+
+        var chart1 = new ApexCharts(document.querySelector("#chart-trending"), options1);
+        chart1.render();
+    });
+    </script> --}}
 @endsection

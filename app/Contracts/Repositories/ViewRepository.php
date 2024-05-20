@@ -111,31 +111,13 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     public function newsStatistic(): mixed
     {
-        $trendingNews = $this->model->query()
+        return $this->model->query()
         ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
-        ->select('news_id', DB::raw('COUNT(*) as total'))
+        ->select('news_id', DB::raw('COUNT(*) as total'), DB::raw('DAY(created_at) as day'))
         ->groupBy('news_id')
+        ->orderBy('day')
         ->orderBy('total', 'desc')
         ->take(3)
         ->get();
-
-        $monthlyData = [];
-        for ($i = 1; $i <= 7; $i++) {
-            $found = false;
-            foreach ($trendingNews as $row) {
-                if ($row->month == $i) {
-                    $newsCount = $row->total;
-                    $monthlyData[] = $newsCount;
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                $monthlyData[] = 0;
-            }
-        }
-
-
-        return $monthlyData;
     }
 }

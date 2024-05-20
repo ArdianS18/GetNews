@@ -37,6 +37,7 @@ use App\Contracts\Interfaces\PaymentAdvertisementInterface;
 use App\Contracts\Interfaces\PaymentAdvertisementsInterface;
 use App\Contracts\Interfaces\PaymentNewsInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Contracts\Interfaces\SendMessageInterface;
 use App\Contracts\Interfaces\SocialMediaInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
@@ -60,6 +61,7 @@ use App\Contracts\Repositories\NewsTagRepository;
 use App\Contracts\Repositories\PaymentAdvertisementRepository;
 use App\Contracts\Repositories\PaymentNewsRepository;
 use App\Contracts\Repositories\ReportRepository;
+use App\Contracts\Repositories\SendMessageRepository;
 use App\Contracts\Repositories\SocialMediaRepository;
 use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\SubscribeRepository;
@@ -99,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
         SocialMediaInterface::class => SocialMediaRepository::class,
         CommentReportInterface::class => CommentReportRepository::class,
         ContactInterface::class => ContactRepository::class,
+        SendMessageInterface::class => SendMessageRepository::class
     ];
 
     /**

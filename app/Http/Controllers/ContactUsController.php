@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\ContactUsInterface;
 use App\Contracts\Interfaces\FaqInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Contracts\Interfaces\SendMessageInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Enums\MessageStatusEnum;
 use App\Helpers\ResponseHelper;
@@ -13,6 +14,7 @@ use App\Http\Requests\ContactUsRequest;
 use App\Models\ContactUs;
 use App\Models\Faq;
 use App\Models\Report;
+use App\Models\SendMessage;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,10 +25,11 @@ class ContactUsController extends Controller
     private ContactUsInterface $contactUs;
     private ReportInterface $report;
 
+    private SendMessageInterface $sendMessage;
     private FaqInterface $faq;
     private User $user;
 
-    public function __construct(ContactUsInterface $contactUs, ReportInterface $report,FaqInterface $faq, User $user, CategoryInterface $category, SubCategoryInterface $subCategory)
+    public function __construct(SendMessageInterface $sendMessage, ContactUsInterface $contactUs, ReportInterface $report,FaqInterface $faq, User $user, CategoryInterface $category, SubCategoryInterface $subCategory)
     {
         $this->contactUs = $contactUs;
         $this->category = $category;
@@ -34,6 +37,8 @@ class ContactUsController extends Controller
         $this->report = $report;
         $this->user = $user;
         $this->faq = $faq;
+
+        $this->sendMessage = $sendMessage;
     }
 
     /**
@@ -57,7 +62,10 @@ class ContactUsController extends Controller
         $countReport = $this->report->count('unread');
         $all = $this->contactUs->countAll('unread');
 
-        return view('pages.admin.inbox.index', compact('contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
+        $sendMessage = $this->sendMessage->get();
+        $sendMessage2 = $this->sendMessage->get();
+
+        return view('pages.admin.inbox.index', compact('sendMessage','sendMessage2','contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
     }
 
     public function contact(Faq $faq){

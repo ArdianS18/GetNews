@@ -22,6 +22,7 @@ use App\Http\Controllers\NewsViewController;
 use App\Http\Controllers\PaymentAdvertisementsController;
 use App\Http\Controllers\PaymentNewsController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SendMessageController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -201,6 +202,8 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
 
     Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
     Route::delete('delete-iklan-admin/{id}', [AdvertisementController::class, 'delete'])->name('admin.destroy.iklan');
+
+    Route::post('send-message', [SendMessageController::class, 'store'])->name('send.message');
 });
 
 Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
@@ -294,9 +297,7 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('ketentuan-dan-persyaratan', function () {
         return view('pages.user.home');
     })->name('user.home');
-    Route::get('user-inbox', function () {
-        return view('pages.user.inbox.index');
-    })->name('user.inbox');
+    Route::get('user-inbox', [UserController::class, 'index'])->name('user.inbox');
 
     Route::get('berita-upload', function () {
         return view('pages.user.news.upload');

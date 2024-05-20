@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\SendMessageInterface;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Requests\UserRequest;
@@ -17,10 +18,13 @@ class UserController extends Controller
     private UserInterface $user;
     private UserPhotoService $userPhoto;
 
-    public function __construct(UserInterface $user, UserPhotoService $userPhoto)
+    private SendMessageInterface $sendMessage;
+
+    public function __construct(UserInterface $user, UserPhotoService $userPhoto, SendMessageInterface $sendMessage)
     {
         $this->user = $user;
         $this->userPhoto = $userPhoto;
+        $this->sendMessage = $sendMessage;
     }
 
     /**
@@ -28,7 +32,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $data = $this->sendMessage->get();
+        $message = $this->sendMessage->get();
 
+        $delete_message = $this->sendMessage->get()->whereIn('status_delete', 1);
+        return view('pages.user.inbox.index', compact('data', 'message', 'delete_message'));
     }
 
     /**
