@@ -256,28 +256,26 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12 col-lg-3">
-                                <ul class="news-metainfo list-style">
-                                    <li class="author">
-                                        <span class="author-img">
-                                            <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
-                                                alt="Image" width="40px" height="30px"
-                                                style="border-radius: 50%; object-fit:cover;" />
-                                        </span>
-                                        <div>
-                                            <a style="display: inline;text-decoration:none" data-toggle="tooltip"
-                                                data-placement="top" title="author - {{ $news->user->name }}"
-                                                href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
+                        <div class="d-flex justify-content-between">
+                            <ul class="news-metainfo list-style">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 mb-3">
+                                        <li class="author">
+                                            <span class="author-img">
+                                                <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
+                                                    alt="Image" width="40px" height="30px"
+                                                    style="border-radius: 50%; object-fit:cover;" />
                                             </span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                            <div>
+                                                <a style="display: inline;text-decoration:none" data-toggle="tooltip"
+                                                    data-placement="top" title="author - {{ $news->user->name }}"
+                                                    href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </div>
 
-                            <div class="col-md-12 col-lg-9">
-                                <div class="d-flex justify-content-between">
-                                    <ul class="news-metainfo list-style d-flex justify-content-start">
+                                    <div class="col-md-12 col-lg-9">
                                         <li><i class="fi fi-rr-calendar-minus"></i>
                                             {{-- <a href="javascript:void(0)"> --}}
                                             {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
@@ -349,34 +347,36 @@
                                             <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
 
                                         </li>
-
-                                    </ul>
-
-                                    <div class="d-flex justify-content-end">
-                                        <a class="" href="#" role="button" id="dropdownMenuLink"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                                viewBox="0 0 24 24">
-                                                <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                    stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
-                                            </svg>
-                                        </a>
-
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <li>
-                                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
-                                                    Bagikan
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button class="btn btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#tambahdataLabel">
-                                                    Laporkan
-                                                </button>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
+                               
+
+
+                            </ul>
+
+                            <div class="">
+                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                        viewBox="0 0 24 24">
+                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                            stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                    </svg>
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li>
+                                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
+                                            Bagikan
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#tambahdataLabel">
+                                            Laporkan
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
