@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+<head>
+    @include('layouts.user.css')
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -24,6 +26,19 @@
 
 
 <body style="background-color: #FFFFFF">
+
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <div class="switch-theme-mode">
+        <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider" />
+            <span class="slider round"></span>
+        </label>
+    </div>
 
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
         style="display: none; visibility: hidden"></iframe></noscript>
@@ -122,7 +137,10 @@
     </div>
 </div>
 
-
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/aos.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
 <script>
     function togglePasswordVisibility() {
         var passwordInput = document.getElementById('password');

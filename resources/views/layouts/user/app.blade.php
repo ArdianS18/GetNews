@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Sebuah portal berita untuk membaca berita yang saedang trending dan hot">
-  @include('layouts.user.css')
+    @include('layouts.user.css')
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
@@ -38,6 +38,7 @@
             <span class="slider round"></span>
         </label>
     </div>
+
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
 
@@ -65,6 +66,7 @@
 
     @include('layouts.user.footer')
     @yield('script')
+    
     <script>
           document.addEventListener("DOMContentLoaded", function() {
             var searchBtn = document.getElementById('search-btn');
