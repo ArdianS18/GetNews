@@ -399,8 +399,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <p>
-                                                    Video dan pengguna yang dilaporkan akan ditinjau oleh staf
-                                                    YouTube 24/7 untuk menentukan apakah video dan pengguna
+                                                    Artikel dan pengguna yang dilaporkan akan ditinjau oleh staf
+                                                    GetMedia untuk menentukan apakah artikel dan pengguna
                                                     tersebut melanggar Pedoman Komunitas kami atau tidak. Akun
                                                     akan dikenai sanksi jika melanggar Pedoman Komunitas, dan
                                                     pelanggaran serius atau berulang dapat berakibat pada
