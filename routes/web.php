@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -117,6 +118,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('faq-list', function () {
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
+
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
