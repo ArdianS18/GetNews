@@ -110,7 +110,6 @@
         </div>
     </div>
 </div>
-
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/aos.js') }}"></script>
