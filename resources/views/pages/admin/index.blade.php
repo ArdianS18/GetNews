@@ -279,7 +279,7 @@
                                     </div>
                                     <h4 class="mb-5 mt-5">Berita Premium</h4>
                                     <div class="row">
-                                        
+
                                         <div class="col-md-12 col-lg-6 mb-3">
                                             <div class="mb-2" style="max-width: 540px;">
                                                 <div class="row g-2">
@@ -310,18 +310,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="tab-pane p-3" id="statistik" role="tabpanel">
                                 <h3>Statistika</h3>
-                                
+
                                 </div>
                             </div>
 
                         </div>
 
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="col-md-12 col-lg-3">
@@ -431,20 +431,20 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                
-                                
+
+
                                     </div>
-                                
+
                                 </div>
                                 <div class="tab-pane p-3" id="statistik-advertisement" role="tabpanel">
                                 <h3>Statistika</h3>
-                                
+
                                 </div>
                             </div>
 
                         </div>
 
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="col-md-12 col-lg-3">
@@ -651,11 +651,8 @@
 
 <script>
     var monthlyData = <?php echo json_encode($news2); ?>;
-
     var monthlyDataString = JSON.stringify(monthlyData);
-
     var monthlyDataObj = JSON.parse(monthlyDataString);
-
     var values = [];
     for (var key in monthlyDataObj) {
         if (monthlyDataObj.hasOwnProperty(key)) {

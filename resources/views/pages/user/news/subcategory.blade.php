@@ -33,7 +33,7 @@
 
                                 <div class="news-card-info">
                                     <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_popular->name }}" href="{{ route('news.user', ['news' => $news_popular->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                            {!! Illuminate\Support\Str::limit($news_popular->name, $limit = 50, $end = '...')  !!}
+                                            {!! ($news_popular->name)  !!}
                                         </a>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">

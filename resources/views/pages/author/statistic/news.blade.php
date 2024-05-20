@@ -309,18 +309,29 @@
         var chart = new ApexCharts(document.querySelector("#chart-info"), options);
         chart.render();
 
+        var news_statistic = <?php echo json_encode($newsStatistics); ?>;
+        var newsString = JSON.stringify(news_statistic);
+        var dataNews = JSON.parse(newsString);
+
+        var news = [];
+        for (var key in dataNews) {
+            if (dataNews.hasOwnProperty(key)) {
+                news.push(dataNews[key]);
+            }
+        }
+
         var options1 = {
             series: [{
-                    name: "koin",
-                    data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+                    name: "Terbawah",
+                    data: news
                 },
                 {
-                    name: "Pengikut",
-                    data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+                    name: "Teratas",
+                    data: news
                 },
                 {
-                    name: 'Total Visits',
-                    data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+                    name: 'Menengah',
+                    data: news
                 }
             ],
             chart: {
@@ -349,9 +360,7 @@
                 }
             },
             xaxis: {
-                categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                    '10 Jan', '11 Jan', '12 Jan'
-                ],
+                categories: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu',],
             },
             tooltip: {
                 y: [{
