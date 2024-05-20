@@ -53,9 +53,9 @@
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <span class="burger-menu">
-                    <span class="top-bar" style="height: 2px; width: 25px;"></span>
-                    <span class="middle-bar" style="height: 2px; width: 25px;"></span>
-                    <span class="bottom-bar" style="height: 2px; width: 25px;"></span>
+                    <span class="top-bar" style="height: 2px; width: 22px;"></span>
+                    <span class="middle-bar" style="height: 2px; width: 22px;"></span>
+                    <span class="bottom-bar" style="height: 2px; width: 22px;"></span>
                 </span>
             </a>
             <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" style="width: 15%" aria-controls="navbarOffcanvas">
