@@ -234,7 +234,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
             ->take(4)
             ->get();
-
     }
 
     public function getByLeft(): mixed
@@ -362,6 +361,23 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
+    public function getPremium(Request $request): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
+            ->when($request->input('opsi') === "terbaru", function($query){
+                $query->latest()->get();
+            })
+            ->when($request->input('opsi') === "terlama", function($query){
+                $query->oldest()->get();
+            })
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->take(3)
+            ->get();
+    }
+
     /**
      * Handle store data event to models.
      *
@@ -461,6 +477,37 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
         return $monthlyData;
     }
+
+    public function showCountMonthPremium(): mixed
+    {
+        $year = date('Y');
+        $result = $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
+            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $found = false;
+            foreach ($result as $row) {
+                if ($row->month == $i) {
+                    $newsCount = $row->news_count;
+                    $monthlyData[] = $newsCount;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $monthlyData[] = 0;
+            }
+        }
+
+        return $monthlyData;
+    }
+
 
     public function StatusBanned($author) : mixed
     {
