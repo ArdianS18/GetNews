@@ -38,7 +38,7 @@
     <div class="card-body px-4 py-4">
         <div class="row justify-content-between">
             <div class="col-8 text-white">
-                <h4 class="fw-semibold mb-4 mt-4 text-white">Hi, Daffa Prasetya</h4>
+                <h4 class="fw-semibold mb-4 mt-4 text-white">Hi, {{ auth()->user()->name }}</h4>
                 <p class="fs-4">Jangan lewatkan kenyamanan membaca berita dengan firtu berlangganan memberikan pengalaman membaca yang lebih baik</p>
             </div>
             <div class="col-2">
