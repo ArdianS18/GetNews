@@ -152,6 +152,10 @@
             })
         })
 
+        function limitString(str, maxLength) {
+            return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
+        }
+
         function cardNews(data) {
             let status, text;
             if (data.status == 'active') {
@@ -191,8 +195,8 @@
                     <div class="col-md-12 col-lg-8">
                         <div class="d-flex">
                             <div class="order-md-1">
-                                <h4>${data.name}</h4>
-                                <p>${data.content}</p>
+                                <h4>${limitString(data.name, 50)}</h4>
+                                <p>${limitString(data.content, 500)}</p>
                             </div>
                         </div>
                     </div>
