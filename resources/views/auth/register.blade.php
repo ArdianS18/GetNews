@@ -60,7 +60,15 @@
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5">
             <div class="w-px-500 mx-auto my-auto">
                 <h3 class="mb-5">Buat Akun GetMedia.id</h3>
-                    <form method="POST" class="py-3" action="{{route('register')}}">
+
+                @if (session('success'))
+                    <div id="error-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                    <form id="registrationForm" method="POST" class="py-3">
                         @csrf
                         <div class="row">
                             <div class="my-2 col-12">
@@ -135,49 +143,41 @@
     </div>
 </div>
 
+<script>
+
+        document.getElementById('form-like').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var form = event.target;
+            var csrfToken = form.querySelector('input[name="_token"]').value;
+
+            fetch('{{ route('register') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {})
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+
+</script>
+
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/aos.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
 <script>
-
-    $('#form-create').submit(function(e) {
-        $('.preloader').show();
-        e.preventDefault();
-
-        $.ajax({
-            url: "{{ route('faq.store') }}",
-            type: "POST",
-            data: $(this).serialize(),
-            success: function(response) {
-                get(1)
-                $('.preloader').fadeOut();
-                var response = response.responseJSON
-
-                Swal.fire({
-                    title: 'Berhasil!',
-                    icon: 'success',
-                    text: "Berhasil Menambahkan Data"
-                })
-                $('#modal-create').modal('hide')
-                emptyForm('form-create')
-            },
-            error: function(response) {
-                $('.preloader').fadeOut();
-                Swal.fire({
-                    title: 'Error!',
-                    icon: 'error',
-                    text: "Terdapat masalah saat input data"
-                });
-                var response = response.responseJSON
-                var status = response.meta.code
-                if (status == 422) {
-                    handleValidate(response.data, 'create')
-                }
-            }
-        })
-    })
-
     function togglePasswordVisibility() {
         var passwordInput = document.getElementById('password');
         var togglePasswordIcon = document.getElementById('togglePasswordIcon');

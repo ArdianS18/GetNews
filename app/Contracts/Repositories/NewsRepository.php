@@ -112,7 +112,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
     {
-        $pagination = $request->perpage;
         return $this->model->query()
             ->where('status', "panding")
             ->when($request->name, function ($query) use ($request) {
@@ -141,32 +140,42 @@ class NewsRepository extends BaseRepository implements NewsInterface
                     $var->take(100);
                 });
             })
-            ->fastPaginate($pagination);
+            ->latest()
+            ->fastPaginate($request->perpage);
     }
 
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
-        $pagination = $request->perpage;
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->when($request->category, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->category . '%');
             })
+            ->orderBy('is_primary', 'desc')
             ->when($request->latest, function ($query) use ($request) {
                 $query->when($request->latest === 'terbaru', function ($terbaru) {
                     $terbaru->latest()->get();
                 });
-
                 $query->when($request->latest === 'terlama', function ($terlama) {
                     $terlama->oldest()->get();
                 });
             })
             ->when($request->perpage, function ($query) use ($request) {
-                $query->take($request->perpage);
+                $query->when($request->perpage === '10', function ($var) {
+                    $var->take(10);
+                });
+                $query->when($request->perpage === '20', function ($var) {
+                    $var->take(20);
+                });
+                $query->when($request->perpage === '50', function ($var) {
+                    $var->take(50);
+                });
+                $query->when($request->perpage === '100', function ($var) {
+                    $var->take(100);
+                });
             })
-            ->orderBy('is_primary', 'desc')
             ->latest()
-            ->fastPaginate($pagination);
+            ->fastPaginate($request->perpage);
     }
 
     public function showWithSlug(string $slug): mixed

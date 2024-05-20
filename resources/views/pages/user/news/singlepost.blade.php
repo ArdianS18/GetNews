@@ -914,8 +914,8 @@
                 .catch(function(error) {
                     console.error(error);
                 });
-
         });
+
         document.getElementById('form-liked').addEventListener('submit', function(event) {
             event.preventDefault();
             var form = event.target;
