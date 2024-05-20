@@ -21,6 +21,7 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 {
     public function showWhithCount() : mixed;
     public function showCountMonth() : mixed;
+    public function showCountMonthPremium() : mixed;
     public function showNewsStatistic() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 
@@ -33,6 +34,9 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function getByPick() : mixed;
     public function getByGeneral() : mixed;
     public function getByPopular($data) : mixed;
+
+    public function getPremium(Request $request) : mixed;
+
     public function latest() : mixed;
     public function latest2() : mixed;
     public function StatusBanned($author) : mixed;

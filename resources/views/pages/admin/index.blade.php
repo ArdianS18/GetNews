@@ -269,13 +269,20 @@
                                 <div class="tab-pane active" id="news" role="tabpanel">
                                     <div class="d-flex justify-content-between mt-5">
                                         <h4>Berita</h4>
-                                        <div class="d-flex gap-2">
-                                            <select class="form-select" id="opsi-latest" style="width: 200px">
-                                                <option value="">Tampilkan semua</option>
-                                                <option value="terbaru">Terbaru</option>
-                                                <option value="terlama">Terlama</option>
-                                            </select>
-                                        </div>
+                                        <form>
+                                            <div class="d-flex gap-2">
+                                                <div class="d-flex gap-2">
+                                                    <select class="form-select" name="opsi" style="width: 200px">
+                                                    <option value="">Tampilkan semua</option>
+                                                    <option value="terbaru">Terbaru</option>
+                                                    <option value="terlama">Terlama</option>
+                                                    </select>
+                                                </div>
+                                                <button class="btn btn-primary" type="submit">
+                                                    Pilih
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                     <h4 class="mb-5 mt-5">Berita Premium</h4>
                                     <div class="row">
@@ -283,39 +290,42 @@
                                         <div class="col-md-12 col-lg-6 mb-3">
                                             <div class="mb-2" style="max-width: 540px;">
                                                 <div class="row g-2">
-                                                    <div class="col-md-4">
-                                                        <img src="{{asset('assets/img/news/news-1.webp')}}" style="width: 100%; height: 100px; object-fit: cover;" alt="">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="card-body p-2">
-                                                            <h5 class="card-text">
-                                                                Judul Berita
-                                                            </h5>
-                                                            <div class="d-flex gap-3 align-items-center ms-0">
-                                                                <p class="card-text m-0">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
-                                                                        <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                                    </svg>
-                                                                    <small class="ms-1">Apr 25, 2023</small>
-                                                                </p>
-                                                                <p class="card-text">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                                                        <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                                    </svg>
-                                                                    <small class="mt-1 ms-1">129x dilihat</small>
-                                                                </p>
+                                                    @forelse ($newsPremium as $premium)
+                                                        <div class="col-md-4">
+                                                            <img src="{{ asset('storage/' . $premium->photo) }}" style="width: 100%; height: 100; object-fit:cover;" alt="">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body p-2">
+                                                                <h5 class="card-text">
+                                                                    {!! Illuminate\Support\Str::limit($premium->name, $limit = 60, $end = '...') !!}
+                                                                </h5>
+                                                                <div class="d-flex gap-3 align-items-center ms-0">
+                                                                    <p class="card-text m-0">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
+                                                                            <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
+                                                                        </svg>
+                                                                        <small class="ms-1">{{ $premium->created_at->format('M d Y') }}</small>
+                                                                    </p>
+                                                                    <p class="card-text">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                                            <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
+                                                                        </svg>
+                                                                        <small class="mt-1 ms-1">{{ $premium->views_count }}x dilihat</small>
+                                                                    </p>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    @empty
+                                                    @endforelse
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="tab-pane p-3" id="statistik" role="tabpanel">
                                 <h3>Statistika</h3>
-
+                                    <div id="chart-news-premium">
+                                    </div>
                                 </div>
                             </div>
 
@@ -739,22 +749,22 @@
     chart.render();
 
 
-    var options = {
-          series: [80, 40, 31],
-          chart: {
-          type: 'donut',
-        },
-        responsive: [{
-          breakpoint: 480,
-          options: {
+        var options = {
+            series: [80, 40, 31],
             chart: {
-              width: 200
+                type: 'donut',
             },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }]
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                    width: 200
+                },
+                    legend: {
+                    position: 'bottom'
+                    },
+                }
+            }]
         };
 
         var chart = new ApexCharts(document.querySelector("#chart-premium"), options);
@@ -764,4 +774,52 @@
         chart.render();
 
 </script>
+
+<script>
+    var monthlyData = <?php echo json_encode($statistikPremium); ?>;
+    var monthlyDataString = JSON.stringify(monthlyData);
+    var monthlyDataObj = JSON.parse(monthlyDataString);
+    var values = [];
+    for (var key in monthlyDataObj) {
+        if (monthlyDataObj.hasOwnProperty(key)) {
+            values.push(monthlyDataObj[key]);
+        }
+    }
+    var options = {
+        series: [{
+            data: values,
+        }],
+        chart: {
+            type: 'line',
+            height: 350,
+            zoom: {
+                type: 'x',
+                enabled: true,
+                autoScaleYaxis: true
+            },
+        },
+        colors: ['#FF0000'],
+        plotOptions: {
+            bar: {
+                borderRadius: 4,
+                horizontal: false,
+            }
+        },
+        // title: {
+        //     text: 'Penulis Terbanyak'
+        // },
+        dataLabels: {
+            enabled: false
+        },
+        xaxis: {
+            categories: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
+                'Oktober', 'November', 'Desember'
+            ]
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart-news-premium"), options);
+    chart.render();
+</script>
+
 @endsection
