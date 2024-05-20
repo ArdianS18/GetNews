@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    @include('layouts.user.css')
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 
     <meta charset="utf-8">
@@ -33,13 +35,6 @@
         <div class="loader"></div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-    </div>
-
-    <div class="switch-theme-mode">
-        <label id="switch" class="switch">
-            <input type="checkbox" onchange="toggleTheme()" id="slider" />
-            <span class="slider round"></span>
-        </label>
     </div>
 
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"

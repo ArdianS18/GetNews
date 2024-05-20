@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    @include('layouts.user.css')
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 
     <meta charset="utf-8">
@@ -33,11 +34,8 @@
         <div class="loader-section section-right"></div>
     </div>
 
-    <div class="switch-theme-mode">
-        <label id="switch" class="switch">
-            <input type="checkbox" onchange="toggleTheme()" id="slider" />
-            <span class="slider round"></span>
-        </label>
+    <div id="formLoader" class="loader" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5) center no-repeat;">
+        <img src="" alt="Loading..." style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
     </div>
 
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
@@ -142,6 +140,44 @@
 <script src="{{ asset('assets/js/aos.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script>
+
+    $('#form-create').submit(function(e) {
+        $('.preloader').show();
+        e.preventDefault();
+
+        $.ajax({
+            url: "{{ route('faq.store') }}",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response) {
+                get(1)
+                $('.preloader').fadeOut();
+                var response = response.responseJSON
+
+                Swal.fire({
+                    title: 'Berhasil!',
+                    icon: 'success',
+                    text: "Berhasil Menambahkan Data"
+                })
+                $('#modal-create').modal('hide')
+                emptyForm('form-create')
+            },
+            error: function(response) {
+                $('.preloader').fadeOut();
+                Swal.fire({
+                    title: 'Error!',
+                    icon: 'error',
+                    text: "Terdapat masalah saat input data"
+                });
+                var response = response.responseJSON
+                var status = response.meta.code
+                if (status == 422) {
+                    handleValidate(response.data, 'create')
+                }
+            }
+        })
+    })
+
     function togglePasswordVisibility() {
         var passwordInput = document.getElementById('password');
         var togglePasswordIcon = document.getElementById('togglePasswordIcon');
