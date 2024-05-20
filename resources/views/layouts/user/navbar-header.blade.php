@@ -22,15 +22,15 @@
     <div class="header-top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-4 col-md-6 col-5 d-none d-md-block">
+                <div class="col-lg-4 col-md-4 d-none d-md-block">
                     <a href="{{route('user.berlangganan')}}" class="subscribe-btn"><span>Berlangganan</span><i class="flaticon-right-arrow"></i></a>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-3">
                     <a class="navbar-brand" href="/">
                         <img src="{{asset('assets/img/logo-get-media.png')}}" class="logo-mobile" alt="Image" />
                     </a>
                 </div>
-                <div class="col-lg-4 col-md-6 col-7 d-none d-md-block">
+                <div class="col-lg-4 col-md-4 col-7 d-none d-md-block">
                     <ul class="social-profile list-style">
                         <li>
                             <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>

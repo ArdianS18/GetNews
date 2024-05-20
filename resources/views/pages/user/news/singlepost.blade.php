@@ -169,6 +169,23 @@
                 }
             }
         }
+
+        .btn-outline-primary {
+            --bs-btn-color: #175A95 d;
+            --bs-btn-border-color: #175A95;
+            --bs-btn-hover-color: #fff;
+            --bs-btn-hover-bg: #175A95;
+            --bs-btn-hover-border-color: #175A95;
+            --bs-btn-focus-shadow-rgb: 13, 110, 253;
+            --bs-btn-active-color: #fff;
+            --bs-btn-active-bg: #175A95;
+            --bs-btn-active-border-color: #175A95;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #175A95;
+            --bs-btn-disabled-bg: transparent;
+            --bs-btn-disabled-border-color: #175A95fd;
+            --bs-gradient: none;
+        }
     </style>
 @endsection
 @section('content')
@@ -262,9 +279,9 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between">
+                        <div class="">
                             <ul class="news-metainfo list-style">
-                                <div class="row">
+                                <div class="row justify-content-between">
                                     <div class="col-md-12 col-lg-4 mb-3">
                                         <li class="author">
                                             <span class="author-img">
@@ -350,37 +367,46 @@
                                             <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
 
                                         </li>
+
+                                        
                                     </div>
+
+                                    
+                                    <div class="col-md-12 col-lg-4">
+                                        <li>
+                                            <a class="" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                    viewBox="0 0 24 24">
+                                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                                        stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                                </svg>
+                                            </a>
+            
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li>
+                                                    <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
+                                                        Bagikan
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#tambahdataLabel">
+                                                        Laporkan
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            </li>
+                                    </div>
+                                   
+                                    
                                 </div>
 
 
 
                             </ul>
 
-                            <div class="">
-                                <a class="" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                            stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
-                                    </svg>
-                                </a>
 
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li>
-                                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
-                                            Bagikan
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="btn btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#tambahdataLabel">
-                                            Laporkan
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
 
                         {{-- modal tambah --}}
