@@ -68,6 +68,7 @@
                                         {!! Illuminate\Support\Str::limit($tren->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($news_popular->content), 160, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($tren->created_at)->translatedFormat('d F Y') }}</a>
@@ -117,6 +118,7 @@
                                         {!! Illuminate\Support\Str::limit($new->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($news_popular->content), 160, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
