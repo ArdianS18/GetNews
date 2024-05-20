@@ -65,41 +65,6 @@
             <button type="button" class="bg-transparent border-0 text-white d-lg-none mt-2"  data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
-            {{-- @auth
-                <div class="ms-2 mt-1 d-lg-none">
-                    <ul class="navbar-nav mx-auto">
-                        <div class="news-card-img mb-2 ms-4">
-                            @role('author')
-                            <a href="{{ route('profile.index') }}">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
-                            </a>
-                            @endrole
-                            @role('user')
-                            <a href="{{ route('profile.user') }}">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
-                            </a>
-                            @endrole
-                            @role('admin')
-                            <a href="/dashboard">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
-                            </a>
-                            @endrole
-                        </div>
-
-                    </ul>
-                </div>
-                @if (Auth::check() && Auth::user()->roles() == "author")
-                @endif
-                @else
-
-                <div class="d-md-none">
-                    <div class="option-item">
-                        <a href="/login" class="btn-two" id="signInBtn">Login</a>
-                    </div>
-                </div>
-
-            @endauth --}}
-
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
@@ -223,5 +188,5 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </div>
 </div>
