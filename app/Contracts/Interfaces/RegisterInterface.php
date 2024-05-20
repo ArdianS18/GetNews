@@ -8,7 +8,7 @@ use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
-interface RegisterInterface extends StoreInterface
+interface RegisterInterface extends StoreInterface, UpdateInterface
 {
 
 }

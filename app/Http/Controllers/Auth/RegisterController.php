@@ -58,4 +58,11 @@ class RegisterController extends Controller
         $this->service->handleRegister($request,$this->register);
         return redirect('/login')->with('success',trans('alert.email.verify'));
     }
+
+    public function verifikasi($id)
+    {
+        $data['email_verified_at'] = now();
+        $this->register->update($id, $data);
+        return redirect('/login')->with('success',trans('alert.email.verify'));
+    }
 }
