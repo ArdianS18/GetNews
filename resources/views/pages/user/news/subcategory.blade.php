@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="news-card-info">
                                     <h3><a data-toggle="tooltip" data-placement="top" title="{{ $tren->name }}" href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                            {!! Illuminate\Support\Str::limit($tren->name, $limit = 50, $end = '...')  !!}
+                                            {!! ($tren->name)  !!}
                                         </a>
                                     </h3>
                                     <ul class="news-metainfo list-style">
