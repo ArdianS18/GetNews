@@ -13,9 +13,19 @@ class RegisterRepository extends BaseRepository implements RegisterInterface
     {
         $this->model = $user;
     }
+
     public function store(array $data): mixed
     {
         return $this->model->query()
         ->create($data);
     }
+
+    public function update(mixed $id, array $data): mixed
+    {
+        return $this->model->query()
+            ->findOrFail($id)
+            ->update($data);
+    }
+
+
 }
