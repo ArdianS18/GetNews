@@ -287,7 +287,6 @@ class AuthorController extends Controller
         $author_id = auth()->user()->author->id;
         $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
         $newsStatistics = $this->news->showNewsStatistic();
-        // dd($newsStatistics);
 
         $view = View::count();
         $like = NewsHasLike::count();
