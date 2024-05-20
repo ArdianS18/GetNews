@@ -995,9 +995,10 @@
             var dataName = element.dataset.name;
 
             var url =
-                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`
+                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
+            var text = `${dataName},Baca Selengkapnya di:  + ${url}`
 
-            var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(url);
+            var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
         }
 
