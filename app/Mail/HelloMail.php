@@ -26,9 +26,14 @@ class HelloMail extends Mailable
     /**
      * Get the message envelope.
      */
-    public function envelope()
+    public function envelope(): Envelope
     {
-       //
+        return new Envelope(
+            to: $this->data['email'],
+            cc: $this->data['email'],
+            bcc: $this->data['email'],
+            subject: 'Verifikasi email untuk pendafataran pada sipjaki pasuruan',
+        );
     }
     /**
      * Get the message content definition.
