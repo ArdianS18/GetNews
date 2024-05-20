@@ -91,6 +91,36 @@
                         </ul>
                     </div>
 
+                    <!-- Reply Modal -->
+                    <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="replyModalLabel">Balas Pesan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form id="replyForm" action="{{ route('send.message') }}" method="POST">
+                                    @method('post')
+                                    @csrf
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="replyEmail" class="col-form-label">Email:</label>
+                                                <input type="email" class="form-control" name="email" id="replyEmail" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="replyMessage" class="col-form-label">Pesan:</label>
+                                                <textarea class="form-control" name="message" id="replyMessage" style="resize: none; height: 100px"></textarea>
+                                            </div>
+                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Kirim Balasan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="d-flex w-100">
                         <div class="min-width-340">
                             <div class="border-end user-chat-box h-100">
@@ -142,6 +172,47 @@
                                                 </td>
                                             </tr> --}}
                                         @endforelse
+
+                                        @forelse ($sendMessage as $send)
+                                        <li class="contact">
+                                            <a href="javascript:void(0)"
+                                                class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
+                                                id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
+                                                <div class="form-check mb-0">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                </div>
+                                                <div class="position-relative w-100 ms-2">
+                                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                                        <h6 class="mb-0 fw-semibold">{{ $send->user->name }}</h6>
+                                                        @if ($send->status == "unread")
+                                                            <span class="badge ms-auto bg-danger">!</span>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="text-dark">{{ $send->message }}</h6>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <p class="mb-0 fs-2 text-muted">{{ $send->created_at }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @empty
+                                        {{-- <tr class="contact">
+                                            <td colspan="5">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h5>Tidak ada data</h5>
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                    @endforelse
 
                                         @forelse ($contactDelete as $contactDelete)
                                             <li class="trash">
@@ -327,8 +398,8 @@
                                                             <ul
                                                                 class="list-unstyledn mb-0 d-flex align-items-center gap-7">
                                                                 <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
-                                                                        href="javascript:void(0)">
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-reply"
+                                                                        href="javascript:void(0)" data-email="{{ $contactUs->user->email }}">
                                                                         <i class="ti ti-arrow-back-up fs-5"></i>
                                                                         Balas
                                                                     </a>
@@ -336,6 +407,85 @@
                                                                 <li>
                                                                     <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-contactus"
                                                                         data-id="{{ $contactUs->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Hapus
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
+                                            {{-- <tr class="chat-content">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada pesan</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
+                                        @endforelse
+
+                                        @forelse ($sendMessage2 as $send2)
+                                        <div class="chat-content" id="chat_content_{{ $send2->id }}" style="display: none;">
+                                            <div class="p-9 py-3 border-bottom chat-meta-user">
+                                                <h5>Detail Pesan</h5>
+                                            </div>
+                                            <div class="position-relative overflow-hidden">
+                                                <div class="position-relative">
+                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                        <div class="chat active-chat" data-user-id="{{ $send2->id }}">
+                                                            <div
+                                                                class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                        alt="user8" width="48" height="48"
+                                                                        class="rounded-circle" />
+                                                                    <div>
+                                                                        <h6 class="fw-semibold mb-0">
+                                                                            {{ $send2->user->name }}</h6>
+                                                                        <p class="mb-0">{{ $send2->user->email }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                                    style="background-color: #175A95;">Pesan</span>
+                                                            </div>
+                                                            <div class="border-bottom pb-7 mb-7">
+                                                                <h4 class="fw-semibold text-dark mb-3">Silakan periksa
+                                                                    pembaruan terbaru ini</h4>
+                                                                <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
+                                                                </p>
+                                                                <p class="mb-3 text-dark">
+                                                                    {{ $send2->message }}
+                                                                </p>
+                                                                <p class="mb-0 text-dark">Salam dari,..</p>
+                                                                <h6 class="fw-semibold mb-0 text-dark pb-1">
+                                                                    {{ $send2->user->name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="px-9 py-3 border-top chat-send-message-footer">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <ul
+                                                                class="list-unstyledn mb-0 d-flex align-items-center gap-7">
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-reply"
+                                                                        href="javascript:void(0)" data-email="{{ $send2->user->email }}">
+                                                                        <i class="ti ti-arrow-back-up fs-5"></i>
+                                                                        Balas
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-contactus"
+                                                                        data-id="{{ $send2->id }}"
                                                                         href="javascript:void(0)">
                                                                         <i class="ti ti-trash fs-5"></i>
                                                                         Hapus
@@ -406,13 +556,6 @@
                                                             <div class="d-flex align-items-center justify-content-between">
                                                                 <ul
                                                                     class="list-unstyledn mb-0 d-flex align-items-center gap-7">
-                                                                    <li>
-                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
-                                                                            href="javascript:void(0)">
-                                                                            <i class="ti ti-arrow-back-up fs-5"></i>
-                                                                            Balas
-                                                                        </a>
-                                                                    </li>
                                                                     <li>
                                                                         <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-contactus"
                                                                             data-id="{{ $contactDelete2->id }}"
@@ -501,8 +644,8 @@
                                                             <ul
                                                                 class="list-unstyledn mb-0 d-flex align-items-center gap-7">
                                                                 <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
-                                                                        href="javascript:void(0)">
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-reply"
+                                                                        href="javascript:void(0)" data-email="{{ $report2->user->email }}">
                                                                         <i class="ti ti-arrow-back-up fs-5"></i>
                                                                         Balas
                                                                     </a>
@@ -589,13 +732,6 @@
                                                                 <ul
                                                                     class="list-unstyledn mb-0 d-flex align-items-center gap-7">
                                                                     <li>
-                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
-                                                                            href="javascript:void(0)">
-                                                                            <i class="ti ti-arrow-back-up fs-5"></i>
-                                                                            Balas
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
                                                                         <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-report"
                                                                             data-id="{{ $reportDelete2->id }}"
                                                                             href="javascript:void(0)">
@@ -636,66 +772,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="offcanvas offcanvas-start user-chat-box" tabindex="-1" id="chat-sidebar"
-                        aria-labelledby="offcanvasExampleLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasExampleLabel"> Email </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="px-9 pt-4 pb-3">
-                            <button class="btn btn-primary fw-semibold py-8 w-100">Compose</button>
-                        </div>
-                        <ul class="list-group" style="height: calc(100vh - 150px)" data-simplebar>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Inbox</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-brand-telegram fs-5"></i>Sent</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-file-text fs-5"></i>Draft</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Spam</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-trash fs-5"></i>Trash</a>
-                            </li>
-                            <li class="border-bottom my-3"></li>
-                            <li class="fw-semibold text-dark text-uppercase mx-9 my-2 px-3 fs-2">IMPORTANT</li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-star fs-5"></i>Starred</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)" class="d-block "><i
-                                        class="ti ti-badge fs-5"></i>Important</a>
-                            </li>
-                            <li class="border-bottom my-3"></li>
-                            <li class="fw-semibold text-dark text-uppercase mx-9 my-2 px-3 fs-2">LABELS</li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i
-                                        class="ti ti-bookmark fs-5 text-primary"></i>Promotional</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-bookmark fs-5 text-warning"></i>Social</a>
-                            </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-bookmark fs-5 text-success"></i>Health</a>
-                            </li>
-                        </ul>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -705,6 +781,21 @@
 @endsection
 
 @section('script')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const replyButtons = document.querySelectorAll('.btn-reply');
+
+            replyButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const email = this.getAttribute('data-email');
+                    const modal = $('#replyModal');
+                    modal.find('#replyEmail').val(email); // Mengisi email ke dalam input field di modal
+                    modal.modal('show');
+                });
+            });
+        });
+    </script>
 
     <script>
         function loadRouteContent(event, route) {

@@ -416,11 +416,19 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showNewsStatistic(): mixed
     {
-        return $this->model->query()
-            ->withCount('views')
-            ->orderByDesc('views_count')
-            ->take(3)
-            ->get();
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $results = [];
+
+        foreach ($days as $day) {
+            $results[$day] = $this->model->query()
+                ->whereDate('created_at', Carbon::now()->startOfWeek()->addDays(array_search($day, $days)))
+                ->withCount('views')
+                ->orderByDesc('views_count')
+                ->take(3)
+                ->get();
+        }
+
+        return $results;
     }
 
     public function showCountMonth(): mixed

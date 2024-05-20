@@ -223,7 +223,7 @@
                                         d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z" />
                                 </svg>
                             </a>
-                            <a id="tw">
+                            <a id="tw" style="display: inline-block; background-color: #ffffff; border-radius: 50%; width: 24px; height: 24px; padding: 5.5px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 128 128">
                                     <path
                                         d="M75.916 54.2L122.542 0h-11.05L71.008 47.06L38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303L89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086l-39.42-56.386h16.972L65.19 53.824l4.954 7.086l41.353 59.15h-16.97L60.782 71.793Z" />
@@ -399,8 +399,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <p>
-                                                    Video dan pengguna yang dilaporkan akan ditinjau oleh staf
-                                                    YouTube 24/7 untuk menentukan apakah video dan pengguna
+                                                    Artikel dan pengguna yang dilaporkan akan ditinjau oleh staf
+                                                    GetMedia untuk menentukan apakah artikel dan pengguna
                                                     tersebut melanggar Pedoman Komunitas kami atau tidak. Akun
                                                     akan dikenai sanksi jika melanggar Pedoman Komunitas, dan
                                                     pelanggaran serius atau berulang dapat berakibat pada
@@ -1056,7 +1056,7 @@
 
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = `${dataName}, Baca Selengkapnya di:  + ${url}`
+            var text = `${dataName}, Baca Selengkapnya di: ${url}`
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
@@ -1081,7 +1081,7 @@
 
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = `${dataName}, Baca Selengkapnya di:  + ${url}`
+            var text = `${dataName}, Baca Selengkapnya di:  ${url}`
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
@@ -1095,7 +1095,7 @@
 
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = `${dataName}, Baca Selengkapnya di:  + ${url}`
+            var text = `${dataName}, Baca Selengkapnya di: ${url}`
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
             window.open(telegramLink, '_blank');

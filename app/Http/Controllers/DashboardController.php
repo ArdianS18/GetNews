@@ -247,4 +247,5 @@ class DashboardController extends Controller
 
         return view('pages.user.news.search',compact('categories', 'subCategories','newsByDate','query','totalCategories','populars'));
     }
+
 }
