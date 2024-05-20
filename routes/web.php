@@ -9,6 +9,8 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentReportController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowersController;
@@ -20,6 +22,7 @@ use App\Http\Controllers\NewsViewController;
 use App\Http\Controllers\PaymentAdvertisementsController;
 use App\Http\Controllers\PaymentNewsController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SendMessageController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -114,7 +117,6 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('faq-list', function () {
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
-
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
@@ -170,14 +172,23 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         return view('pages.admin.akun.index');
     })->name('account.admin.list');
     Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin');
+
     Route::post('create-account', [UserController::class, 'storeByAdmin'])->name('create.account.admin');
     Route::put('update-account/{user}', [UserController::class, 'update'])->name('update.account.admin');
     Route::delete('delete-account/{user}', [UserController::class, 'destroy'])->name('delete.account.admin');
 
-    Route::get('advertisement-list', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.list');
+    Route::get('advertisement-approved', [AdvertisementController::class, 'indexAdmin'])->name('iklan.admin.approved');
+    Route::get('advertisement-list', function () {
+        return view('pages.admin.iklan.index');
+    })->name('iklan.admin.list');
+
     Route::get('detail-iklan', function () {
         return view('pages.admin.iklan.detail-iklan');
     })->name('admin.detail.iklan');
+
+    Route::get('about-create', [DashboardController::class, 'aboutStore'])->name('create.about');
+    Route::post('contact-about-create', [ContactController::class, 'store'])->name('contact.create.about');
+    Route::put('contact-about-update/{contact}', [ContactController::class, 'update'])->name('contact.update.about');
 });
 
 
@@ -191,6 +202,9 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 
     Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
+    Route::delete('delete-iklan-admin/{id}', [AdvertisementController::class, 'delete'])->name('admin.destroy.iklan');
+
+    Route::post('send-message', [SendMessageController::class, 'store'])->name('send.message');
 });
 
 Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
@@ -205,12 +219,10 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
-    // Route::post('profilecreatenews', [NewsController::class, 'store'])->name('profile.berita.store');
     //
     Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
-    // Route::post('sub-category-detail', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     // Update And Delete News
     Route::get('edit-news-profile/{newsId}', [ProfileController::class, 'editnews'])->name('profile.news.edit');
 
@@ -258,6 +270,7 @@ Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
+    Route::post('comment-report/{comment}', [CommentReportController::class, 'store'])->name('comment.report');
     //author
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
@@ -285,13 +298,12 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('ketentuan-dan-persyaratan', function () {
         return view('pages.user.home');
     })->name('user.home');
-    Route::get('user-inbox', function () {
-        return view('pages.user.inbox.index');
-    })->name('user.inbox');
+    Route::get('user-inbox', [UserController::class, 'index'])->name('user.inbox');
 
     Route::get('berita-upload', function () {
         return view('pages.user.news.upload');
     })->name('berita.upload');
+
     Route::post('payment-news', [PaymentNewsController::class, 'store'])->name('user.payment.news');
 
     Route::get('status-berita', function () {
@@ -381,7 +393,6 @@ Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews
 Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 
 Route::get('subscriber', [SubscribeController::class, 'index'])->name('user.berlangganan');
-
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::prefix('tag')->name('tag.')->group(function(){
@@ -395,3 +406,4 @@ Route::get('load-coin', function () {
 });
 
 Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->name('category.all');
+Route::get('allsub/{subslug}/{data}', [NewsController::class, 'showAllSubCategories'])->name('subCategory.all');

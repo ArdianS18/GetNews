@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\ContactInterface;
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
+use App\Services\ContactService;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    private ContactInterface $contact;
+    private ContactService $service;
+
+    public function __construct(ContactInterface $contact, ContactService $service)
+    {
+        $this->contact = $contact;
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,9 +38,12 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-        //
+        $data = $this->service->store($request);
+        $this->contact->store($data);
+
+        return back();
     }
 
     /**
@@ -50,9 +65,11 @@ class ContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
-        //
+        $data = $this->service->update($request, $contact);
+        $this->contact->update($contact->id,$data);
+        return back();
     }
 
     /**

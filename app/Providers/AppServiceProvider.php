@@ -19,6 +19,8 @@ use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Repositories\NewsRepository;
 use App\Contracts\Repositories\UserRepository;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CommentReportInterface;
+use App\Contracts\Interfaces\ContactInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Contracts\Interfaces\ContactUsInterface;
 use App\Contracts\Interfaces\FollowerInterface;
@@ -35,6 +37,7 @@ use App\Contracts\Interfaces\PaymentAdvertisementInterface;
 use App\Contracts\Interfaces\PaymentAdvertisementsInterface;
 use App\Contracts\Interfaces\PaymentNewsInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Contracts\Interfaces\SendMessageInterface;
 use App\Contracts\Interfaces\SocialMediaInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\SubscribeInterface;
@@ -44,6 +47,8 @@ use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Repositories\AdvertisementPhotoRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\CategoryRepository;
+use App\Contracts\Repositories\CommentReportRepository;
+use App\Contracts\Repositories\ContactRepository;
 use App\Contracts\Repositories\RegisterRepository;
 use App\Contracts\Repositories\ContactUsRepository;
 use App\Contracts\Repositories\FollowerRepository;
@@ -56,6 +61,7 @@ use App\Contracts\Repositories\NewsTagRepository;
 use App\Contracts\Repositories\PaymentAdvertisementRepository;
 use App\Contracts\Repositories\PaymentNewsRepository;
 use App\Contracts\Repositories\ReportRepository;
+use App\Contracts\Repositories\SendMessageRepository;
 use App\Contracts\Repositories\SocialMediaRepository;
 use App\Contracts\Repositories\SubCategoryRepository;
 use App\Contracts\Repositories\SubscribeRepository;
@@ -93,6 +99,9 @@ class AppServiceProvider extends ServiceProvider
         PaymentNewsInterface::class => PaymentNewsRepository::class,
         VisitorInterface::class => VisitorRepository::class,
         SocialMediaInterface::class => SocialMediaRepository::class,
+        CommentReportInterface::class => CommentReportRepository::class,
+        ContactInterface::class => ContactRepository::class,
+        SendMessageInterface::class => SendMessageRepository::class
     ];
 
     /**

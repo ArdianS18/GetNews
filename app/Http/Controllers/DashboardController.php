@@ -22,6 +22,7 @@ use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\ContactInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
@@ -43,11 +44,12 @@ class DashboardController extends Controller
     private NewsHasLikeInterface $newsHasLike;
     private CommentInterface $comment;
     private VisitorInterface $visitor;
+    private ContactInterface $contact;
 
     use CustomPaginateTrait;
 
 
-    public function __construct(TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment,VisitorInterface $visitor)
+    public function __construct(ContactInterface $contact,TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment,VisitorInterface $visitor)
     {
         $this->user = $user;
         $this->author = $author;
@@ -64,6 +66,8 @@ class DashboardController extends Controller
         $this->newsHasLike = $newsHasLike;
         $this->comment = $comment;
         $this->visitor = $visitor;
+
+        $this->contact = $contact;
     }
 
     public function index(Request $request){
@@ -77,6 +81,7 @@ class DashboardController extends Controller
         $categories = $this->category->showWhithCount();
         $news2 = $this->news->showCountMonth();
         $newsCategory = $this->newsCategory->trending();
+
         $visitor = $this->visitor->get()->count();
         $visitorChart = $this->visitor->countChart();
 
@@ -224,6 +229,14 @@ class DashboardController extends Controller
         return view('errors.404',compact('categories', 'subCategories'));
     }
 
+
+    public function aboutStore()
+    {
+        $data = $this->contact->get()->first();
+        return view('pages.admin.about.index', compact('data'));
+    }
+
+
     public function searchNews(Request $request){
         $query  = $request->q;
         $newsByDate = $this->news->whereDate($request);
@@ -233,6 +246,6 @@ class DashboardController extends Controller
         $populars = $this->news->getByPopular('up');
 
         return view('pages.user.news.search',compact('categories', 'subCategories','newsByDate','query','totalCategories','populars'));
-
     }
+
 }

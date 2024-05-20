@@ -15,7 +15,7 @@
 @endsection
 
 <head>
-    <title>UIser | Inbox</title>
+    <title>User | Inbox</title>
 </head>
 
 @section('content')
@@ -66,21 +66,38 @@
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                                    href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
-                            </li>
-                            {{-- <li class="list-group-item border-0 p-0 mx-9">
-                  <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                    href="javascript:void(0)"><i class="ti ti-file-text fs-5"></i>Draft</a>
-                </li>
-                <li class="list-group-item border-0 p-0 mx-9">
-                  <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
-                    href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Spam</a>
-                </li> --}}
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
                                     href="javascript:void(0)"><i class="ti ti-trash fs-5"></i>Sampah</a>
                             </li>
                         </ul>
+                    </div>
+
+                    <div class="modal fade" id="replyModal" tabindex="-1" aria-labelledby="replyModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="replyModalLabel">Balas Pesan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form id="replyForm" action="{{ route('send.message') }}" method="POST">
+                                    @method('post')
+                                    @csrf
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="replyEmail" class="col-form-label">Email:</label>
+                                                <input type="email" class="form-control" name="email" id="replyEmail" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="replyMessage" class="col-form-label">Pesan:</label>
+                                                <textarea class="form-control" name="message" id="replyMessage" style="resize: none; height: 100px"></textarea>
+                                            </div>
+                                        </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Kirim Balasan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="d-flex w-100">
@@ -96,25 +113,21 @@
                                 </div>
                                 <div class="app-chat">
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
-                                        {{-- @forelse ($contactUs as $contact)
+                                        @forelse ($data as $dat)
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
-                                                    id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
-                                                    </div>
+                                                    id="chat_user_{{ $dat->id }}" dat-user-id="{{ $dat->user_id }}">
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
+                                                            <h6 class="mb-0 fw-semibold">{{ $dat->user->name }}</h6>
                                                             <span class="badge fs-2 rounded-4 py-1 px-4"
                                                                 style="background-color: #175A95;">Pesan</span>
                                                         </div>
-                                                        <h6 class="text-dark">{{ $contact->message }}</h6>
+                                                        <h6 class="text-dark">{{ $dat->message }}</h6>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $contact->created_at }}
+                                                                <p class="mb-0 fs-2 text-muted">{{ $dat->created_at }}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -124,7 +137,7 @@
                                         @empty
                                         @endforelse
 
-                                        @forelse ($contactDelete as $contactDelete)
+                                        {{-- @forelse ($contactDelete as $contactDelete)
                                             <li>
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
@@ -222,7 +235,7 @@
                             <div class="chat-container h-100 w-100">
                                 <div class="chat-box-inner-part h-100">
                                     <div class="chatting-box app-email-chatting-box">
-                                        {{-- @forelse ($contactUs2 as $contactUs)
+                                        @forelse ($message as $send)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Pesan</h5>
                                             </div>
@@ -239,8 +252,8 @@
                                                                         class="rounded-circle" />
                                                                     <div>
                                                                         <h6 class="fw-semibold mb-0">
-                                                                            {{ $contactUs->user->name }}</h6>
-                                                                        <p class="mb-0">{{ $contactUs->user->email }}
+                                                                            {{ $send->user->name }}</h6>
+                                                                        <p class="mb-0">{{ $send->user->email }}
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -253,11 +266,11 @@
                                                                 <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
                                                                 </p>
                                                                 <p class="mb-3 text-dark">
-                                                                    {{ $contactUs->message }}
+                                                                    {{ $send->message }}
                                                                 </p>
                                                                 <p class="mb-0 text-dark">Regards,</p>
                                                                 <h6 class="fw-semibold mb-0 text-dark pb-1">
-                                                                    {{ $contactUs->user->name }}</h6>
+                                                                    {{ $send->user->name }}</h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -266,15 +279,15 @@
                                                             <ul
                                                                 class="list-unstyledn mb-0 d-flex align-items-center gap-7">
                                                                 <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
-                                                                        href="javascript:void(0)">
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-reply"
+                                                                        href="javascript:void(0)" data-email="{{ $send->user->email }}">
                                                                         <i class="ti ti-arrow-back-up fs-5"></i>
                                                                         Balas
                                                                     </a>
                                                                 </li>
                                                                 <li>
                                                                     <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-contactus"
-                                                                        data-id="{{ $contactUs->id }}"
+                                                                        data-id="{{ $send->id }}"
                                                                         href="javascript:void(0)">
                                                                         <i class="ti ti-trash fs-5"></i>
                                                                         Hapus
@@ -288,7 +301,7 @@
                                         @empty
                                         @endforelse
 
-                                        @forelse ($contactDelete2 as $contactDelete2)
+                                        {{-- @forelse ($contactDelete2 as $contactDelete2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Pesan</h5>
                                             </div>
@@ -360,10 +373,10 @@
                                                 </div>
                                             </div>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
 
-                                        @forelse ($reports2 as $report2)
+                                        {{-- @forelse ($reports2 as $report2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Laporan</h5>
                                             </div>
@@ -585,6 +598,22 @@
 @endsection
 
 @section('script')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const replyButtons = document.querySelectorAll('.btn-reply');
+
+            replyButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const email = this.getAttribute('data-email');
+                    const modal = $('#replyModal');
+                    modal.find('#replyEmail').val(email); // Mengisi email ke dalam input field di modal
+                    modal.modal('show');
+                });
+            });
+        });
+    </script>
+
     <script src="{{ asset('admin/dist/js/apps/chat.js') }}"></script>
 
     <script>

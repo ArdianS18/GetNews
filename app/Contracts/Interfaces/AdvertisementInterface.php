@@ -17,4 +17,5 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface AdvertisementInterface extends GetInterface,StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, CustomPaginationInterface
 {
     public function where($id) : mixed;
+    public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 }

@@ -115,5 +115,37 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
             ->update($data);
     }
 
+    public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->where('status', "pending")
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('type', 'LIKE', '%' .  $request->name . '%');
+            })
+            ->when($request->latest, function ($query) use ($request) {
+                $query->when($request->latest === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+
+                $query->when($request->latest === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->when($request->perpage, function ($query) use ($request) {
+                $query->when($request->perpage === '10', function ($var) {
+                    $var->take(10);
+                });
+                $query->when($request->perpage === '20', function ($var) {
+                    $var->take(20);
+                });
+                $query->when($request->perpage === '50', function ($var) {
+                    $var->take(50);
+                });
+                $query->when($request->perpage === '100', function ($var) {
+                    $var->take(100);
+                });
+            })
+            ->fastPaginate($pagination);
+    }
 
 }

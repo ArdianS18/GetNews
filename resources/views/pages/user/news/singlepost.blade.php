@@ -223,7 +223,7 @@
                                         d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z" />
                                 </svg>
                             </a>
-                            <a id="tw">
+                            <a id="tw" style="display: inline-block; background-color: #ffffff; border-radius: 50%; width: 24px; height: 24px; padding: 5.5px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 128 128">
                                     <path
                                         d="M75.916 54.2L122.542 0h-11.05L71.008 47.06L38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303L89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086l-39.42-56.386h16.972L65.19 53.824l4.954 7.086l41.353 59.15h-16.97L60.782 71.793Z" />
@@ -412,7 +412,7 @@
                                             <div class="d-flex justify-content-end me-2">
                                                 <button type="button" class="me-2 btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="submit" class="btn btn-primary">Laporkan</button>
                                             </div>
                                         </div>
                                     </form>
@@ -517,7 +517,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 text-end order-sm-3 order-2">
-                                                        <div class="">
+                                                        <button class="btn report-button" data-id="{{ $comment->id }}">
                                                             <i><svg xmlns="http://www.w3.org/2000/svg" width="19"
                                                                     height="19" viewBox="0 0 24 24">
                                                                     <path fill="none" stroke="currentColor"
@@ -525,8 +525,9 @@
                                                                         stroke-width="2"
                                                                         d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
                                                                 </svg></i>
-                                                        </div>
+                                                        </button>
                                                     </div>
+
                                                     <div class="col-md-9 order-md-3 order-sm-2 order-2">
                                                         <div class="comment-text">
                                                             <p>{{ $comment->content }}</p>
@@ -560,11 +561,6 @@
                                                         Balasan</button>
                                                 </div>
                                             @endauth
-                                            {{-- <div>
-                                                <button type="submit" class="btn-two w-100 btn"
-                                                    style="background-color: #0F4D8A;padding:10px !important">Kirim
-                                                    Balasan</button>
-                                            </div> --}}
                                         </form>
                                     </div>
                                 @endif
@@ -588,7 +584,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 text-end order-sm-3 order-2">
-                                                        <div class="">
+                                                        <button class="btn report-button" data-id="{{ $reply->id }}">
                                                             <i><svg xmlns="http://www.w3.org/2000/svg" width="19"
                                                                     height="19" viewBox="0 0 24 24">
                                                                     <path fill="none" stroke="currentColor"
@@ -596,8 +592,9 @@
                                                                         stroke-width="2"
                                                                         d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
                                                                 </svg></i>
-                                                        </div>
+                                                        </button>
                                                     </div>
+
                                                     <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
                                                         <div class="comment-text">
                                                             <p>{{ $reply->content }}</p>
@@ -663,6 +660,43 @@
                                     @endauth
                                 </div>
                             </form>
+                        </div>
+
+                        <div class="modal fade" id="modal-report" tabindex="-1" aria-labelledby="modal-report Label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-report Label"><span
+                                                style="color: #0F4D8A; font-size: 25px;" class="mb-2 me-1"></span>Laporkan Komentar
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <form id="form-report">
+                                        @method('post')
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="mb-3 form-group">
+                                                <label for="message" class="form-label">Masukan Detail
+                                                    Laporan:</label>
+                                                <textarea name="content" id="content" class="form-control" rows="7" style="resize: none"></textarea>
+                                                @error('message')
+                                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <div class="d-flex justify-content-end me-2">
+                                                <button type="button" class="me-2 btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Laporkan</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="mt-5">
@@ -818,6 +852,57 @@
 @endsection
 
 @section('script')
+<script>
+        var commentId;
+        document.addEventListener('DOMContentLoaded', function() {
+        var reportButtons = document.querySelectorAll('.report-button');
+        reportButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+            commentId = this.getAttribute('data-id');
+            var messageInput = document.getElementById('message');
+            messageInput.setAttribute('data-comment-id', commentId);
+            var modal = document.getElementById('modal-report');
+            var modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+            });
+        });
+        });
+
+        document.getElementById('form-report').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var messageInput = document.getElementById('content');
+            var form = event.target;
+            var csrfToken = form.querySelector('input[name="_token"]').value;
+            var content = messageInput.value;
+
+            fetch('/comment-report/' + commentId, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        content: content
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    success: function(response) {
+                    document.getElementById('model-report').modal('hide')
+                    emptyForm('form-report')
+                },
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {})
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+    </script>
+
     <script>
         function toggleReplyForm(commentId) {
             var replyForm = document.getElementById("reply-form-" + commentId);

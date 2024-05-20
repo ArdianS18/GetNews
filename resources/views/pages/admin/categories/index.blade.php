@@ -47,11 +47,29 @@
 
     <div class="">
         <div class="d-flex justify-content-between">
-            <form class="d-flex">
+            <form class="d-flex gap-2">
                 <div class="input-group">
                     <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
                         value="{{ request('search') }}" placeholder="Search">
                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                </div>
+                <div>
+                    <div class="d-flex">
+                        <select class="form-select" id="latest" style="width: 200px">
+                            <option value="">Tampilkan semua</option>
+                            <option value="terbaru">Terbaru</option>
+                            <option value="terlama">Terlama</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div class="d-flex">
+                        <select class="form-select" id="many" style="width: 200px">
+                            <option value="">Pilih opsi</option>
+                            <option value="teratas">Teratas</option>
+                            <option value="terbawah">Terbawah</option>
+                        </select>
+                    </div>
                 </div>
             </form>
             <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
@@ -159,13 +177,31 @@
             }, 500);
         });
 
+        $('#latest').change(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+
+        $('#many').change(function() {
+            clearTimeout(debounceTimer);
+
+            debounceTimer = setTimeout(function() {
+                get(1)
+            }, 500);
+        });
+
         function get(page) {
             $.ajax({
                 url: "{{ route('kategori.index') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data: {
-                    category: $('#search-name').val()
+                    category: $('#search-name').val(),
+                    latest: $('#latest').val(),
+                    many: $('#many').val()
                 },
                 beforeSend: function() {
                     $('#data').html("")

@@ -17,6 +17,7 @@ use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Contracts\Interfaces\ViewInterface;
 use App\Enums\NewsStatusEnum;
 use App\Enums\RoleEnum;
 use App\Enums\UserStatusEnum;
@@ -48,7 +49,7 @@ class AuthorController extends Controller
     private NewsInterface $news;
 
     private NewsRejectInterface $newsReject;
-
+    private ViewInterface $view;
     private CategoryInterface $categories;
     private SubCategoryInterface $subCategories;
     private TagInterface $tags;
@@ -62,7 +63,7 @@ class AuthorController extends Controller
     private $authorBannedService;
 
 
-    public function __construct(NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+    public function __construct(ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
@@ -81,6 +82,8 @@ class AuthorController extends Controller
         $this->authorService = $authorService;
         $this->authorBannedService = $authorBannedService;
         $this->serviceregister = $serviceregister;
+
+        $this->view = $view;
 
     }
     /**
@@ -283,10 +286,12 @@ class AuthorController extends Controller
         $user_id = $news->pluck('user_id');
         $author_id = auth()->user()->author->id;
         $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
-        $data_statistik = $this->news->showNewsStatistic();
+        $newsStatistics = $this->news->showNewsStatistic();
+        // dd($newsStatistics);
+
         $view = View::count();
         $like = NewsHasLike::count();
 
-        return view('pages.author.statistic.news', compact('news', 'view', 'like', 'count'));
+        return view('pages.author.statistic.news', compact('news', 'view', 'like', 'count', 'newsStatistics'));
     }
 }

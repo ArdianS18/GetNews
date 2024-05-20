@@ -17,9 +17,9 @@ class AdvertisementResource extends JsonResource
     {
         return[
             'id' => $this->id,
-            'user_id' => $this->user->id,
             'type' => $this->type,
             'page' => $this->page,
+            'position' => $this->position,
             'start_date' => Carbon::parse($this->start_date)->isoFormat('D MMMM Y'),
             'end_date' => Carbon::parse($this->end_date)->isoFormat('D MMMM Y'),
             'url' => $this->url,

@@ -38,16 +38,15 @@
     </form>
 </div>
 
-<div class="card shadow-sm p-4 mt-4">
 
-    @forelse ($advertisements as $advertisement)
+@forelse ($advertisements as $advertisement)
+    <div class="card shadow-sm p-4 mt-4">
         <div class="row">
             <div class="col-md-12 col-lg-3">
                 <div class="mb-2">
                     <img src="{{ asset('storage/' . $advertisement->photo) }}" alt="" width="290px" height="180px" class="w-100" style="width: 100%; object-fit:cover;">
                 </div>
             </div>
-
             <div class="row col-md-12 col-lg-6">
                 <div class="row col-lg-6">
                     <div class="col-lg-6 mb-3">
@@ -85,8 +84,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="col-md-12 col-lg-3">
 
                 <div class="d-flex justify-content-end gap-2">
@@ -154,6 +151,7 @@
             </div>
 
         </div>
+    </div>
     @empty
         <div class="d-flex justify-content-center">
             <div>
@@ -165,7 +163,6 @@
         </div>
     @endforelse
 
-</div>
 
 {{-- <div class="card p-4">
     <div class="row">

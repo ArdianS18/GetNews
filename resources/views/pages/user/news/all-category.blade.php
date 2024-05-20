@@ -12,7 +12,6 @@
         </h2>
         <ul class="breadcrumb-menu list-style">
             <li><a href="/">Home</a></li>
-            <li><p>All</p></li>
             <li>{{ $category->name }}</li>
         </ul>
     </div>

@@ -5,13 +5,13 @@
             @method('DELETE')
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="myModalLabel">
-                    Hapus Akun
+                    Hapus data
                 </h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <p>Apakah anda yakin akan menghapus akun ini?  </p>
+                <p>Apakah anda yakin akan menghapus data ini?  </p>
 
             </div>
             <div class="modal-footer">

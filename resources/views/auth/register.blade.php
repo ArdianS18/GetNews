@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <title>Login | GetMedia.Id</title>
+    <title>Register | GetMedia.Id</title>
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
     <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
@@ -47,70 +47,81 @@
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5">
             <div class="w-px-500 mx-auto my-auto">
                 <h3 class="mb-5">Buat Akun GetMedia.id</h3>
-                @if ($errors->any())
-                    @foreach ($errors->all() as $error)
-                        <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
-                            {{ $error }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                aria-label="Close"></button>
-                        </div>
-                    @endforeach
-                @endif
                     <form method="POST" class="py-3" action="{{route('register')}}">
                         @csrf
                         <div class="row">
                             <div class="my-2 col-12">
                                 <label for="name" class="form-label mb-2">Nama Lengkap</label>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert" style="color: red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="my-2 col-lg-12">
                                 <label for="phone_number" class="form-label mb-2">Nomor Hp</label>
-                                <input type="text" id="phone_number" class="form-control" name="phone_number">
+                                <input type="text" id="phone_number" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}">
+                                @error('phone_number')
+                                    <span class="invalid-feedback" role="alert" style="color: red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="my-2 col-lg-12">
                                 <label for="email" class="form-label mb-2">Email</label>
-                                <input type="email" id="email" class="form-control" name="email">
+                                <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert" style="color: red">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="my-2 col-lg-6">
                                 <label for="password" class="form-label mb-2">Password</label>
                                 <div class="input-group input-group-merge has-validation">
-                                    <input type="password" id="password" class="form-control" name="password">
+                                    <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}">
                                     <span class="input-group-text cursor-pointer" onclick="togglePasswordVisibility()">
                                         <svg xmlns="http://www.w3.org/2000/svg" id="togglePasswordIcon" width="20" height="20" viewBox="0 0 256 256">
                                             <path fill="currentColor" d="M53.92 34.62a8 8 0 1 0-11.84 10.76l19.24 21.17C25 88.84 9.38 123.2 8.69 124.76a8 8 0 0 0 0 6.5c.35.79 8.82 19.57 27.65 38.4C61.43 194.74 93.12 208 128 208a127.11 127.11 0 0 0 52.07-10.83l22 24.21a8 8 0 1 0 11.84-10.76Zm47.33 75.84l41.67 45.85a32 32 0 0 1-41.67-45.85M128 192c-30.78 0-57.67-11.19-79.93-33.25A133.16 133.16 0 0 1 25 128c4.69-8.79 19.66-33.39 47.35-49.38l18 19.75a48 48 0 0 0 63.66 70l14.73 16.2A112 112 0 0 1 128 192m6-95.43a8 8 0 0 1 3-15.72a48.16 48.16 0 0 1 38.77 42.64a8 8 0 0 1-7.22 8.71a6.39 6.39 0 0 1-.75 0a8 8 0 0 1-8-7.26A32.09 32.09 0 0 0 134 96.57m113.28 34.69c-.42.94-10.55 23.37-33.36 43.8a8 8 0 1 1-10.67-11.92a132.77 132.77 0 0 0 27.8-35.14a133.15 133.15 0 0 0-23.12-30.77C185.67 75.19 158.78 64 128 64a118.37 118.37 0 0 0-19.36 1.57A8 8 0 1 1 106 49.79A134 134 0 0 1 128 48c34.88 0 66.57 13.26 91.66 38.35c18.83 18.83 27.3 37.62 27.65 38.41a8 8 0 0 1 0 6.5Z"/>
                                         </svg>
                                     </span>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert" style="color: red">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
                             </div>
                             <div class="my-2 col-lg-6">
                                 <label for="password" class="form-label mb-2">Konfirmasi Password</label>
                                 <div class="input-group input-group-merge has-validation">
-                                    <input type="password" id="password-konfirm" class="form-control" name="password">
+                                    <input type="password" id="password-konfirm" class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}">
                                     <span class="input-group-text cursor-pointer" onclick="togglePasswordVisibility2()">
                                         <svg xmlns="http://www.w3.org/2000/svg" id="togglePasswordIcon2" width="20" height="20" viewBox="0 0 256 256">
                                             <path fill="currentColor" d="M53.92 34.62a8 8 0 1 0-11.84 10.76l19.24 21.17C25 88.84 9.38 123.2 8.69 124.76a8 8 0 0 0 0 6.5c.35.79 8.82 19.57 27.65 38.4C61.43 194.74 93.12 208 128 208a127.11 127.11 0 0 0 52.07-10.83l22 24.21a8 8 0 1 0 11.84-10.76Zm47.33 75.84l41.67 45.85a32 32 0 0 1-41.67-45.85M128 192c-30.78 0-57.67-11.19-79.93-33.25A133.16 133.16 0 0 1 25 128c4.69-8.79 19.66-33.39 47.35-49.38l18 19.75a48 48 0 0 0 63.66 70l14.73 16.2A112 112 0 0 1 128 192m6-95.43a8 8 0 0 1 3-15.72a48.16 48.16 0 0 1 38.77 42.64a8 8 0 0 1-7.22 8.71a6.39 6.39 0 0 1-.75 0a8 8 0 0 1-8-7.26A32.09 32.09 0 0 0 134 96.57m113.28 34.69c-.42.94-10.55 23.37-33.36 43.8a8 8 0 1 1-10.67-11.92a132.77 132.77 0 0 0 27.8-35.14a133.15 133.15 0 0 0-23.12-30.77C185.67 75.19 158.78 64 128 64a118.37 118.37 0 0 0-19.36 1.57A8 8 0 1 1 106 49.79A134 134 0 0 1 128 48c34.88 0 66.57 13.26 91.66 38.35c18.83 18.83 27.3 37.62 27.65 38.41a8 8 0 0 1 0 6.5Z"/>
                                         </svg>
                                     </span>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert" style="color: red">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
                             </div>
                         </div>
-
                         <button type="submit" class="btn mt-5 d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
                             Daftar
                         </button>
                     </form>
-
                     <div class="text-center">
                             <p>Sudah memiliki akun?<a style="color: #438ac8" href="{{route('login')}}"> Masuk Sekarang!</a></p>
                     </div>
-
-
             </div>
         </div>
     </div>
 </div>
+
 
 <script>
     function togglePasswordVisibility() {

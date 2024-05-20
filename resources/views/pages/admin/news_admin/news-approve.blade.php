@@ -61,7 +61,6 @@
                     </tr>
                 </thead>
                 <tbody id="data">
-
                 </tbody>
             </table>
         </div>
@@ -70,8 +69,8 @@
             <nav id="pagination">
             </nav>
         </div>
+        
         <x-delete-modal-component />
-
 @endsection
 
 @section('script')

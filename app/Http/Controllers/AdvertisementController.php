@@ -8,6 +8,7 @@ use App\Enums\AdvertisementStatusEnum;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\AdvertisementRequest;
 use App\Http\Requests\AdvetisementRequest;
+use App\Http\Resources\AdvertisementResource;
 use App\Models\Advertisement;
 use App\Services\AdvertisementPhotoService;
 use App\Services\AdvertisementService;
@@ -37,10 +38,23 @@ class AdvertisementController extends Controller
         return view('pages.user.iklan.pengajuan');
     }
 
-    public function indexAdmin()
+    public function indexAdmin(Request $request, Advertisement $advertisement)
     {
-        $advertisements = $this->advertisement->where('admin');
-        return view('pages.admin.iklan.index', compact('advertisements'));
+        if ($request->has('page')) {
+            $advertisement = $this->advertisement->customPaginate2($request, 10);
+            $data['paginate'] = [
+                'current_page' => $advertisement->currentPage(),
+                'last_page' => $advertisement->lastPage(),
+            ];
+            $data['data'] = AdvertisementResource::collection($advertisement);
+        } else {
+            $advertisement = $this->advertisement->search($request);
+            $data = AdvertisementResource::collection($advertisement);
+        }
+        return ResponseHelper::success($data);
+
+        // $advertisements = $this->advertisement->where('admin');
+        // return view('pages.admin.iklan.index', compact('advertisements'));
     }
 
     public function advertisementStore()
@@ -99,5 +113,18 @@ class AdvertisementController extends Controller
         // dd($advertisement);
         $this->advertisement->delete($id);
         return back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function delete($id)
+    {
+        try {
+            $this->advertisement->delete($id);
+            return ResponseHelper::success(null, trans('alert.delete_success'));
+        } catch (\Exception $e) {
+            return ResponseHelper::error(trans('alert.delete_error'), 500);
+        }
     }
 }

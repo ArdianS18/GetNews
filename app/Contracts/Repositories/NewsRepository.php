@@ -416,43 +416,27 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showNewsStatistic(): mixed
     {
-        $year = date('Y');
-        $result =  $this->model->query()
-            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'), DB::raw('COUNT(views.news_id) as views_count'), DB::raw('COUNT(followers.author_id) as followers_count'))
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->leftJoin('followers', 'news.user_id', '=', 'followers.author_id')
-            ->whereYear('news.created_at', $year)
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $results = [];
 
-
-        $monthlyData = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $found = false;
-            foreach ($result as $row) {
-                if ($row->month == $i) {
-                    $newsCount = $row->news_count;
-                    $monthlyData[] = $newsCount;
-                    $found = true;
-                    break;
-                }
-            }
-            if (!$found) {
-                $monthlyData[] = 0;
-            }
+        foreach ($days as $day) {
+            $results[$day] = $this->model->query()
+                ->whereDate('created_at', Carbon::now()->startOfWeek()->addDays(array_search($day, $days)))
+                ->withCount('views')
+                ->orderByDesc('views_count')
+                ->take(3)
+                ->get();
         }
 
-        return $monthlyData;
+        return $results;
     }
 
     public function showCountMonth(): mixed
     {
         $year = date('Y');
         $result = $this->model->query()
-            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'),  DB::raw('COUNT(views.news_id) as views_count'))
-            ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->whereYear('news.created_at', $year)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
             ->groupBy('month')
             ->orderBy('month')
             ->get();
@@ -487,10 +471,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where(function($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%')
-                      ->orWhere('content', 'LIKE', '%' . $request->q . '%')
-                      ->orWhereHas('user', function ($query) use ($request) {
-                          $query->where('name', 'LIKE', '%' . $request->q . '%');
-                      });
+                    ->orWhere('content', 'LIKE', '%' . $request->q . '%')
+                    ->orWhereHas('user', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', '%' . $request->q . '%');
+                });
+            })
+            ->when($request->opsi, function($query) use ($request) {
+                $query->when($request->opsi === "terbaru", function($opsi){
+                    $opsi->latest();
+                });
+                $query->when($request->opsi === "terlama", function($opsi){
+                    $opsi->oldest();
+                });
             })
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('upload_date', '<=', Carbon::now())
@@ -531,6 +523,36 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $search->where('name', 'LIKE', '%'.$query.'%');
             })
             ->whereRelation('newsCategories', 'category_id', $category)
+            ->when($data === "terbaru", function($query) {
+                $query->latest();
+            })
+            ->when($data === "trending", function($query) {
+                $query->withCount('newsHasLikes');
+                $query->orderByDesc('news_has_likes_count');
+            })
+            ->withCount('views')
+            ->paginate($hal);
+    }
+
+    public function newsSubCategory($subCategory): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('newsSubCategories', 'sub_category_id', $subCategory)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->get()
+            ->take(1);
+    }
+
+    public function newsSubCategorySearch($subCategory, $query, mixed $data, $hal): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->when($query, function($search) use ($query){
+                $search->where('name', 'LIKE', '%'.$query.'%');
+            })
+            ->whereRelation('newsSubCategories', 'sub_category_id', $subCategory)
             ->when($data === "terbaru", function($query) {
                 $query->latest();
             })
