@@ -43,7 +43,7 @@ class RegisterService
         $user = $register->store($data);
         $user->assignRole(RoleEnum::USER);
 
-        Mail::to($user->email)->send(new Hellomail (['email' => $user->email, 'user' => $user->name,'id' => $user->id]));
+        Mail::to($data['email'])->send(new Hellomail (['email' => $user->email, 'user' => $user->name,'id' => $user->id]));
         return;
     }
 

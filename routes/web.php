@@ -337,10 +337,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
         return view('pages.user.news.status-berita');
     })->name('status.detail.berita');
 
-    // Route::get('payment-upload', function(){
-    //     return view('pages.user.iklan.pembayaran');
-    // })->name('payment.index');
-
     Route::get('payment-upload/{advertisement}', [AdvertisementController::class, 'show'])->name('payment.advertisement.show');
 
     Route::post('payment-upload', [PaymentAdvertisementsController::class, 'store'])->name('payment.store');
@@ -348,8 +344,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('iklan-ajukan', function () {
         return view('pages.user.iklan.ajukan');
     })->name('iklan.ajukan');
-
-
 
     Route::get('status-selesai-iklan', function () {
         return view('pages.user.iklan.status-selesa');
@@ -367,24 +361,16 @@ Route::middleware(['role:user', 'verified'])->group(function () {
         return view('pages.user.load-coin.load');
     });
 
-
-
-
-
-    // Route::get('/news-singgle-post/{news}/{id}', [NewsHasLikeController::class, 'show'])->name('news.show');
-    // Route::post('/news-singgle-post/{news}/{id}/like', [NewsHasLikeController::class, 'like'])->name('news.singgle-post.like');
-    // Route::delete('/news-singgle-post/{news}/{id}/unlike', [NewsHasLikeController::class, 'unlike'])->name('news.singgle-post.unlike');
-
     Route::get('admin-inbox', function () {
         return view('pages.admin.inbox.index');
     })->name('admin.inbox');
 
     // Inbox
     Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
-    // Route::get('pengajuan-berita', function () {
-    //     return view('pages.user.news.pengajuan');
-    // })->name('pengajuan.berita');
+});
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('user/subscribers', [SubscribeController::class, 'index'])->name('user.berlangganan');
 });
 
 Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
@@ -396,7 +382,6 @@ Route::get('{category}', [NewsController::class, 'showCategories'])->name('categ
 Route::get('{year}/{month}/{day}/{news:slug}', [NewsController::class, 'usernews'])->name('news.user');
 Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 
-Route::get('subscriber', [SubscribeController::class, 'index'])->name('user.berlangganan');
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
 Route::prefix('tag')->name('tag.')->group(function(){

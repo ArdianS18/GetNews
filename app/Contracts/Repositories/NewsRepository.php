@@ -454,6 +454,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $year = date('Y');
         $result = $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->where('is_primary', NewsStatusEnum::DRAFT->value)
             ->select(DB::raw('MONTH(news.created_at) as month'), DB::raw('COUNT(news.id) as news_count'))
             ->groupBy('month')
             ->orderBy('month')
