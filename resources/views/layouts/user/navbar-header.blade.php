@@ -87,21 +87,21 @@
                                 </a>
                                 @endrole
                             </div>
-    
+
                         </ul>
                     </div>
                     @if (Auth::check() && Auth::user()->roles() == "author")
                     @endif
                     @else
-    
+
                     <div class="d-md-none">
                         <div class="option-item">
                             <a href="/login" class="btn-two" id="signInBtn">Login</a>
                         </div>
                     </div>
-    
+
                 @endauth --}}
-    
+
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
@@ -117,7 +117,7 @@
                                             <li class="nav-item">
                                                 <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                             </li>
-    
+
                                         @empty
                                             <li class="nav-item">
                                                 <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
@@ -126,17 +126,16 @@
                                     </ul>
                                 </li>
                         @endforeach
-    
                     </ul>
-    
+
                     <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
-    
+
                         <div class="option-item">
                             <button type="button" class="search-btn" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                                 <i class="flaticon-loupe"></i>
                             </button>
                         </div>
-    
+
                         <div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -208,13 +207,13 @@
                                             </li>
                                         </ul>
                                     </li>
-    
+
                                 </ul>
                             </div>
                             @if (Auth::check() && Auth::user()->roles() == "author")
                             @endif
                             @else
-    
+
                             <div class="">
                                 <div class="option-item">
                                     <a href="/login" class="btn-two" id="signInBtn">Login</a>
