@@ -1056,7 +1056,7 @@
 
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = `${dataName}, Baca Selengkapnya di:  + ${url}`
+            var text = `${dataName}, Baca Selengkapnya di: ${url}`
 
             var whatsappLink = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text);
 
@@ -1081,7 +1081,7 @@
 
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = `${dataName}, Baca Selengkapnya di:  + ${url}`
+            var text = `${dataName}, Baca Selengkapnya di:  ${url}`
 
             var twitterLink = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(text);
             window.open(twitterLink, '_blank');
@@ -1095,7 +1095,7 @@
 
             var url =
                 `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
-            var text = `${dataName}, Baca Selengkapnya di:  + ${url}`
+            var text = `${dataName}, Baca Selengkapnya di: ${url}`
 
             var telegramLink = 'https://t.me/share/url?url=' + encodeURIComponent(text);
             window.open(telegramLink, '_blank');
