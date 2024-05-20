@@ -1,8 +1,8 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <div class="d-flex mb-4 mt-2 justify-content-between">
-        <div class="d-flex gap-2">
+    <div class="mb-4 mt-2 d-flex justify-content-between">
+        <div class="gap-2">
             <form class="d-flex gap-2">
                 <div>
                     <div class="position-relative d-flex">
@@ -16,18 +16,20 @@
 
                 <div>
                     <div class="d-flex gap-2">
-                        <select class="form-select" id="search-role" style="width: 200px">
+                        <div class="position-relative">
+                        <select class="form-select" id="search-role" style="width: 150px">
                             <option value="">Pilih Role</option>
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div class="">
-            <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5"
+        <div class="d-flex justify-content-end">
+            <button type="button" style="background-color: #175A95;" class="btn btn-md text-white px-4"
                 data-bs-toggle="modal" data-bs-target="#modal-create">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
                     <path fill="currentColor"
