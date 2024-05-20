@@ -19,10 +19,11 @@
     .nav-tabs .premium{
         border: 1px solid #183249;
         color: #183249;
-        border-radius: 11px;
+        border-radius: 8px;
     }
     .nav-tabs .nav-link.active {
         background-color: #183249;
+        border-radius: 6px;
         color: #ffffff;
     }
 </style>
@@ -386,7 +387,7 @@
                                     data-bs-toggle="tab"
                                     href="#advertisement-tab"
                                     role="tab">
-                                    <span>Berita</span>
+                                    <span>Iklan</span>
                                 </a>
                                 </li>
                                 <li class="nav-item">

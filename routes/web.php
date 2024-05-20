@@ -189,6 +189,10 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('about-create', [DashboardController::class, 'aboutStore'])->name('create.about');
     Route::post('contact-about-create', [ContactController::class, 'store'])->name('contact.create.about');
     Route::put('contact-about-update/{contact}', [ContactController::class, 'update'])->name('contact.update.about');
+
+    Route::get('account-list', function(){
+        return view('pages.admin.akun.user');
+    })->name('account.user.list');
 });
 
 

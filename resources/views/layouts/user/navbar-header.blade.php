@@ -53,9 +53,9 @@
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-toggler" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" aria-controls="navbarOffcanvas">
                 <span class="burger-menu">
-                    <span class="top-bar" style="height: 2px; width: 25px;"></span>
-                    <span class="middle-bar" style="height: 2px; width: 25px;"></span>
-                    <span class="bottom-bar" style="height: 2px; width: 25px;"></span>
+                    <span class="top-bar" style="height: 2px; width: 22px;"></span>
+                    <span class="middle-bar" style="height: 2px; width: 22px;"></span>
+                    <span class="bottom-bar" style="height: 2px; width: 22px;"></span>
                 </span>
             </a>
             <div class="sidebar-toggler md-none" data-bs-toggle="offcanvas" href="#navbarOffcanvas" role="button" style="width: 15%" aria-controls="navbarOffcanvas">
@@ -65,41 +65,6 @@
             <button type="button" class="bg-transparent border-0 text-white d-lg-none mt-2"  data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
-            {{-- @auth
-                <div class="ms-2 mt-1 d-lg-none">
-                    <ul class="navbar-nav mx-auto">
-                        <div class="news-card-img mb-2 ms-4">
-                            @role('author')
-                            <a href="{{ route('profile.index') }}">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
-                            </a>
-                            @endrole
-                            @role('user')
-                            <a href="{{ route('profile.user') }}">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
-                            </a>
-                            @endrole
-                            @role('admin')
-                            <a href="/dashboard">
-                                <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="32px" height="32px" style="border-radius: 50%; object-fit:cover;"/>
-                            </a>
-                            @endrole
-                        </div>
-
-                    </ul>
-                </div>
-                @if (Auth::check() && Auth::user()->roles() == "author")
-                @endif
-                @else
-
-                <div class="d-md-none">
-                    <div class="option-item">
-                        <a href="/login" class="btn-two" id="signInBtn">Login</a>
-                    </div>
-                </div>
-
-            @endauth --}}
-
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
@@ -131,7 +96,7 @@
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
 
                     <div class="option-item">
-                        <button type="button" class="search-btn" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <button type="button" class="search-btn mb-1" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="flaticon-loupe"></i>
                         </button>
                     </div>
@@ -223,5 +188,5 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </div>
 </div>
