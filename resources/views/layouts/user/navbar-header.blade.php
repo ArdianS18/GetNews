@@ -131,7 +131,7 @@
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
 
                     <div class="option-item">
-                        <button type="button" class="search-btn" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <button type="button" class="search-btn mb-1" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="flaticon-loupe"></i>
                         </button>
                     </div>
