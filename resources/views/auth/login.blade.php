@@ -36,8 +36,8 @@
                         <img src="{{asset('assets/img/auth/get-back.svg')}}" width="190" alt="">
                     </a>
                 </div>
-                <div class="d-flex justify-content-center align-items-center">
-                    <img src="{{asset('assets/img/auth/bg-log.svg')}}" alt="auth-login-cover" class="img-fluid my-5">
+                <div class="d-flex justify-content-center align-items-center p-4">
+                    <img src="{{asset('assets/img/auth/scooby.png')}}" alt="auth-login-cover" width="620" class="img-fluid">
                 </div>
             </div>
         </div>
