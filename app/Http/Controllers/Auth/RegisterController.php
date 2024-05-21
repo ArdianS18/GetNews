@@ -64,6 +64,6 @@ class RegisterController extends Controller
     {
         $data['email_verified_at'] = now();
         $this->register->update($id, $data);
-        return redirect('/login')->with('success',trans('alert.email.verify'));
+        return redirect('/login')->with('success', 'Email anda telah terverifikasi silahkan login.');
     }
 }
