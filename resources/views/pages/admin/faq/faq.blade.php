@@ -224,44 +224,6 @@
         `
         }
 
-
-        $('#form-create').submit(function(e) {
-            $('.preloader').show();
-            e.preventDefault();
-
-            $.ajax({
-                url: "{{ route('faq.store') }}",
-                type: "POST",
-                data: $(this).serialize(),
-                success: function(response) {
-                    get(1)
-                    $('.preloader').fadeOut();
-                    var response = response.responseJSON
-
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        icon: 'success',
-                        text: "Berhasil Menambahkan Data"
-                    })
-                    $('#modal-create').modal('hide')
-                    emptyForm('form-create')
-                },
-                error: function(response) {
-                    $('.preloader').fadeOut();
-                    Swal.fire({
-                        title: 'Error!',
-                        icon: 'error',
-                        text: "Terdapat masalah saat input data"
-                    });
-                    var response = response.responseJSON
-                    var status = response.meta.code
-                    if (status == 422) {
-                        handleValidate(response.data, 'create')
-                    }
-                }
-            })
-        })
-
         $('#form-delete').submit(function(e) {
             $('.preloader').show()
             e.preventDefault()
