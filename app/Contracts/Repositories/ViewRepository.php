@@ -55,7 +55,9 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     public function where(): mixed
     {
-
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', auth()->user()->id)
+            ->count();
     }
 
     /**

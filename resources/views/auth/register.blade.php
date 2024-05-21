@@ -68,7 +68,8 @@
                     </div>
                 @endif
 
-                    <form id="registrationForm" method="POST" class="py-3">
+                    <form method="POST" class="py-3" action="{{ route('register') }}">
+                        @method('post')
                         @csrf
                         <div class="row">
                             <div class="my-2 col-12">
@@ -142,35 +143,6 @@
         </div>
     </div>
 </div>
-
-<script>
-
-        document.getElementById('form-like').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var form = event.target;
-            var csrfToken = form.querySelector('input[name="_token"]').value;
-
-            fetch('{{ route('register') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                })
-                .then(function(response) {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Error: ' + response.status);
-                    }
-                })
-                .then(function(data) {})
-                .catch(function(error) {
-                    console.error(error);
-                });
-        });
-
-</script>
 
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>

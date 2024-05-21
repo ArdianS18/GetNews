@@ -13,4 +13,6 @@ interface NewsHasLikeInterface extends GetInterface, StoreInterface, UpdateInter
 {
     public function deleteLike(mixed $id,$news) : mixed;
     public function countLike($newsId) : mixed;
+
+    public function whereIn() : mixed;
 }
