@@ -281,98 +281,101 @@
 
                         <div class="">
                             <ul class="news-metainfo list-style">
-                                <div class="row justify-content-between">
-                                    <div class="col-md-12 col-lg-4 mb-3">
-                                        <li class="author">
-                                            <span class="author-img">
-                                                <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
-                                                    alt="Image" width="40px" height="30px"
-                                                    style="border-radius: 50%; object-fit:cover;" />
-                                            </span>
-                                            <div>
-                                                <a style="display: inline;text-decoration:none" data-toggle="tooltip"
-                                                    data-placement="top" title="author - {{ $news->user->name }}"
-                                                    href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
-                                                </span>
+                                <div class="d-flex justify-content-between">
+                                    <div class="col-lg-11 col-md-11">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-3 mb-3">
+                                                <li class="author">
+                                                    <span class="author-img">
+                                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
+                                                            alt="Image" width="40px" height="30px"
+                                                            style="border-radius: 50%; object-fit:cover;" />
+                                                    </span>
+                                                    <div>
+                                                        <a style="display: inline;text-decoration:none" data-toggle="tooltip"
+                                                            data-placement="top" title="author - {{ $news->user->name }}"
+                                                            href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
+                                                        </span>
+                                                    </div>
+                                                </li>
                                             </div>
-                                        </li>
+
+                                            <div class="col-md-12 col-lg-9">
+                                                <li><i class="fi fi-rr-calendar-minus"></i>
+                                                    <span id="formattedDate"></span>
+                                                </li>
+                                                <li>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#e93314"
+                                                            d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
+                                                    </svg>
+                                                    <span class="ms-1">{{ $news->views->count() }}</span>
+                                                </li>
+                                                <li>
+                                                    @auth()
+                                                        <form id="form-like">
+                                                            @csrf
+                                                            @if (auth()->check())
+                                                                <button type="submit" style="background: transparent;border:transparent"
+                                                                    class="like">
+                                                                    <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                        height="18" viewBox="0 0 24 24">
+                                                                        <path fill="#E93314"
+                                                                            d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                                    </svg>
+                                                                </button>
+                                                            @endif
+
+                                                        </form>
+
+                                                        <form id="form-liked" style="display: none;">
+                                                            @csrf
+                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                                class="liked">
+                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                    height="18" viewBox="0 0 24 24">
+                                                                    <path fill="red"
+                                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <form id="form-like">
+                                                            @csrf
+                                                            <button type="button" style="background: transparent;border:transparent"
+                                                                class="like not-login">
+                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path fill="#E93314"
+                                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+
+                                                        <form id="form-liked" style="display: none;">
+                                                            @csrf
+                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                                class="liked">
+                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path fill="red"
+                                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    @endauth
+
+                                                    <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
+
+                                                </li>
+
+                                                
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="col-md-12 col-lg-8">
-                                        <li><i class="fi fi-rr-calendar-minus"></i>
-                                            <span id="formattedDate"></span>
-                                        </li>
-                                        <li>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
-                                                viewBox="0 0 24 24">
-                                                <path fill="#e93314"
-                                                    d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
-                                            </svg>
-                                            <span class="ms-1">{{ $news->views->count() }}</span>
-                                        </li>
-                                        <li>
-                                            @auth()
-                                                <form id="form-like">
-                                                    @csrf
-                                                    @if (auth()->check())
-                                                        <button type="submit" style="background: transparent;border:transparent"
-                                                            class="like">
-                                                            <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                height="18" viewBox="0 0 24 24">
-                                                                <path fill="#E93314"
-                                                                    d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                            </svg>
-                                                        </button>
-                                                    @endif
-
-                                                </form>
-
-                                                <form id="form-liked" style="display: none;">
-                                                    @csrf
-                                                    <button type="submit" style="background: transparent;border:transparent"
-                                                        class="liked">
-                                                        <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                                            height="18" viewBox="0 0 24 24">
-                                                            <path fill="red"
-                                                                d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                            @else
-                                                <form id="form-like">
-                                                    @csrf
-                                                    <button type="button" style="background: transparent;border:transparent"
-                                                        class="like not-login">
-                                                        <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                            viewBox="0 0 24 24">
-                                                            <path fill="#E93314"
-                                                                d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                                        </svg>
-                                                    </button>
-                                                </form>
-
-                                                <form id="form-liked" style="display: none;">
-                                                    @csrf
-                                                    <button type="submit" style="background: transparent;border:transparent"
-                                                        class="liked">
-                                                        <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                            viewBox="0 0 24 24">
-                                                            <path fill="red"
-                                                                d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                                        </svg>
-                                                    </button>
-                                                </form>
-                                            @endauth
-
-                                            <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
-
-                                        </li>
-
-                                        
-                                    </div>
-
                                     
-                                    <div class="col-md-12 col-lg-4">
+                                    <div class="col-md-1 col-lg-1">
                                         <li>
                                             <a class="" href="#" role="button" id="dropdownMenuLink"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
