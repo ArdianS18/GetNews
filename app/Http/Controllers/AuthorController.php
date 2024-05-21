@@ -9,6 +9,7 @@ use App\Http\Requests\AuthorRequest;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\NewsPhotoInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
@@ -58,15 +59,18 @@ class AuthorController extends Controller
     private NewsSubCategoryInterface $newsSubCategories;
     private NewsPhotoInterface $newsPhoto;
 
+    private NewsHasLikeInterface $newsLikes;
+
     private AuthorService $authorService;
     private RegisterService $serviceregister;
     private $authorBannedService;
 
 
-    public function __construct(ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+    public function __construct(NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
     {
         $this->author = $author;
         $this->register = $register;
+        $this->newsLikes = $newsLikes;
 
         $this->news = $news;
         $this->categories = $categories;
@@ -282,15 +286,14 @@ class AuthorController extends Controller
 
     public function newsstatistics()
     {
-        $news = $this->news->showWhithCount();
+        $news = $this->news->showWhithCountStat();
         $user_id = $news->pluck('user_id');
         $author_id = auth()->user()->author->id;
         $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
         $newsStatistics = $this->news->showNewsStatistic();
 
-        $view = View::count();
-        $like = NewsHasLike::count();
-
+        $view = $this->view->where();
+        $like = $this->newsLikes->whereIn();
         return view('pages.author.statistic.news', compact('news', 'view', 'like', 'count', 'newsStatistics'));
     }
 }

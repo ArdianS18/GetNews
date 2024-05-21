@@ -439,6 +439,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function showWhithCountStat(): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', auth()->user()->id)
+            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
+            ->take(3)
+            ->get();
+    }
+
     public function showNewsStatistic(): mixed
     {
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

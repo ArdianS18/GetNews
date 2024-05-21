@@ -26,6 +26,13 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
             ->delete();
     }
 
+    public function whereIn(): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', auth()->user()->id)
+            ->count();
+    }
+
     /**
      * Handle get the specified data by id from models.
      *
