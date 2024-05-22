@@ -931,7 +931,7 @@ select {
   content: "";
   width: 88px;
   height: 3px;
-  background-color: var(--secondaryColor);
+  background-color: #175A95;
 }
 .section-title-two h2 {
   font-size: 36px;

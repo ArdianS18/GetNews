@@ -162,8 +162,8 @@
                             <div class="pp-post-wrap">
                                 @forelse ($news as $news)
                                 @php
-                                $dateParts = date_parse($news->upload_date);
-                            @endphp
+                                    $dateParts = date_parse($news->upload_date);
+                                @endphp
                                     <div class="news-card-one">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news->photo) }}" width="100%" height="80" style="object-fit: cover;">

@@ -200,8 +200,10 @@ class DashboardController extends Controller
         $comments = $this->comment->where($newsId);
         $newsCount = $this->news->get();
         $authors = $this->author->get();
+        $newsPopular = $this->news->showWhithCount();
 
-        return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments'));
+
+        return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments', 'newsPopular'));
     }
 
     public function privacypolicy() {
