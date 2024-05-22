@@ -251,6 +251,10 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
         return view('pages.author.status.index');
     })->name('status.author');
 
+    Route::get('news-liked', function(){
+        return view('pages.author.news.newsliked');
+    })->name('news.author.liked');
+
 });
 
 Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function () {
@@ -367,6 +371,10 @@ Route::middleware(['role:user', 'verified'])->group(function () {
 
     // Inbox
     Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
+
+    Route::get('news-user-liked', function(){
+        return view('pages.user.news.newsliked');
+    })->name('news.user.liked');
 });
 
 Route::middleware(['auth'])->group(function () {
