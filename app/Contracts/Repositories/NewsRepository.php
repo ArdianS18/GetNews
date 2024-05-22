@@ -211,8 +211,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function authorGetNews($user): mixed
     {
         return $this->model->query()
-            ->where('user_id', $user->id)
+            ->where('user_id', $user)
             ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->take(5)
             ->get();
     }
 
