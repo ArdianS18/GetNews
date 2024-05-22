@@ -1,10 +1,53 @@
 @extends('layouts.user.app')
 
 <head>
+    <style>
+       .coin-container {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .coin-loader {
+        position: relative;
+        width: 50px; /* Lebih besar dari ukuran coin */
+        height: 50px; /* Lebih besar dari ukuran coin */
+    }
+
+    .coin-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 3px solid transparent;
+        border-top-color: #0F4D8A; /* Warna lingkaran */
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+        animation: spin 60s linear infinite;
+        /* border-left-color: #0F4D8A; */
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    </style>
     <title>{{ $news->name }} | GetMedia</title>
     @php
         $dateParts = date_parse($news->upload_date);
     @endphp
+
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GetMedia">
     <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 10)) !!}">
@@ -401,15 +444,8 @@
                                             </ul>
                                             </li>
                                     </div>
-
-
                                 </div>
-
-
-
                             </ul>
-
-
                         </div>
 
                         {{-- modal tambah --}}
@@ -856,9 +892,58 @@
             </div>
         </div>
     </div>
+
+    {{-- <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px; display: flex; align-items: center;">
+        <img src="{{asset('assets/img/coin-load.svg')}}" alt="Coin" style="width: 50px; height: 50px;">
+        <div class="loading-bar" style="width: 100px; height: 10px; background-color: #ddd; margin-left: 10px; position: relative;">
+            <div class="loading-progress" style="height: 100%; background-color: #4CAF50; width: 0%;"></div>
+        </div>
+    </div> --}}
+
+    <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
+        <div class="coin-loader">
+            <img src="{{ asset('assets/img/coin-load.svg') }}" alt="Coin" style="width: 50px; height: 50px;">
+            <div class="coin-circle"></div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loadingProgress = document.querySelector('.loading-progress');
+            var width = 0;
+
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                clearInterval(interval);
+                fetchCoin();
+                } else {
+                width++;
+                loadingProgress.style.width = `${width}%`;
+                }
+            }, 600);
+
+            setInterval(fetchCoin, 60000);
+
+            function fetchCoin() {
+                fetch('{{ route('coin.add') }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ amount: 1 })
+                })
+                .then(response => response.json())
+                .then(data => console.log('Coin added', data))
+                .catch(error => console.error('Error adding coin:', error));
+            }
+        });
+    </script>
+
     <script>
         function toggleReplyForm(commentId) {
             var replyForm = document.getElementById("reply-form-" + commentId);
@@ -1081,4 +1166,22 @@
             ' ' + uploadDate.getFullYear();
         document.getElementById("formattedDate").textContent = formattedDate;
     </script>
+
+    {{-- <script>
+        function sendData() {
+        fetch('/add-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token untuk Laravel
+                },
+                body: JSON.stringify({data: 'Your data here'})
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+        setInterval(sendData, 60000);
+    </script> --}}
+
 @endsection

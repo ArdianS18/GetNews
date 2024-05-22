@@ -98,7 +98,6 @@
                         <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
                           <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
                             <img style="object-fit: cover" src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
-                            {{-- <img src="{{ asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/> --}}
                           </div>
                         </div>
                       </div>

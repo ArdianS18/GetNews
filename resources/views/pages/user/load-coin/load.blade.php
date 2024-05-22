@@ -21,6 +21,9 @@
             position: relative;
             width: 100px;
             height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         /* Animasi garis berputar */
@@ -28,12 +31,12 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 100px;
-            height: 100px;
+            width: 60px;
+            height: 60px;
             border-top: 5px solid #3498db; /* Warna garis */
             border-radius: 50%; /* Membuat garis menjadi lingkaran */
             transform-origin: center;
-            animation: rotateLine 5s linear infinite; /* Animasi rotasi */
+            animation: rotateLine 60s linear infinite; /* Animasi rotasi */
             /* z-index: 2; */
         }
 
@@ -47,10 +50,21 @@
             }
         }
 
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; /* Ensure the container fills the height */
+        }
+
         /* Teks hitungan mundur */
         #countdown {
+            position: absolute;
             font-size: 24px;
-            margin-top: 10px;
+            color: white; /* Sesuaikan warna teks agar terlihat */
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
         }
     </style>
 </head>
@@ -62,28 +76,25 @@
             <div class="rotating-line"></div>
             <!-- Gambar -->
             <div class="image">
-                <img src="{{asset('assets/img/coin-load.svg')}}" width="100" alt="Gambar">
+                <img src="{{asset('assets/img/coin-load.svg')}}" width="60" alt="Gambar">
             </div>
+            <div id="countdown"><span id="countdownValue"></span></div>
         </div>
-        
-        <!-- Hitungan mundur -->
-        <div id="countdown">Sisa waktu: <span id="countdownValue"></span> detik</div>
     </div>
 
     <!-- Script untuk mengatur hitungan mundur -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var countdownTime = 5;
+            var countdownTime = 60;
 
             function startCountdown() {
                 var countdownElement = document.getElementById('countdownValue');
                 var timer = setInterval(function() {
-                    countdownElement.textContent = countdownTime;
                     countdownTime--;
 
                     if (countdownTime < 0) {
                         clearInterval(timer);
-                        countdownElement.textContent = 'Anda mendapat 1 poin';
+                        countdownElement.textContent = '1';
                     }
                 }, 1000);
             }

@@ -9,6 +9,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CoinController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReportController;
 use App\Http\Controllers\ContactController;
@@ -398,3 +399,5 @@ Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->n
 Route::get('allsub/{subslug}/{data}', [NewsController::class, 'showAllSubCategories'])->name('subCategory.all');
 
 Route::get('verifikasi/email/{id}', [RegisterController::class, 'verifikasi'])->name('verisikasi.account');
+
+Route::post('coin-add', [CoinController::class, 'store'])->name('coin.add');
