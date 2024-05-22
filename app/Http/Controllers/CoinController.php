@@ -38,6 +38,8 @@ class CoinController extends Controller
     {
         $data['user_id'] = auth()->user()->id;
         $this->coin->store($data);
+
+        // return back();
         return ResponseHelper::success();
     }
 
