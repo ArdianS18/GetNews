@@ -161,8 +161,10 @@
                             <span class="badge bg-light-warning text-warning">{{ $category->news_categories_count }}</span>
                             @elseif ($index == 3 || $index == 4)
                             <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
-                            @else
+                            @elseif ($index == 0)
                             <span class="badge bg-light-danger text-danger">{{ $category->news_categories_count }}</span>
+                            @else
+                            <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
                             @endif
                         </div>
                     </div>
@@ -828,8 +830,8 @@
 
     var options = {
     color: "#adb5bd",
-    series: [55, 55, 55],
-    labels: ["Income", "Current", "Expance"],
+    series: [80, 55],
+    labels: ["Income",  "Expance"],
     chart: {
       type: "donut",
       fontFamily: "Plus Jakarta Sans', sans-serif",
@@ -870,7 +872,7 @@
     legend: {
       show: false,
     },
-    colors: ["var(--bs-primary)", "#EAEFF4", "var(--bs-secondary)"],
+    colors: ["var(--bs-primary)", "var(--bs-secondary)"],
 
     tooltip: {
       theme: "dark",
