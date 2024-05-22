@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\AuthorInterface;
+use Illuminate\Support\Str;
 use App\Models\News;
 use App\Models\NewsPhoto;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
+use App\Contracts\Interfaces\VisitorInterface;
 use App\Http\Requests\NewsDraftRequest;
 use App\Models\Author;
 use App\Models\Comment;
@@ -62,6 +64,8 @@ class NewsController extends Controller
     private NewsCategoryInterface $newsCategories;
     private AuthorInterface $author;
 
+    private VisitorInterface $visitor;
+
     protected $newsRepositoty;
 
     public function __construct(
@@ -85,12 +89,15 @@ class NewsController extends Controller
 
         NewsPhotoInterface $newsPhoto,
         NewsCategoryInterface $newsCategories,
+
+        VisitorInterface $visitor,
         AuthorInterface $author)
     {
         $this->newsCategory = $newsCategory;
         $this->newsSubCategory = $newsSubCategory;
         $this->newsTag = $newsTag;
         $this->newsReject = $newsReject;
+        $this->visitor = $visitor;
 
         $this->tags = $tags;
         $this->news = $news;
@@ -196,8 +203,7 @@ class NewsController extends Controller
         ]);
 
         $userLike = $this->newsHasLike->where($news->id);
-
-        $newsLike = $this->newsHasLike->countLike($newsId);
+        $newsLike = $this->newsHasLike->countLikePost($newsId);
 
         $comments = $this->comment->whereIn($newsId);
         $subCategories = $this->subCategory->get();
@@ -214,12 +220,25 @@ class NewsController extends Controller
         $totalCategories = $this->category->showWhithCount();
         $tags = $this->newsTag->show($newsId);
         $category_id = $this->newsCategories->get()->whereIn('news_id', $news)->pluck('category_id')->first();
-        // $newsCategories = $this->newsCategories->get()->whereIn('category_id', $category_id);
         $newsCategories = $this->news->getById($category_id);
         $authors = $this->author->get();
         $tagPopulars = $this->tags->getByPopular();
 
-        return view('pages.user.news.singlepost', compact('users', 'news','newsId','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories','authors','tagPopulars'));
+        $visitorId = $request->cookie('visitor_id');
+        if (!$visitorId) {
+            $visitorId = Str::random(30);
+            $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
+            return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId',
+                'subCategories','categories','newsPhoto','comments', 'newsLike',
+                'likedByUser','tags','totalCategories','populars','news_recents',
+                'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
+        }
+
+        $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
+        return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId',
+            'subCategories','categories','newsPhoto','comments', 'newsLike',
+            'likedByUser','tags','totalCategories','populars','news_recents',
+            'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
     }
 
     /**

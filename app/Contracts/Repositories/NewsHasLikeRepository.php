@@ -48,6 +48,14 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
     public function countLike($newsId): mixed
     {
         return $this->model->query()
+            ->whereIn('news_id', $newsId)
+            ->get()
+            ->count();
+    }
+
+    public function countLikePOst($newsId): mixed
+    {
+        return $this->model->query()
             ->where('news_id', $newsId)
             ->count();
     }

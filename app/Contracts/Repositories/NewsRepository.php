@@ -455,12 +455,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
         $results = [];
+        $startOfWeek = Carbon::now()->startOfWeek();
 
         foreach ($days as $day) {
             $results[$day] = $this->model->query()
                 ->where('user_id', auth()->user()->id)
                 ->where('status', NewsStatusEnum::ACTIVE->value)
-                ->whereDate('created_at', Carbon::now()->startOfWeek()->addDays(array_search($day, $days)))
+                ->whereDate('created_at', $startOfWeek->copy()->addDays(array_search($day, $days)))
                 ->withCount('views')
                 ->orderByDesc('views_count')
                 ->take(3)
