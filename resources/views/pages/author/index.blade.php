@@ -321,11 +321,11 @@
                   <textarea name="alamat" class="form-control" id="" cols="30" rows="10" readonly>{{ auth()->user()->address }}</textarea>
                 </div>
 
-                 <div class="d-flex justify-content-end mb-5">
+                 {{-- <div class="d-flex justify-content-end mb-5">
                     <a href="{{ route('profile.user.update') }}">
                         <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
                     </a>
-                </div>
+                </div> --}}
               </div>
             </div>
 
