@@ -340,7 +340,8 @@
                         <div class="card-body">
                             <h4>Pendapatan</h4>
                             <p>Tahun 2022-2023</p>
-                            <div class="" id="chart-premium"></div>
+
+                            <div class="" id="current-year"></div>
 
                             <div class="mt-4 d-flex justify-content-between">
                                 <div class="">
@@ -659,6 +660,7 @@
 @section('script')
 <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 <script src="{{asset('admin/dist/js/apps/notes.js')}}"></script>
+<script src="{{asset('admin/dist/js/apps/chat.js')}}"></script>
 
 <script>
     var monthlyData = <?php echo json_encode($news2); ?>;
@@ -821,6 +823,65 @@
 
     var chart = new ApexCharts(document.querySelector("#chart-news-premium"), options);
     chart.render();
+
+
+
+    var options = {
+    color: "#adb5bd",
+    series: [55, 55, 55],
+    labels: ["Income", "Current", "Expance"],
+    chart: {
+      type: "donut",
+      fontFamily: "Plus Jakarta Sans', sans-serif",
+      foreColor: "#adb0bb",
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '89%',
+          background: 'transparent',
+          labels: {
+            show: true,
+            name: {
+              show: true,
+              offsetY: 7,
+            },
+            value: {
+              show: false,
+            },
+            total: {
+              show: true,
+              color: '#5A6A85',
+              fontSize: '20px',
+              fontWeight: "600",
+              label: 'Rp. 99.000',
+            },
+          },
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      show: false,
+    },
+    legend: {
+      show: false,
+    },
+    colors: ["var(--bs-primary)", "#EAEFF4", "var(--bs-secondary)"],
+
+    tooltip: {
+      theme: "dark",
+      fillSeriesColor: false,
+    },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#current-year"), options);
+  chart.render();
+
+
 </script>
 
 @endsection
