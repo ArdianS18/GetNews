@@ -252,13 +252,13 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
         return view('pages.author.status.index');
     })->name('status.author');
 
-    Route::get('news-liked', function(){
-        return view('pages.author.news.newsliked');
-    })->name('news.author.liked');
 
 });
 
 Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function () {
+
+    Route::get('news-liked', [NewsHasLikeController::class, 'index'])->name('news.author.liked');
+
     Route::get('tukar-coin', function () {
         return view('pages.user.coins.index');
     })->name('tukar.coin');
@@ -372,10 +372,6 @@ Route::middleware(['role:user', 'verified'])->group(function () {
 
     // Inbox
     Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
-
-    Route::get('news-user-liked', function(){
-        return view('pages.user.news.newsliked');
-    })->name('news.user.liked');
 
     Route::get('berlangganan-user', function(){
         return view('pages.user.berlangganan.news');
