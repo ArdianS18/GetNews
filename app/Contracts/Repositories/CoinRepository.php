@@ -20,7 +20,8 @@ class CoinRepository extends BaseRepository implements CoinInterface
     public function get(): mixed
     {
         return $this->model->query()
-            ->get();
+            ->where('user_id', auth()->user()->id)
+            ->count();
     }
 
     /**

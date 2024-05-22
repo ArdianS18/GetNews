@@ -22,6 +22,7 @@ use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CoinInterface;
 use App\Contracts\Interfaces\ContactInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
@@ -45,11 +46,12 @@ class DashboardController extends Controller
     private CommentInterface $comment;
     private VisitorInterface $visitor;
     private ContactInterface $contact;
+    private CoinInterface $coin;
 
     use CustomPaginateTrait;
 
 
-    public function __construct(ContactInterface $contact,TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment,VisitorInterface $visitor)
+    public function __construct(CoinInterface $coin, ContactInterface $contact,TagInterface $tag,FollowerInterface $followers, ViewInterface $view,NewsCategoryInterface $newsCategory, UserInterface $user, AuthorInterface $author, NewsInterface $news, CategoryInterface $category, SubCategoryInterface $subCategory,FaqInterface $faq,NewsTagInterface $newsTags, NewsHasLikeInterface $newsHasLike,CommentInterface $comment,VisitorInterface $visitor)
     {
         $this->user = $user;
         $this->author = $author;
@@ -68,6 +70,7 @@ class DashboardController extends Controller
         $this->visitor = $visitor;
 
         $this->contact = $contact;
+        $this->coin = $coin;
     }
 
     public function index(Request $request){
@@ -157,8 +160,9 @@ class DashboardController extends Controller
     }
 
     public function userProfile(){
+        $coin = $this->coin->get();
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
-        return view('pages.user.profile.index', compact('following'));
+        return view('pages.user.profile.index', compact('following', 'coin'));
     }
 
     public function authoruser(Request $request) {
