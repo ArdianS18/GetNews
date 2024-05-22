@@ -370,11 +370,11 @@
 
                                                 </li>
 
-                                                
+
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-1 col-lg-1">
                                         <li>
                                             <a class="" href="#" role="button" id="dropdownMenuLink"
@@ -385,7 +385,7 @@
                                                         stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                 </svg>
                                             </a>
-            
+
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li>
                                                     <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
@@ -401,8 +401,8 @@
                                             </ul>
                                             </li>
                                     </div>
-                                   
-                                    
+
+
                                 </div>
 
 
@@ -925,7 +925,7 @@
             var form = event.target;
             var csrfToken = form.querySelector('input[name="_token"]').value;
 
-            fetch('/news-like/{{ $news->id }}', {
+            fetch('/news-like/{{ $newsId }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -950,7 +950,7 @@
             var form = event.target;
             var csrfToken = form.querySelector('input[name="_token"]').value;
 
-            fetch('/news-unlike/{{ $news->id }}', {
+            fetch('/news-unlike/{{ $newsId }}', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 /*-----------------------------------------------------------
     Theme Name: Baxo
-    Theme URI: 
+    Theme URI:
     Description: Baxo - Responsive Blog HTML Template
     Author: HiBootstrap
     Author URI: https://hibootstrap.com/
@@ -9,7 +9,7 @@
 /*--------------------------------
      =====Table Of Contents====
 
-1.  General Styles 
+1.  General Styles
 2.  Back To Top Button CSS
 3.  Preloader CSS
 4.  Button & Link CSS
@@ -41,7 +41,7 @@
 }
 
 /*---------------------------------
-            General Styles 
+            General Styles
 -----------------------------------*/
 * {
   box-sizing: border-box;
@@ -1724,7 +1724,7 @@ select {
 }
 
 /*---------------------------------
-       Breadcrumb CSS 
+       Breadcrumb CSS
 -----------------------------------*/
 .breadcrumb-wrap {
   padding: 70px 0 64px;
@@ -1920,7 +1920,7 @@ select {
 }
 
 /*---------------------------------
-    Popup Newsletter CSS 
+    Popup Newsletter CSS
 -----------------------------------*/
 #newsletter-popup .modal-content {
   position: relative;
@@ -2040,7 +2040,7 @@ select {
 }
 
 /*---------------------------------
-    Trending News Section CSS 
+    Trending News Section CSS
 -----------------------------------*/
 .trending-news-box {
   border: 1px solid #D9D9D9;
@@ -2182,7 +2182,7 @@ select {
 }
 
 /*---------------------------------
-    News Card CSS 
+    News Card CSS
 -----------------------------------*/
 .news-metainfo li {
   display: inline-block;
@@ -3212,7 +3212,7 @@ select {
 }
 
 /*---------------------------------
-    News Tab Section CSS 
+    News Tab Section CSS
 -----------------------------------*/
 .news-tablist {
   border: none;
@@ -3390,7 +3390,7 @@ select {
 }
 
 /*---------------------------------
-    Promo Card CSS 
+    Promo Card CSS
 -----------------------------------*/
 .promo-card {
   background-image: url(../img/promo-bg.webp);
@@ -3491,10 +3491,10 @@ select {
 }
 
 /*---------------------------------
-    Instagram CSS 
+    Instagram CSS
 -----------------------------------*/
 /*---------------------------------
-    Video Section CSS 
+    Video Section CSS
 -----------------------------------*/
 .video-news-wrap {
   position: relative;
@@ -3562,7 +3562,7 @@ select {
 }
 
 /*---------------------------------
-    Latest News CSS 
+    Latest News CSS
 -----------------------------------*/
 .latest-news .news-card-five {
   margin-bottom: 16px;
@@ -3684,7 +3684,7 @@ select {
 }
 
 /*---------------------------------
-    Selected News CSS 
+    Selected News CSS
 -----------------------------------*/
 .selected-news .news-card-two,
 .selected-news .news-card-three {
@@ -3705,7 +3705,7 @@ select {
 }
 
 /*---------------------------------
-    Instagram CSS 
+    Instagram CSS
 -----------------------------------*/
 .instagram-slide {
   border-radius: 5px;
@@ -3745,7 +3745,7 @@ select {
 }
 
 /*---------------------------------
-    Team Card CSS 
+    Team Card CSS
 -----------------------------------*/
 .team-card {
   position: relative;

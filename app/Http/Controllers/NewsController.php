@@ -196,7 +196,9 @@ class NewsController extends Controller
         ]);
 
         $userLike = $this->newsHasLike->where($news->id);
-        $newsLike = $this->newsHasLike->where($news->id)->count();
+
+        $newsLike = $this->newsHasLike->countLike($newsId);
+
         $comments = $this->comment->whereIn($newsId);
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
@@ -217,7 +219,7 @@ class NewsController extends Controller
         $authors = $this->author->get();
         $tagPopulars = $this->tags->getByPopular();
 
-        return view('pages.user.news.singlepost', compact('users', 'news','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories','authors','tagPopulars'));
+        return view('pages.user.news.singlepost', compact('users', 'news','newsId','subCategories','categories','newsPhoto','comments', 'newsLike', 'likedByUser','tags','totalCategories','populars','news_recents','newsCategories','authors','tagPopulars'));
     }
 
     /**
