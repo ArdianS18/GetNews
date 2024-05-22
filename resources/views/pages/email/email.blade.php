@@ -106,8 +106,8 @@
                         <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate" align="center" border="0">
                             <tbody>
                                 <tr>
-                                    <td style="border: none; border-radius: 3px; color: white; cursor: auto; padding: 15px 19px;" align="center" valign="middle" bgcolor="#1">
-                                        <a href="{{ route('verisikasi.account', ['id' => $data['id']]) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; line-height: 100%; background: #175A95; color: white; font-family: Ubuntu, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; text-transform: none; margin: 0px;">
+                                    <td style="border: none; border-radius: 3px; color: white; cursor: auto; padding: 15px 19px;" align="center; background-color: #175A95;" valign="middle" bgcolor="#1">
+                                        <a href="{{ route('verisikasi.account', ['id' => $data['id']]) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; line-height: 100%; color: white; font-family: Ubuntu, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; text-transform: none; margin: 0px;">
                                             Verifikasi Email
                                         </a>
                                     </td>
