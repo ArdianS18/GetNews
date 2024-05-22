@@ -73,7 +73,7 @@
 
             </div>
 
-            {{-- <div class="shadow-sm" style="background-color: #ECF1F4;">
+            <div class="shadow-sm" style="background-color: #ECF1F4;">
                 <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 rounded-2" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button
@@ -85,7 +85,7 @@
                         </button>
                     </li>
                 </ul>
-            </div> --}}
+            </div>
         </div>
 
         <div class="tab-content" id="pills-tabContent">

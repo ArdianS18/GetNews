@@ -296,16 +296,6 @@
                         </span>
                     @enderror
                 </div>
-                {{-- <div class="col-md-12 col-lg-6 mb-4">
-                  <label class="form-label" for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="password"
-                        value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror" readonly>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div> --}}
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Tanggal Lahir</label>
                     <input type="text" id="email" name="email" placeholder="Tanggal lahir"
@@ -320,12 +310,6 @@
                   <label class="form-label" for="email">Alamat</label>
                   <textarea name="alamat" class="form-control" id="" cols="30" rows="10" readonly>{{ auth()->user()->address }}</textarea>
                 </div>
-
-                 {{-- <div class="d-flex justify-content-end mb-5">
-                    <a href="{{ route('profile.user.update') }}">
-                        <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
-                    </a>
-                </div> --}}
               </div>
             </div>
 
