@@ -10,7 +10,6 @@
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
-
 </head>
 
 <body>
@@ -41,9 +40,8 @@
 
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
-
+    
     @yield('content')
-
     {{-- <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
@@ -64,9 +62,11 @@
     {{-- <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script> --}}
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
+
+
     @include('layouts.user.footer')
     @yield('script')
-    
+
     <script>
           document.addEventListener("DOMContentLoaded", function() {
             var searchBtn = document.getElementById('search-btn');

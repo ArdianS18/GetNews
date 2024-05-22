@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <title>Login | GetMedia.Id</title>
+    <title>Reset | GetMedia.Id</title>
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
     <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
@@ -40,7 +40,7 @@
                     <img src="{{asset('assets/img/auth/bg-forget-password.svg')}}" width="520px" alt="auth-login-cover" class="img-fluid my-5 " data-app-dark-img="illustrations/auth-login-illustration-dark.html">
                 </div>
             </div>
-            
+
         </div>
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 p-4" >
             <div class="w-px-400 mx-auto">
@@ -58,12 +58,12 @@
                 @endif
 
                 <form method="POST" action="{{ route('password.email') }}">
-                    @csrf                      
+                    @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">{{ __('Email Address') }}</label>
                         <input id="email" type="email" class=" form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     </div>
-                    
+
                     <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
                         Kirim
                     </button>
@@ -76,7 +76,7 @@
                 <div class="text-center mt-4">
                         <p>Belum memiliki akun?<a style="color: #438ac8;" href="{{route('register')}}"> Daftar Sekarang!</a></p>
                 </div>
-                
+
 
             </div>
         </div>
