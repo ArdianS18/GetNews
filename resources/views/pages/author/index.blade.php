@@ -98,7 +98,6 @@
                         <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
                           <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
                             <img style="object-fit: cover" src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
-                            {{-- <img src="{{ asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/> --}}
                           </div>
                         </div>
                       </div>
@@ -320,6 +319,12 @@
                 <div class="col-md-12 col-lg-12 mb-4">
                   <label class="form-label" for="email">Alamat</label>
                   <textarea name="alamat" class="form-control" id="" cols="30" rows="10" readonly>{{ auth()->user()->address }}</textarea>
+                </div>
+
+                 <div class="d-flex justify-content-end mb-5">
+                    <a href="{{ route('profile.user.update') }}">
+                        <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
+                    </a>
                 </div>
               </div>
             </div>
