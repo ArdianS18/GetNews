@@ -188,18 +188,18 @@ class DashboardController extends Controller
 
     public function authordetail($id) {
         $user = $this->user->show($id);
+        $userId = $user->id;
         $author = $this->author->where($user);
 
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         $authors = Author::with('user')->where($author);
         $totalCategories = $this->category->showWhithCount();
-        $news = $this->news->authorGetNews($user);
+        $news = $this->news->authorGetNews($userId);
         $newsId = $news->pluck('id');
         $comments = $this->comment->where($newsId);
         $newsCount = $this->news->get();
         $authors = $this->author->get();
-        $news = $this->news->get();
 
         return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments'));
     }

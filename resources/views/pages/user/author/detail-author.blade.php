@@ -18,7 +18,7 @@
             border-radius: 10px;
         }
         @media only screen and (max-width: 768px) {
-            .text-mobile { 
+            .text-mobile {
                 font-size: 10px;
             }
         }
@@ -63,9 +63,7 @@
                             </div>
 
                             <div class="col-10">
-                                <p class="fs-6 text-mobile">lorem oancone o nicygiu IVisu ub oiiuhcc oajicomec uhceb lorem oancone o
-                                    nicygiu IVisu ub oii IVisu ub oiiuhcc oajicomec uhceb lorem oancone o nicygiu IVisu ub
-                                    oiiuhcc oajicomec uhceb aiuhec...</p>
+                                <p class="fs-6 text-mobile"></p>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <div class="d-flex">
@@ -86,13 +84,19 @@
                         <h3 class="sidebar-widget-title">Berita Penulis</h3>
                         <div class="pp-post-wrap">
                             @forelse ($news as $item)
+                                @php
+                                    $dateParts = date_parse($item->upload_date);
+                                @endphp
                                 <div class="row mt-3 mb-4">
                                     <div class="col-lg-3 col-md-12 mb-3">
                                         <img src="{{ asset('storage/' . $item->photo) }}" class="" width="100%"
                                             height="150px" style="object-fit: cover" alt="Image">
                                     </div>
                                     <div class="col-lg-9 col-md-12">
-                                        <h5>{!! Illuminate\Support\Str::limit(strip_tags($item->name), 50, '...') !!}</h5>
+                                        <h5>
+                                            <a data-toggle="tooltip" data-placement="top" title="{{ $item->name }}"
+                                                href="{{ route('news.user', ['news' => $item->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">{!! Illuminate\Support\Str::limit($item->name, $limit = 50, $end = '...') !!}</a>
+                                        </h5>
 
                                         <div class="col-9">
                                             <p>{!! Illuminate\Support\Str::limit(strip_tags($item->content), 120, '...') !!}</p>

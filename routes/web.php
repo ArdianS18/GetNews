@@ -376,7 +376,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
-Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
+Route::get('author/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
