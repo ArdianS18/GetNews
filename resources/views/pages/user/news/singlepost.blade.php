@@ -46,7 +46,7 @@
         $dateParts = date_parse($news->upload_date);
     @endphp
 
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GetMedia">
@@ -912,6 +912,32 @@
 @section('script')
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(() => {
+                fetch('/coin-add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {})
+                .catch(function(error) {
+                    console.error(error);
+                });
+            }, 60000);
+        });
+    </script>
+
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             var loadingProgress = document.querySelector('.loading-progress');
             var width = 0;
@@ -942,7 +968,7 @@
                 .catch(error => console.error('Error adding coin:', error));
             }
         });
-    </script>
+    </script> --}}
 
     <script>
         function toggleReplyForm(commentId) {
