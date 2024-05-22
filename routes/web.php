@@ -372,6 +372,10 @@ Route::middleware(['role:user', 'verified'])->group(function () {
 
     // Inbox
     Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
+
+    Route::get('berlangganan-user', function(){
+        return view('pages.user.berlangganan.news');
+    })->name('user.paket-berlangganan');
 });
 
 Route::middleware(['auth'])->group(function () {
