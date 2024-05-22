@@ -188,12 +188,12 @@
             <div class="card p-4 mt-4">
                 <div class="row">
                     <div class="col-lg-2">
-                        <div class="">
+                        <div class="mb-3">
                                 <img src="${data.photo}" alt="" style="object-fit:cover;" width="100%" height="120">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-8">
-                        <div class="d-flex">
+                        <div class="">
                             <div class="order-md-1">
                                 <h4>${limitString(data.name, 50)}</h4>
                                 <p>${limitString(data.content, 500)}</p>
