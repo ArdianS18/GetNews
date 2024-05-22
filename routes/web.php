@@ -376,6 +376,10 @@ Route::middleware(['role:user', 'verified'])->group(function () {
     Route::get('news-user-liked', function(){
         return view('pages.user.news.newsliked');
     })->name('news.user.liked');
+
+    Route::get('berlangganan-user', function(){
+        return view('pages.user.berlangganan.news');
+    })->name('user.paket-berlangganan');
 });
 
 Route::middleware(['auth'])->group(function () {
