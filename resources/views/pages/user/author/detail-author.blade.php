@@ -35,7 +35,7 @@
                         <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" alt="Image" width="130px" style="border-radius: 50%;" />
                     </div>
                     <div class="col-md-12 col-lg-11">
-                            <div class="d-flex">
+                            <div class="row">
                                 <h3 class="me-2">{{ $author->user->name }}</h3>
                             @auth
                                 @if (auth()->user()->id != $author->user_id)
@@ -145,7 +145,7 @@
                                             href="{{ route('categories.show.user', ['category' => $category->slug]) }}"><img
                                                 src="{{ asset('assets/img/icons/arrow-right.svg') }}"
                                                 alt="Image">{{ $category->name }}
-                                            <span>({{ $category->total }})</span>
+                                            <span>({{ $category->news_categories_count }})</span>
                                         </a>
                                     </li>
                                 @endforeach
