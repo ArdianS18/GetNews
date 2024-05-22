@@ -36,7 +36,6 @@
                                             {!! ($news_popular->name)  !!}
                                         </a>
                                     </h3>
-                                    <p>{!! Illuminate\Support\Str::limit(strip_tags($news_popular->content), 160, '...') !!}</p>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                                 <p>{{ \Carbon\Carbon::parse($news_popular->created_at)->translatedFormat('d F Y') }}</p>
@@ -51,7 +50,7 @@
 
                     <div class="mb-5">
                         @if ($trending != null)
-                            <div class="d-flex justify-content-between mb-5">
+                            <div class="d-flex justify-content-between mb-3 mt-3">
                                 <h3>Trending</h3>
                                 <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'trending'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
                             </div>
@@ -73,6 +72,7 @@
                                             {!! Illuminate\Support\Str::limit($tren->name, $limit = 50, $end = '...')  !!}
                                         </a>
                                     </h3>
+                                    <p>{!! Illuminate\Support\Str::limit(strip_tags($tren->content), 80, '...') !!}</p>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a
                                                 href="javascript:void(0)">{{ \Carbon\Carbon::parse($tren->created_at)->translatedFormat('d F Y') }}</a>

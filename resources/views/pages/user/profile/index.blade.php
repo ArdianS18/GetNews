@@ -73,7 +73,7 @@
 
             </div>
 
-            {{-- <div class="shadow-sm" style="background-color: #ECF1F4;">
+            <div class="shadow-sm" style="background-color: #ECF1F4;">
                 <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 rounded-2" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button
@@ -85,7 +85,7 @@
                         </button>
                     </li>
                 </ul>
-            </div> --}}
+            </div>
         </div>
 
         <div class="tab-content" id="pills-tabContent">
@@ -181,11 +181,11 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-end mb-5">
+                {{-- <div class="d-flex justify-content-end mb-5">
                     <a href="{{ route('profile.user.update') }}">
                         <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
                     </a>
-                </div>
+                </div> --}}
             </div>
 
 
