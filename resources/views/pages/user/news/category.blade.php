@@ -145,14 +145,6 @@
             <div class="col-lg-4">
                 <div class="">
                     <div class="sidebar">
-                        <div class="sidebar-widget-two">
-                            <form class="search-box-widget">
-                                <input type="search" name="search" placeholder="Search">
-                                <button type="submit">
-                                    <i class="fi fi-rr-search"></i>
-                                </button>
-                            </form>
-                        </div>
                         <div class="sidebar-widget">
                             <h3 class="sidebar-widget-title">Kategori</h3>
                             <ul class="category-widget list-style">
