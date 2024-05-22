@@ -192,9 +192,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::post('contact-about-create', [ContactController::class, 'store'])->name('contact.create.about');
     Route::put('contact-about-update/{contact}', [ContactController::class, 'update'])->name('contact.update.about');
 
-    Route::get('account-user-list', function(){
-        return view('pages.admin.akun.user');
-    })->name('account.user.list');
+    Route::get('account-user-list',[UserController::class, 'accountUserList'])->name('account.user.list');
 });
 
 
