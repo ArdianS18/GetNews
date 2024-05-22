@@ -255,7 +255,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
 
 });
 
-Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
+Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function () {
     Route::get('tukar-coin', function () {
         return view('pages.user.coins.index');
     })->name('tukar.coin');
