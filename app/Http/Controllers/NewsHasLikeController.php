@@ -29,7 +29,9 @@ class NewsHasLikeController extends Controller
      */
     public function index()
     {
-        //
+        $id = auth()->user()->id;
+        $news = $this->newsHasLike->show($id);
+        return view('pages.author.news.newsliked', compact('news'));
     }
 
     /**

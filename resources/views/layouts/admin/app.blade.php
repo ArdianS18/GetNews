@@ -78,6 +78,9 @@
         @hasrole('author')
             @include('layouts.author.side')
         @endrole
+        @hasrole('user')
+            @include('layouts.user.side')
+        @endrole
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
