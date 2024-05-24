@@ -131,7 +131,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye mt-2"></i>{{ $mid->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye mt-3"></i>{{ $mid->views_count }}</li>
                                 </ul>
                             </div>
                         </div>

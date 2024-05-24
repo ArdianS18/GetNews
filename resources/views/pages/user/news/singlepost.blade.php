@@ -453,46 +453,43 @@
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-title">
                                         <h5 class="modal-title" id="tambahdataLabel"><span
                                                 style="color: #0F4D8A; font-size: 25px;" class="mb-2 me-1"></span>Laporkan
                                         </h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
-                                        @method('post')
-                                        @csrf
-                                        <div class="modal-body">
-                                            <div class="mb-3 form-group">
-                                                <label for="message" class="form-label">Masukan Detail
-                                                    Laporan:</label>
-                                                <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
-                                                @error('message')
-                                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                    
+                                    <div class="modal-body">
+                                        <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
+                                            @method('post')
+                                            @csrf
+                                                <div class="mb-3 form-group">
+                                                    <label for="message" class="form-label">Masukan Detail
+                                                        Laporan:</label>
+                                                    <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
+                                                    @error('message')
+                                                        <span class="invalid-feedback" role="alert" style="color: red;">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p>
+                                                        Artikel dan pengguna yang dilaporkan akan ditinjau oleh staf Getmedia untuk menentukan apakah artikel dan pengguna tersebut melanggar Pedoman Komunitas kami atau tidak. Akun akan dikenai sanksi jika melanggar Pedoman Komunitas, dan pelanggaran serius atau berulang dapat berakibat pada penghentian akun.
+                                                    </p>
+                                                </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-end me-2">
+                                                    <button type="button" class="me-2 btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Laporkan</button>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <p>
-                                                    Video dan pengguna yang dilaporkan akan ditinjau oleh staf
-                                                    YouTube 24/7 untuk menentukan apakah video dan pengguna
-                                                    tersebut melanggar Pedoman Komunitas kami atau tidak. Akun
-                                                    akan dikenai sanksi jika melanggar Pedoman Komunitas, dan
-                                                    pelanggaran serius atau berulang dapat berakibat pada
-                                                    penghentian akun.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="d-flex justify-content-end me-2">
-                                                <button type="button" class="me-2 btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                </div>
                                 </div>
                             </div>
                         </div>
