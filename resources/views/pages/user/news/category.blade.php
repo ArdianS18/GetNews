@@ -1,5 +1,15 @@
 @extends('layouts.user.app')
 
+@section('style')
+<style>
+    @media (min-width: 768px) {
+    .icon-eye {
+        margin-top: 12px;
+    }
+}
+</style>
+@endsection
+
 @section('content')
 <div class="col-lg-12">
     <div class="breadcrumb-wrap">
@@ -36,7 +46,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($news_popular->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye" style="margin-top: 12px"></i>{{ $news_popular->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye icon-eye"></i>{{ $news_popular->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
