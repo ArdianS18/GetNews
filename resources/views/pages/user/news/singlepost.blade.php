@@ -254,7 +254,7 @@
                         </div>
                         <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
                         <p>Share : <a id="wa" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 256 258">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 258">
                                     <defs>
                                         <linearGradient id="logosWhatsappIcon0" x1="50%" x2="50%" y1="100%"
                                             y2="0%">
@@ -453,7 +453,7 @@
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-title">
+                                    <div class="modal-header">
                                         <h5 class="modal-title" id="tambahdataLabel"><span
                                                 style="color: #0F4D8A; font-size: 25px;" class="mb-2 me-1"></span>Laporkan
                                         </h5>
