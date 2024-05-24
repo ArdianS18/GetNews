@@ -908,63 +908,26 @@
 
 @section('script')
 
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function() {
-            setInterval(() => {
-                fetch('/coin-add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken,
-                    },
-                })
-                .then(function(response) {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Error: ' + response.status);
-                    }
-                })
-                .then(function(data) {})
-                .catch(function(error) {
-                    console.error(error);
-                });
-            }, 60000);
-        });
-    </script>
-
     {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var loadingProgress = document.querySelector('.loading-progress');
-            var width = 0;
-
-            const interval = setInterval(() => {
-                if (width >= 100) {
-                clearInterval(interval);
-                fetchCoin();
+        setInterval(() => {
+            fetch('/coin-add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
                 } else {
-                width++;
-                loadingProgress.style.width = `${width}%`;
+                    throw new Error('Error: ' + response.status);
                 }
-            }, 600);
-
-            setInterval(fetchCoin, 60000);
-
-            function fetchCoin() {
-                fetch('{{ route('coin.add') }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ amount: 1 })
-                })
-                .then(response => response.json())
-                .then(data => console.log('Coin added', data))
-                .catch(error => console.error('Error adding coin:', error));
-            }
-        });
+            })
+            .then(function(data) {})
+            .catch(function(error) {
+                console.error(error);
+            });
+        }, 60000);
     </script> --}}
 
     <script>
@@ -980,6 +943,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            setInterval(() => {
+                fetch('/coin-add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {})
+                .catch(function(error) {
+                    console.error(error);
+                });
+            }, 60000);
+
             var formLike = document.getElementById('form-like');
             var formLiked = document.getElementById('form-liked');
             var likeCount = document.getElementById('like');
