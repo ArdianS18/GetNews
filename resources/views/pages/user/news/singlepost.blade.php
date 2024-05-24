@@ -229,6 +229,12 @@
             --bs-btn-disabled-border-color: #175A95fd;
             --bs-gradient: none;
         }
+
+        @media (max-width: 768px) {
+        .font-date {
+            font-size: 12px;
+        }
+        }
     </style>
 @endsection
 @section('content')
@@ -254,7 +260,7 @@
                         </div>
                         <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
                         <p class="d-flex gap-1">Share : <a id="wa" class="logo" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}">
-                                <svg class="logo-light" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 264">
+                                <svg class="logo-dark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 264">
                                     <defs>
                                         <linearGradient id="logosWhatsappIcon0" x1="50%" x2="50%" y1="100%"
                                             y2="0%">
@@ -275,7 +281,7 @@
                                         d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503c-1.858-.08-3.982-.074-6.104-.074c-2.124 0-5.575.799-8.492 3.984c-2.92 3.188-11.148 10.892-11.148 26.561c0 15.67 11.413 30.813 13.004 32.94c1.593 2.123 22.033 35.307 54.405 48.073c26.904 10.609 32.379 8.499 38.218 7.967c5.84-.53 18.844-7.702 21.497-15.139c2.655-7.436 2.655-13.81 1.859-15.142c-.796-1.327-2.92-2.124-6.105-3.716c-3.186-1.593-18.844-9.298-21.763-10.361c-2.92-1.062-5.043-1.592-7.167 1.597c-2.124 3.184-8.223 10.356-10.082 12.48c-1.857 2.129-3.716 2.394-6.9.801c-3.187-1.598-13.444-4.957-25.613-15.806c-9.468-8.442-15.86-18.867-17.718-22.056c-1.858-3.184-.199-4.91 1.398-6.497c1.431-1.427 3.186-3.719 4.78-5.578c1.588-1.86 2.118-3.187 3.18-5.311c1.063-2.126.531-3.986-.264-5.579c-.798-1.593-6.987-17.343-9.819-23.64" />
                                 </svg>
 
-                                <svg class="logo-dark" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 258">
+                                <svg class="logo-light" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 256 264">
                                     <defs>
                                         <linearGradient id="logosWhatsappIcon0" x1="50%" x2="50%" y1="100%"
                                             y2="0%">
@@ -295,6 +301,7 @@
                                     <path fill="#FFF"
                                         d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503c-1.858-.08-3.982-.074-6.104-.074c-2.124 0-5.575.799-8.492 3.984c-2.92 3.188-11.148 10.892-11.148 26.561c0 15.67 11.413 30.813 13.004 32.94c1.593 2.123 22.033 35.307 54.405 48.073c26.904 10.609 32.379 8.499 38.218 7.967c5.84-.53 18.844-7.702 21.497-15.139c2.655-7.436 2.655-13.81 1.859-15.142c-.796-1.327-2.92-2.124-6.105-3.716c-3.186-1.593-18.844-9.298-21.763-10.361c-2.92-1.062-5.043-1.592-7.167 1.597c-2.124 3.184-8.223 10.356-10.082 12.48c-1.857 2.129-3.716 2.394-6.9.801c-3.187-1.598-13.444-4.957-25.613-15.806c-9.468-8.442-15.86-18.867-17.718-22.056c-1.858-3.184-.199-4.91 1.398-6.497c1.431-1.427 3.186-3.719 4.78-5.578c1.588-1.86 2.118-3.187 3.18-5.311c1.063-2.126.531-3.986-.264-5.579c-.798-1.593-6.987-17.343-9.819-23.64" />
                                 </svg>
+
                             </a>
                             <a id="fb">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
@@ -306,7 +313,7 @@
                             </a>
                             <a id="tw" class="logo">
                                 <svg class="logo-dark" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14"><g fill="none"><g clip-path="url(#primeTwitter0)"><path fill="#ffffff" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"/></g><defs><clipPath id="primeTwitter0"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></g></svg>
-                                <svg class="logo-light" style="margin-top: 3px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 128 128"><path d="M75.916 54.2L122.542 0h-11.05L71.008 47.06L38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303L89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086l-39.42-56.386h16.972L65.19 53.824l4.954 7.086l41.353 59.15h-16.97L60.782 71.793Z"/></svg>
+                                <svg class="logo-light" style="margin-top: 2px" xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 128 128"><path d="M75.916 54.2L122.542 0h-11.05L71.008 47.06L38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303L89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086l-39.42-56.386h16.972L65.19 53.824l4.954 7.086l41.353 59.15h-16.97L60.782 71.793Z"/></svg>
                             </a>
                             {{-- <a id="tw">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 128 128">
@@ -362,9 +369,9 @@
                                                 </li>
                                             </div>
 
-                                            <div class="col-md-12 col-lg-9">
+                                            <div class="col-md-12 col-sm-12 col-lg-9">
                                                 <li><i class="fi fi-rr-calendar-minus"></i>
-                                                    <span id="formattedDate"></span>
+                                                    <span id="formattedDate" class="font-date"></span>
                                                 </li>
                                                 <li>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
@@ -437,7 +444,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-1 col-lg-1">
+                                    <div class="col-md-1 col-sm-1 col-lg-1">
                                         <li>
                                             <a class="" href="#" role="button" id="dropdownMenuLink"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
