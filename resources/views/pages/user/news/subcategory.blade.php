@@ -71,10 +71,10 @@
                                 </div>
                                 <div class="news-card-info">
                                     <h3><a data-toggle="tooltip" data-placement="top" title="{{ $tren->name }}" href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                            {!! Illuminate\Support\Str::limit($tren->name, $limit = 30, $end = '...')  !!}
+                                            {!! Illuminate\Support\Str::limit($tren->name, $limit = 35, $end = '...')  !!}
                                         </a>
                                     </h3>
-                                    <p>{!! Illuminate\Support\Str::limit(strip_tags($tren->content), 80, '...') !!}</p>
+                                    <p>{!! Illuminate\Support\Str::limit(strip_tags($tren->content), 85, '...') !!}</p>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i><a
                                                 href="javascript:void(0)">{{ \Carbon\Carbon::parse($tren->created_at)->translatedFormat('d F Y') }}</a>
@@ -154,7 +154,7 @@
                     <div class="">
                         <div class="sidebar">
                             <div class="sidebar-widget">
-                                <h3 class="sidebar-widget-title">Kategori</h3>
+                                <h3 class="sidebar-widget-title">Kategori Popular</h3>
                                 <ul class="category-widget list-style">
                                     @foreach ($totalCategories as $category)
                                         <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
