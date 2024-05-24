@@ -778,7 +778,7 @@
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <div class="sidebar-widget">
-                            <h3 class="sidebar-widget-title">Kategori</h3>
+                            <h3 class="sidebar-widget-title">Kategori Popular</h3>
                             <ul class="category-widget list-style">
                                 @foreach ($totalCategories as $category)
                                     <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"

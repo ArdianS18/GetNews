@@ -40,7 +40,7 @@
                                         <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                                 <p>{{ \Carbon\Carbon::parse($news_popular->created_at)->translatedFormat('d F Y') }}</p>
                                             </a></li>
-                                        <li><i class="fi fi-rr-eye mt-2"></i>{{ $news_popular->views_count }}</li>
+                                        <li><i class="fi fi-rr-eye" style="margin-top: 2px"></i>{{ $news_popular->views_count }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -52,7 +52,9 @@
                         @if ($trending != null)
                             <div class="d-flex justify-content-between mb-3 mt-3">
                                 <h3>Trending</h3>
-                                <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'trending'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
+                                <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'trending'])}}"><p>Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i>
+                                </p>
+                                </a>
                             </div>
                         @endif
                         @forelse ($trending as $tren)
@@ -77,7 +79,7 @@
                                         <li><i class="fi fi-rr-calendar-minus"></i><a
                                                 href="javascript:void(0)">{{ \Carbon\Carbon::parse($tren->created_at)->translatedFormat('d F Y') }}</a>
                                         </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $tren->views_count }}</li>
+                                        <li><i class="fi fi-rr-eye" style="margin-top: 2px"></i>{{ $tren->views_count }}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -101,7 +103,10 @@
                         @if ($new_news != null)
                             <div class="d-flex justify-content-between mb-5">
                                 <h3>Terbaru</h3>
-                                <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'terbaru'])}}">Lihat lainnya<i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i></a>
+                                <a href="{{ route('subCategory.all', ['subslug' => $subCategory->slug, 'data' => 'terbaru'])}}"><p>Lihat lainnya
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="currentColor" d="m13.292 12l-4.6-4.6l.708-.708L14.708 12L9.4 17.308l-.708-.708z"/></svg></i>
+                                    </p>
+                                </a>
                             </div>
                         @endif
 
@@ -126,7 +131,7 @@
                                         <li><i class="fi fi-rr-calendar-minus"></i><a
                                                 href="javascript:void(0)">{{ \Carbon\Carbon::parse($new->created_at)->translatedFormat('d F Y') }}</a>
                                         </li>
-                                        <li><i class="fi fi-rr-eye"></i>{{ $new->views_count }}</li>
+                                        <li><i class="fi fi-rr-eye" style="margin-top: 2px"></i>{{ $new->views_count }}</li>
                                     </ul>
                                 </div>
                             </div>
