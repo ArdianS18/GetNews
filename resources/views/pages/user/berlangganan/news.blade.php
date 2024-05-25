@@ -10,7 +10,7 @@
         </div>
         <div class="col-3">
           <div class="text-center mb-n4">
-            <img src="{{asset('assets/img/news-bg.svg')}}" width="250px" alt="" class="img-fluid">
+            <img src="{{asset('assets/img/news-bg.svg')}}" width="200px" alt="" class="img-fluid">
           </div>
         </div>
       </div>
