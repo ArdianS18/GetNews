@@ -38,7 +38,7 @@
                         <div class="col-lg-3 mt-n3 order-lg-2 order-1 justify-content-center justify-content-lg-start text-center text-lg-start">
                             <div class="mt-n5">
                                 <div class="row align-items-center justify-content-center mt-5 mb-2">
-                                    <div class="col-md-12 col-lg-9 d-flex align-items-center justify-content-center rounded-circle" style="width: 120px; height: 120px;";>
+                                    <div class="col-md-12 col-lg-8 d-flex align-items-center justify-content-center rounded-circle" style="width: 120px; height: 120px;";>
                                         <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
                                           <img style="object-fit: cover" src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
                                         </div>
@@ -47,7 +47,7 @@
                                     {{-- <div class="rounded-circle  overflow-hidden border border-white" style="width: 110px; height: 110px;">
                                         <img src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100" style="object-fit: cover">
                                     </div> --}}
-                                    <div class="mt-5 col-md-12 col-lg-3 mt-lg-0 ms-lg-3">
+                                    <div class="mt-5 col-md-12 col-lg-4 mt-lg-0 ms-lg-3">
                                         <h5 class="fs-5 mt-2 mb-0 fw-semibold">{{ auth()->user()->name }}</h5>
                                         <p class="mt-2 fs-4">Pengguna</p>
                                     </div>
