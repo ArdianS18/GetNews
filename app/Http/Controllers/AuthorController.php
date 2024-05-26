@@ -16,6 +16,7 @@ use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\RegisterInterface;
+use App\Contracts\Interfaces\ReportInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\ViewInterface;
@@ -65,8 +66,10 @@ class AuthorController extends Controller
     private RegisterService $serviceregister;
     private $authorBannedService;
 
+    private ReportInterface $report;
 
-    public function __construct(NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService)
+
+    public function __construct(NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
     {
         $this->author = $author;
         $this->register = $register;
@@ -88,7 +91,7 @@ class AuthorController extends Controller
         $this->serviceregister = $serviceregister;
 
         $this->view = $view;
-
+        $this->report = $report;
     }
     /**
      * Display a listing of the resource.
@@ -241,7 +244,12 @@ class AuthorController extends Controller
     {
         $newsRejects = $this->newsReject->where(auth()->user()->id);
         $newsRejectRead = $this->newsReject->where(auth()->user()->id);
-        return view('pages.author.inbox.index', compact('newsRejects', 'newsRejectRead'));
+
+        $reports = $this->report->get()->whereIn('status_delete', 0);
+        $reports2 = $this->report->get()->whereIn('status_delete', 0);
+
+        $countReport = $this->report->count('unread');
+        return view('pages.author.inbox.index', compact('newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2'));
     }
 
     /**
