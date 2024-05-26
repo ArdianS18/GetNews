@@ -58,12 +58,12 @@ class TagService implements ShouldHandleFileUpload, CustomUploadValidation
 
     public function update(TagRequest $request): array|bool
     {
-
         $data = $request->validated();
 
         return [
             'name' => $data['name'],
             'slug' => Str::slug($data['name']),
+
         ];
     }
 }
