@@ -34,17 +34,12 @@
                     </div>
             @endforeach
         </div>
-        <div class="offcanvas-contact-info">
-            {{-- <div class="option-item">
-                <a href="/login" class="btn-two">Login</a>
-            </div>
 
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <div class="option-item">
-                    <button class="btn-two" id="logoutBtn">Log Out</button>
-                </div>
-            </form> --}}
+        <div class="offcanvas-contact-info">
+            
+        </div>
+
+        <div class="offcanvas-contact-info">
 
             @auth
                 <div class="ms-2">

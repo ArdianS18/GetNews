@@ -2,7 +2,11 @@
 <title>GetMedia</title>
 @section('style')
     <style>
-
+            @media (min-width: 768px) {
+            .icon-eye {
+                margin-top: 12px;
+            }
+    }
     </style>
 @endsection
 @section('content')
@@ -131,7 +135,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye mt-2"></i>{{ $mid->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye icon-eye"></i>{{ $mid->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
