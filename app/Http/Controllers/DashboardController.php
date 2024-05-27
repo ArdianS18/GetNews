@@ -24,10 +24,12 @@ use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CoinInterface;
 use App\Contracts\Interfaces\ContactInterface;
+use App\Contracts\Interfaces\ContactUsInterface;
 use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
+use App\Contracts\Interfaces\ReportInterface;
 
 class DashboardController extends Controller
 {
@@ -47,6 +49,9 @@ class DashboardController extends Controller
     private VisitorInterface $visitor;
     private ContactInterface $contact;
     private CoinInterface $coin;
+
+    private ContactUsInterface $contactUs;
+    private ReportInterface $report;
 
     use CustomPaginateTrait;
 
@@ -257,5 +262,4 @@ class DashboardController extends Controller
 
         return view('pages.user.news.search',compact('categories', 'subCategories','newsByDate','query','totalCategories','populars'));
     }
-
 }

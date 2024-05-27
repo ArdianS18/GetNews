@@ -37,7 +37,7 @@ class NewsRejectRepository extends BaseRepository implements NewsRejectInterface
      */
     public function show(mixed $id): mixed
     {
-
+        //
     }
 
     public function where(mixed $id): mixed
