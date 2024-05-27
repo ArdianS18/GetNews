@@ -70,7 +70,6 @@
                     @endif
                     @else
                     <form>
-                     
                       <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                   </form>
                 @endauth                

@@ -239,6 +239,27 @@
           </a>
         </li>
       </ul>
+      <div class="card shadow-none position-relative overflow-hidden mb-4" style="background-color: #183249">
+        <div class="card-body px-4 py-3">
+            <div class="row align-items-center">
+                <div class="col-9 d-flex align-items-center">
+                    <div class="ms-1 px-3">
+                        <h3 class="mb-8  text-white" style="font-weight: 400;">Pendapatan Keseluruhan</h3>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><h3 class=" text-warning text-decoration-none ">Rp. 1.500.000</h3></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="text-center mb-n2">
+                        <img src="{{ asset('assets/img/end.png') }}" width="70%" alt="" class="img-fluid mb-n4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="tab-content">
         <div class="tab-pane active" id="premium-news" role="tabpanel">
             <div class="row">
