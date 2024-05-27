@@ -131,6 +131,7 @@
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}" href="{{ route('news.user', ['news' => $mid->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
+                                </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
@@ -153,6 +154,7 @@
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 85, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
@@ -389,7 +391,7 @@
                                                 <img src="{{ asset($most->user->photo ? 'storage/' . $most->user->photo : 'default.png') }}"
                                                     alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;" />
                                             </div>
-                                            <h5>By<a href="{{ route('author.detail', ['id' => $most->user->slug]) }}">{{ $most->user->name }}</a></h5>
+                                            <h5>By <a href="{{ route('author.detail', ['id' => $most->user->slug]) }}">{{ $most->user->name }}</a></h5>
                                         </div>
                                         <h3>
                                             <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}" href="{{ route('news.user', ['news' => $most->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
