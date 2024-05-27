@@ -84,8 +84,8 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12">
-                        <div class=""><p style="line-height: 10px; margin-top: 5px;"><b>{{ auth()->user()->name }}</b></p></div>
-                        <div class=""><p style="font-size: 13px;">{{ auth()->user()->email }}</p></div>
+                        <div class=""><p style="line-height: 0px;" class="mt-3"><b>{{ auth()->user()->name }}</b></p></div>
+                        <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">{{ auth()->user()->email }}</p></div>
                     </div>
                     <div class="col-lg-1 col-md-12">
                         <div class="d-flex justify-content-end">
