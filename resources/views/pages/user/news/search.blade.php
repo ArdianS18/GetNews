@@ -15,6 +15,22 @@
             padding: 4%;
             border-radius: 10px;
         }
+        .btn-outline-primary {
+            --bs-btn-color: #175A95 d;
+            --bs-btn-border-color: #175A95;
+            --bs-btn-hover-color: #fff;
+            --bs-btn-hover-bg: #175A95;
+            --bs-btn-hover-border-color: #175A95;
+            --bs-btn-focus-shadow-rgb: 13, 110, 253;
+            --bs-btn-active-color: #fff;
+            --bs-btn-active-bg: #175A95;
+            --bs-btn-active-border-color: #175A95;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #175A95;
+            --bs-btn-disabled-bg: transparent;
+            --bs-btn-disabled-border-color: #175A95fd;
+            --bs-gradient: none;
+        }
     </style>
 @endsection
 
@@ -31,13 +47,16 @@
                                 <h4 class="mb-3" style="border-bottom: 5px solid #175A95;display:inline-block">Hasil Pencarian "{{ $query }}"</h4>
                             </div>
                             <div class="">
-                                <form>
+                                <form class="d-flex gap-2">
                                     <div class="d-flex gap-2" style="height: 40px">
                                         <select class="form-select" name="opsi" style="width: 200px">
                                             <option value="terbaru">Terbaru</option>
                                             <option value="terlama">Terlama</option>
                                         </select>
-                                        <button class="btn-two" id="signInBtn" type="submit">
+                                        
+                                    </div>
+                                    <div> 
+                                        <button class="btn btn-outline-primary" id="signInBtn" type="submit">
                                             Filter
                                         </button>
                                     </div>

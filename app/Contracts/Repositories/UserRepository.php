@@ -41,8 +41,7 @@ class UserRepository extends BaseRepository implements UserInterface
     {
         return $this->model->query()
             ->where(function ($query) {
-                $query->whereRelation('roles', 'name', 'admin')
-                    ->orWhereRelation('roles', 'name', 'user');
+                $query->whereRelation('roles', 'name', 'admin');
             })
             ->when($request->name, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->name . '%');

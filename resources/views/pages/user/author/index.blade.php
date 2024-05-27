@@ -56,7 +56,7 @@
               <div class="row">
                 @forelse ($authors as $item)
                 <div class="col-md-12 col-lg-4 mb-4">
-                    <a href="{{ route('author.detail', ['id' => $item->user->name]) }}">
+                    <a href="{{ route('author.detail', ['id' => $item->user->slug]) }}">
                         <div class="card-detail hover-img shadow-sm">
                             <div class="card-body">
                                 <div class="p-4 text-center">

@@ -351,9 +351,6 @@
                             <div class="chat-container h-100 w-100">
                                 <div class="chat-box-inner-part h-100">
                                     <div class="chatting-box app-email-chatting-box">
-                                        <div class="p-9 py-3 border-bottom chat-meta-user">
-                                            <h5>Detail Pesan</h5>
-                                          </div>
                                         @forelse ($contactUs2 as $contactUs)
                                         <div class="chat-content" id="chat_content_{{ $contactUs->id }}" style="display: none;">
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
@@ -913,7 +910,7 @@
                     }
                 });
             }
-        });
+        }); 
     </script>
 
 

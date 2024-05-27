@@ -26,6 +26,13 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
             ->delete();
     }
 
+    public function whereIn(): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', auth()->user()->id)
+            ->count();
+    }
+
     /**
      * Handle get the specified data by id from models.
      *
@@ -35,7 +42,9 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
      */
     public function show(mixed $id): mixed
     {
-        //
+        return $this->model->query()
+            ->where('user_id', $id)
+            ->get();
     }
 
     public function countLike($newsId): mixed
@@ -43,6 +52,13 @@ class NewsHasLikeRepository extends BaseRepository implements NewsHasLikeInterfa
         return $this->model->query()
             ->whereIn('news_id', $newsId)
             ->get()
+            ->count();
+    }
+
+    public function countLikePOst($newsId): mixed
+    {
+        return $this->model->query()
+            ->where('news_id', $newsId)
             ->count();
     }
 

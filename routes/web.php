@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdvertisementController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CoinController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CommentReportController;
 use App\Http\Controllers\ContactController;
@@ -117,6 +119,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('faq-list', function () {
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
+
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
@@ -190,9 +193,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::post('contact-about-create', [ContactController::class, 'store'])->name('contact.create.about');
     Route::put('contact-about-update/{contact}', [ContactController::class, 'update'])->name('contact.update.about');
 
-    Route::get('account-list', function(){
-        return view('pages.admin.akun.user');
-    })->name('account.user.list');
+    Route::get('account-user-list',[UserController::class, 'accountUserList'])->name('account.user.list');
 });
 
 
@@ -223,8 +224,6 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
-    //
-    Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
     // Update And Delete News
@@ -233,6 +232,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('status-author', function(){
         return view('pages.author.status.index');
     })->name('status.news.author');
+
     Route::get('list-status-author', [NewsController::class, 'showstatusnews'])->name('list.news.author');
 
     Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
@@ -244,16 +244,19 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('income-statistics', [AuthorController::class, 'incomestatistics'])->name('statistik.income');
     Route::get('news-statistics', [AuthorController::class, 'newsstatistics'])->name('statistik.news');
     Route::get('chart-statistics-news', [NewsViewController::class, 'newsstatistics']);
-    Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
 
 
     Route::get('status', function () {
         return view('pages.author.status.index');
     })->name('status.author');
 
+
 });
 
-Route::middleware(['role:user|author|admin|superadmin'])->group(function () {
+Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function () {
+
+    Route::get('news-liked', [NewsHasLikeController::class, 'index'])->name('news.author.liked');
+
     Route::get('tukar-coin', function () {
         return view('pages.user.coins.index');
     })->name('tukar.coin');
@@ -367,6 +370,10 @@ Route::middleware(['role:user', 'verified'])->group(function () {
 
     // Inbox
     Route::get('admin-report', [ReportController::class, 'index'])->name('admin.report');
+
+    Route::get('berlangganan-user', function(){
+        return view('pages.user.berlangganan.news');
+    })->name('user.paket-berlangganan');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -374,7 +381,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('author', [DashboardController::class, 'authoruser'])->name('author-index');
-Route::get('author-detail/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
+Route::get('author/{id}', [DashboardController::class, 'authordetail'])->name('author.detail');
 Route::get('contact-us', [ContactUsController::class, 'contact'])->name('contact-us.user');
 Route::get('aboutus', [DashboardController::class, 'aboutus'])->name('about.us.user');
 Route::get('all-news-post', [DashboardController::class, 'newspost'])->name('news.post');
@@ -384,15 +391,21 @@ Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
 Route::prefix('tag')->name('tag.')->group(function(){
     Route::get('{tag:slug}/', [NewsTagController::class, 'show'])->name('show.user');
 });
+
 Route::prefix('{category:slug}')->name('subcategories.')->group(function(){
     Route::get('{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('show.user');
 });
+
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
 
 Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->name('category.all');
 Route::get('allsub/{subslug}/{data}', [NewsController::class, 'showAllSubCategories'])->name('subCategory.all');
+
+Route::get('verifikasi/email/{id}', [RegisterController::class, 'verifikasi'])->name('verisikasi.account');
+Route::post('coin-add', [CoinController::class, 'store'])->name('coin.add');

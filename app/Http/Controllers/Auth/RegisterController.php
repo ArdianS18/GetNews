@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Contracts\Interfaces\RegisterInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\Auth\RegisterService;
@@ -56,6 +57,13 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $this->service->handleRegister($request,$this->register);
-        return redirect('/login')->with('success',trans('alert.email.verify'));
+        return back()->with('success', 'Anda berhasil mendaftar, Cek email anda dan login.');
+    }
+
+    public function verifikasi($id)
+    {   
+        $data['email_verified_at'] = now();
+        $this->register->update($id, $data);
+        return redirect('/login')->with('success', 'Email anda telah terverifikasi silahkan login.');
     }
 }

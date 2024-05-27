@@ -22,15 +22,15 @@
     <div class="header-top">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <div class="col-lg-4 col-md-6 col-5 d-none d-md-block">
+                <div class="col-lg-4 col-md-4 d-none d-md-block">
                     <a href="{{route('user.berlangganan')}}" class="subscribe-btn"><span>Berlangganan</span><i class="flaticon-right-arrow"></i></a>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-3">
                     <a class="navbar-brand" href="/">
                         <img src="{{asset('assets/img/logo-get-media.png')}}" class="logo-mobile" alt="Image" />
                     </a>
                 </div>
-                <div class="col-lg-4 col-md-6 col-7 d-none d-md-block">
+                <div class="col-lg-4 col-md-4 col-7 d-none d-md-block">
                     <ul class="social-profile list-style">
                         <li>
                             <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
@@ -65,6 +65,18 @@
             <button type="button" class="bg-transparent border-0 text-white d-lg-none mt-2"  data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
+
+            <div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="{{route('search')}}" method="GET">
+                            <input type="search" name="q" id="search-input"  class="form-control" placeholder="Search here...." />
+                            <button type="submit"><i class="fi fi-rr-search"></i></button>
+                        </form>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>
+                    </div>
+                </div>
+            </div>
 
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">

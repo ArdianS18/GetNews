@@ -59,16 +59,23 @@
                             <h4>Kotak Surat</h4>
                         </div>
                         <ul class="list-group" style="height: calc(100vh - 400px)" data-simplebar>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
+
+                            <li class="list-group-item border-0 d-flex p-0 mx-9">
+                                    <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
                             </li>
-                            <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
+
+                            <li class="list-group-item border-0 d-flex p-0 mx-9">
+                                <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
+                                    @if ($countReport > 0)
+                                    <div>
+                                        <span class="badge ms-auto bg-danger">{{$countReport}}</span>
+                                    </div>
+                                    @endif
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
+                                <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
                                     href="javascript:void(0)"><i class="ti ti-trash fs-5"></i>Sampah</a>
                             </li>
                         </ul>
@@ -88,7 +95,7 @@
                                 <div class="app-chat">
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
                                         @forelse ($newsRejects as $newsReject)
-                                            <li>
+                                            <li class="contact">
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
                                                     id="chat_user_{{ $newsReject->id }}" data-user-id="{{ $newsReject->user_id }}">
@@ -144,36 +151,52 @@
                                         @empty
                                         @endforelse --}}
 
-                                        {{-- @forelse ($reports as $report)
-                                            <li>
-                                                <a href="javascript:void(0)"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start justify-content-between chat-user"
-                                                    id="chat_user_88" data-user-id="88">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
+                                        @forelse ($reports as $report)
+                                        <li class="report">
+                                            <a href="javascript:void(0)" onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')"
+                                                class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
+                                                id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
+                                                <div class="form-check mb-0">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckDefault">
+                                                </div>
+                                                <div class="position-relative w-100 ms-2">
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between mb-2">
+                                                        <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
+                                                        {{-- <span class="badge fs-2 rounded-4 py-1 px-3"
+                                                            style="background-color: #FA896B;">Laporan</span> --}}
+                                                        @if ($report->status == "unread")
+                                                            <span class="badge ms-auto bg-danger">!</span>
+                                                        @endif
                                                     </div>
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
-                                                            <span class="badge fs-2 rounded-4 py-1 px-3"
-                                                                style="background-color: #FA896B;">Laporan</span>
-                                                        </div>
-                                                        <h6 class="text-dark">{{ $report->message }}</h6>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
-                                                                </p>
-                                                            </div>
-                                                            <p class="mb-0 fs-2 text-muted">04:00pm</p>
+                                                    <h6 class="text-dark">{{ $report->message }}</h6>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                </a>
-                                            </li>
-                                        @empty
-                                        @endforelse --}}
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @empty
+                                        {{-- <tr class="report">
+                                            <td colspan="5">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h5>Tidak ada data</h5>
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                    @endforelse
 
+
+                                        
                                         {{-- @forelse ($reportsDelete as $reportDelete)
                                             <li>
                                                 <a href="javascript:void(0)"
@@ -353,7 +376,7 @@
                                         @empty
                                         @endforelse --}}
 
-                                        {{-- @forelse ($reports2 as $report2)
+                                        @forelse ($reports2 as $report2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Laporan</h5>
                                             </div>
@@ -420,7 +443,7 @@
                                                 </div>
                                             </div>
                                         @empty
-                                        @endforelse --}}
+                                        @endforelse
 
                                         {{-- @forelse ($reportsDelete2 as $reportDelete2)
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
@@ -574,6 +597,39 @@
 @endsection
 
 @section('script')
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const contactButton = document.getElementById("contactButton");
+        const reportButton = document.getElementById("reportButton");
+        const trashButton = document.getElementById("trashButton");
+
+        contactButton.addEventListener("click", function() {
+            toggleItems("contact");
+        });
+
+        reportButton.addEventListener("click", function() {
+            toggleItems("report");
+        });
+
+        trashButton.addEventListener("click", function() {
+            toggleItems("trash");
+        });
+
+        function toggleItems(category) {
+            const allItems = document.querySelectorAll(".chat-users li");
+            allItems.forEach(function(item) {
+                if (item.classList.contains(category)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
+
 <script src="{{ asset('admin/dist/js/apps/chat.js') }}"></script>
 
 <script>

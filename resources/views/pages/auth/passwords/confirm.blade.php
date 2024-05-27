@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <title>Login | GetMedia.Id</title>
+    <title>Reset Pw | GetMedia.Id</title>
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
     <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
@@ -57,7 +57,7 @@
                 @endif
 
                 <form method="POST" action="{{ route('password.update') }}">
-                    @csrf                      
+                    @csrf
                     <div class="mb-3">
                         <label for="password" class=" form-label">{{ __('Password') }}</label>
                         <input id="password" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -66,7 +66,7 @@
                         <label for="password" class=" form-label">{{ __('Confirm Password') }}</label>
                         <input id="password" type="password" class=" form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                     </div>
-                    
+
                     <button type="submit" class="btn d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
                         Kirim
                     </button>
@@ -79,7 +79,7 @@
                 <div class="text-center mt-4">
                         <p>Belum memiliki akun?<a style="color: #438ac8" href="{{route('register')}}"> Daftar Sekarang!</a></p>
                 </div>
-                
+
 
             </div>
         </div>

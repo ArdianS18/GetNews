@@ -1,10 +1,53 @@
 @extends('layouts.user.app')
 
 <head>
+    <style>
+       .coin-container {
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .coin-loader {
+        position: relative;
+        width: 50px; /* Lebih besar dari ukuran coin */
+        height: 50px; /* Lebih besar dari ukuran coin */
+    }
+
+    .coin-circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 3px solid transparent;
+        border-top-color: #0F4D8A; /* Warna lingkaran */
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+        animation: spin 60s linear infinite;
+        /* border-left-color: #0F4D8A; */
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    </style>
     <title>{{ $news->name }} | GetMedia</title>
     @php
         $dateParts = date_parse($news->upload_date);
     @endphp
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GetMedia">
     <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 10)) !!}">
@@ -169,6 +212,29 @@
                 }
             }
         }
+
+        .btn-outline-primary {
+            --bs-btn-color: #175A95 d;
+            --bs-btn-border-color: #175A95;
+            --bs-btn-hover-color: #fff;
+            --bs-btn-hover-bg: #175A95;
+            --bs-btn-hover-border-color: #175A95;
+            --bs-btn-focus-shadow-rgb: 13, 110, 253;
+            --bs-btn-active-color: #fff;
+            --bs-btn-active-bg: #175A95;
+            --bs-btn-active-border-color: #175A95;
+            --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            --bs-btn-disabled-color: #175A95;
+            --bs-btn-disabled-bg: transparent;
+            --bs-btn-disabled-border-color: #175A95fd;
+            --bs-gradient: none;
+        }
+
+        @media (max-width: 768px) {
+        .font-date {
+            font-size: 12px;
+        }
+        }
     </style>
 @endsection
 @section('content')
@@ -193,8 +259,8 @@
                             </ul>
                         </div>
                         <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
-                        <p>Share : <a id="wa" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 256 258">
+                        <p class="d-flex gap-1">Share : <a id="wa" class="logo" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}">
+                                <svg class="logo-dark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 256 264">
                                     <defs>
                                         <linearGradient id="logosWhatsappIcon0" x1="50%" x2="50%" y1="100%"
                                             y2="0%">
@@ -214,23 +280,49 @@
                                     <path fill="#FFF"
                                         d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503c-1.858-.08-3.982-.074-6.104-.074c-2.124 0-5.575.799-8.492 3.984c-2.92 3.188-11.148 10.892-11.148 26.561c0 15.67 11.413 30.813 13.004 32.94c1.593 2.123 22.033 35.307 54.405 48.073c26.904 10.609 32.379 8.499 38.218 7.967c5.84-.53 18.844-7.702 21.497-15.139c2.655-7.436 2.655-13.81 1.859-15.142c-.796-1.327-2.92-2.124-6.105-3.716c-3.186-1.593-18.844-9.298-21.763-10.361c-2.92-1.062-5.043-1.592-7.167 1.597c-2.124 3.184-8.223 10.356-10.082 12.48c-1.857 2.129-3.716 2.394-6.9.801c-3.187-1.598-13.444-4.957-25.613-15.806c-9.468-8.442-15.86-18.867-17.718-22.056c-1.858-3.184-.199-4.91 1.398-6.497c1.431-1.427 3.186-3.719 4.78-5.578c1.588-1.86 2.118-3.187 3.18-5.311c1.063-2.126.531-3.986-.264-5.579c-.798-1.593-6.987-17.343-9.819-23.64" />
                                 </svg>
+
+                                <svg class="logo-light" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 256 264">
+                                    <defs>
+                                        <linearGradient id="logosWhatsappIcon0" x1="50%" x2="50%" y1="100%"
+                                            y2="0%">
+                                            <stop offset="0%" stop-color="#1FAF38" />
+                                            <stop offset="100%" stop-color="#60D669" />
+                                        </linearGradient>
+                                        <linearGradient id="logosWhatsappIcon1" x1="50%" x2="50%" y1="100%"
+                                            y2="0%">
+                                            <stop offset="0%" stop-color="#F9F9F9" />
+                                            <stop offset="100%" stop-color="#FFF" />
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#logosWhatsappIcon0)"
+                                        d="M5.463 127.456c-.006 21.677 5.658 42.843 16.428 61.499L4.433 252.697l65.232-17.104a122.994 122.994 0 0 0 58.8 14.97h.054c67.815 0 123.018-55.183 123.047-123.01c.013-32.867-12.775-63.773-36.009-87.025c-23.23-23.25-54.125-36.061-87.043-36.076c-67.823 0-123.022 55.18-123.05 123.004" />
+                                    <path fill="url(#logosWhatsappIcon1)"
+                                        d="M1.07 127.416c-.007 22.457 5.86 44.38 17.014 63.704L0 257.147l67.571-17.717c18.618 10.151 39.58 15.503 60.91 15.511h.055c70.248 0 127.434-57.168 127.464-127.423c.012-34.048-13.236-66.065-37.3-90.15C194.633 13.286 162.633.014 128.536 0C58.276 0 1.099 57.16 1.071 127.416m40.24 60.376l-2.523-4.005c-10.606-16.864-16.204-36.352-16.196-56.363C22.614 69.029 70.138 21.52 128.576 21.52c28.3.012 54.896 11.044 74.9 31.06c20.003 20.018 31.01 46.628 31.003 74.93c-.026 58.395-47.551 105.91-105.943 105.91h-.042c-19.013-.01-37.66-5.116-53.922-14.765l-3.87-2.295l-40.098 10.513z" />
+                                    <path fill="#FFF"
+                                        d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503c-1.858-.08-3.982-.074-6.104-.074c-2.124 0-5.575.799-8.492 3.984c-2.92 3.188-11.148 10.892-11.148 26.561c0 15.67 11.413 30.813 13.004 32.94c1.593 2.123 22.033 35.307 54.405 48.073c26.904 10.609 32.379 8.499 38.218 7.967c5.84-.53 18.844-7.702 21.497-15.139c2.655-7.436 2.655-13.81 1.859-15.142c-.796-1.327-2.92-2.124-6.105-3.716c-3.186-1.593-18.844-9.298-21.763-10.361c-2.92-1.062-5.043-1.592-7.167 1.597c-2.124 3.184-8.223 10.356-10.082 12.48c-1.857 2.129-3.716 2.394-6.9.801c-3.187-1.598-13.444-4.957-25.613-15.806c-9.468-8.442-15.86-18.867-17.718-22.056c-1.858-3.184-.199-4.91 1.398-6.497c1.431-1.427 3.186-3.719 4.78-5.578c1.588-1.86 2.118-3.187 3.18-5.311c1.063-2.126.531-3.986-.264-5.579c-.798-1.593-6.987-17.343-9.819-23.64" />
+                                </svg>
+
                             </a>
                             <a id="fb">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 256 256">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                     <path fill="#1877F2"
                                         d="M256 128C256 57.308 198.692 0 128 0C57.308 0 0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445" />
                                     <path fill="#FFF"
                                         d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A128.959 128.959 0 0 0 128 256a128.9 128.9 0 0 0 20-1.555V165z" />
                                 </svg>
                             </a>
-                            <a id="tw">
+                            <a id="tw" class="logo">
+                                <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14"><g fill="none"><g clip-path="url(#primeTwitter0)"><path fill="#ffffff" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"/></g><defs><clipPath id="primeTwitter0"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></g></svg>
+                                <svg class="logo-light" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14"><g fill="none"><g clip-path="url(#primeTwitter0)"><path fill="#000000" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"/></g><defs><clipPath id="primeTwitter0"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></g></svg>
+                            </a>
+                            {{-- <a id="tw">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 128 128">
                                     <path
                                         d="M75.916 54.2L122.542 0h-11.05L71.008 47.06L38.672 0H1.376l48.898 71.164L1.376 128h11.05L55.18 78.303L89.328 128h37.296L75.913 54.2ZM60.782 71.79l-4.955-7.086l-39.42-56.386h16.972L65.19 53.824l4.954 7.086l41.353 59.15h-16.97L60.782 71.793Z" />
                                 </svg>
-                            </a>
+                            </a> --}}
                             <a id="tele">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 256 256">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 263 263">
                                     <defs>
                                         <linearGradient id="logosTelegram0" x1="50%" x2="50%" y1="0%"
                                             y2="100%">
@@ -256,119 +348,130 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between">
+                        <div class="">
                             <ul class="news-metainfo list-style">
-                                <li class="author">
-                                    <span class="author-img">
-                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
-                                            alt="Image" width="40px" height="30px"
-                                            style="border-radius: 50%; object-fit:cover;" />
-                                    </span>
-                                    <div>
-                                        <a style="display: inline;text-decoration:none" data-toggle="tooltip"
-                                            data-placement="top" title="author - {{ $news->user->name }}"
-                                            href="{{ route('author.detail', ['id' => $news->user->id]) }}">{{ $news->user->name }}</a>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li><i class="fi fi-rr-calendar-minus"></i>
-                                    {{-- <a href="javascript:void(0)"> --}}
-                                    {{-- {{ \Carbon\Carbon::parse($news->upload_date)->format('l, d F Y') }} --}}
-                                    <span id="formattedDate"></span>
-                                    {{-- </a> --}}
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
-                                        viewBox="0 0 24 24">
-                                        <path fill="#e93314"
-                                            d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
-                                    </svg>
-                                    <span class="ms-1">{{ $news->views->count() }}</span>
-                                </li>
-                                <li>
-                                    @auth()
-                                        <form id="form-like">
-                                            @csrf
-                                            @if (auth()->check())
-                                                <button type="submit" style="background: transparent;border:transparent"
-                                                    class="like">
-                                                    <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                                        height="18" viewBox="0 0 24 24">
-                                                        <path fill="#E93314"
-                                                            d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                <div class="d-flex justify-content-between">
+                                    <div class="col-lg-11 col-md-11">
+                                        <div class="row">
+                                            <div class="col-md-12 col-lg-3 mb-3">
+                                                <li class="author">
+                                                    <span class="author-img">
+                                                        <img src="{{ asset($news->user->photo ? 'storage/' . $news->user->photo : 'default.png') }}"
+                                                            alt="Image" width="40px" height="30px"
+                                                            style="border-radius: 50%; object-fit:cover;" />
+                                                    </span>
+                                                    <div>
+                                                        <a style="display: inline;text-decoration:none" data-toggle="tooltip"
+                                                            data-placement="top" title="author - {{ $news->user->name }}"
+                                                            href="{{ route('author.detail', ['id' => $news->user->slug]) }}">{{ $news->user->name }}</a>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </div>
+
+                                            <div class="col-md-12 col-sm-12 col-lg-9">
+                                                <li><i class="fi fi-rr-calendar-minus"></i>
+                                                    <span id="formattedDate" class="font-date"></span>
+                                                </li>
+                                                <li>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#e93314"
+                                                            d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                                     </svg>
-                                                </button>
-                                            @endif
+                                                    <span class="ms-1">{{ $news->views->count() }}</span>
+                                                </li>
+                                                <li>
+                                                    @auth()
+                                                        <form id="form-like">
+                                                            @csrf
+                                                            @if (auth()->check())
+                                                                <button type="submit" style="background: transparent;border:transparent"
+                                                                    class="like">
+                                                                    <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                        height="18" viewBox="0 0 24 24">
+                                                                        <path fill="#E93314"
+                                                                            d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                                    </svg>
+                                                                </button>
+                                                            @endif
 
-                                        </form>
+                                                        </form>
 
-                                        <form id="form-liked" style="display: none;">
-                                            @csrf
-                                            <button type="submit" style="background: transparent;border:transparent"
-                                                class="liked">
-                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                                    height="18" viewBox="0 0 24 24">
-                                                    <path fill="red"
-                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form id="form-like">
-                                            @csrf
-                                            <button type="button" style="background: transparent;border:transparent"
-                                                class="like not-login">
-                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        <form id="form-liked" style="display: none;">
+                                                            @csrf
+                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                                class="liked">
+                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
+                                                                    height="18" viewBox="0 0 24 24">
+                                                                    <path fill="red"
+                                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    @else
+                                                        <form id="form-like">
+                                                            @csrf
+                                                            <button type="button" style="background: transparent;border:transparent"
+                                                                class="like not-login">
+                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path fill="#E93314"
+                                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+
+                                                        <form id="form-liked" style="display: none;">
+                                                            @csrf
+                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                                class="liked">
+                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                                    viewBox="0 0 24 24">
+                                                                    <path fill="red"
+                                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
+                                                                </svg>
+                                                            </button>
+                                                        </form>
+                                                    @endauth
+
+                                                    <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
+
+                                                </li>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1 col-sm-1 col-lg-1">
+                                        <li>
+                                            <a class="" href="#" role="button" id="dropdownMenuLink"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
                                                     viewBox="0 0 24 24">
-                                                    <path fill="#E93314"
-                                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                                    <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                                        stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                 </svg>
-                                            </button>
-                                        </form>
+                                            </a>
 
-                                        <form id="form-liked" style="display: none;">
-                                            @csrf
-                                            <button type="submit" style="background: transparent;border:transparent"
-                                                class="liked">
-                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="red"
-                                                        d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                    @endauth
-
-                                    <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
-
-                                </li>
-
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <li>
+                                                    <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
+                                                        Bagikan
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button class="btn btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#tambahdataLabel">
+                                                        Laporkan
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                            </li>
+                                    </div>
+                                </div>
                             </ul>
-
-                            <div class="">
-                                <a class="" href="#" role="button" id="dropdownMenuLink"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-                                        viewBox="0 0 24 24">
-                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                            stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
-                                    </svg>
-                                </a>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li>
-                                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
-                                            Bagikan
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button class="btn btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#tambahdataLabel">
-                                            Laporkan
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
 
                         {{-- modal tambah --}}
@@ -383,39 +486,36 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
-                                        @method('post')
-                                        @csrf
-                                        <div class="modal-body">
-                                            <div class="mb-3 form-group">
-                                                <label for="message" class="form-label">Masukan Detail
-                                                    Laporan:</label>
-                                                <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
-                                                @error('message')
-                                                    <span class="invalid-feedback" role="alert" style="color: red;">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+
+                                    <div class="modal-body">
+                                        <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
+                                            @method('post')
+                                            @csrf
+                                                <div class="mb-3 form-group">
+                                                    <label for="message" class="form-label">Masukan Detail
+                                                        Laporan:</label>
+                                                    <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
+                                                    @error('message')
+                                                        <span class="invalid-feedback" role="alert" style="color: red;">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p>
+                                                        Artikel dan pengguna yang dilaporkan akan ditinjau oleh staf Getmedia untuk menentukan apakah artikel dan pengguna tersebut melanggar Pedoman Komunitas kami atau tidak. Akun akan dikenai sanksi jika melanggar Pedoman Komunitas, dan pelanggaran serius atau berulang dapat berakibat pada penghentian akun.
+                                                    </p>
+                                                </div>
+
+                                            <div class="">
+                                                <div class="d-flex justify-content-end me-2">
+                                                    <button type="button" class="me-2 btn btn-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Laporkan</button>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <p>
-                                                    Video dan pengguna yang dilaporkan akan ditinjau oleh staf
-                                                    YouTube 24/7 untuk menentukan apakah video dan pengguna
-                                                    tersebut melanggar Pedoman Komunitas kami atau tidak. Akun
-                                                    akan dikenai sanksi jika melanggar Pedoman Komunitas, dan
-                                                    pelanggaran serius atau berulang dapat berakibat pada
-                                                    penghentian akun.
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="">
-                                            <div class="d-flex justify-content-end me-2">
-                                                <button type="button" class="me-2 btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -704,7 +804,7 @@
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <div class="sidebar-widget">
-                            <h3 class="sidebar-widget-title">Kategori</h3>
+                            <h3 class="sidebar-widget-title">Kategori Popular</h3>
                             <ul class="category-widget list-style">
                                 @foreach ($totalCategories as $category)
                                     <li><a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}"
@@ -815,9 +915,49 @@
             </div>
         </div>
     </div>
+
+    {{-- <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px; display: flex; align-items: center;">
+        <img src="{{asset('assets/img/coin-load.svg')}}" alt="Coin" style="width: 50px; height: 50px;">
+        <div class="loading-bar" style="width: 100px; height: 10px; background-color: #ddd; margin-left: 10px; position: relative;">
+            <div class="loading-progress" style="height: 100%; background-color: #4CAF50; width: 0%;"></div>
+        </div>
+    </div> --}}
+
+    @if (Auth::check())
+    <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
+        <div class="coin-loader">
+            <img src="{{ asset('assets/img/coin-load.svg') }}" alt="Coin" style="width: 50px; height: 50px;">
+            <div class="coin-circle"></div>
+        </div>
+    </div>
+    @endif
+
 @endsection
 
 @section('script')
+
+    {{-- <script>
+        setInterval(() => {
+            fetch('/coin-add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error: ' + response.status);
+                }
+            })
+            .then(function(data) {})
+            .catch(function(error) {
+                console.error(error);
+            });
+        }, 60000);
+    </script> --}}
+
     <script>
         function toggleReplyForm(commentId) {
             var replyForm = document.getElementById("reply-form-" + commentId);
@@ -831,6 +971,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+            setInterval(() => {
+                fetch('/coin-add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {})
+                .catch(function(error) {
+                    console.error(error);
+                });
+            }, 60000);
+
             var formLike = document.getElementById('form-like');
             var formLiked = document.getElementById('form-liked');
             var likeCount = document.getElementById('like');
@@ -884,7 +1045,7 @@
             var form = event.target;
             var csrfToken = form.querySelector('input[name="_token"]').value;
 
-            fetch('/news-like/{{ $news->id }}', {
+            fetch('/news-like/{{ $newsId }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -902,14 +1063,14 @@
                 .catch(function(error) {
                     console.error(error);
                 });
-
         });
+
         document.getElementById('form-liked').addEventListener('submit', function(event) {
             event.preventDefault();
             var form = event.target;
             var csrfToken = form.querySelector('input[name="_token"]').value;
 
-            fetch('/news-unlike/{{ $news->id }}', {
+            fetch('/news-unlike/{{ $newsId }}', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1040,4 +1201,22 @@
             ' ' + uploadDate.getFullYear();
         document.getElementById("formattedDate").textContent = formattedDate;
     </script>
+
+    {{-- <script>
+        function sendData() {
+        fetch('/add-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token untuk Laravel
+                },
+                body: JSON.stringify({data: 'Your data here'})
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+        setInterval(sendData, 60000);
+    </script> --}}
+
 @endsection

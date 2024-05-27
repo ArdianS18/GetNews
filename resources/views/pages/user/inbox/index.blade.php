@@ -61,11 +61,11 @@
                         </div>
                         <ul class="list-group" style="height: calc(100vh - 400px)" data-simplebar>
                             <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
+                                <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
-                                <a class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1"
+                                <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
                                     href="javascript:void(0)"><i class="ti ti-trash fs-5"></i>Sampah</a>
                             </li>
                         </ul>
@@ -105,19 +105,16 @@
                             <div class="border-end user-chat-box h-100">
                                 <div class="px-4 pt-9 pb-6 d-none d-lg-block">
                                     <form class="position-relative">
-                                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
-                                            placeholder="Cari" />
-                                        <i
-                                            class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Cari" />
+                                        <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                     </form>
                                 </div>
                                 <div class="app-chat">
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
                                         @forelse ($data as $dat)
-                                            <li>
-                                                <a href="javascript:void(0)"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light"
-                                                    id="chat_user_{{ $dat->id }}" dat-user-id="{{ $dat->user_id }}">
+                                            <li class="contact">
+                                                <a href="javascript:void(0)" class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
+                                                    id="chat_user_{{ $dat->id }}" data-user-id="{{ $dat->user_id }}" data-chat-id="{{ $dat->id }}">
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $dat->user->name }}</h6>
@@ -236,14 +233,14 @@
                                 <div class="chat-box-inner-part h-100">
                                     <div class="chatting-box app-email-chatting-box">
                                         @forelse ($message as $send)
+                                        <div class="chat-content" id="chat_content_{{ $send->id }}" style="display: none;">
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
                                                 <h5>Detail Pesan</h5>
                                             </div>
                                             <div class="position-relative overflow-hidden">
                                                 <div class="position-relative">
-                                                    <div class="chat-box p-9" style="height: calc(100vh - 428px)"
-                                                        data-simplebar>
-                                                        <div class="chat-list chat active-chat" data-user-id="1">
+                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                        <div class="chat active-chat" data-user-id="{{ $send->id }}">
                                                             <div
                                                                 class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
                                                                 <div class="d-flex align-items-center gap-2">
@@ -298,6 +295,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                         @empty
                                         @endforelse
 
@@ -530,7 +528,7 @@
                         </div>
                     </div>
 
-                    <div class="offcanvas offcanvas-start user-chat-box" tabindex="-1" id="chat-sidebar"
+                    {{-- <div class="offcanvas offcanvas-start user-chat-box" tabindex="-1" id="chat-sidebar"
                         aria-labelledby="offcanvasExampleLabel">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="offcanvasExampleLabel"> Email </h5>
@@ -588,7 +586,7 @@
                                     href="javascript:void(0)"><i class="ti ti-bookmark fs-5 text-success"></i>Health</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -614,59 +612,110 @@
         });
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const contactButton = document.getElementById("contactButton");
+            const reportButton = document.getElementById("reportButton");
+            const trashButton = document.getElementById("trashButton");
+
+            contactButton.addEventListener("click", function() {
+                toggleItems("contact");
+            });
+
+            reportButton.addEventListener("click", function() {
+                toggleItems("report");
+            });
+
+            trashButton.addEventListener("click", function() {
+                toggleItems("trash");
+            });
+
+            function toggleItems(category) {
+                const allItems = document.querySelectorAll(".chat-users li");
+                allItems.forEach(function(item) {
+                    if (item.classList.contains(category)) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            }
+        });
+    </script>
+
     <script src="{{ asset('admin/dist/js/apps/chat.js') }}"></script>
 
     <script>
-        $('.btn-delete-contactus').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/contact/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
+        $(document).ready(function() {
+            $('.report').hide();
+            $('.trash').hide();
+
+            $('.chat-report').hide();
+            $('.chat-contactDel').hide();
+            $('.chat-reportDel').hide();
+            $('.chat-content').hide();
+
+            $('.buttonContact').click(function() {
+                var chatId = $(this).data('chat-id');
+                $('.chat-report').hide();
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-content').hide();
+                $('#chat_content_' + chatId).show();
+            });
+
+            $('.buttonReport').click(function() {
+                var chatId = $(this).data('chat-id');
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-content').hide();
+                $('.chat-report').hide();
+                $('#chat_report_' + chatId).show();
+            });
+
+            $('.buttonDelete').click(function() {
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-content').hide();
+                $('.chat-report').hide();
+            });
+
+            $('.show-contact').click(function() {
+                var chatId = $(this).data('chat-id');
+                $('.chat-report').hide();
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-content').hide();
+                $('#chat_content_' + chatId).show();
+            });
+
+            $('.show-report').click(function() {
+                var chatId = $(this).data('chat-id');
+                $('.chat-content').hide();
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-report').hide();
+                $('#chat_report_' + chatId).show();
+            });
+
+            $('.show-delete-contact').click(function() {
+                var chatId = $(this).data('chat-id');
+                $('.chat-content').hide();
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-report').hide();
+                $('#chat_contactDel_' + chatId).show();
+            });
+
+            $('.show-delete-report').click(function() {
+                var chatId = $(this).data('chat-id');
+                $('.chat-content').hide();
+                $('.chat-contactDel').hide();
+                $('.chat-reportDel').hide();
+                $('.chat-report').hide();
+                $('#chat_reportDel_' + chatId).show();
+            });
+        });
     </script>
 
-    <script>
-        $('.btn-recovery-contactus').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/contact-recovery/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
-
-    <script>
-        $('.btn-release-contactus').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/contact-delete/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
-
-    <script>
-        $('.btn-delete-report').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/report/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
-
-    <script>
-        $('.btn-recovery-report').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/report-recovery/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
-
-    <script>
-        $('.btn-release-report').click(function() {
-            id = $(this).data('id')
-            var actionUrl = `/report-delete/${id}`;
-            $('#form-delete').attr('action', actionUrl);
-            $('#modal-delete').modal('show')
-        })
-    </script>
 @endsection

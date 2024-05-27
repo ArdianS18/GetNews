@@ -162,7 +162,7 @@ class ProfileController extends Controller
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             return to_route('news.approve.admin');
         } else {
-            return to_route('status.news.author');
+            return to_route('status.news.author')->with('success', 'Berhasil mengupdate Artiker.');
         }
     }
 
@@ -197,15 +197,9 @@ class ProfileController extends Controller
 
     public function updateprofile(User $user, UserProfileRequest $request){
         $data = $request->validated();
-        // dd($data);
-        // $data['name'] = $data['name'];
-        // $data['email'] = $data['email'];
-        // $data['phone_number'] = $data['phone_number'];
-        // $data['address'] = $data['address'];
-        // $data['birth_date'] = $data['birth_date'];
         $data['slug'] = Str::slug($data['name']);
         $this->user->update($user->id, $data);
-        return back();
+        return back()->with('success', 'Berhasil memperbarui profile');
     }
 
     public function changepassword(User $user, RegisterRequest $registerRequest){

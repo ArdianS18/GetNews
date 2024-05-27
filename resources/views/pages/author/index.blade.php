@@ -98,7 +98,6 @@
                         <div class=" d-flex align-items-center justify-content-center rounded-circle" style="width: 110px; height: 110px;";>
                           <div class="border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
                             <img style="object-fit: cover" src="{{asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "assets/img/profile.svg")}}" alt="" class="w-100 h-100">
-                            {{-- <img src="{{ asset(Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="40px" height="40px" style="border-radius: 50%; object-fit:cover;"/> --}}
                           </div>
                         </div>
                       </div>
@@ -297,16 +296,6 @@
                         </span>
                     @enderror
                 </div>
-                {{-- <div class="col-md-12 col-lg-6 mb-4">
-                  <label class="form-label" for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="password"
-                        value="{{ auth()->user()->password }}" class="form-control @error('password') is-invalid @enderror" readonly>
-                    @error('password')
-                        <span class="invalid-feedback" role="alert" style="color: red;">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div> --}}
                 <div class="col-md-12 col-lg-6 mb-4">
                   <label class="form-label" for="email">Tanggal Lahir</label>
                     <input type="text" id="email" name="email" placeholder="Tanggal lahir"
@@ -347,6 +336,9 @@
     <!-- current page js files -->
     <!-- ---------------------------------------------- -->
     <script src="../../dist/js/apps/chat.js"></script>
+
+    
+
   </body>
 
 @endsection

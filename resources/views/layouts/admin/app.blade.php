@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-light">
 
 <head>
     <title>{{ env('APP_NAME') }}</title>
@@ -77,6 +77,9 @@
         @endrole
         @hasrole('author')
             @include('layouts.author.side')
+        @endrole
+        @hasrole('user')
+            @include('layouts.user.side')
         @endrole
         <!--  Sidebar End -->
         <!--  Main wrapper -->

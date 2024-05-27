@@ -14,18 +14,14 @@
 
         .card-detail img {
             max-width: 100%;
-            /* Maksimum lebar adalah 100% dari lebar elemen induknya */
             max-height: 100%;
             height: auto;
-            /* Ketinggian otomatis */
             border-radius: ;
-            /* Ganti dengan nilai yang sesuai */
         }
 
         @media (max-width: 767px) {
             .card-detail img {
                 width: 100%;
-                /* Menyempitkan lebar saat di tampilan mobile */
             }
         }
     </style>
@@ -36,6 +32,21 @@
 </head>
 
 @section('content')
+
+    @if (session('success'))
+    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if (session('draft'))
+    <div id="success-alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ session('draft') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <form class="d-flex gap-2">
         <div>
             <div class="position-relative d-flex">
@@ -188,12 +199,12 @@
             <div class="card p-4 mt-4">
                 <div class="row">
                     <div class="col-lg-2">
-                        <div class="">
+                        <div class="mb-3">
                                 <img src="${data.photo}" alt="" style="object-fit:cover;" width="100%" height="120">
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-8">
-                        <div class="d-flex">
+                        <div class="">
                             <div class="order-md-1">
                                 <h4>${limitString(data.name, 50)}</h4>
                                 <p>${limitString(data.content, 500)}</p>

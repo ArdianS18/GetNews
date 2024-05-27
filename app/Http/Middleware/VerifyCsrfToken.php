@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         "createauthor",
         "SubKategori/*",
         'create-tag',
-        'kategori'
+        'kategori',
+        'coin-add'
     ];
 }

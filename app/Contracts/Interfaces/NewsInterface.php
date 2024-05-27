@@ -20,7 +20,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface, UpdateOrCreateInterface
 {
     public function showWhithCount() : mixed;
+    public function showWhithCountStat() : mixed;
     public function showCountMonth() : mixed;
+
     public function showCountMonthPremium() : mixed;
     public function showNewsStatistic() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
@@ -51,7 +53,8 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 
     public function newsCategory($category) : mixed;
     public function newsCategorySearch($category, mixed $query, mixed $data, $hal) : mixed;
-
+    public function newsLiked($id);
+    
     public function newsSubCategory($subCategory) : mixed;
     public function newsSubCategorySearch($subCategory, mixed $query, mixed $data, $hal) : mixed;
 }

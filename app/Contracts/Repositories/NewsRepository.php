@@ -112,7 +112,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
     {
-        $pagination = $request->perpage;
         return $this->model->query()
             ->where('status', "panding")
             ->when($request->name, function ($query) use ($request) {
@@ -141,32 +140,42 @@ class NewsRepository extends BaseRepository implements NewsInterface
                     $var->take(100);
                 });
             })
-            ->fastPaginate($pagination);
+            ->latest()
+            ->fastPaginate($request->perpage);
     }
 
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator
     {
-        $pagination = $request->perpage;
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->when($request->category, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' .  $request->category . '%');
             })
+            ->orderBy('is_primary', 'desc')
             ->when($request->latest, function ($query) use ($request) {
                 $query->when($request->latest === 'terbaru', function ($terbaru) {
                     $terbaru->latest()->get();
                 });
-
                 $query->when($request->latest === 'terlama', function ($terlama) {
                     $terlama->oldest()->get();
                 });
             })
             ->when($request->perpage, function ($query) use ($request) {
-                $query->take($request->perpage);
+                $query->when($request->perpage === '10', function ($var) {
+                    $var->take(10);
+                });
+                $query->when($request->perpage === '20', function ($var) {
+                    $var->take(20);
+                });
+                $query->when($request->perpage === '50', function ($var) {
+                    $var->take(50);
+                });
+                $query->when($request->perpage === '100', function ($var) {
+                    $var->take(100);
+                });
             })
-            ->orderBy('is_primary', 'desc')
             ->latest()
-            ->fastPaginate($pagination);
+            ->fastPaginate($request->perpage);
     }
 
     public function showWithSlug(string $slug): mixed
@@ -202,9 +211,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function authorGetNews($user): mixed
     {
         return $this->model->query()
-            ->where('user_id', $user->id)
+            ->where('user_id', $user)
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->get();
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->paginate(8);
+            
     }
 
     public function getAll(): mixed
@@ -430,23 +442,56 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
+    public function showWhithCountStat(): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', auth()->user()->id)
+            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->orderBy('created_at')
+            ->take(3)
+            ->get();
+    }
+
     public function showNewsStatistic(): mixed
     {
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        $results = [];
+        // return $this->model->query()
+        //     ->where('user_id', auth()->user()->id)
+        //     ->where('status', NewsStatusEnum::ACTIVE->value)
+        //     ->withCount('views')
+        //     ->orderByDesc('views_count')
+        //     ->take(3)
+        //     ->get();
 
-        foreach ($days as $day) {
-            $results[$day] = $this->model->query()
-                ->where('user_id', auth()->user()->id)
-                ->where('status', NewsStatusEnum::ACTIVE->value)
-                ->whereDate('created_at', Carbon::now()->startOfWeek()->addDays(array_search($day, $days)))
-                ->withCount('views')
-                ->orderByDesc('views_count')
-                ->take(3)
-                ->get();
+        $year = date('Y');
+        $result = $this->model->query()
+            ->where('user_id', auth()->user()->id)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->join('views', 'news.id', '=', 'views.news_id')
+            ->select(DB::raw('DAY(news.created_at) as day'), DB::raw('COUNT(views.id) as views_count'))
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get();
+        
+        $monthlyData = [];
+        $daysInMonth = date('t');
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $found = false;
+            foreach ($result as $row) {
+                if ($row->day == $i) {
+                    $viewsCount = $row->views_count;
+                    $monthlyData[] = $viewsCount;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $monthlyData[] = 0;
+            }
         }
-
-        return $results;
+        
+        return $monthlyData;
     }
 
     public function showCountMonth(): mixed
@@ -583,6 +628,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->paginate($hal);
     }
+
+    public function newsLiked($id)
+    {
+        return $this->model->query()
+            ->whereRelation('newsHasLikes', 'user_id', $id)
+            ->withCount('newsHasLikes')
+            ->get();
+    }
+
+
 
     public function newsSubCategory($subCategory): mixed
     {

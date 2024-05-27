@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="row">
         <div class="col-md-12 col-lg-7">
@@ -265,6 +265,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <span class="fw-semibold text-dark fs-4">Lainnya</span>
 
                     <div class="col-lg-6">
                         <div class="card p-3 border" onclick="selectCard(this)">

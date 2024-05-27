@@ -161,8 +161,10 @@
                             <span class="badge bg-light-warning text-warning">{{ $category->news_categories_count }}</span>
                             @elseif ($index == 3 || $index == 4)
                             <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
-                            @else
+                            @elseif ($index == 0)
                             <span class="badge bg-light-danger text-danger">{{ $category->news_categories_count }}</span>
+                            @else
+                            <span class="badge bg-light-success text-success">{{ $category->news_categories_count }}</span>
                             @endif
                         </div>
                     </div>
@@ -285,7 +287,6 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <h4 class="mb-5 mt-5">Berita Premium</h4>
                                     <div class="row">
 
                                         <div class="col-md-12 col-lg-6 mb-3">
@@ -340,7 +341,20 @@
                         <div class="card-body">
                             <h4>Pendapatan</h4>
                             <p>Tahun 2022-2023</p>
-                            <div class="" id="chart-premium"></div>
+
+                            <div class="" id="current-year"></div>
+
+                            <div class="mt-4 d-flex justify-content-between">
+                                <div class="">
+                                    <h4 style="color: #183249;">Jumlah Keseluruhan</h4>
+                                    <b>Rp. 1.450.000</b>
+                                </div>
+                                <div class="">
+                                    <a href="" class="btn btn-sm" style="background-color: #183249">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M10.5 16a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0"/><path fill="#ffffff" d="M17.526 5.116L14.347.659L2.658 9.997L2.01 9.99V10H1.5v12h21V10h-.962l-1.914-5.599zM19.425 10H9.397l7.469-2.546l1.522-.487zM15.55 5.79L7.84 8.418l6.106-4.878zM3.5 18.169v-4.34A3.008 3.008 0 0 0 5.33 12h13.34a3.009 3.009 0 0 0 1.83 1.83v4.34A3.009 3.009 0 0 0 18.67 20H5.332A3.01 3.01 0 0 0 3.5 18.169"/></svg>
+                                    </a>
+                                </div>
+                            </div>
 
                             <div class="mt-4 d-flex justify-content-between">
                                 <div class="">
@@ -349,19 +363,19 @@
                                 </div>
                                 <div class="">
                                     <a href="" class="btn btn-sm" style="background-color: #5D87FF">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5m0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M10.5 16a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0"/><path fill="#ffffff" d="M17.526 5.116L14.347.659L2.658 9.997L2.01 9.99V10H1.5v12h21V10h-.962l-1.914-5.599zM19.425 10H9.397l7.469-2.546l1.522-.487zM15.55 5.79L7.84 8.418l6.106-4.878zM3.5 18.169v-4.34A3.008 3.008 0 0 0 5.33 12h13.34a3.009 3.009 0 0 0 1.83 1.83v4.34A3.009 3.009 0 0 0 18.67 20H5.332A3.01 3.01 0 0 0 3.5 18.169"/></svg>
                                     </a>
                                 </div>
                             </div>
 
                             <div class="mt-4 d-flex justify-content-between">
                                 <div class="">
-                                    <h4 style="color: #49BEFF;">Berita Premium</h4>
+                                    <h4 style="color: #49BEFF;">Pengiklanan</h4>
                                     <b>Rp. 1.450.000</b>
                                 </div>
                                 <div class="">
                                     <a href="" class="btn btn-sm" style="background-color: #49BEFF">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5m0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 12.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7M10.5 16a1.5 1.5 0 1 1 3 0a1.5 1.5 0 0 1-3 0"/><path fill="#ffffff" d="M17.526 5.116L14.347.659L2.658 9.997L2.01 9.99V10H1.5v12h21V10h-.962l-1.914-5.599zM19.425 10H9.397l7.469-2.546l1.522-.487zM15.55 5.79L7.84 8.418l6.106-4.878zM3.5 18.169v-4.34A3.008 3.008 0 0 0 5.33 12h13.34a3.009 3.009 0 0 0 1.83 1.83v4.34A3.009 3.009 0 0 0 18.67 20H5.332A3.01 3.01 0 0 0 3.5 18.169"/></svg>
                                     </a>
                                 </div>
                             </div>
@@ -659,6 +673,7 @@
 @section('script')
 <script src="{{ asset('admin/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
 <script src="{{asset('admin/dist/js/apps/notes.js')}}"></script>
+<script src="{{asset('admin/dist/js/apps/chat.js')}}"></script>
 
 <script>
     var monthlyData = <?php echo json_encode($news2); ?>;
@@ -821,6 +836,65 @@
 
     var chart = new ApexCharts(document.querySelector("#chart-news-premium"), options);
     chart.render();
+
+
+
+    var options = {
+    color: "#adb5bd",
+    series: [80, 55],
+    labels: ["Income",  "Expance"],
+    chart: {
+      type: "donut",
+      fontFamily: "Plus Jakarta Sans', sans-serif",
+      foreColor: "#adb0bb",
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '70%',
+          background: 'transparent',
+          labels: {
+            show: true,
+            name: {
+              show: true,
+              offsetY: 7,
+            },
+            value: {
+              show: false,
+            },
+            total: {
+              show: true,
+              color: '#5A6A85',
+              fontSize: '20px',
+              fontWeight: "600",
+              label: '',
+            },
+          },
+        },
+      },
+    },
+
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      show: false,
+    },
+    legend: {
+      show: false,
+    },
+    colors: ["var(--bs-primary)", "var(--bs-secondary)"],
+
+    tooltip: {
+      theme: "dark",
+      fillSeriesColor: false,
+    },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#current-year"), options);
+  chart.render();
+
+
 </script>
 
 @endsection

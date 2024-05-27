@@ -19,6 +19,7 @@ use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Repositories\NewsRepository;
 use App\Contracts\Repositories\UserRepository;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CoinInterface;
 use App\Contracts\Interfaces\CommentReportInterface;
 use App\Contracts\Interfaces\ContactInterface;
 use App\Contracts\Interfaces\RegisterInterface;
@@ -47,6 +48,7 @@ use App\Contracts\Interfaces\VisitorInterface;
 use App\Contracts\Repositories\AdvertisementPhotoRepository;
 use App\Contracts\Repositories\AdvertisementRepository;
 use App\Contracts\Repositories\CategoryRepository;
+use App\Contracts\Repositories\CoinRepository;
 use App\Contracts\Repositories\CommentReportRepository;
 use App\Contracts\Repositories\ContactRepository;
 use App\Contracts\Repositories\RegisterRepository;
@@ -101,7 +103,8 @@ class AppServiceProvider extends ServiceProvider
         SocialMediaInterface::class => SocialMediaRepository::class,
         CommentReportInterface::class => CommentReportRepository::class,
         ContactInterface::class => ContactRepository::class,
-        SendMessageInterface::class => SendMessageRepository::class
+        SendMessageInterface::class => SendMessageRepository::class,
+        CoinInterface::class => CoinRepository::class
     ];
 
     /**

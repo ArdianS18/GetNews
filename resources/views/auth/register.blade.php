@@ -1,7 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+<head>
+    <style>
+        .loader-wrapper {
+            --line-width: 5px;
+            --curtain-color: #f1faee;
+            --outer-line-color: #a8dadc;
+            --middle-line-color: #457b9d;
+            --inner-line-color: #1d3557;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            }
+
+            .loader {
+            display: block;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            /*   transform: translate(-50%, -50%); */
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: var(--line-width) solid transparent;
+            border-top-color: var(--outer-line-color);
+            border-radius: 100%;
+            animation: spin 2s linear infinite;
+            z-index: 1001;
+            }
+
+            .loader:before {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: var(--line-width) solid transparent;
+            border-top-color: var(--inner-line-color);
+            border-radius: 100%;
+            animation: spin 3s linear infinite;
+            }
+
+            .loader:after {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            border: var(--line-width) solid transparent;
+            border-top-color: var(--middle-line-color);
+            border-radius: 100%;
+            animation: spin 1.5s linear infinite;
+            }
+            @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+            }
+            .loader-wrapper .loader-section {
+            position: fixed;
+            top: 0;
+            background: var(--curtain-color);
+            width: 51%;
+            height: 100%;
+            z-index: 1000;
+            }
+
+            .loader-wrapper .loader-section.section-left {
+            left: 0;
+            }
+
+            .loader-wrapper .loader-section.section-right {
+            right: 0;
+            }
+
+            /* Loaded Styles */
+            .loaded .loader-wrapper .loader-section.section-left {
+            transform: translateX(-100%);
+            transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            }
+
+            .loaded .loader-wrapper .loader-section.section-right {
+            transform: translateX(100%);
+            transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            }
+
+            .loaded .loader {
+            opacity: 0;
+            transition: all 0.3s ease-out;
+            }
+
+            .loaded .loader-wrapper {
+            visibility: hidden;
+            transform: translateY(-100%);
+            transition: all 0.3s 1s ease-out;
+            }
+    </style>
+
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
@@ -25,6 +130,16 @@
 
 <body style="background-color: #FFFFFF">
 
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <div id="formLoader" class="loader" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5) center no-repeat;">
+        <img src="" alt="Loading..." style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    </div>
+
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
         style="display: none; visibility: hidden"></iframe></noscript>
 <div class="authentication-wrapper authentication-cover authentication-bg">
@@ -47,7 +162,16 @@
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5">
             <div class="w-px-500 mx-auto my-auto">
                 <h3 class="mb-5">Buat Akun GetMedia.id</h3>
-                    <form method="POST" class="py-3" action="{{route('register')}}">
+
+                @if (session('success'))
+                    <div id="error-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                    <form method="POST" class="py-3" action="{{ route('register') }}">
+                        @method('post')
                         @csrf
                         <div class="row">
                             <div class="my-2 col-12">
@@ -122,6 +246,10 @@
     </div>
 </div>
 
+<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/aos.js') }}"></script>
+<script src="{{ asset('assets/js/main.js') }}"></script>
 
 <script>
     function togglePasswordVisibility() {

@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Sebuah portal berita untuk membaca berita yang saedang trending dan hot">
-  @include('layouts.user.css')
+    @include('layouts.user.css')
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
-
 </head>
 
 <body>
@@ -38,11 +37,11 @@
             <span class="slider round"></span>
         </label>
     </div>
+
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
-
+    
     @yield('content')
-
     {{-- <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
@@ -63,8 +62,11 @@
     {{-- <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script> --}}
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
+
+
     @include('layouts.user.footer')
     @yield('script')
+
     <script>
           document.addEventListener("DOMContentLoaded", function() {
             var searchBtn = document.getElementById('search-btn');

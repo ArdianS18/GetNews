@@ -79,9 +79,9 @@
     <div style="background-color: #f9f9f9; margin: 0 auto; max-width: 640px; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); border-radius: 4px; overflow: hidden;">
         <div style="background: transparent">
             <!-- Header Section -->
-            <div style="text-align: center; background-color: #cbf1ff; padding: 57px;">
+            <div style="text-align: center; background-color: #DDDDDD;">
                 <div style="cursor: auto; color: #1B3061; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-size: 36px; font-weight: 600; line-height: 36px; text-align: center;">
-                    <img src="{{asset('assets/img/logo-getmedia.png')}}" alt="" />
+                    <img src="{{asset('assets/img/logo-getmedia.png')}}" width="200px" alt="" />
                 </div>
             </div>
 
@@ -106,10 +106,10 @@
                         <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate" align="center" border="0">
                             <tbody>
                                 <tr>
-                                    <td style="border: none; border-radius: 3px; color: white; cursor: auto; padding: 15px 19px;" align="center" valign="middle" bgcolor="#1b613d">
-                                        {{-- <a href="{{ route('verification.account', $data['id']) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; line-height: 100%; background: #1b613d; color: white; font-family: Ubuntu, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; text-transform: none; margin: 0px;">
-                                            Verifikasi
-                                        </a> --}}
+                                    <td style="border: none; border-radius: 3px; color: white; cursor: auto; padding: 15px 19px;" align="center; background-color: #175A95;" valign="middle" bgcolor="#1">
+                                        <a href="{{ route('verisikasi.account', ['id' => $data['id']]) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; line-height: 100%; color: white; font-family: Ubuntu, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; text-transform: none; margin: 0px;">
+                                            Verifikasi Email
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>

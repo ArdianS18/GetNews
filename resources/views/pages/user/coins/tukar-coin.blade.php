@@ -86,7 +86,7 @@
 
 
         <div class="col-lg-6 d-flex justify-content-center">
-            <img src="{{asset('assets/img/tukar-coin-bg.svg')}}" width="400px" class="img-fluid" alt="">
+            <img src="{{asset('assets/img/bg-tukar-coin.svg')}}" width="400px" class="img-fluid" alt="">
         </div>
     </div>
 </div>

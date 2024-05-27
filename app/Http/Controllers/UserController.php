@@ -39,6 +39,11 @@ class UserController extends Controller
         return view('pages.user.inbox.index', compact('data', 'message', 'delete_message'));
     }
 
+    public function accountUserList()
+    {
+        return view('pages.admin.akun.user');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -54,7 +59,7 @@ class UserController extends Controller
     {
         $data = $this->userPhoto->store($request, $user);
         $this->user->update($user->id, $data);
-        return back();
+        return back()->with('success', 'Berhasil memperbarui foto profile');
     }
 
     public function storeByAdmin(UserRequest $request)

@@ -307,7 +307,7 @@
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                    ['fontname', ['fontname']], // Menambahkan opsi untuk mengganti font
+                    ['fontname', ['fontname']],
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph', 'height']],
@@ -328,6 +328,7 @@
             });
         });
     </script>
+    
     <script>
         $('.category').change(function() {
             getSubCategory($(this).val())
