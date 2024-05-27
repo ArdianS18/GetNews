@@ -27,7 +27,7 @@
                 <form class="d-flex gap-2">
                     <div class="position-relative">
                         <div class="">
-                            <input type="text" name="search" class="form-control search-chat py-2 ps-5" id="search-name"
+                            <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" id="search-name"
                                 placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         </div>
