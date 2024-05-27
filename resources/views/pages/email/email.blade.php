@@ -79,7 +79,7 @@
     <div style="background-color: #f9f9f9; margin: 0 auto; max-width: 640px; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); border-radius: 4px; overflow: hidden;">
         <div style="background: transparent">
             <!-- Header Section -->
-            <div style="text-align: center; background-color: #cbf1ff;">
+            <div style="text-align: center; background-color: #DDDDDD;">
                 <div style="cursor: auto; color: #1B3061; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-size: 36px; font-weight: 600; line-height: 36px; text-align: center;">
                     <img src="{{asset('assets/img/logo-getmedia.png')}}" width="200px" alt="" />
                 </div>
