@@ -28,24 +28,25 @@
 @endsection
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Author | Status News</title>
 </head>
 
 @section('content')
 
-    @if (session('success'))
+    {{-- @if (session('success'))
     <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    @endif
+    @endif --}}
 
-    @if (session('draft'))
+    {{-- @if (session('draft'))
     <div id="success-alert" class="alert alert-warning alert-dismissible fade show" role="alert">
         {{ session('draft') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    @endif
+    @endif --}}
 
     <form class="d-flex gap-2">
         <div>
@@ -84,6 +85,29 @@
     <x-delete-modal-component />
 @endsection
 @section('script')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('draft'))
+                Swal.fire({
+                    title: 'Success Draft!',
+                    text: '{{ session('draft') }}',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+
     <script>
         get(1)
         let debounceTimer;
