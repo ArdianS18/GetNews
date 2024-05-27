@@ -79,7 +79,7 @@ class ProfileController extends Controller
 
     }
 
-    public function index(Request $request)
+    public function index(Request $request, User $user)
     {
         $subCategories = $this->subCategory->get();
         $category = $this->category->get();

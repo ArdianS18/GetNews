@@ -172,7 +172,7 @@ class AuthorController extends Controller
         return ResponseHelper::success($data);
     }
 
-    public function banned(Author $author, Request $request)
+    public function banned(Author $author)
     {
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
         if (!$author->banned) {
@@ -188,6 +188,11 @@ class AuthorController extends Controller
                 $message->to($email)
                         ->subject($subject);
             });
+
+            if (auth()->user()->id !== $user->id) {
+                Auth::logoutOtherDevices($user->password);
+            }
+
         } else {
             $this->authorBannedService->unBanned($author);
         }
@@ -224,7 +229,7 @@ class AuthorController extends Controller
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
-    public function detailnews ($newsId)
+    public function detailnewsauthor ($newsId)
     {
         $news = $this->news->show($newsId);
 
@@ -234,7 +239,6 @@ class AuthorController extends Controller
 
         $tags = $this->tags->get();
         $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
-
         $newsSubCategories = $this->newsSubCategories->get()->whereIn('news_id', $news);
         $newsTags = $this->newsTags->get()->whereIn('news_id', $news);
 
