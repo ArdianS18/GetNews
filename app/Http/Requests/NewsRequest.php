@@ -21,8 +21,8 @@ class NewsRequest extends FormRequest
             'category.*' => 'required',
             'sub_category' => 'array|required',
             'sub_category.*' => 'required',
-            'tags' => 'array|required',
-            'tags.*' => 'required',
+            'tag' => 'array|required',
+            'tag.*' => 'required',
             'upload_date' => 'required|date|after_or_equal:'.now()->toDateString(),
         ];
     }
