@@ -51,16 +51,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request->validated();
 
-        if ($request->has('tags')) {
+        if ($request->has('tag')) {
             $newTags = [];
-            foreach ($request->input('tags') as $tagName) {
+            foreach ($request->input('tag') as $tagName) {
                 $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
                 );
                 $newTags[] = $tag->id;
             }
-            $data['tags'] = $newTags;
+            $data['tag'] = $newTags;
         }
 
             $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
@@ -80,7 +80,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
             'sub_category' => $data['sub_category'],
-            'tags' => $data['tags'],
+            'tag' => $data['tag'],
             'upload_date' => $data['upload_date']
         ];
     }
@@ -89,16 +89,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request ? $request->validated() : null;
 
-        if ($request && $request->has('tags')) {
+        if ($request && $request->has('tag')) {
             $newTags = [];
-            foreach ($request->input('tags') as $tagName) {
+            foreach ($request->input('tag') as $tagName) {
                 $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
                 );
                 $newTags[] = $tag->id;
             }
-            $data['tags'] = $newTags;
+            $data['tag'] = $newTags;
         }
 
             $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
@@ -120,7 +120,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'slug' => Str::slug($data['name']),
             'category' => $data['category'] ?? null,
             'sub_category' => $data['sub_category'] ?? null,
-            'tags' => $data['tags'] ?? null,
+            'tag' => $data['tag'] ?? null,
             'upload_date' => $data['upload_date'] ?? null
         ];
     }
@@ -129,16 +129,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request ? $request->validated() : null;
 
-        if ($request && $request->has('tags')) {
+        if ($request && $request->has('tag')) {
             $newTags = [];
-            foreach ($request->input('tags') as $tagName) {
+            foreach ($request->input('tag') as $tagName) {
                 $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
                 );
                 $newTags[] = $tag->id;
             }
-            $data['tags'] = $newTags;
+            $data['tag'] = $newTags;
         }
 
         $old_photo = $news->photo;
@@ -169,7 +169,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'slug' => Str::slug($data['name']),
             'category' => $data['category'] ?? null,
             'sub_category' => $data['sub_category'] ?? null,
-            'tags' => $data['tags'] ?? null,
+            'tag' => $data['tag'] ?? null,
             'upload_date' => $data['upload_date'] ?? null
         ];
     }
@@ -186,9 +186,9 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request->validated();
 
-        if ($request->has('tags')) {
+        if ($request->has('tag')) {
             $newTags = [];
-            foreach ($request->input('tags') as $tagName) {
+            foreach ($request->input('tag') as $tagName) {
                 $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
@@ -196,7 +196,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 $newTags[] = $tag->id;
             }
 
-            $data['tags'] = $newTags;
+            $data['tag'] = $newTags;
         }
 
         $old_photo = $news->photo;
@@ -230,7 +230,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
-            'tags' => $data['tags'],
+            'tag' => $data['tag'],
             'upload_date' => $data['upload_date'],
             'sub_category' => $data['sub_category'],
         ];
@@ -240,9 +240,9 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
     {
         $data = $request->validated();
 
-        if ($request->has('tags')) {
+        if ($request->has('tag')) {
             $newTags = [];
-            foreach ($request->input('tags') as $tagName) {
+            foreach ($request->input('tag') as $tagName) {
                 $tag = Tag::updateOrCreate(
                     ['name' => $tagName],
                     ['slug' => Str::slug($tagName)]
@@ -250,7 +250,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 $newTags[] = $tag->id;
             }
 
-            $data['tags'] = $newTags;
+            $data['tag'] = $newTags;
         }
 
         $old_photo = $news->photo;
@@ -277,7 +277,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
-            'tags' => $data['tags'],
+            'tag' => $data['tag'],
             'upload_date' => $data['upload_date'],
             'sub_category' => $data['sub_category'],
         ];

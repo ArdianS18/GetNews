@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row gx-55 gx-5">
             <div class="col-lg-8">
-                <div class="row justify-content-center">
+                <div class="">
 
                     @forelse ($popular as $news_popular)
                         @php

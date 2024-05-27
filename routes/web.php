@@ -218,7 +218,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
 
     Route::get('mynews', [NewsController::class, 'showmynews'])->name('my.news');
-    Route::get('detail-news/{news}', [AuthorController::class, 'detailnews'])->name('detail.news');
+    Route::get('detail-news/{news}', [AuthorController::class, 'detailnewsauthor'])->name('detail.news');
     // Profile Author
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
@@ -295,7 +295,6 @@ Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function 
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
-
 });
 
 Route::middleware(['role:user', 'verified'])->group(function () {

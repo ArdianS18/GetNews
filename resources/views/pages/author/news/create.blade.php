@@ -148,14 +148,14 @@
                         </div>
                         <div class="col-lg-12 mb-3">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]"
+                            <select class="form-control @error('tag') is-invalid @enderror select2 tags" name="tag[]"
                                 multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
                                     <option value="{{ $tag->name }}">{{ $tag->name }}</option>
                                 @endforeach
                             </select>
-                            @error('tags')
+                            @error('tag')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
                                 </span>

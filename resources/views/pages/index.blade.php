@@ -37,7 +37,7 @@
                                         <h3><a data-toggle="tooltip" data-placement="top"
                                                 title="{{ $trending->news->name }}"
                                                 href="{{ route('news.user', ['news' => $trending->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 27, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 40, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
@@ -557,7 +557,7 @@
                                             class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}"
                                                 href="{{ route('news.user', ['news' => $general->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 47, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 35, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a

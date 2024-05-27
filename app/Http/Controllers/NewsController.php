@@ -450,7 +450,7 @@ class NewsController extends Controller
             ]);
         }
 
-        foreach ($data['tags'] as $tagId) {
+        foreach ($data['tag'] as $tagId) {
             $this->newsTag->store([
                 'news_id' => $newsId,
                 'tag_id' => $tagId
@@ -488,8 +488,8 @@ class NewsController extends Controller
             }
         }
 
-        if ($data['tags']) {
-            foreach ($data['tags'] as $tagId) {
+        if ($data['tag']) {
+            foreach ($data['tag'] as $tagId) {
                 $this->newsTag->store([
                     'news_id' => $newsId,
                     'tag_id' => $tagId
@@ -532,8 +532,8 @@ class NewsController extends Controller
         }
 
         $newsTag->where('news_id', $news->id)->delete();
-        if ($data['tags']) {
-            foreach ($data['tags'] as $tagId) {
+        if ($data['tag']) {
+            foreach ($data['tag'] as $tagId) {
                 $this->newsTag->store([
                     'news_id' => $news->id,
                     'tag_id' => $tagId

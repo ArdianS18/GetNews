@@ -72,10 +72,8 @@
             </div>
 
           <p>
-            There are many variations of passages of Lorem Ipsum available,
-            but the majority have suffered alteration in some form, by
-            injected humour, or ran domised words which don't look even
-            slightly believable.
+                {{$author->user->description}}
+                {{-- Tidak ada deskripsi. --}}
           </p>
           <div class="author-profile d-flex justify-content-end">
             <div class="author-stat">
