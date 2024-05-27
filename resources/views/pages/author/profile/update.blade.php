@@ -51,20 +51,35 @@
                                         <div class="mb-4">
                                             <label for="exampleInputPassword1" class="form-label fw-semibold">Password
                                                 Lama</label>
-                                            <input type="password" name="current_password" class="form-control"
+                                            <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror"
                                                 id="">
+                                            @error('current_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <div class="mb-4">
                                             <label for="" class="form-label fw-semibold">Password
                                                 Baru</label>
-                                            <input type="password" name="password" class="form-control" id="password">
+                                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password">
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="">
                                             <label for="" class="form-label fw-semibold">Konfirmasi
                                                 Password</label>
-                                            <input type="password" name="password_confirmation" class="form-control"
+                                            <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror"
                                                 id="password-confirmation">
                                                 <span class="error-confirm-password"></span>
+                                            @error('password_confirmation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <div class="col-12">
                                             <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
