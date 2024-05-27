@@ -148,7 +148,7 @@
                         </div>
                         <div class="col-lg-12 mb-3">
                             <label class="form-label" for="password_confirmation">Tags</label>
-                            <select class="form-control @error('tags') is-invalid @enderror select2 tags" name="tags[]"
+                            <select class="form-control @error('tag') is-invalid @enderror select2 tag" name="tag[]"
                                 multiple="multiple">
                                 <option disabled>pilih tags</option>
                                 @foreach ($tags as $tag)
@@ -361,8 +361,8 @@
         var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
         document.getElementById('upload_date').value = formattedDate;
 
-        $(".tags").select2({
-            tags: true,
+        $(".tag").select2({
+            tag: true,
             tokenSeparators: [',', ' ']
         })
 

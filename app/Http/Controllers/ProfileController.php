@@ -152,7 +152,7 @@ class ProfileController extends Controller
         }
 
         $newsTag->where('news_id', $news->id)->delete();
-        foreach ($data['tags'] as $tagId) {
+        foreach ($data['tag'] as $tagId) {
             $this->newsTag->store([
                 'news_id' => $news->id,
                 'tag_id' => $tagId
