@@ -62,7 +62,7 @@
                 
                 <div class="col-lg-6 col-md-12">
                     <div class="news-col-wrap mb-3">
-                        <div class="news-card-five">
+                    <div class="news-card-five">
                             <div class="news-card-img">
                                 <img src="{{ asset('storage/' . $item->photo) }}" class="" width="100%" height="150px" style="object-fit: cover" alt="Image">
                                 <a href="{{ route('categories.show.user', ['category' => $item->newsCategories[0]->category->slug]) }}"
