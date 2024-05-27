@@ -87,9 +87,9 @@
                             <div class="col-lg-6 col-md-12 from-outline mt-2">
                                 <label class="form-label" for="password_confirmation">Tags</label>
                                 <div class="tags-container">
-                                    @foreach ($newsTags as $tag)
+                                    @foreach ($newsTags as $newsTag)
                                     <p class="tag">
-                                        {{ $tag->tag->name }}
+                                        {{ $newsTag->tag->name }}
                                     </p>
                                     @endforeach
                                 </div>
