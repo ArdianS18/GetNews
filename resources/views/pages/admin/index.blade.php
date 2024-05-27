@@ -26,6 +26,11 @@
         border-radius: 6px;
         color: #ffffff;
     }
+    @media (max-width: 768px) {
+        .img-responsive {
+            height: 300;
+        }
+    }
 </style>
 <link rel="stylesheet" href="{{ 'admin/dist/libs/prismjs/themes/prism-okaidia.min.css' }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -118,7 +123,7 @@
                             <div class="mb-2" style="max-width: 540px;">
                                 <div class="row g-2">
                                     <div class="col-md-4">
-                                        <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%; height: 100; object-fit:cover;" alt="">
+                                        <img src="{{ asset('storage/' . $news->photo) }}" class="img-responsive" height="100" style="width: 100%; object-fit:cover;" alt="">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body p-2">
@@ -263,7 +268,7 @@
     <div class="tab-content">
         <div class="tab-pane active" id="premium-news" role="tabpanel">
             <div class="row">
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-9">
                     <div class="card card-body">
                         <h4><b>Data Berita Premium</b></h4>
                         <div class="mt-4">
@@ -291,7 +296,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane active" id="news" role="tabpanel">
-                                    <div class="d-flex justify-content-between mt-5">
+                                    <div class="d-flex justify-content-between mt-5 mb-5">
                                         <h4>Berita</h4>
                                         <form>
                                             <div class="d-flex gap-2">
@@ -309,40 +314,41 @@
                                         </form>
                                     </div>
                                     <div class="row">
+                                        @forelse ($newsPremium as $premium)
+                                            <div class="col-md-12 col-lg-6 mb-3">
+                                                <div class="mb-2" style="max-width: 540px;">
+                                                    <div class="row g-2">
 
-                                        <div class="col-md-12 col-lg-6 mb-3">
-                                            <div class="mb-2" style="max-width: 540px;">
-                                                <div class="row g-2">
-                                                    @forelse ($newsPremium as $premium)
-                                                        <div class="col-md-4">
-                                                            <img src="{{ asset('storage/' . $premium->photo) }}" style="width: 100%; height: 100; object-fit:cover;" alt="">
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <div class="card-body p-2">
-                                                                <h5 class="card-text">
-                                                                    {!! Illuminate\Support\Str::limit($premium->name, $limit = 60, $end = '...') !!}
-                                                                </h5>
-                                                                <div class="d-flex gap-3 align-items-center ms-0">
-                                                                    <p class="card-text m-0">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
-                                                                            <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
-                                                                        </svg>
-                                                                        <small class="ms-1">{{ $premium->created_at->format('M d Y') }}</small>
-                                                                    </p>
-                                                                    <p class="card-text">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                                                                            <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                                        </svg>
-                                                                        <small class="mt-1 ms-1">{{ $premium->views_count }}x dilihat</small>
-                                                                    </p>
+                                                            <div class="col-md-4">
+                                                                <img src="{{ asset('storage/' . $premium->photo) }}" class="img-responsive" height="100" style="width: 100%; object-fit:cover;" alt="">
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-body p-2">
+                                                                    <h5 class="card-text">
+                                                                        {!! Illuminate\Support\Str::limit($premium->name, $limit = 60, $end = '...') !!}
+                                                                    </h5>
+                                                                    <div class="d-flex gap-3 align-items-center ms-0">
+                                                                        <p class="card-text m-0">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
+                                                                                <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
+                                                                            </svg>
+                                                                            <small class="ms-1">{{ $premium->created_at->format('M d Y') }}</small>
+                                                                        </p>
+                                                                        <p class="card-text">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                                                                <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
+                                                                            </svg>
+                                                                            <small class="mt-1 ms-1">{{ $premium->views_count }}x dilihat</small>
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    @empty
-                                                    @endforelse
+
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @empty
+                                        @endforelse
                                     </div>
                                 </div>
                                 <div class="tab-pane p-3" id="statistik" role="tabpanel">
