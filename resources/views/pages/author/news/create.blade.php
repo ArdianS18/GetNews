@@ -328,6 +328,7 @@
             });
         });
     </script>
+    
     <script>
         $('.category').change(function() {
             getSubCategory($(this).val())

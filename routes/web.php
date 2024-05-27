@@ -234,6 +234,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('status-author', function(){
         return view('pages.author.status.index');
     })->name('status.news.author');
+
     Route::get('list-status-author', [NewsController::class, 'showstatusnews'])->name('list.news.author');
 
     Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
@@ -245,7 +246,6 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('income-statistics', [AuthorController::class, 'incomestatistics'])->name('statistik.income');
     Route::get('news-statistics', [AuthorController::class, 'newsstatistics'])->name('statistik.news');
     Route::get('chart-statistics-news', [NewsViewController::class, 'newsstatistics']);
-    Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
 
 
     Route::get('status', function () {
@@ -393,12 +393,15 @@ Route::get('search',[DashboardController::class,'searchNews'])->name('search');
 
 Route::get('tag/{tag:slug}', [NewsTagController::class, 'show'])->name('tag.show.user');
 Route::get('{category:slug}/{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('subcategories.show.user');
+
 Route::prefix('tag')->name('tag.')->group(function(){
     Route::get('{tag:slug}/', [NewsTagController::class, 'show'])->name('show.user');
 });
+
 Route::prefix('{category:slug}')->name('subcategories.')->group(function(){
     Route::get('{subCategory:slug}', [NewsController::class, 'showSubCategories'])->name('show.user');
 });
+
 Route::get('load-coin', function () {
     return view('pages.user.load-coin.load');
 });
@@ -407,5 +410,4 @@ Route::get('all/{slug}/{data}', [NewsController::class, 'showAllCategories'])->n
 Route::get('allsub/{subslug}/{data}', [NewsController::class, 'showAllSubCategories'])->name('subCategory.all');
 
 Route::get('verifikasi/email/{id}', [RegisterController::class, 'verifikasi'])->name('verisikasi.account');
-
 Route::post('coin-add', [CoinController::class, 'store'])->name('coin.add');

@@ -460,7 +460,7 @@ class NewsController extends Controller
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             return to_route('news.approve.admin');
         } else {
-            return to_route('status.news.author');
+            return to_route('status.news.author')->with('success', 'Berhasil menambahkan Artikel.');
         }
     }
 
@@ -497,7 +497,12 @@ class NewsController extends Controller
             }
         }
 
-        return to_route('status.news.author');
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            return to_route('news.approve.admin');
+        } else {
+            return to_route('status.news.author')->with('draft', 'Berhasil meyimpan Artikel.');
+        }
+
     }
 
     public function updateDraft(NewsDraftRequest $request, News $news, NewsPhoto $newsPhoto, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
@@ -535,7 +540,13 @@ class NewsController extends Controller
                 ]);
             }
         }
-        return to_route('status.news.author');
+
+        if (auth()->user()->roles->pluck('name')[0] == "admin") {
+            return to_route('news.approve.admin');
+        } else {
+            return to_route('status.news.author')->with('draft', 'Berhasil update dan meyimpan Artikel.');
+        }
+
     }
 
     public function createUserNews()

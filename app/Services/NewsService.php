@@ -144,10 +144,13 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $old_photo = $news->photo;
         $new_photo= "";
 
-        if ($request->hasFile('photo')) {
-            $this->remove($old_photo);
-            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
-        }
+        // if ($request->hasFile('photo')) {
+            // if ($request->file('photo')) {
+                // $this->remove($old_photo);
+            // } else {
+                $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+            // }
+        // }
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);

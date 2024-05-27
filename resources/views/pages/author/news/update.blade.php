@@ -286,6 +286,7 @@
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontname', ['fontname']],
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph', 'height']],
@@ -296,6 +297,12 @@
                     ['codeview', ['codeview']],
                     ['help', ['help']],
                     ['insert', ['ul']]
+                ],
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
+                    'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+                ],
+                fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
+                    'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ]
             });
         });

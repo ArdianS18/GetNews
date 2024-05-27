@@ -162,7 +162,7 @@ class ProfileController extends Controller
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
             return to_route('news.approve.admin');
         } else {
-            return to_route('status.news.author');
+            return to_route('status.news.author')->with('success', 'Berhasil mengupdate Artiker.');
         }
     }
 

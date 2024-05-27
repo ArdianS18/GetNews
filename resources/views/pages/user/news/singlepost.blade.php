@@ -486,7 +486,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    
+
                                     <div class="modal-body">
                                         <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
                                             @method('post')
@@ -923,12 +923,14 @@
         </div>
     </div> --}}
 
+    @if (Auth::check())
     <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
         <div class="coin-loader">
             <img src="{{ asset('assets/img/coin-load.svg') }}" alt="Coin" style="width: 50px; height: 50px;">
             <div class="coin-circle"></div>
         </div>
     </div>
+    @endif
 
 @endsection
 
