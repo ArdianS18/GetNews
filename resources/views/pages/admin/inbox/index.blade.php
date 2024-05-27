@@ -57,7 +57,7 @@
                         <i class="ti ti-menu-2 fs-5"></i>
                     </button>
                     <form class="position-relative w-100">
-                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh"
+                        <input type="text" class="form-control search-chat py-2 px-5 ps-5" id="text-srh"
                             placeholder="Search Contact">
                         <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                     </form>
@@ -126,7 +126,7 @@
                             <div class="border-end user-chat-box h-100">
                                 <div class="px-4 pt-9 pb-6 d-none d-lg-block">
                                     <form class="position-relative">
-                                        <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Cari" />
+                                        <input type="text" class="form-control search-chat py-2 px-5 ps-5" id="text-srh" placeholder="Cari" />
                                         <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
                                     </form>
                                 </div>
