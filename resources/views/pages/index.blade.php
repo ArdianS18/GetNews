@@ -76,6 +76,7 @@
                                         href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...') !!}
                                     </a>
+                                </h3>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i>
                                                 {{ \Carbon\Carbon::parse($newss->upload_date)->translatedFormat('d F Y') }}
@@ -207,6 +208,7 @@
                                         href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...') !!}
                                     </a>
+                                </h3>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i>
                                                 {{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}
