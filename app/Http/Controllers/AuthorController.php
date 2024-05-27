@@ -177,7 +177,7 @@ class AuthorController extends Controller
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
             $this->news->StatusBanned($author->user_id);
-
+            
             $user = $author->user;
             $email = $user->email;
             $subject = 'Pemberitahuan: Anda telah dibanned';
@@ -185,7 +185,7 @@ class AuthorController extends Controller
 
             Mail::raw($message, function ($message) use ($email, $subject) {
                 $message->to($email)
-                    ->subject($subject);
+                        ->subject($subject);
             });
         } else {
             $this->authorBannedService->unBanned($author);
@@ -299,6 +299,7 @@ class AuthorController extends Controller
         $author_id = auth()->user()->author->id;
         $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
         $newsStatistics = $this->news->showNewsStatistic();
+        // dd($newsStatistics);
 
         $view = $this->view->where();
         $like = $this->newsLikes->whereIn();
