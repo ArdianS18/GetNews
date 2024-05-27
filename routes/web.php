@@ -295,7 +295,6 @@ Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function 
     Route::get('sub-category-detail/{category}', [CategoryController::class, 'getCategory'])->name('sub.category.id');
     Route::get('pengajuan-berita', [NewsController::class, 'createUserNews'])->name('pengajuan.berita');
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
-
 });
 
 Route::middleware(['role:user', 'verified'])->group(function () {
