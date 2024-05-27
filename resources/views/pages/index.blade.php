@@ -76,6 +76,7 @@
                                         href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                         {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...') !!}
                                     </a>
+                                </h3>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i>
                                                 {{ \Carbon\Carbon::parse($newss->upload_date)->translatedFormat('d F Y') }}
@@ -142,12 +143,13 @@
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...') !!}
                                     </a>
                                 </h3>
-                                    <ul class="news-metainfo list-style">
-                                        <li><i class="fi fi-rr-calendar-minus"></i>
-                                                {{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}
-                                            </li>
-                                        <li><i class="fi fi-rr-eye icon-eye"></i>{{ $mid->views_count }}</li>
-                                    </ul>
+
+                                <ul class="news-metainfo list-style">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
+                                            <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
+                                        </a></li>
+                                    <li><i class="fi fi-rr-eye" style="margin-top: 2px;"></i>{{ $mid->views_count }}</li>
+                                </ul>
                             </div>
                         </div>
                     @elseif ($counter < 3)
@@ -167,7 +169,7 @@
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...') !!}
                                     </a>
                                 </h3>
-                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 85, '...') !!}</p>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 75, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
@@ -206,6 +208,7 @@
                                         href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...') !!}
                                     </a>
+                                </h3>
                                     <ul class="news-metainfo list-style">
                                         <li><i class="fi fi-rr-calendar-minus"></i>
                                                 {{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}
@@ -554,7 +557,7 @@
                                             class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}"
                                                 href="{{ route('news.user', ['news' => $general->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 47, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 35, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
