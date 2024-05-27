@@ -11,8 +11,8 @@
                 <div>
                     <div class="position-relative d-flex">
                         <div class="input-group">
-                            <input type="text" name="search"
-                                class="form-control search-chat py-2 ps-5" style="width: 200px" id="search-name" placeholder="Search">
+                            <input type="text" name="search" class="form-control search-chat py-2 ps-5" style="width: 200px"
+                                id="search-name" placeholder="Search">
                             <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                         </div>
                     </div>
@@ -66,8 +66,7 @@
 
     </div>
     </div>
-    
-    @endsection
+@endsection
 
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -92,7 +91,7 @@
             }, 500);
         });
 
-       
+
 
         $('#opsi-perpage').change(function() {
             clearTimeout(debounceTimer);
@@ -133,10 +132,14 @@
             })
         }
 
+
         function rowTag(index, data) {
             function limitString(str, maxLength) {
                 return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
             }
+
+           
+
             return `
             <tr>
                 <td>${index + 1}</td>

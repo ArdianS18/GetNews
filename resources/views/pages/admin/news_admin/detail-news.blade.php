@@ -259,9 +259,7 @@
                 </form>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
+
 
     <div class="modal fade" id="modal-reject" tabindex="-1" aria-labelledby="modal-reject Label">
         <div class="modal-dialog modal-lg">
@@ -314,6 +312,7 @@
                 toolbar: [
                     ['style', ['style']],
                     ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontname', ['fontname']],
                     ['fontsize', ['fontsize']],
                     ['color', ['color']],
                     ['para', ['ul', 'ol', 'paragraph', 'height']],
@@ -324,6 +323,12 @@
                     ['codeview', ['codeview']],
                     ['help', ['help']],
                     ['insert', ['ul']]
+                ],
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
+                    'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+                ],
+                fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
+                    'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ]
             });
         });
@@ -365,7 +370,6 @@
         var minutes = ('0' + today.getMinutes()).slice(-2);
 
         var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        document.getElementById('upload_date').value = formattedDate;
 
         function previewImage(event) {
             var input = event.target;
