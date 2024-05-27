@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Http\Requests\ApiRequest;
 use App\Http\Requests\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class RegisterRequest extends BaseRequest
+class RegisterRequest extends ApiRequest
 {
 
 
@@ -20,7 +21,7 @@ class RegisterRequest extends BaseRequest
         return [
             'name' => 'required|string|unique:users,name|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'nullable|string|min:8',
+            'password' => 'required|string|min:8',
             'phone_number' => 'required|numeric|min:15',
             'address' => 'nullable|string|max:255',
             'birth_date' => 'nullable|date',

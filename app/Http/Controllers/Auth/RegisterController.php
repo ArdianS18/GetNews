@@ -57,7 +57,7 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request)
     {
         $this->service->handleRegister($request,$this->register);
-        return back()->with('success', 'Anda berhasil mendaftar, Cek email anda dan login.');
+        return ResponseHelper::success();
     }
 
     public function verifikasi($id)

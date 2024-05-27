@@ -20,6 +20,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\NewsRequest;
 use App\Http\Requests\NewsUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UserProfileRequest;
@@ -202,13 +203,12 @@ class ProfileController extends Controller
         return back()->with('success', 'Berhasil memperbarui profile');
     }
 
-    public function changepassword(User $user, RegisterRequest $registerRequest){
-        if (!Hash::check($registerRequest->old_password, auth()->user()->password)) {
+    public function changepassword(User $user, UpdatePasswordRequest $updatePasswordRequest){
+        if (!Hash::check($updatePasswordRequest->old_password, auth()->user()->password)) {
             throw ValidationException::withMessages(['old_password' => 'Password lama tidak sesuai.']);
             return redirect()->back()->with('failed', trans('alert.password_failed'));
         }
-
-        $this->user->update($user->id, $registerRequest->validated());
+        $this->user->update($user->id, $updatePasswordRequest->validated());
         return redirect()->back()->with('success', trans('alert.password_updated'));
     }
 
