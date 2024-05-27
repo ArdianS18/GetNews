@@ -79,9 +79,15 @@
             @endif
           </p>
           <div class="author-profile d-flex justify-content-end">
-            <div class="author-stat">
-              <span>{{$newsCount->count()}} Berita</span>
+            <div class="sidebar-widget">
               <span>{{ $comments }} Komentar</span>
+            </div>
+            <div class="author-stat">
+              <div>
+                <input type="text" name="{{$newsCount->count()}} Berita" style="100px" value="" id="">
+              </div>
+              {{-- <span>/span> --}}
+
             </div>
           </div>
         </div>

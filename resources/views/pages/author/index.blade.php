@@ -164,7 +164,7 @@
 
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active card" id="pills-berita" role="tabpanel" aria-labelledby="pills-berita-tab" tabindex="0">
-              <div class="card-body">
+              <div class="card card-body">
                 <h4 class="mb-4">Berita</h4>
                 <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-5">
                   <form class="d-flex flex-column flex-sm-row gap-2">
@@ -200,66 +200,66 @@
 
                 </div>
 
-              </div>
-
-              <!-- Row -->
-              <div class="row">
-                @forelse ($news as $news)
-                  <div class="col-lg-6 col-md-12 mb-5">
-                    <div class="">
-                      <div class="row">
-                        <div class="col-md-12 col-lg-5">
-                          <div>
-                            <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%;height:150;object-fiit:cover;" class="img-fluid" height="160px">
-                          </div>
-                        </div>
-                        <div class="col-md-12 col-lg-7 align-items-center">
-                          <div>
-                            <h5>{!! Illuminate\Support\Str::limit(strip_tags($news->name), 60, '...') !!}</h5>
+                <!-- Row -->
+                <div class="row">
+                  @forelse ($news as $news)
+                    <div class="col-lg-6 col-md-12 mb-5">
+                      <div class="">
+                        <div class="row">
+                          <div class="col-md-12 col-lg-5">
                             <div>
-                              <p>{!! Illuminate\Support\Str::limit(strip_tags($news->content), 100, '...') !!}</p>
+                              <img src="{{ asset('storage/' . $news->photo) }}" style="width: 100%;height:150;object-fiit:cover;" class="img-fluid" height="160px">
+                            </div>
                           </div>
-                          </div>
-                          <div class="d-flex">
+                          <div class="col-md-12 col-lg-7 align-items-center">
+                            <div>
+                              <h5>{!! Illuminate\Support\Str::limit(strip_tags($news->name), 60, '...') !!}</h5>
+                              <div>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($news->content), 100, '...') !!}</p>
+                            </div>
+                            </div>
                             <div class="d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#e93314" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16.5 5V3m-9 2V3M3.25 8h17.5M10 14h4M3 10.044c0-2.115 0-3.173.436-3.981a3.896 3.896 0 0 1 1.748-1.651C6.04 4 7.16 4 9.4 4h5.2c2.24 0 3.36 0 4.216.412c.753.362 1.364.94 1.748 1.65c.436.81.436 1.868.436 3.983v4.912c0 2.115 0 3.173-.436 3.981a3.896 3.896 0 0 1-1.748 1.651C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.412a3.896 3.896 0 0 1-1.748-1.65C3 18.128 3 17.07 3 14.955z"/></svg>
-                              <p class="ms-2">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d, Y') }}</p>
-                            </div>
-                            <div class="d-flex ms-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#E93314"
-                                        d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                </svg>
-                              <p class="ms-2">{{$news->newsHasLikes->count()}}</p>
-                            </div>
-                            <div class="d-flex ms-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                viewBox="0 0 24 24">
-                                <path fill="#E93314"
-                                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                            </svg><span class="ms-2">{{ $news->views_count }}</span>
+                              <div class="d-flex">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#e93314" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16.5 5V3m-9 2V3M3.25 8h17.5M10 14h4M3 10.044c0-2.115 0-3.173.436-3.981a3.896 3.896 0 0 1 1.748-1.651C6.04 4 7.16 4 9.4 4h5.2c2.24 0 3.36 0 4.216.412c.753.362 1.364.94 1.748 1.65c.436.81.436 1.868.436 3.983v4.912c0 2.115 0 3.173-.436 3.981a3.896 3.896 0 0 1-1.748 1.651C17.96 21 16.84 21 14.6 21H9.4c-2.24 0-3.36 0-4.216-.412a3.896 3.896 0 0 1-1.748-1.65C3 18.128 3 17.07 3 14.955z"/></svg>
+                                <p class="ms-2">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d, Y') }}</p>
+                              </div>
+                              <div class="d-flex ms-4">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                      viewBox="0 0 24 24">
+                                      <path fill="#E93314"
+                                          d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
+                                  </svg>
+                                <p class="ms-2">{{$news->newsHasLikes->count()}}</p>
+                              </div>
+                              <div class="d-flex ms-4">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                  viewBox="0 0 24 24">
+                                  <path fill="#E93314"
+                                      d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
+                              </svg><span class="ms-2">{{ $news->views_count }}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                @empty
-                  <div class="col-md-12 col-lg-12">
-                      <div class="d-flex justify-content-center">
-                          <div>
-                              <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
-                          </div>
-                      </div>
-                      <div class="text-center">
-                          <h5>Tidak ada data</h5>
-                      </div>
-                  </div>
-                @endforelse
+                  @empty
+                    <div class="col-md-12 col-lg-12">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data.svg') }}" width="200px" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h5>Tidak ada data</h5>
+                        </div>
+                    </div>
+                  @endforelse
 
+                </div>
+                <!-- End Row -->
               </div>
-              <!-- End Row -->
+
             </div>
 
             <div class="tab-pane fade card p-4" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
