@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\NewsHasLikeInterface;
+use App\Contracts\Interfaces\NewsInterface;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\NewsLikeRequest;
 use App\Models\Author;
@@ -15,11 +16,13 @@ class NewsHasLikeController extends Controller
 {
 
     private NewsHasLikeInterface $newsHasLike;
+    private NewsInterface $news;
     private NewsHasLikeService $newsHasLikeService;
 
 
-    public function __construct(NewsHasLikeInterface $newsHasLike, NewsHasLikeService $newsHasLikeService)
+    public function __construct(NewsInterface $news,NewsHasLikeInterface $newsHasLike, NewsHasLikeService $newsHasLikeService)
     {
+        $this->news = $news;
         $this->newsHasLike = $newsHasLike;
         $this->newsHasLikeService = $newsHasLikeService;
     }
@@ -30,7 +33,7 @@ class NewsHasLikeController extends Controller
     public function index()
     {
         $id = auth()->user()->id;
-        $news = $this->newsHasLike->show($id);
+        $news = $this->news->newsLiked($id);
         return view('pages.author.news.newsliked', compact('news'));
     }
 
