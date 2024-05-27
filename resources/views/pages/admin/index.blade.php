@@ -263,7 +263,7 @@
     <div class="tab-content">
         <div class="tab-pane active" id="premium-news" role="tabpanel">
             <div class="row">
-                <div class="col-md-12 col-lg-9">
+                <div class="col-md-12 col-lg-6">
                     <div class="card card-body">
                         <h4><b>Data Berita Premium</b></h4>
                         <div class="mt-4">
