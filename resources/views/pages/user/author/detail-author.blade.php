@@ -72,11 +72,8 @@
             </div>
 
           <p>
-            @if ($author->user->description)
                 {{$author->user->description}}
-            @else
-                Tidak ada deskripsi.
-            @endif
+                {{-- Tidak ada deskripsi. --}}
           </p>
           <div class="author-profile d-flex justify-content-end">
             <div class="sidebar-widget">

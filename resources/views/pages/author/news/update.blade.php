@@ -103,14 +103,17 @@
                             <label class="form-label" for="password_confirmation">Sub Kategori</label>
                             <select id="sub_category_id"
                                 class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
-                                name="sub_category[]" multiple="true" value=""
-                                aria-label="Default select example">
-                                <option >pilih sub kategori</option>
-                                @foreach ($subCategories as $subCategory)
-                                <option value="{{ $subCategory->id }}" {{ $newsSubCategory->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
-                                    {{ $subCategory->name }}
-                                </option>
-                                @endforeach
+                                name="sub_category[]" multiple="true" aria-label="Default select example">
+
+                                @if ($subCategories != null)
+                                    <option >pilih sub kategori</option>
+                                    @foreach ($subCategories as $subCategory)
+                                    <option value="{{ $subCategory->id }}" {{ $newsSubCategory->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
+                                        {{ $subCategory->name }}
+                                    </option>
+                                    @endforeach
+                                @endif
+
                             </select>
                             @error('sub_category')
                                 <span class="invalid-feedback" role="alert" style="color: red">
@@ -309,26 +312,47 @@
     </script>
 
     <script>
+        // $('.category').change(function() {
+        //     var selectedCategories = $(this).val();
+        //     getSubCategory(selectedCategories);
+        // })
+
+        // function getSubCategory(ids) {
+        //     $('.sub-category').html('');
+        //     ids.forEach(function(id) {
+        //         $.ajax({
+        //             url: "sub-category-detail/" + id,
+        //             method: "GET",
+        //             dataType: "JSON",
+        //             success: function(response) {
+        //                 $.each(response.data, function(index, data) {
+        //                     $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+        //                         '</option>');
+        //                 });
+        //             }
+        //         });
+        //     });
+        // }
+
         $('.category').change(function() {
-            var selectedCategories = $(this).val();
-            getSubCategory(selectedCategories);
+            getSubCategory($(this).val())
         })
 
-        function getSubCategory(ids) {
-            $('.sub-category').html('');
-            ids.forEach(function(id) {
-                $.ajax({
-                    url: "sub-category-detail/" + id,
-                    method: "GET",
-                    dataType: "JSON",
-                    success: function(response) {
-                        $.each(response.data, function(index, data) {
-                            $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-                                '</option>');
-                        });
-                    }
-                });
-            });
+        function getSubCategory(id) {
+            $.ajax({
+                url: "sub-category-detail/" + id,
+                method: "GET",
+                dataType: "JSON",
+                beforeSend: function() {
+                    $('.sub-category').html('')
+                },
+                success: function(response) {
+                    $.each(response.data, function(index, data) {
+                        $('.sub-category').append('<option value="' + data.id + '">' + data.name +
+                            '</option>');
+                    });
+                }
+            })
         }
 
     </script>
