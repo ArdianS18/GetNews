@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 @extends('layouts.user.app')
 
 <head>
@@ -1222,4 +1220,3 @@
     </script> --}}
 
 @endsection
->>>>>>> ceb8888a64d28e932d41fa5ccdfcc95c49ccac13
