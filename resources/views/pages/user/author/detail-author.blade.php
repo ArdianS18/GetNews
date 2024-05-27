@@ -72,18 +72,18 @@
             </div>
 
           <p>
+            @if ($author->user->description)
                 {{$author->user->description}}
-                {{-- Tidak ada deskripsi. --}}
+            @else
+                Tidak ada deskripsi.
+            @endif
           </p>
           <div class="author-profile d-flex justify-content-end">
-            <div class="sidebar-widget">
-              <span>{{ $comments }} Komentar</span>
-            </div>
+
             <div class="author-stat">
-              <div>
-                <input type="text" name="{{$newsCount->count()}} Berita" style="100px" value="" id="">
-              </div>
-              {{-- <span>/span> --}}
+               <span>{{$newsCount->count()}} Berita</span>
+              <span>{{ $comments }} Komentar</span>
+             
 
             </div>
           </div>
