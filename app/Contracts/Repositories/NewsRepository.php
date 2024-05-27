@@ -609,6 +609,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->paginate($hal);
     }
 
+    public function newsLiked($id)
+    {
+        return $this->model->query()
+            ->whereRelation('newsHasLikes', 'user_id', $id)
+            ->withCount('newsHasLikes')
+            ->get();
+    }
+
+
+
     public function newsSubCategory($subCategory): mixed
     {
         return $this->model->query()
