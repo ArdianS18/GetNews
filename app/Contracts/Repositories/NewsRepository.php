@@ -456,22 +456,42 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showNewsStatistic(): mixed
     {
-        $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        $results = [];
-        $startOfWeek = Carbon::now()->startOfWeek();
+        // return $this->model->query()
+        //     ->where('user_id', auth()->user()->id)
+        //     ->where('status', NewsStatusEnum::ACTIVE->value)
+        //     ->withCount('views')
+        //     ->orderByDesc('views_count')
+        //     ->take(3)
+        //     ->get();
 
-        foreach ($days as $day) {
-            $results[$day] = $this->model->query()
-                ->where('user_id', auth()->user()->id)
-                ->where('status', NewsStatusEnum::ACTIVE->value)
-                ->whereDate('created_at', $startOfWeek->copy()->addDays(array_search($day, $days)))
-                ->withCount('views')
-                ->orderByDesc('views_count')
-                ->take(3)
-                ->get();
+        $year = date('Y');
+        $result = $this->model->query()
+            ->where('user_id', auth()->user()->id)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->join('views', 'news.id', '=', 'views.news_id')
+            ->select(DB::raw('DAY(news.created_at) as day'), DB::raw('COUNT(views.id) as views_count'))
+            ->groupBy('day')
+            ->orderBy('day')
+            ->get();
+        
+        $monthlyData = [];
+        $daysInMonth = date('t');
+        for ($i = 1; $i <= $daysInMonth; $i++) {
+            $found = false;
+            foreach ($result as $row) {
+                if ($row->day == $i) {
+                    $viewsCount = $row->views_count;
+                    $monthlyData[] = $viewsCount;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $monthlyData[] = 0;
+            }
         }
-
-        return $results;
+        
+        return $monthlyData;
     }
 
     public function showCountMonth(): mixed

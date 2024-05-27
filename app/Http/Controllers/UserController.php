@@ -59,7 +59,7 @@ class UserController extends Controller
     {
         $data = $this->userPhoto->store($request, $user);
         $this->user->update($user->id, $data);
-        return back();
+        return back()->with('success', 'Berhasil memperbarui foto profile');
     }
 
     public function storeByAdmin(UserRequest $request)

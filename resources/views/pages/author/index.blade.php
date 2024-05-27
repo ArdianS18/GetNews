@@ -336,6 +336,9 @@
     <!-- current page js files -->
     <!-- ---------------------------------------------- -->
     <script src="../../dist/js/apps/chat.js"></script>
+
+    
+
   </body>
 
 @endsection

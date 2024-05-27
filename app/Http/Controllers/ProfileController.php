@@ -199,7 +199,7 @@ class ProfileController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name']);
         $this->user->update($user->id, $data);
-        return back();
+        return back()->with('success', 'Berhasil memperbarui profile');
     }
 
     public function changepassword(User $user, RegisterRequest $registerRequest){

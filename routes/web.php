@@ -224,8 +224,6 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
-    //
-    Route::post('profile-change-password/{user}', [ProfileController::class, 'changepassword'])->name('change.password.profile');
     // UpdateNews
     Route::put('update-news', [ProfileController::class, 'update'])->name('profile.berita.update');
     // Update And Delete News
