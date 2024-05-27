@@ -24,7 +24,7 @@
     <div class="">
         <div class="d-flex justify-content-between">
             <form class="d-flex">
-                <div class="input-group">
+                <div class="position-relative d-flex">
                     <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
                         placeholder="Search">
                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
