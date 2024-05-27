@@ -136,7 +136,7 @@
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
                                             <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye icon-eye"></i>{{ $mid->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye" style="margin-top: 2px;"></i>{{ $mid->views_count }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                                         {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...')  !!}
                                     </a>
                                 </h3>
-                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 85, '...') !!}</p>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 75, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
                                             href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
