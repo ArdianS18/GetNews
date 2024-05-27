@@ -41,7 +41,7 @@
     <div class="container">
       <div class="author-box">
         <div class="author-img">
-            <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" alt="Image"/>
+            <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" height="150" alt="Image"/>
         </div>
         <div class="author-info">
             <div class="d-flex">
@@ -76,9 +76,15 @@
                 {{-- Tidak ada deskripsi. --}}
           </p>
           <div class="author-profile d-flex justify-content-end">
-            <div class="author-stat">
-              <span>{{$newsCount->count()}} Berita</span>
+            <div class="sidebar-widget">
               <span>{{ $comments }} Komentar</span>
+            </div>
+            <div class="author-stat">
+              <div>
+                <input type="text" name="{{$newsCount->count()}} Berita" style="100px" value="" id="">
+              </div>
+              {{-- <span>/span> --}}
+
             </div>
           </div>
         </div>
