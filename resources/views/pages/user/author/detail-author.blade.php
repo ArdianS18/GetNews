@@ -64,10 +64,15 @@
                             <form action="{{ route('follow.author', ['author' => $author->id]) }}" method="POST">
                                 @method('post')
                                 @csrf
-                                <button class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                             </form>
                         @endif
                     @endif
+                    @else
+                    <form>
+                     
+                      <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                  </form>
                 @endauth                
             </div>
 
