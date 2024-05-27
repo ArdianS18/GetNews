@@ -13,7 +13,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/footer.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/dark-theme.css') }}">
         <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     </head>
 @endsection

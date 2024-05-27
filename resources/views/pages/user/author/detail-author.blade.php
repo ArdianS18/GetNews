@@ -41,7 +41,7 @@
     <div class="container">
       <div class="author-box">
         <div class="author-img">
-            <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" alt="Image"/>
+            <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" height="150" width="150" style="object-fit: cover;" alt="Image"/>
         </div>
         <div class="author-info">
             <div class="d-flex">
@@ -64,21 +64,31 @@
                             <form action="{{ route('follow.author', ['author' => $author->id]) }}" method="POST">
                                 @method('post')
                                 @csrf
-                                <button class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                <button class="btn btn-sm py-1 px-5 text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                             </form>
                         @endif
                     @endif
+                    @else
+                    <form>
+                      <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                  </form>
                 @endauth                
             </div>
 
           <p>
+            @if ($author->user->description)
                 {{$author->user->description}}
-                {{-- Tidak ada deskripsi. --}}
+            @else
+                Tidak ada deskripsi.
+            @endif
           </p>
           <div class="author-profile d-flex justify-content-end">
+
             <div class="author-stat">
-              <span>{{$newsCount->count()}} Berita</span>
+               <span>{{$newsCount->count()}} Berita</span>
               <span>{{ $comments }} Komentar</span>
+             
+
             </div>
           </div>
         </div>
@@ -217,141 +227,6 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="footer-wrap">
-      <div class="row align-items-center">
-        <div class="col-lg-4">
-          <p class="copyright-text">
-            © <span>Baxo</span> is proudly owned by
-            <a href="https://hibootstrap.com/">HiBootstrap</a>
-          </p>
-        </div>
-        <div class="col-lg-4 text-center">
-          <ul class="social-profile list-style">
-            <li>
-              <a href="https://www.fb.com/" target="_blank"
-                ><i class="flaticon-facebook-1"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://www.twitter.com/" target="_blank"
-                ><i class="flaticon-twitter-1"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/" target="_blank"
-                ><i class="flaticon-instagram-2"></i
-              ></a>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/" target="_blank"
-                ><i class="flaticon-linkedin"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-4">
-          <div class="footer-right">
-            <button
-              class="subscribe-btn"
-              data-bs-toggle="modal"
-              data-bs-target="#newsletter-popup"
-            >
-              Become a subscriber<i class="flaticon-right-arrow"></i>
-            </button>
-            <p>Get all the latest posts delivered straight to your inbox.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button
-    type="button"
-    id="backtotop"
-    class="position-fixed text-center border-0 p-0"
-  >
-    <i class="ri-arrow-up-line"></i>
-  </button>
-
-  <div
-    class="modal fade"
-    id="newsletter-popup"
-    tabindex="-1"
-    aria-labelledby="newsletter-popup"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content">
-        <button
-          type="button"
-          class="btn_close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <i class="fi fi-rr-cross"></i>
-        </button>
-        <div class="modal-body">
-          <div class="newsletter-bg bg-f"></div>
-          <div class="newsletter-content">
-            <img
-              src="assets/img/newsletter-icon.webp"
-              alt="Image"
-              class="newsletter-icon"
-            />
-            <h2>Join Our Newsletter & Read The New Posts First</h2>
-            <form action="#" class="newsletter-form">
-              <input type="email" placeholder="Email Address" />
-              <button type="button" class="btn-one">
-                Subscribe<i class="flaticon-arrow-right"></i>
-              </button>
-            </form>
-            <div class="form-check checkbox">
-              <input class="form-check-input" type="checkbox" id="test_21" />
-              <label class="form-check-label" for="test_21">
-                I've read and accept
-                <a href="privacy-policy.html">Privacy Policy</a>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div
-    class="modal fade"
-    id="quickview-modal"
-    data-bs-keyboard="false"
-    tabindex="-1"
-    aria-labelledby="quickview-modal"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content">
-        <button
-          type="button"
-          class="btn_close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <i class="ri-close-line"></i>
-        </button>
-        <div class="modal-body">
-          <div class="video-popup">
-            <iframe
-              width="885"
-              height="498"
-              src="https://www.youtube.com/embed/3FjT7etqxt8"
-              title="How to Design an Elvis Movie Poster in Photoshop"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   
 @endsection

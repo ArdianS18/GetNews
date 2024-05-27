@@ -91,7 +91,7 @@
                                 <a
                                     href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                     <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100"
-                                        width="100%" style="object-fit: cover" />
+                                        width="100%" style="object-fit: cover"/>
                                 </a>
                             </div>
                             <div class="news-card-info">
