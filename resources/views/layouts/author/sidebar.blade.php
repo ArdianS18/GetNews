@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-light">
 
 <head>
     <title>{{ env('APP_NAME') }}</title>

@@ -39,17 +39,17 @@
             <div class="accordion">
                 <div class="accordion-item">
                     <a href="/aboutus" class="accordion-link">
-                        <b>Tentang Kami</b>
+                        <p><b>Tentang Kami</b></p>
                     </a>
                 </div>
                 <div class="accordion-item">
                     <a href="/contact-us" class="accordion-link">
-                        <b>Hubungi Kami</b>
+                        <p><b>Hubungi Kami</b></p>
                     </a>
                 </div>
                 <div class="accordion-item">
                     <a href="/author" class="accordion-link">
-                        <b>Penulis</b>
+                        <p><b>Penulis</b></p>
                     </a>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-12">
-                        <div class=""><b>{{ auth()->user()->name }}</b></div>
+                        <div class=""><p style="line-height: 10px; margin-top: 5px;"><b>{{ auth()->user()->name }}</b></p></div>
                         <div class=""><p style="font-size: 13px;">{{ auth()->user()->email }}</p></div>
                     </div>
                     <div class="col-lg-1 col-md-12">
