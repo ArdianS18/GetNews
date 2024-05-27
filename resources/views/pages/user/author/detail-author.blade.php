@@ -41,7 +41,7 @@
     <div class="container">
       <div class="author-box">
         <div class="author-img">
-            <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" height="150" alt="Image"/>
+            <img src="{{asset( $author->user->photo ? 'storage/'.$author->user->photo : "default.png")}}" height="150" width="150" style="object-fit: cover;" alt="Image"/>
         </div>
         <div class="author-info">
             <div class="d-flex">
