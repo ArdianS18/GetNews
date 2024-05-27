@@ -60,7 +60,6 @@ class ContactUsController extends Controller
 
         $countContact = $this->contactUs->count('unread');
         $countReport = $this->report->count('unread');
-        $all = $this->contactUs->countAll('unread');
 
         $sendMessage = $this->sendMessage->get();
         $sendMessage2 = $this->sendMessage->get();

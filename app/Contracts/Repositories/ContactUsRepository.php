@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\ContactUsInterface;
+use App\Enums\MessageStatusEnum;
 use App\Models\ContactUs;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -15,10 +16,11 @@ class ContactUsRepository extends BaseRepository implements ContactUsInterface
         $this->model = $contactUs;
     }
 
-    public function getAllWithUser()
+    public function getall() : mixed
     {
         return $this->model->query()
-            ->get();
+            ->where('status', MessageStatusEnum::UNREAD->value)
+            ->count();
     }
 
     public function where(Request $request): mixed

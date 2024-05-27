@@ -13,4 +13,5 @@ interface ContactUsInterface extends GetInterface, StoreInterface, UpdateInterfa
 {
     public function count($data) : mixed;
     public function countAll($data) : mixed;
+    public function getall() : mixed;
 }

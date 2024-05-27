@@ -262,8 +262,7 @@
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
                                                     id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
                                                     <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                                     </div>
                                                     <div class="position-relative w-100 ms-2">
                                                         <div
@@ -774,7 +773,7 @@
         </div>
     </div>
 
-    <x-delete-modal-component />
+    <x-delete-user-component />
 @endsection
 
 @section('script')
@@ -787,7 +786,7 @@
                 button.addEventListener('click', function () {
                     const email = this.getAttribute('data-email');
                     const modal = $('#replyModal');
-                    modal.find('#replyEmail').val(email); // Mengisi email ke dalam input field di modal
+                    modal.find('#replyEmail').val(email);
                     modal.modal('show');
                 });
             });
@@ -910,7 +909,7 @@
                     }
                 });
             }
-        }); 
+        });
     </script>
 
 
