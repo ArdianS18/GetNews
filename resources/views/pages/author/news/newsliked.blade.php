@@ -1,3 +1,4 @@
+<html lang="en">
 @extends('layouts.admin.app')
 
 @section('style')
