@@ -39,6 +39,7 @@ use App\Services\AuthorBannedService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
@@ -171,7 +172,7 @@ class AuthorController extends Controller
         return ResponseHelper::success($data);
     }
 
-    public function banned(Author $author)
+    public function banned(Author $author, Request $request)
     {
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
         if (!$author->banned) {

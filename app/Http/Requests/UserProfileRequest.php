@@ -20,6 +20,7 @@ class UserProfileRequest extends FormRequest
             'phone_number' => 'nullable',
             'address' => 'nullable',
             'birth_date' => 'nullable',
+            'description' => 'nullable',
         ];
     }
 
