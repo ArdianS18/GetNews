@@ -113,6 +113,17 @@
                                                     <textarea type="text" class="form-control" name="address" id="exampleInputtext" placeholder="814 Howard Street, 120065, India" style="resize: none">{{ auth()->user()->address }}</textarea>
                                                 </div>
                                             </div>
+
+                                            @hasrole('author')
+                                            <div class="col-12">
+                                                <div class="mt-2">
+                                                    <label for="exampleInputPassword1"
+                                                        class="form-label fw-semibold">Deskripsi</label>
+                                                    <textarea type="text" class="form-control" name="description" id="exampleInputtext" placeholder="Saya author.." style="resize: none; height: 80px">{{ auth()->user()->description }}</textarea>
+                                                </div>
+                                            </div>
+                                            @endhasrole
+
                                             <div class="col-12">
                                                 <div class="d-flex align-items-center justify-content-end mt-4 gap-3">
                                                     <button type="submit" class="btn btn-primary">Save</button>
