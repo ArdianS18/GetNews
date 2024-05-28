@@ -52,11 +52,13 @@
         </div>
     </div>
 
-    @if (session('error'))
-        <div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
+                <p class="text-danger" style="margin-bottom:0%"> {{ $error }} </p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
     @endif
 
     <div class="ms-1">
@@ -301,8 +303,10 @@
 
     <script>
         $(document).ready(function() {
-            $('#content').summernote({
+            var quote = $('<blockquote class="quote">hello<footer>world</footer></blockquote>')[0];
 
+            $('#content').summernote({
+                blockquoteBreakingLevel: 2,
                 height: 520,
                 toolbar: [
                     ['style', ['style']],
@@ -317,19 +321,20 @@
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
-                    ['style', ['blockquote']], // Include Blockquote button in toolbar
-                    ['insert', ['ul']]
+                    ['insert', ['ul', 'blockquote']] // Include Blockquote button in 'insert' dropdown
                 ],
+
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
                     'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ],
                 fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
                     'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ]
+
             });
         });
     </script>
-    
+
     <script>
         $('.category').change(function() {
             getSubCategory($(this).val())
