@@ -632,7 +632,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                     $terlama->oldest()->get();
                 });
             })
-            ->paginate(1);
+            ->paginate(6);
     }
 
 
