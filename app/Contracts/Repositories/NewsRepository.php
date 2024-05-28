@@ -432,10 +432,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function findUser(mixed $user_id): mixed
     {
         return $this->model->query()
-        ->where('user_id',$user_id)
-        ->where('status', NewsStatusEnum::ACTIVE->value)
-        ->first();
+            ->where('user_id', $user_id)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->inRandomOrder()
+            ->first();
     }
+
 
     /**
      * Handle show method and update data instantly from models.
