@@ -357,7 +357,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->with('newsCategories')
             ->withCount('views')
             ->latest()
-            ->take(6)
+            ->take(12)
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 
