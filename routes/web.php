@@ -83,6 +83,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create'); // fungsi create author dari admin -> langsung approve dan role : author
     // Sub Catgeory dan Category
     // Route::resource('categories', CategoryController::class);
+
     Route::get('search', [CategoryController::class, 'search'])->name('search.category');
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
