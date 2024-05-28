@@ -1,4 +1,5 @@
 @extends('layouts.user.app')
+@section('title', $subCategory->name)
 
 @section('style')
 <style>

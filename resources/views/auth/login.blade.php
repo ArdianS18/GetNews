@@ -156,6 +156,10 @@
         </div>
         <div class="d-flex col-12 col-lg-5 align-items-center p-sm-5 mt-5">
             <div class="w-px-400 mx-auto">
+                <a href="/" class="position-absolute top-0 start-0 mt-5 ms-3 d-block d-lg-none">
+                    <img src="{{asset('assets/img/auth/get-back.svg')}}" width="150" alt="">
+                </a>
+
                 <h3 class="mb-1">Selamat datang di GetMedia</h3>
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)

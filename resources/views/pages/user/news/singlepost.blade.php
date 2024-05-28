@@ -2,56 +2,62 @@
 
 <head>
     <style>
-       .coin-container {
-        position: fixed;
-        left: 20px;
-        bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .coin-loader {
-        position: relative;
-        width: 50px; /* Lebih besar dari ukuran coin */
-        height: 50px; /* Lebih besar dari ukuran coin */
-    }
-
-    .coin-circle {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border: 3px solid transparent;
-        border-top-color: #0F4D8A; /* Warna lingkaran */
-        border-radius: 100%;
-        width: 100%;
-        height: 100%;
-        animation: spin 60s linear infinite;
-        /* border-left-color: #0F4D8A; */
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
+        .coin-container {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        100% {
-            transform: rotate(360deg);
+
+        .coin-loader {
+            position: relative;
+            width: 50px;
+            /* Lebih besar dari ukuran coin */
+            height: 50px;
+            /* Lebih besar dari ukuran coin */
         }
-    }
+
+        .coin-circle {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid transparent;
+            border-top-color: #0F4D8A;
+            /* Warna lingkaran */
+            border-radius: 100%;
+            width: 100%;
+            height: 100%;
+            animation: spin 60s linear infinite;
+            /* border-left-color: #0F4D8A; */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
-    <title>{{ $news->name }} | GetMedia</title>
+    @section('title', $news->name)
     @php
         $dateParts = date_parse($news->upload_date);
+        $newsContent = strip_tags($news->content);
+        $description = implode(' ', array_slice(explode(' ', $newsContent), 0, 20)) . '...';
+
     @endphp
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GetMedia">
-    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 10)) !!}">
-    <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta property="og:description" content="{{ $description }}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
     <meta property="og:url"
@@ -231,9 +237,9 @@
         }
 
         @media (max-width: 768px) {
-        .font-date {
-            font-size: 12px;
-        }
+            .font-date {
+                font-size: 12px;
+            }
         }
     </style>
 @endsection
@@ -259,8 +265,24 @@
                             </ul>
                         </div>
                         <h2 class="d-flex justify-content-start mb-2">{{ $news->name }}</h2>
-                        <p class="d-flex gap-1">Share : <a id="wa" class="logo" data-name="{{ $news->name }}" data-slug="{{ $news->slug }}">
-                            <svg height="19" width="19" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 58 58" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#2CB742;" d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z"></path> <path style="fill:#FFFFFF;" d="M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42 c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242 c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169 c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097 c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z"></path> </g> </g></svg>
+                        <p class="d-flex gap-1">Share : <a id="wa" class="logo" data-name="{{ $news->name }}"
+                                data-slug="{{ $news->slug }}">
+                                <svg height="19" width="19" version="1.1" id="Capa_1"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    viewBox="0 0 58 58" xml:space="preserve" fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <g>
+                                            <path style="fill:#2CB742;"
+                                                d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5 S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z">
+                                            </path>
+                                            <path style="fill:#FFFFFF;"
+                                                d="M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42 c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242 c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169 c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097 c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z">
+                                            </path>
+                                        </g>
+                                    </g>
+                                </svg>
 
                             </a>
                             <a id="fb">
@@ -272,8 +294,34 @@
                                 </svg>
                             </a>
                             <a id="tw" class="logo">
-                                <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14"><g fill="none"><g clip-path="url(#primeTwitter0)"><path fill="#ffffff" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"/></g><defs><clipPath id="primeTwitter0"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></g></svg>
-                                <svg class="logo-light" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 14 14"><g fill="none"><g clip-path="url(#primeTwitter0)"><path fill="#000000" d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z"/></g><defs><clipPath id="primeTwitter0"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></g></svg>
+                                <svg class="logo-dark" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" viewBox="0 0 14 14">
+                                    <g fill="none">
+                                        <g clip-path="url(#primeTwitter0)">
+                                            <path fill="#ffffff"
+                                                d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="primeTwitter0">
+                                                <path fill="#fff" d="M0 0h14v14H0z" />
+                                            </clipPath>
+                                        </defs>
+                                    </g>
+                                </svg>
+                                <svg class="logo-light" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" viewBox="0 0 14 14">
+                                    <g fill="none">
+                                        <g clip-path="url(#primeTwitter0)">
+                                            <path fill="#000000"
+                                                d="M11.025.656h2.147L8.482 6.03L14 13.344H9.68L6.294 8.909l-3.87 4.435H.275l5.016-5.75L0 .657h4.43L7.486 4.71zm-.755 11.4h1.19L3.78 1.877H2.504z" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="primeTwitter0">
+                                                <path fill="#fff" d="M0 0h14v14H0z" />
+                                            </clipPath>
+                                        </defs>
+                                    </g>
+                                </svg>
                             </a>
                             {{-- <a id="tw">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 128 128">
@@ -321,8 +369,9 @@
                                                             style="border-radius: 50%; object-fit:cover;" />
                                                     </span>
                                                     <div>
-                                                        <a style="display: inline;text-decoration:none" data-toggle="tooltip"
-                                                            data-placement="top" title="author - {{ $news->user->name }}"
+                                                        <a style="display: inline;text-decoration:none"
+                                                            data-toggle="tooltip" data-placement="top"
+                                                            title="author - {{ $news->user->name }}"
                                                             href="{{ route('author.detail', ['id' => $news->user->slug]) }}">{{ $news->user->name }}</a>
                                                         </span>
                                                     </div>
@@ -334,8 +383,8 @@
                                                     <span id="formattedDate" class="font-date"></span>
                                                 </li>
                                                 <li>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21" height="21"
-                                                        viewBox="0 0 24 24">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="21"
+                                                        height="21" viewBox="0 0 24 24">
                                                         <path fill="#e93314"
                                                             d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5" />
                                                     </svg>
@@ -346,10 +395,11 @@
                                                         <form id="form-like">
                                                             @csrf
                                                             @if (auth()->check())
-                                                                <button type="submit" style="background: transparent;border:transparent"
+                                                                <button type="submit"
+                                                                    style="background: transparent;border:transparent"
                                                                     class="like">
-                                                                    <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                        height="18" viewBox="0 0 24 24">
+                                                                    <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                        width="18" height="18" viewBox="0 0 24 24">
                                                                         <path fill="#E93314"
                                                                             d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                                     </svg>
@@ -360,10 +410,11 @@
 
                                                         <form id="form-liked" style="display: none;">
                                                             @csrf
-                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                            <button type="submit"
+                                                                style="background: transparent;border:transparent"
                                                                 class="liked">
-                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg" width="18"
-                                                                    height="18" viewBox="0 0 24 24">
+                                                                <svg class="last mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                    width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="red"
                                                                         d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
                                                                 </svg>
@@ -372,10 +423,11 @@
                                                     @else
                                                         <form id="form-like">
                                                             @csrf
-                                                            <button type="button" style="background: transparent;border:transparent"
+                                                            <button type="button"
+                                                                style="background: transparent;border:transparent"
                                                                 class="like not-login">
-                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                                    viewBox="0 0 24 24">
+                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                    width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="#E93314"
                                                                         d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
                                                                 </svg>
@@ -384,10 +436,11 @@
 
                                                         <form id="form-liked" style="display: none;">
                                                             @csrf
-                                                            <button type="submit" style="background: transparent;border:transparent"
+                                                            <button type="submit"
+                                                                style="background: transparent;border:transparent"
                                                                 class="liked">
-                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                                                    viewBox="0 0 24 24">
+                                                                <svg class="mb-1" xmlns="http://www.w3.org/2000/svg"
+                                                                    width="18" height="18" viewBox="0 0 24 24">
                                                                     <path fill="red"
                                                                         d="M18 21H8V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L15.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.037.375t-.113.375l-3 7.05q-.225.5-.75.85T18 21M6 8v13H2V8z" />
                                                                 </svg>
@@ -395,7 +448,8 @@
                                                         </form>
                                                     @endauth
 
-                                                    <span id="like" data-like="{{ $newsLike }}">{{ $newsLike }}</span>
+                                                    <span id="like"
+                                                        data-like="{{ $newsLike }}">{{ $newsLike }}</span>
 
                                                 </li>
 
@@ -411,13 +465,15 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
                                                     viewBox="0 0 24 24">
                                                     <path fill="none" stroke="currentColor" stroke-linejoin="round"
-                                                        stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                                        stroke-width="3"
+                                                        d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                 </svg>
                                             </a>
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <li>
-                                                    <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#share">
+                                                    <button class="btn btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#share">
                                                         Bagikan
                                                     </button>
                                                 </li>
@@ -428,7 +484,7 @@
                                                     </button>
                                                 </li>
                                             </ul>
-                                            </li>
+                                        </li>
                                     </div>
                                 </div>
                             </ul>
@@ -446,26 +502,30 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    
+
                                     <div class="modal-body">
                                         <form action="{{ route('report.store', ['news' => $news->id]) }}" method="post">
                                             @method('post')
                                             @csrf
-                                                <div class="mb-3 form-group">
-                                                    <label for="message" class="form-label">Masukan Detail
-                                                        Laporan:</label>
-                                                    <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
-                                                    @error('message')
-                                                        <span class="invalid-feedback" role="alert" style="color: red;">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <p>
-                                                        Artikel dan pengguna yang dilaporkan akan ditinjau oleh staf Getmedia untuk menentukan apakah artikel dan pengguna tersebut melanggar Pedoman Komunitas kami atau tidak. Akun akan dikenai sanksi jika melanggar Pedoman Komunitas, dan pelanggaran serius atau berulang dapat berakibat pada penghentian akun.
-                                                    </p>
-                                                </div>
+                                            <div class="mb-3 form-group">
+                                                <label for="message" class="form-label">Masukan Detail
+                                                    Laporan:</label>
+                                                <textarea name="message" id="message" class="form-control" rows="7" style="resize: none"></textarea>
+                                                @error('message')
+                                                    <span class="invalid-feedback" role="alert" style="color: red;">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <p>
+                                                    Artikel dan pengguna yang dilaporkan akan ditinjau oleh staf Getmedia
+                                                    untuk menentukan apakah artikel dan pengguna tersebut melanggar Pedoman
+                                                    Komunitas kami atau tidak. Akun akan dikenai sanksi jika melanggar
+                                                    Pedoman Komunitas, dan pelanggaran serius atau berulang dapat berakibat
+                                                    pada penghentian akun.
+                                                </p>
+                                            </div>
 
                                             <div class="">
                                                 <div class="d-flex justify-content-end me-2">
@@ -475,7 +535,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -531,7 +591,20 @@
                         {{-- @foreach ($pages as $index => $page) --}}
                         <div class="news-para">
                             {{-- <p>{!! $pages !!}</p> --}}
-                            <p>{!! $news->content !!}</p>
+                            @php
+                                $paragraphs = explode('</p>', $news->content);
+                                $insertAt = ceil(count($paragraphs) / 2);
+                            @endphp
+
+                            @foreach ($paragraphs as $index => $paragraph)
+                                {!! $paragraph !!}
+                                </p>
+                                @if ($index == $insertAt)
+                                    <div class="related-news">
+                                        <strong>{{ $relatedNews }}</strong>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                         Tag :
                         @forelse ($tags as $tag)
@@ -932,22 +1005,22 @@
 
             setInterval(() => {
                 fetch('/coin-add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-                .then(function(response) {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Error: ' + response.status);
-                    }
-                })
-                .then(function(data) {})
-                .catch(function(error) {
-                    console.error(error);
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                    .then(function(response) {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Error: ' + response.status);
+                        }
+                    })
+                    .then(function(data) {})
+                    .catch(function(error) {
+                        console.error(error);
+                    });
             }, 60000);
 
             var formLike = document.getElementById('form-like');
