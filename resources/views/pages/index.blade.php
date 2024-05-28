@@ -218,7 +218,7 @@
         </div>
         </div>
 
-        <div class="bg_gray editor-news pt-100 pb-75">
+        <div class="editor-news pt-100 pb-75">
             <div class="container-fluid">
                 <div class="row gx-5">
                     <div class="col-xl-6">
@@ -270,6 +270,9 @@
                                         @empty
                                         @endforelse
                                     </div>
+                                </div>
+                                <div>
+                                    <a href="business.html" class="btn-three d-block w-100">View All News<i class="flaticon-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -342,10 +345,10 @@
             </div>
         </div>
 
-        <div class="p-5">
+        <div class="container-fluid pb-75 mt-5">
             <div class="row align-items-end mb-40">
                 <div class="col-md-6">
-                    <h2 class="section-title">Editor's Pick
+                    <h2 class="section-title">Berita Premium
                         <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
                     </h2>
                 </div>
