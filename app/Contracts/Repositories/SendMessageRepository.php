@@ -51,9 +51,10 @@ class SendMessageRepository extends BaseRepository implements SendMessageInterfa
      *
      * @return mixed
      */
-    public function get(): mixed
+    public function get($status): mixed
     {
         return $this->model->query()
+            ->where('status_delete', $status)
             ->where('email', auth()->user()->email)
             ->get();
     }

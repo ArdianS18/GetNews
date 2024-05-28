@@ -178,10 +178,6 @@
                                             <a href="javascript:void(0)"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
-                                                {{-- <div class="form-check mb-0">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                        id="flexCheckDefault">
-                                                </div> --}}
                                                 <div class="position-relative w-100 ms-2">
                                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                                         <h6 class="mb-0 fw-semibold">{{ $send->user->name }}</h6>
@@ -200,90 +196,7 @@
                                             </a>
                                         </li>
                                         @empty
-                                            <tr class="contact">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada data</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse
-
-                                        {{-- @forelse ($contactDelete as $contactDelete)
-                                            <li class="trash">
-                                                <a href="javascript:void(0)"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
-                                                    id="chat_user_{{ $contactDelete->id }}" data-user-id="{{ $contactDelete->user_id }}" data-chat-id="{{ $contactDelete->id }}">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
-                                                    </div>
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $contactDelete->user->name }}
-                                                            </h6>
-                                                            <span class="badge fs-2 rounded-4 py-1 px-4"
-                                                                style="background-color: #175A95;">Sampah</span>
-                                                        </div>
-                                                        <h6 class="text-dark">{{ $contactDelete->message }}</h6>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">
-                                                                    {{ $contactDelete->created_at }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @empty
-                                            <tr class="trash">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada data</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse --}}
-
-                                        @forelse ($reports as $report)
-                                            <li class="report">
-                                                {{-- onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')" --}}
-                                                <a href="javascript:void(0)"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
-                                                    id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
-                                                    {{-- <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    </div> --}}
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
-                                                            {{-- @if ($report->status == "unread")
-                                                                <span class="badge ms-auto bg-danger">!</span>
-                                                            @endif --}}
-                                                        </div>
-                                                        <h6 class="text-dark">{{ $report->message }}</h6>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @empty
-                                            {{-- <tr class="report">
+                                            {{-- <tr class="contact">
                                                 <td colspan="5">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
@@ -298,56 +211,60 @@
                                         @endforelse
 
                                         @forelse ($newsRejects as $newsReject)
-                                            <li class="report">
-                                                {{-- onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')" --}}
-                                                <a href="javascript:void(0)"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
-                                                    id="chat_user_{{ $newsReject->id }}" data-user-id="{{ $newsReject->user_id }}" data-chat-id="{{ $newsReject->id }}">
-                                                    {{-- <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    </div> --}}
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $newsReject->user->name }}</h6>
-                                                            {{-- @if ($newsReject->status == "unread")
-                                                                <span class="badge ms-auto bg-danger">!</span>
-                                                            @endif --}}
+                                        <li class="contact">
+                                            <a href="javascript:void(0)"
+                                                class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
+                                                id="chat_user_{{ $newsReject->id }}" data-user-id="{{ $newsReject->user_id }}" data-chat-id="{{ $newsReject->id }}">
+                                                <div class="position-relative w-100 ms-2">
+                                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                                        <h6 class="mb-0 fw-semibold">{{ $newsReject->user->name }}</h6>
+                                                        @if ($newsReject->status == "unread")
+                                                            <span class="badge ms-auto bg-danger">!</span>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="text-dark">{{ $newsReject->massage }}</h6>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <p class="mb-0 fs-2 text-muted">{{ $newsReject->created_at }}
+                                                            </p>
                                                         </div>
-                                                        <h6 class="text-dark">{{ $newsReject->message }}</h6>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        @empty
+                                        @endforelse
+
+                                        @forelse ($sendDelete as $sendDelete)
+                                            <li class="trash">
+                                                <a href="javascript:void(0)"
+                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
+                                                    id="chat_user_{{ $sendDelete->id }}" data-user-id="{{ $sendDelete->user_id }}" data-chat-id="{{ $sendDelete->id }}">
+                                                    <div class="position-relative w-100 ms-2">
+                                                        <div class="d-flex align-items-center justify-content-between mb-2">
+                                                            <h6 class="mb-0 fw-semibold">{{ $sendDelete->user->name }}
+                                                            </h6>
+                                                            <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                                style="background-color: #175A95;">Sampah</span>
+                                                        </div>
+                                                        <h6 class="text-dark">{{ $sendDelete->message }}</h6>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $newsReject->created_at }}
-                                                                </p>
+                                                                <p class="mb-0 fs-2 text-muted">
+                                                                    {{ $sendDelete->created_at }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
                                         @empty
-                                            {{-- <tr class="report">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada data</h5>
-                                                    </div>
-                                                </td>
-                                            </tr> --}}
                                         @endforelse
 
-                                        {{-- @forelse ($reportsDelete as $reportDelete)
+                                        @forelse ($reportsDelete as $reportDelete)
                                             <li class="trash">
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start justify-content-between chat-user show-delete-report"
                                                     id="chat_user_{{ $reportDelete->id }}" data-user-id="{{ $reportDelete->user_id }}" data-chat-id="{{ $reportDelete->id }}">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
-                                                    </div>
                                                     <div class="position-relative w-100 ms-2">
                                                         <div
                                                             class="d-flex align-items-center justify-content-between mb-2">
@@ -362,13 +279,12 @@
                                                                 <p class="mb-0 fs-2 text-muted">
                                                                     {{ $reportDelete->created_at }}</p>
                                                             </div>
-                                                            <p class="mb-0 fs-2 text-muted">04:00pm</p>
                                                         </div>
                                                     </div>
                                                 </a>
                                             </li>
                                         @empty
-                                            <tr class="trash">
+                                            {{-- <tr class="trash">
                                                 <td colspan="5">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
@@ -379,8 +295,60 @@
                                                         <h5>Tidak ada data</h5>
                                                     </div>
                                                 </td>
-                                            </tr>
-                                        @endforelse --}}
+                                            </tr> --}}
+                                        @endforelse
+
+                                        @forelse ($newsDelete as $newsDele)
+                                        <li class="trash">
+                                            <a href="javascript:void(0)"
+                                                class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
+                                                id="chat_user_{{ $newsDele->id }}" data-user-id="{{ $newsDele->user_id }}" data-chat-id="{{ $newsDele->id }}">
+                                                <div class="position-relative w-100 ms-2">
+                                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                                        <h6 class="mb-0 fw-semibold">{{ $newsDele->user->name }}
+                                                        </h6>
+                                                        <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                            style="background-color: #175A95;">Sampah</span>
+                                                    </div>
+                                                    <h6 class="text-dark">{{ $newsDele->massage }}</h6>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div class="d-flex align-items-center">
+                                                            <p class="mb-0 fs-2 text-muted">
+                                                                {{ $newsDele->created_at }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @empty
+                                    @endforelse
+
+                                        @forelse ($reports as $report)
+                                            <li class="report">
+                                                {{-- onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')" --}}
+                                                <a href="javascript:void(0)"
+                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
+                                                    id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
+                                                    <div class="position-relative w-100 ms-2">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-between mb-2">
+                                                            <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
+                                                            @if ($report->status == "unread")
+                                                                <span class="badge ms-auto bg-danger">!</span>
+                                                            @endif
+                                                        </div>
+                                                        <h6 class="text-dark">{{ $report->message }}</h6>
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <div class="d-flex align-items-center">
+                                                                <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        @empty
+                                        @endforelse
                                     </ul>
                                 </div>
                             </div>
@@ -534,7 +502,144 @@
                                             </div>
                                         </div>
                                         @empty
-                                            <tr class="chat-content">
+                                        @endforelse
+
+                                        @forelse ($newsRejectRead as $newsReject2)
+                                        <div class="chat-content" id="chat_content_{{ $newsReject2->id }}" style="display: none;">
+                                            <div class="p-9 py-3 border-bottom chat-meta-user">
+                                                <h5>Detail Pesan</h5>
+                                            </div>
+                                            <div class="position-relative overflow-hidden">
+                                                <div class="position-relative">
+                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                        <div class="chat active-chat" data-user-id="{{ $newsReject2->id }}">
+                                                            <div
+                                                                class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                        alt="user8" width="48" height="48"
+                                                                        class="rounded-circle" />
+                                                                    <div>
+                                                                        <h6 class="fw-semibold mb-0">
+                                                                            {{ $newsReject2->user->name }}</h6>
+                                                                        <p class="mb-0">{{ $newsReject2->user->email }}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                                    style="background-color: #175A95;">Pesan</span>
+                                                            </div>
+                                                            <div class="border-bottom pb-7 mb-7">
+                                                                <h4 class="fw-semibold text-dark mb-3">Silakan periksa
+                                                                    pembaruan terbaru ini</h4>
+                                                                <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
+                                                                </p>
+                                                                <p class="mb-3 text-dark">
+                                                                    {{ $newsReject2->massage }}
+                                                                </p>
+                                                                <p class="mb-0 text-dark">Salam dari,..</p>
+                                                                <h6 class="fw-semibold mb-0 text-dark pb-1">
+                                                                    {{ $newsReject2->user->name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="px-9 py-3 border-top chat-send-message-footer">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <ul
+                                                                class="list-unstyledn mb-0 d-flex align-items-center gap-7">
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-reply"
+                                                                        href="javascript:void(0)" data-email="{{ $newsReject2->user->email }}">
+                                                                        <i class="ti ti-arrow-back-up fs-5"></i>
+                                                                        Balas
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-reject"
+                                                                        data-id="{{ $newsReject2->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Hapus
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
+                                        @endforelse
+
+
+                                        @forelse ($sendDelete2 as $sendDel)
+                                            <div class="chat-contactDel" id="chat_contactDel_{{ $sendDel->id }}" style="display: none;">
+                                                <div class="p-9 py-3 border-bottom chat-meta-user">
+                                                    <h5>Detail Sampah Pesan</h5>
+                                                </div>
+                                                <div class="position-relative overflow-hidden">
+                                                    <div class="position-relative">
+                                                        <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                            <div class="chat-list chat active-chat" data-user-id="{{ $sendDel->id }}">
+                                                                <div
+                                                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
+                                                                    <div class="d-flex align-items-center gap-2">
+                                                                        <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                            alt="user8" width="48" height="48"
+                                                                            class="rounded-circle" />
+                                                                        <div>
+                                                                            <h6 class="fw-semibold mb-0">
+                                                                                {{ $sendDel->user->name }}</h6>
+                                                                            <p class="mb-0">
+                                                                                {{ $sendDel->user->email }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                                        style="background-color: #175A95;">Sampah</span>
+                                                                </div>
+                                                                <div class="border-bottom pb-7 mb-7">
+                                                                    <h4 class="fw-semibold text-dark mb-3">Silakan periksa
+                                                                        pembaruan terbaru ini</h4>
+                                                                    <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
+                                                                    </p>
+                                                                    <p class="mb-3 text-dark">
+                                                                        {{ $sendDel->message }}
+                                                                    </p>
+                                                                    <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque nisi magna, laoreet a augue eget, tempor volutpat diam.</p>
+                                                                    <p class="mb-0 text-dark">Regards,</p>
+                                                                    <h6 class="fw-semibold mb-0 text-dark pb-1">
+                                                                        {{ $sendDel->user->name }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="px-9 py-3 border-top chat-send-message-footer">
+                                                            <div class="d-flex align-items-center justify-content-between">
+                                                                <ul
+                                                                    class="list-unstyledn mb-0 d-flex align-items-center gap-7">
+                                                                    <li>
+                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-send"
+                                                                            data-id="{{ $sendDel->id }}"
+                                                                            href="javascript:void(0)">
+                                                                            <i class="ti ti-trash fs-5"></i>
+                                                                            Pulihkan
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-release-send"
+                                                                            data-id="{{ $sendDel->id }}"
+                                                                            href="javascript:void(0)">
+                                                                            <i class="ti ti-trash fs-5"></i>
+                                                                            Hapus
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @empty
+                                            {{-- <tr class="chat-contactDel">
                                                 <td colspan="5">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
@@ -545,7 +650,88 @@
                                                         <h5>Tidak ada pesan</h5>
                                                     </div>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
+                                        @endforelse
+
+                                        @forelse ($newsDeleteRead as $newsDeleteR)
+                                        <div class="chat-contactDel" id="chat_contactDel_{{ $newsDeleteR->id }}" style="display: none;">
+                                            <div class="p-9 py-3 border-bottom chat-meta-user">
+                                                <h5>Detail Sampah Pesan</h5>
+                                            </div>
+                                            <div class="position-relative overflow-hidden">
+                                                <div class="position-relative">
+                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                        <div class="chat-list chat active-chat" data-user-id="{{ $newsDeleteR->id }}">
+                                                            <div
+                                                                class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                        alt="user8" width="48" height="48"
+                                                                        class="rounded-circle" />
+                                                                    <div>
+                                                                        <h6 class="fw-semibold mb-0">
+                                                                            {{ $newsDeleteR->user->name }}</h6>
+                                                                        <p class="mb-0">
+                                                                            {{ $newsDeleteR->user->email }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                                    style="background-color: #175A95;">Sampah</span>
+                                                            </div>
+                                                            <div class="border-bottom pb-7 mb-7">
+                                                                <h4 class="fw-semibold text-dark mb-3">Silakan periksa
+                                                                    pembaruan terbaru ini</h4>
+                                                                <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
+                                                                </p>
+                                                                <p class="mb-3 text-dark">
+                                                                    {{ $newsDeleteR->massage }}
+                                                                </p>
+                                                                <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque nisi magna, laoreet a augue eget, tempor volutpat diam.</p>
+                                                                <p class="mb-0 text-dark">Regards,</p>
+                                                                <h6 class="fw-semibold mb-0 text-dark pb-1">
+                                                                    {{ $newsDeleteR->user->name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="px-9 py-3 border-top chat-send-message-footer">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <ul
+                                                                class="list-unstyledn mb-0 d-flex align-items-center gap-7">
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-reject"
+                                                                        data-id="{{ $newsDeleteR->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Pulihkan
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-release-reject"
+                                                                        data-id="{{ $newsDeleteR->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Hapus
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @empty
+                                            {{-- <tr class="chat-contactDel">
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div>
+                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h5>Tidak ada pesan</h5>
+                                                    </div>
+                                                </td>
+                                            </tr> --}}
                                         @endforelse
 
                                         {{-- @forelse ($contactDelete2 as $contactDelete2)
@@ -701,108 +887,96 @@
                                             </div>
                                         </div>
                                         @empty
-                                            {{-- <tr class="chat-report">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada pesan</h5>
-                                                    </div>
-                                                </td>
-                                            </tr> --}}
                                         @endforelse
 
 
-                                        {{-- @forelse ($reportsDelete2 as $reportDelete2)
-                                            <div class="chat-reportDel" id="chat_reportDel_{{ $reportDelete2->id }}" style="display: none;">
-                                                <div class="p-9 py-3 border-bottom chat-meta-user">
-                                                    <h5>Detail Sampah Laporan</h5>
-                                                </div>
-                                                <div class="position-relative overflow-hidden">
-                                                    <div class="position-relative">
-                                                        <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
-                                                            <div class="chat-list chat" data-user-id="{{ $reportDelete2->id }}">
-                                                                <div
-                                                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
-                                                                    <div class="d-flex align-items-center gap-2">
-                                                                        <img src="{{ asset('assets/img/usr1.svg') }}"
-                                                                            alt="user8" width="48" height="48"
-                                                                            class="rounded-circle" />
-                                                                        <div>
-                                                                            <h6 class="fw-semibold mb-0">
-                                                                                {{ $reportDelete2->user->name }}</h6>
-                                                                            <p class="mb-0">{{ $reportDelete2->user->email }}
-                                                                            </p>
-                                                                        </div>
+                                        @forelse ($reportsDelete2 as $reportDelete2)
+                                        <div class="chat-reportDel" id="chat_reportDel_{{ $reportDelete2->id }}" style="display: none;">
+                                            <div class="p-9 py-3 border-bottom chat-meta-user">
+                                                <h5>Detail Sampah Laporan</h5>
+                                            </div>
+                                            <div class="position-relative overflow-hidden">
+                                                <div class="position-relative">
+                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                        <div class="chat-list chat" data-user-id="{{ $reportDelete2->id }}">
+                                                            <div
+                                                                class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                        alt="user8" width="48" height="48"
+                                                                        class="rounded-circle" />
+                                                                    <div>
+                                                                        <h6 class="fw-semibold mb-0">
+                                                                            {{ $reportDelete2->user->name }}</h6>
+                                                                        <p class="mb-0">{{ $reportDelete2->user->email }}
+                                                                        </p>
                                                                     </div>
-                                                                    <span class="badge fs-2 rounded-4 py-1 px-3"
-                                                                        style="background-color: #FA896B;">Sampah</span>
                                                                 </div>
-                                                                <div class="border-bottom pb-7 mb-7">
-                                                                    <div class="d-flex">
-                                                                        <div class="col-3">
-                                                                            <p class="text-dark">Judul Berita</p>
-                                                                            <b
-                                                                                style="fw-semibold mb-0">{{ $reportDelete2->news->name }}</b>
-                                                                        </div>
-                                                                        <div class="col-3">
-                                                                            <p class="text-dark">Penulis</p>
-                                                                            <b
-                                                                                style="fw-semibold mb-0">{{ $reportDelete2->user->name }}</b>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="mt-5">
-                                                                        <p class="text-dark">Isi Laporan</p>
+                                                                <span class="badge fs-2 rounded-4 py-1 px-3"
+                                                                    style="background-color: #FA896B;">Sampah</span>
+                                                            </div>
+                                                            <div class="border-bottom pb-7 mb-7">
+                                                                <div class="d-flex">
+                                                                    <div class="col-3">
+                                                                        <p class="text-dark">Judul Berita</p>
                                                                         <b
-                                                                            style="fw-semibold mb-0">{{ $reportDelete2->message }}</b>
+                                                                            style="fw-semibold mb-0">{{ $reportDelete2->news->name }}</b>
                                                                     </div>
+                                                                    <div class="col-3">
+                                                                        <p class="text-dark">Penulis</p>
+                                                                        <b
+                                                                            style="fw-semibold mb-0">{{ $reportDelete2->user->name }}</b>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="mt-5">
+                                                                    <p class="text-dark">Isi Laporan</p>
+                                                                    <b
+                                                                        style="fw-semibold mb-0">{{ $reportDelete2->message }}</b>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="px-9 py-3 border-top chat-send-message-footer">
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <ul
-                                                                    class="list-unstyledn mb-0 d-flex align-items-center gap-7">
-                                                                    <li>
-                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-report"
-                                                                            data-id="{{ $reportDelete2->id }}"
-                                                                            href="javascript:void(0)">
-                                                                            <i class="ti ti-trash fs-5"></i>
-                                                                            Pulihkan
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-release-report"
-                                                                            data-id="{{ $reportDelete2->id }}"
-                                                                            href="javascript:void(0)">
-                                                                            <i class="ti ti-trash fs-5"></i>
-                                                                            Hapus
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                                    </div>
+                                                    <div class="px-9 py-3 border-top chat-send-message-footer">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <ul
+                                                                class="list-unstyledn mb-0 d-flex align-items-center gap-7">
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-report"
+                                                                        data-id="{{ $reportDelete2->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Pulihkan
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-release-report"
+                                                                        data-id="{{ $reportDelete2->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Hapus
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @empty
-                                            <tr class="chat-reportDel">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
-                                                        </div>
+                                        </div>
+                                    @empty
+                                        {{-- <tr class="chat-reportDel">
+                                            <td colspan="5">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
                                                     </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada pesan</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse --}}
+                                                </div>
+                                                <div class="text-center">
+                                                    <h5>Tidak ada pesan</h5>
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                    @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -887,6 +1061,15 @@
     </script>
 
     <script>
+        $('.btn-delete-reject').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/reject-news/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
         $('.btn-recovery-contactus').click(function() {
             id = $(this).data('id')
             var actionUrl = `/contact-recovery/${id}`;
@@ -899,6 +1082,42 @@
         $('.btn-release-contactus').click(function() {
             id = $(this).data('id')
             var actionUrl = `/contact-delete/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-recovery-send').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/send-recovery/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-recovery-reject').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/reject-recovery/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-release-send').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/send-delete/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-release-reject').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/reject-delete/${id}`;
             $('#form-delete').attr('action', actionUrl);
             $('#modal-delete').modal('show')
         })

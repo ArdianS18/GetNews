@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Interfaces\NewsRejectInterface;
 use App\Models\NewsReject;
-use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Request;
 
 class NewsRejectController extends Controller
 {
+    private NewsRejectInterface $newsReject;
+
+
+    public function __construct(NewsRejectInterface $newsReject)
+    {
+        $this->newsReject = $newsReject;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -58,8 +67,31 @@ class NewsRejectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(NewsReject $newsReject)
+    public function destroy(NewsReject $reject)
     {
-        //
+        $data = [
+            'status_delete' => 1
+        ];
+
+        $this->newsReject->update($reject->id, $data);
+        return back()->with('success', 'berhasil menghapus data');
     }
+
+
+    public function recovery(NewsReject $reject)
+    {
+        $data = [
+            'status_delete' => 0
+        ];
+
+        $this->newsReject->update($reject->id, $data);
+        return back()->with('success', 'berhasil menghapus data');
+    }
+
+    public function delete(NewsReject $reject)
+    {
+        $this->newsReject->delete($reject->id);
+        return back()->with('success', 'berhasil menghapus data');
+    }
+
 }

@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\NewsCategoryController;
 use App\Http\Controllers\NewsHasLikeController;
+use App\Http\Controllers\NewsRejectController;
 use App\Http\Controllers\NewsReportController;
 use App\Http\Controllers\NewsTagController;
 use App\Http\Controllers\NewsViewController;
@@ -213,6 +214,10 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::delete('send/{send}', [SendMessageController::class, 'destroy'])->name('send.message.destroy');
     Route::delete('send-recovery/{send}', [SendMessageController::class, 'recovery'])->name('send.message.recovery');
     Route::delete('send-delete/{send}', [SendMessageController::class, 'delete'])->name('send.message.delete');
+
+    Route::delete('reject-news/{reject}', [NewsRejectController::class, 'destroy'])->name('news.reject.destroy');
+    Route::delete('reject-recovery/{reject}', [NewsRejectController::class, 'recovery'])->name('news.reject.recovery');
+    Route::delete('reject-delete/{reject}', [NewsRejectController::class, 'delete'])->name('news.reject.delete');
 
     Route::post('send-message', [SendMessageController::class, 'store'])->name('send.message');
 });
