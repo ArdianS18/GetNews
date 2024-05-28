@@ -632,19 +632,20 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="reportModalLabel">Report Comment</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <h5 class="modal-title" id="reportModalLabel">Laporkan Komentar</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form id="reportForm">
                                             <div class="form-group">
-                                                <label for="reportReason">Reason</label>
+                                                <label for="reportReason">Alasan</label>
                                                 <textarea name="content" class="form-control" id="reportReason" rows="3" required></textarea>
                                             </div>
                                             <input type="hidden" id="commentId" name="comment_id" value="commentId">
-                                            <button type="submit" class="btn btn-primary">Submit Report</button>
+                                            <div class="d-flex justify-content-end mt-4">
+                                                <button type="submit" class="btn btn-primary">Submit Report</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -672,8 +673,8 @@
                                     <div class="comment-item w-100">
                                         <div class="comment-author-img">
                                             <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}"
-                                                alt="Image" class="img-fluid" width="90"
-                                                style="object-fit:cover;" />
+                                                alt="Image" class="img-fluid" width="60"
+                                                style="object-fit:cover; height: 60px;"/>
                                         </div>
                                         <div class="comment-author-wrap">
                                             <div class="comment-author-info">
@@ -740,7 +741,7 @@
                                         <div class="comment-author-img">
                                             <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}"
                                                 alt="Image" class="img-fluid" width="90"
-                                                style="object-fit:cover;" />
+                                                style="object-fit:cover; height: 60px;" />
                                         </div>
                                         <div class="comment-author-wrap">
                                             <div class="comment-author-info">
