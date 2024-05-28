@@ -61,8 +61,8 @@ class ContactUsController extends Controller
         $countContact = $this->contactUs->count('unread');
         $countReport = $this->report->count('unread');
 
-        $sendMessage = $this->sendMessage->get();
-        $sendMessage2 = $this->sendMessage->get();
+        $sendMessage = $this->sendMessage->get('0');
+        $sendMessage2 = $this->sendMessage->get('0');
 
         return view('pages.admin.inbox.index', compact('sendMessage','sendMessage2','contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
     }

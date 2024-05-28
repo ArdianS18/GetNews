@@ -48,14 +48,16 @@
     @section('title', $news->name)
     @php
         $dateParts = date_parse($news->upload_date);
+        $newsContent = strip_tags($news->content);
+        $description = implode(' ', array_slice(explode(' ', $newsContent), 0, 20)) . '...';
+
     @endphp
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@GetMedia">
-    <meta name="twitter:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 10)) !!}">
-    <meta property="og:description" content="{!! implode(' ', array_slice(explode(' ', strip_tags($news->content)), 0, 30)) !!}">
+    <meta property="og:description" content="{{ $description }}">
     <meta property="og:title" content="{{ $news->name }} | GetMedia">
     <meta property="og:image" content="{{ asset('storage/' . $news->photo) }}">
     <meta property="og:url"
@@ -589,7 +591,20 @@
                         {{-- @foreach ($pages as $index => $page) --}}
                         <div class="news-para">
                             {{-- <p>{!! $pages !!}</p> --}}
-                            <p>{!! $news->content !!}</p>
+                            @php
+                                $paragraphs = explode('</p>', $news->content);
+                                $insertAt = ceil(count($paragraphs) / 2);
+                            @endphp
+
+                            @foreach ($paragraphs as $index => $paragraph)
+                                {!! $paragraph !!}
+                                </p>
+                                @if ($index == $insertAt)
+                                    <div class="related-news">
+                                        <strong>{{ $relatedNews }}</strong>
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                         Tag :
                         @forelse ($tags as $tag)
