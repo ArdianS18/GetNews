@@ -138,6 +138,15 @@ input:checked + .slider:before {
 .theme-dark .bg_gray {
   background-color: var(--codColor);
 }
+.theme-dark .tag-list li a{
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--whiteColor);
+  &.active,
+  &:hover{
+      background-color: var(--secondaryColor);
+  }
+}
 .theme-dark body,
 .theme-dark .td_dark,
 .theme-dark .responsive-navbar,
@@ -521,6 +530,8 @@ input:checked + .slider:before {
 .theme-dark .search-box .form-group input::-moz-placeholder {
   color: var(--whiteColor);
 }
+
+
 .theme-dark .search-box .form-group input::placeholder {
   color: var(--whiteColor);
 }
