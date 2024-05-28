@@ -225,7 +225,7 @@
                         <div class="editor-box">
                             <div class="row align-items-end mb-40">
                                 <div class="col-md-6">
-                                    <h2 class="section-title">Editor's Pick
+                                    <h2 class="section-title">Pilihan Editor
                                         <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
                                     </h2>
                                 </div>
@@ -272,7 +272,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <a href="business.html" class="btn-three d-block w-100">View All News<i class="flaticon-arrow-right"></i></a>
+                                    <a href="/all-news-post" class="btn-three d-block w-100">Lihat Semua Berita<i class="flaticon-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -281,10 +281,10 @@
                         <div class="pp-news-box">
                             <ul class="nav nav-tabs news-tablist-two" role="tablist">
                                 <li class="nav-item">
-                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_10" type="button" role="tab">Popular News</button>
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_10" type="button" role="tab">Artikel Popular</button>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_11" type="button" role="tab">Recent News</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_11" type="button" role="tab">Artikel Terbaru</button>
                                 </li>
                             </ul>
 
@@ -348,26 +348,43 @@
         <div class="container-fluid pb-75 mt-5">
             <div class="row align-items-end mb-40">
                 <div class="col-md-6">
-                    <h2 class="section-title">Berita Premium
+                    <h2 class="section-title">Artikel Premium
                         <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
                     </h2>
                 </div>
             </div>
             <div class="popular-news-slider swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide pp-news-card">
-                        <img src="assets/img/news/news-86.webp" alt="Image" style="width: 600px;">
-                        <div class="pp-news-info">
-                            <a href="business.html" class="news-cat">Politics</a>
-                            <h3 class="mb-4"><a href="business-details.html">Empowering the People: The Role of Politics in Society</a>
-                            </h3>
-                            <ul class="news-metainfo list-style mb-4">
-                                <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">Feb 03, 2023</a></li>
-                                <li><i class="fi fi-rr-eye"></i>1.2k Views</li>
-                            </ul>
+                    @forelse ($premium as $pre)
+                        @php
+                            $dateParts = date_parse($pre->upload_date);
+                        @endphp
+                        <div class="swiper-slide pp-news-card">
+                            <img src="{{ asset('storage/' . $pre->photo) }}" alt="Image" style="width: 600px;">
+                            <div class="pp-news-info">
+                                <a href="{{ route('categories.show.user', ['category' => $pre->newsCategories[0]->category->slug]) }}" class="news-cat">{{ $pre->newsCategories[0]->category->name }}</a>
+                                <h3 class="mb-4"><a data-toggle="tooltip" data-placement="top" title="{{ $pre->name }}" href="{{ route('news.user', ['news' => $pre->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    {!! Illuminate\Support\Str::limit($pre->name, $limit = 60, $end = '...') !!}</a>
+                                </h3>
+                                <ul class="news-metainfo list-style mb-4">
+                                    <li><i class="fi fi-rr-calendar-minus"></i><a href="news-by-date.html">{{ \Carbon\Carbon::parse($pre->created_at)->translatedFormat('d F Y') }}</a></li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $pre->views_count }}x Views</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide pp-news-card">
+                    @empty
+                        <div class="mb-4 swiper-slide justify-content-center">
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h4>Tidak ada Artikel Premium</h4>
+                            </div>
+                        </div>
+                    @endforelse
+                    {{-- <div class="swiper-slide pp-news-card">
                         <img src="assets/img/news/news-87.webp" alt="Image" style="width: 600px;">
                         <div class="pp-news-info">
                             <a href="business.html" class="news-cat">Technology</a>
@@ -399,7 +416,7 @@
                                 <li><i class="fi fi-rr-eye"></i>1.2k Views</li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -408,7 +425,7 @@
             <div class="container-fluid">
                 <div class="row align-items-end mb-40">
                     <div class="col-md-7">
-                        <h2 class="section-title">Most Popular<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
+                        <h2 class="section-title">Artikel Paling Popular<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                     </div>
                     <div class="col-md-5 text-md-end">
                         <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>
@@ -519,7 +536,7 @@
                     <div class="left-content">
                         <div class="row align-items-end mb-40">
                             <div class="col-md-7">
-                                <h2 class="section-title">General News<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
+                                <h2 class="section-title">Berita Umum<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                             </div>
                             <div class="col-md-5 text-md-end">
                                 <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>
@@ -551,7 +568,7 @@
                             @endforelse
                         </div>
                         <div class="ad-section">
-                            <p>SPONSORED AD</p>
+                            <p>Di Seponsori Oleh</p>
                         </div>
                         <div class="promo-wrap">
                             <div class="promo-card-two">
@@ -595,7 +612,7 @@
                             </div>
                         </div>
                         <div class="sidebar-widget">
-                            <h3 class="sidebar-widget-title">Popular Posts</h3>
+                            <h3 class="sidebar-widget-title">Postingan Popular</h3>
                             <div class="pp-post-wrap">
                                 @forelse ($popular_post as $post)
                                 @php
@@ -620,7 +637,7 @@
                             </div>
                         </div>
                         <div class="sidebar-widget">
-                            <h3 class="sidebar-widget-title">Popular Tags</h3>
+                            <h3 class="sidebar-widget-title">Tag Popular</h3>
                             <ul class="tag-list list-style">
                                 @forelse ($tags as $tag)
                                 <li><a href="{{ route('tag.show.user', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a>
@@ -640,7 +657,7 @@
                     <div class="left-content">
                         <div class="row align-items-end mb-40">
                             <div class="col-md-7">
-                                <h2 class="section-title">Latest News<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
+                                <h2 class="section-title">Artikel Terbaru<img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                             </div>
                             <div class="col-md-5 text-md-end">
                                 <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>

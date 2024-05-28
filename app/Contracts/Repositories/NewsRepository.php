@@ -187,6 +187,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->firstOrFail();
     }
 
+    public function newsPremium(): mixed
+    {
+        return $this->model->query()
+            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('user.roles', 'name', 'user')
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->take(6)
+            ->get();
+    }
+
     public function findBySlug($slug): mixed
     {
         return $this->model->query()

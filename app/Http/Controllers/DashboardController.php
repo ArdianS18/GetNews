@@ -127,13 +127,14 @@ class DashboardController extends Controller
         $most_populer = $this->news->getByPopular('down');
         $most_populer2 = $this->news->getByPopular('side');
         $categorypopuler = $this->category->showWhithCount();
+        $premium = $this->news->newsPremium();
 
         $visitorId = $request->cookie('visitor_id');
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
             return response()->view('pages.index', compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
-            'news_left', 'news_mid', 'news_right', 'categories',
+            'news_left', 'news_mid', 'news_right', 'categories', 'premium',
             'subCategories', 'trendings', 'news_recent', 'populars',
             'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
             'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
@@ -141,7 +142,7 @@ class DashboardController extends Controller
         $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
 
         return response()->view('pages.index', compact('news', 'categorypopuler', 'most_populer', 'most_populer2',
-            'news_left', 'news_mid', 'news_right', 'categories',
+            'news_left', 'news_mid', 'news_right', 'categories', 'premium',
             'subCategories', 'trendings', 'news_recent', 'populars',
             'editor_pick', 'generals', 'popular_post', 'picks', 'tags',
             'totalCategories', 'authors', 'news_latests', 'news_latests2'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
