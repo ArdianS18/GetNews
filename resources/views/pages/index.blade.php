@@ -900,23 +900,23 @@
                 }
             }
         });
-        function toggleTheme() {
-            if (localStorage.getItem('get_media_theme') === 'theme-dark') {
-                setTheme('theme-light');
-            } else {
-                setTheme('theme-dark');
-            }
-        }
-        function setTheme(themeName) { localStorage.setItem('get_media_theme', themeName); document.documentElement.className = themeName; }
+        // function toggleTheme() {
+        //     if (localStorage.getItem('get_media_theme') === 'theme-dark') {
+        //         setTheme('theme-light');
+        //     } else {
+        //         setTheme('theme-dark');
+        //     }
+        // }
+        // function setTheme(themeName) { localStorage.setItem('get_media_theme', themeName); document.documentElement.className = themeName; }
 
-        (function() {
-            if (localStorage.getItem('get_media_theme') === 'theme-dark') {
-                setTheme('theme-dark');
-                document.getElementById('slider').checked = false;
-            } else {
-                setTheme('theme-light');
-                document.getElementById('slider').checked = true;
-            }
-        })();
+        // (function() {
+        //     if (localStorage.getItem('get_media_theme') === 'theme-dark') {
+        //         setTheme('theme-dark');
+        //         document.getElementById('slider').checked = false;
+        //     } else {
+        //         setTheme('theme-light');
+        //         document.getElementById('slider').checked = true;
+        //     }
+        // })();
     </script>
 @endsection
