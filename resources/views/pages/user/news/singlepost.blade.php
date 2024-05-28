@@ -2,6 +2,14 @@
 
 <head>
     <style>
+        .quote-box {
+            border-left: 5px solid #183249;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background: #f9f9f9;
+            font-style: italic;
+        }
+
         .coin-container {
             position: fixed;
             left: 20px;
@@ -50,6 +58,8 @@
         $dateParts = date_parse($news->upload_date);
         $newsContent = strip_tags($news->content);
         $description = implode(' ', array_slice(explode(' ', $newsContent), 0, 20)) . '...';
+
+        $datePartsRelated = date_parse($relatedNews->upload_date);
 
     @endphp
 
@@ -601,7 +611,11 @@
                                 </p>
                                 @if ($index == $insertAt)
                                     <div class="related-news">
-                                        <strong>{{ $relatedNews }}</strong>
+                                        <blockquote class="quote-box">
+                                            <p>Baca juga : <a
+                                                    href="{{ route('news.user', ['year' => $datePartsRelated['year'], 'month' => $datePartsRelated['month'], 'day' => $datePartsRelated['day'], 'news' => $relatedNews->slug]) }}">{{ $relatedNews->name }}</a>
+                                            </p>
+                                        </blockquote>
                                     </div>
                                 @endif
                             @endforeach

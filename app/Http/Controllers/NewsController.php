@@ -223,7 +223,11 @@ class NewsController extends Controller
         $newsCategories = $this->news->getById($category_id);
         $authors = $this->author->get();
         $tagPopulars = $this->tags->getByPopular();
-        $relatedNews = "Baca juga: Game GTA 6 Dipastikan Meluncur September-November 2025";
+        if ($this->news->findUser($news->user_id)) {
+            $relatedNews = $this->news->findUser($news->user_id);
+        }else{
+            $relatedNews = $this->news->get()->inRandomOrder()->first();
+        }
 
 
         $visitorId = $request->cookie('visitor_id');
