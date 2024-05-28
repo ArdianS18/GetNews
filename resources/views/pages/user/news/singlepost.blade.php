@@ -822,7 +822,7 @@
                                         <p>{!! Illuminate\Support\Str::limit(strip_tags($news->content), 150, '...') !!}</p>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->format('M d Y') }}</a>
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($news->upload_date)->translatedFormat('d F Y') }}</a>
                                             </li>
                                             <li><i class="fi fi-rr-eye"></i>{{ $news->views_count }}</li>
                                         </ul>
@@ -897,7 +897,8 @@
                             <h3 class="sidebar-widget-title">Popular Tags</h3>
                             <ul class="tag-list list-style">
                                 @forelse ($tagPopulars as $tag)
-                                    <li><a data-toggle="tooltip" data-placement="top" title="{{ $tag->name }}"
+                                    <li><a data-toggle="tooltip" class="tag-stye-2" data-placement="top"
+                                            title="{{ $tag->name }}"
                                             href="{{ route('tag.show.user', ['tag' => $tag->slug]) }}">{{ $tag->name }}</a>
                                     </li>
                                 @empty

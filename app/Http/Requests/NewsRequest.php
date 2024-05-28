@@ -33,6 +33,7 @@ class NewsRequest extends FormRequest
             'name.required' => 'Nama tidak boleh kosong',
             'name.unique' => 'Judulnya tidak boleh ada yang sama',
             'photo.required' => 'Foto tidak boleh kosong',
+            'photo.mimes' => 'Foto harus berupa jpg , png , atau jpeg',
             'content.required' => 'Konten tidak boleh kosong',
             'category.required' => 'Kategori tidak boleh kosong',
             'tags.required' => 'Tags tidak boleh kosong',

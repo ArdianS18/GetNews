@@ -32,7 +32,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $sendMessage = $this->sendMessage->get('0');
         $sendMessage2 = $this->sendMessage->get('0');
 

@@ -72,7 +72,7 @@
                     <form>
                       <button type="button" class="btn btn-sm py-1 px-5  not-login text-white" style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
                   </form>
-                @endauth                
+                @endauth
             </div>
 
           <p>
@@ -85,9 +85,9 @@
           <div class="author-profile d-flex justify-content-end">
 
             <div class="author-stat">
-               <span>{{$newsCount->count()}} Berita</span>
+               <span>{{$newsCount}} Berita</span>
               <span>{{ $comments }} Komentar</span>
-             
+
 
             </div>
           </div>
@@ -228,7 +228,7 @@
   </div>
 
 
-  
+
 @endsection
 
 @section('script')

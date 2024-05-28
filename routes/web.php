@@ -83,6 +83,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::post('createauthor', [AuthorController::class, 'store'])->name('author.create'); // fungsi create author dari admin -> langsung approve dan role : author
     // Sub Catgeory dan Category
     // Route::resource('categories', CategoryController::class);
+
     Route::get('search', [CategoryController::class, 'search'])->name('search.category');
     Route::post('subcategories/{category}', [SubCategoryController::class, 'store'])->name('sub.category.store');
     Route::post('categories/{subcategory}', [SubCategoryController::class, 'update'])->name('sub.category.update');
@@ -203,7 +204,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::get('contact-read/{contact}', [ContactUsController::class, 'read'])->name('contact.read');
 
     Route::delete('report/{report}', [ReportController::class, 'destroy'])->name('report.destroy.');
-    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('report.read');
+    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('read.report');
 
     Route::delete('contact-recovery/{contact}', [ContactUsController::class, 'recovery'])->name('contact.recovery');
     Route::delete('report-recovery/{report}', [ReportController::class, 'recovery'])->name('report.recovery');

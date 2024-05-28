@@ -52,11 +52,13 @@
         </div>
     </div>
 
-    @if (session('error'))
-        <div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">
+                <p class="text-danger" style="margin-bottom:0%"> {{ $error }} </p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
     @endif
 
     <div class="ms-1">
@@ -85,11 +87,10 @@
                                 width="350" height="200" alt="">
                         </div>
                         <div class="d-flex justify-content-center mt-3">
-                            <label for="image-upload" class="btn btn-primary @error('photo') is-invalid @enderror   ">
+                            <label for="image-upload" class="btn btn-primary">
                                 Unggah
                             </label>
-                            <input type="file" name="photo" id="image-upload" class="hide"
-                                onchange="previewImage(event)">
+                            <input type="file" name="photo" id="image-upload" class="hide @error('photo') is-invalid @enderror" onchange="previewImage(event)">
                         </div>
                         <div class="d-flex justify-content-center">
                             <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
@@ -301,8 +302,10 @@
 
     <script>
         $(document).ready(function() {
-            $('#content').summernote({
+            var quote = $('<blockquote class="quote">hello<footer>world</footer></blockquote>')[0];
 
+            $('#content').summernote({
+                blockquoteBreakingLevel: 2,
                 height: 520,
                 toolbar: [
                     ['style', ['style']],
@@ -317,19 +320,20 @@
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
-                    ['style', ['blockquote']], // Include Blockquote button in toolbar
-                    ['insert', ['ul']]
+                    ['insert', ['ul', 'blockquote']] // Include Blockquote button in 'insert' dropdown
                 ],
+
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
                     'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ],
                 fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
                     'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
                 ]
+
             });
         });
     </script>
-    
+
     <script>
         $('.category').change(function() {
             getSubCategory($(this).val())

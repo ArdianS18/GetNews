@@ -43,9 +43,12 @@ class ReportController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($report)
     {
-        //
+        $data['status'] = MessageStatusEnum::READ->value;
+        $this->report->update($report, $data);
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
 
@@ -67,10 +70,10 @@ class ReportController extends Controller
         return back()->with('success', 'berhasil menambahkan data');
     }
 
-    public function read(Report $report)
+    public function read($report)
     {
         $data['status'] = MessageStatusEnum::READ->value;
-        $this->report->update($report->id, $data);
+        $this->report->update($report, $data);
 
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
