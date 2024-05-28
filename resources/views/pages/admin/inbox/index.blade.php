@@ -137,10 +137,10 @@
                                                 <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('contact.read', ['contact' => $contact->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                     id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}" data-chat-id="{{ $contact->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
@@ -178,10 +178,10 @@
                                             <a href="javascript:void(0)"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
-                                                <div class="form-check mb-0">
+                                                {{-- <div class="form-check mb-0">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                </div>
+                                                </div> --}}
                                                 <div class="position-relative w-100 ms-2">
                                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                                         <h6 class="mb-0 fw-semibold">{{ $send->user->name }}</h6>
@@ -244,10 +244,10 @@
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
                                                     id="chat_user_{{ $contactDelete->id }}" data-user-id="{{ $contactDelete->user_id }}" data-chat-id="{{ $contactDelete->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contactDelete->user->name }}
@@ -286,9 +286,9 @@
                                                 <a href="javascript:void(0)" onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
                                                     id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div
                                                             class="d-flex align-items-center justify-content-between mb-2">
