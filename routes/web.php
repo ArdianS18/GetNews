@@ -211,6 +211,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::delete('contact-delete/{contact}', [ContactUsController::class, 'delete'])->name('contact.delete');
     Route::delete('report-delete/{report}', [ReportController::class, 'delete'])->name('report.delete');
 
+    Route::get('send-read/{send}', [SendMessageController::class, 'read'])->name('send.message.read');
     Route::delete('send/{send}', [SendMessageController::class, 'destroy'])->name('send.message.destroy');
     Route::delete('send-recovery/{send}', [SendMessageController::class, 'recovery'])->name('send.message.recovery');
     Route::delete('send-delete/{send}', [SendMessageController::class, 'delete'])->name('send.message.delete');

@@ -137,10 +137,10 @@
                                                 <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('contact.read', ['contact' => $contact->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                     id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}" data-chat-id="{{ $contact->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
@@ -175,13 +175,13 @@
 
                                         @forelse ($sendMessage as $send)
                                         <li class="contact">
-                                            <a href="javascript:void(0)"
+                                            <a href="javascript:void(0)" onclick="loadRouteSend(event, '{{ route('send.message.read', ['send' => $send->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
-                                                <div class="form-check mb-0">
+                                                {{-- <div class="form-check mb-0">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                </div>
+                                                </div> --}}
                                                 <div class="position-relative w-100 ms-2">
                                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                                         <h6 class="mb-0 fw-semibold">{{ $send->user->name }}</h6>
@@ -244,10 +244,10 @@
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
                                                     id="chat_user_{{ $contactDelete->id }}" data-user-id="{{ $contactDelete->user_id }}" data-chat-id="{{ $contactDelete->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contactDelete->user->name }}
@@ -286,15 +286,13 @@
                                                 <a href="javascript:void(0)" onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
                                                     id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div
                                                             class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
-                                                            {{-- <span class="badge fs-2 rounded-4 py-1 px-3"
-                                                                style="background-color: #FA896B;">Laporan</span> --}}
                                                             @if ($report->status == "unread")
                                                                 <span class="badge ms-auto bg-danger">!</span>
                                                             @endif
@@ -903,6 +901,21 @@
 
     <script>
         function loadRouteContent(event, route) {
+            event.preventDefault();
+
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (response) {
+                    $('#content-container').html(response);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        function loadRouteSend(event, route) {
             event.preventDefault();
 
             $.ajax({
