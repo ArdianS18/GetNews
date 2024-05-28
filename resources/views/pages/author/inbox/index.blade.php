@@ -520,7 +520,7 @@
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-contactus"
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-message"
                                                                         data-id="{{ $send2->id }}"
                                                                         href="javascript:void(0)">
                                                                         <i class="ti ti-trash fs-5"></i>
@@ -872,6 +872,15 @@
         $('.btn-delete-contactus').click(function() {
             id = $(this).data('id')
             var actionUrl = `/contact/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-delete-message').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/send/${id}`;
             $('#form-delete').attr('action', actionUrl);
             $('#modal-delete').modal('show')
         })

@@ -10,7 +10,7 @@ class SendMessage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','user_id', 'email', 'message', 'status_delete'];
+    protected $fillable = ['user_id', 'email', 'message', 'status_delete', 'status'];
     protected $table = 'send_messages';
 
     public function user(): BelongsTo
