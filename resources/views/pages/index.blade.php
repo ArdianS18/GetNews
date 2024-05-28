@@ -354,8 +354,9 @@
                 </div>
             </div>
             <div class="popular-news-slider swiper">
-                <div class="swiper-wrapper">
+
                     @forelse ($premium as $pre)
+                    <div class="swiper-wrapper">
                         @php
                             $dateParts = date_parse($pre->upload_date);
                         @endphp
@@ -372,8 +373,8 @@
                                 </ul>
                             </div>
                         </div>
+                    </div>
                     @empty
-                        <div class="mb-4 swiper-slide justify-content-center">
                             <div class="d-flex justify-content-center">
                                 <div>
                                     <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
@@ -382,7 +383,7 @@
                             <div class="text-center">
                                 <h4>Tidak ada Artikel Premium</h4>
                             </div>
-                        </div>
+
                     @endforelse
                     {{-- <div class="swiper-slide pp-news-card">
                         <img src="assets/img/news/news-87.webp" alt="Image" style="width: 600px;">
@@ -417,7 +418,7 @@
                             </ul>
                         </div>
                     </div> --}}
-                </div>
+
             </div>
         </div>
 
