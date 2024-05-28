@@ -42,17 +42,18 @@
                 <option value="terbaru">Terbaru</option>
                 <option value="terlama">Terlama</option>
             </select> --}}
-            <div class="input-group" style="width: 200px">
+            <form action="">
+            <div class="input-group" style="width: 250px">
                 <select class="form-select" name="filter">
-                    <option selected disabled>Pilih Option</option>
                     <option value="terbaru">Terbaru</option>
                     <option value="terlama">Terlama</option>
                     <option value="">Tampilkan Semua</option>
                 </select>
-                <button class="btn btn-outline-primary">
+                <button type="submit" class="btn btn-outline-primary">
                     Pilih
                 </button>
             </div>
+            </form>
 
             <select class="form-select" id="opsi-perpage" style="width: 200px">
                 <option value="10">10</option>
@@ -63,8 +64,7 @@
         </div>
     </div>
 
-
-
+    <div class="card card-body mt-5">
         <div class="row mt-5">
             @forelse ($news as $item)
             @php
@@ -104,6 +104,17 @@
             @empty
             @endforelse
         </div>
+
+        <ul class="page-nav list-style text-center mt-20">
+            <li><a href="{{ $news->previousPageUrl() }} && {{ $news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
+
+            @for ($i = 1; $i <= $news->lastPage(); $i++)
+                <li><a href="{{ $news->url($i) }} && {{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }} && {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
+            @endfor
+
+            <li><a href="{{ $news->nextPageUrl() }} && {{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
+        </ul>
+    </div>
 
 </div>
 @endsection
