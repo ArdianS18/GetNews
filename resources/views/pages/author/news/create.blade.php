@@ -317,6 +317,7 @@
                     ['video', ['video']],
                     ['codeview', ['codeview']],
                     ['help', ['help']],
+                    ['style', ['blockquote']], // Include Blockquote button in toolbar
                     ['insert', ['ul']]
                 ],
                 fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
