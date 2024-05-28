@@ -319,8 +319,10 @@
                                 </div>
                             </div>
                             <div>
-                                <a href="/all-news-post" class="btn-three d-block w-100">Lihat Semua Berita<i
+                                @if ($picks->count() > 5)
+                                <a href="{{ route('news.post') }}" class="btn-three d-block w-100">Lihat Semua Berita<i
                                         class="flaticon-arrow-right"></i></a>
+                                @endif
                             </div>
                         </div>
                     </div>
