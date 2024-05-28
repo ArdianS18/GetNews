@@ -10,7 +10,7 @@ class NewsReject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'news_id', 'massage'];
+    protected $fillable = ['user_id', 'news_id', 'massage', 'status_delete', 'status'];
 
     /**
      * Get the user that owns the NewsReject

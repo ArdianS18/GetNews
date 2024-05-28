@@ -242,18 +242,27 @@ class AuthorController extends Controller
 
     public function inboxauthor()
     {
-        $newsRejects = $this->newsReject->where(auth()->user()->id);
-        $newsRejectRead = $this->newsReject->where(auth()->user()->id);
+        $newsRejects = $this->newsReject->where(auth()->user()->id, '0');
+        $newsRejectRead = $this->newsReject->where(auth()->user()->id, '0');
 
-        $reports = $this->report->whereAuthor();
-        $reports2 = $this->report->whereAuthor();
+        $newsDelete = $this->newsReject->where(auth()->user()->id, '1');
+        $newsDeleteRead = $this->newsReject->where(auth()->user()->id, '1');
 
-        $sendMessage = $this->sendMessage->get();
-        $sendMessage2 = $this->sendMessage->get();
+        $reports = $this->report->whereAuthor('0');
+        $reports2 = $this->report->whereAuthor('0');
+
+        $reportsDelete = $this->report->whereAuthor('1');
+        $reportsDelete2 = $this->report->whereAuthor('1');
+
+        $sendMessage = $this->sendMessage->get('0');
+        $sendMessage2 = $this->sendMessage->get('0');
+
+        $sendDelete = $this->sendMessage->get('1');
+        $sendDelete2 = $this->sendMessage->get('1');
 
         $countReport = $this->report->count('unread');
 
-        return view('pages.author.inbox.index', compact('newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2', 'sendMessage', 'sendMessage2'));
+        return view('pages.author.inbox.index', compact('reportsDelete', 'reportsDelete2','newsDelete','newsDeleteRead','newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2', 'sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 
     /**
