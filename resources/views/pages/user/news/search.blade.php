@@ -54,9 +54,9 @@
                                             <option value="terbaru">Terbaru</option>
                                             <option value="terlama">Terlama</option>
                                         </select>
-                                        
+
                                     </div>
-                                    <div> 
+                                    <div>
                                         <button class="btn btn-outline-primary" id="signInBtn" type="submit">
                                             Filter
                                         </button>
@@ -117,14 +117,15 @@
                                 </div>
                             @endforelse
                         </div>
+
                         <ul class="page-nav list-style text-center mt-5 mb-5">
-                            <li><a href="{{ $newsByDate->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
+                            <li><a href="{{ $newsByDate->appends(['q' => $query])->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
                             @for ($i = 1; $i <= $newsByDate->lastPage(); $i++)
-                                <li><a href="{{ $newsByDate->url($i) }}"
+                                <li><a href="{{ $newsByDate->appends(['q' => $query])->url($i) }}"
                                         class="btn btn-black {{ $newsByDate->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
                                 </li>
                             @endfor
-                            <li><a href="{{ $newsByDate->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
+                            <li><a href="{{ $newsByDate->appends(['q' => $query])->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
                         </ul>
 
                         <div class="text-center item-center d-flex justify-content-center"
