@@ -189,7 +189,7 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $totalCategories = $this->category->showWhithCount();
         $query = $request->input('search');
-        $newsByDate = $this->news->whereDate($request);
+        $newsByDate = $this->news->whereDate($request, '');
         $populars = $this->news->getByPopular('up');
         $news = $this->news->get();
 
@@ -254,12 +254,14 @@ class DashboardController extends Controller
 
     public function searchNews(Request $request){
         $query  = $request->q;
-        $newsByDate = $this->news->whereDate($request);
+        $opsi = $request->opsi;
+
+        $newsByDate = $this->news->whereDate($request, $query);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         $totalCategories = $this->category->showWhithCount();
         $populars = $this->news->getByPopular('up');
 
-        return view('pages.user.news.search',compact('categories', 'subCategories','newsByDate','query','totalCategories','populars'));
+        return view('pages.user.news.search',compact('categories', 'subCategories','newsByDate','query','totalCategories','populars', 'opsi'));
     }
 }
