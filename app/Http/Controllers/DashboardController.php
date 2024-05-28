@@ -208,10 +208,9 @@ class DashboardController extends Controller
         $news = $this->news->authorGetNews($userId);
         $newsId = $news->pluck('id');
         $comments = $this->comment->where($newsId);
-        $newsCount = $this->news->get();
+        $newsCount = $this->news->manyNews($userId);
         $authors = $this->author->get();
         $newsPopular = $this->news->showWhithCount();
-
 
         return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments', 'newsPopular'));
     }

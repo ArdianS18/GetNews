@@ -85,11 +85,10 @@
                                 width="350" height="200" alt="">
                         </div>
                         <div class="d-flex justify-content-center mt-3">
-                            <label for="image-upload" class="btn btn-primary @error('photo') is-invalid @enderror   ">
+                            <label for="image-upload" class="btn btn-primary">
                                 Unggah
                             </label>
-                            <input type="file" name="photo" id="image-upload" class="hide"
-                                onchange="previewImage(event)">
+                            <input type="file" name="photo" id="image-upload" class="hide" @error('photo') is-invalid @enderror" onchange="previewImage(event)">
                         </div>
                         <div class="d-flex justify-content-center">
                             <p class="text-muted mt-3">File dengan format Jpg atau Png </p>
@@ -329,7 +328,7 @@
             });
         });
     </script>
-    
+
     <script>
         $('.category').change(function() {
             getSubCategory($(this).val())

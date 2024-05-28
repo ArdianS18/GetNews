@@ -20,6 +20,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface, UpdateOrCreateInterface
 {
     public function newsPremium() : mixed;
+    public function manyNews($id) : mixed;
 
     public function showWhithCount() : mixed;
     public function showWhithCountStat() : mixed;

@@ -110,6 +110,15 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->firstOrFail();
     }
 
+    public function manyNews($id): mixed
+    {
+        return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->where('user_id', $id)
+            ->get()
+            ->count();
+    }
+
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
