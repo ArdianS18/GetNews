@@ -579,7 +579,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         ->where('user_id', $author)->update(['status' => NewsStatusEnum::PANDING->value]);
     }
 
-    public function whereDate($request) : mixed
+    public function whereDate($request, $data) : mixed
     {
         return $this->model->query()
             ->where(function($query) use ($request) {

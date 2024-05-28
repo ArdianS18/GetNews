@@ -92,7 +92,7 @@
                                         <div class="position-absolute" style="top: -50px; left: 50%; transform: translateX(-50%);">
                                             <div class="d-flex justify-content-center rounded-circle" style="width: 120px; height: 120px;">
                                                 <div class="border border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
-                                                    <img style="object-fit: cover" src="{{ asset(Auth::user()->photo ? 'storage/' . Auth::user()->photo : 'assets/img/profile.svg') }}" alt="" class="w-100 h-100">
+                                                    <img src="{{asset($item->user->photo ? 'storage/'.$item->user->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
                                                 </div>
                                             </div>
                                         </div>
