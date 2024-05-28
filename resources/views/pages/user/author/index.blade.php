@@ -68,10 +68,18 @@
             <div class="d-sm-flex align-items-center justify-content-between mt-5 mb-4">
                 <form class="d-flex mb-2">
                     <div class="input-group">
+                        <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
+                            {{-- <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i> --}}
+                            <svg class="position-absolute top-50 translate-middle-y ms-3" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"/></svg>   
+                        <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
+                      </div>
+
+                    {{-- <div class="input-group">
                         <input type="text" name="name" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"/></svg>    --}}
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"/></svg>   
                         <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
-                    </div>
+                    </div> --}}
                 </form>
               </div>
               <div class="row">
@@ -90,10 +98,8 @@
                                     </div>
                                     <div class="position-relative">
                                         <div class="position-absolute" style="top: -50px; left: 50%; transform: translateX(-50%);">
-                                            <div class="d-flex justify-content-center rounded-circle" style="width: 120px; height: 120px;">
-                                                <div class="border border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden" style="width: 100px; height: 100px;">
-                                                    <img src="{{asset($item->user->photo ? 'storage/'.$item->user->photo : "default.png")}}" alt="" class="rounded-circle mb-3" style="object-fit: cover" width="80" height="80">
-                                                </div>
+                                            <div class="">
+                                                <img src="{{asset($item->user->photo ? 'storage/'.$item->user->photo : "default.png")}}" alt="" style="width: 140; height: 140; border-radius: 50%;" class="mb-3" style="object-fit: cover" width="80" height="80">
                                             </div>
                                         </div>
                                         <div class="text-center" style="margin-top: 10px; padding-top: 60px;">
