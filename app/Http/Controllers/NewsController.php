@@ -223,19 +223,21 @@ class NewsController extends Controller
         $newsCategories = $this->news->getById($category_id);
         $authors = $this->author->get();
         $tagPopulars = $this->tags->getByPopular();
+        $relatedNews = "Baca juga: Game GTA 6 Dipastikan Meluncur September-November 2025";
+
 
         $visitorId = $request->cookie('visitor_id');
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
-            return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId',
+            return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews',
                 'subCategories','categories','newsPhoto','comments', 'newsLike',
                 'likedByUser','tags','totalCategories','populars','news_recents',
                 'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
         }
 
         $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
-        return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId',
+        return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews',
             'subCategories','categories','newsPhoto','comments', 'newsLike',
             'likedByUser','tags','totalCategories','populars','news_recents',
             'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
