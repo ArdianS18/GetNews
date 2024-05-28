@@ -191,7 +191,7 @@
                                                             <div
                                                                 class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
                                                                 <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                    <img src="{{asset( $send2->user->photo ? 'storage/'.$send2->user->photo : "/img/usr1.svg")}}"
                                                                         alt="user8" width="48" height="48"
                                                                         class="rounded-circle" />
                                                                     <div>
@@ -258,7 +258,7 @@
                                                                 <div
                                                                     class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
                                                                     <div class="d-flex align-items-center gap-2">
-                                                                        <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                        <img src="{{asset( $sendDel->user->photo ? 'storage/'.$sendDel->user->photo : "/img/usr1.svg")}}"
                                                                             alt="user8" width="48" height="48"
                                                                             class="rounded-circle" />
                                                                         <div>
