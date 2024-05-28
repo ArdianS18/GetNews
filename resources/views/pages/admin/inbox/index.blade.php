@@ -175,7 +175,7 @@
 
                                         @forelse ($sendMessage as $send)
                                         <li class="contact">
-                                            <a href="javascript:void(0)"
+                                            <a href="javascript:void(0)" onclick="loadRouteSend(event, '{{ route('send.message.read', ['send' => $send->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
                                                 {{-- <div class="form-check mb-0">
@@ -293,8 +293,6 @@
                                                         <div
                                                             class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
-                                                            {{-- <span class="badge fs-2 rounded-4 py-1 px-3"
-                                                                style="background-color: #FA896B;">Laporan</span> --}}
                                                             @if ($report->status == "unread")
                                                                 <span class="badge ms-auto bg-danger">!</span>
                                                             @endif
@@ -903,6 +901,21 @@
 
     <script>
         function loadRouteContent(event, route) {
+            event.preventDefault();
+
+            $.ajax({
+                url: route,
+                type: 'GET',
+                success: function (response) {
+                    $('#content-container').html(response);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+
+        function loadRouteSend(event, route) {
             event.preventDefault();
 
             $.ajax({
