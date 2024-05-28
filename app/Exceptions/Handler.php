@@ -6,6 +6,7 @@ use Throwable;
 use Illuminate\Http\Response;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
+use App\Enums\NewsStatusEnum;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\SubCategory;
@@ -39,17 +40,17 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
-            $news = News::latest()->take(10)->get();
+            $news = News::latest()->take(10)->where('status', NewsStatusEnum::ACTIVE->value)->get();
             $additionalData = [
                'categories' => Category::all(),
                'subCategories'=> SubCategory::all(),
                'news'=>$news
             ];
-    
+
             return response()->view('error.404', $additionalData, 404);
         }
-    
+
         return parent::render($request, $exception);
     }
-    
+
 }

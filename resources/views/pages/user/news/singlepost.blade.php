@@ -627,6 +627,30 @@
                                 class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
                         @empty
                         @endforelse
+
+                        <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reportModalLabel">Report Comment</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="reportForm">
+                                            <div class="form-group">
+                                                <label for="reportReason">Reason</label>
+                                                <textarea name="content" class="form-control" id="reportReason" rows="3" required></textarea>
+                                            </div>
+                                            <input type="hidden" id="commentId" name="comment_id" value="commentId">
+                                            <button type="submit" class="btn btn-primary">Submit Report</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <h3 class="comment-title mt-5">{{ $comments->count() }} Komentar</h3>
                         <div class="comment-item-wrap">
                             @php
@@ -664,14 +688,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 text-end order-sm-3 order-2">
-                                                        <div class="">
-                                                            <i><svg xmlns="http://www.w3.org/2000/svg" width="19"
+                                                        <div class="comment">
+                                                            <i><svg class="report-icon" data-id="{{ $comment->id }}" xmlns="http://www.w3.org/2000/svg" width="19"
                                                                     height="19" viewBox="0 0 24 24">
                                                                     <path fill="none" stroke="currentColor"
                                                                         stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2"
                                                                         d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
-                                                                </svg></i>
+                                                            </svg></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-9 order-md-3 order-sm-2 order-2">
@@ -707,14 +731,10 @@
                                                         Balasan</button>
                                                 </div>
                                             @endauth
-                                            {{-- <div>
-                                                <button type="submit" class="btn-two w-100 btn"
-                                                    style="background-color: #0F4D8A;padding:10px !important">Kirim
-                                                    Balasan</button>
-                                            </div> --}}
                                         </form>
                                     </div>
                                 @endif
+
                                 @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
                                     <div class="comment-item w-100 ms-5">
                                         <div class="comment-author-img">
@@ -735,14 +755,14 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 text-end order-sm-3 order-2">
-                                                        <div class="">
-                                                            <i><svg xmlns="http://www.w3.org/2000/svg" width="19"
+                                                        <div class="comment">
+                                                            <i><svg class="report-icon" data-id="{{ $reply->id }}" xmlns="http://www.w3.org/2000/svg" width="19"
                                                                     height="19" viewBox="0 0 24 24">
                                                                     <path fill="none" stroke="currentColor"
                                                                         stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2"
                                                                         d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
-                                                                </svg></i>
+                                                            </svg></i>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
@@ -971,12 +991,14 @@
         </div>
     </div> --}}
 
-    <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
-        <div class="coin-loader">
-            <img src="{{ asset('assets/img/coin-load.svg') }}" alt="Coin" style="width: 50px; height: 50px;">
-            <div class="coin-circle"></div>
+    @auth
+        <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
+            <div class="coin-loader">
+                <img src="{{ asset('assets/img/coin-load.svg') }}" alt="Coin" style="width: 50px; height: 50px;">
+                <div class="coin-circle"></div>
+            </div>
         </div>
-    </div>
+    @endauth
 
 @endsection
 
@@ -1015,10 +1037,10 @@
         }
     </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            setInterval(() => {
+    @auth
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                setInterval(() => {
                 fetch('/coin-add', {
                         method: 'POST',
                         headers: {
@@ -1037,6 +1059,16 @@
                         console.error(error);
                     });
             }, 60000);
+            });
+        </script>
+    @else
+        <script>
+            console.error('Anda tidak login');
+        </script>
+    @endauth
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
             var formLike = document.getElementById('form-like');
             var formLiked = document.getElementById('form-liked');
@@ -1070,6 +1102,7 @@
                 likeCount.setAttribute('data-like', likeData);
             });
         });
+
         const notLoginElements = document.querySelectorAll('.not-login');
 
         notLoginElements.forEach(function(element) {
@@ -1264,5 +1297,42 @@
         }
         setInterval(sendData, 60000);
     </script> --}}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Open modal on SVG icon click
+            $('.report-icon').on('click', function() {
+                var commentId = $(this).data('id');
+                $('#commentId').val(commentId);
+                $('#reportModal').modal('show');
+            });
+
+            // Handle form submission
+            $('#reportForm').on('submit', function(e) {
+                e.preventDefault();
+                var commentId = $('#commentId').val();
+                var reportReason = $('#reportReason').val();
+
+                // Perform AJAX request to send data to server
+                $.ajax({
+                    url: '/comment-report/' + commentId,  // Change to your server endpoint
+                    method: 'POST',
+                    data: {
+                        commentId: commentId,
+                        reportReason: reportReason
+                    },
+                    success: function(response) {
+                        alert('Report submitted successfully!');
+                        $('#reportModal').modal('hide');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('An error occurred while submitting the report.');
+                    }
+                });
+            });
+        });
+    </script>
 
 @endsection

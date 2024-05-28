@@ -6,6 +6,7 @@ use App\Contracts\Interfaces\CoinInterface;
 use App\Helpers\ResponseHelper;
 use App\Models\Coin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CoinController extends Controller
 {
@@ -36,8 +37,14 @@ class CoinController extends Controller
      */
     public function store(Request $request)
     {
-        $data['user_id'] = auth()->user()->id;
-        $this->coin->store($data);
+        if (!auth()->check()) {
+            return response()->json(['message' => 'Anda tidak login'], 401);
+        } else {
+            $data['user_id'] = auth()->user()->id;
+            $this->coin->store($data);
+        }
+
+
         return ResponseHelper::success();
     }
 
