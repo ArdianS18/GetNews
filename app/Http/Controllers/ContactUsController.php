@@ -64,7 +64,10 @@ class ContactUsController extends Controller
         $sendMessage = $this->sendMessage->get('0');
         $sendMessage2 = $this->sendMessage->get('0');
 
-        return view('pages.admin.inbox.index', compact('sendMessage','sendMessage2','contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
+        $sendDelete = $this->sendMessage->get('1');
+        $sendDelete2 = $this->sendMessage->get('1');
+
+        return view('pages.admin.inbox.index', compact('sendDelete', 'sendDelete2', 'sendMessage','sendMessage2','contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
     }
 
     public function contact(Faq $faq){

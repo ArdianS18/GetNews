@@ -214,6 +214,31 @@
                                         </tr> --}}
                                     @endforelse
 
+                                    @forelse ($sendDelete as $sendDelete)
+                                    <li class="trash">
+                                        <a href="javascript:void(0)"
+                                            class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
+                                            id="chat_user_{{ $sendDelete->id }}" data-user-id="{{ $sendDelete->user_id }}" data-chat-id="{{ $sendDelete->id }}">
+                                            <div class="position-relative w-100 ms-2">
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h6 class="mb-0 fw-semibold">{{ $sendDelete->user->name }}
+                                                    </h6>
+                                                    <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                        style="background-color: #175A95;">Sampah</span>
+                                                </div>
+                                                <h6 class="text-dark">{{ $sendDelete->message }}</h6>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="mb-0 fs-2 text-muted">
+                                                            {{ $sendDelete->created_at }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    @empty
+                                    @endforelse
+
                                         @forelse ($contactDelete as $contactDelete)
                                             <li class="trash">
                                                 <a href="javascript:void(0)"
@@ -480,7 +505,7 @@
                                                                     </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-contactus"
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-send"
                                                                         data-id="{{ $send2->id }}"
                                                                         href="javascript:void(0)">
                                                                         <i class="ti ti-trash fs-5"></i>
@@ -588,6 +613,7 @@
                                                 </td>
                                             </tr> --}}
                                         @endforelse
+
 
 
                                         @forelse ($reports2 as $report2)
@@ -763,6 +789,88 @@
                                                 </td>
                                             </tr> --}}
                                         @endforelse
+
+
+                                        @forelse ($sendDelete2 as $sendDel)
+                                        <div class="chat-contactDel" id="chat_contactDel_{{ $sendDel->id }}" style="display: none;">
+                                            <div class="p-9 py-3 border-bottom chat-meta-user">
+                                                <h5>Detail Sampah Pesan</h5>
+                                            </div>
+                                            <div class="position-relative overflow-hidden">
+                                                <div class="position-relative">
+                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
+                                                        <div class="chat-list chat active-chat" data-user-id="{{ $sendDel->id }}">
+                                                            <div
+                                                                class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
+                                                                <div class="d-flex align-items-center gap-2">
+                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
+                                                                        alt="user8" width="48" height="48"
+                                                                        class="rounded-circle" />
+                                                                    <div>
+                                                                        <h6 class="fw-semibold mb-0">
+                                                                            {{ $sendDel->user->name }}</h6>
+                                                                        <p class="mb-0">
+                                                                            {{ $sendDel->user->email }}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="badge fs-2 rounded-4 py-1 px-4"
+                                                                    style="background-color: #175A95;">Sampah</span>
+                                                            </div>
+                                                            <div class="border-bottom pb-7 mb-7">
+                                                                <h4 class="fw-semibold text-dark mb-3">Silakan periksa
+                                                                    pembaruan terbaru ini</h4>
+                                                                <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
+                                                                </p>
+                                                                <p class="mb-3 text-dark">
+                                                                    {{ $sendDel->message }}
+                                                                </p>
+                                                                <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque nisi magna, laoreet a augue eget, tempor volutpat diam.</p>
+                                                                <p class="mb-0 text-dark">Regards,</p>
+                                                                <h6 class="fw-semibold mb-0 text-dark pb-1">
+                                                                    {{ $sendDel->user->name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="px-9 py-3 border-top chat-send-message-footer">
+                                                        <div class="d-flex align-items-center justify-content-between">
+                                                            <ul
+                                                                class="list-unstyledn mb-0 d-flex align-items-center gap-7">
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-send"
+                                                                        data-id="{{ $sendDel->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Pulihkan
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-release-send"
+                                                                        data-id="{{ $sendDel->id }}"
+                                                                        href="javascript:void(0)">
+                                                                        <i class="ti ti-trash fs-5"></i>
+                                                                        Hapus
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        {{-- <tr class="chat-contactDel">
+                                            <td colspan="5">
+                                                <div class="d-flex justify-content-center">
+                                                    <div>
+                                                        <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <h5>Tidak ada pesan</h5>
+                                                </div>
+                                            </td>
+                                        </tr> --}}
+                                    @endforelse
                                     </div>
                                 </div>
                             </div>
@@ -837,6 +945,24 @@
     </script>
 
     <script>
+        $('.btn-delete-send').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/send/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-recovery-send').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/send-recovery/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
         $('.btn-recovery-contactus').click(function() {
             id = $(this).data('id')
             var actionUrl = `/contact-recovery/${id}`;
@@ -849,6 +975,15 @@
         $('.btn-release-contactus').click(function() {
             id = $(this).data('id')
             var actionUrl = `/contact-delete/${id}`;
+            $('#form-delete').attr('action', actionUrl);
+            $('#modal-delete').modal('show')
+        })
+    </script>
+
+    <script>
+        $('.btn-release-send').click(function() {
+            id = $(this).data('id')
+            var actionUrl = `/send-delete/${id}`;
             $('#form-delete').attr('action', actionUrl);
             $('#modal-delete').modal('show')
         })

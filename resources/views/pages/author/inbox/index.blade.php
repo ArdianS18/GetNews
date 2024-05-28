@@ -323,35 +323,6 @@
                                     @empty
                                     @endforelse
 
-                                        {{-- @forelse ($contactDelete as $contactDelete)
-                                            <li class="trash">
-                                                <a href="javascript:void(0)"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
-                                                    id="chat_user_{{ $contactDelete->id }}" data-user-id="{{ $contactDelete->user_id }}" data-chat-id="{{ $contactDelete->id }}">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
-                                                    </div>
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $contactDelete->user->name }}
-                                                            </h6>
-                                                            <span class="badge fs-2 rounded-4 py-1 px-4"
-                                                                style="background-color: #175A95;">Sampah</span>
-                                                        </div>
-                                                        <h6 class="text-dark">{{ $contactDelete->message }}</h6>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">
-                                                                    {{ $contactDelete->created_at }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @empty
-                                        @endforelse --}}
-
                                         @forelse ($reports as $report)
                                             <li class="report">
                                                 {{-- onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')" --}}

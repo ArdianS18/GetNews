@@ -32,11 +32,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = $this->sendMessage->get();
-        $message = $this->sendMessage->get();
 
-        $delete_message = $this->sendMessage->get()->whereIn('status_delete', 1);
-        return view('pages.user.inbox.index', compact('data', 'message', 'delete_message'));
+        $sendMessage = $this->sendMessage->get('0');
+        $sendMessage2 = $this->sendMessage->get('0');
+
+        $sendDelete = $this->sendMessage->get('1');
+        $sendDelete2 = $this->sendMessage->get('1');
+
+        return view('pages.user.inbox.index', compact('sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 
     public function accountUserList()
