@@ -60,4 +60,6 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
 
     public function newsSubCategory($subCategory) : mixed;
     public function newsSubCategorySearch($subCategory, mixed $query, mixed $data, $hal) : mixed;
+
+    public function findUser(mixed $user_id) : mixed;
 }
