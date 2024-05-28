@@ -2,10 +2,10 @@
 @section('title', 'Informasi Berita Terkini,Terbaru dan Akurat')
 @section('style')
     <style>
-            @media (min-width: 768px) {
-            .icon-eye {
-                margin-top: 12px;
-            }
+    @media (max-width: 768px) {
+        .img-responsive {
+            height: 300px;
+        }
     }
     </style>
 @endsection
@@ -65,7 +65,7 @@
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $newss->photo) }}" style="object-fit: cover;"
+                                    <img src="{{ asset('storage/' . $newss->photo) }}" class="img-responsive" style="object-fit: cover;"
                                         width="100%" alt="Image" height="250" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
@@ -132,7 +132,7 @@
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" width="100%"
+                                    <img src="{{ asset('storage/' . $mid->photo) }}" class="img-responsive" alt="Image" width="100%"
                                         style="object-fit: cover" height="450" />
                                 </a>
                             </div>
@@ -153,11 +153,12 @@
                             </div>
                         </div>
                     @elseif ($counter < 3)
+                    <hr>    
                         <div class="news-card-five">
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $mid->photo) }}" alt="Image" height="150"
+                                    <img src="{{ asset('storage/' . $mid->photo) }}" class="img-responsive" alt="Image" height="150"
                                         width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
@@ -197,7 +198,7 @@
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit: cover;"
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive" style="object-fit: cover;"
                                         alt="Image" height="250" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
@@ -222,7 +223,7 @@
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" style="object-fit:cover;"
+                                    <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive" style="object-fit:cover;"
                                         width="100%" height="100" alt="Image" />
                                 </a>
                             </div>
@@ -278,7 +279,7 @@
                                                 <div class="news-card-img">
                                                     <a
                                                         href="{{ route('news.user', ['news' => $pick->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                        <img src="{{ asset('storage/' . $pick->photo) }}" width="100%"
+                                                        <img src="{{ asset('storage/' . $pick->photo) }}" class="img-responsive" width="100%"
                                                             height="220" style="object-fit: cover;" alt="Image" />
                                                     </a>
                                                 </div>
@@ -340,7 +341,7 @@
                                     @endphp
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->photo) }}" alt="Image"
+                                            <img src="{{ asset('storage/' . $popular->photo) }}" class="img-responsive" alt="Image"
                                                 width="100%" height="110" style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
@@ -369,7 +370,7 @@
                                     @endphp
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}" alt="Image"
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" class="img-responsive" alt="Image"
                                                 width="100%" height="110" style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
@@ -422,7 +423,7 @@
                                 <div class="col-12">
                                     <div class="news-card-eleven">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $most->photo) }}" width="100%"
+                                            <img src="{{ asset('storage/' . $most->photo) }}"  classimg-responsive="100%"
                                                 height="500" style="object-fit: cover;" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
@@ -432,7 +433,7 @@
                                                         alt="Image" width="40px" height="40px"
                                                         style="border-radius: 50%; object-fit:cover;" />
                                                 </div>
-                                                <h5>By<a
+                                                <h5>By <a
                                                         href="{{ route('author.detail', ['id' => $most->user->slug]) }}">{{ $most->user->name }}</a>
                                                 </h5>
                                             </div>
@@ -488,7 +489,7 @@
                             <div class="col-md-6">
                                 <div class="news-card-six">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $most2->photo) }}" width="100%" height="250"
+                                        <img src="{{ asset('storage/' . $most2->photo) }}" class="img-responsive" width="100%" height="250"
                                             style="object-fit: cover;" alt="Image" />
                                         <a href="{{ route('categories.show.user', ['category' => $most2->newsCategories[0]->category->slug]) }}"
                                             class="news-cat">{{ $most2->newsCategories[0]->category->name }}</a>
@@ -549,7 +550,7 @@
                             <div class="col-xl-6">
                                 <div class="news-card-twelve">
                                     <div class="news-card-img">
-                                        <img src="{{ asset('storage/' . $general->photo) }}" alt="Image"
+                                        <img src="{{ asset('storage/' . $general->photo) }}" class="img-responsive" alt="Image"
                                             width="100%" height="130" style="object-fit: cover" />
                                     </div>
                                     <div class="news-card-info">
@@ -685,7 +686,7 @@
                                     @endphp
                                     <div class="news-card-five">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $news_latest->photo) }}" alt="Image"
+                                            <img src="{{ asset('storage/' . $news_latest->photo) }}" class="img-responsive" alt="Image"
                                                 width="100%" height="110" style="object-fit: cover" />
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
@@ -718,7 +719,7 @@
                                 @if ($counter < 1)
                                     <div class="news-card-two">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $news_latest2->photo) }}" alt="Image" />
+                                            <img src="{{ asset('storage/' . $news_latest2->photo) }}" class="img-responsive" alt="Image" />
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $news_latest2->newsCategories[0]->category->name }}</a>
                                         </div>
@@ -742,7 +743,7 @@
                                 @elseif ($counter < 3)
                                     <div class="news-card-three">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $news_latest2->photo) }}" alt="Image" />
+                                            <img src="{{ asset('storage/' . $news_latest2->photo) }}" class="img-responsive" alt="Image" />
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"

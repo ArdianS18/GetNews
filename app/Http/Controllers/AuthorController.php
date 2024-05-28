@@ -17,6 +17,7 @@ use App\Contracts\Interfaces\NewsSubCategoryInterface;
 use App\Contracts\Interfaces\NewsTagInterface;
 use App\Contracts\Interfaces\RegisterInterface;
 use App\Contracts\Interfaces\ReportInterface;
+use App\Contracts\Interfaces\SendMessageInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
 use App\Contracts\Interfaces\ViewInterface;
@@ -50,7 +51,6 @@ class AuthorController extends Controller
     private AuthorInterface $author;
     private RegisterInterface $register;
     private NewsInterface $news;
-
     private NewsRejectInterface $newsReject;
     private ViewInterface $view;
     private CategoryInterface $categories;
@@ -60,22 +60,19 @@ class AuthorController extends Controller
     private NewsCategoryInterface $newsCategories;
     private NewsSubCategoryInterface $newsSubCategories;
     private NewsPhotoInterface $newsPhoto;
-
     private NewsHasLikeInterface $newsLikes;
-
     private AuthorService $authorService;
     private RegisterService $serviceregister;
+    private ReportInterface $report;
+    private SendMessageInterface $sendMessage;
     private $authorBannedService;
 
-    private ReportInterface $report;
 
-
-    public function __construct(NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
+    public function __construct(SendMessageInterface $sendMessage,NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
     {
         $this->author = $author;
         $this->register = $register;
         $this->newsLikes = $newsLikes;
-
         $this->news = $news;
         $this->categories = $categories;
         $this->subCategories = $subCategories;
@@ -84,15 +81,13 @@ class AuthorController extends Controller
         $this->newsCategories = $newsCategories;
         $this->newsSubCategories = $newsSubCategories;
         $this->newsPhoto = $newsPhoto;
-
         $this->newsReject = $newsReject;
-
         $this->authorService = $authorService;
         $this->authorBannedService = $authorBannedService;
         $this->serviceregister = $serviceregister;
-
         $this->view = $view;
         $this->report = $report;
+        $this->sendMessage = $sendMessage;
     }
     /**
      * Display a listing of the resource.
@@ -178,7 +173,7 @@ class AuthorController extends Controller
         if (!$author->banned) {
             $this->authorBannedService->banned($author);
             $this->news->StatusBanned($author->user_id);
-            
+
             $user = $author->user;
             $email = $user->email;
             $subject = 'Pemberitahuan: Anda telah dibanned';
@@ -250,11 +245,15 @@ class AuthorController extends Controller
         $newsRejects = $this->newsReject->where(auth()->user()->id);
         $newsRejectRead = $this->newsReject->where(auth()->user()->id);
 
-        $reports = $this->report->get()->whereIn('status_delete', 0);
-        $reports2 = $this->report->get()->whereIn('status_delete', 0);
+        $reports = $this->report->whereAuthor();
+        $reports2 = $this->report->whereAuthor();
+
+        $sendMessage = $this->sendMessage->get();
+        $sendMessage2 = $this->sendMessage->get();
 
         $countReport = $this->report->count('unread');
-        return view('pages.author.inbox.index', compact('newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2'));
+
+        return view('pages.author.inbox.index', compact('newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2', 'sendMessage', 'sendMessage2'));
     }
 
     /**

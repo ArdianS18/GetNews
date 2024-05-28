@@ -37,11 +37,22 @@
 <div class="">
     <div>
         <div class="d-flex gap-2">
-            <select class="form-select" id="opsi-latest" style="width: 200px">
+            {{-- <select class="form-select" id="opsi-latest" style="width: 200px">
                 <option value="">Tampilkan semua</option>
                 <option value="terbaru">Terbaru</option>
                 <option value="terlama">Terlama</option>
-            </select>
+            </select> --}}
+            <div class="input-group" style="width: 200px">
+                <select class="form-select" name="filter">
+                    <option selected disabled>Pilih Option</option>
+                    <option value="terbaru">Terbaru</option>
+                    <option value="terlama">Terlama</option>
+                    <option value="">Tampilkan Semua</option>
+                </select>
+                <button class="btn btn-outline-primary">
+                    Pilih
+                </button>
+            </div>
 
             <select class="form-select" id="opsi-perpage" style="width: 200px">
                 <option value="10">10</option>
@@ -77,16 +88,13 @@
                                     {!! Illuminate\Support\Str::limit(strip_tags($item->content), 120, '...') !!}
                                 </p>
                                 <ul class="news-metainfo list-style">
-                                <li>
-                                    <i class="fi fi-rr-calendar-minus"></i><a href="javascript:view(0)">{{ \Carbon\Carbon::parse($item->upload_date)->format('M d Y') }}</a>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="20" height="20"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#E93314" d="M18 21H7V8l7-7l1.25 1.25q.175.175.288.475t.112.575v.35L14.55 8H21q.8 0 1.4.6T23 10v2q0 .175-.05.375t-.1.375l-3 7.05q-.225.5-.75.85T18 21m-9-2h9l3-7v-2h-9l1.35-5.5L9 8.85zM9 8.85V19zM7 8v2H4v9h3v2H2V8z" />
-                                    </svg>
-                                    {{ $item->news_has_likes_count }}
-                                </li>
+                                    <li>
+                                        <i class="fi fi-rr-calendar-minus"></i><a href="javascript:view(0)">{{ \Carbon\Carbon::parse($item->upload_date)->translatedFormat('d F Y') }}</a>
+                                    </li>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24"><path d="M4 21h1V8H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2zM20 8h-7l1.122-3.368A2 2 0 0 0 12.225 2H12L7 7.438V21h11l3.912-8.596L22 12v-2a2 2 0 0 0-2-2z" fill="#e93314"/></svg>
+                                        {{ $item->news_has_likes_count }}
+                                    </li>
                                 </ul>
                             </div>
                         </div>

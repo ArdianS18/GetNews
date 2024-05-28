@@ -25,6 +25,14 @@ class ReportRepository extends BaseRepository implements ReportInterface
         return $this->model->whereIn('status_delete', $request)->ger();
     }
 
+    public function whereAuthor(): mixed
+    {
+        return $this->model->query()
+            ->where('status_delete', 0)
+            ->whereRelation('news', 'user_id', auth()->user()->id)
+            ->get();
+    }
+
 
     /**
      * Handle show method and delete data instantly from models.

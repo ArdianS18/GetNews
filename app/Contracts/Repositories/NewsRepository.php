@@ -216,7 +216,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->paginate(8);
-            
+
     }
 
     public function getAll(): mixed
@@ -456,26 +456,16 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function showNewsStatistic(): mixed
     {
-        // return $this->model->query()
-        //     ->where('user_id', auth()->user()->id)
-        //     ->where('status', NewsStatusEnum::ACTIVE->value)
-        //     ->withCount('views')
-        //     ->orderByDesc('views_count')
-        //     ->take(3)
-        //     ->get();
-
-        $year = date('Y');
         $result = $this->model->query()
             ->where('user_id', auth()->user()->id)
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->join('views', 'news.id', '=', 'views.news_id')
-            ->select(DB::raw('DAY(news.created_at) as day'), DB::raw('COUNT(views.id) as views_count'))
-            ->groupBy('day')
-            ->orderBy('day')
+            ->withCount('views')
+            ->orderByDesc('views_count')
+            ->take(3)
             ->get();
-        
+
         $monthlyData = [];
-        $daysInMonth = date('t');
+        $daysInMonth = date('w');
         for ($i = 1; $i <= $daysInMonth; $i++) {
             $found = false;
             foreach ($result as $row) {
@@ -490,7 +480,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $monthlyData[] = 0;
             }
         }
-        
+
         return $monthlyData;
     }
 
@@ -629,12 +619,20 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->paginate($hal);
     }
 
-    public function newsLiked($id)
+    public function newsLiked($id, Request $request)
     {
         return $this->model->query()
             ->whereRelation('newsHasLikes', 'user_id', $id)
             ->withCount('newsHasLikes')
-            ->get();
+            ->when($request->filter, function ($query) use ($request) {
+                $query->when($request->filter === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+                $query->when($request->filter === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->paginate(1);
     }
 
 

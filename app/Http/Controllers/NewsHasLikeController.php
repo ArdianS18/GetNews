@@ -30,10 +30,10 @@ class NewsHasLikeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $id = auth()->user()->id;
-        $news = $this->news->newsLiked($id);
+        $news = $this->news->newsLiked($id, $request);
         return view('pages.author.news.newsliked', compact('news'));
     }
 

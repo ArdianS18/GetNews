@@ -68,11 +68,32 @@ class SendMessageController extends Controller
         //
     }
 
+    public function recovery(SendMessage $send)
+    {
+        $data = [
+            'status_delete' => 0
+        ];
+
+        $this->sendMessage->update($send->id, $data);
+        return back()->with('success', 'berhasil menghapus data');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SendMessage $sendMessage)
+    public function destroy(SendMessage $send)
     {
-        //
+        $data = [
+            'status_delete' => 1
+        ];
+
+        $this->sendMessage->update($send->id, $data);
+        return back()->with('success', 'berhasil menghapus data');
+    }
+
+    public function delete(SendMessage $send)
+    {
+        $this->sendMessage->delete($send->id);
+        return back()->with('success', 'berhasil menghapus data');
     }
 }

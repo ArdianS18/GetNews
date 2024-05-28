@@ -149,17 +149,6 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 
     // Inbox
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
-    Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
-    Route::get('contact-read/{contact}', [ContactUsController::class, 'read'])->name('contact.read');
-
-    Route::delete('report/{report}', [ReportController::class, 'destroy'])->name('report.destroy.');
-    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('report.read');
-
-    Route::delete('contact-recovery/{contact}', [ContactUsController::class, 'recovery'])->name('contact.recovery');
-    Route::delete('report-recovery/{report}', [ReportController::class, 'recovery'])->name('report.recovery');
-
-    Route::delete('contact-delete/{contact}', [ContactUsController::class, 'delete'])->name('contact.delete');
-    Route::delete('report-delete/{report}', [ReportController::class, 'delete'])->name('report.delete');
 
     Route::get('tag-admin', [TagController::class, 'index'])->name('tag.detail');
 
@@ -208,6 +197,22 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
 
     Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
     Route::delete('delete-iklan-admin/{id}', [AdvertisementController::class, 'delete'])->name('admin.destroy.iklan');
+
+    Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
+    Route::get('contact-read/{contact}', [ContactUsController::class, 'read'])->name('contact.read');
+
+    Route::delete('report/{report}', [ReportController::class, 'destroy'])->name('report.destroy.');
+    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('report.read');
+
+    Route::delete('contact-recovery/{contact}', [ContactUsController::class, 'recovery'])->name('contact.recovery');
+    Route::delete('report-recovery/{report}', [ReportController::class, 'recovery'])->name('report.recovery');
+
+    Route::delete('contact-delete/{contact}', [ContactUsController::class, 'delete'])->name('contact.delete');
+    Route::delete('report-delete/{report}', [ReportController::class, 'delete'])->name('report.delete');
+
+    Route::delete('send/{send}', [SendMessageController::class, 'destroy'])->name('send.message.destroy');
+    Route::delete('send-recovery/{send}', [SendMessageController::class, 'recovery'])->name('send.message.recovery');
+    Route::delete('send-delete/{send}', [SendMessageController::class, 'delete'])->name('send.message.delete');
 
     Route::post('send-message', [SendMessageController::class, 'store'])->name('send.message');
 });
