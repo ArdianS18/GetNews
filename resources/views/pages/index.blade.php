@@ -1,5 +1,5 @@
 @extends('layouts.user.app')
-<title>GetMedia</title>
+@section('title', 'Informasi Berita Terkini,Terbaru dan Akurat')
 @section('style')
     <style>
             @media (min-width: 768px) {
