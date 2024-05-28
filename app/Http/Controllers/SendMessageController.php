@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\SendMessageInterface;
+use App\Enums\MessageStatusEnum;
+use App\Helpers\ResponseHelper;
 use App\Models\SendMessage;
 use Illuminate\Http\Request;
 
@@ -66,6 +68,14 @@ class SendMessageController extends Controller
     public function update(Request $request, SendMessage $sendMessage)
     {
         //
+    }
+
+    public function read(SendMessage $send)
+    {
+        $data['status'] = MessageStatusEnum::READ->value;
+        $this->sendMessage->update($send->id, $data);
+
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     public function recovery(SendMessage $send)

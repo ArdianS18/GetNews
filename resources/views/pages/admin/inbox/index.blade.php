@@ -137,10 +137,10 @@
                                                 <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('contact.read', ['contact' => $contact->id]) }}')"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                     id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}" data-chat-id="{{ $contact->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
@@ -175,13 +175,13 @@
 
                                         @forelse ($sendMessage as $send)
                                         <li class="contact">
-                                            <a href="javascript:void(0)"
+                                            <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('send.message.read', ['send' => $send->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
-                                                <div class="form-check mb-0">
+                                                {{-- <div class="form-check mb-0">
                                                     <input class="form-check-input" type="checkbox" value=""
                                                         id="flexCheckDefault">
-                                                </div>
+                                                </div> --}}
                                                 <div class="position-relative w-100 ms-2">
                                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                                         <h6 class="mb-0 fw-semibold">{{ $send->user->name }}</h6>
@@ -200,19 +200,36 @@
                                             </a>
                                         </li>
                                     @empty
-                                        {{-- <tr class="contact">
-                                            <td colspan="5">
-                                                <div class="d-flex justify-content-center">
-                                                    <div>
-                                                        <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
+                                    @endforelse
+
+                                    @forelse ($reports as $report)
+                                    <li class="report">
+                                        <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('read.report', ['report' => $report->id]) }}')"
+                                            class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
+                                            id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
+                                            {{-- <div class="form-check mb-0">
+                                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            </div> --}}
+                                            <div class="position-relative w-100 ms-2">
+                                                <div
+                                                    class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
+                                                    @if ($report->status == "unread")
+                                                        <span class="badge ms-auto bg-danger">!</span>
+                                                    @endif
+                                                </div>
+                                                <h6 class="text-dark">{{ $report->message }}</h6>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
+                                                        </p>
                                                     </div>
                                                 </div>
-                                                <div class="text-center">
-                                                    <h5>Tidak ada data</h5>
-                                                </div>
-                                            </td>
-                                        </tr> --}}
-                                    @endforelse
+                                            </div>
+                                        </a>
+                                    </li>
+                                @empty
+                                @endforelse
 
                                     @forelse ($sendDelete as $sendDelete)
                                     <li class="trash">
@@ -244,10 +261,10 @@
                                                 <a href="javascript:void(0)"
                                                     class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-delete-contact"
                                                     id="chat_user_{{ $contactDelete->id }}" data-user-id="{{ $contactDelete->user_id }}" data-chat-id="{{ $contactDelete->id }}">
-                                                    <div class="form-check mb-0">
+                                                    {{-- <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" value=""
                                                             id="flexCheckDefault">
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="position-relative w-100 ms-2">
                                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                                             <h6 class="mb-0 fw-semibold">{{ $contactDelete->user->name }}
@@ -268,49 +285,6 @@
                                             </li>
                                         @empty
                                             {{-- <tr class="trash">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada data</h5>
-                                                    </div>
-                                                </td>
-                                            </tr> --}}
-                                        @endforelse
-
-                                        @forelse ($reports as $report)
-                                            <li class="report">
-                                                <a href="javascript:void(0)" onclick="loadRouteReport(event, '{{ route('report.read', ['report' => $report->id]) }}')"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-report"
-                                                    id="chat_user_{{ $report->id }}" data-user-id="{{ $report->user_id }}" data-chat-id="{{ $report->id }}">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    </div>
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $report->user->name }}</h6>
-                                                            {{-- <span class="badge fs-2 rounded-4 py-1 px-3"
-                                                                style="background-color: #FA896B;">Laporan</span> --}}
-                                                            @if ($report->status == "unread")
-                                                                <span class="badge ms-auto bg-danger">!</span>
-                                                            @endif
-                                                        </div>
-                                                        <h6 class="text-dark">{{ $report->message }}</h6>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @empty
-                                            {{-- <tr class="report">
                                                 <td colspan="5">
                                                     <div class="d-flex justify-content-center">
                                                         <div>
@@ -898,26 +872,39 @@
                     modal.modal('show');
                 });
             });
+
+            const contactButton = document.getElementById("contactButton");
+            const reportButton = document.getElementById("reportButton");
+            const trashButton = document.getElementById("trashButton");
+
+            contactButton.addEventListener("click", function() {
+                toggleItems("contact");
+            });
+
+            reportButton.addEventListener("click", function() {
+                toggleItems("report");
+            });
+
+            trashButton.addEventListener("click", function() {
+                toggleItems("trash");
+            });
+
+            function toggleItems(category) {
+                const allItems = document.querySelectorAll(".chat-users li");
+                allItems.forEach(function(item) {
+                    if (item.classList.contains(category)) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            }
+
         });
     </script>
 
     <script>
         function loadRouteContent(event, route) {
-            event.preventDefault();
-
-            $.ajax({
-                url: route,
-                type: 'GET',
-                success: function (response) {
-                    $('#content-container').html(response);
-                },
-                error: function (xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-
-        function loadRouteReport(event, route) {
             event.preventDefault();
 
             $.ajax({
@@ -1016,36 +1003,10 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const contactButton = document.getElementById("contactButton");
-            const reportButton = document.getElementById("reportButton");
-            const trashButton = document.getElementById("trashButton");
-
-            contactButton.addEventListener("click", function() {
-                toggleItems("contact");
-            });
-
-            reportButton.addEventListener("click", function() {
-                toggleItems("report");
-            });
-
-            trashButton.addEventListener("click", function() {
-                toggleItems("trash");
-            });
-
-            function toggleItems(category) {
-                const allItems = document.querySelectorAll(".chat-users li");
-                allItems.forEach(function(item) {
-                    if (item.classList.contains(category)) {
-                        item.style.display = "block";
-                    } else {
-                        item.style.display = "none";
-                    }
-                });
-            }
         });
-    </script>
+    </script> --}}
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
