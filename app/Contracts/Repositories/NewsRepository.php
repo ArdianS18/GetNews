@@ -619,12 +619,20 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->paginate($hal);
     }
 
-    public function newsLiked($id)
+    public function newsLiked($id, Request $request)
     {
         return $this->model->query()
             ->whereRelation('newsHasLikes', 'user_id', $id)
             ->withCount('newsHasLikes')
-            ->get();
+            ->when($request->filter, function ($query) use ($request) {
+                $query->when($request->filter === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+                $query->when($request->filter === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->paginate(1);
     }
 
 

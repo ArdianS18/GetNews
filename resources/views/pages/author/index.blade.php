@@ -307,6 +307,11 @@
                     @enderror
                 </div>
                 <div class="col-md-12 col-lg-12 mb-4">
+                  <label class="form-label" for="email">deskripsi</label>
+                  <input type="text" id="email" name="email" placeholder="Hallo"
+                  value="{{ auth()->user()->deskripsi }}" class="form-control @error('email') is-invalid @enderror" readonly>
+                </div>
+                <div class="col-md-12 col-lg-12 mb-4">
                   <label class="form-label" for="email">Alamat</label>
                   <textarea name="alamat" class="form-control" id="" cols="30" rows="10" readonly>{{ auth()->user()->address }}</textarea>
                 </div>
