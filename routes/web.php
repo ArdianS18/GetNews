@@ -203,7 +203,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::get('contact-read/{contact}', [ContactUsController::class, 'read'])->name('contact.read');
 
     Route::delete('report/{report}', [ReportController::class, 'destroy'])->name('report.destroy.');
-    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('report.read');
+    Route::get('report-read/{report}', [ReportController::class, 'read'])->name('read.report');
 
     Route::delete('contact-recovery/{contact}', [ContactUsController::class, 'recovery'])->name('contact.recovery');
     Route::delete('report-recovery/{report}', [ReportController::class, 'recovery'])->name('report.recovery');
