@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePasswordRequest extends FormRequest
 {
-   
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -17,7 +15,8 @@ class UpdatePasswordRequest extends FormRequest
     {
         return [
             'current_password' => 'required|current_password',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8|confirmed|same:password_confirmation',
+            'password_confirmation' => 'required|same:password|min:8',
         ];
     }
 

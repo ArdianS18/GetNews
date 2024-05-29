@@ -26,47 +26,47 @@
 </div>
 
 <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label"
-aria-hidden="true">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <!-- Modal content -->
-        <div class="modal-header">
-            <h3 class="modal-title">Detail data User</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <!-- Modal body -->
-        <div class="modal-body">
-            <div class="d-flex justify-content-center">
-                <img src="" class="rounded-circle mb-4" id="detail-photo" width="150"
-                    alt="photo-siswa" height="150" />
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal content -->
+            <div class="modal-header">
+                <h3 class="modal-title">Detail data User</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="font-weight: bold;">Nama : <span
-                                    id="detail-name" style="font-weight: normal;"></span>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                    <img src="" class="rounded-circle mb-4" id="detail-photo" width="150"
+                        alt="photo-siswa" height="150" />
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" style="font-weight: bold;">Nama : <span
+                                        id="detail-name" style="font-weight: normal;"></span>
+                                </li>
+                                <li class="list-group-item" style="font-weight: bold;">Nomer Telepon : <span
+                                    id="detail-phone_number" style="font-weight: normal;"></span>
                             </li>
-                            <li class="list-group-item" style="font-weight: bold;">Nomer Telepon : <span
-                                id="detail-phone_number" style="font-weight: normal;"></span>
-                        </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" style="font-weight: bold;">Email: <span
-                                id="detail-email" style="font-weight: normal;"></span></li>
-                        </ul>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" style="font-weight: bold;">Email: <span
+                                    id="detail-email" style="font-weight: normal;"></span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-light-danger mt-3 text-danger"
-                data-bs-dismiss="modal">Tutup</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-danger mt-3 text-danger"
+                    data-bs-dismiss="modal">Tutup</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="table-responsive rounded-2 mt-4">

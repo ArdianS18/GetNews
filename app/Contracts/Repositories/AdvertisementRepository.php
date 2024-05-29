@@ -131,19 +131,8 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
                     $terlama->oldest()->get();
                 });
             })
-            ->when($request->perpage, function ($query) use ($request) {
-                $query->when($request->perpage === '10', function ($var) {
-                    $var->take(10);
-                });
-                $query->when($request->perpage === '20', function ($var) {
-                    $var->take(20);
-                });
-                $query->when($request->perpage === '50', function ($var) {
-                    $var->take(50);
-                });
-                $query->when($request->perpage === '100', function ($var) {
-                    $var->take(100);
-                });
+            ->when($request->jenis, function ($query) use ($request) {
+                $query->where('type', $request->jenis)->get();
             })
             ->fastPaginate($pagination);
     }
