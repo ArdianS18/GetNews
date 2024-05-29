@@ -440,7 +440,7 @@
                             font-weight-medium
                             ">Aktif</div>`
                 banned = `
-                <a data-id="${data.id}" data-bs-toggle="tooltip" title="Blokir" class="btn blokir btn-sm btn-danger">
+                <a data-id="${data.user_id}" data-bs-toggle="tooltip" title="Blokir" class="btn blokir btn-sm btn-danger">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 512 512"><circle cx="256" cy="256" r="208" fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="#ffffff" stroke-miterlimit="10" stroke-width="32" d="m108.92 108.92l294.16 294.16"/></svg>
                             </a>
                 `
@@ -453,7 +453,7 @@
                             font-weight-medium
                             ">Blokir</div>`
                 banned = `
-                <a data-id="${data.id}" data-bs-toggle="tooltip" title="Buka Blokir" class="btn unblock btn-sm btn-success">
+                <a data-id="${data.user_id}" data-bs-toggle="tooltip" title="Buka Blokir" class="btn unblock btn-sm btn-success">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#fff" d="M6.615 9H15V7q0-1.25-.875-2.125T12 4q-1.25 0-2.125.875T9 7H8q0-1.671 1.164-2.836T12 3q1.671 0 2.836 1.164T16 7v2h1.385q.666 0 1.14.475q.475.474.475 1.14v8.77q0 .666-.475 1.14q-.474.475-1.14.475H6.615q-.666 0-1.14-.475Q5 20.051 5 19.385v-8.77q0-.666.475-1.14Q5.949 9 6.615 9M12 16.5q.633 0 1.066-.434q.434-.433.434-1.066t-.434-1.066Q12.633 13.5 12 13.5t-1.066.434Q10.5 14.367 10.5 15t.434 1.066q.433.434 1.066.434"/></svg>
                 </a>
 

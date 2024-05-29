@@ -3,24 +3,36 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Author;
 
 class AuthorBannedService
 {
     public function banned(User $user)
     {
-        $user->update([
-            'banned' => true,
-            'status' => 'reject'
-        ]);
+        $user->status_banned = 1;
+        $user->save();
+    
+    
+        if ($user->author) {
+            $author = Author::find($user->author->id);
+            if ($author) {
+                $author->status = 'reject';
+                $author->save();
+            }
+        }
         
     }
 
     public function unBanned(User $user)
     {
-        $user->update([
-            'banned' => false,
-            'status' => 'approved'
-        ]);
-        
+        $user->status_banned = 0;
+        $user->save();
+        if ($user->author) {
+            $author = Author::find($user->author->id);
+            if ($author) {
+                $author->status = 'approved';
+                $author->save();
+            }
+        }
     }
 }

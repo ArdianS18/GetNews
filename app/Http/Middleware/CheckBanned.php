@@ -16,7 +16,7 @@ class CheckBanned
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->banned) {
+        if (Auth::check() && Auth::user()->status_banned) {
             Auth::logout();
             return redirect('/login')->withErrors(['Akun anda telah di banned.Jika ada pertanyaan silahkan hubungi kami!']);
         }
