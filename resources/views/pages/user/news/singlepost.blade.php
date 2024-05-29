@@ -6,7 +6,7 @@
             border-left: 5px solid #ffffff;
             padding: 10px 20px;
             margin: 20px 0;
-            background: #6b6b6b;
+            background: #1d1d1d;
             font-style: italic;
         }
         .quote-box {
