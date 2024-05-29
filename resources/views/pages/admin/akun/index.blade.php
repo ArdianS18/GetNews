@@ -1,56 +1,43 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    <div class="mb-4 mt-2 d-flex justify-content-between">
-        <div class="gap-2">
-            <form class="d-flex gap-2">
-                <div>
-                    <div class="position-relative d-flex">
-                        <div class="">
-                            <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5"
-                                id="search-name" placeholder="Search">
-                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+    {{-- <div class="mb-4 mt-2 d-flex justify-content-between"> --}}
+        <div class="row">
+            <div class="col-12 mb-3">
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                    <form>
+                        <div>
+                            <div class="position-relative d-flex">
+                                <div class="">
+                                    <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" id="search-name" placeholder="Search">
+                                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                                </div>
+                            </div>
                         </div>
+                    </form>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" style="width: 150px; background-color: #175A95;" class="btn btn-md text-white px-4"
+                            data-bs-toggle="modal" data-bs-target="#modal-create">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                                <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                            </svg>
+                            Tambah
+                        </button>
                     </div>
                 </div>
-
-                {{-- <div>
-                    <div class="d-flex gap-2">
-                        <div class="position-relative">
-                        <select class="form-select" id="search-role" style="width: 150px">
-                            <option value="">Pilih Role</option>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
-                        </select>
-                        </div>
-                    </div>
-                </div> --}}
-            </form>
+            </div>
         </div>
-
-        <div class="d-flex justify-content-end">
-            <button type="button" style="background-color: #175A95;" class="btn btn-md text-white px-4"
-                data-bs-toggle="modal" data-bs-target="#modal-create">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                </svg>
-                Tambah
-            </button>
-        </div>
-    </div>
+    {{-- </div> --}}
 
     <div class="row" id="data">
 
 
     </div>
-
-    <div class="d-flex mt-2 mx-4 justify-content-center">
         <div id="loading"></div>
         <div class="d-flex mt-2 mx-4 justify-content-end">
             <nav id="pagination">
             </nav>
         </div>
-    </div>
 
     <div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="tambahdataLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -93,13 +80,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                            <div class="col-lg-6 mb-3">
-                                <label for="role" class="form-label">Role:</label>
-                                <select name="role" class="form-select" id="role">
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -153,13 +133,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
-                            <div class="col-lg-6 mb-3">
-                                <label for="role" class="form-label">Role:</label>
-                                <select name="role" class="form-select" id="role">
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>
-                                </select>
                             </div>
                         </div>
                     </div>

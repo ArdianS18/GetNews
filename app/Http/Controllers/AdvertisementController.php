@@ -58,7 +58,7 @@ class AdvertisementController extends Controller
     public function indexApproved(Request $request, Advertisement $advertisement)
     {
         if ($request->has('page')) {
-            $advertisement = $this->advertisement->customPaginate2($request, 10);
+            $advertisement = $this->advertisement->customPaginateApproved($request, 10);
             $data['paginate'] = [
                 'current_page' => $advertisement->currentPage(),
                 'last_page' => $advertisement->lastPage(),

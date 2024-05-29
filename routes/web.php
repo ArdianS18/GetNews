@@ -160,7 +160,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::put('update-tag/{tag}', [TagController::class, 'update'])->name('tag.update');
     Route::delete('delete-tag/{tag}', [TagController::class, 'destroy'])->name('delete.tag');
 
-    Route::get('add-account',function(){
+    Route::get('admin-account',function(){
         return view('pages.admin.akun.index');
     })->name('account.admin.list');
     Route::get('account-list', [DashboardController::class, 'createAccount'])->name('account.admin');

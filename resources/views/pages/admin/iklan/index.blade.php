@@ -1,38 +1,36 @@
 @extends('layouts.admin.app')
 @section('content')
 
-<div class="d-flex gap-2">
-    <form class="d-flex gap-2">
-        <div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+        <form class="d-flex gap-2">
             <div class="position-relative d-flex">
-                <div class="input-group">
-                    <input type="text" name="search"
-                        class="form-control search-chat py-2 px-5 ps-5" style="width: 200px" id="search-name" placeholder="Search">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5"
+                    id="search-name" placeholder="Search">
+                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+            </div>
+
+            <div>
+                <div class="d-flex">
+                    <select class="form-select" id="opsi-latest">
+                        <option disabled selected>Pilih opsi</option>
+                        <option value="terbaru">Terbaru</option>
+                        <option value="terlama">Terlama</option>
+                    </select>
                 </div>
             </div>
-        </div>
 
-        <div>
-            <div class="d-flex gap-2">
-                <select class="form-select" id="opsi-latest" style="width: 200px">
-                    <option disabled>Pilih opsi</option>
-                    <option value="terbaru">Terbaru</option>
-                    <option value="terlama">Terlama</option>
-                </select>
+            <div>
+                <div class="d-flex">
+                    <select class="form-select" id="opsi-jenis">
+                        <option disabled selected>Pilih jenis</option>
+                        <option value="foto">Foto</option>
+                        <option value="vidio">Video</option>
+                    </select>
+                </div>
             </div>
-        </div>
-
-        <div>
-            <div class="d-flex gap-2">
-                <select class="form-select" id="opsi-jenis" style="width: 200px">
-                    <option disabled>Pilih jenis</option>
-                    <option value="foto">Foto</option>
-                    <option value="vidio">Video</option>
-                </select>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label"
@@ -101,21 +99,24 @@
     </div>
 </div>
 
-<div class="table-responsive rounded-2 mt-4">
-    <table class="table border text-nowrap customize-table mb-0 align-middle ">
-        <thead>
-            <tr>
-                <th style="background-color: #D9D9D9;">No</th>
-                <th style="background-color: #D9D9D9;">Nama</th>
-                <th style="background-color: #D9D9D9;">Jenis Iklan</th>
-                <th style="background-color: #D9D9D9;">Halaman</th>
-                <th style="background-color: #D9D9D9;">Posisi Iklan</th>
-                <th style="background-color: #D9D9D9;">Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="data">
-        </tbody>
-    </table>
+<div class="mt-4">
+    <div class="table-responsive rounded-2 mb-3">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
+            <thead>
+                <tr>
+                    <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">No</th>
+                    <th style="background-color: #D9D9D9;">Nama</th>
+                    <th style="background-color: #D9D9D9;">Jenis Iklan</th>
+                    <th style="background-color: #D9D9D9;">Halaman</th>
+                    <th style="background-color: #D9D9D9;">Posisi Iklan</th>
+                    <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+            </tbody>
+        </table>
+    </div>
+
     <div id="loading"></div>
     <div class="d-flex mt-2 justify-content-end">
         <nav id="pagination">
