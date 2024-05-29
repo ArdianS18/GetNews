@@ -20,6 +20,8 @@ class VerifyCsrfToken extends Middleware
         'coin-add',
         'register',
         'comment-delete/*',
-        'comment-report/*'
+        'comment-report/*',
+        'approved-advertisement/*',
+        'delete-iklan-admin/*',
     ];
 }

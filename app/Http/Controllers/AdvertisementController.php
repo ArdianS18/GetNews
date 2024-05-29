@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\AdvertisementInterface;
 use App\Contracts\Interfaces\AdvertisementPhotoInterface;
 use App\Enums\AdvertisementStatusEnum;
+use App\Enums\NewsStatusEnum;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\AdvertisementRequest;
 use App\Http\Requests\AdvetisementRequest;
@@ -52,9 +53,22 @@ class AdvertisementController extends Controller
             $data = AdvertisementResource::collection($advertisement);
         }
         return ResponseHelper::success($data);
+    }
 
-        // $advertisements = $this->advertisement->where('admin');
-        // return view('pages.admin.iklan.index', compact('advertisements'));
+    public function indexApproved(Request $request, Advertisement $advertisement)
+    {
+        if ($request->has('page')) {
+            $advertisement = $this->advertisement->customPaginate2($request, 10);
+            $data['paginate'] = [
+                'current_page' => $advertisement->currentPage(),
+                'last_page' => $advertisement->lastPage(),
+            ];
+            $data['data'] = AdvertisementResource::collection($advertisement);
+        } else {
+            $advertisement = $this->advertisement->search($request);
+            $data = AdvertisementResource::collection($advertisement);
+        }
+        return ResponseHelper::success($data);
     }
 
     public function advertisementStore()
@@ -89,6 +103,13 @@ class AdvertisementController extends Controller
         return view('pages.user.iklan.pembayaran', compact('advertisement'));
     }
 
+    public function approved(Advertisement $advertisement)
+    {
+        $data['status'] = AdvertisementStatusEnum::ACCEPTED->value;
+        $this->advertisement->update($advertisement->id,$data);
+        return ResponseHelper::success(null);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -110,7 +131,6 @@ class AdvertisementController extends Controller
      */
     public function destroy($id)
     {
-        // dd($advertisement);
         $this->advertisement->delete($id);
         return back();
     }
@@ -118,10 +138,10 @@ class AdvertisementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function delete($id)
+    public function delete(Advertisement $advertisement)
     {
         try {
-            $this->advertisement->delete($id);
+            $this->advertisement->delete($advertisement->id);
             return ResponseHelper::success(null, trans('alert.delete_success'));
         } catch (\Exception $e) {
             return ResponseHelper::error(trans('alert.delete_error'), 500);

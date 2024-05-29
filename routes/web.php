@@ -174,6 +174,14 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         return view('pages.admin.iklan.index');
     })->name('iklan.admin.list');
 
+    Route::get('advertisement', [AdvertisementController::class, 'indexApproved'])->name('iklan.list.approved');
+    Route::get('advertisement-approved-list', function () {
+        return view('pages.admin.iklan.approve-list');
+    })->name('advertisement.approved.list');
+
+    Route::post('approved-advertisement/{advertisement}', [AdvertisementController::class, 'approved'])->name('approved.advertisement');
+    Route::delete('delete-iklan-admin/{advertisement}', [AdvertisementController::class, 'delete'])->name('admin.destroy.iklan');
+
     Route::get('detail-iklan', function () {
         return view('pages.admin.iklan.detail-iklan');
     })->name('admin.detail.iklan');
@@ -199,7 +207,6 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user','check.banned'])-
     Route::get('profile-create', [NewsController::class, 'createnews'])->name('profile.berita.create');
 
     Route::delete('delete-iklan/{id}', [AdvertisementController::class, 'destroy'])->name('destroy.iklan');
-    Route::delete('delete-iklan-admin/{id}', [AdvertisementController::class, 'delete'])->name('admin.destroy.iklan');
 
     Route::delete('contact/{contact}', [ContactUsController::class, 'destroy'])->name('contact.destroy');
     Route::get('contact-read/{contact}', [ContactUsController::class, 'read'])->name('contact.read');

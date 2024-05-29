@@ -118,7 +118,29 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-            ->where('status', "pending")
+            ->where('status', AdvertisementStatusEnum::PENDING->value)
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('type', 'LIKE', '%' .  $request->name . '%');
+            })
+            ->when($request->latest, function ($query) use ($request) {
+                $query->when($request->latest === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+
+                $query->when($request->latest === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->when($request->jenis, function ($query) use ($request) {
+                $query->where('type', $request->jenis)->get();
+            })
+            ->fastPaginate($pagination);
+    }
+
+    public function customPaginateApproved(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->where('status', AdvertisementStatusEnum::ACCEPTED->value)
             ->when($request->name, function ($query) use ($request) {
                 $query->where('type', 'LIKE', '%' .  $request->name . '%');
             })
