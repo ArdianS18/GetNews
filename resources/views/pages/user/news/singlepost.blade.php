@@ -725,7 +725,7 @@
                                                                     </svg>
                                                                 </a>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    @if (Auth::check() && $comment->user_id == auth()->user()->id)
+                                                                    @if (Auth::check() && $comment->user_id === auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
@@ -736,7 +736,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif (Auth::check() && $comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $comment->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author"))
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit

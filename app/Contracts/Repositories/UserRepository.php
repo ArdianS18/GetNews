@@ -74,10 +74,11 @@ class UserRepository extends BaseRepository implements UserInterface
         ->firstOrFail();
     }
 
-    public function whereUser(): mixed
+    public function whereUser(Request $request): mixed
     {
         return $this->model->query()
             ->whereRelation('roles', 'name', 'user')
+            ->when()
             ->get();
     }
 
