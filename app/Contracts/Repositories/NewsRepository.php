@@ -653,6 +653,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function newsLiked($id, Request $request)
     {
         return $this->model->query()
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereRelation('newsHasLikes', 'user_id', $id)
             ->withCount('newsHasLikes')
             ->when($request->filter, function ($query) use ($request) {
