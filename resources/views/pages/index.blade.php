@@ -702,7 +702,7 @@
                             </a>
                             <p>Mauris mattis auctor cursus. Phasellus iso tellus tellus, imperdiet ut imperdiet eu,
                                 noiaculis a sem Donec vehicula luctus nunc in laoreet Aliquam</p>
-                            <ul class="social-profile list-style">
+                            {{-- <ul class="social-profile list-style">
                                 <li>
                                     <a href="https://www.fb.com/" target="_blank"><i class="flaticon-facebook-1"></i></a>
                                 </li>
@@ -718,7 +718,21 @@
                                     <a href="https://www.linkedin.com/" target="_blank"><i
                                             class="flaticon-linkedin"></i></a>
                                 </li>
-                            </ul>
+                            </ul> --}}
+                            <ul class="social-profile list-style">
+                                <li>
+                                  <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
+                                </li>
+                                <li>
+                                  <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
+                                </li>
+                                <li>
+                                  <a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a>
+                                </li>
+                                <li>
+                                  <a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                                </li>
+                              </ul>
                         </div>
                     </div>
                     <div class="sidebar-widget">
