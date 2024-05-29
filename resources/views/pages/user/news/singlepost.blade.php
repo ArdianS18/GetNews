@@ -642,7 +642,7 @@
                                                 <label for="reportReason">Alasan</label>
                                                 <textarea name="content" class="form-control" id="reportReason" rows="3" required></textarea>
                                             </div>
-                                            <input type="hidden" id="commentId" name="commentId" />
+                                            <input type="hidden" id="commentId" name="commentId"/>
                                             <div class="d-flex justify-content-end mt-4">
                                                 <button type="submit" class="btn btn-primary">Submit Report</button>
                                             </div>
@@ -665,7 +665,7 @@
                                             <div class="form-group">
                                                 <label for="deleteReason">Yakin ingin menghapus komentar anda?</label>
                                             </div>
-                                            <input type="hidden" id="commentId" name="commentId" />
+                                            {{-- <input type="hidden" id="commentId" name="commentId" /> --}}
                                             <div class="d-flex justify-content-end mt-4 gap-2">
                                                 <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Tidak</button>
                                                 <button type="submit" class="btn btn-primary">Hapus</button>
