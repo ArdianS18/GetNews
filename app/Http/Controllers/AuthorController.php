@@ -311,7 +311,7 @@ class AuthorController extends Controller
         $user_id = $news->pluck('user_id');
         $author_id = auth()->user()->author->id;
         $count = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
-        $newsStatistics = $this->news->showNewsStatistic();
+        $newsStatistics = $this->view->newsStatistic();
         // dd($newsStatistics);
 
         $view = $this->view->where();

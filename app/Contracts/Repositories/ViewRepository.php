@@ -113,13 +113,41 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
     public function newsStatistic(): mixed
     {
-        return $this->model->query()
-        ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
-        ->select('news_id', DB::raw('COUNT(*) as total'), DB::raw('DAY(created_at) as day'))
-        ->groupBy('news_id')
-        ->orderBy('day')
-        ->orderBy('total', 'desc')
-        ->take(3)
-        ->get();
+        $startDate = Carbon::now()->subDays(6)->startOfDay();
+        $endDate = Carbon::now()->endOfDay();
+
+        // Get top 3 trending news IDs based on total views in the past 7 days
+        $topNewsIds = $this->model->query()
+            ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('news_id')
+            ->orderBy('total', 'desc')
+            ->take(3)
+            ->pluck('news_id');
+
+        // Get daily views for each of the top 3 news items
+        $dailyViews = $this->model->query()
+            ->whereIn('news_id', $topNewsIds)
+            ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+            ->select('news_id', DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('news_id', 'date')
+            ->orderBy('date', 'asc')
+            ->get()
+            ->groupBy('news_id');
+
+        $result = [];
+        foreach ($topNewsIds as $newsId) {
+            $views = $dailyViews->get($newsId, collect())->keyBy('date');
+            $dailyData = [];
+            for ($i = 6; $i >= 0; $i--) {
+                $date = Carbon::now()->subDays($i)->toDateString();
+                $dailyData[$date] = $views->get($date, (object)['total' => 0])->total;
+            }
+            $result[$newsId] = $dailyData;
+        }
+
+        return $result;
     }
 }
