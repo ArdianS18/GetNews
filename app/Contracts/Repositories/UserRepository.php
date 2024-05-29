@@ -74,6 +74,14 @@ class UserRepository extends BaseRepository implements UserInterface
         ->firstOrFail();
     }
 
+    public function whereUser(Request $request): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('roles', 'name', 'user')
+            ->when()
+            ->get();
+    }
+
     /**
      * Handle the Get all data event from models.
      *

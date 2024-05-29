@@ -12,8 +12,10 @@ use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInterface;
 use App\Contracts\Interfaces\Eloquent\WhereRelationInterface;
+use Illuminate\Http\Request;
 
 interface UserInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, WhereRelationInterface, CustomPaginationInterface, ShowSlugInterface
 {
     public function showWhithCount() : mixed;
+    public function whereUser(Request $request) : mixed;
 }

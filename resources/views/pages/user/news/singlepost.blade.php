@@ -2,6 +2,13 @@
 
 <head>
     <style>
+        .theme-dark blockquote{
+            border-left: 5px solid #ffffff;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background: #1d1d1d;
+            font-style: italic;
+        }
         .quote-box {
             border-left: 5px solid #183249;
             padding: 10px 20px;
@@ -642,7 +649,7 @@
                                                 <label for="reportReason">Alasan</label>
                                                 <textarea name="content" class="form-control" id="reportReason" rows="3" required></textarea>
                                             </div>
-                                            <input type="hidden" id="commentId" name="commentId" />
+                                            <input type="hidden" id="commentId" name="commentId"/>
                                             <div class="d-flex justify-content-end mt-4">
                                                 <button type="submit" class="btn btn-primary">Submit Report</button>
                                             </div>
@@ -660,8 +667,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form id="deleteForm" method="GET" action="/comment-delete/">
+                                    <div class="modal-body" method="delete">
+                                        <form id="deleteForm">
                                             <div class="form-group">
                                                 <label for="deleteReason">Yakin ingin menghapus komentar anda?</label>
                                             </div>
@@ -725,7 +732,7 @@
                                                                     </svg>
                                                                 </a>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    @if (Auth::check() && $comment->user_id == auth()->user()->id)
+                                                                    @if (Auth::check() && $comment->user_id === auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
@@ -736,7 +743,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif ($comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $comment->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author") && $reply->user_id != auth()->user()->author->user_id)
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
@@ -749,7 +756,7 @@
                                                                         </li>
                                                                     @endif
 
-                                                                    @if ($comment->user_id != auth()->user()->id)
+                                                                    @if (Auth::check() && $comment->user_id != auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm report-icon" data-id="{{ $comment->id }}">
                                                                                 Laporkan
@@ -848,7 +855,7 @@
                                                                     </svg>
                                                                 </a>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    @if (Auth::check() && $reply->user_id == auth()->user()->id)
+                                                                    @if (Auth::check() && $reply->user_id === auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
@@ -859,7 +866,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif ($reply->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $reply->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author") && $reply->user_id != auth()->user()->author->user_id)
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
@@ -872,7 +879,7 @@
                                                                         </li>
                                                                     @endif
 
-                                                                    @if ($reply->user_id != auth()->user()->id)
+                                                                    @if (Auth::check() && $reply->user_id != auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm report-icon" data-id="{{ $reply->id }}">
                                                                                 Laporkan
