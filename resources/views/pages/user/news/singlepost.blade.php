@@ -2,6 +2,13 @@
 
 <head>
     <style>
+        .theme-dark blockquote{
+            border-left: 5px solid #ffffff;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background: #6b6b6b;
+            font-style: italic;
+        }
         .quote-box {
             border-left: 5px solid #183249;
             padding: 10px 20px;
