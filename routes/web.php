@@ -75,7 +75,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
-    Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
+    Route::put('banned-author/{author}', [UserController::class, 'banned'])->name('banned.author'); //fungsi banned author
     // Approved And Reject Author
     Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved'); //fungsi approved author
     Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject'); // fungsi reject author
