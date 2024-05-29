@@ -30,7 +30,7 @@ class AuthorBannedService
         if ($user->author) {
             $author = Author::find($user->author->id);
             if ($author) {
-                $author->status = 'reject';
+                $author->status = 'approved';
                 $author->save();
             }
         }
