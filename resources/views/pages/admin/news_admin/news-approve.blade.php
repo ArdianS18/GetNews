@@ -10,6 +10,10 @@
     </style>
 @endsection
 
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
 @section('content')
 <div class="">
     <div class="d-flex gap-2 mb-3 mt-2">
@@ -74,6 +78,29 @@
 @endsection
 
 @section('script')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        @if (session('success'))
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if (session('draft'))
+            Swal.fire({
+                title: 'Success Draft!',
+                text: '{{ session('draft') }}',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous">
 </script>
@@ -120,7 +147,7 @@
             }, 500);
         });
 
-        
+
         function splitDate(dateString) {
             const months = {
                 "Januari": 1,

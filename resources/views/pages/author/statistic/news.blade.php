@@ -309,35 +309,132 @@
         var chart = new ApexCharts(document.querySelector("#chart-info"), options);
         chart.render();
 
-        var news_statistic = <?php echo json_encode($newsStatistics); ?>;
-        var newsString = JSON.stringify(news_statistic);
-        var dataNews = JSON.parse(newsString);
+        // var news_statistic = <?php echo json_encode($newsStatistics); ?>;
+        // var newsString = JSON.stringify(news_statistic);
+        // var dataNews = JSON.parse(newsString);
 
-        var news = [];
+        // var news = [];
+        // for (var key in dataNews) {
+        //     if (dataNews.hasOwnProperty(key)) {
+        //         news.push(dataNews[key]);
+        //     }
+        // }
+
+        // var options1 = {
+        //     series: [{
+        //             name: "Terbawah",
+        //             data: news
+        //         },
+        //         {
+        //             name: "Teratas",
+        //             data: news
+        //         },
+        //         {
+        //             name: 'Menengah',
+        //             data: news
+        //         }
+        //     ],
+        //     chart: {
+        //         height: 350,
+        //         type: 'bar',
+
+        //     },
+        //     dataLabels: {
+        //         enabled: false
+        //     },
+        //     stroke: {
+        //         width: [5, 7, 5],
+        //         curve: 'smooth',
+        //         dashArray: [0]
+        //     },
+        //     legend: {
+        //         tooltipHoverFormatter: function(val, opts) {
+        //             return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+        //                 '</strong>'
+        //         }
+        //     },
+        //     markers: {
+        //         size: 0,
+        //         hover: {
+        //             sizeOffset: 6
+        //         }
+        //     },
+        //     xaxis: {
+        //         categories: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu',],
+        //     },
+        //     tooltip: {
+        //         y: [{
+        //                 title: {
+        //                     formatter: function(val) {
+        //                         return val + " (mins)"
+        //                     }
+        //                 }
+        //             },
+        //             {
+        //                 title: {
+        //                     formatter: function(val) {
+        //                         return val + " per session"
+        //                     }
+        //                 }
+        //             },
+        //             {
+        //                 title: {
+        //                     formatter: function(val) {
+        //                         return val;
+        //                     }
+        //                 }
+        //             }
+        //         ]
+        //     },
+        //     grid: {
+        //         borderColor: '#f1f1f1',
+        //     },
+        //     colors: ['#FFD643', '#175A95', '#EF6E6E'] // Ubah warna masing-masing chart di sini
+        // };
+
+        // var chart1 = new ApexCharts(document.querySelector("#chart-trending"), options1);
+        // chart1.render();
+
+        var news_statistic = <?php echo json_encode($newsStatistics); ?>;
+        var dataNews = JSON.parse(JSON.stringify(news_statistic));
+
+        var categories = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+        var today = new Date();
+        var days = [];
+        for (var i = 6; i >= 0; i--) {
+            var day = new Date(today);
+            day.setDate(today.getDate() - i);
+            var options = { weekday: 'long' };
+            days.push(day.toLocaleDateString('id-ID', options));
+        }
+
+        var news = [[], [], []];
+        var i = 0;
         for (var key in dataNews) {
             if (dataNews.hasOwnProperty(key)) {
-                news.push(dataNews[key]);
+                news[i] = Object.values(dataNews[key]);
+                i++;
             }
         }
 
         var options1 = {
-            series: [{
+            series: [
+                {
                     name: "Terbawah",
-                    data: news
+                    data: news[2]
                 },
                 {
-                    name: "Teratas",
-                    data: news
+                    name: "Menengah",
+                    data: news[1]
                 },
                 {
-                    name: 'Menengah',
-                    data: news
+                    name: 'Teratas',
+                    data: news[0]
                 }
             ],
             chart: {
                 height: 350,
                 type: 'bar',
-
             },
             dataLabels: {
                 enabled: false
@@ -348,9 +445,9 @@
                 dashArray: [0]
             },
             legend: {
-                tooltipHoverFormatter: function(val, opts) {
+                tooltipHoverFormatter: function (val, opts) {
                     return val + ' - <strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-                        '</strong>'
+                        '</strong>';
                 }
             },
             markers: {
@@ -360,27 +457,28 @@
                 }
             },
             xaxis: {
-                categories: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu',],
+                categories: days,
             },
             tooltip: {
-                y: [{
+                y: [
+                    {
                         title: {
-                            formatter: function(val) {
-                                return val + " (mins)"
+                            formatter: function (val) {
+                                return val + " views";
                             }
                         }
                     },
                     {
                         title: {
-                            formatter: function(val) {
-                                return val + " per session"
+                            formatter: function (val) {
+                                return val + " views";
                             }
                         }
                     },
                     {
                         title: {
-                            formatter: function(val) {
-                                return val;
+                            formatter: function (val) {
+                                return val + " views";
                             }
                         }
                     }
@@ -394,5 +492,6 @@
 
         var chart1 = new ApexCharts(document.querySelector("#chart-trending"), options1);
         chart1.render();
+
     </script>
 @endsection
