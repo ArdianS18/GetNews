@@ -170,7 +170,7 @@ class AuthorController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(RegisterRequest $request, User $user)
+    public function create(AuthorRequest $request, User $user)
     {
         $data = $this->authorService->store($request, $user);
         $this->author->store($data);
