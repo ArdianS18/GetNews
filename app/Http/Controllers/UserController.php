@@ -16,6 +16,8 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\SendMessageInterface;
+use App\Http\Resources\UserResource;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -49,10 +51,20 @@ class UserController extends Controller
         return view('pages.user.inbox.index', compact('sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 
-    public function accountUserList()
+    public function accountUserList(Request $request)
     {
-        $users = $this->user->whereUser();
-        return view('pages.admin.akun.user', compact('users'));
+        if ($request->has('page')) {
+            $user = $this->user->customPaginate2($request, 10);
+            $data['paginate'] = [
+                'current_page' => $user->currentPage(),
+                'last_page' => $user->lastPage(),
+            ];
+            $data['data'] = UserResource::collection($user);
+        } else {
+            $users = $this->user->search($request);
+            $data = UserResource::collection($users);
+        }
+        return ResponseHelper::success($data);
     }
 
     /**

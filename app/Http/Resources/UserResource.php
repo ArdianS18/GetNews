@@ -19,7 +19,8 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'role' => $this->roles->pluck('name')[0],
             'email'=> $this->email,
-            'photo'=> asset($this->photo ? 'storage/'. $this->photo:'default.png')
+            'photo'=> asset($this->photo ? 'storage/'. $this->photo:'default.png'),
+            'phone_number' => $this->phone_number
         ];
     }
 }

@@ -117,11 +117,9 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('filter-news-admin', [NewsController::class, 'filter'])->name('news.filter');
     // ===> Faq
     Route::get('faq-admin', [FaqController::class, 'index'])->name('faq.index');
-
     Route::get('faq-list', function () {
         return view('pages.admin.faq.faq');
     })->name('faq.admin');
-
     Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
     Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('faq/{faq}', [FaqController::class, 'destroy'])->name('faq.destroy');
@@ -184,7 +182,10 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::post('contact-about-create', [ContactController::class, 'store'])->name('contact.create.about');
     Route::put('contact-about-update/{contact}', [ContactController::class, 'update'])->name('contact.update.about');
 
-    Route::get('account-user-list',[UserController::class, 'accountUserList'])->name('account.user.list');
+    Route::get('account-user-list', function () {
+        return view('pages.admin.akun.user');
+    })->name('account.user.list');
+    Route::get('account-user', [UserController::class, 'accountUserList'])->name('account.user');
 });
 
 

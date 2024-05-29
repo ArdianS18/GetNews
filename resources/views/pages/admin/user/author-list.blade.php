@@ -217,6 +217,7 @@
                 </div>
             </div>
         </div>
+        
     </div>
 
     <div class="modal fade" id="modal-blokir" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
