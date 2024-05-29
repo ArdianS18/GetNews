@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <div>
+                {{-- <div>
                     <div class="d-flex gap-2">
                         <div class="position-relative">
                         <select class="form-select" id="search-role" style="width: 150px">
@@ -24,7 +24,7 @@
                         </select>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </form>
         </div>
 
@@ -189,6 +189,7 @@
                 get(1)
             }, 500);
         });
+
         $('#search-role').change(function() {
             get(1)
         })
