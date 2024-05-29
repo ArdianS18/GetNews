@@ -703,7 +703,7 @@
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                                     @if (Auth::check() && $comment->user_id == auth()->user()->id)
                                                                         <li>
-                                                                            <button class="btn btn-sm" onclick="showEditForm({{ $comment->id }}),({{$comment->content}})">
+                                                                            <button class="btn btn-sm" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
                                                                             </button>
                                                                         </li>
@@ -714,7 +714,7 @@
                                                                         </li>
                                                                     @elseif ($comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
                                                                         <li>
-                                                                            <button class="btn btn-sm edit-btn" data-id="{{ $comment->id }}" data-message="{{ $comment->message }}">
+                                                                            <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
                                                                             </button>
                                                                         </li>
@@ -734,6 +734,7 @@
                                                                     @endif
                                                                 </ul>
                                                         </div>
+
                                                     </div>
                                                     <div class="col-md-9 order-md-3 order-sm-2 order-2">
                                                         <div class="comment-text">
@@ -749,8 +750,10 @@
                                         </div>
                                     </div>
 
-                                    <div id="edit-form-{{ $comment->id }}-{{ $comment->content }}" class="edit-form mt-3" style="display: none;">
-                                        <form>
+                                    <div id="edit-form-{{ $comment->id }}" class="edit-form mt-3" style="display: none;">
+                                        <form action="{{route('comment.update', ['comment' => $comment->id])}}" method="POST">
+                                            @method('post')
+                                            @csrf
                                             <textarea name="content" class="form-control mb-2" cols="100" rows="2" placeholder="Edit Komentar">{{ $comment->content }}</textarea>
                                             @auth
                                                 <div>
@@ -811,13 +814,48 @@
                                                     </div>
                                                     <div class="col-md-3 text-end order-sm-3 order-2">
                                                         <div class="comment">
-                                                            <i><svg class="report-icon" data-id="{{ $reply->id }}" xmlns="http://www.w3.org/2000/svg" width="19"
-                                                                    height="19" viewBox="0 0 24 24">
-                                                                    <path fill="none" stroke="currentColor"
-                                                                        stroke-linecap="round" stroke-linejoin="round"
-                                                                        stroke-width="2"
-                                                                        d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z" />
-                                                            </svg></i>
+                                                                <a class="" href="#" role="button" id="dropdownMenuLink"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+                                                                        viewBox="0 0 24 24">
+                                                                        <path fill="none" stroke="currentColor" stroke-linejoin="round"
+                                                                            stroke-width="3"
+                                                                            d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                                                    </svg>
+                                                                </a>
+                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                    @if (Auth::check() && $comment->user_id == auth()->user()->id)
+                                                                        <li>
+                                                                            <button class="btn btn-sm" onclick="showEditForm({{ $comment->id }})">
+                                                                                Edit
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="btn btn-sm">
+                                                                                Hapus
+                                                                            </button>
+                                                                        </li>
+                                                                    @elseif ($comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                        <li>
+                                                                            <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
+                                                                                Edit
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="btn btn-sm">
+                                                                                Hapus
+                                                                            </button>
+                                                                        </li>
+                                                                    @endif
+
+                                                                    @if ($comment->user_id != auth()->user()->id)
+                                                                        <li>
+                                                                            <button class="btn btn-sm report-icon" data-id="{{ $comment->id }}">
+                                                                                Laporkan
+                                                                            </button>
+                                                                        </li>
+                                                                    @endif
+                                                                </ul>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 col-sm-12 col-12 order-md-3 order-sm-2 order-2">
@@ -851,6 +889,26 @@
                                             @endauth
                                         </form>
                                     </div>
+
+                                    <div id="edit-form-{{ $comment->id }}" class="edit-form mt-3" style="display: none;">
+                                        <form action="{{route('comment.update', ['comment' => $comment->id])}}" method="POST">
+                                            @method('post')
+                                            @csrf
+                                            <textarea name="content" class="form-control mb-2" cols="100" rows="2" placeholder="Edit Komentar">{{ $comment->content }}</textarea>
+                                            @auth
+                                                <div>
+                                                    <button type="submit" class="btn-two w-100 btn"
+                                                        style="background-color: #0F4D8A;padding:10px !important">Edit Komentar</button>
+                                                </div>
+                                            @else
+                                                <div>
+                                                    <button type="button" class="btn-two w-100 btn not-login"
+                                                        style="background-color: #0F4D8A;padding:10px !important">Edit Komentar</button>
+                                                </div>
+                                            @endauth
+                                        </form>
+                                    </div>
+
                                 @endforeach
 
                             @empty
@@ -1323,8 +1381,8 @@
     </script>
 
     <script>
-        function showEditForm(commentId,commentContent) {
-            var replyForm = document.getElementById('edit-form-' + commentId + '-' + commentContent);
+        function showEditForm(commentId) {
+            var replyForm = document.getElementById('edit-form-' + commentId);
             if (replyForm) {
                 if (replyForm.style.display === 'block') {
                     replyForm.style.display = 'none';

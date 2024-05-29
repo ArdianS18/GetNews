@@ -289,8 +289,9 @@ Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function 
     //comment
     Route::post('comment/{news}', [CommentController::class, 'store'])->name('comment.create');
     Route::post('reply-comment/{news}/{id}', [CommentController::class, 'reply'])->name('reply.comment.create');
-    
     Route::post('comment-report/{comment}', [CommentReportController::class, 'store'])->name('comment.report');
+    Route::post('comment-edit/{comment}', [CommentController::class, 'update'])->name('comment.update');
+
     //author
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
     Route::delete('unfollow/{author}', [FollowersController::class, 'destroy'])->name('unfollow.author');
