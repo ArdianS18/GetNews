@@ -736,7 +736,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif ($comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
@@ -749,7 +749,7 @@
                                                                         </li>
                                                                     @endif
 
-                                                                    @if ($comment->user_id != auth()->user()->id)
+                                                                    @if (Auth::check() && $comment->user_id != auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm report-icon" data-id="{{ $comment->id }}">
                                                                                 Laporkan
@@ -859,7 +859,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif ($reply->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $reply->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
@@ -872,7 +872,7 @@
                                                                         </li>
                                                                     @endif
 
-                                                                    @if ($reply->user_id != auth()->user()->id)
+                                                                    @if (Auth::check() && $reply->user_id != auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm report-icon" data-id="{{ $reply->id }}">
                                                                                 Laporkan

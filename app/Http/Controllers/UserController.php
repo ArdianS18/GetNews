@@ -51,8 +51,8 @@ class UserController extends Controller
 
     public function accountUserList()
     {
-        $user = $this->user;
-        return view('pages.admin.akun.user');
+        $users = $this->user->whereUser();
+        return view('pages.admin.akun.user', compact('users'));
     }
 
     /**
