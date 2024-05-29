@@ -431,6 +431,11 @@
             })
         })
 
+        $(document).ready(function(){
+            var nameCv = data.name + "_cv.pdf";
+            $('#download-cv').attr('href', data.cv).attr('download', );
+        });
+
         function authorRow(index, data) {
             let status = ""
             let banned = ""
@@ -481,11 +486,13 @@
                             </button>
                             ${banned}
 
-                            <button data-bs-toggle="tooltip" data-id="${data.id}" title="Download" class="btn btn-sm btn-unduh ms-2" style="background-color:#0F4D8A">
-                                <i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3zm-1-4l-1.41-1.41L13 12.17V4h-2v8.17L8.41 9.59L7 11l5 5z"/></svg>
-                                </i>
-                            </button>
+                            <a href="${data.cv}" target="_blank" download>
+                                <button data-bs-toggle="tooltip" data-id="${data.id}" title="Download" class="btn btn-sm btn-unduh ms-2" style="background-color:#0F4D8A">
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3zm-1-4l-1.41-1.41L13 12.17V4h-2v8.17L8.41 9.59L7 11l5 5z"/></svg>
+                                    </i>
+                                </button>
+                            </a>
 
                         </div>
                     </td>
