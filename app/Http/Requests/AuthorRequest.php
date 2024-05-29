@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthorRequest extends ApiRequest
+class AuthorRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
