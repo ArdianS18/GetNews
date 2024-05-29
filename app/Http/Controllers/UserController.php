@@ -8,6 +8,7 @@ use App\Enums\NewsStatusEnum;
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\UserRequest;
 use App\Services\UserPhotoService;;
+
 use Illuminate\Support\Facades\Mail;
 use App\Services\AuthorBannedService;
 use App\Http\Requests\UserPhotoRequest;
@@ -25,7 +26,7 @@ class UserController extends Controller
     private AuthorBannedService $authorBannedService;
     private SendMessageInterface $sendMessage;
 
-    public function __construct(UserInterface $user, UserPhotoService $userPhoto,NewsInterface $news,SendMessageInterface $sendMessage,AuthorBannedService $authorBannedService)
+    public function __construct(UserInterface $user, UserPhotoService $userPhoto, NewsInterface $news, SendMessageInterface $sendMessage, AuthorBannedService $authorBannedService)
     {
         $this->user = $user;
         $this->userPhoto = $userPhoto;
@@ -131,24 +132,21 @@ class UserController extends Controller
         }
     }
 
-    public function banned(User $user)
+    public function banned($id)
     {
+        $user = $this->user->show($id);
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
-        if (!$user->banned) {
+        if (!$user->status_banned) {
             $this->authorBannedService->banned($user);
-            $this->news->StatusBanned($user->user_id);
+            $this->news->StatusBanned($user->id);
 
             $email = $user->email;
             $subject = 'Pemberitahuan: Anda telah dibanned';
             $message = 'Anda telah dibanned dari sistem kami. Mohon untuk hubungi kami jika ingin Tidak di Ban';
-
             Mail::raw($message, function ($message) use ($email, $subject) {
                 $message->to($email)
-                        ->subject($subject);
+                ->subject($subject);
             });
-
-           
-
         } else {
             $this->authorBannedService->unBanned($user);
         }
