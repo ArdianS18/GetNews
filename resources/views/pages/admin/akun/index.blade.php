@@ -32,8 +32,7 @@
             <button type="button" style="background-color: #175A95;" class="btn btn-md text-white px-4"
                 data-bs-toggle="modal" data-bs-target="#modal-create">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor"
-                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    <path fill="currentColor" d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
                 </svg>
                 Tambah
             </button>

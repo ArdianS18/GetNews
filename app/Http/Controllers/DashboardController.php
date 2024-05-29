@@ -197,7 +197,7 @@ class DashboardController extends Controller
     }
 
     public function authordetail($id) {
-        $user = $this->user->show($id);
+        $user = $this->user->showWithSlug($id);
         $userId = $user->id;
         $author = $this->author->where($user);
 
