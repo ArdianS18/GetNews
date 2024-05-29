@@ -78,7 +78,9 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $data['content'] = $request->input('content');
+        $this->comment->update($comment->id, $data);
+        return back();
     }
 
     /**
