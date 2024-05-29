@@ -188,7 +188,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(function () {
+Route::middleware(['auth', 'role:admin|author|superadmin|user','check.banned'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
@@ -224,7 +224,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::post('send-message', [SendMessageController::class, 'store'])->name('send.message');
 });
 
-Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
+Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(function () {
     // fungsi crud news
     Route::post('author-news-store', [NewsController::class, 'store'])->name('news.store');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
@@ -265,7 +265,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
 
 });
 
-Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function () {
+Route::middleware(['auth','role:user|author|admin|superadmin','check.banned'])->group(function () {
 
     Route::get('news-liked', [NewsHasLikeController::class, 'index'])->name('news.author.liked');
 
@@ -310,7 +310,7 @@ Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function 
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
 });
 
-Route::middleware(['role:user', 'verified'])->group(function () {
+Route::middleware(['role:user', 'verified','check.banned'])->group(function () {
     Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
 

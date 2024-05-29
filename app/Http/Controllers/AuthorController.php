@@ -167,33 +167,7 @@ class AuthorController extends Controller
         return ResponseHelper::success($data);
     }
 
-    public function banned(Author $author)
-    {
-        $data['status'] = NewsStatusEnum::NONACTIVE->value;
-        if (!$author->banned) {
-            $this->authorBannedService->banned($author);
-            $this->news->StatusBanned($author->user_id);
-
-            $user = $author->user;
-            $email = $user->email;
-            $subject = 'Pemberitahuan: Anda telah dibanned';
-            $message = 'Anda telah dibanned dari sistem kami. Mohon untuk hubungi kami jika ingin Tidak di Ban';
-
-            Mail::raw($message, function ($message) use ($email, $subject) {
-                $message->to($email)
-                        ->subject($subject);
-            });
-
-            if (auth()->user()->id !== $user->id) {
-                Auth::logoutOtherDevices($user->password);
-            }
-
-        } else {
-            $this->authorBannedService->unBanned($author);
-        }
-
-        return ResponseHelper::success(null, trans('alert.update_success'));
-    }
+ 
 
     /**
      * Show the form for creating a new resource.
