@@ -11,6 +11,7 @@
 @endsection
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Admin | Faq-List</title>
 </head>
 
@@ -47,7 +48,9 @@
                     <h5 class="modal-title" id="tambahdataLabel">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form-create" method="post">
+                <form action="{{route('faq.store')}}" method="post">
+                    @method('post')
+                    @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="question" class="form-label">Pertanyaan:</label>
@@ -151,6 +154,29 @@
     <x-delete-modal-component />
 @endsection
 @section('script')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('draft'))
+                Swal.fire({
+                    title: 'Success Draft!',
+                    text: '{{ session('draft') }}',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+
     <script>
         get(1)
         let debounceTimer;
