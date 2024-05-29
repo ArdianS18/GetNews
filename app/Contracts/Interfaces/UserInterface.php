@@ -16,4 +16,5 @@ use App\Contracts\Interfaces\Eloquent\WhereRelationInterface;
 interface UserInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface, WhereRelationInterface, CustomPaginationInterface, ShowSlugInterface
 {
     public function showWhithCount() : mixed;
+    public function whereUser() : mixed;
 }
