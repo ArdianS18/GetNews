@@ -7,6 +7,17 @@
                 height: 300px;
             }
         }
+
+        .scrollscreen .scrollscreen--track {
+            width: 18px;
+            background: transparent;
+            position: relative;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            pointer-events: none;
+        }
     </style>
 @endsection
 @section('content')
@@ -812,7 +823,7 @@
                                     <div class="news-card-two">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest2->photo) }}"
-                                                class="img-responsive" alt="Image" />
+                                                class="img-responsive" alt="Image"  height="271" style="object-fit: cover;"/>
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $news_latest2->newsCategories[0]->category->name }}</a>
                                         </div>
@@ -837,7 +848,7 @@
                                     <div class="news-card-three">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest2->photo) }}"
-                                                class="img-responsive" alt="Image" />
+                                                class="img-responsive" alt="Image" height="120" style="object-fit: cover;"/>
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
