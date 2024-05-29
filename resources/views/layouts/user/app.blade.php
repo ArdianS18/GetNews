@@ -23,6 +23,12 @@
                 background-color: var(--secondaryColor);
             }
         }
+        .theme-dark .searchModal .modal-dialog{
+            background-color: #222 !important;
+        }
+        .theme-dark .searchModal .modal-dialog .btn-close{
+            color: #fff !important;
+        }
     </style>
 </head>
 

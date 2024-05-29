@@ -16,7 +16,7 @@
             --bs-btn-focus-shadow-rgb: 49, 132, 253;
             --bs-btn-active-color: #fff;
             --bs-btn-a
-            ]]]ctive-bg: #0a58ca;
+            --ctive-bg: #0a58ca;
             --bs-btn-active-border-color: #0a53be;
             --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
             --bs-btn-disabled-color: #fff;
@@ -83,7 +83,7 @@
               </div>
               <div class="row">
                 @forelse ($authors as $item)
-                <div class="col-md-12 col-lg-4 mb-4">
+                <div class="col-md-12 col-lg-3 mb-4">
                     <div class="card-detail hover-img shadow-sm" style="border: 1px solid rgb(255, 255, 255);border-bottom: 3px solid #183249;">
                         <a href="{{ route('author.detail', ['id' => $item->user->slug]) }}">
                             <div>
