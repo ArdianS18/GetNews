@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\CommentReportInterface;
 use App\Helpers\ResponseHelper;
+use App\Models\Comment;
 use App\Models\CommentReport;
 use App\Services\CommentService;
 use Illuminate\Http\Request;
@@ -36,11 +37,11 @@ class CommentReportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($comment, Request $request)
+    public function store(Comment $comment, Request $request)
     {
         $data = $this->commentReport->store([
             'user_id' => auth()->user()->id,
-            'comment_id' => $comment,
+            'comment_id' => $comment->id,
             'content' => $request->input('content'),
         ]);
 

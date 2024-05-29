@@ -18,6 +18,8 @@ class VerifyCsrfToken extends Middleware
         'create-tag',
         'kategori',
         'coin-add',
-        'register'
+        'register',
+        'comment-delete/*',
+        'comment-report/*'
     ];
 }
