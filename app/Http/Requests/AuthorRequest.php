@@ -14,7 +14,6 @@ class AuthorRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required',
             'cv' => 'required|mimes:pdf',
         ];
     }
