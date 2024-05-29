@@ -15,6 +15,17 @@
         <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
         <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     </head>
+
+    <style>
+        .page-nav li a.active, .page-nav li a:hover {
+            color: var(--whiteColor);
+            opacity: 1;
+            background-color: #175A95;
+            border-color: transparent;
+        }
+
+
+    </style>
 @endsection
 
 @section('content')
@@ -54,18 +65,11 @@
                 </button>
             </div>
             </form>
-
-            <select class="form-select" id="opsi-perpage" style="width: 200px">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
         </div>
     </div>
 
     <div class="card card-body mt-5">
-        <div class="row mt-5">
+        <div class="row mb-3 mt-2">
             @forelse ($news as $item)
             @php
                 $dateParts = date_parse($item->upload_date);

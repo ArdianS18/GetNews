@@ -51,7 +51,7 @@
                                                 {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 40, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-eye"></i>{{ $trending->total }}</li>
+                                            <li><i class="fi fi-rr-eye"></i><p>{{ $trending->total }}</p></li>
                                         </ul>
                                     </div>
                                 </div>
