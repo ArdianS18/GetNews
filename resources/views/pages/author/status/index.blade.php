@@ -196,7 +196,7 @@
             if (data.status == 'active') {
                 status = ' bg-light-success text-success',
                     text = 'Aktif'
-            } else if (data.status == 'reject') {
+            } else if (data.status == 'nonactive') {
                 status = ' bg-light-danger text-danger'
                 text = 'Tolak'
             } else if (data.status == 'draft') {
