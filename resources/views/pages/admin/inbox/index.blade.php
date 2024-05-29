@@ -50,6 +50,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="card overflow-hidden chat-application">
                 <div class="d-flex align-items-center justify-content-between gap-3 m-3 d-lg-none">
                     <button class="btn btn-primary d-flex" type="button" data-bs-toggle="offcanvas"
