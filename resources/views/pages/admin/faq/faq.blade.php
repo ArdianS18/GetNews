@@ -17,8 +17,8 @@
 
 @section('content')
     <div class="mb-4">
-        <div class="d-flex justify-content-between">
-            <div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                 <form class="d-flex">
                     <div class="position-relative d-flex">
                         <div class="">
@@ -29,14 +29,20 @@
                     </div>
                 </form>
             </div>
-            <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5"
-                data-bs-toggle="modal" data-bs-target="#modal-create">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor"
-                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                </svg>
-                Tambah
-            </button>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="d-flex justify-content-end">
+                    <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5"
+                        data-bs-toggle="modal" data-bs-target="#modal-create">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                            <path fill="currentColor"
+                                d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                        </svg>
+                        Tambah
+                    </button>   
+                </div>
+                             
+            </div>
+
         </div>
     </div>
 
@@ -48,13 +54,13 @@
                     <h5 class="modal-title" id="tambahdataLabel">Tambah Data</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route('faq.store')}}" method="post">
+                <form id="form-create" method="post">
                     @method('post')
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="question" class="form-label">Pertanyaan:</label>
-                            <textarea id="question" name="question" value="{{ old('password') }}" placeholder="Question" class="form-control @error('question') is-invalid @enderror" style="height: 100px; resize: none"></textarea>
+                            <textarea id="question" name="question" value="{{ old('question') }}" placeholder="Question" class="form-control @error('question') is-invalid @enderror" style="height: 100px; resize: none"></textarea>
                             @error('question')
                                 <span class="invalid-feedback" role="alert" style="color: red;">
                                     <strong>{{ $message }}</strong>
@@ -119,7 +125,7 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label for="question" class="form-label">Question:</label>
-                            <textarea  id="question" name="question"
+                            <textarea id="question" name="question"
                                 class="form-control @error('question') is-invalid @enderror" placeholder="Question">
                             </textarea>
                             @error('question')
@@ -296,6 +302,44 @@
                 },
                 error: function(response) {
                     $('.preloader').fadeOut()
+                }
+            })
+        })
+
+
+        $('#form-create').submit(function(e) {
+            $('.preloader').show();
+            e.preventDefault();
+
+            $.ajax({
+                url: "{{ route('faq.store') }}",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    get(1)
+                    $('.preloader').fadeOut();
+                    var response = response.responseJSON
+
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: "Berhasil Menambahkan Data"
+                    })
+                    $('#tambahdataLabel').modal('hide')
+                    emptyForm('form-create')
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut();
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Terdapat masalah saat input data"
+                    });
+                    var response = response.responseJSON
+                    var status = response.meta.code
+                    if (status == 422) {
+                        handleValidate(response.data, 'create')
+                    }
                 }
             })
         })
