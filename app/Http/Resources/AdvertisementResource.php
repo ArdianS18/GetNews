@@ -25,6 +25,7 @@ class AdvertisementResource extends JsonResource
             'url' => $this->url,
             'status' => $this->status,
             'photo' => asset('storage/'. $this->photo),
+            'created' => $this->user->name
           ];
     }
 }
