@@ -35,9 +35,8 @@
             margin-left: 1px;
         }
         .card-detail{
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid rgb(249, 249, 249);
+            border-radius: 8px;
+            border: 1px solid rgb(255, 255, 255);
         }
         .card-author{
             position: absolute;
@@ -85,7 +84,7 @@
               <div class="row">
                 @forelse ($authors as $item)
                 <div class="col-md-12 col-lg-4 mb-4">
-                    <div class="card hover-img shadow-sm" style="border: 1px solid rgb(249, 249, 249);border-bottom: 3px solid #183249;">
+                    <div class="card-detail hover-img shadow-sm" style="border: 1px solid rgb(255, 255, 255);border-bottom: 3px solid #183249;">
                         <a href="{{ route('author.detail', ['id' => $item->user->slug]) }}">
                             <div>
                                 <div>
@@ -127,7 +126,7 @@
                                     @elseif (!Auth::check())
                                         Mohon untuk login
                                     @else
-                                        Ini akun anda
+                                        {{-- Ini akun anda --}}
                                     @endif
 
                                     <div class="d-flex align-items-center justify-content-between mt-4" style="padding-left: 90px; padding-right: 90px; padding-bottom: 30px;">
