@@ -45,8 +45,8 @@
         </div>
     @endif
 
-    <div class="">
-        <div class="d-flex justify-content-between">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
             <form class="d-flex gap-2">
                 <div class="position-relative d-flex">
                     <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
@@ -55,7 +55,7 @@
                 </div>
                 <div>
                     <div class="d-flex">
-                        <select class="form-select" id="latest" style="width: 200px">
+                        <select class="form-select" id="latest">
                             <option value="">Tampilkan semua</option>
                             <option value="terbaru">Terbaru</option>
                             <option value="terlama">Terlama</option>
@@ -64,7 +64,7 @@
                 </div>
                 <div>
                     <div class="d-flex">
-                        <select class="form-select" id="many" style="width: 200px">
+                        <select class="form-select" id="many">
                             <option value="">Pilih opsi</option>
                             <option value="teratas">Teratas</option>
                             <option value="terbawah">Terbawah</option>
@@ -72,15 +72,22 @@
                     </div>
                 </div>
             </form>
-            <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
-                data-bs-target="#modal-create"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                    viewBox="0 2 30 24">
-                    <path fill="currentColor"
-                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                </svg>
-                Tambah
-            </button>
         </div>
+
+        <div class="col-md-6 col-lg-6 col-sm-12">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
+                    data-bs-target="#modal-create"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 2 30 24">
+                        <path fill="currentColor"
+                            d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    </svg>
+                    Tambah
+                </button>
+            </div>
+        </div>
+            
+        
     </div>
 
     <div class="mt-4">

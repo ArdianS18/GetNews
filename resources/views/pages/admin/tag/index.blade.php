@@ -13,8 +13,8 @@
 @section('content')
 
     <div class="">
-        <div class="d-flex justify-content-between">
-            <div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                 <form class="d-flex">
                     <div class="position-relative d-flex">
                         <div class="">
@@ -25,14 +25,19 @@
                     </div>
                 </form>
             </div>
-            <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5"
-                data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
-                    <path fill="currentColor"
-                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
-                </svg>
-                Tambah
-            </button>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="d-flex justify-content-end">
+                <button type="button" style="background-color: #175A95;" class="btn btn-mdx text-white px-5"
+                    data-bs-toggle="modal" data-bs-target="#tambahdataLabel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
+                        <path fill="currentColor"
+                            d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                    </svg>
+                    Tambah
+                </button>
+                </div>
+            
+            </div>
         </div>
     </div>
 

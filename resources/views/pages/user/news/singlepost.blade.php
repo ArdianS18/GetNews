@@ -743,7 +743,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif (Auth::check() && $comment->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $comment->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author") && $reply->user_id != auth()->user()->author->user_id)
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
                                                                                 Edit
@@ -855,7 +855,7 @@
                                                                     </svg>
                                                                 </a>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    @if (Auth::check() && $reply->user_id == auth()->user()->id)
+                                                                    @if (Auth::check() && $reply->user_id === auth()->user()->id)
                                                                         <li>
                                                                             <button class="btn btn-sm" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
@@ -866,7 +866,7 @@
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif (Auth::check() && $reply->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif (Auth::check() && $reply->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author") && $reply->user_id != auth()->user()->author->user_id)
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
