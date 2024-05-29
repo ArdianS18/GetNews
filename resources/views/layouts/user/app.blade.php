@@ -12,6 +12,18 @@
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @yield('style')
+    <style>
+        .theme-dark .tag-list li a {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--whiteColor);
+
+            &.active,
+            &:hover {
+                background-color: var(--secondaryColor);
+            }
+        }
+    </style>
 </head>
 
 <body>
