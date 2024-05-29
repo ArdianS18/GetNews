@@ -230,7 +230,7 @@
                     <div class="col-md-12 col-lg-8">
                         <div class="">
                             <div class="order-md-1">
-                                <h4>${limitString(data.name, 50)}</h4>
+                                <h4>${limitString(data.name, 80)}</h4>
                                 <p>${limitString(data.content, 500)}</p>
                             </div>
                         </div>

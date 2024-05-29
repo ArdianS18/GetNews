@@ -167,8 +167,6 @@ class AuthorController extends Controller
         return ResponseHelper::success($data);
     }
 
- 
-
     /**
      * Show the form for creating a new resource.
      */

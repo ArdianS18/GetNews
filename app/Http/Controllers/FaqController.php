@@ -43,7 +43,7 @@ class FaqController extends Controller
     public function store(FaqRequest $request)
     {
         $this->faq->store(($request->validated()));
-        return ResponseHelper::success(null, trans('alert.add_success'));
+        return back()->with('success', 'Berhasil menambahkan Faq');
     }
 
     /**
