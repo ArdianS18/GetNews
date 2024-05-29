@@ -60,7 +60,11 @@
                     @endforelse
                 </div>
 
-                <ul class="page-nav list-style text-center mt-20">
+                <div class="text-center item-center d-flex justify-content-center mt-4" style="background-color:#F6F6F6; width:100%;height:200px;">
+                    <h5 class="mt-5">Iklan</h5>
+                </div>
+
+                <ul class="page-nav list-style text-center mt-5">
                     <li><a href="{{ $trending->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
 
                     @for ($i = 1; $i <= $trending->lastPage(); $i++)
@@ -69,10 +73,6 @@
 
                     <li><a href="{{ $trending->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
                 </ul>
-
-                <div class="text-center item-center d-flex justify-content-center mt-4" style="background-color:#F6F6F6; width:100%;height:200px;">
-                    <h5 class="mt-5">Iklan</h5>
-                </div>
             </div>
 
             <div class="col-lg-4">

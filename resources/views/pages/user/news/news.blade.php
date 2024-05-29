@@ -87,7 +87,12 @@
                     </div>
                 @endforelse
             </div>
-            <ul class="page-nav list-style text-center mt-20">
+            
+            <div class="text-center item-center mt-4 d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
+                <h5 class="mt-5 text-dark">Iklan</h5>
+            </div>
+            
+            <ul class="page-nav list-style text-center mt-5">
                 <li><a href="{{ $newsByDate->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
                 @for ($i = 1; $i <= $newsByDate->lastPage(); $i++)
                 <li><a href="{{ $newsByDate->url($i) }}" class="btn btn-black {{ $newsByDate->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
@@ -95,9 +100,6 @@
                 <li><a href="{{ $newsByDate->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
             </ul>
 
-            <div class="text-center item-center d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
-                <h5 class="mt-5">Iklan</h5>
-            </div>
         </div>
 
         <div class="col-lg-4">
