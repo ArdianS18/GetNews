@@ -602,6 +602,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereDate('upload_date', '<=', Carbon::now())
             ->withCount('views')
+            ->latest()
             ->paginate(8);
     }
 
