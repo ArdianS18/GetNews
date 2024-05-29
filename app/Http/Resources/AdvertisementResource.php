@@ -23,7 +23,8 @@ class AdvertisementResource extends JsonResource
             'start_date' => Carbon::parse($this->start_date)->isoFormat('D MMMM Y'),
             'end_date' => Carbon::parse($this->end_date)->isoFormat('D MMMM Y'),
             'url' => $this->url,
-            'status' => $this->status
+            'status' => $this->status,
+            'photo' => asset('storage/'. $this->photo),
           ];
     }
 }

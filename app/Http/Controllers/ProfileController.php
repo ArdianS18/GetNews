@@ -204,11 +204,8 @@ class ProfileController extends Controller
     }
 
     public function changepassword(User $user, UpdatePasswordRequest $updatePasswordRequest){
-        if (!Hash::check($updatePasswordRequest->old_password, auth()->user()->password)) {
-            throw ValidationException::withMessages(['old_password' => 'Password lama tidak sesuai.']);
-            return redirect()->back()->with('failed', trans('alert.password_failed'));
-        }
-        $this->user->update($user->id, $updatePasswordRequest->validated());
+        $data = $updatePasswordRequest->validated();
+        $this->user->update($user->id, $data);
         return redirect()->back()->with('success', trans('alert.password_updated'));
     }
 
