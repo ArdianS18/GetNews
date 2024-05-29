@@ -15,8 +15,7 @@ class AuthorRequest extends ApiRequest
     {
         return [
             'user_id' => 'required',
-            'cv' => 'required|image|mimes:jpg,png,jpeg',
-            'status' => 'required'
+            'cv' => 'required|mimes:pdf',
         ];
     }
 

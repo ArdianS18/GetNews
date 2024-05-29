@@ -39,7 +39,7 @@ class AuthorService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return array|bool
      */
-    public function store(RegisterRequest $request, $user): array
+    public function store(AuthorRequest $request, $user): array
     {
         $data = $request->validated();
 
