@@ -36,7 +36,7 @@
 
         .card-detail {
             border-radius: 8px;
-            border: 1px solid rgb(255, 255, 255);
+            border: 1px solid #CCCCCC;
         }
 
         .card-author {
@@ -95,28 +95,20 @@
             @forelse ($authors as $item)
                 <div class="col-md-12 col-lg-3 mb-4">
                     <div class="card-detail box hover-img shadow-sm"
-                        style="border: 1px solid rgb(255, 255, 255);border-bottom: 3px solid #183249;">
+                        style="border: 1px solid #CCCCCC#212529;border-bottom: 3px solid #183249;">
                         <a href="{{ route('author.detail', ['id' => $item->user->slug]) }}">
-                            <div>
+                            <div class="p-5">
                                 <div>
-                                    {{-- <div class="card" style="background-color: #183249;">
-                                        <div class="mt-3">
-                                            <div class="d-flex justify-content-end">
-                                                <img src="{{ asset('assets/img/author-bg.svg') }}" width="150px"
-                                                    style="border-radius: 10px 10px 0 0;" alt="">
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    <div class="position-relative">
-                                        <div class="position-absolute"
-                                            style="top: -50px; left: 50%; transform: translateX(-50%);">
+                                   
+                                    <div class="text-center">
+                                        <div>
                                             <div class="">
                                                 <img src="{{ asset($item->user->photo ? 'storage/' . $item->user->photo : 'default.png') }}"
                                                     alt="" style="width: 140; height: 140; border-radius: 50%;"
                                                     class="mb-3" style="object-fit: cover" width="80" height="80">
                                             </div>
                                         </div>
-                                        <div class="text-center" style="margin-top: 10px; padding-top: 60px;">
+                                        <div class="text-center" style="margin-top: 10px;">
                                             <h5 class="mb-3">{{ $item->user->name }}</h5>
                                             @if (Auth::check() && auth()->user()->id != $item->user_id)
                                                 @php
@@ -151,8 +143,8 @@
                                                 {{-- Ini akun anda --}}
                                             @endif
 
-                                            <div class="d-flex align-items-center justify-content-between mt-4"
-                                                style="padding-left: 90px; padding-right: 90px; padding-bottom: 30px;">
+                                            <div class="d-flex align-items-center justify-content-between mt-5"
+                                                style="">
                                                 <div class="text-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         viewBox="0 0 24 24">
