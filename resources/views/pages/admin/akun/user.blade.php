@@ -13,7 +13,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <div class="d-flex gap-2">
                     <select class="form-select" id="opsi-perpage" style="width: 200px">
@@ -40,7 +39,7 @@
             @forelse ($users as $user)
                 <tr>
                     <td>
-                        <img src="{{asset('assets/img/profile.svg')}}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
+                        <img src="{{asset($user->photo ? 'storage/'.$user->photo : "assets/img/profile.svg")}}" class="rounded-circle me-2 user-profile" style="object-fit: cover" width="35" height="35" alt="" />
                         {{ $user->name }}
                     </td>
                     <td>{{ $user->email }}</td>
