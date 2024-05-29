@@ -637,14 +637,38 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="reportForm">
+                                        <form id="reportForm" method="post">
                                             <div class="form-group">
                                                 <label for="reportReason">Alasan</label>
                                                 <textarea name="content" class="form-control" id="reportReason" rows="3" required></textarea>
                                             </div>
-                                            <input type="hidden" id="commentId" name="comment_id" value="commentId">
+                                            <input type="hidden" id="commentId" name="commentId" />
                                             <div class="d-flex justify-content-end mt-4">
                                                 <button type="submit" class="btn btn-primary">Submit Report</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Komentar</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="deleteForm" method="GET" action="/comment-delete/">
+                                            <div class="form-group">
+                                                <label for="deleteReason">Yakin ingin menghapus komentar anda?</label>
+                                            </div>
+                                            <input type="hidden" id="commentId" name="commentId" />
+                                            <div class="d-flex justify-content-end mt-4 gap-2">
+                                                <button type="button" data-bs-dismiss="modal" class="btn btn-danger">Tidak</button>
+                                                <button type="submit" class="btn btn-primary">Hapus</button>
                                             </div>
                                         </form>
                                     </div>
@@ -708,7 +732,7 @@
                                                                             </button>
                                                                         </li>
                                                                         <li>
-                                                                            <button class="btn btn-sm">
+                                                                            <button class="btn btn-sm delete" data-id="{{ $comment->id }}">
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
@@ -719,7 +743,7 @@
                                                                             </button>
                                                                         </li>
                                                                         <li>
-                                                                            <button class="btn btn-sm">
+                                                                            <button class="btn btn-sm delete" data-id="{{ $comment->id }}">
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
@@ -824,33 +848,33 @@
                                                                     </svg>
                                                                 </a>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    @if (Auth::check() && $comment->user_id == auth()->user()->id)
+                                                                    @if (Auth::check() && $reply->user_id == auth()->user()->id)
                                                                         <li>
-                                                                            <button class="btn btn-sm" onclick="showEditForm({{ $comment->id }})">
+                                                                            <button class="btn btn-sm" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
                                                                             </button>
                                                                         </li>
                                                                         <li>
-                                                                            <button class="btn btn-sm">
+                                                                            <button class="btn btn-sm delete" data-id="{{ $reply->id }}">
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
-                                                                    @elseif ($comment->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
+                                                                    @elseif ($reply->news->user_id == (auth()->user()->roles->pluck('name')[0] == "author"))
                                                                         <li>
-                                                                            <button class="btn btn-sm edit-btn" onclick="showEditForm({{ $comment->id }})">
+                                                                            <button class="btn btn-sm edit-btn" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
                                                                             </button>
                                                                         </li>
                                                                         <li>
-                                                                            <button class="btn btn-sm">
+                                                                            <button class="btn btn-sm delete" data-id="{{ $reply->id }}">
                                                                                 Hapus
                                                                             </button>
                                                                         </li>
                                                                     @endif
 
-                                                                    @if ($comment->user_id != auth()->user()->id)
+                                                                    @if ($reply->user_id != auth()->user()->id)
                                                                         <li>
-                                                                            <button class="btn btn-sm report-icon" data-id="{{ $comment->id }}">
+                                                                            <button class="btn btn-sm report-icon" data-id="{{ $reply->id }}">
                                                                                 Laporkan
                                                                             </button>
                                                                         </li>
@@ -890,11 +914,11 @@
                                         </form>
                                     </div>
 
-                                    <div id="edit-form-{{ $comment->id }}" class="edit-form mt-3" style="display: none;">
-                                        <form action="{{route('comment.update', ['comment' => $comment->id])}}" method="POST">
+                                    <div id="edit-reply-form-{{ $reply->id }}" class="edit-reply-form mt-3" style="display: none;">
+                                        <form action="{{route('comment.update', ['comment' => $reply->id])}}" method="POST">
                                             @method('post')
                                             @csrf
-                                            <textarea name="content" class="form-control mb-2" cols="100" rows="2" placeholder="Edit Komentar">{{ $comment->content }}</textarea>
+                                            <textarea name="content" class="form-control mb-2" cols="100" rows="2" placeholder="Edit Komentar">{{ $reply->content }}</textarea>
                                             @auth
                                                 <div>
                                                     <button type="submit" class="btn-two w-100 btn"
@@ -1394,6 +1418,19 @@
     </script>
 
     <script>
+        function showEditReplyForm(replyId) {
+            var replyForm = document.getElementById('edit-reply-form-' + replyId);
+            if (replyForm) {
+                if (replyForm.style.display === 'block') {
+                    replyForm.style.display = 'none';
+                } else {
+                    replyForm.style.display = 'block';
+                }
+            }
+        }
+    </script>
+
+    <script>
         var uploadDate = new Date("{{ $news->upload_date }}");
         var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
@@ -1404,56 +1441,40 @@
         document.getElementById("formattedDate").textContent = formattedDate;
     </script>
 
-    {{-- <script>
-        function sendData() {
-        fetch('/add-data', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token untuk Laravel
-                },
-                body: JSON.stringify({data: 'Your data here'})
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Error:', error));
-        }
-        setInterval(sendData, 60000);
-    </script> --}}
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
         $(document).ready(function() {
-            // Open modal on SVG icon click
             $('.report-icon').on('click', function() {
                 var commentId = $(this).data('id');
                 $('#commentId').val(commentId);
                 $('#reportModal').modal('show');
             });
 
-            // Handle form submission
             $('#reportForm').on('submit', function(e) {
                 e.preventDefault();
                 var commentId = $('#commentId').val();
-                var reportReason = $('#reportReason').val();
+                var actionUrl = '/comment-report/' + commentId;
+                $(this).attr('action', actionUrl);
+                this.submit();
+            });
+        });
+    </script>
 
-                // Perform AJAX request to send data to server
-                $.ajax({
-                    url: '/comment-report/' + commentId,  // Change to your server endpoint
-                    method: 'POST',
-                    data: {
-                        commentId: commentId,
-                        reportReason: reportReason
-                    },
-                    success: function(response) {
-                        alert('Report submitted successfully!');
-                        $('#reportModal').modal('hide');
-                    },
-                    error: function(xhr, status, error) {
-                        alert('An error occurred while submitting the report.');
-                    }
-                });
+    <script>
+        $(document).ready(function() {
+            $('.delete').on('click', function() {
+                var commentId = $(this).data('id');
+                $('#commentId').val(commentId);
+                $('#deleteModal').modal('show');
+            });
+
+            $('#deleteForm').on('submit', function(e) {
+                e.preventDefault();
+                var commentId = $('#commentId').val();
+                var actionUrl = '/comment-delete/' + commentId;
+                $(this).attr('action', actionUrl);
+                this.submit();
             });
         });
     </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\CommentInterface;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\News;
@@ -88,6 +89,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $this->comment->delete($comment->id);
+        return back();
     }
 }
