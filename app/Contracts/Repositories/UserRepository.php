@@ -54,6 +54,24 @@ class UserRepository extends BaseRepository implements UserInterface
             ->fastPaginate($pagination);
     }
 
+    public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
+    {
+        return $this->model->query()
+            ->whereRelation('roles', 'name', 'user')
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            })
+            ->when($request->opsi, function ($query) use ($request) {
+                $query->when($request->opsi === "terbaru", function($q){
+                    $q->latest()->get();
+                });
+                $query->when($request->opsi === "terlama", function($q){
+                    $q->oldest()->get();
+                });
+            })
+            ->fastPaginate($pagination);
+    }
+
     /**
      * Handle get the specified data by id from models.
      *
@@ -78,7 +96,6 @@ class UserRepository extends BaseRepository implements UserInterface
     {
         return $this->model->query()
             ->whereRelation('roles', 'name', 'user')
-            ->when()
             ->get();
     }
 
