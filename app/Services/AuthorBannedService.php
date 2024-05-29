@@ -2,22 +2,22 @@
 
 namespace App\Services;
 
-use App\Models\Author;
+use App\Models\User;
 
 class AuthorBannedService
 {
-    public function banned(Author $author)
+    public function banned(User $user)
     {
-        $author->update([
+        $user->update([
             'banned' => true,
             'status' => 'reject'
         ]);
         
     }
 
-    public function unBanned(Author $author)
+    public function unBanned(User $user)
     {
-        $author->update([
+        $user->update([
             'banned' => false,
             'status' => 'approved'
         ]);

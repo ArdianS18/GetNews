@@ -75,7 +75,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::delete('kategori/{category}', [CategoryController::class, 'destroy'])->name('author.admin.destroy');
 
     Route::get('list-author-banned-admin', [AuthorController::class, 'listbanned'])->name('list.banned.author.admin'); //list banned author
-    Route::put('banned-author/{author}', [AuthorController::class, 'banned'])->name('banned.author'); //fungsi banned author
+    Route::put('banned-author/{author}', [UserController::class, 'banned'])->name('banned.author'); //fungsi banned author
     // Approved And Reject Author
     Route::patch('approved-user/{user}', [AuthorController::class, 'approved'])->name('user.approved'); //fungsi approved author
     Route::patch('reject-user/{user}', [AuthorController::class, 'reject'])->name('user.reject'); // fungsi reject author
@@ -188,7 +188,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 });
 
 
-Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(function () {
+Route::middleware(['auth', 'role:admin|author|superadmin|user','check.banned'])->group(function () {
     //update news ===>
     Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
@@ -224,7 +224,7 @@ Route::middleware(['auth', 'role:admin|author|superadmin|user',])->group(functio
     Route::post('send-message', [SendMessageController::class, 'store'])->name('send.message');
 });
 
-Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
+Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(function () {
     // fungsi crud news
     Route::post('author-news-store', [NewsController::class, 'store'])->name('news.store');
     Route::delete('news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
@@ -265,7 +265,7 @@ Route::middleware(['auth', 'role:author', 'verified'])->group(function () {
 
 });
 
-Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function () {
+Route::middleware(['auth','role:user|author|admin|superadmin','check.banned'])->group(function () {
 
     Route::get('news-liked', [NewsHasLikeController::class, 'index'])->name('news.author.liked');
 
@@ -312,7 +312,7 @@ Route::middleware(['auth','role:user|author|admin|superadmin'])->group(function 
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
 });
 
-Route::middleware(['role:user', 'verified'])->group(function () {
+Route::middleware(['role:user', 'verified','check.banned'])->group(function () {
     Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');
 

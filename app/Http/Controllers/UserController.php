@@ -2,29 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\Interfaces\SendMessageInterface;
 use App\Models\User;
 use Illuminate\Support\Str;
+use App\Enums\NewsStatusEnum;
+use App\Helpers\ResponseHelper;
 use App\Http\Requests\UserRequest;
 use App\Services\UserPhotoService;;
-use App\Contracts\Interfaces\UserInterface;
-use App\Helpers\ResponseHelper;
+use Illuminate\Support\Facades\Mail;
+use App\Services\AuthorBannedService;
 use App\Http\Requests\UserPhotoRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Contracts\Interfaces\NewsInterface;
+use App\Contracts\Interfaces\UserInterface;
+use App\Contracts\Interfaces\SendMessageInterface;
 
 class UserController extends Controller
 {
 
     private UserInterface $user;
+    private NewsInterface $news;
     private UserPhotoService $userPhoto;
-
+    private AuthorBannedService $authorBannedService;
     private SendMessageInterface $sendMessage;
 
-    public function __construct(UserInterface $user, UserPhotoService $userPhoto, SendMessageInterface $sendMessage)
+    public function __construct(UserInterface $user, UserPhotoService $userPhoto,NewsInterface $news,SendMessageInterface $sendMessage,AuthorBannedService $authorBannedService)
     {
         $this->user = $user;
         $this->userPhoto = $userPhoto;
         $this->sendMessage = $sendMessage;
+        $this->news = $news;
+        $this->authorBannedService = $authorBannedService;
     }
 
     /**
@@ -122,5 +129,30 @@ class UserController extends Controller
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
         } catch (\Exception $exception) {
         }
+    }
+
+    public function banned(User $user)
+    {
+        $data['status'] = NewsStatusEnum::NONACTIVE->value;
+        if (!$user->banned) {
+            $this->authorBannedService->banned($user);
+            $this->news->StatusBanned($user->user_id);
+
+            $email = $user->email;
+            $subject = 'Pemberitahuan: Anda telah dibanned';
+            $message = 'Anda telah dibanned dari sistem kami. Mohon untuk hubungi kami jika ingin Tidak di Ban';
+
+            Mail::raw($message, function ($message) use ($email, $subject) {
+                $message->to($email)
+                        ->subject($subject);
+            });
+
+           
+
+        } else {
+            $this->authorBannedService->unBanned($user);
+        }
+
+        return ResponseHelper::success(null, trans('alert.update_success'));
     }
 }
