@@ -698,4 +698,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->paginate($hal);
     }
+
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $author->user_id)
+            ->delete();
+    }
 }

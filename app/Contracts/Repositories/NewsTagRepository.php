@@ -6,6 +6,7 @@ use App\Models\NewsTag;
 use Illuminate\Http\Request;
 use App\Enums\NewsStatusEnum;
 use App\Contracts\Interfaces\NewsTagInterface;
+use App\Models\Author;
 use Carbon\Carbon;
 
 class NewsTagRepository extends BaseRepository implements NewsTagInterface
@@ -30,6 +31,12 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
             ->delete();
     }
 
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $author->user_id)
+            ->delete();
+    }
 
     public function paginate(): mixed
     {

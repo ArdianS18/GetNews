@@ -8,6 +8,7 @@ use App\Services\AuthorService;
 use App\Http\Requests\AuthorRequest;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
+use App\Contracts\Interfaces\CommentInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
@@ -20,6 +21,7 @@ use App\Contracts\Interfaces\ReportInterface;
 use App\Contracts\Interfaces\SendMessageInterface;
 use App\Contracts\Interfaces\SubCategoryInterface;
 use App\Contracts\Interfaces\TagInterface;
+use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Enums\NewsStatusEnum;
 use App\Enums\RoleEnum;
@@ -30,8 +32,16 @@ use App\Http\Requests\AuthorsRequest;
 use App\Http\Resources\AuthorResource;
 use App\Mail\SendEmail;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\News;
+use App\Models\NewsCategory;
 use App\Models\NewsHasLike;
+use App\Models\NewsPhoto;
+use App\Models\NewsReject;
+use App\Models\NewsReport;
+use App\Models\NewsSubCategory;
+use App\Models\NewsTag;
+use App\Models\Report;
 use App\Models\SubCategory;
 use App\Models\User;
 use App\Models\View;
@@ -41,6 +51,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
@@ -65,10 +76,12 @@ class AuthorController extends Controller
     private RegisterService $serviceregister;
     private ReportInterface $report;
     private SendMessageInterface $sendMessage;
+    private CommentInterface $comment;
+    private UserInterface $user;
     private $authorBannedService;
 
 
-    public function __construct(SendMessageInterface $sendMessage,NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
+    public function __construct(UserInterface $user,CommentInterface $comment,SendMessageInterface $sendMessage,NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
     {
         $this->author = $author;
         $this->register = $register;
@@ -88,7 +101,37 @@ class AuthorController extends Controller
         $this->view = $view;
         $this->report = $report;
         $this->sendMessage = $sendMessage;
+        $this->comment = $comment;
+        $this->user =  $user;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Author $author)
+    {
+        $this->newsCategories->deleteByAuthor($author);
+        $this->newsSubCategories->deleteByAuthor($author);
+        $this->newsTags->deleteByAuthor($author);
+        $this->newsLikes->deleteByAuthor($author);
+        $this->newsReject->deleteByAuthor($author);
+        $this->comment->deleteByAuthor($author);
+        $this->report->deleteByAuthor($author);
+        $this->view->deleteByAuthor($author);
+        $this->sendMessage->deleteByAuthor($author);
+
+        $this->news->deleteByAuthor($author);
+
+        $user = $this->user->show($author->user_id);
+        $this->authorBannedService->delete($user);
+        $this->user->delete($author->user_id);
+
+        $this->author->delete($author);
+
+        // $this->author->delete($author->id);
+        return ResponseHelper::success(null);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -245,7 +288,7 @@ class AuthorController extends Controller
         $sendDelete2 = $this->sendMessage->get('1');
 
         $countReport = $this->report->count('unread');
-        $countReport2 = $this->report->count('');                                               
+        $countReport2 = $this->report->count('');
         return view('pages.author.inbox.index', compact('reportsDelete', 'reportsDelete2','newsDelete','newsDeleteRead','newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2', 'sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 
@@ -273,15 +316,6 @@ class AuthorController extends Controller
         $data = $this->authorService->update($request, $author);
         $this->author->update($author->id, $data);
         return back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Author $author)
-    {
-        $this->author->delete($author->id);
-        return ResponseHelper::success(null, trans('alert.delete_success'));
     }
 
     public function incomestatistics()

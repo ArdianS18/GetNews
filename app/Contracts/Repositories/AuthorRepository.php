@@ -86,7 +86,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-            ->findOrFail($id)
+            ->findOrFail($id->id)
             ->delete();
     }
 

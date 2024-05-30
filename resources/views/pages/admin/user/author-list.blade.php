@@ -284,7 +284,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-hapus" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <form id="form-delete" method="POST" class="modal-content">
                 @csrf
@@ -377,7 +377,7 @@
 
                         $('.delete').click(function() {
                             $('#form-delete').data('id', $(this).data('id'))
-                            $('#modal-delete').modal('show')
+                            $('#modal-hapus').modal('show')
                         })
                     } else {
                         $('#loading').html(showNoData('Penulis Tidak Ada !!'))
@@ -479,8 +479,8 @@
             const id = $(this).data('id')
             console.log(id);
             $.ajax({
-                url: "banned-author/" + id,
-                type: 'PUT',
+                url: "author-delete/" + id,
+                type: 'DELETE',
                 data: $(this).serialize(),
                 success: function(response) {
                     $('.preloader').fadeOut()
@@ -540,7 +540,7 @@
                 </a>`
 
                 hapus = `
-                <a data-id="${data.user_id}" data-bs-toggle="tooltip" title="delete" class="btn delete btn-sm btn-danger">
+                <a data-id="${data.id}" data-bs-toggle="tooltip" title="delete" class="btn delete btn-sm btn-danger">
                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>
                 </a>`
             }

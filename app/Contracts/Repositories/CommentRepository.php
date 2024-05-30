@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\CommentInterface;
+use App\Models\Author;
 use App\Models\Comment;
 use App\Models\News;
 use Illuminate\Database\QueryException;
@@ -27,6 +28,13 @@ class CommentRepository extends BaseRepository implements CommentInterface
         return $this->model->query()
         ->findOrFail($id)
         ->delete();
+    }
+
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $author->user_id)
+            ->delete();
     }
 
     /**
