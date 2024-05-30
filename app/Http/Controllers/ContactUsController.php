@@ -59,6 +59,9 @@ class ContactUsController extends Controller
         $reportsDelete2 = $this->report->get()->whereIn('status_delete', 1);
 
         $countContact = $this->contactUs->count('unread');
+        $countMassage = $this->sendMessage->count('unread');
+        $countTotal = $countContact + $countMassage;
+
         $countReport = $this->report->count('unread');
 
         $sendMessage = $this->sendMessage->get('0');
@@ -67,7 +70,21 @@ class ContactUsController extends Controller
         $sendDelete = $this->sendMessage->get('1');
         $sendDelete2 = $this->sendMessage->get('1');
 
-        return view('pages.admin.inbox.index', compact('sendDelete', 'sendDelete2', 'sendMessage','sendMessage2','contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
+        return view('pages.admin.inbox.index', compact('countTotal','sendDelete', 'sendDelete2', 'sendMessage','sendMessage2','contactUs', 'contactUs2', 'reports', 'reports2', 'contactDelete', 'contactDelete2', 'reportsDelete', 'reportsDelete2', 'countContact', 'countReport'));
+    }
+
+    public function count()
+    {
+        $countContact = $this->contactUs->count('unread');
+        $countMassage = $this->sendMessage->count('unread');
+        $countTotal = $countContact + $countMassage;
+        return response()->json(['count' => $countTotal]);
+    }
+
+    public function countReport()
+    {
+        $countReport = $this->report->count('unread');
+        return response()->json(['count' => $countReport]);
     }
 
     public function contact(Faq $faq){
