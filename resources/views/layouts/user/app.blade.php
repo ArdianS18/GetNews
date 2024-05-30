@@ -23,16 +23,48 @@
                 background-color: var(--secondaryColor);
             }
         }
-        .theme-dark .searchModal .modal-dialog{
+
+        .theme-dark .searchModal .modal-dialog {
             background-color: #222 !important;
         }
-        .theme-dark .searchModal .modal-dialog .btn-close{
+
+        .theme-dark .searchModal .modal-dialog .btn-close {
             color: #fff !important;
+        }
+
+        /* Ensure the modal is visible on mobile view */
+        .modal.show {
+            display: block;
+        }
+
+        /* Ensure input field is styled properly on mobile */
+        .modal-dialog .form-control {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .logo-mobile {
+                width: 150px;
+            }
+
+        }
+
+        @media (max-width: 992px) {
+            .sidebar-toggler {
+                width: 1% !important;
+            }
+        }
+
+
+        body {
+            overflow-x: hidden;
         }
     </style>
 </head>
 
 <body>
+    @include('layouts.user.navbar-header')
+    @include('layouts.user.mobile-navbar')
 
     {{-- @if (Auth::check() && !Auth::user()->email_verified_at)
         <div class="alert alert-danger mb-n1 text-center" role="alert">
@@ -58,8 +90,6 @@
         </label>
     </div>
 
-    @include('layouts.user.navbar-header')
-    @include('layouts.user.mobile-navbar')
 
     @yield('content')
     {{-- <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> --}}
@@ -88,13 +118,19 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var searchBtn = document.getElementById('search-btn');
+            var searchBtns = document.querySelectorAll('#search-btn');
             var input = document.getElementById('search-input');
-            input.focus()
-            searchBtn.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+
+            searchBtns.forEach(function(searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+
+                    if (input) {
+                        input.focus();
+                    }
                 });
             });
         });
