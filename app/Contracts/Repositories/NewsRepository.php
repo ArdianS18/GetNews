@@ -74,25 +74,25 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function searchStatus(mixed $id, Request $request,int $pagination): LengthAwarePaginator
+    public function searchStatus(mixed $id, Request $request, int $pagination): LengthAwarePaginator
     {
         return $this->model->query()
-        ->where('user_id', $id)
-        ->when($request->name, function($query) use ($request){
-            $query->where('name', 'LIKE', '%'.$request->name.'%');
-        })
-        ->when($request->status, function ($query) use ($request){
-            $query->when($request->status === 'panding', function ($var) {
-                $var->where('status', 'panding');
-            });
-            $query->when($request->status === 'active', function ($var) {
-                $var->where('status', 'active');
-            });
-            $query->when($request->status === 'nonactive', function ($var) {
-                $var->where('status', 'nonactive');
-            });
-        })
-        ->fastPaginate($pagination);
+            ->where('user_id', $id)
+            ->when($request->name, function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->name . '%');
+            })
+            ->when($request->status, function ($query) use ($request) {
+                $query->when($request->status === 'panding', function ($var) {
+                    $var->where('status', 'panding');
+                });
+                $query->when($request->status === 'active', function ($var) {
+                    $var->where('status', 'active');
+                });
+                $query->when($request->status === 'nonactive', function ($var) {
+                    $var->where('status', 'nonactive');
+                });
+            })
+            ->fastPaginate($pagination);
     }
 
     /**
@@ -192,14 +192,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('slug', $slug)
             ->with(['category', 'user'])
-            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->firstOrFail();
     }
 
     public function newsPremium(): mixed
     {
         return $this->model->query()
-            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereRelation('user.roles', 'name', 'user')
             ->withCount('views')
             ->orderByDesc('views_count')
@@ -236,7 +236,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->paginate(8);
-
     }
 
     public function getAll(): mixed
@@ -249,7 +248,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->whereRelation('newsCategories', 'category_id' , $category_id)
+            ->whereRelation('newsCategories', 'category_id', $category_id)
             ->withCount('views')
             ->orderByDesc('views_count')
             ->take(6)
@@ -299,7 +298,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->limit(2)
             ->get()
             ->pluck('category_id')
-            ->skip(1)
+            ->skip(0)
             ->take(1);
 
         return $this->model->query()
@@ -330,7 +329,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function getByPick(): mixed
     {
         return $this->model->query()
-             ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
             ->with('newsCategories')
             ->withCount('views')
@@ -358,13 +357,13 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
-            ->when($data == 'up', function($query){
+            ->when($data == 'up', function ($query) {
                 $query->take(6);
             })
-            ->when($data == 'down', function($query){
+            ->when($data == 'down', function ($query) {
                 $query->take(3);
             })
-            ->when($data == 'side', function($query){
+            ->when($data == 'side', function ($query) {
                 $query->take(4);
             })
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
@@ -398,10 +397,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->where('is_primary', NewsStatusEnum::PUBLISHED->value)
-            ->when($request->input('opsi') === "terbaru", function($query){
+            ->when($request->input('opsi') === "terbaru", function ($query) {
                 $query->latest()->get();
             })
-            ->when($request->input('opsi') === "terlama", function($query){
+            ->when($request->input('opsi') === "terlama", function ($query) {
                 $query->oldest()->get();
             })
             ->withCount('views')
@@ -464,7 +463,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function showWhithCount(): mixed
     {
         return $this->model->query()
-            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
@@ -476,7 +475,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('user_id', auth()->user()->id)
-            ->where('status',NewsStatusEnum::ACTIVE->value)
+            ->where('status', NewsStatusEnum::ACTIVE->value)
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
@@ -575,27 +574,27 @@ class NewsRepository extends BaseRepository implements NewsInterface
     }
 
 
-    public function StatusBanned($author) : mixed
+    public function StatusBanned($author): mixed
     {
         return $this->model->query()
-        ->where('user_id', $author)->update(['status' => NewsStatusEnum::PANDING->value]);
+            ->where('user_id', $author)->update(['status' => NewsStatusEnum::PANDING->value]);
     }
 
-    public function whereDate($request, $data) : mixed
+    public function whereDate($request, $data): mixed
     {
         return $this->model->query()
-            ->where(function($query) use ($request) {
+            ->where(function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%')
                     ->orWhere('content', 'LIKE', '%' . $request->q . '%')
                     ->orWhereHas('user', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', '%' . $request->q . '%');
-                });
+                        $query->where('name', 'LIKE', '%' . $request->q . '%');
+                    });
             })
-            ->when($request->opsi, function($query) use ($request) {
-                $query->when($request->opsi === "terbaru", function($opsi){
+            ->when($request->opsi, function ($query) use ($request) {
+                $query->when($request->opsi === "terbaru", function ($opsi) {
                     $opsi->latest();
                 });
-                $query->when($request->opsi === "terlama", function($opsi){
+                $query->when($request->opsi === "terlama", function ($opsi) {
                     $opsi->oldest();
                 });
             })
@@ -606,18 +605,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->paginate(10);
     }
 
-    public function searchAll(Request $request) : mixed
+    public function searchAll(Request $request): mixed
     {
         return $this->model->query()
 
-        ->where(function($query) use ($request) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%')
-                  ->orWhere('content', 'LIKE', '%' . $request->search . '%')
-                  ->orWhereHas('user', function ($query) use ($request) {
-                      $query->where('name', 'LIKE', '%' . $request->search . '%');
-                  });
-        })
-        ->get();
+            ->where(function ($query) use ($request) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('content', 'LIKE', '%' . $request->search . '%')
+                    ->orWhereHas('user', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', '%' . $request->search . '%');
+                    });
+            })
+            ->get();
     }
 
     public function newsCategory($category): mixed
@@ -635,14 +634,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->when($query, function($search) use ($query){
-                $search->where('name', 'LIKE', '%'.$query.'%');
+            ->when($query, function ($search) use ($query) {
+                $search->where('name', 'LIKE', '%' . $query . '%');
             })
             ->whereRelation('newsCategories', 'category_id', $category)
-            ->when($data === "terbaru", function($query) {
+            ->when($data === "terbaru", function ($query) {
                 $query->latest();
             })
-            ->when($data === "trending", function($query) {
+            ->when($data === "trending", function ($query) {
                 $query->withCount('newsHasLikes');
                 $query->orderByDesc('news_has_likes_count');
             })
@@ -684,14 +683,14 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->when($query, function($search) use ($query){
-                $search->where('name', 'LIKE', '%'.$query.'%');
+            ->when($query, function ($search) use ($query) {
+                $search->where('name', 'LIKE', '%' . $query . '%');
             })
             ->whereRelation('newsSubCategories', 'sub_category_id', $subCategory)
-            ->when($data === "terbaru", function($query) {
+            ->when($data === "terbaru", function ($query) {
                 $query->latest();
             })
-            ->when($data === "trending", function($query) {
+            ->when($data === "trending", function ($query) {
                 $query->withCount('newsHasLikes');
                 $query->orderByDesc('news_has_likes_count');
             })
