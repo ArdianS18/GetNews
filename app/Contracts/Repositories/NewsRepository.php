@@ -277,6 +277,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get()
             ->pluck('category_id');
 
+
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereHas('newsCategories', function ($query) use ($subquery) {
