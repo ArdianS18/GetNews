@@ -19,4 +19,6 @@ interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface,
     public function customPaginate(Request $request, int $pagination = 10): LengthAwarePaginator;
     public function showWhithCount() : mixed;
     public function showWhithCountSearch(Request $request) : mixed;
+
+    public function whereEmail($authorId): mixed;
 }

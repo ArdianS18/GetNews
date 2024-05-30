@@ -25,6 +25,12 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->get();
     }
 
+    public function whereEmail($authorId): mixed
+    {
+        $author = $this->model->with('user')->findOrFail($authorId);
+        return $author->user->email;
+    }
+
     public function whereIn(mixed $data, mixed $banned, Request $request): mixed
     {
         return $this->model->query()

@@ -162,9 +162,21 @@ class AuthorController extends Controller
 
     public function reject($authorId)
     {
-        $data['status'] = UserStatusEnum::REJECT->value;
-        $this->author->update($authorId, $data);
-        return ResponseHelper::success($data);
+        $email = $this->author->whereEmail($authorId);
+        $subject = 'Pemberitahuan: Anda telah ditolak sebagai author';
+        $message = 'Anda telah ditolak untuk menjadi author, silahkan untuk menghubungi kami atau mengirim ulang vc anda';
+        Mail::raw($message, function ($message) use ($email, $subject) {
+            $message->to($email)
+            ->subject($subject);
+        });
+
+        $data['user_id'] = auth()->user()->id;
+        $data['email'] = $email;
+        $data['message'] = $message;
+
+        $this->sendMessage->store($data);
+        $this->author->delete($authorId);
+        return ResponseHelper::success(null);
     }
 
     /**
