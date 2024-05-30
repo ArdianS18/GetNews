@@ -73,12 +73,110 @@
         .theme-dark .card-detail {
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
         }
+
+        .author-box {
+            width: 1200px;
+            padding: 30px 40px 0px 40px;
+            border-radius: 20px;
+        }
+
+        .search-box-widget button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: 40px;
+            background-color: #175A95;
+            border-radius: 5px;
+            padding: 10px 10px 10px 10px;
+            border: none;
+            width: 40px;
+        }
+
+        .page-nav li a.active, .page-nav li a:hover {
+            color: var(--whiteColor);
+            opacity: 1;
+            background-color: #175A95;
+            border-color: transparent;
+        }
     </style>
 @endsection
 @section('content')
 
-    <div class="p-5">
-        <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
+<div class="breadcrumb-wrap mt-3">
+    <div class="container">
+      <h2 class="breadcrumb-title">Penulis</h2>
+      <ul class="breadcrumb-menu list-style">
+        <li><a href="/">Beranda</a></li>
+        <li>Penulis</li>
+      </ul>
+    </div>
+</div>
+
+<div class="author-wrap">
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="author-box d-flex justify-content-center shadow-sm">
+
+                <form class="search-box-widget w-100">
+                    <input type="text" name="name" class="form-control search-chat py-2"
+                    placeholder="Search"/>
+                    <button type="submit">
+                      <i class="fi fi-rr-search"></i>
+                    </button>
+                  </form>
+
+                {{--  --}}
+                
+                {{-- <div class="author-img">
+                <img src="assets/img/author/single-author.jpg" alt="Image" />
+                </div>
+                <div class="author-info">
+                <h4>Scarlett Emily</h4>
+                <p>
+                    There are many variations of passages of Lorem Ipsum available,
+                    but the majority have suffered alteration in some form, by
+                    injected humour, or ran domised words which don't look even
+                    slightly believable.
+                </p>
+                <div class="author-profile">
+                    <ul class="social-profile list-style">
+                    <li>
+                        <a href="https://www.fb.com/" target="_blank"
+                        ><i class="ri-facebook-fill"></i
+                        ></a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitter.com/" target="_blank"
+                        ><i class="ri-twitter-fill"></i
+                        ></a>
+                    </li>
+                    <li>
+                        <a href="https://www.instagram.com/" target="_blank"
+                        ><i class="ri-instagram-line"></i
+                        ></a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/" target="_blank"
+                        ><i class="ri-linkedin-fill"></i
+                        ></a>
+                    </li>
+                    </ul>
+                    <div class="author-stat">
+                    <span>40 Articles</span>
+                    <span>191 Comments</span>
+                    </div>
+                </div>
+                </div> --}}
+            </div>            
+        </div>
+
+    </div>
+  </div>
+
+
+    <div class="container-fluid pb-75 mt-5">
+        
+        {{-- <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
             <div class="card-body px-4">
                 <div class="row justify-content-between">
                     <div class="col-8 text-white">
@@ -92,31 +190,25 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
-        <div class="d-sm-flex align-items-center justify-content-between mt-5 mb-4">
+        {{-- <div class="d-sm-flex align-items-center justify-content-between mt-5 mb-4">
             <form class="d-flex mb-2">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5"
+                    <input type="text" name="name" class="form-control search-chat py-2 px-5 ps-5"
                         placeholder="Search">
-                    {{-- <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i> --}}
-                    <svg class="position-absolute top-50 translate-middle-y ms-3" xmlns="http://www.w3.org/2000/svg"
+
+                        <svg class="position-absolute top-50 translate-middle-y ms-3" xmlns="http://www.w3.org/2000/svg"
                         width="25" height="25" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14" />
                     </svg>
                     <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
                 </div>
-
-                {{-- <div class="input-group">
-                        <input type="text" name="name" class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14"/></svg>
-                        <button type="submit" style="background-color: #C7C7C7;" class="btn btn-sm text-black px-4">Cari</button>
-                    </div> --}}
             </form>
-        </div>
+        </div> --}}
+
         <div class="row">
             @forelse ($authors as $item)
                 <div class="col-md-12 col-lg-3 mb-4">
@@ -164,7 +256,10 @@
                                                     </form>
                                                 @endif
                                             @elseif (!Auth::check())
-                                                Mohon untuk login
+                                            
+                                                <button type="button" class="btn btn-sm py-1 px-5 text-white not-login"
+                                                    style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
+                                            
                                             @else
                                                 @role('author')
                                                     <a href="{{ route('profile.index') }}" class="btn btn-sm btn-outline-secondary py-1 px-4"
@@ -272,12 +367,39 @@
                     </a> --}}
                 </div>
             @empty
-                <div>
-                    <h1>Tidak Ada Data</h1>
-                </div>
+                <x-no-data>
+                    Penulis Tidak Tersedia !!
+                </x-no-data>
             @endforelse
-
         </div>
+        <ul class="page-nav list-style text-center mt-20">
+            <li><a href="{{ $authors->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
 
+            @for ($i = 1; $i <= $authors->lastPage(); $i++)
+                <li><a href="{{ $authors->url($i) }}" class="btn btn-black {{ $authors->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
+            @endfor
+
+            <li><a href="{{ $authors->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
+        </ul>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        const notLoginElements = document.querySelectorAll('.not-login');
+
+        notLoginElements.forEach(function(element) {
+            element.addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Error!!',
+                    icon: 'error',
+                    text: 'Anda Belum Login Silahkan Login Terlebih Dahulu'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '{{ route('login') }}';
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

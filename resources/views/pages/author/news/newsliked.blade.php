@@ -23,8 +23,6 @@
             background-color: #175A95;
             border-color: transparent;
         }
-
-
     </style>
 @endsection
 

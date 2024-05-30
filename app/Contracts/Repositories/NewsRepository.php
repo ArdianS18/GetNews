@@ -228,13 +228,24 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function authorGetNews($user): mixed
+    public function authorGetNews($user, Request $request): mixed
     {
         return $this->model->query()
             ->where('user_id', $user)
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->withCount('views')
             ->orderByDesc('views_count')
+            ->when($request->filter, function ($query) use ($request) {
+                $query->when($request->filter === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+                $query->when($request->filter === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->when($request->input('name'), function($query) use ($request) {
+                $query->where('name', 'LIKE', '%'.$request->input('name').'%');
+            })
             ->paginate(8);
     }
 

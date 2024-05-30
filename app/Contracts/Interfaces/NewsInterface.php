@@ -31,7 +31,7 @@ interface NewsInterface extends DeleteByAuthor, GetInterface, StoreInterface, Up
     public function showNewsStatistic() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 
-    public function authorGetNews($user) : mixed;
+    public function authorGetNews($user, Request $request) : mixed;
     public function getAll() : mixed;
     public function getAllNews() : mixed;
     public function getByRight() : mixed;
