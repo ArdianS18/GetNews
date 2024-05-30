@@ -121,8 +121,9 @@ class AuthorController extends Controller
         $this->sendMessage->deleteByAuthor($author);
         $this->news->deleteByAuthor($author);
 
-        $this->authorBannedService->delete($author->user_id);
-        // $this->user->delete($author->user_id);
+        $userId = $this->user->show($author->user_id);
+        $this->authorBannedService->delete($userId);
+        $this->user->delete($userId);
 
         $this->author->delete($author);
 
