@@ -74,7 +74,6 @@ class ReportController extends Controller
     {
         $data['status'] = MessageStatusEnum::READ->value;
         $this->report->update($report, $data);
-
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
