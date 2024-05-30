@@ -27,7 +27,7 @@
 
 @section('content')
 
-<div class="breadcrumb-wrap">
+  <div class="breadcrumb-wrap">
     <div class="container">
       <h2 class="breadcrumb-title">Author</h2>
       <ul class="breadcrumb-menu list-style">
