@@ -86,8 +86,8 @@
                 </button>
             </div>
         </div>
-            
-        
+
+
     </div>
 
     <div class="mt-4">
@@ -101,11 +101,7 @@
                 </thead>
                 <tbody id="data">
                 </tbody>
-
             </table>
-
-            </table>
-
         </div>
         <div id="loading"></div>
         <div class="d-flex mt-2 justify-content-end">

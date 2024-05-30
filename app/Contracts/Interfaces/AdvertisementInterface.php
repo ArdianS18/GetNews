@@ -18,4 +18,5 @@ interface AdvertisementInterface extends GetInterface,StoreInterface, UpdateInte
 {
     public function where($id) : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
+    public function customPaginateApproved(Request $request, int $pagination = 10): LengthAwarePaginator;
 }

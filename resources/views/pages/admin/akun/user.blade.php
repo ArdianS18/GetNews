@@ -1,8 +1,8 @@
 @extends('layouts.admin.app')
 
 @section('content')
-<div class="">
-    <div class="d-flex gap-2 mb-3 mt-2">
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
         <form class="d-flex gap-2">
             <div>
                 <div class="position-relative d-flex">
@@ -15,7 +15,7 @@
             </div>
             <div>
                 <div class="d-flex gap-2">
-                    <select class="form-select" id="opsi" style="width: 200px">
+                    <select class="form-select" id="opsi">
                         <option value="terbaru">Terbaru</option>
                         <option value="terlama">Terlama</option>
                     </select>
@@ -69,20 +69,22 @@
     </div>
 </div>
 
-<div class="table-responsive rounded-2 mt-4">
-    <table class="table border text-nowrap customize-table mb-0 align-middle">
-        <thead>
-            <tr>
-                <th style="background-color: #D9D9D9;">No</th>
-                <th style="background-color: #D9D9D9;">Nama</th>
-                <th style="background-color: #D9D9D9;">Email</th>
-                <th style="background-color: #D9D9D9;">Nomer Telepon</th>
-                <th style="background-color: #D9D9D9;">Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="data">
-        </tbody>
-    </table>
+<div class="mt-4">
+    <div class="table-responsive rounded-2 mt-4">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
+            <thead>
+                <tr>
+                    <th style="background-color: #D9D9D9;  border-radius: 5px 0 0 5px;">No</th>
+                    <th style="background-color: #D9D9D9;">Nama</th>
+                    <th style="background-color: #D9D9D9;">Email</th>
+                    <th style="background-color: #D9D9D9;">Nomer Telepon</th>
+                    <th style="background-color: #D9D9D9;  border-radius: 5px 0 0 5px;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+            </tbody>
+        </table>
+    </div>
 
     <div id="loading"></div>
     <div class="d-flex mt-2 justify-content-end">

@@ -59,6 +59,7 @@
                 transform: rotate(360deg);
             }
         }
+        
     </style>
     @section('title', $news->name)
     @php
@@ -627,13 +628,16 @@
                                 @endif
                             @endforeach
                         </div>
-                        Tag :
-                        @forelse ($tags as $tag)
-                            <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tag->name }}"
-                                href="{{ route('tag.show.user', ['tag' => $tag->tag->slug]) }}"
-                                class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
-                        @empty
-                        @endforelse
+                        <p>
+                            Tag :
+                            @forelse ($tags as $tag)
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $tag->tag->name }}"
+                                    href="{{ route('tag.show.user', ['tag' => $tag->tag->slug]) }}"
+                                    class="btn btn-rounded btn-outline-primary">{{ $tag->tag->name }}</a>
+                            @empty
+                            @endforelse
+                        </p>
+                        
 
                         <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

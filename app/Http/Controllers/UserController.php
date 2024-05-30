@@ -92,7 +92,7 @@ class UserController extends Controller
         $slug = Str::slug($data['name']);
         $data['slug'] = $slug;
         $user = $this->user->store($data);
-        $user->assignRole($data['role']);
+        $user->assignRole('admin');
 
         return ResponseHelper::success(null, trans('alert.add_success'));
     }
@@ -130,19 +130,15 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        try {
-            $user = User::findOrFail($id);
-            $user->delete();
+        $user->roles()->detach();
+        $user->permissions()->detach();
 
-            $user->roles->destroy();
-            $user->permissions->destroy();
+        $userId = $user->id;
+        $this->user->delete($userId);
 
-            return ResponseHelper::success(null, trans('alert.add_success'));
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
-        } catch (\Exception $exception) {
-        }
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     public function banned($id)

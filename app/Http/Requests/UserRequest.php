@@ -18,7 +18,6 @@ class UserRequest extends FormRequest
             'password' => 'required',
             'name' => 'required',
             'email' => 'required',
-            'role' => 'required',
             'phone_number' => 'nullable',
             'address' => 'nullable',
             'birth_date' => 'nullable',

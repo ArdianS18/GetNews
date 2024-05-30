@@ -32,6 +32,12 @@
             --bs-btn-disabled-border-color: #175A95fd;
             --bs-gradient: none;
         }
+
+        .theme-dark select {
+            background-color: var(--codColor);
+            border-color: var(--codColor);
+            color: #ffffff;
+        }
     </style>
 @endsection
 

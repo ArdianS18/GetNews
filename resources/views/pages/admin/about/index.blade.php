@@ -9,8 +9,8 @@
                 <p>Info dan Slogan yang akan tampil di footer</p>
             </div>
             <div class="col-3">
-                <div class="text-center mb-n4">
-                    <img src="{{ asset('assets/img/bg-ajuan.svg') }}" width="250px" alt="" class="img-fluid">
+                <div class="text-center mb-n5">
+                    <img src="{{ asset('assets/img/bg-ajuan.svg') }}" width="250px" alt="" class="img-fluid mb-n4">
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     class="hide"
                 @endif
                 style="object-fit: cover; border: transparent;"
-                    width="350" height="200" alt="">
+                    width="290" height="140" alt="">
             </div>
 
             <div class="row mt-5 mb-5">

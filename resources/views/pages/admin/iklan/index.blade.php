@@ -1,38 +1,36 @@
 @extends('layouts.admin.app')
 @section('content')
 
-<div class="d-flex gap-2">
-    <form class="d-flex gap-2">
-        <div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+        <form class="d-flex gap-2">
             <div class="position-relative d-flex">
-                <div class="input-group">
-                    <input type="text" name="search"
-                        class="form-control search-chat py-2 px-5 ps-5" style="width: 200px" id="search-name" placeholder="Search">
-                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5"
+                    id="search-name" placeholder="Search">
+                <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+            </div>
+
+            <div>
+                <div class="d-flex">
+                    <select class="form-select" id="opsi-latest">
+                        <option disabled selected>Pilih opsi</option>
+                        <option value="terbaru">Terbaru</option>
+                        <option value="terlama">Terlama</option>
+                    </select>
                 </div>
             </div>
-        </div>
 
-        <div>
-            <div class="d-flex gap-2">
-                <select class="form-select" id="opsi-latest" style="width: 200px">
-                    <option disabled>Pilih opsi</option>
-                    <option value="terbaru">Terbaru</option>
-                    <option value="terlama">Terlama</option>
-                </select>
+            <div>
+                <div class="d-flex">
+                    <select class="form-select" id="opsi-jenis">
+                        <option disabled selected>Pilih jenis</option>
+                        <option value="foto">Foto</option>
+                        <option value="vidio">Video</option>
+                    </select>
+                </div>
             </div>
-        </div>
-
-        <div>
-            <div class="d-flex gap-2">
-                <select class="form-select" id="opsi-jenis" style="width: 200px">
-                    <option disabled>Pilih jenis</option>
-                    <option value="foto">Foto</option>
-                    <option value="vidio">Video</option>
-                </select>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 <div class="modal fade" id="modal-detail" tabindex="-1" aria-labelledby="modal-detail Label"
@@ -54,48 +52,71 @@
                     <div class="row">
                         <div class="col">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" style="font-weight: bold;">Jenis Iklan : <span
-                                        id="detail-type" style="font-weight: normal;"></span>
+                                <li class="list-group-item" style="font-weight: bold;">Penambah : <span
+                                    id="detail-created" style="font-weight: normal;"></span>
                                 </li>
-                                <li class="list-group-item" style="font-weight: bold;">Nomer Telepon : <span
-                                    id="detail-phone_number" style="font-weight: normal;"></span>
-                            </li>
+                                <li class="list-group-item" style="font-weight: bold;">Url : <span
+                                    id="detail-url" style="font-weight: normal;"></span>
+                                </li>
+                                <li class="list-group-item" style="font-weight: bold;">Posisi : <span
+                                    id="detail-position" style="font-weight: normal;"></span>
+                                </li>
+                                <li class="list-group-item" style="font-weight: bold;">Mulai iklan : <span
+                                    id="detail-start_date" style="font-weight: normal;"></span>
+                                </li>
                             </ul>
                         </div>
                         <div class="col">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item" style="font-weight: bold;">Email: <span
-                                    id="detail-email" style="font-weight: normal;"></span></li>
+                                <li class="list-group-item" style="font-weight: bold;">Jenis Iklan : <span
+                                    id="detail-type" style="font-weight: normal;"></span>
+                                </li>
+                                <li class="list-group-item" style="font-weight: bold;">Halaman : <span
+                                    id="detail-page" style="font-weight: normal;"></span>
+                                </li>
+                                <li class="list-group-item" style="font-weight: bold;"><span
+                                    style="font-weight: normal;"></span>
+                                </li>
+                                <li class="list-group-item" style="font-weight: bold;"><span
+                                    style="font-weight: normal;"></span>
+                                </li>
+
+                                <li class="list-group-item" style="font-weight: bold;">Akhir Iklan : <span
+                                    id="detail-end_date" style="font-weight: normal;"></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-danger mt-3 text-danger"
-                    data-bs-dismiss="modal">Tutup</button>
+            <div class="modal-footer d-flex gap-2">
+                <form id="form-accept">
+                    <button type="button" class="btn btn-light-danger mt-3 text-danger" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" data-id="detail-id" class="btn btn-light-primary mt-3 text-primary" data-bs-dismiss="modal">Terima Iklan</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<div class="table-responsive rounded-2 mt-4">
-    <table class="table border text-nowrap customize-table mb-0 align-middle ">
-        <thead>
-            <tr>
-                <th style="background-color: #D9D9D9;">No</th>
-                <th style="background-color: #D9D9D9;">Jenis Iklan</th>
-                <th style="background-color: #D9D9D9;">Halaman</th>
-                <th style="background-color: #D9D9D9;">Posisi Iklan</th>
-                <th style="background-color: #D9D9D9;">Tanggal Awal</th>
-                <th style="background-color: #D9D9D9;">Tanggal Akhir</th>
-                <th style="background-color: #D9D9D9;">Url</th>
-                <th style="background-color: #D9D9D9;">Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="data">
-        </tbody>
-    </table>
+<div class="mt-4">
+    <div class="table-responsive rounded-2 mb-3">
+        <table class="table border text-nowrap customize-table mb-0 align-middle">
+            <thead>
+                <tr>
+                    <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">No</th>
+                    <th style="background-color: #D9D9D9;">Nama</th>
+                    <th style="background-color: #D9D9D9;">Jenis Iklan</th>
+                    <th style="background-color: #D9D9D9;">Halaman</th>
+                    <th style="background-color: #D9D9D9;">Posisi Iklan</th>
+                    <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+            </tbody>
+        </table>
+    </div>
+
     <div id="loading"></div>
     <div class="d-flex mt-2 justify-content-end">
         <nav id="pagination">
@@ -105,8 +126,7 @@
 
 <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <form id="form-delete" method="POST" class="modal-content">
-            @csrf
+        <form id="form-delete" class="modal-content">
             @method('DELETE')
             <div class="modal-header d-flex align-items-center">
                 <h4 class="modal-title" id="myModalLabel">
@@ -130,6 +150,7 @@
         </form>
     </div>
 </div>
+
 @endsection
 
 
@@ -195,6 +216,7 @@
                             handleDetail(data)
                             const detailType = document.getElementById("detail-type");
                             detailType.src = data['type'];
+                            $('#form-accept').data('id', $(this).data('id'))
                             $('#modal-detail').modal('show')
                         })
 
@@ -218,12 +240,10 @@
             return `
             <tr>
                 <td>${index + 1}</td>
+                <td>${data.created}</td>
                 <td>${data.type}</td>
                 <td>${data.page}</td>
                 <td>${data.position}</td>
-                <td>${data.start_date}</td>
-                <td>${data.end_date}</td>
-                <td>${data.url}</td>
                 <td>
                     <div class="d-flex gap-2">
                             <button data-id="${data.id}" style="background-color: #EF6E6E"
@@ -252,6 +272,30 @@
                     $('.preloader').fadeOut()
                     get(1)
                     $('#modal-delete').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                }
+            })
+        })
+
+        $('#form-accept').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            $.ajax({
+                url: "approved-advertisement/" + id,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-detail').modal('hide')
                     Swal.fire({
                         title: 'Berhasil!',
                         icon: 'success',
