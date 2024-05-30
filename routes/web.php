@@ -320,6 +320,7 @@ Route::middleware(['auth','role:user|author|admin|superadmin','check.banned'])->
     Route::post('create-news-user', [NewsController::class, 'store'])->name('user.berita.store');
 });
 
+
 Route::middleware(['role:user', 'verified','check.banned'])->group(function () {
     Route::get('profile-user', [DashboardController::class, 'userProfile'])->name('profile.user');
     Route::put('user-author/{user}', [AuthorController::class, 'create'])->name('user.author');

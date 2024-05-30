@@ -2569,7 +2569,7 @@ select {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: var(--whiteColor);
+  background-color: var(--bgColor);;
   padding: 39px 40px 41px;
   border-radius: 5px;
   border: var(--blackColor);

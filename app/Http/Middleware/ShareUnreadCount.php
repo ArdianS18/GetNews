@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Contact;
 use App\Models\ContactUs;
 use App\Models\Report;
 use Illuminate\Support\Facades\View;
@@ -13,11 +14,13 @@ class ShareUnreadCount
 {
     protected $contactUs;
     protected $report;
+    protected $contact;
 
-    public function __construct(ContactUs $contactUs, Report $report)
+    public function __construct(ContactUs $contactUs, Report $report, Contact $contact)
     {
         $this->contactUs = $contactUs;
         $this->report = $report;
+        $this->contact = $contact;
     }
     /**
      * Handle an incoming request.
@@ -30,7 +33,11 @@ class ShareUnreadCount
         $countReport = $this->report->where('status', 'unread')->count();
         $totalUnread = $countContact + $countReport;
 
-        View::share('totalUnread', $totalUnread);
+        $contactUs = $this->contact->get()->first();
+        View::share([
+            'totalUnread' => $totalUnread,
+            'contactUs' => $contactUs,
+        ]);
 
         return $next($request);
     }
