@@ -145,6 +145,7 @@ class UserController extends Controller
     {
         $user = $this->user->show($id);
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
+        
         if (!$user->status_banned) {
             $this->authorBannedService->banned($user);
             $this->news->StatusBanned($user->id);

@@ -11,8 +11,7 @@ class AuthorBannedService
     {
         $user->status_banned = 1;
         $user->save();
-    
-    
+
         if ($user->author) {
             $author = Author::find($user->author->id);
             if ($author) {
@@ -20,7 +19,7 @@ class AuthorBannedService
                 $author->save();
             }
         }
-        
+
     }
 
     public function unBanned(User $user)

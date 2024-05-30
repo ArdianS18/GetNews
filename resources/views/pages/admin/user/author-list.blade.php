@@ -55,7 +55,7 @@
                     </button>
                 </div>
             </div>
-           
+
         </div>
     </div>
 
@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <div class="modal fade" id="modal-blokir" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -278,6 +278,35 @@
                     <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
                         data-bs-dismiss="modal">
                         Buka
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <form id="form-delete" method="POST" class="modal-content">
+                @csrf
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Hapus Penulis
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <p>Apakah anda yakin menghapus Penulis ini?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Hapus
                     </button>
                 </div>
             </form>
@@ -344,6 +373,11 @@
                         $('.unblock').click(function() {
                             $('#form-unblock').data('id', $(this).data('id'))
                             $('#modal-unblock').modal('show')
+                        })
+
+                        $('.delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
                         })
                     } else {
                         $('#loading').html(showNoData('Penulis Tidak Ada !!'))
@@ -439,13 +473,33 @@
             })
         })
 
-        // $(document).ready(function(){
-        //     $('#download-cv').attr('href', data.cv);
-        // });
+        $('#form-delete').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            console.log(id);
+            $.ajax({
+                url: "banned-author/" + id,
+                type: 'PUT',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-delete').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                }
+            })
+        })
 
-        
         $('#download-cv').click(function(){
-            event.preventDefault(); 
+            event.preventDefault();
                 var cvUrl = $(this).data('cv');
                 var fileName = cvUrl.substring(cvUrl.lastIndexOf('/') + 1);
                 var link = document.createElement('a');
@@ -457,6 +511,8 @@
         function authorRow(index, data) {
             let status = ""
             let banned = ""
+            let hapus = ""
+
             if (data.status == 0) {
                 status = ` <div class="
                             fs-3
@@ -479,14 +535,17 @@
                             font-weight-medium
                             ">Blokir</div>`
                 banned = `
-                <a data-id="${data.user_id}" data-bs-toggle="tooltip" title="Buka Blokir" class="btn unblock btn-sm btn-success">
+                <a data-id="${data.user_id}" data-bs-toggle="tooltip" title="Buka Blokir" class="btn unblock btn-sm btn-success me-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#fff" d="M6.615 9H15V7q0-1.25-.875-2.125T12 4q-1.25 0-2.125.875T9 7H8q0-1.671 1.164-2.836T12 3q1.671 0 2.836 1.164T16 7v2h1.385q.666 0 1.14.475q.475.474.475 1.14v8.77q0 .666-.475 1.14q-.474.475-1.14.475H6.615q-.666 0-1.14-.475Q5 20.051 5 19.385v-8.77q0-.666.475-1.14Q5.949 9 6.615 9M12 16.5q.633 0 1.066-.434q.434-.433.434-1.066t-.434-1.066Q12.633 13.5 12 13.5t-1.066.434Q10.5 14.367 10.5 15t.434 1.066q.433.434 1.066.434"/></svg>
-                </a>
+                </a>`
 
-                `
+                hapus = `
+                <a data-id="${data.user_id}" data-bs-toggle="tooltip" title="delete" class="btn delete btn-sm btn-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>
+                </a>`
             }
             return `
-        <tr>
+                <tr>
                     <td>${index + 1}</td>
                     <td>
                         <img src="${data.photo}" class="rounded-circle me-2 user-profile"
@@ -503,7 +562,7 @@
                                 <i><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M12 6.5a9.77 9.77 0 0 1 8.82 5.5c-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12A9.77 9.77 0 0 1 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5m0 5a2.5 2.5 0 0 1 0 5a2.5 2.5 0 0 1 0-5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5s4.5-2.02 4.5-4.5s-2.02-4.5-4.5-4.5"/></svg></i>
                             </button>
                             ${banned}
-
+                            ${hapus}
                         </div>
                     </td>
                 </tr>
