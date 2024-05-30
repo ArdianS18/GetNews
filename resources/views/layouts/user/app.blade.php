@@ -41,23 +41,24 @@
         .modal-dialog .form-control {
             width: 100%;
         }
+
         @media (max-width: 768px) {
-        .logo-mobile {
-            width: 150px;
+            .logo-mobile {
+                width: 150px;
+            }
+
         }
 
-    }
-
-    @media (max-width: 992px) {
-        .sidebar-toggler{
-            width: 1% !important ;
+        @media (max-width: 992px) {
+            .sidebar-toggler {
+                width: 1% !important;
+            }
         }
-    }
 
 
-    body {
-        overflow-x: hidden;
-    }
+        body {
+            overflow-x: hidden;
+        }
     </style>
 </head>
 
@@ -117,8 +118,10 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var searchBtn = document.getElementById('search-btn');
+            var searchBtns = document.querySelectorAll('#search-btn');
             var input = document.getElementById('search-input');
+
+            searchBtns.forEach(function(searchBtn) {
                 searchBtn.addEventListener('click', function() {
                     window.scrollTo({
                         top: 0,
@@ -129,7 +132,7 @@
                         input.focus();
                     }
                 });
-            
+            });
         });
     </script>
 </body>
