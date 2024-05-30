@@ -19,6 +19,16 @@ class SendMessageRepository extends BaseRepository implements SendMessageInterfa
             ->get();
     }
 
+
+    public function count($data): mixed
+    {
+        return $this->model->query()
+            ->where('email', auth()->user()->email)
+            ->where('status', $data)
+            ->get()
+            ->count();
+    }
+
     /**
      * Handle show method and delete data instantly from models.
      *

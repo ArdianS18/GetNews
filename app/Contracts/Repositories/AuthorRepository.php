@@ -192,9 +192,12 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
 
     public function showWhithCountSearch(Request $request): mixed
     {
+        $currentUserId = Auth::check() ? auth()->user()->id : null;
+
         return $this->model->query()
             ->where('authors.status', 'approved')
             ->where('authors.banned', '0')
+            ->where('authors.user_id', '!=', $currentUserId)
             ->withCount('followers')
             ->leftJoin('users', 'users.id', '=', 'authors.user_id')
             ->when($request->input('name'), function($query) use ($request) {
