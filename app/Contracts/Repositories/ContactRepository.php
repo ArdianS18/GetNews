@@ -58,7 +58,6 @@ class ContactRepository extends BaseRepository implements ContactInterface
     public function get(): mixed
     {
         return $this->model->query()
-            ->latest()
             ->get();
     }
 

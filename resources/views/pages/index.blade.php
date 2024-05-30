@@ -266,7 +266,7 @@
         </div>
     </div>
 
-    <div class="bg_tray editor-news pt-100 pb-75">
+    <div class="bg_gray editor-news pt-100 pb-75">
         <div class="container-fluid">
             <div class="row gx-5">
                 <div class="col-xl-6">

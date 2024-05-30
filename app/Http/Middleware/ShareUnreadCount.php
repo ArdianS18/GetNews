@@ -33,10 +33,11 @@ class ShareUnreadCount
         $countReport = $this->report->where('status', 'unread')->count();
         $totalUnread = $countContact + $countReport;
 
-        $contactUs = $this->contact->get()->first();
+        $firstContact = $this->contact->first();
+
         View::share([
             'totalUnread' => $totalUnread,
-            'contactUs' => $contactUs,
+            'firstContact' => $firstContact
         ]);
 
         return $next($request);

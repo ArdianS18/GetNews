@@ -3,25 +3,38 @@
 @section('style')
 <style>
     .theme-dark .accordion-item:first-of-type .accordion-button {
-      background-color: var(--bs-accordion-btn-color);
+      background-color: var(--codColor);
       color: #ffffff;
     }
 
     .theme-dark .accordion-button {
-      background-color: var(--bs-accordion-btn-color);
+      background-color: var(--codColor);
       color: #ffffff;
     }
 
     .theme-dark .accordion-body {
-      background-color: var(--bs-accordion-btn-color);
+      background-color: var(--codColor);
       color: #ffffff;
     
     }
 
-    .theme-dark .accordion-button .collapsed{
+    .theme-dark .button .accordion-button .collapsed::after{
       color: #ffffff;
-    
     }
+
+
+    /* Default accordion button icon color */
+.accordion {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23052c65'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+/* Dark theme styles */
+.theme-dark .accordion {
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
 </style>
 
 @endsection
@@ -58,4 +71,5 @@
         </div>
       </div>
     </div>
+    
 @endsection

@@ -34,7 +34,7 @@
 
 <form action="{{route('advertisement.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mb-3">
         <h5>Isi form dibawah ini untuk konten iklan</h5>
         <button type="submit" class="btn btn-md text-white" style="background-color: #175A95;">
             Upload
