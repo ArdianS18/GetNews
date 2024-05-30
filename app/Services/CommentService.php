@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
 use App\Http\Requests\CommentRequest;
+use App\Models\Comment;
 use App\Models\News;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
@@ -45,5 +46,12 @@ class CommentService implements ShouldHandleFileUpload, CustomUploadValidation
             'user_id' => auth()->id(),
             'content' => $data['content'],
         ];
+    }
+    public function checkPin(Comment $comment){
+        $news = News::find($comment->news_id);
+
+        $news->comments()
+        ->where('pin',1)
+        ->update(['pin'=>0]);
     }
 }

@@ -52,6 +52,7 @@ class CommentController extends Controller
     public function pin(Comment $comment)
     {
         $data['pin'] = '1';
+        $service = $this->commentService->checkPin($comment);
         $this->comment->update($comment->id, $data);
         return back()->with('success', 'Berhasil pin komentar');
     }
