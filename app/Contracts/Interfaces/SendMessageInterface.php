@@ -10,4 +10,6 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 interface SendMessageInterface extends StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
     public function get($status) : mixed;
+    public function count($data) : mixed;
+
 }

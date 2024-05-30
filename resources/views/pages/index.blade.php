@@ -173,7 +173,7 @@
                                         height="150" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
+                                    class="news-cat">{{ $mid->newsCategories->random()->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"

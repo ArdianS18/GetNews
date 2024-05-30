@@ -42,6 +42,8 @@ class FollowersController extends Controller
         $data['author_id'] = $author->id;
         $this->followers->store($data);
 
+        
+
         return back();
     }
 

@@ -73,8 +73,8 @@
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                     <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
-                                    @if ($countContact > 0)
-                                        <span class="badge ms-auto bg-danger">{{$countContact}}</span>
+                                    @if ($countTotal > 0)
+                                        <span class="badge ms-auto bg-danger contact">{{$countTotal}}</span>
                                     @endif
                             </li>
 
@@ -82,7 +82,7 @@
                                 <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
                                     @if ($countReport > 0)
-                                        <span class="badge ms-auto bg-danger">{{$countReport}}</span>
+                                        <span class="badge ms-auto bg-danger report">{{$countReport}}</span>
                                     @endif
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
@@ -1082,6 +1082,66 @@
                 $('.chat-report').hide();
                 $('#chat_reportDel_' + chatId).show();
             });
+        });
+    </script>
+
+    <script>
+        function updateBadgeCount() {
+            $.ajax({
+                url: 'countInbox',
+                type: 'GET',
+                success: function(response) {
+                    var newCount = response.count;
+                    var badge = $('.badge.bg-danger.contact');
+                    if (newCount > 0) {
+                        if (badge.length) {
+                            badge.text(newCount);
+                        } else {
+                            $('#contactButton').append(`<span class="badge ms-auto bg-danger contact">${newCount}</span>`);
+                        }
+                    } else {
+                        badge.remove();
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error fetching count:', xhr.responseText);
+                }
+            });
+        }
+
+        setInterval(updateBadgeCount, 10000);
+        $(document).ready(function() {
+            updateBadgeCount();
+        });
+    </script>
+
+    <script>
+        function updateBadgeCount() {
+            $.ajax({
+                url: 'countInboxReport',
+                type: 'GET',
+                success: function(response) {
+                    var newCount = response.count;
+                    var badge = $('.badge.bg-danger.report');
+                    if (newCount > 0) {
+                        if (badge.length) {
+                            badge.text(newCount);
+                        } else {
+                            $('#reportButton').append(`<span class="badge ms-auto bg-danger report">${newCount}</span>`);
+                        }
+                    } else {
+                        badge.remove();
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error fetching count:', xhr.responseText);
+                }
+            });
+        }
+
+        setInterval(updateBadgeCount, 10000);
+        $(document).ready(function() {
+            updateBadgeCount();
         });
     </script>
 
