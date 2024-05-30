@@ -260,7 +260,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'))
+            ->select('news.id', 'news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('news.created_at as created_at_formatted'))
             ->orderBy('views', 'DESC')
             ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
             ->take(8)

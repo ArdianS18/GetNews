@@ -140,7 +140,7 @@ class CategoryRepository extends BaseRepository implements CategoryInterface
             ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
             ->withCount('newsCategories')
             ->orderByDesc('news_categories_count')
-            ->take(6)
+            ->take(7)
             ->get();
 
     }
