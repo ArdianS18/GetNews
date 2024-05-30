@@ -166,7 +166,15 @@
                                             @elseif (!Auth::check())
                                                 Mohon untuk login
                                             @else
-                                                {{-- Ini akun anda --}}
+                                                @role('author')
+                                                    <a href="{{ route('profile.index') }}" class="btn btn-sm btn-outline-secondary py-1 px-4"
+                                                    style="border-radius: 8px;">Profile</a>
+                                                @endrole
+                                                @role('user')
+                                                    <a href="{{ route('profile.user') }}" class="btn btn-sm btn-outline-secondary py-1 px-4"
+                                                    style="border-radius: 8px;">Profile</a>
+                                                @endrole
+                                            
                                             @endif
 
                                             <div class="d-flex align-items-center justify-content-between mt-5"

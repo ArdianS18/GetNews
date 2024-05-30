@@ -21,8 +21,8 @@
 </head>
 
 @section('content')
-    <div class="">
-        <div class="d-flex justify-content-between">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
             <form class="d-flex">
                 <div class="position-relative d-flex">
                     <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
@@ -30,13 +30,16 @@
                     <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                 </div>
             </form>
+        </div>
 
-            <div class="">
+        <div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+            <div class="d-flex justify-content-end">
                 <a href="{{ route('kategori.admin') }}" class="btn mr-2 me-2" style="background-color: #D9D9D9"> <svg
                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="me-2" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M20 11H6.83l2.88-2.88A.996.996 0 1 0 8.3 6.71L3.71 11.3a.996.996 0 0 0 0 1.41L8.3 17.3a.996.996 0 1 0 1.41-1.41L6.83 13H20c.55 0 1-.45 1-1s-.45-1-1-1" />
                     </svg> Kembali</a>
+
                 <button type="button" style="background-color: #175A95" class="btn btn-md text-white px-5"
                     data-bs-toggle="modal" data-bs-target="#modal-create">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 2 30 24">
@@ -47,9 +50,10 @@
                 </button>
             </div>
         </div>
+       
     </div>
 
-    <div class="mt-4">
+    <div class="">
         <div class="table-responsive rounded-2 mb-3">
             <table class="table border text-nowrap customize-table mb-0 align-middle">
                 <thead class=" table">
