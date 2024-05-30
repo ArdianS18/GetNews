@@ -271,10 +271,10 @@
                     <div class="col-lg-6">
                         <div class="card p-3 border" onclick="selectCard(this)">
                             <div class="d-flex align-items-center">
-                                <input type="radio" name="payment_method" value="indomart" style="display: none;" class="me-2">
+                                <input type="radio" name="payment_method" value="Indomart" style="display: none;" class="me-2">
                                 <label for="bri_va" class="mb-0 d-flex">
                                     <div class="d-flex">
-                                        <img src="{{asset('assets/img/wallet-indomart.svg')}}" width="100px" alt="">
+                                        <img src="{{asset('assets/img/wallet-indomaret.svg')}}" width="100px" alt="">
                                         <div class="ms-4 mt-3">
                                             <p class="text-dark">indomart</p>
                                         </div>
