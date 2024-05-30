@@ -167,12 +167,15 @@
                         $('#pagination').html(handlePaginate(response.data.paginate))
                         $('.btn-detail').click(function() {
                             var authorId = $(this).data('id');
-                            // Asumsikan 'category' adalah array objek penulis, pastikan itu didefinisikan dan dapat diakses di cakupan ini.
                             var data = author.find(author => author.id === authorId);
 
                             if (data) {
                                 $('#detail-photo').attr('src', data.photo); // Foto
-                                $('#download-cv').attr('href', data.cv)
+                                // $('#download-cv').attr('href', data.cv)
+
+                                var cv = data['cv']
+                                $('#download-cv').data('cv',cv).data('name', data['name'])
+                            
                                 $('#data-id').text(data.id);
                                 $('#form-terima').attr('data-id', data.id);
                                 $('#form-tolak').attr('data-id', data.id);
@@ -287,6 +290,15 @@
             });
         });
 
+        $('#download-cv').click(function(){
+            event.preventDefault(); 
+                var cvUrl = $(this).data('cv');
+                var fileName = cvUrl.substring(cvUrl.lastIndexOf('/') + 1);
+                var link = document.createElement('a');
+                link.href = cvUrl;
+                link.setAttribute('download', $(this).data('name'));
+                link.click();
+        })
 
         function rowNewsApproved(index, data) {
             return `
