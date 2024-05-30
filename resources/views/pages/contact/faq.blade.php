@@ -1,5 +1,31 @@
 @extends('layouts.user.app')
 
+@section('style')
+<style>
+    .theme-dark .accordion-item:first-of-type .accordion-button {
+      background-color: var(--bs-accordion-btn-color);
+      color: #ffffff;
+    }
+
+    .theme-dark .accordion-button {
+      background-color: var(--bs-accordion-btn-color);
+      color: #ffffff;
+    }
+
+    .theme-dark .accordion-body {
+      background-color: var(--bs-accordion-btn-color);
+      color: #ffffff;
+    
+    }
+
+    .theme-dark .accordion-button .collapsed{
+      color: #ffffff;
+    
+    }
+</style>
+
+@endsection
+
 @section('content')
     <div class="d-flex justify-content-center">
         <img src="{{ asset('faq.svg') }}"  alt="" class="" srcset="">

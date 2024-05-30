@@ -266,7 +266,7 @@
         </div>
     </div>
 
-    <div class="editor-news pt-100 pb-75">
+    <div class="bg_tray editor-news pt-100 pb-75">
         <div class="container-fluid">
             <div class="row gx-5">
                 <div class="col-xl-6">
@@ -294,6 +294,8 @@
                                                             class="img-responsive" width="100%" height="220"
                                                             style="object-fit: cover;" alt="Image" />
                                                     </a>
+                                                    <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
+                                                        class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
                                                 </div>
                                                 <div class="news-card-info">
                                                     <div class="news-author">
