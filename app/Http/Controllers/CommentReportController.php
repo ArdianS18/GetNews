@@ -45,7 +45,7 @@ class CommentReportController extends Controller
             'content' => $request->input('content'),
         ]);
 
-        return back();
+        return back()->with('success', 'Berhasil melaporkan komentar');
     }
 
     /**

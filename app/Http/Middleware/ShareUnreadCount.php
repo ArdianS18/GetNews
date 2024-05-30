@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Models\Contact;
 use App\Models\ContactUs;
 use App\Models\Report;
+use App\Models\SendMessage;
 use Illuminate\Support\Facades\View;
 use Closure;
 use Illuminate\Http\Request;
@@ -15,12 +16,14 @@ class ShareUnreadCount
     protected $contactUs;
     protected $report;
     protected $contact;
+    protected $sendMessage;
 
-    public function __construct(ContactUs $contactUs, Report $report, Contact $contact)
+    public function __construct(ContactUs $contactUs, Report $report, Contact $contact, SendMessage $sendMessage)
     {
         $this->contactUs = $contactUs;
         $this->report = $report;
         $this->contact = $contact;
+        $this->sendMessage = $sendMessage;
     }
     /**
      * Handle an incoming request.
@@ -31,7 +34,8 @@ class ShareUnreadCount
     {
         $countContact = $this->contactUs->where('status', 'unread')->count();
         $countReport = $this->report->where('status', 'unread')->count();
-        $totalUnread = $countContact + $countReport;
+        $countMessage = $this->sendMessage->where('status', 'unread')->count();
+        $totalUnread = $countContact + $countReport + $countMessage;
 
         $firstContact = $this->contact->first();
 

@@ -62,9 +62,19 @@ class CommentRepository extends BaseRepository implements CommentInterface
     public function whereIn($id): mixed
     {
         return $this->model->query()
+            ->where('pin', '0')
             ->where('news_id', $id)
             ->get();
     }
+
+    public function pin($newsid): mixed
+    {
+        return $this->model->query()
+            ->where('pin', '1')
+            ->where('news_id', $newsid)
+            ->first();
+    }
+
     /**
      * Handle store data event to models.
      *

@@ -206,6 +206,8 @@ class NewsController extends Controller
         $newsLike = $this->newsHasLike->countLikePost($newsId);
 
         $comments = $this->comment->whereIn($newsId);
+        $pin_comments =  $this->comment->pin($newsId);
+
         $subCategories = $this->subCategory->get();
         $categories = $this->category->get();
         $users = $this->user->get();
@@ -234,14 +236,14 @@ class NewsController extends Controller
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
-            return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews',
+            return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews', 'pin_comments',
                 'subCategories','categories','newsPhoto','comments', 'newsLike',
                 'likedByUser','tags','totalCategories','populars','news_recents',
                 'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
         }
 
         $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
-        return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews',
+        return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews', 'pin_comments',
             'subCategories','categories','newsPhoto','comments', 'newsLike',
             'likedByUser','tags','totalCategories','populars','news_recents',
             'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);

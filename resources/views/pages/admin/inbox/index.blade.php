@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="card overflow-hidden chat-application">
                 <div class="d-flex align-items-center justify-content-between gap-3 m-3 d-lg-none">
                     <button class="btn btn-primary d-flex" type="button" data-bs-toggle="offcanvas"
@@ -860,7 +860,6 @@
 @endsection
 
 @section('script')
-
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const replyButtons = document.querySelectorAll('.btn-reply');
@@ -907,12 +906,14 @@
     <script>
         function loadRouteContent(event, route) {
             event.preventDefault();
-
             $.ajax({
                 url: route,
                 type: 'GET',
                 success: function (response) {
-                    $('#content-container').html(response);
+                    $('#someContainer').html(response);
+                    $(event.target).closest('.contact').find('.badge.bg-danger').remove();
+                    $(event.target).closest('.report').find('.badge.bg-danger').remove();
+                    // $('#content-container').html(response);
                 },
                 error: function (xhr) {
                     console.log(xhr.responseText);

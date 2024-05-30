@@ -125,17 +125,12 @@ class ProfileController extends Controller
 
     public function updateberita(NewsUpdateRequest $request, News $news, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag)
     {
+        dd($request);
         $data = $this->NewsService->update($request, $news);
 
-        if (auth()->user()->roles->pluck('name')[0] == "admin") {
-            $data['status'] = NewsStatusEnum::ACTIVE->value;
-        } else {
-            $data['status'] = NewsStatusEnum::PANDING->value;
-        }
-
+        $data['status'] = NewsStatusEnum::PANDING->value;
 
         $this->news->update($news->id, $data);
-
         $newsCategory->where('news_id', $news->id)->delete();
         foreach ($data['category'] as $category) {
             $this->newsCategory->store([
@@ -161,7 +156,7 @@ class ProfileController extends Controller
         }
 
         if (auth()->user()->roles->pluck('name')[0] == "admin") {
-            return to_route('news.approve.admin');
+            return back()->with('success', 'Berhasil mengupdate artikel');
         } else {
             return to_route('status.news.author')->with('success', 'Berhasil mengupdate Artikel.');
         }

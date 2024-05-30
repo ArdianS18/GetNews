@@ -67,7 +67,7 @@ class ReportController extends Controller
         $data['user_id'] = auth()->id();
         $data['news_id'] = $news->id;
         $this->report->store($data);
-        return back()->with('success', 'berhasil menambahkan data');
+        return back()->with('success', 'Berhasil melaporkan artikel');
     }
 
     public function read($report)
