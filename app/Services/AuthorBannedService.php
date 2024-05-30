@@ -39,5 +39,6 @@ class AuthorBannedService
     {
         $user->roles()->detach();
         $user->permissions()->detach();
+        $user->delete();
     }
 }
