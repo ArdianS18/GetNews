@@ -603,7 +603,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereDate('upload_date', '<=', Carbon::now())
             ->withCount('views')
             ->latest()
-            ->paginate(8);
+            ->paginate(2);
     }
 
     public function searchAll(Request $request) : mixed
