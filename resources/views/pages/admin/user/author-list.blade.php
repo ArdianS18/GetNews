@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <div class="mt-4 col-md-12 col-lg-12 ">
+    <div class="col-md-12 col-lg-12">
         <div class="table-responsive rounded-2">
             <table class="table border text-nowrap customize-table mb-0 align-middle">
                 <thead>
