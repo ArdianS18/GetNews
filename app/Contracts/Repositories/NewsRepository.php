@@ -263,7 +263,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->select('news.id', 'news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('news.created_at as created_at_formatted'))
             ->orderBy('views', 'DESC')
             ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
-            ->take(8)
+            ->take(6)
             ->get();
     }
 
