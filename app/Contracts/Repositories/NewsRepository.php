@@ -299,7 +299,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->limit(2)
             ->get()
             ->pluck('category_id')
-            ->skip(0)
+            ->skip(1)
             ->take(1);
 
         return $this->model->query()
