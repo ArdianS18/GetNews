@@ -1,7 +1,7 @@
 <div class="responsive-navbar offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="navbarOffcanvas">
     <div class="offcanvas-header">
         <a href="/" class="logo d-inline-block">
-            <img class="logo-light" src="{{asset('assets/img/logo-getmedia.png')}}" alt="logo" />
+            <img class="logo-light" src="{{asset('assets/img/getmedia-group.png')}}" alt="logo" />
             <img class="logo-dark" src="{{asset('assets/img/logo-get-media.png')}}" alt="logo" />
         </a>
 
