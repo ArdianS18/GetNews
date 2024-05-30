@@ -8,6 +8,7 @@ use App\Contracts\Interfaces\Eloquent\PaginateInterface;
 use App\Contracts\Interfaces\Eloquent\ShowInterface;
 use App\Contracts\Interfaces\Eloquent\StoreInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateInterface;
+use App\Contracts\Interfaces\Eloquent\UpdateOrCreateInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInterface;
 use Illuminate\Http\Request;
@@ -21,4 +22,6 @@ interface AuthorInterface extends GetInterface, StoreInterface, UpdateInterface,
     public function showWhithCountSearch(Request $request) : mixed;
 
     public function whereEmail($authorId): mixed;
+
+    public function updateOrCreate($userId,array $data): mixed;
 }

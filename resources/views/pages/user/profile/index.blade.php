@@ -20,6 +20,7 @@
 @endsection
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>User | Profile</title>
 </head>
 
@@ -234,6 +235,38 @@
 @endsection
 
 @section('script')
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        @if (session('success'))
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if (session('failed'))
+            Swal.fire({
+                title: 'Failed!',
+                text: '{{ session('failed') }}',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        @endif
+
+        @if (session('draft'))
+            Swal.fire({
+                title: 'Success Draft!',
+                text: '{{ session('draft') }}',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        @endif
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // Periksa status checkbox saat halaman dimuat

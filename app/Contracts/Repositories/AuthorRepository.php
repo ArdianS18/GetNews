@@ -127,6 +127,12 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->create($data);
     }
 
+    public function updateOrCreate($userId, array $data): mixed
+    {
+        return $this->model->query()
+            ->updateOrCreate(['user_id' => $userId], $data);
+    }
+
     /**
      * Handle show method and update data instantly from models.
      *
