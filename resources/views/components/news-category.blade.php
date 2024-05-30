@@ -1,4 +1,4 @@
-@props('categories')
+@props(['categories'])
 
 <div class="sidebar-widget kategori">
     <h3 class="sidebar-widget-title">Kategori</h3>

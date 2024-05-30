@@ -1,4 +1,4 @@
-@props('populars')
+@props(['populars'])
 
 <div class="sidebar-widget populer">
     <h3 class="sidebar-widget-title">Berita Popular</h3>
