@@ -185,7 +185,7 @@ class AuthorController extends Controller
     public function create(AuthorRequest $request, User $user)
     {
         $data = $this->authorService->store($request, $user);
-        $this->author->store($data);
+        $this->author->updateOrCreate($user->id,$data);
         return back()->with('success', trans('alert.add_success'));
     }
 
