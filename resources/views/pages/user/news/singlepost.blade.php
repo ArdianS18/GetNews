@@ -684,7 +684,6 @@
                             </div>
                         </div>
 
-                        @dd($comments)
                         <h3 class="comment-title mt-5">{{ $comments->count() }} Komentar</h3>
                         <div class="comment-item-wrap">
                             @php
