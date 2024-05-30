@@ -9,6 +9,7 @@ use App\Http\Requests\AuthorRequest;
 use App\Contracts\Interfaces\AuthorInterface;
 use App\Contracts\Interfaces\CategoryInterface;
 use App\Contracts\Interfaces\CommentInterface;
+use App\Contracts\Interfaces\FollowerInterface;
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Contracts\Interfaces\NewsHasLikeInterface;
 use App\Contracts\Interfaces\NewsInterface;
@@ -78,10 +79,11 @@ class AuthorController extends Controller
     private SendMessageInterface $sendMessage;
     private CommentInterface $comment;
     private UserInterface $user;
+    private FollowerInterface $follower;
     private $authorBannedService;
 
 
-    public function __construct(UserInterface $user,CommentInterface $comment,SendMessageInterface $sendMessage,NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
+    public function __construct(FollowerInterface $follower,UserInterface $user,CommentInterface $comment,SendMessageInterface $sendMessage,NewsHasLikeInterface $newsLikes, ViewInterface $view, NewsRejectInterface $newsReject, NewsTagInterface $newsTags, NewsPhotoInterface $newsPhoto, CategoryInterface $categories, SubCategoryInterface $subCategories, NewsCategoryInterface $newsCategories, NewsSubCategoryInterface $newsSubCategories, TagInterface $tags, NewsInterface $news,AuthorInterface $author, AuthorService $authorService, RegisterService $serviceregister, RegisterInterface $register, AuthorBannedService $authorBannedService, ReportInterface $report)
     {
         $this->author = $author;
         $this->register = $register;
@@ -103,6 +105,7 @@ class AuthorController extends Controller
         $this->sendMessage = $sendMessage;
         $this->comment = $comment;
         $this->user =  $user;
+        $this->follower = $follower;
     }
 
     /**
@@ -120,6 +123,7 @@ class AuthorController extends Controller
         $this->view->deleteByAuthor($author);
         $this->sendMessage->deleteByAuthor($author);
         $this->news->deleteByAuthor($author);
+        $this->follower->deleteByAuthor($author);
 
         // $user = $this->user->show($author->user_id);
         // $this->authorBannedService->delete($user);
