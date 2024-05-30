@@ -1,23 +1,4 @@
-<style>
-    @media (max-width: 768px) {
-        .logo-mobile {
-            width: 150px;
-        }
 
-    }
-
-    @media (max-width: 992px) {
-        .sidebar-toggler{
-            width: 1% !important ;
-        }
-    }
-
-
-    body {
-        overflow-x: hidden;
-    }
-
-</style>
 <div class="navbar-area header-one mb-5" id="navbar">
     <div class="header-top">
         <div class="container-fluid">
@@ -62,7 +43,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M20.75 7a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75m0 5a.75.75 0 0 1-.75.75H4a.75.75 0 0 1 0-1.5h16a.75.75 0 0 1 .75.75" clip-rule="evenodd"/></svg>
             </div>
 
-            <button type="button" class="bg-transparent border-0 text-white d-lg-none mt-2"  data-bs-toggle="modal" data-bs-target="#searchModal">
+            <button type="button" class="bg-transparent border-0 text-white d-lg-none mt-2" id="search-btn"  data-bs-toggle="modal" data-bs-target="#searchModal">
                 <i class="flaticon-loupe"></i>
             </button>
 
@@ -106,24 +87,13 @@
                 </ul>
 
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
-
+                   
                     <div class="option-item">
-                        <button type="button" class="search-btn mb-1" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
+                        <button type="button" class="search-btn" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="flaticon-loupe"></i>
                         </button>
                     </div>
 
-                    <div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="{{route('search')}}" method="GET">
-                                    <input type="search" name="q" id="search-input"  class="form-control" placeholder="Search here...." />
-                                    <button type="submit"><i class="fi fi-rr-search"></i></button>
-                                </form>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>
-                            </div>
-                        </div>
-                    </div>
                     @auth
                         <div class="option-item">
                             <ul class="navbar-nav">
@@ -200,5 +170,17 @@
                 </div>
             </div>
         </nav>
+    </div>
+</div>
+
+<div class="modal fade searchModal" id="searchModal" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{route('search')}}" method="GET">
+                <input type="search" name="q" id="search-input"  class="form-control" placeholder="Search here...." />
+                <button type="submit"><i class="fi fi-rr-search"></i></button>
+            </form>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>
+        </div>
     </div>
 </div>
