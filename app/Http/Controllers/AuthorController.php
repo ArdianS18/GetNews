@@ -245,7 +245,7 @@ class AuthorController extends Controller
         $sendDelete2 = $this->sendMessage->get('1');
 
         $countReport = $this->report->count('unread');
-
+        $countReport2 = $this->report->count('');                                               
         return view('pages.author.inbox.index', compact('reportsDelete', 'reportsDelete2','newsDelete','newsDeleteRead','newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2', 'sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 

@@ -46,7 +46,21 @@ class CommentController extends Controller
         $data = $this->commentService->store($request);
         $data['news_id'] = $news->id;
         $this->comment->store($data);
-        return back();
+        return back()->with('success', 'Anda berhasil berkomentar');
+    }
+
+    public function pin(Comment $comment)
+    {
+        $data['pin'] = '1';
+        $this->comment->update($comment->id, $data);
+        return back()->with('success', 'Berhasil pin komentar');
+    }
+
+    public function unpin(Comment $comment)
+    {
+        $data['pin'] = '0';
+        $this->comment->update($comment->id, $data);
+        return back()->with('success', 'Berhasil unpin komentar');
     }
 
     public function reply(CommentRequest $request, News $news ,$commentId)
@@ -55,7 +69,7 @@ class CommentController extends Controller
         $data['news_id'] = $news->id;
         $data['parent_id'] = $commentId;
         $this->comment->store($data);
-        return back();
+        return back()->with('success', 'Berhasil membalas komentar');
     }
 
     /**
@@ -81,7 +95,7 @@ class CommentController extends Controller
     {
         $data['content'] = $request->input('content');
         $this->comment->update($comment->id, $data);
-        return back();
+        return back()->with('success', 'Berhasil mengupdate komentar');
     }
 
     /**
@@ -90,6 +104,6 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $this->comment->delete($comment->id);
-        return back();
+        return back()->with('success', 'Berhasil menghapus komentar');
     }
 }

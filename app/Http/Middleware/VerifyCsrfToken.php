@@ -23,5 +23,7 @@ class VerifyCsrfToken extends Middleware
         'comment-report/*',
         'approved-advertisement/*',
         'delete-iklan-admin/*',
+        'comment-pin/*',
+        'comment-unpin/*'
     ];
 }

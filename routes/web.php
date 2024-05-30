@@ -199,7 +199,6 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 
 Route::middleware(['auth', 'role:admin|author|superadmin|user','check.banned'])->group(function () {
     //update news ===>
-    Route::get('update-news-admin/{news}', [ProfileController::class, 'updateberita'])->name('update.news.admin');
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
     Route::post('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
 
@@ -300,6 +299,9 @@ Route::middleware(['auth','role:user|author|admin|superadmin','check.banned'])->
     Route::post('comment-report/{comment}', [CommentReportController::class, 'store'])->name('comment.report');
     Route::post('comment-edit/{comment}', [CommentController::class, 'update'])->name('comment.update');
     Route::get('comment-delete/{comment}', [CommentController::class, 'destroy'])->name('comment.delete');
+
+    Route::post('comment-pin/{comment}', [CommentController::class, 'pin'])->name('comment.pin');
+    Route::post('comment-unpin/{comment}', [CommentController::class, 'unpin'])->name('comment.unpin');
 
     //author
     Route::post('follow/{author}', [FollowersController::class, 'store'])->name('follow.author');
