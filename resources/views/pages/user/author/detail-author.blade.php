@@ -103,6 +103,38 @@
           <div class="section-title-two mb-40">
             <h2>Berita Ditulis</h2>
           </div>
+
+          <div>
+            <form class="d-flex gap-2 mb-3">
+                <div>
+                    <div class="input-group">
+                        <input type="text" name="name" class="form-control search-chat py-2 px-4 ps-5"
+                            placeholder="Search">
+    
+                            <svg class="position-absolute top-50 translate-middle-y ms-3" xmlns="http://www.w3.org/2000/svg"
+                            width="25" height="25" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5q0-2.725 1.888-4.612T9.5 3q2.725 0 4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5q0-1.875-1.312-3.187T9.5 5Q7.625 5 6.313 6.313T5 9.5q0 1.875 1.313 3.188T9.5 14" />
+                        </svg>
+                        <button type="submit" class="btn btn-outline-primary px-4">Cari</button>
+                    </div>
+                </div>
+
+                <div class="input-group" style="width: 250px">
+                    <select class="form-select" name="filter">
+                        <option value="terbaru">Terbaru</option>
+                        <option value="terlama">Terlama</option>
+                        <option value="">Tampilkan Semua</option>
+                    </select>
+                    <button type="submit" class="btn btn-outline-primary">
+                        Pilih
+                    </button>
+                </div>
+            </form>
+
+
+          </div>
+
           <div class="popular-news-wrap">
             @forelse ($news as $item)
                 @php
