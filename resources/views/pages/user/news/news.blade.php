@@ -92,21 +92,8 @@
                 <h5 class="mt-5 text-dark">Iklan</h5>
             </div>
             
-            <ul class="page-nav list-style text-center mt-5">
-                <li><a href="{{ $newsByDate->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-                @if ($newsByDate->lastPage() > 5 && $newsByDate->currentPage() > 3)
-                    <li><a href="{{ $newsByDate->url(1) }}" class="btn btn-black {{ $newsByDate->currentPage() == 1 ? 'active' : '' }}">1</a></li>
-                    <li><span>...</span></li>
-                @endif
-                @for ($i = max(1, $newsByDate->currentPage() - 2); $i <= min($newsByDate->lastPage(), $newsByDate->currentPage() + 2); $i++)
-                    <li><a href="{{ $newsByDate->url($i) }}" class="btn btn-black {{ $newsByDate->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
-                @endfor
-                @if ($newsByDate->lastPage() > 5 && $newsByDate->currentPage() < $newsByDate->lastPage() - 2)
-                    <li><span>...</span></li>
-                    <li><a href="{{ $newsByDate->url($newsByDate->lastPage()) }}" class="btn btn-black {{ $newsByDate->currentPage() == $newsByDate->lastPage() ? 'active' : '' }}">{{ $newsByDate->lastPage() }}</a></li>
-                @endif
-                <li><a href="{{ $newsByDate->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-            </ul>
+            <x-paginator :paginator="$newsByDate" />
+
 
         </div>
 
