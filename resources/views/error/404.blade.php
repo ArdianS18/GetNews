@@ -6,7 +6,6 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="error-content justify-content-center">
                     <img src="{{ asset('assets/img/404.webp') }}" alt="Iamge" style="height: 170px;"/>
-                    <h6 style="color: #888888">404 Not Found</h6>
                     <h5>Maaf Kami Tidak Menemukan Halaman Yang Anda Cari.</h5>
                     <a href="/" class="btn mt-3" style="background-color: #DD1818; color: white">
                         <div class="gap-2">
