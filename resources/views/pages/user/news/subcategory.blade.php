@@ -95,14 +95,7 @@
                                 </div>
                             </div>
                         @empty
-                            <div class="d-flex justify-content-center">
-                                <div>
-                                    <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <h4>Tidak ada data</h4>
-                            </div>
+                        <x-no-data />
                         @endforelse
                     </div>
 
@@ -148,18 +141,27 @@
                                 </div>
                             </div>
                         @empty
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h4>Tidak Ada Berita!!</h4>
+                        </div>
                         @endforelse
                     </div>
+                  @if ($trending->lastPage() > 1)
+                  <ul class="page-nav list-style text-center mt-20">
+                    <li><a href="{{ $trending->previousPageUrl() }} && {{ $new_news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
 
-                    <ul class="page-nav list-style text-center mt-20">
-                        <li><a href="{{ $trending->previousPageUrl() }} && {{ $new_news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
+                    @for ($i = 1; $i <= $trending->lastPage(); $i++)
+                        <li><a href="{{ $trending->url($i) }} && {{ $new_news->url($i) }}" class="btn btn-black {{ $trending->currentPage() == $i ? 'active' : '' }} && {{ $new_news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
+                    @endfor
 
-                        @for ($i = 1; $i <= $trending->lastPage(); $i++)
-                            <li><a href="{{ $trending->url($i) }} && {{ $new_news->url($i) }}" class="btn btn-black {{ $trending->currentPage() == $i ? 'active' : '' }} && {{ $new_news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
-                        @endfor
-
-                        <li><a href="{{ $trending->nextPageUrl() }} && {{ $new_news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                    </ul>
+                    <li><a href="{{ $trending->nextPageUrl() }} && {{ $new_news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
+                </ul>
+                  @endif
                 </div>
 
                 <div class="col-lg-4">
