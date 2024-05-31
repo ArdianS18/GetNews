@@ -68,26 +68,23 @@
                     </li>
 
 
+                    @foreach ($categories as $category)
                     <li class="nav-item">
-                                <a  class="dropdown-toggle nav-link">Menu 1</a>
+                    <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 
                                 <ul class="dropdown-menu">
 
                                 <div class="d-flex">
                                          <li class="nav-item">
-                                            <a class="nav-link">satu</a>
-                                            <a class="nav-link">dua</a>
-                                            <a class="nav-link">tiga</a>
-                                            <a class="nav-link">empat</a>
-                                        </li>
+                                         @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                         <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
 
-                                        <li class="nav-item">
-                                        <a class="nav-link">lima</a>
-                                        <a class="nav-link">lima</a>
-                                        <a class="nav-link">lima</a>
-                                        <a class="nav-link">lima</a>
+                                         @if(($loop->iteration % 4) == 0)
+                                         </li>
+                                         <li class="nav-item">
+                                         @endif
+                                        @endforeach
                                         </li>
-
                                     </div>
                                        
 
@@ -96,6 +93,7 @@
                                 
                             </li>
 
+                            @endforeach
                             
                 
 
