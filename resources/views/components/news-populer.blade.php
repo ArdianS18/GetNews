@@ -32,6 +32,7 @@
             </div>
         </div>
     @empty
+    <x-no-data />
     @endforelse
     </div>
 </div>
