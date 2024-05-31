@@ -203,11 +203,6 @@
                 @foreach ($news_right as $barus)
                     @php
                         $dateParts = date_parse($barus->upload_date);
-
-                        $subquery = '';
-                        $categoryName = $barus->newsCategories->first(function ($category) use ($subquery) {
-                            return $subquery->contains($category->category_id);
-                        })->category->name ?? '';
                     @endphp
                     @if ($counters < 1)
                         <div class="news-card-two">
@@ -217,6 +212,11 @@
                                     <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive"
                                         style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
+                                @php
+                                    $categoryName = $barus->newsCategories->first(function ($category) use ($subquery) {
+                                        return $subquery->contains($category->category_id);
+                                    })->category->name ?? '';
+                                @endphp
                                 <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $categoryName }}</a>
                             </div>
