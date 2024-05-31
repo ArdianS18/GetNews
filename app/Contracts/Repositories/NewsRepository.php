@@ -307,11 +307,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->select('category_id', DB::raw('COUNT(*) as category_count'))
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
-            ->limit(2)
-            ->get()
-            ->pluck('category_id')
             ->skip(1)
-            ->take(1);
+            ->take(1)
+            ->get()
+            ->pluck('category_id');
 
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
