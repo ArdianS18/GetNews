@@ -111,7 +111,7 @@
                             <label class="form-label" for="password_confirmation">Kategori</label>
                             <select id="category_id"
                                 class="select2 form-control category @error('category') is-invalid @enderror"
-                                name="category[]" multiple="true" aria-label="Default select example">
+                                name="category[]" multiple aria-label="Default select example">
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
@@ -138,7 +138,7 @@
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-label" for="password_confirmation">Tanggal Upload</label>
-                            <input type="datetime-local" value="" id="upload_date" name="upload_date"
+                            <input type="datetime-local" id="upload_date" name="upload_date"
                                 placeholder="date" value="{{ old('upload_date') }}"
                                 class="form-control @error('upload_date') is-invalid @enderror">
                             @error('upload_date')
@@ -285,6 +285,16 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            var uploadDateInput = document.getElementById('upload_date');
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = ('0' + (now.getMonth() + 1)).slice(-2);
+            var day = ('0' + now.getDate()).slice(-2);
+            var hours = ('0' + now.getHours()).slice(-2);
+            var minutes = ('0' + now.getMinutes()).slice(-2);
+
+            var minDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+
             var form = document.getElementById('myForm');
             var submitButton1 = document.getElementById('submitButton1');
             var submitButton2 = document.getElementById('submitButton2');
@@ -296,6 +306,8 @@
             submitButton2.addEventListener('click', function() {
                 form.action = "{{ route('news.draft') }}";
             });
+
+            uploadDateInput.setAttribute('min', minDateTime);
         });
     </script>
 
@@ -336,13 +348,18 @@
 
     <script>
         $('.category').change(function() {
-            getSubCategory($(this).val())
+            // getSubCategory($(this).val())
+            var selectedCategories = $(this).val();
+            getSubCategory(selectedCategories);
         })
 
-        function getSubCategory(id) {
+        function getSubCategory(ids) {
             $.ajax({
-                url: "sub-category-detail/" + id,
+                url: "sub-category-detail/" + ids,
                 method: "GET",
+                data: {
+                    category_ids: ids
+                },
                 dataType: "JSON",
                 beforeSend: function() {
                     $('.sub-category').html('')
