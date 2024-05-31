@@ -378,7 +378,7 @@
 
                         <div class="">
                             <ul class="news-metainfo list-style">
-                                <div class="row">
+                                <div class="d-flex justify-content-between">
                                     <div class="col-lg-11 col-md-11">
                                         <div class="row">
                                             <div class="col-md-12 col-lg-3 mb-3">
@@ -1076,8 +1076,8 @@
                                     </div>
 
                                     @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
-                                        
-                                            <div class="row comment-item w-100 ms-5 mt-3" style="border-bottom:1px solid #eee;">
+                                        <div class="">
+                                            <div class="row comment-item w-100 ms-5">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}"
@@ -1213,7 +1213,7 @@
                                                 </div>
                                                 
                                             </div>
-                                        
+                                        </div>
 
                                         <!-- Form Balasan -->
                                         <div id="reply-form-{{ $reply->id }}" class="reply-form mt-3"
@@ -1265,8 +1265,12 @@
                             @endforelse
 
                             @if ($comments->count() > 5)
-                                <div class="text-center mt-3">
-                                    <button id="load-more" class="btn btn-primary">Lihat Selengkapnya</button>
+                                <div class="text-center left-content mt-3">
+                                    <a id="load-more" class="link-one" style="color: var(--secondaryColor);">Lihat Selengkapnya
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z"/></svg>
+                                    
+                                    </a>
+                                    {{-- <button id="load-more" class="btn btn-primary">Lihat Selengkapnya</button> --}}
                                 </div>
                             @endif
                         </div>
