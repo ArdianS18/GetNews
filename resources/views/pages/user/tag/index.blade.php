@@ -53,15 +53,7 @@
                             </div>
                         @endforelse
                     </div>
-                    <ul class="page-nav list-style text-center mt-20">
-                        <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-                        @for ($i = 1; $i <= $news->lastPage(); $i++)
-                            <li><a href="{{ $news->url($i) }}"
-                                    class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                            </li>
-                        @endfor
-                        <li><a href="{{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                    </ul>
+                   <x-paginator :paginator="$news"/>
                 </div>
 
                 <div class="col-lg-4">
@@ -99,7 +91,7 @@
                                                 width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a href="#">{!! Illuminate\Support\Str::limit($popular->name, $limit = 20, $end = '...') !!}</a>
+                                            <h3><a href="{{ route('news.user',['day'=> $dateParts['day'],'month'=>$dateParts['month'],'year'=>$dateParts['year'],'news'=>$popular->slug]) }}">{!! Illuminate\Support\Str::limit($popular->name, $limit = 20, $end = '...') !!}</a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li>
