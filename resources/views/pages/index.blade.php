@@ -203,6 +203,10 @@
                 @foreach ($news_right as $barus)
                     @php
                         $dateParts = date_parse($barus->upload_date);
+
+                        $categoryName = $barus->newsCategories->first(function ($category) use ($subquery) {
+                            return $subquery->contains($category->category_id);
+                        })->category->name ?? '';
                     @endphp
                     @if ($counters < 1)
                         <div class="news-card-two">
@@ -213,7 +217,7 @@
                                         style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                    class="news-cat">{{ $categoryName }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}"
@@ -241,7 +245,7 @@
                             <div class="news-card-info">
                                 <a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}"
                                     href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                    class="news-cat">{{ $categoryName }}</a>
                                 <h3><a
                                         href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                         {!! Illuminate\Support\Str::limit($barus->name, $limit = 40, $end = '...') !!}
