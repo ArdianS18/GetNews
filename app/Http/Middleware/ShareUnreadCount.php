@@ -38,7 +38,7 @@ class ShareUnreadCount
         $totalUnread = $countContact + $countReport + $countMessage;
 
         // $firstContact = $this->contact->first();
-
+        
         View::share(
             'totalUnread', $totalUnread
             // 'firstContact' => $firstContact

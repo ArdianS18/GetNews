@@ -13,12 +13,12 @@
                 height: 130px; */
         }
 
-        .badge {
+        /* .badge {
             width: fit-content;
             height: fit-content;
             padding: 0.25em 0.5em;
             font-size: inherit;
-        }
+        } */
     </style>
 @endsection
 
@@ -73,17 +73,13 @@
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                     <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
-                                    @if ($countTotal > 0)
-                                        <span class="badge ms-auto bg-danger contact">{{$countTotal}}</span>
-                                    @endif
+                                    <span class="badge ms-auto bg-danger"></span>
                             </li>
 
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                 <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
-                                    @if ($countReport > 0)
-                                        <span class="badge ms-auto bg-danger report">{{$countReport}}</span>
-                                    @endif
+                                    <span class="badge ms-auto bg-danger"></span>
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
@@ -1092,12 +1088,12 @@
                 type: 'GET',
                 success: function(response) {
                     var newCount = response.count;
-                    var badge = $('.badge.bg-danger.contact');
+                    var badge = $('.badge.bg-danger');
                     if (newCount > 0) {
                         if (badge.length) {
                             badge.text(newCount);
                         } else {
-                            $('#contactButton').append(`<span class="badge ms-auto bg-danger contact">${newCount}</span>`);
+                            $('#contactButton').append(`<span class="badge ms-auto bg-danger">${newCount}</span>`);
                         }
                     } else {
                         badge.remove();
@@ -1116,18 +1112,18 @@
     </script>
 
     <script>
-        function updateBadgeReportCount() {
+        function updateBadgeCount() {
             $.ajax({
                 url: 'countInboxReport',
                 type: 'GET',
                 success: function(response) {
-                    var newCount = response.count;
-                    var badge = $('.badge.bg-danger.report');
-                    if (newCount > 0) {
+                    var newReportCount = response.countReport;
+                    var badge = $('.badge.bg-danger');
+                    if (newReportCount > 0) {
                         if (badge.length) {
-                            badge.text(newCount);
+                            badge.text(newReportCount);
                         } else {
-                            $('#reportButton').append(`<span class="badge ms-auto bg-danger report">${newCount}</span>`);
+                            $('#reportButton').append(`<span class="badge ms-auto bg-danger">${newReportCount}</span>`);
                         }
                     } else {
                         badge.remove();
@@ -1139,9 +1135,9 @@
             });
         }
 
-        setInterval(updateBadgeReportCount, 5000);
+        setInterval(updateBadgeCount, 5000);
         $(document).ready(function() {
-            updateBadgeReportCount();
+            updateBadgeCount();
         });
     </script>
 
