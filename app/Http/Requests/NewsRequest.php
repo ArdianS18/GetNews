@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class NewsRequest extends FormRequest
@@ -23,7 +24,7 @@ class NewsRequest extends FormRequest
             'sub_category.*' => 'required',
             'tag' => 'array|required',
             'tag.*' => 'required',
-            'upload_date' => 'required|date|after_or_equal:'.now()->toDateString(),
+            'upload_date' => 'required|date|after_or_equal:' . now()->toDateString(),
         ];
     }
 
@@ -36,7 +37,7 @@ class NewsRequest extends FormRequest
             'photo.mimes' => 'Foto harus berupa jpg , png , atau jpeg',
             'content.required' => 'Konten tidak boleh kosong',
             'category.required' => 'Kategori tidak boleh kosong',
-            'tags.required' => 'Tags tidak boleh kosong',
+            'tag.required' => 'Tags tidak boleh kosong',
             'upload_date.required' => 'Tanggal tidak boleh kosong',
             'sub_category.required' => 'Sub kategori tidak boleh kosong',
         ];

@@ -52,6 +52,8 @@
         <!-- Core Css -->
         <!-- --------------------------------------------------- -->
         <link id="themeColors" rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -366,82 +368,104 @@
             <div class="offcanvas offcanvas-end shopping-cart" tabindex="-1" id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header py-4">
-                    <h5 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Shopping Cart</h5>
-                    <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>
-                </div>
-                <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar>
-                    <ul class="mb-0">
-                        <li class="pb-7">
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/product-1.jpg" width="95" height="75"
-                                    class="rounded-1 me-9 flex-shrink-0" alt="" />
-                                <div>
-                                    <h6 class="mb-1">Supreme toys cooker</h6>
-                                    <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-2">
-                                        <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
-                                        <div class="input-group input-group-sm w-50">
-                                            <button class="btn border-0 round-20 minus p-0 bg-light-success text-success "
-                                                type="button" id="add1"> - </button>
-                                            <input type="text"
-                                                class="form-control round-20 bg-transparent text-muted fs-2 border-0  text-center qty"
-                                                placeholder="" aria-label="Example text with button addon"
-                                                aria-describedby="add1" value="1" />
-                                            <button class="btn text-success bg-light-success  p-0 round-20 border-0 add"
-                                                type="button" id="addo2"> + </button>
-                                        </div>
-                                    </div>
-                                </div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+                <div>
+                    <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
+                        <li class="nav-item">
+                            <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
+                                <span class="text-dark fs-3 fw-semibold lh-1 mb-1 username"></span>
+                                <span class="text-dark fs-3 fw-bold lh-1 role"></span>
                             </div>
                         </li>
-                        <li class="pb-7">
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/product-2.jpg" width="95" height="75"
-                                    class="rounded-1 me-9 flex-shrink-0" alt="" />
-                                <div>
-                                    <h6 class="mb-1">Supreme toys cooker</h6>
-                                    <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-2">
-                                        <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
-                                        <div class="input-group input-group-sm w-50">
-                                            <button class="btn border-0 round-20 minus p-0 bg-light-success text-success "
-                                                type="button" id="add2"> - </button>
-                                            <input type="text"
-                                                class="form-control round-20 bg-transparent text-muted fs-2 border-0  text-center qty"
-                                                placeholder="" aria-label="Example text with button addon"
-                                                aria-describedby="add2" value="1" />
-                                            <button class="btn text-success bg-light-success  p-0 round-20 border-0 add"
-                                                type="button" id="addon34"> + </button>
-                                        </div>
-                                    </div>
-                                </div>
+                        <li class="nav item me-2">
+                            <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
+                                <span class="mt-2 fs-4 lh-1 text-end fw-semibold">{{ auth()->user()->name }}</span>
+                                <span class="fs-4 text-end">{{ auth()->user()->email }}</span>
                             </div>
                         </li>
-                        <li class="pb-7">
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/product-3.jpg" width="95" height="75"
-                                    class="rounded-1 me-9 flex-shrink-0" alt="" />
-                                <div>
-                                    <h6 class="mb-1">Supreme toys cooker</h6>
-                                    <p class="mb-0 text-muted fs-2">Kitchenware Item</p>
-                                    <div class="d-flex align-items-center justify-content-between mt-2">
-                                        <h6 class="fs-2 fw-semibold mb-0 text-muted">$250</h6>
-                                        <div class="input-group input-group-sm w-50">
-                                            <button class="btn border-0 round-20 minus p-0 bg-light-success text-success "
-                                                type="button" id="add3"> - </button>
-                                            <input type="text"
-                                                class="form-control round-20 bg-transparent text-muted fs-2 border-0  text-center qty"
-                                                placeholder="" aria-label="Example text with button addon"
-                                                aria-describedby="add3" value="1" />
-                                            <button class="btn text-success bg-light-success  p-0 round-20 border-0 add"
-                                                type="button" id="addon3"> + </button>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile"
+                                            style="object-fit: cover" width="35" height="35" alt="" />
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up"
+                                aria-labelledby="drop1">
+                                <div class="profile-dropdown position-relative" data-simplebar>
+                                    <div class="py-3 px-7 pb-0">
+                                        <h5 class="mb-0 fs-5 fw-semibold">User Profile</h5>
+                                    </div>
+                                    <div class="d-flex align-items-center py-9 mx-7 border-bottom">
+                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile" style="object-fit: cover"
+                                            width="80" height="80" alt="" />
+                                        <div class="ms-3">
+                                            <h5 class="mb-1 fs-3 username">{{ auth()->user()->name }}</h5>
+                                            <span class="mb-1 d-block text-dark role">{{ auth()->user()->roles->pluck('name')[0] }}</span>
+                                            <p class="mb-0 d-flex text-dark align-items-center gap-2 email">
+                                                <i class="ti ti-mail fs-4"></i>
+                                                {{ auth()->user()->email }}
+                                            </p>
                                         </div>
                                     </div>
+                                    <div class="message-body">
+                                        <a class="py-8 px-7 mt-8 d-flex align-items-center" href="{{ route('profile.author.update') }}">
+                                            <span
+                                                class="d-flex align-items-center justify-content-center bg-light rounded-1 p-6">
+                                                {{-- <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg")  }}" width="24" height="24" alt="" /> --}}
+                                                <img src="https://demos.adminmart.com/premium/bootstrap/modernize-bootstrap/package/dist/images/svgs/icon-account.svg" alt="" width="24" height="24">
+                                            </span>
+                                            <div class="w-75 d-inline-block v-middle ps-3">
+                                                <h6 class="mb-1 bg-hover-primary fw-semibold"> Profile Ku </h6>
+                                                <span class="d-block text-dark">Setting Akun</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <div class="d-grid py-4 px-7 pt-8">
+                                            <button class="btn btn-outline-primary" id="logoutBtn">Log Out</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <div class="align-bottom">
+                </div>
+                
+                
+                    <!-- <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span> -->
+                </div>
+
+                <div class="offcanvas-header py-4">
+                    
+                <h3 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Pengikut
+                    <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary"></span>
+                    </h3>
+                </div>
+
+                <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar>
+                    <ul class="mb-0">
+                        <li class="pb-7">
+                            <a href="{{ route('profile.index') }}" class="btn btn-sm" style="background-color: #175A95">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23"
+                                    viewBox="0 0 512 512">
+                                    <path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="32"
+                                        d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 0 0-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 0 0 0-17.47C428.89 172.28 347.8 112 255.66 112" />
+                                    <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff"
+                                        stroke-miterlimit="10" stroke-width="32" />
+                                </svg>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                    <!-- <div class="align-bottom">
                         <div class="d-flex align-items-center pb-7">
                             <span class="text-dark fs-3">Sub Total</span>
                             <div class="ms-auto">
@@ -455,7 +479,7 @@
                             </div>
                         </div>
                         <a href="eco-checkout.html" class="btn btn-outline-primary w-100">Go to shopping cart</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -485,4 +509,9 @@
 
 
     </body>
+@endsection
+
+@section('script')
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
 @endsection

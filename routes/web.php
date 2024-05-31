@@ -275,6 +275,8 @@ Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(fun
 
 });
 
+aku bien perna ada keluh kesah pisan ambe nasya, pas iko dipanggil nang 
+
 Route::middleware(['auth','role:user|author|admin|superadmin','check.banned'])->group(function () {
 
     Route::get('news-liked', [NewsHasLikeController::class, 'index'])->name('news.author.liked');
