@@ -74,8 +74,8 @@
                                 <a href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $tren->photo) }}" alt="Image" height="140" width="100%" />
                                 </a>
-                                <a data-toggle="tooltip" data-placement="top" title="{{ $tren->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $tren->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $tren->newsCategories[0]->category->name }}</a>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                                    class="news-cat">{{$category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $tren->name }}" href="{{ route('news.user', ['news' => $tren->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
@@ -92,14 +92,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="d-flex justify-content-center">
-                            <div>
-                                <img src="{{ asset('assets/img/no-data.svg') }}" alt="">
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <h4>Tidak ada data</h4>
-                        </div>
+                       <x-no-data/>
                     @endforelse
                 </div>
 
@@ -126,8 +119,8 @@
                                 <a href="{{ route('news.user', ['news' => $new->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $new->photo) }}" alt="Image" height="140" width="100%" />
                                 </a>
-                                <a data-toggle="tooltip" data-placement="top" title="{{ $new->newsCategories[0]->category->name }}" href="{{ route('categories.show.user', ['category' => $new->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $new->newsCategories[0]->category->name }}</a>
+                                < <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                                    class="news-cat">{{$category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $new->name }}" href="{{ route('news.user', ['news' => $new->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
@@ -147,15 +140,7 @@
                     @endforelse
                 </div>
 
-                <ul class="page-nav list-style text-center mt-20">
-                    <li><a href="{{ $trending->previousPageUrl() }} && {{ $new_news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-
-                    @for ($i = 1; $i <= $trending->lastPage(); $i++)
-                        <li><a href="{{ $trending->url($i) }} && {{ $new_news->url($i) }}" class="btn btn-black {{ $trending->currentPage() == $i ? 'active' : '' }} && {{ $new_news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
-                    @endfor
-
-                    <li><a href="{{ $trending->nextPageUrl() }} && {{ $new_news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                </ul>
+               <x-paginator :paginator="$new_news"/>
             </div>
 
             <div class="col-lg-4">
