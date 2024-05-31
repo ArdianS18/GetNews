@@ -5509,6 +5509,7 @@ article {
   flex-wrap: wrap;
   margin-bottom: 25px;
   padding-bottom: 25px;
+  padding-top: 25px;
   border-bottom: 1px solid #eee;
 }
 .comment-item-wrap .comment-item.reply {
