@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\NewsCategoryInterface;
 use App\Enums\NewsStatusEnum;
+use App\Models\Author;
 use App\Models\NewsCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -30,6 +31,12 @@ class NewsCategoryRepository extends BaseRepository implements NewsCategoryInter
         ->delete();
     }
 
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $author->user_id)
+            ->delete();
+    }
 
     public function paginate(): mixed
     {

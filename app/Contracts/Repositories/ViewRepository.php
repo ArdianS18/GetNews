@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Contracts\Interfaces\ViewInterface;
 use App\Enums\NewsStatusEnum;
+use App\Models\Author;
 
 class ViewRepository extends BaseRepository implements ViewInterface
 {
@@ -28,6 +29,13 @@ class ViewRepository extends BaseRepository implements ViewInterface
         return $this->model->query()
         ->findOrFail($id)
         ->delete();
+    }
+
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $author->user_id)
+            ->delete();
     }
 
     /**

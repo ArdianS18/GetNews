@@ -34,4 +34,10 @@ class AuthorBannedService
             }
         }
     }
+
+    public function delete(User $user)
+    {
+        $user->roles()->detach();
+        $user->permissions()->detach();
+    }
 }

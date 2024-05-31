@@ -82,7 +82,7 @@ class UserRepository extends BaseRepository implements UserInterface
     public function show(mixed $id): mixed
     {
         return $this->model->query()
-        ->findOrFail($id);
+            ->findOrFail($id);
     }
 
     public function showWithSlug(string $slug): mixed

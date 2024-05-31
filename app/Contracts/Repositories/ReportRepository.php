@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\ReportInterface;
+use App\Models\Author;
 use App\Models\Report;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -12,6 +13,13 @@ class ReportRepository extends BaseRepository implements ReportInterface
     public function __construct(Report $report)
     {
         $this->model = $report;
+    }
+
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $author->user_id)
+            ->delete();
     }
 
     public function getAllWithUser()

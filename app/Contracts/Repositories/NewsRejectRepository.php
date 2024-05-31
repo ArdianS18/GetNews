@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\NewsRejectInterface;
+use App\Models\Author;
 use App\Models\NewsReject;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -28,6 +29,12 @@ class NewsRejectRepository extends BaseRepository implements NewsRejectInterface
         ->delete();
     }
 
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('news', 'user_id', $author->user_id)
+            ->delete();
+    }
     /**
      * Handle get the specified data by id from models.
      *
