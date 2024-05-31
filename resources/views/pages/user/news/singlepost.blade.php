@@ -741,7 +741,7 @@
                                                                         {{ $comment->user->name }}
 
                                                                         @if ($comment->user_id === $comment->news->user_id)
-                                                                            <span style="font-size: 0.8em;"> -
+                                                                            <span style="font-size: 0.8em;font:400;color:red"> -
                                                                                 pembuat</span>
                                                                             </a>
                                                                         @endif
@@ -933,7 +933,7 @@
                                                                             {{ $reply->user->name }}
 
                                                                             @if ($reply->user_id === $reply->news->user_id)
-                                                                                <span style="font-size: 0.8em;"> -
+                                                                                <span style="font-size: 0.8em;font:400;color:red"> -
                                                                                     pembuat</span>
                                                                                 </a>
                                                                             @endif
