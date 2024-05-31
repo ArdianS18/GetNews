@@ -33,7 +33,7 @@ class ShareUnreadCount
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth()) {
+        if (Auth::check()) {
 
             $countContact = $this->contactUs->where('status', 'unread')->count();
             $countReport = $this->report->where('status', 'unread')->count();
