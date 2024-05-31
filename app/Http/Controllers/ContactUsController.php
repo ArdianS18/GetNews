@@ -87,6 +87,15 @@ class ContactUsController extends Controller
         return response()->json(['countReport' => $countReport]);
     }
 
+    public function countTotal()
+    {
+        $countContact = $this->contactUs->count('unread');
+        $countMassage = $this->sendMessage->count('unread');
+        $countReport = $this->report->count('unread');
+        $totalUnread = $countContact + $countReport + $countMassage;
+        return response()->json(['countTotal' => $totalUnread]);
+    }
+
     public function contact(Faq $faq){
         $contactUs = $this->contactUs->get();
         $faqs = $this->faq->get();
