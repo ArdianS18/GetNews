@@ -140,15 +140,7 @@
                     @endforelse
                 </div>
 
-                <ul class="page-nav list-style text-center mt-20">
-                    <li><a href="{{ $trending->previousPageUrl() }} && {{ $new_news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-
-                    @for ($i = 1; $i <= $trending->lastPage(); $i++)
-                        <li><a href="{{ $trending->url($i) }} && {{ $new_news->url($i) }}" class="btn btn-black {{ $trending->currentPage() == $i ? 'active' : '' }} && {{ $new_news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
-                    @endfor
-
-                    <li><a href="{{ $trending->nextPageUrl() }} && {{ $new_news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-                </ul>
+               <x-paginator :paginator="$new_news"/>
             </div>
 
             <div class="col-lg-4">
