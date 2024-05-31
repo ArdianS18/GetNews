@@ -17,6 +17,7 @@ use App\Contracts\Interfaces\NewsInterface;
 use App\Contracts\Interfaces\UserInterface;
 use App\Contracts\Interfaces\SendMessageInterface;
 use App\Http\Resources\UserResource;
+use App\Models\Author;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -145,6 +146,7 @@ class UserController extends Controller
     {
         $user = $this->user->show($id);
         $data['status'] = NewsStatusEnum::NONACTIVE->value;
+
         if (!$user->status_banned) {
             $this->authorBannedService->banned($user);
             $this->news->StatusBanned($user->id);

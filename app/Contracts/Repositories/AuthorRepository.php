@@ -86,7 +86,7 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
     public function delete(mixed $id): mixed
     {
         return $this->model->query()
-            ->findOrFail($id)
+            ->findOrFail($id->id)
             ->delete();
     }
 
@@ -207,6 +207,6 @@ class AuthorRepository extends BaseRepository implements AuthorInterface
             ->selectRaw('(SELECT COUNT(*) FROM news_has_likes
                             INNER JOIN news ON news_has_likes.news_id = news.id
                             WHERE news.user_id = authors.user_id) as count_like')
-            ->get();
+            ->paginate(16);
     }
 }

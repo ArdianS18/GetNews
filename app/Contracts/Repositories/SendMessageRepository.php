@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\SendMessageInterface;
+use App\Models\Author;
 use App\Models\SendMessage;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,13 @@ class SendMessageRepository extends BaseRepository implements SendMessageInterfa
             ->get();
     }
 
+    public function deleteByAuthor(Author $author): mixed
+    {
+
+        return $this->model->query()
+            ->where('email', $author->user->email)
+            ->delete();
+    }
 
     public function count($data): mixed
     {

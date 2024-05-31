@@ -1,5 +1,9 @@
 @extends('layouts.admin.app')
 
+@section('style')
+<link rel="stylesheet" href="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.css') }}">
+
+@endsection
 @section('content')
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
     <div class="card-body px-4 py-4">
@@ -111,6 +115,20 @@
                 </div>
             </div>
 
+            <h4><span class="me-2" style="color: #175A95; font-size: 20px">|</span>Tentang GetMedia</h4>
+            <div class="row mt-4 mb-5">
+                <div class="col-lg-12 mb-4">
+                    <label class="form-label" for="content">Isi Berita</label>
+                        <textarea id="content" name="content" placeholder="content" value="{{ old('content') }}"
+                            class="form  @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
+                        @error('content')
+                            <span class="invalid-feedback" role="alert" style="color: red;">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                </div>
+            </div>
+
             <h4><span class="me-2" style="color: #175A95; font-size: 20px">|</span>Social Media</h4>
 
             <div class="row mt-5">
@@ -183,6 +201,8 @@
 @endsection
 
 @section('script')
+<script src="{{ asset('admin/dist/libs/summernote/dist/summernote-lite.min.js') }}"></script>
+
     <script>
         function previewImage(event) {
             var input = event.target;
@@ -199,5 +219,35 @@
                 previewImg.classList.add('hide');
             }
         }
+
+        $(document).ready(function() {
+            $('#content').summernote({
+                blockquoteBreakingLevel: 2,
+                height: 250,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph', 'height']],
+                    ['table', ['table']],
+                    ['link', ['link']],
+                    ['picture', ['picture']],
+                    ['video', ['video']],
+                    ['codeview', ['codeview']],
+                    ['help', ['help']],
+                    ['insert', ['ul', 'blockquote']] // Include Blockquote button in 'insert' dropdown
+                ],
+
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica', 'Impact',
+                    'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+                ],
+                fontNamesIgnoreCheck: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Helvetica',
+                    'Impact', 'Lucida Grande', 'Tahoma', 'Times New Roman', 'Verdana'
+                ]
+
+            });
+        });
     </script>
 @endsection

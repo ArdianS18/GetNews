@@ -34,18 +34,19 @@ class ShareUnreadCount
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth()) {
+
             $countContact = $this->contactUs->where('status', 'unread')->count();
             $countReport = $this->report->where('status', 'unread')->count();
-            $countMessage = $this->sendMessage->where('status', 'unread')->count();
+            $countMessage = $this->sendMessage->where('email', auth()->user()->email)->where('status', 'unread')->count();
             $totalUnread = $countContact + $countReport + $countMessage;
         }
 
-        $firstContact = $this->contact->first();
+        // $firstContact = $this->contact->first();
 
-        View::share([
-            'totalUnread' => $totalUnread,
-            'firstContact' => $firstContact
-        ]);
+        View::share(
+            'totalUnread', $totalUnread
+            // 'firstContact' => $firstContact
+        );
 
         return $next($request);
     }

@@ -712,7 +712,21 @@
                                             <div class="row align-items-start">
                                                 <div class="col-md-9 order-md-1 order-sm-1 order-1">
                                                     <div class="comment-author-name">
-                                                        <h5>{{ $pin_comments->user->name }}</h5>
+                                                        <h5
+                                                        @if ($pin_comments->user_id === $pin_comments->news->user_id)
+                                                            style="padding: 5px; border-radius: 5px;" class="btn btn-rounded btn-outline-primary"
+                                                        @endif
+                                                        >
+                                                        @if ($pin_comments->user_id === $pin_comments->news->user_id)
+                                                        <a href="{{ route('author.detail', ['id' => $pin_comments->user->slug]) }}">
+                                                        @endif
+
+                                                        {{ $pin_comments->user->name }}
+
+                                                        @if ($pin_comments->user_id === $pin_comments->news->user_id)
+                                                        </a>
+                                                        @endif
+                                                        </h5>
                                                         <div class="mt-2">
                                                             <span
                                                                 class="comment-date">{{ \Carbon\Carbon::parse($pin_comments->created_at)->format('M d,Y | g:i A') }}</span>
@@ -867,7 +881,21 @@
                                                 <div class="row align-items-start">
                                                     <div class="col-md-9 order-md-1 order-sm-1 order-1">
                                                         <div class="comment-author-name">
-                                                            <h5>{{ $comment->user->name }}</h5>
+                                                            <h5
+                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                style="padding: 5px; border-radius: 5px;" class="btn btn-rounded btn-outline-primary"
+                                                            @endif
+                                                            >
+                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                            <a href="{{ route('author.detail', ['id' => $comment->user->slug]) }}">
+                                                            @endif
+
+                                                            {{ $comment->user->name }}
+
+                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                            </a>
+                                                            @endif
+                                                            </h5>
                                                             <div class="mt-2">
                                                                 <span
                                                                     class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d,Y | g:i A') }}</span>
@@ -1021,7 +1049,21 @@
                                                 <div class="row align-items-start">
                                                     <div class="col-md-9 order-md-1 order-sm-1 order-1">
                                                         <div class="comment-author-name">
-                                                            <h5>{{ $reply->user->name }}</h5>
+                                                            <h5
+                                                            @if ($reply->user_id === $reply->news->user_id)
+                                                                style="padding: 5px; border-radius: 5px;" class="btn btn-rounded btn-outline-primary"
+                                                            @endif
+                                                            >
+                                                            @if ($reply->user_id === $reply->news->user_id)
+                                                                <a href="{{ route('author.detail', ['id' => $reply->user->slug]) }}">
+                                                            @endif
+
+                                                            {{ $reply->user->name }}
+
+                                                            @if ($reply->user_id === $reply->news->user_id)
+                                                            </a>
+                                                            @endif
+                                                            </h5>
                                                             <div class="d-flex">
                                                                 <span
                                                                     class="comment-date">{{ \Carbon\Carbon::parse($reply->created_at)->format('M d,Y | g:i A') }}</span>
@@ -1040,7 +1082,14 @@
                                                                     </svg>
                                                                 </a>
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                                    @if (Auth::check() && $reply->user_id === auth()->user()->id)
+                                                                        @if (Auth::check() && $reply->user_id === auth()->user()->id)
+                                                                        @if ($comment->news->user_id === auth()->user()->id)
+                                                                        <li>
+                                                                            <button class="btn btn-sm pin" data-id="{{ $reply->id }}">
+                                                                                Pin
+                                                                            </button>
+                                                                        </li>
+                                                                        @endif
                                                                         <li>
                                                                             <button class="btn btn-sm" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
@@ -1052,6 +1101,13 @@
                                                                             </button>
                                                                         </li>
                                                                     @elseif (Auth::check() && $reply->news->user_id === (auth()->user()->roles->pluck('name')[0] == "author") && $reply->user_id != auth()->user()->author->user_id)
+                                                                        @if ($comment->news->user_id === auth()->user()->id)
+                                                                        <li>
+                                                                            <button class="btn btn-sm pin" data-id="{{ $reply->id }}">
+                                                                                Pin
+                                                                            </button>
+                                                                        </li>
+                                                                        @endif
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit
@@ -1063,6 +1119,11 @@
                                                                             </button>
                                                                         </li>
                                                                     @elseif (Auth::check() && $reply->news->user_id === auth()->user()->id)
+                                                                        <li>
+                                                                            <button class="btn btn-sm pin" data-id="{{ $reply->id }}">
+                                                                                Pin
+                                                                            </button>
+                                                                        </li>
                                                                         <li>
                                                                             <button class="btn btn-sm edit-btn" onclick="showEditReplyForm({{ $reply->id }})">
                                                                                 Edit

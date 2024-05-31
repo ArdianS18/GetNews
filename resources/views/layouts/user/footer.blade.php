@@ -7,9 +7,9 @@
                     <li></li>
                     <li>
                         <p class="copyright-text mt-4">
-                            @if ($firstContact)
+                            {{-- @if ($firstContact)
                                 {{ $firstContact->slogan }}
-                            @endif
+                            @endif --}}
                         </p>
                         {{-- <p class="copyright-text mt-4" style="font-size: 20px">© <span>Get</span>Media berita terlengkap dengan berita terbaru dan terpopuler.</p> --}}
                     </li>
@@ -38,10 +38,10 @@
             <div class="col-lg-2">
                 <ul style="list-style-type: none;" class="p-4">
                     <span style="color: #92989F; font-size: 15px;">Social Media</span>
-                    <li class="mb-2"><a href="@if ($firstContact) {{$firstContact->url_facebook}} @endif" style="color: #FFFFFF">Facebook</a></li>
+                    {{-- <li class="mb-2"><a href="@if ($firstContact) {{$firstContact->url_facebook}} @endif" style="color: #FFFFFF">Facebook</a></li>
                     <li class="mb-2"><a href="@if ($firstContact) {{$firstContact->url_twitter}} @endif" style="color: #FFFFFF">Twitter</a></li>
                     <li class="mb-2"><a href="@if ($firstContact) {{$firstContact->url_instagram}} @endif" style="color: #FFFFFF">Instagram</a></li>
-                    <li class="mb-2"><a href="@if ($firstContact) {{$firstContact->url_likedin}} @endif" style="color: #FFFFFF">Linkedin</a></li>
+                    <li class="mb-2"><a href="@if ($firstContact) {{$firstContact->url_likedin}} @endif" style="color: #FFFFFF">Linkedin</a></li> --}}
                 </ul>
             </div>
             <div class="col-lg-4">

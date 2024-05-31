@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Contracts\Interfaces\FollowerInterface;
+use App\Models\Author;
 use App\Models\ContactUs;
 use App\Models\Followers;
 use Illuminate\Database\QueryException;
@@ -24,6 +25,13 @@ class FollowerRepository extends BaseRepository implements FollowerInterface
     public function where(Request $request): mixed
     {
         return $this->model->whereIn('status_delete', $request)->get();
+    }
+
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->where('author_id', $author->id)
+            ->delete();
     }
 
     public function whereIn($user_id, $author_id): mixed

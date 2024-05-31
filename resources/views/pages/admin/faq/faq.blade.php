@@ -326,6 +326,7 @@
                         text: "Berhasil Menambahkan Data"
                     })
                     $('#tambahdataLabel').modal('hide')
+                    $('#modal-create').modal('hide')
                     emptyForm('form-create')
                 },
                 error: function(response) {

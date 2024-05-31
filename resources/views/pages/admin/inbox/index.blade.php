@@ -1109,14 +1109,14 @@
             });
         }
 
-        setInterval(updateBadgeCount, 10000);
+        setInterval(updateBadgeCount, 5000);
         $(document).ready(function() {
             updateBadgeCount();
         });
     </script>
 
     <script>
-        function updateBadgeCount() {
+        function updateBadgeReportCount() {
             $.ajax({
                 url: 'countInboxReport',
                 type: 'GET',
@@ -1139,9 +1139,9 @@
             });
         }
 
-        setInterval(updateBadgeCount, 10000);
+        setInterval(updateBadgeReportCount, 5000);
         $(document).ready(function() {
-            updateBadgeCount();
+            updateBadgeReportCount();
         });
     </script>
 

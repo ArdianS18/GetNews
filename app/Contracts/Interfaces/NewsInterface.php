@@ -3,6 +3,7 @@
 namespace App\Contracts\Interfaces;
 
 use App\Contracts\Interfaces\Eloquent\CustomPaginationInterface;
+use App\Contracts\Interfaces\Eloquent\DeleteByAuthor;
 use App\Contracts\Interfaces\Eloquent\DeleteInterface;
 use App\Contracts\Interfaces\Eloquent\GetInterface;
 use App\Contracts\Interfaces\Eloquent\SearchInterface;
@@ -17,7 +18,7 @@ use Illuminate\Foundation\Mix;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface, UpdateOrCreateInterface
+interface NewsInterface extends DeleteByAuthor, GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, ShowSlugInterface, SearchInterface, WhereInterface, WhereInInterface, CustomPaginationInterface, UpdateOrCreateInterface
 {
     public function newsPremium() : mixed;
     public function manyNews($id) : mixed;
@@ -30,7 +31,7 @@ interface NewsInterface extends GetInterface, StoreInterface, UpdateInterface, S
     public function showNewsStatistic() : mixed;
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator;
 
-    public function authorGetNews($user) : mixed;
+    public function authorGetNews($user, Request $request) : mixed;
     public function getAll() : mixed;
     public function getAllNews() : mixed;
     public function getByRight() : mixed;

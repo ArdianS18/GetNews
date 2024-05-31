@@ -228,13 +228,24 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function authorGetNews($user): mixed
+    public function authorGetNews($user, Request $request): mixed
     {
         return $this->model->query()
             ->where('user_id', $user)
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->withCount('views')
             ->orderByDesc('views_count')
+            ->when($request->filter, function ($query) use ($request) {
+                $query->when($request->filter === 'terbaru', function ($terbaru) {
+                    $terbaru->latest()->get();
+                });
+                $query->when($request->filter === 'terlama', function ($terlama) {
+                    $terlama->oldest()->get();
+                });
+            })
+            ->when($request->input('name'), function($query) use ($request) {
+                $query->where('name', 'LIKE', '%'.$request->input('name').'%');
+            })
             ->paginate(8);
     }
 
@@ -260,10 +271,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->leftJoin('views', 'news.id', '=', 'views.news_id')
-            ->select('news.id', 'news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('DATE_FORMAT(news.created_at, "%M %d %Y") as created_at_formatted'))
+            ->select('news.id', 'news.name', 'news.photo', 'news.upload_date', DB::raw('COUNT(views.news_id) as views'), DB::raw('news.created_at as created_at_formatted'))
             ->orderBy('views', 'DESC')
             ->groupBy('news.id', 'news.name', 'news.photo', 'news.upload_date', 'news.created_at')
-            ->take(4)
+            ->take(6)
             ->get();
     }
 
@@ -299,7 +310,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->limit(2)
             ->get()
             ->pluck('category_id')
-            ->skip(0)
+            ->skip(1)
             ->take(1);
 
         return $this->model->query()
@@ -697,5 +708,12 @@ class NewsRepository extends BaseRepository implements NewsInterface
             })
             ->withCount('views')
             ->paginate($hal);
+    }
+
+    public function deleteByAuthor(Author $author): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $author->user_id)
+            ->delete();
     }
 }
