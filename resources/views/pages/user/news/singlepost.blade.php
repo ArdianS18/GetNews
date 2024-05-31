@@ -364,6 +364,12 @@
                                         d="M57.94 126.648c37.32-16.256 62.2-26.974 74.64-32.152c35.56-14.786 42.94-17.354 47.76-17.441c1.06-.017 3.42.245 4.96 1.49c1.28 1.05 1.64 2.47 1.82 3.467c.16.996.38 3.266.2 5.038c-1.92 20.24-10.26 69.356-14.5 92.026c-1.78 9.592-5.32 12.808-8.74 13.122c-7.44.684-13.08-4.912-20.28-9.63c-11.26-7.386-17.62-11.982-28.56-19.188c-12.64-8.328-4.44-12.906 2.76-20.386c1.88-1.958 34.64-31.748 35.26-34.45c.08-.338.16-1.598-.6-2.262c-.74-.666-1.84-.438-2.64-.258c-1.14.256-19.12 12.152-54 35.686c-5.1 3.508-9.72 5.218-13.88 5.128c-4.56-.098-13.36-2.584-19.9-4.708c-8-2.606-14.38-3.984-13.82-8.41c.28-2.304 3.46-4.662 9.52-7.072" />
                                 </svg>
                             </a>
+                            <a id="copy">
+                                <span style="border-radius: 50%; background-color: #cccccc" class="d-flex justify-content-center p-1" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 256 256"><path fill="#292929" d="M240 88.23a54.43 54.43 0 0 1-16 37L189.25 160a54.27 54.27 0 0 1-38.63 16h-.05A54.63 54.63 0 0 1 96 119.84a8 8 0 0 1 16 .45A38.62 38.62 0 0 0 150.58 160a38.4 38.4 0 0 0 27.31-11.31l34.75-34.75a38.63 38.63 0 0 0-54.63-54.63l-11 11A8 8 0 0 1 135.7 59l11-11a54.65 54.65 0 0 1 77.3 0a54.86 54.86 0 0 1 16 40.23m-131 97.43l-11 11A38.4 38.4 0 0 1 70.6 208a38.63 38.63 0 0 1-27.29-65.94L78 107.31a38.63 38.63 0 0 1 66 28.4a8 8 0 0 0 16 .45A54.86 54.86 0 0 0 144 96a54.65 54.65 0 0 0-77.27 0L32 130.75A54.62 54.62 0 0 0 70.56 224a54.28 54.28 0 0 0 38.64-16l11-11a8 8 0 0 0-11.2-11.34"/></svg>
+
+                                </span>
+                            </a>
                         </p>
                         <div class="slideshow-container mb-3">
                             <div class="slideshow news-img">
@@ -378,7 +384,7 @@
 
                         <div class="">
                             <ul class="news-metainfo list-style">
-                                <div class="row">
+                                <div class="d-flex justify-content-between">
                                     <div class="col-lg-11 col-md-11">
                                         <div class="row">
                                             <div class="col-md-12 col-lg-3 mb-3">
@@ -1076,8 +1082,8 @@
                                     </div>
 
                                     @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
-                                        
-                                            <div class="row comment-item w-100 ms-5 mt-3" style="border-bottom:1px solid #eee;">
+                                        <div class="">
+                                            <div class="row comment-item w-100 ms-5">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}"
@@ -1213,7 +1219,7 @@
                                                 </div>
                                                 
                                             </div>
-                                        
+                                        </div>
 
                                         <!-- Form Balasan -->
                                         <div id="reply-form-{{ $reply->id }}" class="reply-form mt-3"
@@ -1265,8 +1271,12 @@
                             @endforelse
 
                             @if ($comments->count() > 5)
-                                <div class="text-center mt-3">
-                                    <button id="load-more" class="btn btn-primary">Lihat Selengkapnya</button>
+                                <div class="text-center left-content mt-3">
+                                    <a id="load-more" class="link-one" style="color: var(--secondaryColor);">Lihat Selengkapnya
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z"/></svg>
+                                    
+                                    </a>
+                                    {{-- <button id="load-more" class="btn btn-primary">Lihat Selengkapnya</button> --}}
                                 </div>
                             @endif
                         </div>
