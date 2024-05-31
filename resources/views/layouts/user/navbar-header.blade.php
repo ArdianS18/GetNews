@@ -66,14 +66,54 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19h3.692v-5.885h4.616V19H18v-9l-6-4.538L6 10zm-1 1V9.5l7-5.288L19 9.5V20h-5.692v-5.885h-2.616V20zm7-7.77"/></svg>
                         </a>
                     </li>
+
+
                     @foreach ($categories as $category)
+                    <li class="nav-item">
+                    <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
+                                
+                                <ul class="dropdown-menu">
+
+                                <div class="d-flex">
+                                         <li class="nav-item">
+                                         @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                         <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
+
+                                         @if(($loop->iteration % 4) == 0)
+                                         </li>
+                                         <li class="nav-item">
+                                         @endif
+                                        @endforeach
+                                        </li>
+                                    </div>
+                                       
+
+                                </ul>
+
+                                
+                            </li>
+
+                            @endforeach
+                            
+                
+
+                    <!-- @foreach ($categories as $category)
                             <li class="nav-item">
                                 <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
+                                
                                 <ul class="dropdown-menu">
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
+                                    <div class="d-flex">
+                                         <li class="nav-item">
+                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                        </li>
+
                                         <li class="nav-item">
                                             <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
                                         </li>
+
+                                    </div>
+                                       
 
                                     @empty
                                         <li class="nav-item">
@@ -81,8 +121,12 @@
                                         </li>
                                     @endforelse
                                 </ul>
+
+                                
                             </li>
-                    @endforeach
+
+                            
+                    @endforeach -->
 
                 </ul>
 

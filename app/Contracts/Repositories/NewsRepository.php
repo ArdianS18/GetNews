@@ -70,7 +70,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->withCount('views')
             ->orderByDesc('views_count')
             ->latest()
-            ->take(8)
+            ->take(6)
             ->get();
     }
 

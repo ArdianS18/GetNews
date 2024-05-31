@@ -70,8 +70,8 @@ class CommentRepository extends BaseRepository implements CommentInterface
     public function whereIn($id): mixed
     {
         return $this->model->query()
-            ->where('pin', '0')
             ->where('news_id', $id)
+            ->orderBy('pin','desc')
             ->get();
     }
 
