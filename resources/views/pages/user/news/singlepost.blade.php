@@ -367,7 +367,7 @@
                             <a id="copylink" tooltip="Salin Link">
                                 <span style="border-radius: 50%; background-color: #cccccc"
                                     class="d-flex justify-content-center p-1 copyLink" onclick="copyToClipboard()"
-                                    id="copy" >
+                                    id="copy">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                         viewBox="0 0 256 256">
                                         <path fill="#292929"
@@ -732,8 +732,7 @@
                                                         <div class="row align-items-start">
                                                             <div class="col-md-9 order-md-1 order-sm-1 order-1">
                                                                 <div class="comment-author-name">
-                                                                    <h5
-                                                                        @if ($comment->user_id === $comment->news->user_id) style="padding: 5px; border-radius: 5px;" class="btn btn-rounded btn-outline-primary" @endif>
+                                                                    <h5>
                                                                         @if ($comment->user_id === $comment->news->user_id)
                                                                             <a
                                                                                 href="{{ route('author.detail', ['id' => $comment->user->slug]) }}">
@@ -742,6 +741,8 @@
                                                                         {{ $comment->user->name }}
 
                                                                         @if ($comment->user_id === $comment->news->user_id)
+                                                                            <span style="font-size: 0.8em;"> -
+                                                                                pembuat</span>
                                                                             </a>
                                                                         @endif
                                                                     </h5>
@@ -750,6 +751,7 @@
                                                                             class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d,Y | g:i A') }}</span>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                             <div class="col-md-3 text-end order-sm-3 order-2">
                                                                 <div class="comment">
@@ -922,8 +924,7 @@
                                                             <div class="row align-items-start">
                                                                 <div class="col-md-9 order-md-1 order-sm-1 order-1">
                                                                     <div class="comment-author-name">
-                                                                        <h5
-                                                                            @if ($reply->user_id === $reply->news->user_id) style="padding: 5px; border-radius: 5px;" class="btn btn-rounded btn-outline-primary" @endif>
+                                                                        <h5>
                                                                             @if ($reply->user_id === $reply->news->user_id)
                                                                                 <a
                                                                                     href="{{ route('author.detail', ['id' => $reply->user->slug]) }}">
@@ -932,6 +933,8 @@
                                                                             {{ $reply->user->name }}
 
                                                                             @if ($reply->user_id === $reply->news->user_id)
+                                                                                <span style="font-size: 0.8em;"> -
+                                                                                    pembuat</span>
                                                                                 </a>
                                                                             @endif
                                                                         </h5>
@@ -959,14 +962,6 @@
                                                                         <ul class="dropdown-menu"
                                                                             aria-labelledby="dropdownMenuLink">
                                                                             @if (Auth::check() && $reply->user_id === auth()->user()->id)
-                                                                                @if ($comment->news->user_id === auth()->user()->id)
-                                                                                    <li>
-                                                                                        <button class="btn btn-sm pin"
-                                                                                            data-id="{{ $reply->id }}">
-                                                                                            Pin
-                                                                                        </button>
-                                                                                    </li>
-                                                                                @endif
                                                                                 <li>
                                                                                     <button class="btn btn-sm"
                                                                                         onclick="showEditReplyForm({{ $reply->id }})">
@@ -1193,8 +1188,8 @@
                                     @endphp
                                     <div class="news-card-one">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}"
-                                                style="object-fit: cover" alt="Image" width="100%" height="80">
+                                            <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
+                                                alt="Image" width="100%" height="80">
                                         </div>
                                         <div class="news-card-info">
                                             <h3><a data-toggle="tooltip" data-placement="top"
@@ -1443,7 +1438,7 @@
             var dataSlug = element.dataset.slug;
 
             var copyText =
-            `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
+                `https://media.mijurnal.com/{{ $dateParts['year'] }}/{{ $dateParts['month'] }}/{{ $dateParts['day'] }}/${dataSlug}`;
 
             navigator.clipboard.writeText(copyText)
                 .then(() => {
