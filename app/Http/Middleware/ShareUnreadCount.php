@@ -9,6 +9,7 @@ use App\Models\SendMessage;
 use Illuminate\Support\Facades\View;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ShareUnreadCount
@@ -32,10 +33,12 @@ class ShareUnreadCount
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $countContact = $this->contactUs->where('status', 'unread')->count();
-        $countReport = $this->report->where('status', 'unread')->count();
-        $countMessage = $this->sendMessage->where('status', 'unread')->count();
-        $totalUnread = $countContact + $countReport + $countMessage;
+        if (Auth()) {
+            $countContact = $this->contactUs->where('status', 'unread')->count();
+            $countReport = $this->report->where('status', 'unread')->count();
+            $countMessage = $this->sendMessage->where('status', 'unread')->count();
+            $totalUnread = $countContact + $countReport + $countMessage;
+        }
 
         $firstContact = $this->contact->first();
 
