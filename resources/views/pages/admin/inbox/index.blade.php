@@ -1109,7 +1109,7 @@
             });
         }
 
-        setInterval(updateBadgeCount, 10000);
+        setInterval(updateBadgeCount, 5000);
         $(document).ready(function() {
             updateBadgeCount();
         });
@@ -1139,7 +1139,7 @@
             });
         }
 
-        setInterval(updateBadgeCount, 10000);
+        setInterval(updateBadgeCount, 5000);
         $(document).ready(function() {
             updateBadgeCount();
         });
