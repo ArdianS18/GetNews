@@ -35,7 +35,7 @@
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ $item->news->created_at->format('M d, Y') }}</a>
+                                                    href="javascript:void(0)">{{\Carbon\Carbon::parse($item->news->upload_date)->translatedFormat('d F Y') }}</a>
                                             </li>
                                             <li><i class="fi fi-rr-eye"></i>{{ $item->news->views->count() }}</li>
                                         </ul>
