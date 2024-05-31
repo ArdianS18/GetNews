@@ -309,7 +309,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->orderByRaw('COUNT(*) DESC')
             ->skip(1)
             ->take(1)
-            ->get()
             ->pluck('category_id');
 
         return $this->model->query()
@@ -317,6 +316,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->whereHas('newsCategories', function ($query) use ($subquery) {
                 $query->whereIn('category_id', $subquery);
             })
+            ->with(['newsCategories' => function ($query) {
+                $query->with('category');
+            }])
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
