@@ -197,6 +197,11 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         return view('pages.admin.akun.user');
     })->name('account.user.list');
     Route::get('account-user', [UserController::class, 'accountUserList'])->name('account.user');
+
+    Route::get('voucher', function(){
+        return view('pages.admin.advertisement.voucher');
+    })->name('voucher-pengiklanan');
+
 });
 
 
