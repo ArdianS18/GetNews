@@ -212,8 +212,8 @@
                                     <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive"
                                         style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
-                                <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[1]->category->slug]) }}"
-                                    class="news-cat">{{ $barus->newsCategories[1]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}"
