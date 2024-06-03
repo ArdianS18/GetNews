@@ -12,27 +12,44 @@
 @endsection
 @section('content')
 
-<form class="d-flex gap-2">
-    <div class="position-relative">
-        <div class="">
-            <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" id="search-name"
-                placeholder="Search">
-            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+<div class="row">
+    <div class="col-lg-6 mb-3">
+        <form class="d-flex gap-2">
+            <div class="position-relative">
+                <div class="">
+                    <input type="text" name="search" class="form-control search-chat py-2 px-5 ps-5" id="search-name"
+                        placeholder="Search">
+                    <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <select name="banned" class="form-select" id="search-status">
+                    <option value="">Pilih status</option>
+                    <option value="approved">Aktif</option>
+                    <option value="reject">Blokir</option>
+                    <option value="">Tampilkan semua</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-6 mb-3">
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn text-white px-5" style="background-color: #175A95" data-bs-toggle="modal"
+                data-bs-target="#modal-create"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                    viewBox="0 2 30 24">
+                    <path fill="currentColor"
+                        d="M18 12.998h-5v5a1 1 0 0 1-2 0v-5H6a1 1 0 0 1 0-2h5v-5a1 1 0 0 1 2 0v5h5a1 1 0 0 1 0 2" />
+                </svg>
+                Tambah
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="d-flex gap-2">
-        <select name="banned" class="form-select" id="search-status">
-            <option value="">Pilih status</option>
-            <option value="approved">Aktif</option>
-            <option value="reject">Blokir</option>
-            <option value="">Tampilkan semua</option>
-        </select>
-    </div>
-</form>
 
 <div class="">
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-lg-4 col-md-12">
             <div class="card">
                 <div class="card-header" style="background-color: #175A95;">
@@ -432,6 +449,56 @@
     </div>
 
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Voucher</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="form-create">
+                @csrf
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label class="form-label mt-2">Kode Voucher</label>
+                            <input class="form-control" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label mt-2">Potongan Harga</label>
+                            <input class="form-control" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label mt-2">Tanggal Awal</label>
+                            <input class="form-control" type="date" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <label class="form-label mt-2">Tanggal Akhir</label>
+                            <input class="form-control" type="date" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label mt-2">Stok</label>
+                            <input class="form-control" type="text" name="name">
+                            <ul class="error-text"></ul>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-rounded btn-light-danger text-danger"
+                            data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-rounded btn-light-success text-success">Tambah</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @endsection
