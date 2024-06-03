@@ -12,5 +12,5 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 
 interface NewsTagInterface extends DeleteByAuthor,GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface, SearchInterface
 {
-    public function getNewsTags($news): array;
+    public function getNewsTags($news): mixed;
 }
