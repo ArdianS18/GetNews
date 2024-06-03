@@ -91,8 +91,12 @@ class ProfileController extends Controller
         $news_reject = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "nonactive")->count();
 
         $news_post = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
+
         $followers = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
+        $follower_detail = $this->followers->whereAuthor(auth()->user()->author->id);
+
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
+        $follow_detail = $this->followers->whereUser(auth()->user()->id);
 
         $news_id = News::where('user_id', auth()->user()->id)
                                 ->where('status', 'active')
@@ -100,7 +104,7 @@ class ProfileController extends Controller
         $news_like = $this->newsHasLike->countLike($news_id);
 
         $authors = $this->author->get();
-        return view('pages.author.index', compact('news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like', 'following'));
+        return view('pages.author.index', compact('follow_detail','follower_detail','news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like', 'following'));
     }
 
     public function profilestatus()
