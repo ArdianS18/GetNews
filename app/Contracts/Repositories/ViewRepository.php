@@ -119,6 +119,53 @@ class ViewRepository extends BaseRepository implements ViewInterface
         return $trendingNews;
     }
 
+    public function getByPopular($data): mixed
+    {
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
+        $trendingNews = $this->model->query()
+        ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+        ->select('news_id', DB::raw('COUNT(*) as total'))
+        ->whereBetween('created_at', [$startDate, $endDate])
+        ->groupBy('news_id')
+        ->orderBy('total', 'desc')
+        ->when($data == 'up', function ($query) {
+            $query->take(6);
+        })
+        ->when($data == 'down', function ($query) {
+            $query->take(3);
+        })
+        ->when($data == 'side', function ($query) {
+            $query->take(4);
+        })
+        ->get();
+
+        return $trendingNews;
+
+        // $startDate = Carbon::now()->subDays(10)->toDateString();
+        // $endDate = Carbon::now()->toDateString();
+        // $popularNews = $this->model->query()
+        //     ->where('status', NewsStatusEnum::ACTIVE->value)
+        //     ->with('newsCategories')
+        //     ->whereHas('views', function($query) use ($startDate, $endDate){
+        //         $query->whereBetween('created_at', [$startDate, $endDate]);
+        //     })
+        //     ->withCount('views')
+        //     ->orderByDesc('views_count')
+        //     ->when($data == 'up', function ($query) {
+        //         $query->take(6);
+        //     })
+        //     ->when($data == 'down', function ($query) {
+        //         $query->take(3);
+        //     })
+        //     ->when($data == 'side', function ($query) {
+        //         $query->take(4);
+        //     })
+        //     ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
+
+        // return $popularNews;
+    }
+
     public function newsStatistic(): mixed
     {
         $startDate = Carbon::now()->subDays(6)->startOfDay();
