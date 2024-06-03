@@ -713,6 +713,7 @@
                             @endphp
 
                             @forelse ($comments as $index => $comment)
+                            @if ($comment->parent_id === null)
                                 <div class="comment-item w-100" style="display: {{ $index < 5 ? 'block' : 'none' }}">
                                     <div class="row">
                                         @if ($comment->parent_id == null)
@@ -751,7 +752,8 @@
                                                                     </h5>
                                                                     <div class="mt-2">
                                                                         <span
-                                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d,Y | g:i A') }}</span>
+                                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                        </span>
                                                                     </div>
                                                                 </div>
 
@@ -769,82 +771,7 @@
                                                                                 d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                                         </svg>
                                                                     </a>
-                                                                    <ul class="dropdown-menu"
-                                                                        aria-labelledby="dropdownMenuLink">
-                                                                        @if (Auth::check() && $comment->user_id === auth()->user()->id)
-                                                                            @if ($comment->news->user_id === auth()->user()->id)
-                                                                                <li>
-                                                                                    <button class="btn btn-sm pin"
-                                                                                        data-id="{{ $comment->id }}">
-                                                                                        Pin
-                                                                                    </button>
-                                                                                </li>
-                                                                            @endif
-                                                                            <li>
-                                                                                <button class="btn btn-sm edit-btn"
-                                                                                    onclick="showEditForm({{ $comment->id }})">
-                                                                                    Edit
-                                                                                </button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <button class="btn btn-sm delete"
-                                                                                    data-id="{{ $comment->id }}">
-                                                                                    Hapus
-                                                                                </button>
-                                                                            </li>
-                                                                        @elseif (Auth::check() &&
-                                                                                $comment->news->user_id === (auth()->user()->roles->pluck('name')[0] == 'author') &&
-                                                                                $comment->user_id != auth()->user()->author->user_id)
-                                                                            @if ($comment->news->user_id === auth()->user()->id)
-                                                                                <li>
-                                                                                    <button class="btn btn-sm pin"
-                                                                                        data-id="{{ $comment->id }}">
-                                                                                        Pin
-                                                                                    </button>
-                                                                                </li>
-                                                                            @endif
-                                                                            <li>
-                                                                                <button class="btn btn-sm edit-btn"
-                                                                                    onclick="showEditForm({{ $comment->id }})">
-                                                                                    Edit
-                                                                                </button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <button class="btn btn-sm delete"
-                                                                                    data-id="{{ $comment->id }}">
-                                                                                    Hapus
-                                                                                </button>
-                                                                            </li>
-                                                                        @elseif (Auth::check() && $comment->news->user_id === auth()->user()->id)
-                                                                            <li>
-                                                                                <button class="btn btn-sm pin"
-                                                                                    data-id="{{ $comment->id }}">
-                                                                                    Pin
-                                                                                </button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <button class="btn btn-sm edit-btn"
-                                                                                    onclick="showEditForm({{ $comment->id }})">
-                                                                                    Edit
-                                                                                </button>
-                                                                            </li>
-                                                                            <li>
-                                                                                <button class="btn btn-sm delete"
-                                                                                    data-id="{{ $comment->id }}">
-                                                                                    Hapus
-                                                                                </button>
-                                                                            </li>
-                                                                        @endif
-
-                                                                        @if (Auth::check() && $comment->user_id != auth()->user()->id)
-                                                                            <li>
-                                                                                <button class="btn btn-sm report-icon"
-                                                                                    data-id="{{ $comment->id }}">
-                                                                                    Laporkan
-                                                                                </button>
-                                                                            </li>
-                                                                        @endif
-                                                                    </ul>
+                                                                    @include('layouts.user.pin')
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-9 order-md-3 order-sm-2 order-2">
@@ -947,7 +874,8 @@
                                                                         </h5>
                                                                         <div class="d-flex">
                                                                             <span
-                                                                                class="comment-date">{{ \Carbon\Carbon::parse($reply->created_at)->format('M d,Y | g:i A') }}</span>
+                                                                                class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1096,10 +1024,12 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @endif
+
                             @empty
                             @endforelse
 
-                            @if ($comments->count() > 5)
+                            @if ($comments->where('parent_id',null)->count() > 5)
                                 <div class="text-center left-content mt-3">
                                     <a id="load-more" class="link-one" style="color: var(--secondaryColor);">Lihat
                                         Selengkapnya
