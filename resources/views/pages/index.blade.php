@@ -212,9 +212,6 @@
                                     <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive"
                                         style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
-                                @php
-                                    $secondCategory = $barus->newsCategories->first()->category;
-                                @endphp
                                 <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $secondCategory->name }}</a>
                             </div>
