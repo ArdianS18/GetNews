@@ -295,6 +295,25 @@ class AuthorController extends Controller
         return view('pages.author.inbox.index', compact('reportsDelete', 'reportsDelete2','newsDelete','newsDeleteRead','newsRejects', 'newsRejectRead', 'countReport', 'reports', 'reports2', 'sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 
+    public function inboxcount()
+    {
+        $countMassage = $this->sendMessage->count('unread');
+        return response()->json(['count' => $countMassage]);
+    }
+
+    public function inboxcountreport()
+    {
+        $countReport = $this->report->count('unread');
+        return response()->json(['countReport' => $countReport]);
+    }
+
+    public function inboxcounttotal()
+    {
+        $countReport = $this->report->count('unread');
+        $countMassage = $this->sendMessage->count('unread');
+        $countTotal = $countReport + $countMassage;
+        return response()->json(['countTotal' => $countTotal]);
+    }
     /**
      * Display the specified resource.
      */

@@ -23,6 +23,7 @@
 @endsection
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Author | Inbox</title>
 </head>
 
@@ -72,17 +73,13 @@
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                     <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
-                                    {{-- @if ($countContact > 0)
-                                        <span class="badge ms-auto bg-danger">{{$countContact}}</span>
-                                    @endif --}}
+                                    <span id="messageCountBadge" class="badge ms-auto bg-danger"></span>
                             </li>
 
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                 <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
-                                    {{-- @if ($countReport > 0)
-                                        <span class="badge ms-auto bg-danger">{{$countReport}}</span>
-                                    @endif --}}
+                                <span id="messageRejectBadge" class="badge ms-auto bg-danger"></span>
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
@@ -132,50 +129,9 @@
                                 </div>
                                 <div class="app-chat">
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
-                                        {{-- @forelse ($contactUs as $contact)
-                                            <li class="contact">
-                                                <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('contact.read', ['contact' => $contact->id]) }}')"
-                                                    class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
-                                                    id="chat_user_{{ $contact->id }}" data-user-id="{{ $contact->user_id }}" data-chat-id="{{ $contact->id }}">
-                                                    <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault">
-                                                    </div>
-                                                    <div class="position-relative w-100 ms-2">
-                                                        <div class="d-flex align-items-center justify-content-between mb-2">
-                                                            <h6 class="mb-0 fw-semibold">{{ $contact->user->name }}</h6>
-                                                            @if ($contact->status == "unread")
-                                                                <span class="badge ms-auto bg-danger">!</span>
-                                                            @endif
-                                                        </div>
-                                                        <h6 class="text-dark">{{ $contact->message }}</h6>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $contact->created_at }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        @empty
-                                            <tr class="contact">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-data.svg') }}" width="200" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada data</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse --}}
-
                                         @forelse ($sendMessage as $send)
                                         <li class="contact">
-                                            <a href="javascript:void(0)"
+                                            <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('send.message.read', ['send' => $send->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
                                                 <div class="position-relative w-100 ms-2">
@@ -212,7 +168,7 @@
 
                                         @forelse ($newsRejects as $newsReject)
                                         <li class="contact">
-                                            <a href="javascript:void(0)"
+                                            <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('read.report', ['report' => $newsReject->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $newsReject->id }}" data-user-id="{{ $newsReject->user_id }}" data-chat-id="{{ $newsReject->id }}">
                                                 <div class="position-relative w-100 ms-2">
@@ -358,85 +314,6 @@
                             <div class="chat-container h-100 w-100">
                                 <div class="chat-box-inner-part h-100">
                                     <div class="chatting-box app-email-chatting-box">
-                                        {{-- @forelse ($contactUs2 as $contactUs)
-                                        <div class="chat-content" id="chat_content_{{ $contactUs->id }}" style="display: none;">
-                                            <div class="p-9 py-3 border-bottom chat-meta-user">
-                                                <h5>Detail Pesan</h5>
-                                            </div>
-                                            <div class="position-relative overflow-hidden">
-                                                <div class="position-relative">
-                                                    <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
-                                                        <div class="chat active-chat" data-user-id="{{ $contactUs->id }}">
-                                                            <div
-                                                                class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
-                                                                <div class="d-flex align-items-center gap-2">
-                                                                    <img src="{{ asset('assets/img/usr1.svg') }}"
-                                                                        alt="user8" width="48" height="48"
-                                                                        class="rounded-circle" />
-                                                                    <div>
-                                                                        <h6 class="fw-semibold mb-0">
-                                                                            {{ $contactUs->user->name }}</h6>
-                                                                        <p class="mb-0">{{ $contactUs->user->email }}
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <span class="badge fs-2 rounded-4 py-1 px-4"
-                                                                    style="background-color: #175A95;">Pesan</span>
-                                                            </div>
-                                                            <div class="border-bottom pb-7 mb-7">
-                                                                <h4 class="fw-semibold text-dark mb-3">Silakan periksa
-                                                                    pembaruan terbaru ini</h4>
-                                                                <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
-                                                                </p>
-                                                                <p class="mb-3 text-dark">
-                                                                    {{ $contactUs->message }}
-                                                                </p>
-                                                                <p class="mb-0 text-dark">Salam dari,..</p>
-                                                                <h6 class="fw-semibold mb-0 text-dark pb-1">
-                                                                    {{ $contactUs->user->name }}</h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="px-9 py-3 border-top chat-send-message-footer">
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <ul
-                                                                class="list-unstyledn mb-0 d-flex align-items-center gap-7">
-                                                                <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-reply"
-                                                                        href="javascript:void(0)" data-email="{{ $contactUs->user->email }}">
-                                                                        <i class="ti ti-arrow-back-up fs-5"></i>
-                                                                        Balas
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-delete-contactus"
-                                                                        data-id="{{ $contactUs->id }}"
-                                                                        href="javascript:void(0)">
-                                                                        <i class="ti ti-trash fs-5"></i>
-                                                                        Hapus
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @empty
-                                            <tr class="chat-content">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada pesan</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse --}}
-
                                         @forelse ($sendMessage2 as $send2)
                                         <div class="chat-content" id="chat_content_{{ $send2->id }}" style="display: none;">
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
@@ -734,88 +611,6 @@
                                             </tr> --}}
                                         @endforelse
 
-                                        {{-- @forelse ($contactDelete2 as $contactDelete2)
-                                            <div class="chat-contactDel" id="chat_contactDel_{{ $contactDelete2->id }}" style="display: none;">
-                                                <div class="p-9 py-3 border-bottom chat-meta-user">
-                                                    <h5>Detail Sampah Pesan</h5>
-                                                </div>
-                                                <div class="position-relative overflow-hidden">
-                                                    <div class="position-relative">
-                                                        <div class="p-9" style="height: calc(100vh - 428px)" data-simplebar>
-                                                            <div class="chat-list chat active-chat" data-user-id="{{ $contactDelete2->id }}">
-                                                                <div
-                                                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between">
-                                                                    <div class="d-flex align-items-center gap-2">
-                                                                        <img src="{{ asset('assets/img/usr1.svg') }}"
-                                                                            alt="user8" width="48" height="48"
-                                                                            class="rounded-circle" />
-                                                                        <div>
-                                                                            <h6 class="fw-semibold mb-0">
-                                                                                {{ $contactDelete2->user->name }}</h6>
-                                                                            <p class="mb-0">
-                                                                                {{ $contactDelete2->user->email }}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <span class="badge fs-2 rounded-4 py-1 px-4"
-                                                                        style="background-color: #175A95;">Sampah</span>
-                                                                </div>
-                                                                <div class="border-bottom pb-7 mb-7">
-                                                                    <h4 class="fw-semibold text-dark mb-3">Silakan periksa
-                                                                        pembaruan terbaru ini</h4>
-                                                                    <p class="mb-3 text-dark">Hello {{ Auth::user()->name }},
-                                                                    </p>
-                                                                    <p class="mb-3 text-dark">
-                                                                        {{ $contactDelete2->message }}
-                                                                    </p>
-                                                                    <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque nisi magna, laoreet a augue eget, tempor volutpat diam.</p>
-                                                                    <p class="mb-0 text-dark">Regards,</p>
-                                                                    <h6 class="fw-semibold mb-0 text-dark pb-1">
-                                                                        {{ $contactDelete2->user->name }}</h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="px-9 py-3 border-top chat-send-message-footer">
-                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                <ul
-                                                                    class="list-unstyledn mb-0 d-flex align-items-center gap-7">
-                                                                    <li>
-                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-recovery-contactus"
-                                                                            data-id="{{ $contactDelete2->id }}"
-                                                                            href="javascript:void(0)">
-                                                                            <i class="ti ti-trash fs-5"></i>
-                                                                            Pulihkan
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="text-dark bg-hover-primary d-flex align-items-center gap-1 btn-release-contactus"
-                                                                            data-id="{{ $contactDelete2->id }}"
-                                                                            href="javascript:void(0)">
-                                                                            <i class="ti ti-trash fs-5"></i>
-                                                                            Hapus
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @empty
-                                            <tr class="chat-contactDel">
-                                                <td colspan="5">
-                                                    <div class="d-flex justify-content-center">
-                                                        <div>
-                                                            <img src="{{ asset('assets/img/no-chat.svg') }}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="text-center">
-                                                        <h5>Tidak ada pesan</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse --}}
-
-
                                         @forelse ($reports2 as $report2)
                                         <div class="chat-report" id="chat_report_{{ $report2->id }}" style="display: none;">
                                             <div class="p-9 py-3 border-bottom chat-meta-user">
@@ -992,7 +787,18 @@
 @endsection
 
 @section('script')
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const replyButtons = document.querySelectorAll('.btn-reply');
@@ -1011,27 +817,12 @@
     <script>
         function loadRouteContent(event, route) {
             event.preventDefault();
-
             $.ajax({
                 url: route,
                 type: 'GET',
                 success: function (response) {
-                    $('#content-container').html(response);
-                },
-                error: function (xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-
-        function loadRouteReport(event, route) {
-            event.preventDefault();
-
-            $.ajax({
-                url: route,
-                type: 'GET',
-                success: function (response) {
-                    $('#content-container').html(response);
+                    $('#someContainer').html(response);
+                    $(event.target).closest('.contact').find('.badge.bg-danger').remove();
                 },
                 error: function (xhr) {
                     console.log(xhr.responseText);
@@ -1256,4 +1047,74 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            function updateMessageCount() {
+                $.ajax({
+                    url: '/authorCount',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.count == 0) {
+                            $('#messageCountBadge').hide();
+                        } else {
+                            $('#messageCountBadge').text(data.count).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateMessageCount, 5000);
+            updateMessageCount();
+        });
+
+        $(document).ready(function() {
+            function updateRejectCount() {
+                $.ajax({
+                    url: '/authorReport',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.countReport == 0) {
+                            $('#messageRejectBadge').hide();
+                        } else {
+                            $('#messageRejectBadge').text(data.countReport).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateRejectCount, 5000);
+            updateRejectCount();
+        });
+
+        $(document).ready(function() {
+            function updateTotalCount() {
+                $.ajax({
+                    url: '/authorTotal',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.countTotal == 0) {
+                            $('#total').hide();
+                        } else {
+                            $('#total').text(data.countTotal).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateTotalCount, 5000);
+            updateTotalCount();
+        });
+    </script>
 @endsection

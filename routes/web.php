@@ -267,6 +267,9 @@ Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(fun
     Route::get('list-status-author', [NewsController::class, 'showstatusnews'])->name('list.news.author');
 
     Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
+    Route::get('authorCount', [AuthorController::class, 'inboxcount'])->name('author.inbox.count');
+    Route::get('authorReport', [AuthorController::class, 'inboxcountreport'])->name('author.report.count');
+    Route::get('authorTotal', [AuthorController::class, 'inboxcounttotal'])->name('author.total.count');
 
     Route::get('statistic', function () {
         return view('pages.author.statistic.index');
