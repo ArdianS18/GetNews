@@ -104,18 +104,13 @@
                 </div>
 
             @empty
+            <x-no-data>
+                Tidak ada berita yang disukai!!
+            </x-no-data>
             @endforelse
         </div>
 
-        <ul class="page-nav list-style text-center mt-20">
-            <li><a href="{{ $news->previousPageUrl() }}"><i class="flaticon-arrow-left"></i></a></li>
-
-            @for ($i = 1; $i <= $news->lastPage(); $i++)
-                <li><a href="{{ $news->url($i) }}" class="btn btn-black {{ $news->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a></li>
-            @endfor
-
-            <li><a href="{{ $news->nextPageUrl() }}"><i class="flaticon-arrow-right"></i></a></li>
-        </ul>
+       <x-paginator :paginator="$news" />
     </div>
 
 </div>
