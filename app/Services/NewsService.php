@@ -100,7 +100,8 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $data['tag'] = $newTags;
         }
 
-        $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
+        $img = $this->compressImage($request->photo);
+        $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $img) : null;
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);
@@ -151,15 +152,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $old_photo = $news->photo;
         $new_photo = "";
 
-        // if ($request->hasFile('photo')) {
-        // if ($request->file('photo')) {
-        // $this->remove($old_photo);
-        // } else {
-        $img = $this->compressImage($request->photo);
+        if ($request->hasFile('photo')) {
 
-        $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
-        // }
-        // }
+            if (file_exists(public_path($old_photo))) {
+                unlink(public_path($old_photo));
+            }
+
+            $img = $this->compressImage($request->photo);
+            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
+            $news->photo = $new_photo;
+        }
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);
@@ -212,7 +214,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $new_photo = "";
 
         if ($request->hasFile('photo')) {
-            
+
             if (file_exists(public_path($old_photo))) {
                 unlink(public_path($old_photo));
             }
