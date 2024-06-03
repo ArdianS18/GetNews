@@ -123,7 +123,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'upload_date' => $data['upload_date'] ?? null
         ];
     }
-    
+
     /**
      * Method updateDraft
      *
@@ -210,11 +210,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
         $old_photo = $news->photo;
         $new_photo = "";
+
         if ($request->hasFile('photo')) {
-            $this->remove($old_photo);
-            $img = $this->compressImage($request->photo);
             
+            if (file_exists(public_path($old_photo))) {
+                unlink(public_path($old_photo));
+            }
+
+            $img = $this->compressImage($request->photo);
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
+            $news->photo = $new_photo;
         }
 
         $domQuestion = new \DOMDocument();
@@ -245,7 +250,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'sub_category' => $data['sub_category'],
         ];
     }
-    
+
     /**
      * Method updateByAdmin
      *
@@ -300,7 +305,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'sub_category' => $data['sub_category'],
         ];
     }
-    
+
     /**
      * Method processImages
      *
@@ -308,7 +313,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return void
      */
-    
+
      private function processImages(\DOMDocument $dom)
     {
         $images = $dom->getElementsByTagName('img');
@@ -333,11 +338,11 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
     }
 
-    
+
     /**
      * Method compressImage
      *
-     * @param $file as string 
+     * @param $file as string
      *
      * @return UploadedFile
      */
