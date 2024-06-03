@@ -107,8 +107,11 @@
                     <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">No</th>
                     <th style="background-color: #D9D9D9;">Nama</th>
                     <th style="background-color: #D9D9D9;">Jenis Iklan</th>
+                    <th style="background-color: #D9D9D9;">Tanggal Awak</th>
+                    <th style="background-color: #D9D9D9;">Tanggal Akhir</th>
                     <th style="background-color: #D9D9D9;">Halaman</th>
                     <th style="background-color: #D9D9D9;">Posisi Iklan</th>
+                    <th style="background-color: #D9D9D9;">Status</th>
                     <th style="background-color: #D9D9D9; border-radius: 5px 0 0 5px;">Aksi</th>
                 </tr>
             </thead>
@@ -244,6 +247,7 @@
                 <td>${data.type}</td>
                 <td>${data.page}</td>
                 <td>${data.position}</td>
+                <td><span class="mb-1 badge rounded-pill font-medium bg-light-danger text-danger">Belum Bayar</span></td>
                 <td>
                     <div class="d-flex gap-2">
                             <button data-id="${data.id}" style="background-color: #EF6E6E"
