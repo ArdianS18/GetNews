@@ -152,6 +152,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
     Route::get('inbox', [ContactUsController::class, 'index'])->name('report.index');
     Route::get('countInbox', [ContactUsController::class, 'count'])->name('inbox.count');
     Route::get('countInboxReport', [ContactUsController::class, 'countReport'])->name('inbox.count.report');
+    Route::get('countInboxTotal', [ContactUsController::class, 'countTotal'])->name('inbox.count.total');
 
     Route::get('tag-admin', [TagController::class, 'index'])->name('tag.detail');
 

@@ -307,17 +307,18 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->select('category_id', DB::raw('COUNT(*) as category_count'))
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
-            ->limit(2)
-            ->get()
-            ->pluck('category_id')
             ->skip(1)
-            ->take(1);
+            ->take(1)
+            ->pluck('category_id');
 
         return $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->whereHas('newsCategories', function ($query) use ($subquery) {
                 $query->whereIn('category_id', $subquery);
             })
+            ->with(['newsCategories' => function ($query) {
+                $query->with('category');
+            }])
             ->withCount('views')
             ->orderByDesc('views_count')
             ->orderBy('created_at')
@@ -388,7 +389,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->with('newsCategories')
             ->withCount('views')
             ->latest()
-            ->take(12)
+            ->take(6)
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
     }
 

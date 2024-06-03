@@ -100,6 +100,13 @@ class SubCategoryRepository extends BaseRepository implements SubCategoryInterfa
             ->get();
     }
 
+    public function getWhere($category): mixed
+    {
+        return $this->model->query()
+            ->whereIn('category_id', $category)
+            ->get();
+    }
+
     public function get404(): mixed
     {
         return $this->model->query()

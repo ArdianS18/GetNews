@@ -55,7 +55,6 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -100,63 +99,55 @@
                                     <label class="form-label" for="nomor">Nama</label>
                                     <input type="text" id="create-name" name="name" placeholder="nama"
                                         value="{{ old('name') }}" class="form-control ">
-                                    <ul class="error-text"></ul>
-
-
+                                        @error('phone_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Nomor Telepon</label>
                                     <input type="text" id="create-phone_number" name="phone_number"
                                         placeholder="nomor telepon" value="{{ old('phone_number') }}" class=" @error('phone_number') is-invalid @enderror form-control">
-                                    <ul class="error-text">
                                         @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                    </ul>
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Email</label>
                                     <input type="text" id="create-email" name="email" placeholder="email"
                                         value="{{ old('email') }}"  class=" @error('email') is-invalid @enderror form-control">
-                                    <ul class="error-text">
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                    </ul>
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">CV</label>
                                     <input type="file" id="create-cv" name="cv" placeholder="name"
                                         value="{{ old('cv') }}"  class=" @error('cv') is-invalid @enderror form-control">
-                                    <ul class="error-text">
                                         @error('cv')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                    </ul>
-
                                 </div>
 
                                 <div class="col-md-12 col-lg-6 mb-3">
                                     <label class="form-label" for="nomor">Password</label>
                                     <input type="password" id="create-password" name="password" placeholder="password"
-                                        value="{{ old('password') }}"  class=" @error('password') is-invalid @enderror form-control">
-                                    <ul class="error-text">
+                                        value="{{ old('password') }}" class=" @error('password') is-invalid @enderror form-control">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
-                                    </ul>
-
                                 </div>
                             </div>
                         </div>
@@ -386,7 +377,6 @@
             })
         }
 
-
         $('#form-create').submit(function(e) {
             $('.preloader').show();
             e.preventDefault();
@@ -419,7 +409,6 @@
                         text: "Terdapat masalah saat input data"
                     });
                     handleValidate(response.responseJSON.errors, 'create')
-
                 }
             })
         })

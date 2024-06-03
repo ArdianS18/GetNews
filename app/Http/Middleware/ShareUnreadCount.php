@@ -45,9 +45,6 @@ class ShareUnreadCount
             );
         }
 
-        // $firstContact = $this->contact->first();
-
-
         return $next($request);
     }
 }

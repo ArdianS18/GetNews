@@ -39,6 +39,7 @@ class NewsRequest extends FormRequest
             'category.required' => 'Kategori tidak boleh kosong',
             'tag.required' => 'Tags tidak boleh kosong',
             'upload_date.required' => 'Tanggal tidak boleh kosong',
+            'upload_date.after_or_equal' => 'Tanggal tidak boleh kurang dari hari ini',
             'sub_category.required' => 'Sub kategori tidak boleh kosong',
         ];
     }

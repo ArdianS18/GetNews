@@ -73,17 +73,13 @@
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                     <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
-                                    @if ($countTotal > 0)
-                                        <span class="badge ms-auto bg-danger contact">{{$countTotal}}</span>
-                                    @endif
+                                    <span id="messageCountBadge" class="badge ms-auto bg-danger"></span>
                             </li>
 
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                 <a id="reportButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonReport"
                                     href="javascript:void(0)"><i class="ti ti-flag fs-5"></i>Laporan</a>
-                                    @if ($countReport > 0)
-                                        <span class="badge ms-auto bg-danger report">{{$countReport}}</span>
-                                    @endif
+                                    <span id="messageRejectBadge" class="badge ms-auto bg-danger"></span>
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
@@ -1086,63 +1082,73 @@
     </script>
 
     <script>
-        function updateBadgeCount() {
-            $.ajax({
-                url: 'countInbox',
-                type: 'GET',
-                success: function(response) {
-                    var newCount = response.count;
-                    var badge = $('.badge.bg-danger.contact');
-                    if (newCount > 0) {
-                        if (badge.length) {
-                            badge.text(newCount);
-                        } else {
-                            $('#contactButton').append(`<span class="badge ms-auto bg-danger contact">${newCount}</span>`);
-                        }
-                    } else {
-                        badge.remove();
-                    }
-                },
-                error: function(xhr) {
-                    console.error('Error fetching count:', xhr.responseText);
-                }
-            });
-        }
-
-        setInterval(updateBadgeCount, 5000);
         $(document).ready(function() {
-            updateBadgeCount();
+            function updateMessageCount() {
+                $.ajax({
+                    url: '/countInbox',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.count == 0) {
+                            $('#messageCountBadge').hide();
+                        } else {
+                            $('#messageCountBadge').text(data.count).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateMessageCount, 5000);
+            updateMessageCount();
+        });
+
+        $(document).ready(function() {
+            function updateRejectCount() {
+                $.ajax({
+                    url: '/countInboxReport',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.countReport == 0) {
+                            $('#messageRejectBadge').hide();
+                        } else {
+                            $('#messageRejectBadge').text(data.countReport).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateRejectCount, 5000);
+            updateRejectCount();
+        });
+
+        $(document).ready(function() {
+            function updateTotalCount() {
+                $.ajax({
+                    url: '/countInboxTotal',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.countTotal == 0) {
+                            $('#total').hide();
+                        } else {
+                            $('#total').text(data.countTotal).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateTotalCount, 5000);
+            updateTotalCount();
         });
     </script>
-
-    <script>
-        function updateBadgeReportCount() {
-            $.ajax({
-                url: 'countInboxReport',
-                type: 'GET',
-                success: function(response) {
-                    var newCount = response.count;
-                    var badge = $('.badge.bg-danger.report');
-                    if (newCount > 0) {
-                        if (badge.length) {
-                            badge.text(newCount);
-                        } else {
-                            $('#reportButton').append(`<span class="badge ms-auto bg-danger report">${newCount}</span>`);
-                        }
-                    } else {
-                        badge.remove();
-                    }
-                },
-                error: function(xhr) {
-                    console.error('Error fetching count:', xhr.responseText);
-                }
-            });
-        }
-
-        setInterval(updateBadgeReportCount, 5000);
-        $(document).ready(function() {
-            updateBadgeReportCount();
-        });
-    </script>
-
 @endsection

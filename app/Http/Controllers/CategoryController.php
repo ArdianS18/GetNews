@@ -103,16 +103,9 @@ class CategoryController extends Controller
      */
     public function getCategory(Category $category, Request $request)
     {
-        // $request->merge([
-        //     'category_id' => $category->id
-        // ]);
-
-        $subCategory = $this->subCategory->get()->whereIn('category_id', $category->id);
-        // $news = $this->news->get();
-        // $newsSubCategories = $this->newsSubCategory->get();
-
-        // return view('pages.user.news.subcategory', compact('subCategory','news', 'newsSubCategories'));
-        return ResponseHelper::success($subCategory, trans('alert.fetch_success'));
+        $categoryIds = $request->input('category_ids');
+        $subCategory = $this->subCategory->getWhere($categoryIds);
+        return response()->json(['data' => $subCategory]);
     }
 
     /**
