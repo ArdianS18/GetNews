@@ -371,7 +371,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->with('newsCategories')
             ->withCount('views')
             ->orderByDesc('views_count')
-            ->whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at')
             ->when($data == 'up', function ($query) {
                 $query->take(6);
@@ -382,6 +381,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->when($data == 'side', function ($query) {
                 $query->take(4);
             })
+            ->whereBetween('created_at', [$startDate, $endDate])
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
 
         return $popularNews;
