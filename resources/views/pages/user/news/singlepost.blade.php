@@ -1100,7 +1100,7 @@
 
                             @if ($comments->count() > 5)
                                 <div class="text-center left-content mt-3">
-                                    <a id="load-more" class="link-one" style="color: var(--secondaryColor);">Lihat
+                                    <a id="load-more" style="color: var(--secondaryColor);">Lihat
                                         Selengkapnya
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                             viewBox="0 0 24 24">
@@ -1110,6 +1110,7 @@
                                     {{-- <button id="load-more" class="btn btn-primary">Lihat Selengkapnya</button> --}}
                                 </div>
                             @endif
+
                         </div>
                         <div id="cmt-form">
                             <div class="mb-30">
