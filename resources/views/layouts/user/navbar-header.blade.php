@@ -161,7 +161,8 @@
                                             <div id="notif-admin" class="notification bg-primary rounded-circle"></div>
                                         @elseif ((auth()->user()->roles->pluck('name')[0] == "user") && $countMessage > 0)
                                             <div id="notif-admin" class="notification bg-primary rounded-circle"></div>
-                                        @else
+                                        @elseif ((auth()->user()->roles->pluck('name')[0] == "author") && $totalAuthor > 0)
+                                            <div id="notif-admin" class="notification bg-primary rounded-circle"></div>
                                         @endif
                                         <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="mb-2" alt="Image" width="40" height="40" style="min-width: 40px;border-radius: 50%;object-fit:cover;min-height: 40px;"/>
                                     </a>
