@@ -265,7 +265,7 @@ class AuthorController extends Controller
         $tags = $this->tags->get();
         $newsCategories = $this->newsCategories->get()->whereIn('news_id', $news);
         $newsSubCategories = $this->newsSubCategories->get()->whereIn('news_id', $news);
-        $newsTags = $this->newsTags->get()->whereIn('news_id', $news);
+        $newsTags = $this->newsTags->getNewsTags($news);
 
         return view('pages.author.news.detail', compact('news','tags','newsCategories','newsSubCategories','subCategories','newsTags','categories','newsPhoto'));
     }
