@@ -62,11 +62,22 @@
                                     <h5 class="mb-0 fw-semibold lh-1">{{ $coin }}</h5>
                                     <p class="mb-0 fs-4">Coin</p>
                                 </div>
+
+                                <a class="nav-link notify-badge nav-icon-hover" href="javascript:void(0)"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasfollowing"
+                                aria-controls="offcanvasfollowing">
                                 <div class="text-center">
+                                    <i class="ti ti-user-check fs-6 d-block mb-2"></i>
+                                <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
+                                <p class="mb-0 fs-3">Mengikuti</p>
+                                </div>
+                                </a>
+
+                                {{-- <div class="text-center">
                                     <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
                                     <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
                                     <p class="mb-0 fs-4">Mengikuti</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -232,6 +243,102 @@
             </div>
         </div>
     </div>
+
+    <div class="offcanvas offcanvas-end shopping-cart" tabindex="-1" id="offcanvasfollowing"
+    aria-labelledby="offcanvasfollowingLabel">
+    <div class="offcanvas-header py-4">
+
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+    <div>
+        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-center">
+            <li class="nav-item">
+                <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2">
+                    <span class="text-dark fs-3 fw-semibold lh-1 mb-1 username"></span>
+                    <span class="text-dark fs-3 fw-bold lh-1 role"></span>
+                </div>
+            </li>
+            <li class="nav item me-2">
+                <div class="d-none d-md-flex flex-column align-items-end justify-content-center">
+                    <span class="mt-2 fs-4 lh-1 text-end fw-semibold">{{ auth()->user()->name }}</span>
+                    <span class="fs-4 text-end">{{ auth()->user()->email }}</span>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link pe-0" href="javascript:void(0)">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile"
+                                style="object-fit: cover" width="35" height="35" alt="" />
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+    <div class="offcanvas-header py-4">
+        <h3 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Mengikuti
+        <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">{{ $following }}</span>
+        </h3>
+    </div>
+
+    <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar>
+        <div class="row">
+            @forelse ($follow_detail as $follow)
+                @php
+                    $user_id = auth()->user()->id;
+                    $author_id = $follow->author->id;
+                    $isFollowing = DB::table('followers')
+                        ->where('user_id', $user_id)
+                        ->where('author_id', $author_id)
+                        ->exists();
+                @endphp
+                <div class="col-lg-3 col-md-3">
+                    <div class="">
+                        <ul class="navbar-nav mx-auto">
+                            <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
+                                <a>
+                                    <img src="{{ asset( $follow->user->photo ? 'storage/'.$follow->user->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
+                                </a>
+                            </div>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-2">
+                    <div class=""><p style="line-height: 0px;" class="mt-2"><b>{{ $follow->author->user->name }}</b></p></div>
+                    <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">Penulis</p></div>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <div class="d-flex justify-content-end">
+                        @if ($isFollowing)
+                            <form action="{{ route('unfollow.author', ['author' => $follow->author->id]) }}"
+                                method="POST">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #424f5b">
+                                    Mengikuti
+                                </button>
+                            </form>
+                        @else
+                            <form action="{{ route('follow.author', ['author' => $follow->author->id]) }}" method="POST">
+                                @method('post')
+                                @csrf
+                                <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                    Ikuti
+                                </button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            @empty
+            @endforelse
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('script')
