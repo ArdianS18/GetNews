@@ -370,7 +370,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->with('newsCategories')
             ->withCount('views')
-            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereHas('views', function($query) use ($startDate, $endDate){
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            })
             ->orderByDesc('views_count')
             ->orderBy('created_at')
             ->when($data == 'up', function ($query) {
