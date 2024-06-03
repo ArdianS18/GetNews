@@ -368,6 +368,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $endDate = Carbon::now()->toDateString();
         $popularNews = $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereBetween('created_at', [$startDate, $endDate])
             ->with('newsCategories')
             ->withCount('views')
             ->orderByDesc('views_count')
@@ -381,7 +382,6 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->when($data == 'side', function ($query) {
                 $query->take(4);
             })
-            ->whereBetween('created_at', [$startDate, $endDate])
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
 
         return $popularNews;
