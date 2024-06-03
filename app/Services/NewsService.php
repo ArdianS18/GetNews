@@ -2,24 +2,21 @@
 
 namespace App\Services;
 
+use Exception;
 use App\Models\Tag;
 use App\Models\News;
-use App\Models\NewsTag;
-use App\Models\NewsPhoto;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Enums\UploadDiskEnum;
-use App\Helpers\ImageCompressing;
+use Illuminate\Http\UploadedFile;
 use App\Http\Requests\NewsRequest;
+use App\Http\Requests\NewsDraftRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\NewsUpdateRequest;
-use function Laravel\Prompts\multisearch;
+use Intervention\Image\Laravel\Facades\Image;
 use App\Http\Requests\Dashboard\Article\UpdateRequest;
-
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
-use App\Http\Requests\NewsDraftRequest;
 
 class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 {
@@ -63,19 +60,21 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $data['tag'] = $newTags;
         }
 
-            $image = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+        $img = $this->compressImage($request->photo);
 
-            $domQuestion = new \DOMDocument();
-            libxml_use_internal_errors(true);
-            $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-            $this->processImages($domQuestion);
+        $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
 
-            libxml_clear_errors();
+        $domQuestion = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $domQuestion->loadHTML($data['content'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+        $this->processImages($domQuestion);
+
+        libxml_clear_errors();
 
         return [
             'user_id' => auth()->user()->id,
             'name' => $data['name'],
-            'photo' => $image,
+            'photo' => $new_photo,
             'content' => $domQuestion->saveHTML(),
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
@@ -101,16 +100,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $data['tag'] = $newTags;
         }
 
-            $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
+        $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
 
-            $domQuestion = new \DOMDocument();
-            libxml_use_internal_errors(true);
-            $content = $data['content'] ?? '-';
-            if (!$content) {
-                $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-                $this->processImages($domQuestion);
-            }
-            libxml_clear_errors();
+        $domQuestion = new \DOMDocument();
+        libxml_use_internal_errors(true);
+        $content = $data['content'] ?? '-';
+        if (!$content) {
+            $domQuestion->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
+            $this->processImages($domQuestion);
+        }
+        libxml_clear_errors();
 
         return [
             'user_id' => auth()->user()->id,
@@ -124,7 +123,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'upload_date' => $data['upload_date'] ?? null
         ];
     }
-
+    
+    /**
+     * Method updateDraft
+     *
+     * @param NewsDraftRequest $request [explicite description]
+     * @param News $news [explicite description]
+     *
+     * @return void
+     */
     public function updateDraft(NewsDraftRequest $request, News $news)
     {
         $data = $request ? $request->validated() : null;
@@ -142,14 +149,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
 
         $old_photo = $news->photo;
-        $new_photo= "";
+        $new_photo = "";
 
         // if ($request->hasFile('photo')) {
-            // if ($request->file('photo')) {
-                // $this->remove($old_photo);
-            // } else {
-                $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
-            // }
+        // if ($request->file('photo')) {
+        // $this->remove($old_photo);
+        // } else {
+        $img = $this->compressImage($request->photo);
+
+        $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
+        // }
         // }
 
         $domQuestion = new \DOMDocument();
@@ -200,11 +209,12 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
 
         $old_photo = $news->photo;
-        $new_photo= "";
-
+        $new_photo = "";
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
-            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo'));
+            $img = $this->compressImage($request->photo);
+            
+            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
         }
 
         $domQuestion = new \DOMDocument();
@@ -226,7 +236,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         return [
             'user_id' => $id,
             'name' => $data['name'],
-            'photo' => $old_photo ?: $new_photo,
+            'photo' => $new_photo ? $new_photo : $old_photo,
             'content' => $data['content'],
             'slug' => Str::slug($data['name']),
             'category' => $data['category'],
@@ -235,7 +245,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'sub_category' => $data['sub_category'],
         ];
     }
-
+    
+    /**
+     * Method updateByAdmin
+     *
+     * @param NewsUpdateRequest $request
+     * @param News $news
+     *
+     * @return array
+     */
     public function updateByAdmin(NewsUpdateRequest $request, News $news): array|bool
     {
         $data = $request->validated();
@@ -254,7 +272,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
 
         $old_photo = $news->photo;
-        $new_photo= "";
+        $new_photo = "";
 
         if ($request->hasFile('photo')) {
             $this->remove($old_photo);
@@ -282,7 +300,15 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'sub_category' => $data['sub_category'],
         ];
     }
-
+    
+    /**
+     * Method processImages
+     *
+     * @param \DOMDocument $dom
+     *
+     * @return void
+     */
+    
     private function processImages(\DOMDocument $dom)
     {
         $images = $dom->getElementsByTagName('img');
@@ -308,7 +334,41 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
                 $img->setAttribute('class', 'img-responsive');
             }
         }
-
     }
 
+    
+    /**
+     * Method compressImage
+     *
+     * @param $file as string 
+     *
+     * @return UploadedFile
+     */
+    public function compressImage($file): UploadedFile
+    {
+        $imageInfo = getimagesize($file);
+        $imageType = $imageInfo[2];
+
+        switch ($imageType) {
+            case IMAGETYPE_JPEG:
+                $sourceImage = imagecreatefromjpeg($file);
+                break;
+            case IMAGETYPE_PNG:
+                $sourceImage = imagecreatefrompng($file);
+                break;
+            case IMAGETYPE_GIF:
+                $sourceImage = imagecreatefromgif($file);
+                break;
+            default:
+                throw new Exception('Unsupported image type');
+        }
+
+        $compressedImagePath = tempnam(sys_get_temp_dir(), 'compressed_image') . '.webp';
+
+        imagewebp($sourceImage, $compressedImagePath, 80);
+
+        imagedestroy($sourceImage);
+
+        return new UploadedFile($compressedImagePath, basename($compressedImagePath), 'image/webp', null, true);
+    }
 }
