@@ -364,8 +364,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
 
     public function getByPopular($data): mixed
     {
-        return $this->model->query()
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
+        $popularNews = $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
+            ->whereBetween('created_at', [$startDate, $endDate])
             ->with('newsCategories')
             ->withCount('views')
             ->orderByDesc('views_count')
@@ -380,6 +383,8 @@ class NewsRepository extends BaseRepository implements NewsInterface
                 $query->take(4);
             })
             ->get(['id', 'slug', 'photo', 'name', 'created_at', 'upload_date', 'user_id']);
+
+        return $popularNews;
     }
 
     public function latest(): mixed
