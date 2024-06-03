@@ -18,11 +18,12 @@
                 </a>
             </div>
         </ul>
+
         <ul class="navbar-nav d-lg-none">
             <li class="nav-item dropdown">
                 <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <div class="d-flex align-items-center">
+                aria-expanded="false">
+                <div class="d-flex align-items-center">
                         <div class="">
                             <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="rounded-circle user-profile"
                                 style="object-fit: cover" width="35" height="35" alt="" />
@@ -47,6 +48,7 @@
                                 </p>
                             </div>
                         </div>
+
                         <div class="message-body">
                             <a class="py-8 px-7 mt-8 d-flex align-items-center" href="{{ route('profile.author.update') }}">
                                 <span

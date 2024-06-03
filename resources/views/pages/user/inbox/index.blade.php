@@ -2,7 +2,6 @@
 
 @section('style')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
     <style>
         .card-profile {
             box-shadow: 0 5px 2px rgba(0, 0, 0, 0.1);
@@ -12,7 +11,6 @@
             /* width: 400px;
                 height: 130px; */
         }
-
         .badge {
             width: fit-content;
             height: fit-content;
@@ -23,6 +21,7 @@
 @endsection
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>User | Inbox</title>
 </head>
 
@@ -72,6 +71,7 @@
                             <li class="list-group-item border-0 d-flex p-0 mx-9">
                                     <a id="contactButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonContact"
                                     href="javascript:void(0)"><i class="ti ti-inbox fs-5"></i>Pesan</a>
+                                    <span id="messageCountBadge" class="badge ms-auto bg-danger"></span>
                             </li>
                             <li class="list-group-item border-0 p-0 mx-9">
                                 <a id="trashButton" class="d-flex align-items-center gap-2 list-group-item-action text-dark px-3 py-8 mb-1 rounded-1 buttonDelete"
@@ -123,7 +123,7 @@
                                     <ul class="chat-users" style="height: calc(100vh - 400px)" data-simplebar>
                                         @forelse ($sendMessage as $send)
                                         <li class="contact">
-                                            <a href="javascript:void(0)"
+                                            <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('send.message.read', ['send' => $send->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $send->id }}" data-user-id="{{ $send->user_id }}" data-chat-id="{{ $send->id }}">
                                                 <div class="position-relative w-100 ms-2">
@@ -331,6 +331,19 @@
 @section('script')
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
+
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const replyButtons = document.querySelectorAll('.btn-reply');
 
@@ -348,27 +361,12 @@
     <script>
         function loadRouteContent(event, route) {
             event.preventDefault();
-
             $.ajax({
                 url: route,
                 type: 'GET',
                 success: function (response) {
-                    $('#content-container').html(response);
-                },
-                error: function (xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        }
-
-        function loadRouteReport(event, route) {
-            event.preventDefault();
-
-            $.ajax({
-                url: route,
-                type: 'GET',
-                success: function (response) {
-                    $('#content-container').html(response);
+                    $('#someContainer').html(response);
+                    $(event.target).closest('.contact').find('.badge.bg-danger').remove();
                 },
                 error: function (xhr) {
                     console.log(xhr.responseText);
@@ -588,4 +586,51 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            function updateMessageCount() {
+                $.ajax({
+                    url: '/countInboxUser',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.count == 0) {
+                            $('#messageCountBadge').hide();
+                        } else {
+                            $('#messageCountBadge').text(data.count).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateMessageCount, 5000);
+            updateMessageCount();
+        });
+
+        $(document).ready(function() {
+            function updateTotalCount() {
+                $.ajax({
+                    url: '/countUser',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.countTotal == 0) {
+                            $('#total').hide();
+                        } else {
+                            $('#total').text(data.countTotal).show();
+                        }
+                    },
+                    error: function() {
+                        console.error('Failed to fetch message count.');
+                    }
+                });
+            }
+
+            setInterval(updateTotalCount, 5000);
+            updateTotalCount();
+        });
+    </script>
 @endsection

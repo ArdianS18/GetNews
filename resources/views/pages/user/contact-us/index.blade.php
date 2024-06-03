@@ -68,7 +68,7 @@
                                         <p style="line-height: 25px;">PT. Humma Digital Indonesia</p>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 

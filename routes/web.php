@@ -267,6 +267,9 @@ Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(fun
     Route::get('list-status-author', [NewsController::class, 'showstatusnews'])->name('list.news.author');
 
     Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
+    Route::get('authorCount', [AuthorController::class, 'inboxcount'])->name('author.inbox.count');
+    Route::get('authorReport', [AuthorController::class, 'inboxcountreport'])->name('author.report.count');
+    Route::get('authorTotal', [AuthorController::class, 'inboxcounttotal'])->name('author.total.count');
 
     Route::get('statistic', function () {
         return view('pages.author.statistic.index');
@@ -343,7 +346,10 @@ Route::middleware(['role:user', 'verified','check.banned'])->group(function () {
     Route::get('ketentuan-dan-persyaratan', function () {
         return view('pages.user.home');
     })->name('user.home');
+
     Route::get('user-inbox', [UserController::class, 'index'])->name('user.inbox');
+    Route::get('countInboxUser', [UserController::class, 'countMessage'])->name('user.inbox.count');
+    Route::get('countUser', [UserController::class, 'countMessage2'])->name('user.inbox.side');
 
     Route::get('berita-upload', function () {
         return view('pages.user.news.upload');

@@ -43,7 +43,7 @@ class SendMessageController extends Controller
         $data['message'] = $request->message;
 
         $this->sendMessage->store($data);
-        return back();
+        return back()->with('success', 'Berhasil membalas pesan.');
     }
 
     /**

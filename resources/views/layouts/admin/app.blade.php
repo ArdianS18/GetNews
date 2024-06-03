@@ -54,6 +54,22 @@
                 transform: translateY(-15px);
             }
         }
+
+        .notification {
+            content: "";
+            position: absolute;
+            top: 22px;
+            right: 9px;
+            width: 8px;
+            height: 8px;
+        }
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+        .bg-primary {
+            --bs-bg-opacity: 1;
+            background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+        }
     </style>
 </head>
 
