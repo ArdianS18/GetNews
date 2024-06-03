@@ -40,10 +40,12 @@ class ShareUnreadCount
             $countMessage = $this->sendMessage->where('email', auth()->user()->email)->where('status', 'unread')->count();
             $totalUnread = $countContact + $countReport + $countMessage;
 
+            $totalAuthor = $countReport + $countMessage;
 
             View::share([
                 'totalUnread' => $totalUnread,
-                'countMessage' => $countMessage
+                'countMessage' => $countMessage,
+                'totalAuthor' => $totalAuthor
             ]);
         }
 
