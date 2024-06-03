@@ -29,6 +29,7 @@ class HelloMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from:'GetMedia.id@media',
             to: $this->data['email'],
             cc: $this->data['email'],
             bcc: $this->data['email'],
