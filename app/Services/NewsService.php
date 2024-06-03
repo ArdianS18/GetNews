@@ -309,7 +309,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      * @return void
      */
     
-    private function processImages(\DOMDocument $dom)
+     private function processImages(\DOMDocument $dom)
     {
         $images = $dom->getElementsByTagName('img');
         foreach ($images as $img) {
@@ -325,10 +325,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
                 Storage::put(UploadDiskEnum::CONTENT->value . '/' . $filepath, $imageData);
 
-                $baseUrl = config('app.url');
-
-                $new_src = str_replace('http://127.0.0.1:8000', $baseUrl, Storage::url(UploadDiskEnum::CONTENT->value . '/' . $filepath));
-
+                $new_src = Storage::url(UploadDiskEnum::CONTENT->value . '/' . $filepath);
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
                 $img->setAttribute('class', 'img-responsive');
