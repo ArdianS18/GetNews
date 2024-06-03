@@ -183,6 +183,7 @@ class ProfileController extends Controller
         $categories = $this->category->get();
         $tags = $this->tag->get();
         $newsTags = $this->newsTag->getNewsTags($news);
+        dd($newsTags);
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
         $newsCategory = $this->newsCategory->get()->whereIn('news_id', $news);
