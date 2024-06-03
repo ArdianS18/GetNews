@@ -45,7 +45,7 @@
         </div>
     @endif
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
             <form class="d-flex gap-2">
                 <div class="position-relative d-flex">

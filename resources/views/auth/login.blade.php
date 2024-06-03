@@ -104,6 +104,12 @@
             transform: translateY(-100%);
             transition: all 0.3s 1s ease-out;
             }
+
+            @media (max-width: 768px){
+                .mobile-title{
+                    margin-top: 50px;
+                }
+            }
     </style>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
@@ -160,7 +166,7 @@
                     <img src="{{asset('assets/img/auth/get-back.svg')}}" width="150" alt="">
                 </a>
 
-                <h3 class="mb-1">Selamat datang di GetMedia</h3>
+                <h3 class="mb-1 mobile-title">Selamat datang di GetMedia</h3>
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
                         <div class="alert mt-3 alert-danger alert-dismissible fade show" role="alert">

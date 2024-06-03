@@ -43,7 +43,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-md py-1 px-5 text-white" type="button" style="background-color: #175A95;"
                         data-bs-toggle="modal" data-bs-target="#modal-create">

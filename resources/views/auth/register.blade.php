@@ -107,6 +107,12 @@
             transform: translateY(-100%);
             transition: all 0.3s 1s ease-out;
         }
+
+        @media (max-width: 768px){
+            .mobile-title{
+                margin-top: 100px;
+            }
+        }
     </style>
 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
@@ -177,7 +183,7 @@
                         <img src="{{asset('assets/img/auth/get-back.svg')}}" width="150" alt="">
                     </a>
     
-                    <h3 class="mb-5">Buat Akun GetMedia.id</h3>
+                    <h3 class="mb-5 mobile-title">Buat Akun GetMedia.id</h3>
 
                     {{-- @if (session('success'))
                         <div id="error-alert" class="alert alert-success alert-dismissible fade show" role="alert">
