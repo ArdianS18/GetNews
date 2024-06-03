@@ -49,6 +49,13 @@ class FollowerRepository extends BaseRepository implements FollowerInterface
             ->get();
     }
 
+    public function whereUser($user_id): mixed
+    {
+        return $this->model->query()
+            ->where('user_id', $user_id)
+            ->get();
+    }
+
     /**
      * Handle show method and delete data instantly from models.
      *
