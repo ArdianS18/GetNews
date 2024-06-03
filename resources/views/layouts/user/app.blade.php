@@ -32,12 +32,10 @@
             color: #fff !important;
         }
 
-        /* Ensure the modal is visible on mobile view */
         .modal.show {
             display: block;
         }
 
-        /* Ensure input field is styled properly on mobile */
         .modal-dialog .form-control {
             width: 100%;
         }
@@ -65,18 +63,6 @@
 <body>
     @include('layouts.user.navbar-header')
     @include('layouts.user.mobile-navbar')
-
-    {{-- @if (Auth::check() && !Auth::user()->email_verified_at)
-        <div class="alert alert-danger mb-n1 text-center" role="alert">
-            Anda belum verifikasi email,
-            <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                @csrf
-                <button type="submit"
-                    class="text-danger btn btn-link p-0 m-0 align-baseline">{{ __('verifikasi ulang') }}</button>.
-            </form>
-        </div>
-     @endif --}}
-
     <div class="loader-wrapper">
         <div class="loader"></div>
         <div class="loader-section section-left"></div>
@@ -92,24 +78,12 @@
 
 
     @yield('content')
-    {{-- <script data-cfasync="false" src="{{ asset('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js') }}"></script> --}}
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/swiper.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
-    {{-- <script src="{{ asset('assets/dist/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/libs/simplebar/dist/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- core files -->
-    <script src="{{ asset('assets/dist/js/app.min.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/app.init.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/app-style-switcher.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/sidebarmenu.js') }}"></script>
-    <script src="{{ asset('assets/dist/js/custom.js') }}"></script> --}}
-    <!-- current page js files -->
-    {{-- <script src="{{ asset('assets/dist/libs/apexcharts/dist/apexcharts.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/dist/js/dashboard5.js') }}"></script> --}}
+
     <script src="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
 
@@ -118,8 +92,35 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var searchBtns = document.querySelectorAll('#search-btn');
             var input = document.getElementById('search-input');
+            var errorText = document.getElementById('error-text-input');
+
+            function checkInput() {
+                if (input && input.value.trim() === '') {
+                    input.focus();
+                    input.classList.add('border-danger');
+                    if (errorText) {
+                        errorText.classList.add('text-danger');
+                        errorText.textContent = 'Input harus diisi';
+                    }
+                    return false; 
+                } else {
+                    input.classList.remove('error');
+                    if (errorText) {
+                        errorText.classList.remove('text-danger');
+                        errorText.textContent = '';
+                    }
+                    return true; 
+                }
+            }
+
+            document.getElementById('save-btn').addEventListener('click', function(event) {
+                if (!checkInput()) {
+                    event.preventDefault(); 
+                }
+            });
+
+            var searchBtns = document.querySelectorAll('#search-btn');
 
             searchBtns.forEach(function(searchBtn) {
                 searchBtn.addEventListener('click', function() {

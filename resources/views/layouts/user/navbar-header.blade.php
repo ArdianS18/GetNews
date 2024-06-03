@@ -52,7 +52,8 @@
                     <div class="modal-content">
                         <form action="{{route('search')}}" method="GET">
                             <input type="search" name="q" id="search-input"  class="form-control" placeholder="Search here...." />
-                            <button type="submit"><i class="fi fi-rr-search"></i></button>
+                            <p id="error-text-input"></p>
+                            <button type="submit" id="save-btn"><i class="fi fi-rr-search"></i></button>
                         </form>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="ri-close-line"></i></button>
                     </div>
