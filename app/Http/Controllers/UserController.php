@@ -52,6 +52,18 @@ class UserController extends Controller
         return view('pages.user.inbox.index', compact('sendMessage', 'sendMessage2', 'sendDelete', 'sendDelete2'));
     }
 
+    public function countMessage()
+    {
+        $countMassage = $this->sendMessage->count('unread');
+        return response()->json(['count' => $countMassage]);
+    }
+
+    public function countMessage2()
+    {
+        $countMassage = $this->sendMessage->count('unread');
+        return response()->json(['countTotal' => $countMassage]);
+    }
+
     public function accountUserList(Request $request)
     {
         if ($request->has('page')) {

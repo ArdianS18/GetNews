@@ -90,7 +90,7 @@
                                                 <div class="text-center">
                                                     <i class="ti ti-user-circle fs-6 d-block mb-2"></i>
                                                     <h5 class="mb-0 fw-semibold lh-1">{{ $followers }}</h5>
-                                                    <p class="mb-0 fs-3">Followers</p>
+                                                    <p class="mb-0 fs-3">Pengikut</p>
                                                 </div>
                                             </a>
 
@@ -98,9 +98,9 @@
                                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasfollowing"
                                                 aria-controls="offcanvasfollowing">
                                                 <div class="text-center">
-                                                     <i class="ti ti-user-check fs-6 d-block mb-2"></i>
+                                                    <i class="ti ti-user-check fs-6 d-block mb-2"></i>
                                                 <h5 class="mb-0 fw-semibold lh-1">{{ $following }}</h5>
-                                                <p class="mb-0 fs-3">Following</p>
+                                                <p class="mb-0 fs-3">Mengikuti</p>
                                                 </div>
                                             </a>
 
@@ -402,48 +402,79 @@
                         </li>
                     </ul>
                 </div>
-                
-                
-                    <!-- <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span> -->
-                </div>
 
+                </div>
                 <div class="offcanvas-header py-4">
-                    
                 <h3 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Pengikut
-                    <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">3.586</span>
+                    <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">{{ $followers }}</span>
                     </h3>
                 </div>
 
                 <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar>
-                   
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="">
-                            <ul class="navbar-nav mx-auto">
-                                <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
-                                    
-                                    <a>
-                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
-                                    </a>
-                                </div>
+                <div class="row">
+                    @forelse ($follower_detail as $follower)
+                        <div class="col-lg-3 col-md-3">
+                            <div class="">
+                                <ul class="navbar-nav mx-auto">
+                                    <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
 
-                            </ul>
+                                        <a>
+                                            <img src="{{ asset( $follower->user->photo ? 'storage/'. $follower->user->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
+                                        </a>
+                                    </div>
+
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-7 col-md-2">
-                        <div class=""><p style="line-height: 0px;" class="mt-2"><b>M. Ardian</b></p></div>
-                        <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">Penulis</p></div>
-                    </div>
-                    <div class="col-lg-2 col-md-2">
-                        <div class="d-flex justify-content-end">
-                    
-                            <a class="btn btn-sm text-white px-4" style="background-color: #175A95">
-                               Ikuti
-                            </a>
+
+                        <div class="col-lg-7 col-md-2">
+                            <div class=""><p style="line-height: 0px;" class="mt-2"><b>{{ $follower->user->name }}</b></p></div>
+                            <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">
+                                @if ($follower->user->roles->pluck('name')[0] === "user")
+                                    User
+                                @else
+                                    Penulis
+                                @endif
+                            </p></div>
                         </div>
-                    </div>
+
+                        @if ($follower->user->roles->pluck('name')[0] === "author")
+                            @php
+                                $user_id = auth()->user()->id;
+                                $author_id = $follower->user->author->id;
+                                $isFollowing = DB::table('followers')
+                                    ->where('user_id', $user_id)
+                                    ->where('author_id', $author_id)
+                                    ->exists();
+                            @endphp
+                            <div class="col-lg-2 col-md-2">
+                                <div class="d-flex justify-content-end">
+                                    @if ($isFollowing)
+                                        <form action="{{ route('unfollow.author', ['author' => $follower->user->author->id]) }}"
+                                            method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #424f5b">
+                                                Mengikuti
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow.author', ['author' => $follower->user->author->id]) }}" method="POST">
+                                            @method('post')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                                Ikuti
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+                    @empty
+                    @endforelse
+
                 </div>
-                
+
                 </div>
             </div>
 
@@ -481,53 +512,66 @@
                         </li>
                     </ul>
                 </div>
-                
-                
-                    <!-- <span class="badge bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span> -->
                 </div>
-
                 <div class="offcanvas-header py-4">
-                    
-                <h3 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Mengikuti
-                    <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">3.586</span>
+                    <h3 class="offcanvas-title fs-5 fw-semibold" id="offcanvasRightLabel">Mengikuti
+                    <span class="mb-1 badge rounded-pill font-medium bg-light-primary text-primary ms-2">{{ $following }}</span>
                     </h3>
                 </div>
-
                 <div class="offcanvas-body h-100 px-4 pt-0" data-simplebar>
-                   
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="">
-                            <ul class="navbar-nav mx-auto">
-                                <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
-                                    
-                                    <a>
-                                        <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
-                                    </a>
-                                </div>
+                    <div class="row">
+                        @forelse ($follow_detail as $follow)
+                            @php
+                                $user_id = auth()->user()->id;
+                                $author_id = $follow->author->id;
+                                $isFollowing = DB::table('followers')
+                                    ->where('user_id', $user_id)
+                                    ->where('author_id', $author_id)
+                                    ->exists();
+                            @endphp
+                            <div class="col-lg-3 col-md-3">
+                                <div class="">
+                                    <ul class="navbar-nav mx-auto">
+                                        <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
+                                            <a>
+                                                <img src="{{ asset( $follow->user->photo ? 'storage/'.$follow->user->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
+                                            </a>
+                                        </div>
 
-                            </ul>
-                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-2">
+                                <div class=""><p style="line-height: 0px;" class="mt-2"><b>{{ $follow->author->user->name }}</b></p></div>
+                                <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">Penulis</p></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2">
+                                <div class="d-flex justify-content-end">
+                                    @if ($isFollowing)
+                                        <form action="{{ route('unfollow.author', ['author' => $follow->author->id]) }}"
+                                            method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #424f5b">
+                                                Mengikuti
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow.author', ['author' => $follow->author->id]) }}" method="POST">
+                                            @method('post')
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #175A95">
+                                                Ikuti
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        @empty
+                        @endforelse
                     </div>
-                    <div class="col-lg-7 col-md-2">
-                        <div class=""><p style="line-height: 0px;" class="mt-2"><b>M. Ardian</b></p></div>
-                        <div class=""><p class="d-inline-block text-truncate" style="font-size: 14px;max-width: 150px;">Penulis</p></div>
-                    </div>
-                    <div class="col-lg-2 col-md-2">
-                        <div class="d-flex justify-content-end">
-                    
-                            <a class="btn btn-sm text-white px-4" style="background-color: #175A95">
-                               Ikuti
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
                 </div>
             </div>
-
-
-
         </div>
         <!-- ---------------------------------------------- -->
         <!-- Import Js Files -->

@@ -72,7 +72,7 @@
                                 </form>
                             </div>
                         </div>
-                        <p>Menampilkan {{ $newsByDate->count() }} Hasil</p>
+                        <p>Menampilkan {{ $newsByDate->total() }} Hasil</p>
                         <div class="row">
                             @forelse ($newsByDate as $item)
                                 @php

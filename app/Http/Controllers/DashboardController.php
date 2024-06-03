@@ -168,7 +168,8 @@ class DashboardController extends Controller
     public function userProfile(){
         $coin = $this->coin->get();
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
-        return view('pages.user.profile.index', compact('following', 'coin'));
+        $follow_detail = $this->followers->whereUser(auth()->user()->id);
+        return view('pages.user.profile.index', compact('following', 'coin', 'follow_detail'));
     }
 
     public function authoruser(Request $request) {
