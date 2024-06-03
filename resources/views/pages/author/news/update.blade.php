@@ -191,9 +191,9 @@
             </button>
         </div>
         <div class="d-flex">
-            <button type="reset" class="btn btn-danger m-2">
+            <a href="/status-author" class="btn btn-danger m-2">
                 Batal
-            </button>
+            </a>
             @if ($news->status == "draft")
                 <button type="submit" class="btn btn-primary m-2" id="submitButton1">
                     Rilis & Update
