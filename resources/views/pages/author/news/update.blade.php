@@ -116,7 +116,7 @@
 
                             </select>
                             @error('sub_category')
-                                <span class="invalid-feedback" role="alert" style="color: red">
+                                  <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -137,12 +137,11 @@
                         <label class="form-label" for="password_confirmation">Tags</label>
                         <select class="form-control  @error('tag') is-invalid @enderror select2 tags" name="tag[]" multiple="multiple" value="">
                             <option>pilih tags</option>
-
                             @foreach ($tags as $tag)
-                            <option value="{{ $tag->name }}" {{ $newsTags->pluck('tag_id')->contains($tag->id) ? 'selected' : '' }}>
-                              {{ $tag->name }}
-                            </option>
-                          @endforeach
+                                <option value="{{ $tag->name }}" {{ $newsTags->tags->pluck('name')->contains($tag->name) ? 'selected' : '' }}>
+                                {{ $tag->name }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('tags')
                             <span class="invalid-feedback" role="alert" style="color: red;">
