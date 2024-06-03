@@ -79,12 +79,11 @@
     <div style="background-color: #f9f9f9; margin: 0 auto; max-width: 640px; box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); border-radius: 4px; overflow: hidden;">
         <div style="background: transparent">
             <!-- Header Section -->
-            <div style="text-align: center; background-color: #DDDDDD;">
-                <div style="cursor: auto; color: #1B3061; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif; font-size: 36px; font-weight: 600; line-height: 36px; text-align: center;">
-                    <img src="{{asset('assets/img/logo-getmedia.png')}}" width="200px" alt="" />
+            <div style="text-align: center;">
+                <div style="cursor: auto; color: #1B3061; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;">
+                    <img src="{{asset('Kop-Email.jpg')}}" style="width:638px" />
                 </div>
             </div>
-
             <!-- Content Section -->
             <div style="text-align: center; background: #ffffff; padding: 40px 70px;">
                 <div style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 100%;">
@@ -98,7 +97,7 @@
                                 Aktivasi Akun Anda
                             </h4>
                             <p>
-                                Terimakasih {{ $data['user'] }} telah mendaftar di <span style="color: #000000;">Website GetMedia.id,</span>
+                                Terimakasih {{ $data['user'] }} telah mendaftar di <span style="color: #000000;">Website GetMedia.id,</span> verifikasi Untuk melanjutkan mengakses GetMedia.Klik tombol di bawah ini untuk memulai proses verifikasi:
                             </p>
                         </div>
                     </div>
@@ -106,8 +105,8 @@
                         <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate" align="center" border="0">
                             <tbody>
                                 <tr>
-                                    <td style="border: none; border-radius: 3px; color: white; cursor: auto; padding: 15px 19px;" align="center; background-color: #175A95;" valign="middle" bgcolor="#1">
-                                        <a href="{{ route('verisikasi.account', ['id' => $data['id']]) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; line-height: 100%; color: white; font-family: Ubuntu, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; text-transform: none; margin: 0px;">
+                                    <td style="background-color:red;border: none; border-radius: 3px; color: white; cursor: auto; padding: 15px 19px;" align="center; background-color: #175A95;" valign="middle" bgcolor="#1">
+                                        <a href="{{ route('verisikasi.account', ['id' => $data['id']]) }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; line-height: 100%; color: white; font-family: Ubuntu, Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; text-transform: none; margin: 0px;background-color:red">
                                             Verifikasi Email
                                         </a>
                                     </td>
@@ -115,6 +114,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <p>
+                         Mulailah menjelajahi dunia berita untuk perluas pengetahuan dengan membaca di GetMedia, dan dapatkan pengalaman membaca berita yang kebih nyaman dan menarik!
+                    </p>
                 </div>
             </div>
         </div>
