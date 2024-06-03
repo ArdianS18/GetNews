@@ -1,4 +1,23 @@
 
+<head>
+    <style>
+        .notification {
+            content: "";
+            position: absolute;
+            top: 22px;
+            right: 1px;
+            width: 13px;
+            height: 13px;
+        }
+        .rounded-circle {
+            border-radius: 50% !important;
+        }
+        .bg-primary {
+            --bs-bg-opacity: 1;
+            background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
+        }
+    </style>
+</head>
 <div class="navbar-area header-one mb-5" id="navbar">
     <div class="header-top">
         <div class="container-fluid">
@@ -71,36 +90,30 @@
                     @foreach ($categories as $category)
                     <li class="nav-item">
                     <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
-                                
                                 <ul class="dropdown-menu">
-
                                 <div class="d-flex">
-                                         <li class="nav-item">
-                                         @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
-                                         <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                        <li class="nav-item">
+                                        @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
+                                        <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
 
-                                         @if(($loop->iteration % 4) == 0)
-                                         </li>
-                                         <li class="nav-item">
-                                         @endif
+                                        @if(($loop->iteration % 4) == 0)
+                                        </li>
+                                        <li class="nav-item">
+                                        @endif
                                         @endforeach
                                         </li>
-                                    </div>
-                                       
-
+                                </div>
                                 </ul>
-
-                                
                             </li>
 
                             @endforeach
-                            
-                
+
+
 
                     <!-- @foreach ($categories as $category)
                             <li class="nav-item">
                                 <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
-                                
+
                                 <ul class="dropdown-menu">
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                     <div class="d-flex">
@@ -113,7 +126,7 @@
                                         </li>
 
                                     </div>
-                                       
+
 
                                     @empty
                                         <li class="nav-item">
@@ -122,16 +135,16 @@
                                     @endforelse
                                 </ul>
 
-                                
+
                             </li>
 
-                            
+
                     @endforeach -->
 
                 </ul>
 
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
-                   
+
                     <div class="option-item">
                         <button type="button" class="search-btn" id="search-btn" data-bs-toggle="modal" data-bs-target="#searchModal">
                             <i class="flaticon-loupe"></i>
@@ -143,6 +156,12 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a href="javascript:void(0)" class="nav-link">
+                                        @if ((auth()->user()->roles->pluck('name')[0] == "admin") && $totalUnread > 0)
+                                            <div id="notif-admin" class="notification bg-primary rounded-circle"></div>
+                                        @elseif ((auth()->user()->roles->pluck('name')[0] == "user") && $countMessage > 0)
+                                            <div id="notif-admin" class="notification bg-primary rounded-circle"></div>
+                                        @else
+                                        @endif
                                         <img src="{{ asset( Auth::user()->photo ? 'storage/'.Auth::user()->photo : "default.png")  }}" class="mb-2" alt="Image" width="40" height="40" style="min-width: 40px;border-radius: 50%;object-fit:cover;min-height: 40px;"/>
                                     </a>
                                     <ul class="dropdown-menu">

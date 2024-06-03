@@ -343,7 +343,10 @@ Route::middleware(['role:user', 'verified','check.banned'])->group(function () {
     Route::get('ketentuan-dan-persyaratan', function () {
         return view('pages.user.home');
     })->name('user.home');
+
     Route::get('user-inbox', [UserController::class, 'index'])->name('user.inbox');
+    Route::get('countInboxUser', [UserController::class, 'countMessage'])->name('user.inbox.count');
+    Route::get('countUser', [UserController::class, 'countMessage2'])->name('user.inbox.side');
 
     Route::get('berita-upload', function () {
         return view('pages.user.news.upload');
