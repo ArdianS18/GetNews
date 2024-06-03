@@ -357,27 +357,27 @@
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
                                 @forelse ($populars as $popular)
                                     @php
-                                        $dateParts = date_parse($popular->upload_date);
+                                        $dateParts = date_parse($popular->news->upload_date);
                                     @endphp
                                     <div class="news-card-seven">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->photo) }}" class="img-responsive"
+                                            <img src="{{ asset('storage/' . $popular->news->photo) }}" class="img-responsive"
                                                 alt="Image" width="100%" height="110"
                                                 style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="{{ route('categories.show.user', ['category' => $popular->newsCategories[0]->category->slug]) }}"
-                                                class="news-cat">{{ $popular->newsCategories[0]->category->name }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $popular->news->newsCategories[0]->category->slug]) }}"
+                                                class="news-cat">{{ $popular->news->newsCategories[0]->category->name }}</a>
                                             <h3><a data-toggle="tooltip" data-placement="top"
-                                                    title="{{ $popular->name }}"
-                                                    href="{{ route('news.user', ['news' => $popular->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($popular->name, $limit = 60, $end = '...') !!}
+                                                    title="{{ $popular->news->name }}"
+                                                    href="{{ route('news.user', ['news' => $popular->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                                    {!! Illuminate\Support\Str::limit($popular->news->name, $limit = 60, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->news->created_at)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>{{ $popular->views_count }}</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $popular->total }}</li>
                                             </ul>
                                         </div>
                                     </div>

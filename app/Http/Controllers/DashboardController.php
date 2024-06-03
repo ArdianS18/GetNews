@@ -112,7 +112,7 @@ class DashboardController extends Controller
         $news_right = $this->news->getByRight();
         $news_mid = $this->news->getByMid();
 
-        $populars = $this->news->getByPopular('up');
+        $populars = $this->view->getByPopular('up');
         $popular_post = $this->news->showWhithCount();
         $news_recent = $this->news->latest();
         $editor_pick = $this->newsCategory->get();

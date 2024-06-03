@@ -15,6 +15,7 @@ interface ViewInterface extends DeleteByAuthor,GetInterface, StoreInterface, Upd
     public function showCountView() : mixed;
     public function trending() : mixed;
     public function where() : mixed;
+    public function getByPopular($data) : mixed;
 
     public function newsStatistic() : mixed;
 }

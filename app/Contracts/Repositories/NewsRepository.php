@@ -369,10 +369,11 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $popularNews = $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
             ->with('newsCategories')
+            ->whereHas('views', function($query) use ($startDate, $endDate){
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            })
             ->withCount('views')
-            ->whereBetween('created_at', [$startDate, $endDate])
             ->orderByDesc('views_count')
-            ->orderBy('created_at')
             ->when($data == 'up', function ($query) {
                 $query->take(6);
             })
