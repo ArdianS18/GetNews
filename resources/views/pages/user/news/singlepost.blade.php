@@ -752,7 +752,8 @@
                                                                     </h5>
                                                                     <div class="mt-2">
                                                                         <span
-                                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->format('M d,Y | g:i A') }}</span>
+                                                                            class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                        </span>
                                                                     </div>
                                                                 </div>
 
@@ -873,7 +874,8 @@
                                                                         </h5>
                                                                         <div class="d-flex">
                                                                             <span
-                                                                                class="comment-date">{{ \Carbon\Carbon::parse($reply->created_at)->format('M d,Y | g:i A') }}</span>
+                                                                                class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
