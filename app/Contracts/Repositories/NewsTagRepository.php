@@ -59,10 +59,10 @@ class NewsTagRepository extends BaseRepository implements NewsTagInterface
             ->get();
     }
 
-    public function getNewsTags($news) : mixed
+    public function getNewsTags($news) : array
     {
         return $this->model->query()
-            ->where('news_id', $news)
+            ->whereIn('news_id', $news)
             ->get();
     }
 
