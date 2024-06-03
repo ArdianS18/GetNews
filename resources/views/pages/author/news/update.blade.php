@@ -83,8 +83,7 @@
                         <label class="form-label" for="password_confirmation">Kategori</label>
                         <select id="category_id"
                             class="select2 form-control category @error('category') is-invalid @enderror"
-                            name="category[]" multiple value="{{ $news->newsCategories->category_id }}"
-                            aria-label="Default select example">
+                            name="category[]" multiple aria-label="Default select example">
                             <option>pilih kategori</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}" {{ $news->newsCategories>contains('category_id', $category->id) ? 'selected' : '' }}>
