@@ -376,7 +376,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->orderByDesc('views_count')
             ->orderBy('created_at')
             ->when($data == 'up', function ($query) {
-                $query->take(6);
+                $query->take(9);
             })
             ->when($data == 'down', function ($query) {
                 $query->take(3);
