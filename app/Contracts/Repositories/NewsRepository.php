@@ -368,9 +368,9 @@ class NewsRepository extends BaseRepository implements NewsInterface
         $endDate = Carbon::now()->toDateString();
         $popularNews = $this->model->query()
             ->where('status', NewsStatusEnum::ACTIVE->value)
-            ->whereBetween('created_at', [$startDate, $endDate])
             ->with('newsCategories')
             ->withCount('views')
+            ->whereBetween('news.view.created_at', [$startDate, $endDate])
             ->orderByDesc('views_count')
             ->orderBy('created_at')
             ->when($data == 'up', function ($query) {
