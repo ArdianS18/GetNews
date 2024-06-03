@@ -711,8 +711,9 @@
                                     }
                                 }
                             @endphp
-                            @forelse ($comments as $index => $comment)
-                                <div class="comment-item w-100" style="display: {{ $index < 5 ? 'block' : 'none' }}">
+
+                            <div class="comment-item w-100" style="display: {{ $index < 5 ? 'block' : 'none' }}">
+                                @forelse ($comments as $index => $comment)
                                     <div class="row">
                                         @if ($comment->parent_id == null)
                                             <div class="col-lg-1">
@@ -1094,9 +1095,9 @@
                                             </form>
                                         </div>
                                     @endforeach
-                                </div>
-                            @empty
-                            @endforelse
+                                @empty
+                                @endforelse
+                            </div>
 
                             @if ($comments->count() > 5)
                                 <div class="text-center left-content mt-3">
