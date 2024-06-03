@@ -316,6 +316,18 @@
 
         $('#form-register').submit(function(e) {
             e.preventDefault();
+            if ($('#password-konfirm').val() === '' ) {
+                $('.error-confirm-password').html('Password tidak sama').addClass(
+                    'is-invalid text-danger mt-2')
+                $('#password-konfirm').addClass('is-invalid')
+                return
+            }
+             if ($('#password-konfirm').val() != $('#password').val()) {
+                $('.error-confirm-password').html('Password tidak sama').addClass(
+                    'is-invalid text-danger mt-2')
+                $('#password-konfirm').addClass('is-invalid')
+                return
+            }
             $('.loader').show()
 
             if (isSubmitting) {
