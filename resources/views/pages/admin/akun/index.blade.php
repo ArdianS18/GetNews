@@ -34,7 +34,7 @@
 
     </div>
         <div id="loading"></div>
-        <div class="d-flex mt-2 mx-4 justify-content-end">
+        <div class="d-flex mt-2 mx-4 justify-content-center">
             <nav id="pagination">
             </nav>
         </div>

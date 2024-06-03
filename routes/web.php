@@ -203,6 +203,9 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
         return view('pages.admin.advertisement.voucher');
     })->name('voucher-pengiklanan');
 
+    Route::get('news-premium', function(){
+        return view('pages.admin.news-premium.index');
+    })->name('news.premium.confirm');
 });
 
 
