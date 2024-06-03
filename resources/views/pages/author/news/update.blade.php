@@ -83,10 +83,11 @@
                         <label class="form-label" for="password_confirmation">Kategori</label>
                         <select id="category_id"
                             class="select2 form-control category @error('category') is-invalid @enderror"
-                            name="category[]" multiple aria-label="Default select example">
+                            name="category[]" multiple="true" value=""
+                            aria-label="Default select example">
                             <option>pilih kategori</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ $news->newsCategories>contains('category_id', $category->id) ? 'selected' : '' }}>
+                                <option value="{{ $category->id }}" {{ $newsCategory->contains('category_id', $category->id) ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -103,6 +104,7 @@
                             <select id="sub_category_id"
                                 class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
                                 name="sub_category[]" multiple="true" aria-label="Default select example">
+
                                 @if ($subCategories != null)
                                     <option >pilih sub kategori</option>
                                     @foreach ($subCategories as $subCategory)
