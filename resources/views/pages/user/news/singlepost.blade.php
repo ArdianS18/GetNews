@@ -1447,10 +1447,10 @@
         let limit = 5;
         let index = 1;
         function showMoreCommentsReply() {
-            for (index; i < comments.length; i++) {
+            for (var i = index; i < comments.length; i++) {
                 --limit;
                 if (limit <= 0) {
-                    index += 5;
+                    i += 5;
                     return;
                 }
                 comments[i].style.display = 'flex';
