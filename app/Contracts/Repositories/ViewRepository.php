@@ -183,10 +183,6 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->take(1)
             ->pluck('category_id');
 
-        $categoryName = DB::table('categories')
-            ->where('id', $subquery->first())
-            ->pluck('name')
-            ->first();
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
