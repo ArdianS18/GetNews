@@ -633,8 +633,28 @@ class NewsController extends Controller
        //
     }
 
-    public function softDelete(News $news) : JsonResponse {
+    public function softDelete(News $news, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, ModelsView $view ,Report $report) : JsonResponse {
         $this->news->softDelete($news);
+        $newsId = $this->news->cleanupSoftDelete($news);
+
+        dd($newsId);
+
+        // $newsCategory->where('news_id', $newsId)->delete();
+        // $newsSubCategory->where('news_id', $newsId)->delete();
+        // $newsTag->where('news_id', $newsId)->delete();
+        // $newsHasLike->where('news_id', $newsId)->delete();
+        // $newsReject->where('news_id', $newsId)->delete();
+        // $newsComment->where('news_id', $newsId)->delete();
+        // $newsReport->where('news_id', $newsId)->delete();
+        // $view->where('news_id', $newsId)->delete();
+
+        // $relatedReports = $report->where('news_id', $newsId)->get();
+        // foreach ($relatedReports as $relatedReport) {
+        //     $relatedReport->delete();
+        // }
+
+        // $this->news->delete($newsId);
+
         return ResponseHelper::success(trans('alert.delete_success'));
     }
 
