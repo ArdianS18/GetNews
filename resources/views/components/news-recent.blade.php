@@ -3,7 +3,7 @@
 <div class="sidebar-widget">
     <h3 class="sidebar-widget-title">Berita Terbaru</h3>
     <div class="pp-post-wrap">
-        @for ($i = 0; $i < min(7, count($recents)); $i++)
+        @for ($i = 0; $i < min(5, count($recents)); $i++)
         @php
                 $dateParts = date_parse($recents[$i]->upload_date);
             @endphp

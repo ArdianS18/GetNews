@@ -389,11 +389,11 @@
 
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
-                                @for ($i = 0 ;$i < count($news_recent ) ; $i++)
-                                    @php
+                                @for ($i = 0; $i < min(6, count($recents)); $i++)
+                                @php
                                         $dateParts = date_parse($news_recent [$i]->upload_date);
                                     @endphp
-                                    <div class="news-card-seven" @if ($i > 5) style="display:none" @endif>
+                                    <div class="news-card-seven" >
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}" class="img-responsive"
                                                 alt="Image" width="100%" height="110"
