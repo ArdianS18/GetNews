@@ -85,7 +85,7 @@ class DashboardController extends Controller
         $news_count = $this->news->get()->count();
         $authors1 = $this->author->showWhithCount();
 
-        $news = $this->news->getAllNews();
+        $news = $this->view->getByPopular('up');
         $newsPremium = $this->news->getPremium($request);
 
         $categories = $this->category->showWhithCount();

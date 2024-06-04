@@ -123,23 +123,23 @@
                             <div class="mb-2" style="max-width: 540px;">
                                 <div class="row g-2">
                                     <div class="col-md-4">
-                                        <img src="{{ asset('storage/' . $news->photo) }}" class="img-responsive" height="100" style="width: 100%; object-fit:cover;" alt="">
+                                        <img src="{{ asset('storage/' . $news->news->photo) }}" class="img-responsive" height="100" style="width: 100%; object-fit:cover;" alt="">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body p-2">
                                             <h5 class="card-text">
-                                                {!! Illuminate\Support\Str::limit($news->name, $limit = 60, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($news->news->name, $limit = 60, $end = '...') !!}
                                             </h5>
                                             <div class="d-flex gap-3 align-items-center ms-0">
                                                 <p class="card-text m-0"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 2048 2048">
                                                         <path fill="#DD1818" d="M1536 171h341v1877H0V171h341V0h171v171h853V0h171zm171 1706V683H171v1194zm0-1365V341H171v171z" />
                                                     </svg><small class="ms-1">
-                                                        {{ \Carbon\Carbon::parse($news->created_at_formatted)->translatedFormat('d F Y') }}
+                                                        {{ \Carbon\Carbon::parse($news->news->created_at)->translatedFormat('d F Y') }}
                                                     </small>
                                                 </p>
                                                 <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                                                         <path fill="#DD1818" d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0" />
-                                                    </svg><small class="mt-1 ms-1">{{ $news->views }}</small></p>
+                                                    </svg><small class="mt-1 ms-1">{{ $news->total }}</small></p>
                                             </div>
                                         </div>
                                     </div>
