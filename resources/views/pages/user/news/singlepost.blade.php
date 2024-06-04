@@ -827,14 +827,14 @@
                                                                 <div class="col-md-9">
                                                                     <div class="comment-author-name">
                                                                         <h5>
-                                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                            @if ($reply->user_id === $reply->news->user_id)
                                                                                 <a class=""
-                                                                                    href="{{ route('author.detail', ['id' => $comment->user->slug]) }}">
+                                                                                    href="{{ route('author.detail', ['id' => $reply->user->slug]) }}">
                                                                             @endif
 
                                                                             <span class="text-name-comment">
-                                                                                {{ $comment->user->name }}
-                                                                                @if ($comment->user->roles->pluck('name')[0] === 'author' || $comment->user->roles->pluck('name')[0] === 'admin')
+                                                                                {{ $reply->user->name }}
+                                                                                @if ($reply->user->roles->pluck('name')[0] === 'author' || $reply->user->roles->pluck('name')[0] === 'admin')
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="16" height="16"
                                                                                         viewBox="0 0 24 24">
@@ -844,7 +844,7 @@
                                                                                 @endif
                                                                             </span>
 
-                                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                            @if ($reply->user_id === $reply->news->user_id)
                                                                                 <span
                                                                                     style="font-size: 0.8em;font-weight:400;color:red">
                                                                                     -
@@ -854,7 +854,7 @@
                                                                         </h5>
                                                                         <div class="mt-2">
                                                                             <span
-                                                                                class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                                class="comment-date">{{ \Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -873,15 +873,15 @@
                                                                 <div class="col-md-12">
 
                                                                     <div class="comment-text">
-                                                                        <p>{{ $comment->content }}</p>
+                                                                        <p>{{ $reply->content }}</p>
                                                                     </div>
                                                                     {{-- <a href="javascript:void(0)" class="reply-btn mt-3" onclick="showReplyForm({{ $reply->id }})">Balas</a> --}}
 
-                                                                    @if ($comment->parent_id == null)
+                                                                    {{-- @if ($comment->parent_id == null)
                                                                         <a href="javascript:void(0)"
                                                                             class="reply-btn mt-3"
                                                                             onclick="showReplyForm({{ $comment->id }})">Balas</a>
-                                                                    @endif
+                                                                    @endif --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -889,6 +889,7 @@
                                                 </div>
 
                                             </div>
+
                                             <div id="edit-form-{{ $reply->id }}" class="edit-form mt-3" style="display: none;">
                                                 <form action="{{ route('comment.update', ['comment' => $reply->id]) }}" method="POST">
                                                     @csrf
@@ -905,6 +906,7 @@
                                                     @endauth
                                                 </form>
                                             </div>
+
                                             <div id="reply-form-{{ $reply->id }}" class="reply-form mt-3" style="display: none;">
                                                 <form action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $reply->id]) }}" method="post">
                                                     @csrf
@@ -940,7 +942,6 @@
                                         </svg>
                                     </a>
                                 </div>
-
                             </div>
                             @endif
 
@@ -1024,13 +1025,6 @@
         </div>
     </div>
 
-    {{-- <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px; display: flex; align-items: center;">
-        <img src="{{asset('assets/img/coin-load.svg')}}" alt="Coin" style="width: 50px; height: 50px;">
-        <div class="loading-bar" style="width: 100px; height: 10px; background-color: #ddd; margin-left: 10px; position: relative;">
-            <div class="loading-progress" style="height: 100%; background-color: #4CAF50; width: 0%;"></div>
-        </div>
-    </div> --}}
-
     @auth
         <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
             <div class="coin-loader">
@@ -1065,28 +1059,6 @@
             @endif
         });
     </script>
-
-    {{-- <script>
-        setInterval(() => {
-            fetch('/coin-add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(function(response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Error: ' + response.status);
-                }
-            })
-            .then(function(data) {})
-            .catch(function(error) {
-                console.error(error);
-            });
-        }, 60000);
-    </script> --}}
 
     <script>
         function toggleReplyForm(commentId) {
