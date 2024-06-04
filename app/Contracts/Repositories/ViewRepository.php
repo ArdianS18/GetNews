@@ -183,19 +183,18 @@ class ViewRepository extends BaseRepository implements ViewInterface
         //     ->get();
 
         $subquery = DB::table('categories')
-            ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->orderByDesc('news_categories_count')
-            ->skip(1)
-            ->take(1)
-            ->pluck('categories.id');
-
-            // ->get();
-            // ->select('category_id')
-            // ->groupBy('category_id')
-            // ->orderByRaw('COUNT(*) DESC')
+            // ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
+            // ->withCount('newsCategories')
+            // ->orderByDesc('news_categories_count')
             // ->skip(1)
             // ->take(1)
-            // ->pluck('category_id');
+            // ->get();
+            ->select('category_id')
+            ->groupBy('category_id')
+            ->orderByRaw('COUNT(*) DESC')
+            ->skip(1)
+            ->take(1)
+            ->pluck('category_id');
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
