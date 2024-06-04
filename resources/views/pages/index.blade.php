@@ -28,6 +28,22 @@
             color: #ffffff;
             background-color: #222222;
         }
+        
+        .news-card-seven {
+        flex-wrap: nowrap;
+    }
+    .news-tablist-two .nav-item .nav-link {
+        width: 100%;
+        border: none;
+        background-color: #222222;
+        color: #ffffff;
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 500;
+        padding: 10px 35px;
+        transition: var(--transition);
+        border: none;
+    }
     </style>
 @endsection
 @section('content')
@@ -374,11 +390,7 @@
                                     <div class="news-card-seven @if ($i > 7)
                                         hide
                                     @endif">
-                                        <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $populars[$i]->news->photo) }}"
-                                                class="img-responsive" alt="Image" width="160" height="140"
-                                                style="object-fit: cover" />
-                                        </div>
+                                        
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $populars[$i]->news->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $populars[$i]->news->newsCategories[0]->category->name }}</a>
@@ -394,6 +406,11 @@
                                                 <li><i class="fi fi-rr-eye"></i>{{ $populars[$i]->total }}</li>
                                             </ul>
                                         </div>
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $populars[$i]->news->photo) }}"
+                                                alt="Image" width="100%" height="140"
+                                                style="object-fit: cover" />
+                                        </div>
                                     </div>
                                 @endfor
 
@@ -404,11 +421,6 @@
                                         $dateParts = date_parse($news_recent [$i]->upload_date);
                                     @endphp
                                     <div class="news-card-seven" >
-                                        <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}" class="img-responsive"
-                                                alt="Image" width="160" height="140"
-                                                style="object-fit: cover" />
-                                        </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $news_recent [$i]->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $news_recent [$i]->newsCategories[0]->category->name }}</a>
@@ -423,6 +435,11 @@
                                                 </li>
                                                 <li><i class="fi fi-rr-eye"></i>{{ $news_recent [$i]->views_count }}</li>
                                             </ul>
+                                        </div>
+                                        <div class="news-card-img">
+                                            <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}"
+                                                alt="Image" width="100%" height="140"
+                                                style="object-fit: cover" />
                                         </div>
                                     </div>
                                 @endfor
