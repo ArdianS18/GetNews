@@ -930,7 +930,7 @@
                                             </div>
                                         </div>
                                         @endif
-            
+
 
                                     </div>
                                 </div>
@@ -1411,6 +1411,8 @@
 
     <script>
         $(document).ready(function() {
+            var comments = document.querySelectorAll('.reply-item');
+            console.log(comments);
             $('.unpin').click(function() {
                 var commentId = $(this).data('id');
                 var form = $('<form>', {
@@ -1442,7 +1444,6 @@
         }
 
         function showMoreCommentsReply() {
-            var comments = document.querySelectorAll('.reply-item');
             for (var i = 0; i < comments.length; i++) {
                 comments[i].style.display = 'flex';
             }
