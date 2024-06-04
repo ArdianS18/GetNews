@@ -16,4 +16,5 @@ interface FollowerInterface extends DeleteByAuthor, GetInterface, StoreInterface
     public function whereUser($user_id) : mixed;
     public function whereIn($user_id,$author_id) : mixed;
     public function whereAuthor($author_id) : mixed;
+    public function whereFollow($author_id): mixed;
 }

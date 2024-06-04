@@ -110,6 +110,7 @@ class DashboardController extends Controller
 
         $news_left = $this->view->getByLeft();
         $news_right = $this->view->getByRight();
+
         $news_mid = $this->news->getByMid();
 
         $populars = $this->view->getByPopular('up');
@@ -202,6 +203,7 @@ class DashboardController extends Controller
         $userId = $user->id;
         $author = $this->author->where($user);
 
+        $followers = $this->followers->whereFollow($userId);
         $categories = $this->category->get();
         $subCategories = $this->subCategory->get();
         $authors = Author::with('user')->where($author);
@@ -213,7 +215,7 @@ class DashboardController extends Controller
         $authors = $this->author->get();
         $newsPopular = $this->news->showWhithCount();
 
-        return view('pages.user.author.detail-author', compact('categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments', 'newsPopular'));
+        return view('pages.user.author.detail-author', compact('followers','categories', 'author','subCategories','authors','totalCategories','newsCount','news', 'comments', 'newsPopular'));
     }
 
     public function privacypolicy() {
