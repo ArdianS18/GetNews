@@ -183,10 +183,15 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->take(1)
             ->pluck('category_id');
 
+        $categoryName = DB::table('categories')
+            ->where('id', $subquery->first())
+            ->pluck('name')
+            ->first();
+
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
             ->whereRelation('news.newsCategories', 'category_id', $subquery)
-            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->select('news_id', DB::raw('COUNT(*) as total'),  DB::raw('? as categoryname', [$categoryName]))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
