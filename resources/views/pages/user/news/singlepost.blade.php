@@ -1450,7 +1450,8 @@
             for (var i = index; i < comments.length; i++) {
                 --limit;
                 if (limit <= 0) {
-                    i += 5;
+                    index += 5;
+                    limit = 5;
                     return;
                 }
                 comments[i].style.display = 'flex';
