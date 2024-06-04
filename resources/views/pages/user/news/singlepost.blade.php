@@ -813,7 +813,7 @@
 
                                         @foreach ($groupedReplies[$comment->id] ?? [] as $index => $reply)
                                         <div>
-                                            <div class="row comment-item w-100 ms-5 mt-4" style="display: {{ $index < 1 ? 'flex' : 'none' }};">
+                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $index < 1 ? 'flex' : 'none' }};">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -1412,7 +1412,7 @@
     <script>
         let comments;
         $(document).ready(function() {
-        comments = document.querySelectorAll('.comment-item');
+        comments = document.querySelectorAll('.reply-item');
             console.log(comments);
             $('.unpin').click(function() {
                 var commentId = $(this).data('id');
