@@ -86,7 +86,7 @@
                                 <div class="news-card-img">
                                     <a
                                         href="{{ route('news.user', ['news' => $tren->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        <img src="{{ asset('storage/' . $tren->photo) }}" alt="Image" height="140"
+                                        <img src="{{ asset('storage/' . $tren->photo) }}" style="object-fit:cover;" alt="Image" height="140"
                                             width="100%" />
                                     </a>
                                     <a data-toggle="tooltip" data-placement="top"

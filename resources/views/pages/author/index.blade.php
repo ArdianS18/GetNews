@@ -552,7 +552,7 @@
                                             method="POST">
                                             @method('delete')
                                             @csrf
-                                            <button type="submit" class="btn btn-sm text-white px-4" style="background-color: #424f5b">
+                                            <button type="submit" class="btn btn-sm text-white px-3" style="background-color: #424f5b">
                                                 Mengikuti
                                             </button>
                                         </form>

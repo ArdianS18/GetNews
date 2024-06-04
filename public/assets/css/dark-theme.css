@@ -490,9 +490,9 @@ input:checked + .slider:before {
 .theme-dark .login-form .form-group input,
 .theme-dark #contactForm .form-group input,
 .theme-dark #contactForm .form-group textarea {
-  background-color: transparent !important;
+  /* background-color: transparent !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: var(--whiteColor) !important;
+  color: var(--whiteColor) !important; */
 }
 .theme-dark input::-moz-placeholder, .theme-dark textarea::-moz-placeholder, .theme-dark #cmt-form .comment-form .form-group input::-moz-placeholder, .theme-dark #cmt-form .comment-form .form-group textarea::-moz-placeholder, .theme-dark .checkout-form .form-group input::-moz-placeholder, .theme-dark .checkout-form .form-group textarea::-moz-placeholder, .theme-dark .comment-form .form-group input::-moz-placeholder, .theme-dark .comment-form .form-group textarea::-moz-placeholder, .theme-dark .newsletter-form input::-moz-placeholder, .theme-dark .login-form .form-group input::-moz-placeholder, .theme-dark #contactForm .form-group input::-moz-placeholder, .theme-dark #contactForm .form-group textarea::-moz-placeholder {
   color: var(--whiteColor);
