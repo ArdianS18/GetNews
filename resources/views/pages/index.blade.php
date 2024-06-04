@@ -69,30 +69,30 @@
                 @php $counter= 0; @endphp
                 @foreach ($news_left as $newss)
                     @php
-                        $dateParts = date_parse($newss->upload_date);
+                        $dateParts = date_parse($newss->news->upload_date);
                     @endphp
                     @if ($counter < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $newss->photo) }}" class="img-responsive"
+                                    href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $newss->news->photo) }}" class="img-responsive"
                                         style="object-fit: cover;" width="100%" alt="Image" height="250" />
                                 </a>
-                                <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $newss->news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $newss->news->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}"
-                                        href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->name, $limit = 60, $end = '...') !!}
+                                        href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 60, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i>
-                                        {{ \Carbon\Carbon::parse($newss->upload_date)->translatedFormat('d F Y') }}
+                                        {{ \Carbon\Carbon::parse($newss->news->upload_date)->translatedFormat('d F Y') }}
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->total }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -100,25 +100,25 @@
                         <div class="news-card-three">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $newss->photo) }}" alt="Image" height="100"
+                                    href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $newss->news->photo) }}" alt="Image" height="100"
                                         width="100%" style="object-fit: cover" />
                                 </a>
                             </div>
                             <div class="news-card-info">
-                                <a href="{{ route('categories.show.user', ['category' => $newss->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $newss->newsCategories[0]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $newss->news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $newss->news->newsCategories[0]->category->name }}</a>
                                 <h3>
-                                    <a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}"
-                                        href="{{ route('news.user', ['news' => $newss->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->name, $limit = 40, $end = '...') !!}
+                                    <a data-toggle="tooltip" data-placement="top" title="{{ $newss->news->name }}"
+                                        href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 40, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->news->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $newss->total }}</li>
 
                                 </ul>
                             </div>
