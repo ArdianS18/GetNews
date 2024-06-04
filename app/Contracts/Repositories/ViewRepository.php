@@ -175,12 +175,12 @@ class ViewRepository extends BaseRepository implements ViewInterface
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
 
-        return $this->model->query()
-            ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->withCount('newsCategories')
-            ->orderByDesc('news_categories_count')
-            ->take(7)
-            ->get();
+        // return $this->model->query()
+        //     ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
+        //     ->withCount('newsCategories')
+        //     ->orderByDesc('news_categories_count')
+        //     ->take(7)
+        //     ->get();
 
         $subquery = DB::table('categories')
             ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
