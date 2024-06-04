@@ -1435,17 +1435,28 @@
             editForm.style.display = editForm.style.display === 'none' ? 'flex' : 'none';
         }
 
+        let limit = 5;
+        let index = 1;
+        let index2 = 5;
+
         function showMoreComments() {
             var comments = document.querySelectorAll('.comment-item');
-            for (var i = 0; i < comments.length; i++) {
+
+
+            for (var i = index2; i < comments.length; i++) {
+                --limit;
+                if (limit <= 0) {
+                    index2 += 5;
+                    limit = 5;
+                    return;
+                }
                 comments[i].style.display = 'flex';
             }
+
             var showMoreButton = document.querySelector('.show-more');
             showMoreButton.style.display = 'none';
         }
 
-        let limit = 5;
-        let index = 1;
         function showMoreCommentsReply() {
             for (var i = index; i < comments.length; i++) {
                 --limit;
