@@ -180,6 +180,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
             ->skip(1)
+            ->take(1)
             ->pluck('category_id');
 
         $popularLeft = $this->model->query()
