@@ -37,7 +37,7 @@
                                     $dateParts = date_parse($trending->news->upload_date);
                                 @endphp
                                 <div class="swiper-slide news-card-one">
-                                    <div class="news-card-img">
+                                    <div class="news-card-img" style="border-radius:50% !important">
                                         <a
                                             href="{{ route('news.user', ['news' => $trending->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                             <img src="{{ asset('storage/' . $trending->news->photo) }}" width="100%"
