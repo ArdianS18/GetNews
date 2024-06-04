@@ -154,7 +154,6 @@
                                             </div>
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label" for="password_confirmation">Kategori</label>
-
                                                 <select id="category_id"
                                                     class="select2 form-control category @error('category') is-invalid @enderror"
                                                     name="category[]" multiple="true" aria-label="Default select example">
@@ -254,8 +253,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <button type="submit" class="btn btn-success">Simpan</button> --}}
-                        </div>
+                            {{-- <button type="submit" class="btn btn-success">Simpan</button> --}} </div>
                     </div>
                 </form>
         </div>

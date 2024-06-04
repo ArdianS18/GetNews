@@ -83,9 +83,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-    
+
                     <p>Apakah anda yakin ingin memulihkan data ini? </p>
-    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
@@ -150,7 +150,7 @@
                     },
                     beforeSend: function() {
                         $('#data').html('')
-                        
+
                         $('#pagination').html('')
                     },
                     success: function(response) {
@@ -166,11 +166,11 @@
                         $('.btn-delete').click(function() {
                             $('#form-delete').data('id', $(this).data('id'))
                             $('#modal-delete').modal('show')
-                        }) 
+                        })
                         $('.btn-restore').click(function() {
                             $('#form-restore').data('id', $(this).data('id'))
                             $('#modal-restore').modal('show')
-                        })   
+                        })
                     }
                 })
             }
@@ -238,28 +238,6 @@
                 }
             })
             })
-
-
-            // function restore(id) {
-            //     $('.preloader').show()
-            //     url = "{{ route('profile.news.restore', ['news' => ':slug']) }}"
-            //     url = url.replace(':slug', id)
-            //     $.ajax({
-            //         url: url,
-            //         method: 'POST',
-            //         dataType: 'JSON',
-            //         success: function(response) {
-            //             get(1)
-            //             $('.preloader').hide()
-            //             $('#modal-delete').modal('hide')
-            //             Swal.fire({
-            //                 title: 'Berhasil!',
-            //                 icon: 'success',
-            //                 text: response.message
-            //             })
-            //         }
-            //     })
-            // }
 
             function limitString(str, maxLength) {
                 return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;

@@ -191,7 +191,7 @@ class NewsController extends Controller
 
     public function usernews(Request $request,$year,$mounth,$day,$slug)
     {
-        $ip = $request->getClientIp();
+        $visitorId = $request->cookie('visitor_id');
 
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
@@ -199,7 +199,7 @@ class NewsController extends Controller
 
         $view = $this->view->store([
             'news_id' => $newsId,
-            'ip' => $ip,
+            'ip' => $visitorId,
         ]);
 
         $userLike = $this->newsHasLike->where($news->id);
@@ -230,8 +230,6 @@ class NewsController extends Controller
             $relatedNews = $this->news->get()->inRandomOrder()->first();
         }
 
-
-        $visitorId = $request->cookie('visitor_id');
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
@@ -633,27 +631,8 @@ class NewsController extends Controller
        //
     }
 
-    public function softDelete(News $news, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, ModelsView $view ,Report $report) : JsonResponse {
+    public function softDelete(News $news) : JsonResponse {
         $this->news->softDelete($news);
-
-        // $this->news->cleanupSoftDelete($news);
-
-        // $newsCategory->where('news_id', $newsId)->delete();
-        // $newsSubCategory->where('news_id', $newsId)->delete();
-        // $newsTag->where('news_id', $newsId)->delete();
-        // $newsHasLike->where('news_id', $newsId)->delete();
-        // $newsReject->where('news_id', $newsId)->delete();
-        // $newsComment->where('news_id', $newsId)->delete();
-        // $newsReport->where('news_id', $newsId)->delete();
-        // $view->where('news_id', $newsId)->delete();
-
-        // $relatedReports = $report->where('news_id', $newsId)->get();
-        // foreach ($relatedReports as $relatedReport) {
-        //     $relatedReport->delete();
-        // }
-
-        // $this->news->delete($newsId);
-
         return ResponseHelper::success(trans('alert.delete_success'));
     }
 
