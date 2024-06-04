@@ -1410,8 +1410,9 @@
     </script>
 
     <script>
+        let comments;
         $(document).ready(function() {
-            var comments = document.querySelectorAll('.reply-item');
+        comments = document.querySelectorAll('.reply-item');
             console.log(comments);
             $('.unpin').click(function() {
                 var commentId = $(this).data('id');
