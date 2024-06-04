@@ -813,7 +813,7 @@
 
                                         @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
                                         <div>
-                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $reply[$comment->id] < 5 ? 'flex' : 'none' }};">
+                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $reply[$comment->id] < 1 ? 'flex' : 'none' }};">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -917,7 +917,7 @@
                                         </div>
                                         @endforeach
 
-                                        @if ($groupedReplies[$comment->id] > 1)
+                                        {{-- @if ($groupedReplies[$comment->id] > 1)
                                         <div class="show-more text-center mt-4">
                                             <div class="text-center left-content mt-3">
                                                 <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
@@ -929,7 +929,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        @endif
+                                        @endif --}}
             
 
                                     </div>
