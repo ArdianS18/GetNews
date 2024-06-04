@@ -811,9 +811,9 @@
                                             </form>
                                         </div>
 
-                                        @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
+                                        @foreach ($groupedReplies[$comment->id] ?? [] as $index => $reply)
                                         <div>
-                                            <div class="row comment-item w-100 ms-5 mt-4">
+                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $index < 5 ? 'flex' : 'none' }};">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -827,14 +827,14 @@
                                                                 <div class="col-md-9">
                                                                     <div class="comment-author-name">
                                                                         <h5>
-                                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                            @if ($reply->user_id === $reply->news->user_id)
                                                                                 <a class=""
-                                                                                    href="{{ route('author.detail', ['id' => $comment->user->slug]) }}">
+                                                                                    href="{{ route('author.detail', ['id' => $reply->user->slug]) }}">
                                                                             @endif
 
                                                                             <span class="text-name-comment">
-                                                                                {{ $comment->user->name }}
-                                                                                @if ($comment->user->roles->pluck('name')[0] === 'author' || $comment->user->roles->pluck('name')[0] === 'admin')
+                                                                                {{ $reply->user->name }}
+                                                                                @if ($reply->user->roles->pluck('name')[0] === 'author' || $reply->user->roles->pluck('name')[0] === 'admin')
                                                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                                                         width="16" height="16"
                                                                                         viewBox="0 0 24 24">
@@ -844,7 +844,7 @@
                                                                                 @endif
                                                                             </span>
 
-                                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                            @if ($reply->user_id === $reply->news->user_id)
                                                                                 <span
                                                                                     style="font-size: 0.8em;font-weight:400;color:red">
                                                                                     -
@@ -854,7 +854,7 @@
                                                                         </h5>
                                                                         <div class="mt-2">
                                                                             <span
-                                                                                class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                                class="comment-date">{{ \Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -871,17 +871,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-
                                                                     <div class="comment-text">
-                                                                        <p>{{ $comment->content }}</p>
+                                                                        <p>{{ $reply->content }}</p>
                                                                     </div>
-                                                                    {{-- <a href="javascript:void(0)" class="reply-btn mt-3" onclick="showReplyForm({{ $reply->id }})">Balas</a> --}}
-
-                                                                    @if ($comment->parent_id == null)
-                                                                        <a href="javascript:void(0)"
-                                                                            class="reply-btn mt-3"
-                                                                            onclick="showReplyForm({{ $comment->id }})">Balas</a>
-                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -889,6 +881,7 @@
                                                 </div>
 
                                             </div>
+
                                             <div id="edit-form-{{ $reply->id }}" class="edit-form mt-3" style="display: none;">
                                                 <form action="{{ route('comment.update', ['comment' => $reply->id]) }}" method="POST">
                                                     @csrf
@@ -905,6 +898,7 @@
                                                     @endauth
                                                 </form>
                                             </div>
+
                                             <div id="reply-form-{{ $reply->id }}" class="reply-form mt-3" style="display: none;">
                                                 <form action="{{ route('reply.comment.create', ['news' => $news->id, 'id' => $reply->id]) }}" method="post">
                                                     @csrf
@@ -922,6 +916,22 @@
                                             </div>
                                         </div>
                                         @endforeach
+
+                                        @if (isset($groupedReplies[$comment->id]) && count($groupedReplies[$comment->id]) > 5)
+                                        <div class="show-reply-more text-center mt-4">
+                                            <div class="text-center left-content mt-3">
+                                                <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
+                                                    Selengkapnya
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @endif
+            
+
                                     </div>
                                 </div>
                                 @endif
@@ -940,7 +950,6 @@
                                         </svg>
                                     </a>
                                 </div>
-
                             </div>
                             @endif
 
@@ -1024,13 +1033,6 @@
         </div>
     </div>
 
-    {{-- <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px; display: flex; align-items: center;">
-        <img src="{{asset('assets/img/coin-load.svg')}}" alt="Coin" style="width: 50px; height: 50px;">
-        <div class="loading-bar" style="width: 100px; height: 10px; background-color: #ddd; margin-left: 10px; position: relative;">
-            <div class="loading-progress" style="height: 100%; background-color: #4CAF50; width: 0%;"></div>
-        </div>
-    </div> --}}
-
     @auth
         <div class="coin-container" style="position: fixed; left: 20px; bottom: 20px;">
             <div class="coin-loader">
@@ -1065,28 +1067,6 @@
             @endif
         });
     </script>
-
-    {{-- <script>
-        setInterval(() => {
-            fetch('/coin-add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(function(response) {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Error: ' + response.status);
-                }
-            })
-            .then(function(data) {})
-            .catch(function(error) {
-                console.error(error);
-            });
-        }, 60000);
-    </script> --}}
 
     <script>
         function toggleReplyForm(commentId) {
@@ -1442,22 +1422,6 @@
             });
         });
 
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     let comments = document.querySelectorAll('.comment-item');
-        //     let loadMoreButton = document.getElementById('load-more');
-        //     let visibleComments = 5;
-
-        //     loadMoreButton.addEventListener('click', function() {
-        //         for (let i = visibleComments; i < visibleComments + 10 && i < comments.length; i++) {
-        //             comments[i].style.display = 'block';
-        //         }
-        //         visibleComments += 10;
-        //         if (visibleComments >= comments.length) {
-        //             loadMoreButton.style.display = 'none';
-        //         }
-        //     });
-        // });
-
         function showReplyForm(commentId) {
             var replyForm = document.getElementById('reply-form-' + commentId);
             replyForm.style.display = replyForm.style.display === 'none' ? 'flex' : 'none';
@@ -1475,6 +1439,25 @@
             }
             var showMoreButton = document.querySelector('.show-more');
             showMoreButton.style.display = 'none';
+        }
+
+        function showMoreCommentsReply() {
+            var comments = document.querySelectorAll('.reply-item');
+            var showMoreButton = document.querySelector('.show-reply-more');
+
+            for (var i = 0; i < 5 && i < comments.length; i++) {
+                comments[i].style.display = 'flex';
+            }
+
+            for (var j = 5; j < comments.length; j++) {
+                comments[j].style.display = 'none';
+            }
+
+            if (comments.length > 5) {
+                showMoreButton.style.display = 'flex';
+            } else {
+                showMoreButton.style.display = 'none';
+            }
         }
 
     </script>

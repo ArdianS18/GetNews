@@ -101,7 +101,7 @@
                                         @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
                                         <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
 
-                                        @if(($loop->iteration % 4) == 0)
+                                        @if(($loop->iteration % 5) == 0)
                                         </li>
                                         <li class="nav-item">
                                         @endif
