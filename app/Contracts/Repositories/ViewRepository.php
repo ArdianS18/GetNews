@@ -164,7 +164,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4)
+            ->take(3)
             ->get();
 
         return $popularLeft;
@@ -174,25 +174,23 @@ class ViewRepository extends BaseRepository implements ViewInterface
     {
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
-
+        
         $subquery = DB::table('news_categories')
             ->select('category_id')
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
-            ->get();
-
-        if($subquery->count() > 1) {
-            $secondCategory = $subquery[1]->category_id;
-        }
+            ->skip(1)
+            ->take(1)
+            ->pluck('category_id');
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->whereRelation('news.newsCategories', 'category_id', $secondCategory)
+            ->whereRelation('news.newsCategories', 'category_id', $subquery)
             ->select('news_id', DB::raw('COUNT(*) as total'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4)
+            ->take(3)
             ->get();
 
         return $popularLeft;
