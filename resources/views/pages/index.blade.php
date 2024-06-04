@@ -215,7 +215,7 @@
                                         style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $barus->news->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $barus->news->newsCategories[0]->category->name }}</a>
+                                    class="news-cat">{{ $barus->category->name }}</a>
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->news->name }}"
