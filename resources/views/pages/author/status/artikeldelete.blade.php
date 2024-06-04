@@ -108,7 +108,7 @@
                 }, 500);
             });
 
-            $('#loading').html('ha')
+            $('#loading').html(showLoading())
 
           
             function get(page) {
