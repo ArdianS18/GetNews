@@ -118,10 +118,11 @@
                     },
                     beforeSend: function() {
                         $('#data').html('')
-                        $('#loading').html(showLoading())
+                        
                         $('#pagination').html('')
                     },
                     success: function(response) {
+                        $('#loading').html('')
                         if (response.data.data.length > 0) {
                             $.each(response.data.data, function(index, data) {
                                 $('#data').append(cardNews(data))
