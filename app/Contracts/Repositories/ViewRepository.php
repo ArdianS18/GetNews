@@ -182,13 +182,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
         //     ->take(7)
         //     ->get();
 
-        $subquery = DB::table('categories')
-            // ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
-            // ->withCount('newsCategories')
-            // ->orderByDesc('news_categories_count')
-            // ->skip(1)
-            // ->take(1)
-            // ->get();
+        $subquery = DB::table('news_categories')
             ->select('category_id')
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
