@@ -164,8 +164,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4)
-            ->get();
+            ->take(4);
 
         return $popularLeft;
     }
@@ -184,19 +183,18 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->pluck('category_id');
 
         $categoryName = DB::table('categories')
-            ->where('id', $subquery->first())
+            ->whereIn('id', $subquery)
             ->pluck('name')
             ->first();
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
             ->whereRelation('news.newsCategories', 'category_id', $subquery)
-            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->select('news_id', DB::raw('COUNT(*) as total'), DB::raw('? as categoryname', [$categoryName]))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4)
-            ->get();
+            ->take(4);
 
         return $popularLeft;
     }
