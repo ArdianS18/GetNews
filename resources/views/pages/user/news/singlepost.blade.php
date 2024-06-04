@@ -1444,12 +1444,13 @@
             showMoreButton.style.display = 'none';
         }
 
+        let limit = 5;
+        let index = 1;
         function showMoreCommentsReply() {
-            let limit = 5;
-            for (var i = 1; i < comments.length; i++) {
+            for (index; i < comments.length; i++) {
                 --limit;
                 if (limit <= 0) {
-                    i += 5;
+                    index += 5;
                     return;
                 }
                 comments[i].style.display = 'flex';
