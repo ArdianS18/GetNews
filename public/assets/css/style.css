@@ -5507,19 +5507,26 @@ article {
 .comment-item-wrap .comment-item {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
   padding-top: 25px;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
 }
+
 .comment-item-wrap .comment-item.reply {
   margin-left: 40px;
 }
-.comment-item-wrap .comment-item:last-child {
+/* .comment-item-wrap .comment-item:last-child {
   margin-bottom: 0;
   padding-bottom: 0;
   border-bottom: none;
+} */
+.comment-item-wrap .comment-item:last-child {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: none;
 }
+
 .comment-item-wrap .comment-item .comment-author-img {
   width: 60px;
   height: 60px;
