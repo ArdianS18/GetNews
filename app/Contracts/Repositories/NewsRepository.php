@@ -744,7 +744,7 @@ class NewsRepository extends BaseRepository implements NewsInterface
         return $this->model->query()
             ->findOrFail($news->id)
             ->whereNotNull('delete_at')
-            ->where('delete_at', '<', Carbon::now()->subDays(30))
+            ->where('delete_at', '>', Carbon::now()->subDays(30))
             ->pluck('id');
     }
 
