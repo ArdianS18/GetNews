@@ -64,9 +64,8 @@
     </div>
 
     <div id="loading">
-
     </div>
-    
+
     <div class="d-flex mt-2 justify-content-center">
         <nav id="pagination">
         </nav>
@@ -141,6 +140,38 @@
                 })
             }
 
+            $('#form-delete').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            var url = "{{ route('profile.news.delete', ['news' => ':id']) }}";
+            url = url.replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-delete').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Gagal menghapus data,Data sedang di gunakan"
+                    })
+                }
+            })
+        })
+
             function restore(id) {
                 $('.preloader').show()
                 url = "{{ route('profile.news.restore', ['news' => ':slug']) }}"
@@ -214,7 +245,9 @@
 
                     <div class="col-md-12 col-lg-2 mt-3 mt-lg-0 ">
                         <div class="d-flex justify-content-end">
-                        
+                            <div class="text-md-right mt-md-0">
+                                <span class="badge bg-light-warning fs-2 text-danger fw-bold fs-5">Dihapus</span>
+                            </div>
                         </div>
 
                         <div class="mt-3 d-flex justify-content-end">
@@ -240,17 +273,18 @@
                                 </a>
                             </button>
 
-                            <a  class="btn btn-sm btn-edit m-1"
+                            <button class="btn btn-sm btn-recovery m-1"
                                 style="background-color: #FFD643;" data-id="${data.id}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="white" d="M12 14q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m0 7q-3.475 0-6.025-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21"/></svg>
-                            </a>
-                                <button type="submit" class="btn btn-sm m-1 btn-delete" data-id=${data.id} style="background-color: #C94F4F;"><svg
-                                        xmlns="http://www.w3.org/2000/svg" width="18" height="23"
-                                        viewBox="0 0 512 512">
-                                        <path
-                                            d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
-                                            fill="#ffffff" />
-                                    </svg></button>
+                            </button>
+
+                            <button type="submit" class="btn btn-sm m-1 btn-delete" data-id=${data.id} style="background-color: #C94F4F;"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="18" height="23"
+                                    viewBox="0 0 512 512">
+                                    <path
+                                        d="M128 405.429C128 428.846 147.198 448 170.667 448h170.667C364.802 448 384 428.846 384 405.429V160H128v245.429zM416 96h-80l-26.785-32H202.786L176 96H96v32h320V96z"
+                                        fill="#ffffff" />
+                            </svg></button>
                         </div>
                     </div>
                 </div>
