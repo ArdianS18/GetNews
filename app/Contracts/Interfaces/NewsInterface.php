@@ -50,7 +50,7 @@ interface NewsInterface extends DeleteByAuthor, GetInterface, StoreInterface, Up
 
     public function getById($category_id) : mixed;
 
-    public function searchStatus(mixed $id, Request $request,int $pagination) : LengthAwarePaginator;
+    public function searchStatus(mixed $id, Request $request,int $pagination, $condition) : LengthAwarePaginator;
     public function searchAll(Request $request) : mixed;
 
     public function findBySlug($slug): mixed;

@@ -74,9 +74,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->get();
     }
 
-    public function searchStatus(mixed $id, Request $request, int $pagination): LengthAwarePaginator
+    public function searchStatus(mixed $id, Request $request, int $pagination, $condition): LengthAwarePaginator
     {
         return $this->model->query()
+            ->when($condition, function($query) use ($condition){
+                $query->when($condition == "false", function($q){
+                    $q->where('delete_at', null);
+                });
+                $query->when($condition == "true", function($q){
+                    $q->where('delete_at', '!=', null);
+                });
+            })
             ->where('user_id', $id)
             ->when($request->name, function ($query) use ($request) {
                 $query->where('name', 'LIKE', '%' . $request->name . '%');

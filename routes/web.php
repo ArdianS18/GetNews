@@ -263,8 +263,12 @@ Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(fun
     Route::get('status-author', function(){
         return view('pages.author.status.index');
     })->name('status.news.author');
-
     Route::get('list-status-author', [NewsController::class, 'showstatusnews'])->name('list.news.author');
+
+    Route::get('artikel-delete', function(){
+        return view('pages.author.status.artikeldelete');
+    })->name('delete.artikel.author');
+    Route::get('list-delete-artikel', [NewsController::class, 'showdeleteartikel'])->name('list.artikel.delete');
 
     Route::get('author-inbox', [AuthorController::class, 'inboxauthor'])->name('author.inbox');
     Route::get('authorCount', [AuthorController::class, 'inboxcount'])->name('author.inbox.count');
