@@ -917,8 +917,8 @@
                                         </div>
                                         @endforeach
 
-                                        @if (count($groupedReplies[$comment->id]) > 5)
-                                        <div class="show-more text-center mt-4">
+                                        @if (isset($groupedReplies[$comment->id]) && count($groupedReplies[$comment->id]) > 5)
+                                        <div class="show-reply-more text-center mt-4">
                                             <div class="text-center left-content mt-3">
                                                 <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
                                                     Selengkapnya
@@ -1462,7 +1462,7 @@
             for (var i = 0; i < comments.length; i++) {
                 comments[i].style.display = 'flex';
             }
-            var showMoreButton = document.querySelector('.show-more');
+            var showMoreButton = document.querySelector('.show-reply-more');
             showMoreButton.style.display = 'none';
         }
 
