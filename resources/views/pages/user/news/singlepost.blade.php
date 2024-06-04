@@ -811,9 +811,9 @@
                                             </form>
                                         </div>
 
-                                        @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
+                                        @foreach ($groupedReplies[$comment->id] ?? [] as $index => $reply)
                                         <div>
-                                            <div class="row comment-item w-100 ms-5 mt-4">
+                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $index < 5 ? 'flex' : 'none' }};">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -871,17 +871,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-
                                                                     <div class="comment-text">
                                                                         <p>{{ $reply->content }}</p>
                                                                     </div>
-                                                                    {{-- <a href="javascript:void(0)" class="reply-btn mt-3" onclick="showReplyForm({{ $reply->id }})">Balas</a> --}}
-
-                                                                    {{-- @if ($comment->parent_id == null)
-                                                                        <a href="javascript:void(0)"
-                                                                            class="reply-btn mt-3"
-                                                                            onclick="showReplyForm({{ $comment->id }})">Balas</a>
-                                                                    @endif --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -924,6 +916,22 @@
                                             </div>
                                         </div>
                                         @endforeach
+
+                                        @if (isset($groupedReplies[$comment->id]) && count($groupedReplies[$comment->id]) > 5)
+                                        <div class="show-reply-more text-center mt-4">
+                                            <div class="text-center left-content mt-3">
+                                                <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
+                                                    Selengkapnya
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @endif
+            
+
                                     </div>
                                 </div>
                                 @endif
@@ -1414,22 +1422,6 @@
             });
         });
 
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     let comments = document.querySelectorAll('.comment-item');
-        //     let loadMoreButton = document.getElementById('load-more');
-        //     let visibleComments = 5;
-
-        //     loadMoreButton.addEventListener('click', function() {
-        //         for (let i = visibleComments; i < visibleComments + 10 && i < comments.length; i++) {
-        //             comments[i].style.display = 'block';
-        //         }
-        //         visibleComments += 10;
-        //         if (visibleComments >= comments.length) {
-        //             loadMoreButton.style.display = 'none';
-        //         }
-        //     });
-        // });
-
         function showReplyForm(commentId) {
             var replyForm = document.getElementById('reply-form-' + commentId);
             replyForm.style.display = replyForm.style.display === 'none' ? 'flex' : 'none';
@@ -1447,6 +1439,25 @@
             }
             var showMoreButton = document.querySelector('.show-more');
             showMoreButton.style.display = 'none';
+        }
+
+        function showMoreCommentsReply() {
+            var comments = document.querySelectorAll('.reply-item');
+            var showMoreButton = document.querySelector('.show-reply-more');
+
+            for (var i = 0; i < 5 && i < comments.length; i++) {
+                comments[i].style.display = 'flex';
+            }
+
+            for (var j = 5; j < comments.length; j++) {
+                comments[j].style.display = 'none';
+            }
+
+            if (comments.length > 5) {
+                showMoreButton.style.display = 'flex';
+            } else {
+                showMoreButton.style.display = 'none';
+            }
         }
 
     </script>
