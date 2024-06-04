@@ -723,7 +723,7 @@
                                 @forelse ($comments as $index => $comment)
                                 @if ($comment->parent_id === null)
                                 <div>
-                                    <div class="row comment-item w-100" style="display: {{ $index < 5 ? 'flex' : 'none' }};">
+                                    <div class="row comment-item w-100" style="display: {{ $index < 6 ? 'flex' : 'none' }};">
                                         <div class="col-lg-1">
                                             <div class="comment-author-img">
                                                 <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
