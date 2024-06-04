@@ -42,6 +42,13 @@ class FollowerRepository extends BaseRepository implements FollowerInterface
             ->get();
     }
 
+    public function whereFollow($author_id): mixed
+    {
+        return $this->model->query()
+            ->whereRelation('author.user', 'id', $author_id)
+            ->count();
+    }
+
     public function whereAuthor($author_id): mixed
     {
         return $this->model->query()

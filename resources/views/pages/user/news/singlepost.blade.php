@@ -2,6 +2,7 @@
 
 <head>
     <style>
+
         .theme-dark blockquote {
             border-left: 5px solid #ffffff;
             padding: 10px 20px;
@@ -50,8 +51,9 @@
             animation: spin 60s linear infinite;
             /* border-left-color: #0F4D8A; */
         }
-       .dark-theme .text-name-comment{
-           color: white;
+
+        .dark-theme .text-name-comment {
+            color: white;
         }
 
         @keyframes spin {
@@ -815,6 +817,7 @@
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
+
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-11">
@@ -824,26 +827,38 @@
                                                                 <div class="col-md-9">
                                                                     <div class="comment-author-name">
                                                                         <h5>
-                                                                            @if ($reply->user_id === $reply->news->user_id)
-                                                                            <a href="{{ route('author.detail', ['id' => $reply->user->slug]) }}">
-                                                                                @endif
-                                                                                <span class="text-name-comment">
-                                                                                    {{ $reply->user->name }}
-                                                                                    @if (in_array($reply->user->roles->pluck('name')[0], ['author', 'admin']))
-                                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
-                                                                                        <path fill="currentColor" d="m12.25 10.825l.925.925L18.6 6.325l-.925-.925zM5 19h.925l5.825-5.825l-.925-.925L5 18.075zm8.875-5.125l-3.75-3.75L14.3 5.95l-.725-.725L8.1 10.7L6.7 9.3l5.45-5.475q.6-.6 1.413-.6t1.412.6l.725.725l1.25-1.25q.3-.3.713-.3t.712.3L20.7 5.625q.3.3.3.712t-.3.713zM6.75 21H3v-3.75l7.125-7.125l3.75 3.75z" />
+                                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                                <a class=""
+                                                                                    href="{{ route('author.detail', ['id' => $comment->user->slug]) }}">
+                                                                            @endif
+
+                                                                            <span class="text-name-comment">
+                                                                                {{ $comment->user->name }}
+                                                                                @if ($comment->user->roles->pluck('name')[0] === 'author' || $comment->user->roles->pluck('name')[0] === 'admin')
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="16" height="16"
+                                                                                        viewBox="0 0 24 24">
+                                                                                        <path fill="currentColor"
+                                                                                            d="m12.25 10.825l.925.925L18.6 6.325l-.925-.925zM5 19h.925l5.825-5.825l-.925-.925L5 18.075zm8.875-5.125l-3.75-3.75L14.3 5.95l-.725-.725L8.1 10.7L6.7 9.3l5.45-5.475q.6-.6 1.413-.6t1.412.6l.725.725l1.25-1.25q.3-.3.713-.3t.712.3L20.7 5.625q.3.3.3.712t-.3.713zM6.75 21H3v-3.75l7.125-7.125l3.75 3.75z" />
                                                                                     </svg>
-                                                                                    @endif
-                                                                                </span>
-                                                                                @if ($reply->user_id === $reply->news->user_id)
-                                                                                <span style="font-size: 0.8em;font-weight:400;color:red"> - pembuat</span>
-                                                                            </a>
+                                                                                @endif
+                                                                            </span>
+
+                                                                            @if ($comment->user_id === $comment->news->user_id)
+                                                                                <span
+                                                                                    style="font-size: 0.8em;font-weight:400;color:red">
+                                                                                    -
+                                                                                    pembuat</span>
+                                                                                </a>
                                                                             @endif
                                                                         </h5>
                                                                         <div class="mt-2">
-                                                                            <span class="comment-date">{{ \Carbon\Carbon::parse($reply->created_at)->diffForHumans() }}</span>
+                                                                            <span
+                                                                                class="comment-date">{{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                                                                            </span>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                                 <div class="col-md-3 text-end">
                                                                     <div class="comment">
@@ -856,15 +871,23 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
+
                                                                     <div class="comment-text">
-                                                                        <p>{{ $reply->content }}</p>
+                                                                        <p>{{ $comment->content }}</p>
                                                                     </div>
-                                                                    <a href="javascript:void(0)" class="reply-btn mt-3" onclick="showReplyForm({{ $reply->id }})">Balas</a>
+                                                                    {{-- <a href="javascript:void(0)" class="reply-btn mt-3" onclick="showReplyForm({{ $reply->id }})">Balas</a> --}}
+
+                                                                    @if ($comment->parent_id == null)
+                                                                        <a href="javascript:void(0)"
+                                                                            class="reply-btn mt-3"
+                                                                            onclick="showReplyForm({{ $comment->id }})">Balas</a>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div id="edit-form-{{ $reply->id }}" class="edit-form mt-3" style="display: none;">
                                                 <form action="{{ route('comment.update', ['comment' => $reply->id]) }}" method="POST">
@@ -994,45 +1017,7 @@
                             <h3 class="sidebar-widget-title">iklan</h3>
                         </div>
                         <x-tag :tags="$tagPopulars" />
-                        <div class="sidebar-widget">
-                            <h3 class="sidebar-widget-title">Berita Terbaru</h3>
-                            <div class="pp-post-wrap">
-                                @forelse ($news_recents as $recent)
-                                    @php
-                                        $dateParts = date_parse($recent->upload_date);
-                                    @endphp
-                                    <div class="news-card-one">
-                                        <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
-                                                alt="Image" width="100%" height="80">
-                                        </div>
-                                        <div class="news-card-info">
-                                            <h3><a data-toggle="tooltip" data-placement="top"
-                                                    title="{{ $recent->name }}"
-                                                    href="{{ route('news.user', ['news' => $recent->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">{!! Illuminate\Support\Str::limit(strip_tags($recent->name), 40, '...') !!}</a>
-                                            </h3>
-                                            <ul class="news-metainfo list-style">
-                                                <li><i class="fi fi-rr-calendar-minus"></i>
-                                                    <a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
-                                                </li>
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="#e93314" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5s5 2.24 5 5s-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3z" />
-                                                </svg>
-
-                                                </i>{{ $recent->views->count() }}</li>
-
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                @empty
-                                @endforelse
-
-                            </div>
-                        </div>
+                        <x-news-recent :recents="$news_recents" />
                     </div>
                 </div>
             </div>

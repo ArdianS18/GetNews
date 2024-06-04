@@ -86,7 +86,7 @@
 
             <div class="author-stat">
                <span>{{$newsCount}} Berita</span>
-              <span>{{ $comments }} Komentar</span>
+              <span>{{ $followers }} Pengikut</span>
 
 
             </div>
@@ -110,7 +110,7 @@
                     <div class="input-group">
                         <input type="text" name="name" class="form-control search-chat py-2 px-4 ps-5"
                             placeholder="Search">
-    
+
                             <svg class="position-absolute top-50 translate-middle-y ms-3" xmlns="http://www.w3.org/2000/svg"
                             width="25" height="25" viewBox="0 0 24 24">
                             <path fill="currentColor"

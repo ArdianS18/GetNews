@@ -37,7 +37,7 @@
                                     $dateParts = date_parse($trending->news->upload_date);
                                 @endphp
                                 <div class="swiper-slide news-card-one">
-                                    <div class="news-card-img">
+                                    <div class="news-card-img" style="border-radius:50% !important">
                                         <a
                                             href="{{ route('news.user', ['news' => $trending->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                             <img src="{{ asset('storage/' . $trending->news->photo) }}" width="100%"
@@ -51,7 +51,9 @@
                                                 {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 40, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
-                                            <li><i class="fi fi-rr-eye"></i><p>{{ $trending->total }}</p></li>
+                                            <li><i class="fi fi-rr-eye"></i>
+                                                <p>{{ $trending->total }}</p>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -85,7 +87,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}"
                                         href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 60, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 100, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -111,7 +113,7 @@
                                 <h3>
                                     <a data-toggle="tooltip" data-placement="top" title="{{ $newss->news->name }}"
                                         href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 40, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -151,7 +153,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
                                         href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 70, $end = '...') !!}
                                     </a>
                                 </h3>
 
@@ -178,13 +180,13 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
                                         href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 55, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 75, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $mid->views_count }}</li>
                                 </ul>
@@ -218,7 +220,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->news->name }}"
                                         href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 60, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 100, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -244,7 +246,7 @@
                                     class="news-cat">{{ $barus->news->newsCategories[0]->category->name }}</a>
                                 <h3><a
                                         href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 40, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -315,7 +317,7 @@
                                                         <a data-toggle="tooltip" data-placement="top"
                                                             title="{{ $pick->name }}"
                                                             href="{{ route('news.user', ['news' => $pick->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                            {!! Illuminate\Support\Str::limit($pick->name, $limit = 47, $end = '...') !!}
+                                                            {!! Illuminate\Support\Str::limit($pick->name, $limit = 65, $end = '...') !!}
                                                         </a>
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
@@ -333,8 +335,8 @@
                             </div>
                             <div>
                                 @if ($picks->count() > 5)
-                                <a href="{{ route('news.post') }}" class="btn-three d-block w-100">Lihat Semua Berita<i
-                                        class="flaticon-arrow-right"></i></a>
+                                    <a href="{{ route('news.post') }}" class="btn-three d-block w-100">Lihat Semua
+                                        Berita<i class="flaticon-arrow-right"></i></a>
                                 @endif
                             </div>
                         </div>
@@ -355,64 +357,65 @@
 
                         <div class="tab-content news-tab-content">
                             <div class="tab-pane fade show active" id="tab_10" role="tabpanel">
-                                @forelse ($populars as $popular)
+                                @for ($i = 0; $i < count($populars); $i++)
                                     @php
-                                        $dateParts = date_parse($popular->news->upload_date);
+                                        $dateParts = date_parse($populars[$i]->news->upload_date);
                                     @endphp
-                                    <div class="news-card-seven">
+                                    <div class="news-card-seven @if ($i > 7)
+                                        hide
+                                    @endif">
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $popular->news->photo) }}" class="img-responsive"
-                                                alt="Image" width="100%" height="110"
+                                            <img src="{{ asset('storage/' . $populars[$i]->news->photo) }}"
+                                                class="img-responsive" alt="Image" width="100%" height="110"
                                                 style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="{{ route('categories.show.user', ['category' => $popular->news->newsCategories[0]->category->slug]) }}"
-                                                class="news-cat">{{ $popular->news->newsCategories[0]->category->name }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $populars[$i]->news->newsCategories[0]->category->slug]) }}"
+                                                class="news-cat">{{ $populars[$i]->news->newsCategories[0]->category->name }}</a>
                                             <h3><a data-toggle="tooltip" data-placement="top"
-                                                    title="{{ $popular->news->name }}"
-                                                    href="{{ route('news.user', ['news' => $popular->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($popular->news->name, $limit = 60, $end = '...') !!}
+                                                    title="{{ $populars[$i]->news->name }}"
+                                                    href="{{ route('news.user', ['news' => $populars[$i]->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                                    {!! Illuminate\Support\Str::limit($populars[$i]->news->name, $limit = 80, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->news->created_at)->translatedFormat('d F Y') }}</a>
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($populars[$i]->news->created_at)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>{{ $popular->total }}</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $populars[$i]->total }}</li>
                                             </ul>
                                         </div>
                                     </div>
-                                @empty
-                                @endforelse
+                                @endfor
+
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
-                                @forelse ($news_recent as $recent)
-                                    @php
-                                        $dateParts = date_parse($recent->upload_date);
+                                @for ($i = 0; $i < min(6, count($news_recent)); $i++)
+                                @php
+                                        $dateParts = date_parse($news_recent [$i]->upload_date);
                                     @endphp
-                                    <div class="news-card-seven">
+                                    <div class="news-card-seven" >
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $recent->photo) }}" class="img-responsive"
+                                            <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}" class="img-responsive"
                                                 alt="Image" width="100%" height="110"
                                                 style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
-                                            <a href="{{ route('categories.show.user', ['category' => $recent->newsCategories[0]->category->slug]) }}"
-                                                class="news-cat">{{ $recent->newsCategories[0]->category->name }}</a>
+                                            <a href="{{ route('categories.show.user', ['category' => $news_recent [$i]->newsCategories[0]->category->slug]) }}"
+                                                class="news-cat">{{ $news_recent [$i]->newsCategories[0]->category->name }}</a>
                                             <h3><a data-toggle="tooltip" data-placement="top"
-                                                    title="{{ $recent->name }}"
-                                                    href="{{ route('news.user', ['news' => $recent->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($recent->name, $limit = 60, $end = '...') !!}
+                                                    title="{{ $news_recent [$i]->name }}"
+                                                    href="{{ route('news.user', ['news' => $news_recent [$i]->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                                    {!! Illuminate\Support\Str::limit($news_recent [$i]->name, $limit = 80, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($recent->upload_date)->translatedFormat('d F Y') }}</a>
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news_recent [$i]->upload_date)->translatedFormat('d F Y') }}</a>
                                                 </li>
-                                                <li><i class="fi fi-rr-eye"></i>{{ $recent->views_count }}</li>
+                                                <li><i class="fi fi-rr-eye"></i>{{ $news_recent [$i]->views_count }}</li>
                                             </ul>
                                         </div>
                                     </div>
-                                @empty
-                                @endforelse
+                                @endfor
                             </div>
                         </div>
 
@@ -445,7 +448,7 @@
                             <h3 class="mb-4"><a data-toggle="tooltip" data-placement="top"
                                     title="{{ $pre->name }}"
                                     href="{{ route('news.user', ['news' => $pre->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    {!! Illuminate\Support\Str::limit($pre->name, $limit = 60, $end = '...') !!}</a>
+                                    {!! Illuminate\Support\Str::limit($pre->name, $limit = 80, $end = '...') !!}</a>
                             </h3>
                             <ul class="news-metainfo list-style mb-4">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -544,7 +547,7 @@
                                                 <a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $most->name }}"
                                                     href="{{ route('news.user', ['news' => $most->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($most->name, $limit = 80, $end = '...') !!}
                                                 </a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
@@ -564,12 +567,12 @@
                                         <h3>
                                             <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}"
                                                 href="{{ route('news.user', ['news' => $most->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($most->name, $limit = 80, $end = '...') !!}
                                             </a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($popular->created_at)->translatedFormat('d F Y') }}</a>
+                                                    href="javascript:void(0)">{{ \Carbon\Carbon::parse($most->created_at)->translatedFormat('d F Y') }}</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -611,7 +614,7 @@
                                         <h3>
                                             <a data-toggle="tooltip" data-placement="top" title="{{ $most2->name }}"
                                                 href="{{ route('news.user', ['news' => $most2->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($most2->name, $limit = 47, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($most2->name, $limit = 78, $end = '...') !!}
                                             </a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
@@ -661,7 +664,7 @@
                                             class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}"
                                                 href="{{ route('news.user', ['news' => $general->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 35, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 60, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -723,18 +726,21 @@
                             </ul> --}}
                             <ul class="social-profile list-style">
                                 <li>
-                                  <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
+                                    <a href="https://www.fb.com/" target="_blank"><i class="ri-facebook-fill"></i></a>
                                 </li>
                                 <li>
-                                  <a href="https://www.twitter.com/" target="_blank"><i class="ri-twitter-fill"></i></a>
+                                    <a href="https://www.twitter.com/" target="_blank"><i
+                                            class="ri-twitter-fill"></i></a>
                                 </li>
                                 <li>
-                                  <a href="https://www.instagram.com/" target="_blank"><i class="ri-instagram-line"></i></a>
+                                    <a href="https://www.instagram.com/" target="_blank"><i
+                                            class="ri-instagram-line"></i></a>
                                 </li>
                                 <li>
-                                  <a href="https://www.linkedin.com/" target="_blank"><i class="ri-linkedin-fill"></i></a>
+                                    <a href="https://www.linkedin.com/" target="_blank"><i
+                                            class="ri-linkedin-fill"></i></a>
                                 </li>
-                              </ul>
+                            </ul>
                         </div>
                     </div>
                     <div class="sidebar-widget">
@@ -752,7 +758,7 @@
                                     <div class="news-card-info">
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}"
                                                 href="{{ route('news.user', ['news' => $post->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($post->name, $limit = 20, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($post->name, $limit = 60, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -814,7 +820,7 @@
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 60, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 90, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -839,7 +845,8 @@
                                     <div class="news-card-two">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest2->photo) }}"
-                                                class="img-responsive" alt="Image"  height="271" style="object-fit: cover;"/>
+                                                class="img-responsive" alt="Image" height="271"
+                                                style="object-fit: cover;" />
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $news_latest2->newsCategories[0]->category->name }}</a>
                                         </div>
@@ -848,7 +855,7 @@
                                                 <a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest2->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest2->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 80, $end = '...') !!}
                                                 </a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
@@ -864,7 +871,8 @@
                                     <div class="news-card-three">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest2->photo) }}"
-                                                class="img-responsive" alt="Image" height="120" style="object-fit: cover;"/>
+                                                class="img-responsive" alt="Image" height="120"
+                                                style="object-fit: cover;" />
                                         </div>
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest2->newsCategories[0]->category->slug]) }}"
@@ -873,12 +881,12 @@
                                                 <a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest2->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest2->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 80, $end = '...') !!}
                                                 </a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news_latest2->created_at)->translatedFormat('d F Y') }}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -929,6 +937,7 @@
                 }
             }
         });
+
         function toggleTheme() {
             if (localStorage.getItem('get_media_theme') === 'theme-dark') {
                 setTheme('theme-light');
@@ -936,7 +945,11 @@
                 setTheme('theme-dark');
             }
         }
-        function setTheme(themeName) { localStorage.setItem('get_media_theme', themeName); document.documentElement.className = themeName; }
+
+        function setTheme(themeName) {
+            localStorage.setItem('get_media_theme', themeName);
+            document.documentElement.className = themeName;
+        }
 
         (function() {
             if (localStorage.getItem('get_media_theme') === 'theme-dark') {
