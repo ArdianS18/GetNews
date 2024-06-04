@@ -185,9 +185,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->whereHas('news.newsCategories', function ($query) use ($subquery) {
-                $query->whereIn('category_id', $subquery);
-            })
+            ->whereRelation('news.newsCategories', 'category_id', $subquery)
             ->select('news_id', DB::raw('COUNT(*) as total'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
