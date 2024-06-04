@@ -1422,22 +1422,6 @@
             });
         });
 
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     let comments = document.querySelectorAll('.comment-item');
-        //     let loadMoreButton = document.getElementById('load-more');
-        //     let visibleComments = 5;
-
-        //     loadMoreButton.addEventListener('click', function() {
-        //         for (let i = visibleComments; i < visibleComments + 10 && i < comments.length; i++) {
-        //             comments[i].style.display = 'block';
-        //         }
-        //         visibleComments += 10;
-        //         if (visibleComments >= comments.length) {
-        //             loadMoreButton.style.display = 'none';
-        //         }
-        //     });
-        // });
-
         function showReplyForm(commentId) {
             var replyForm = document.getElementById('reply-form-' + commentId);
             replyForm.style.display = replyForm.style.display === 'none' ? 'flex' : 'none';
@@ -1450,7 +1434,7 @@
 
         function showMoreComments() {
             var comments = document.querySelectorAll('.comment-item');
-            for (var i = 0; i < comments.length; i++) {
+            for (var i = 0; i < 5; i++) {
                 comments[i].style.display = 'flex';
             }
             var showMoreButton = document.querySelector('.show-more');
@@ -1459,7 +1443,7 @@
 
         function showMoreCommentsReply() {
             var comments = document.querySelectorAll('.reply-item');
-            for (var i = 0; i < comments.length; i++) {
+            for (var i = 0; i < 5; i++) {
                 comments[i].style.display = 'flex';
             }
             var showMoreButton = document.querySelector('.show-reply-more');
