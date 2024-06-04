@@ -317,7 +317,7 @@
                                                         <a data-toggle="tooltip" data-placement="top"
                                                             title="{{ $pick->name }}"
                                                             href="{{ route('news.user', ['news' => $pick->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                            {!! Illuminate\Support\Str::limit($pick->name, $limit = 47, $end = '...') !!}
+                                                            {!! Illuminate\Support\Str::limit($pick->name, $limit = 65, $end = '...') !!}
                                                         </a>
                                                     </h3>
                                                     <ul class="news-metainfo list-style">
