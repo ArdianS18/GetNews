@@ -164,7 +164,8 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4);
+            ->take(4)
+            ->get();
 
         return $popularLeft;
     }
@@ -194,7 +195,8 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4);
+            ->take(4)
+            ->get();
 
         return $popularLeft;
     }
