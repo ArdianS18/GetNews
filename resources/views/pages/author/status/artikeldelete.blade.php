@@ -71,7 +71,38 @@
         </nav>
     </div>
 
+    <div class="modal fade" id="modal-restore" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <form id="form-restore" method="POST" class="modal-content">
+                @csrf
+                @method('post')
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Pulihkan data
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+    
+                    <p>Apakah anda yakin ingin memulihkan data ini? </p>
+    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                        data-bs-dismiss="modal">
+                        Pulihkan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <x-delete-modal-component />
+
     @endsection
     @section('script')
         <script>
@@ -135,6 +166,10 @@
                         $('.btn-delete').click(function() {
                             $('#form-delete').data('id', $(this).data('id'))
                             $('#modal-delete').modal('show')
+                        }) 
+                        $('.btn-restore').click(function() {
+                            $('#form-restore').data('id', $(this).data('id'))
+                            $('#modal-restore').modal('show')
                         })   
                     }
                 })
@@ -170,28 +205,61 @@
                     })
                 }
             })
-        })
+            })
 
-            function restore(id) {
-                $('.preloader').show()
-                url = "{{ route('profile.news.restore', ['news' => ':slug']) }}"
-                url = url.replace(':slug', id)
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    dataType: 'JSON',
-                    success: function(response) {
-                        get(1)
-                        $('.preloader').hide()
-                        $('#modal-delete').modal('hide')
-                        Swal.fire({
-                            title: 'Berhasil!',
-                            icon: 'success',
-                            text: response.message
-                        })
-                    }
-                })
-            }
+            $('#form-restore').submit(function(e) {
+            $('.preloader').show()
+            e.preventDefault()
+            const id = $(this).data('id')
+            var url = "{{ route('profile.news.restore', ['news' => ':id']) }}";
+            url = url.replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('.preloader').fadeOut()
+                    get(1)
+                    $('#modal-restore').modal('hide')
+                    Swal.fire({
+                        title: 'Berhasil!',
+                        icon: 'success',
+                        text: response.message
+                    })
+                },
+                error: function(response) {
+                    $('.preloader').fadeOut()
+                    Swal.fire({
+                        title: 'Error!',
+                        icon: 'error',
+                        text: "Gagal menghapus data,Data sedang di gunakan"
+                    })
+                }
+            })
+            })
+
+
+            // function restore(id) {
+            //     $('.preloader').show()
+            //     url = "{{ route('profile.news.restore', ['news' => ':slug']) }}"
+            //     url = url.replace(':slug', id)
+            //     $.ajax({
+            //         url: url,
+            //         method: 'POST',
+            //         dataType: 'JSON',
+            //         success: function(response) {
+            //             get(1)
+            //             $('.preloader').hide()
+            //             $('#modal-delete').modal('hide')
+            //             Swal.fire({
+            //                 title: 'Berhasil!',
+            //                 icon: 'success',
+            //                 text: response.message
+            //             })
+            //         }
+            //     })
+            // }
 
             function limitString(str, maxLength) {
                 return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
@@ -273,7 +341,7 @@
                                 </a>
                             </button>
 
-                            <button class="btn btn-sm btn-recovery m-1"
+                            <button class="btn btn-sm btn-restore m-1"
                                 style="background-color: #FFD643;" data-id="${data.id}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="white" d="M12 14q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m0 7q-3.475 0-6.025-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21"/></svg>
                             </button>
