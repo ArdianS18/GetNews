@@ -813,7 +813,7 @@
 
                                         @foreach ($groupedReplies[$comment->id] ?? [] as $index => $reply)
                                         <div>
-                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $index < 5 ? 'flex' : 'none' }};">
+                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $index < 1 ? 'flex' : 'none' }};">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -1443,21 +1443,12 @@
 
         function showMoreCommentsReply() {
             var comments = document.querySelectorAll('.reply-item');
-            var showMoreButton = document.querySelector('.show-reply-more');
-
-            for (var i = 0; i < 5 && i < comments.length; i++) {
+            for (var i = 0; i < comments.length; i++) {
                 comments[i].style.display = 'flex';
             }
 
-            for (var j = 5; j < comments.length; j++) {
-                comments[j].style.display = 'none';
-            }
-
-            if (comments.length > 5) {
-                showMoreButton.style.display = 'flex';
-            } else {
-                showMoreButton.style.display = 'none';
-            }
+            var showMoreButton = document.querySelector('.show-reply-more');
+            showMoreButton.style.display = 'none';
         }
 
     </script>

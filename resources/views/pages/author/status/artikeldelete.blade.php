@@ -64,12 +64,11 @@
     </div>
 
     <div id="loading">
+        <div class="d-flex mt-2 justify-content-center">
+            <nav id="pagination">
+            </nav>
+        </div>
     </div>
-    <div class="d-flex mt-2 justify-content-end">
-        <nav id="pagination">
-        </nav>
-    </div>
-
 
     <x-delete-modal-component />
     @endsection
@@ -108,9 +107,6 @@
                 }, 500);
             });
 
-            $('#loading').html('ha')
-
-          
             function get(page) {
                 $.ajax({
                     url: '{{ route('list.artikel.delete') }}?page=' + page,
@@ -122,39 +118,23 @@
                     },
                     beforeSend: function() {
                         $('#data').html('')
-                        $('#loading').html(showLoading())
+                        
                         $('#pagination').html('')
                     },
                     success: function(response) {
+                        $('#loading').html('')
                         if (response.data.data.length > 0) {
                             $.each(response.data.data, function(index, data) {
                                 $('#data').append(cardNews(data))
                             })
                             $('#pagination').html(handlePaginate(response.data.paginate))
-                            $('.btn-delete').click(function() {
-                            $('#form-delete').data('id', $(this).data('id'))
-                            $('#modal-delete').modal('show')
-                        })
-                        $('.btn-edit').click(function() {
-                            const id = $(this).data('id');
-                            Swal.fire({
-                                title: 'Apakah Anda yakin?',
-                                text: 'Data akan dipulihkan.',
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Ya, Pulihkan!'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    restore(id);
-                                }
-                            });
-                        })
                         } else {
                             $('#loading').html(showNoData('Tidak ada data'))
                         }
-                        
+                        $('.btn-delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
+                        })   
                     }
                 })
             }
