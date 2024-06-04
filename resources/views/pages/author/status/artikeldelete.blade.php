@@ -70,7 +70,6 @@
         </div>
     </div>
 
-
     <x-delete-modal-component />
     @endsection
     @section('script')
@@ -128,30 +127,13 @@
                                 $('#data').append(cardNews(data))
                             })
                             $('#pagination').html(handlePaginate(response.data.paginate))
-                            $('.btn-delete').click(function() {
-                            $('#form-delete').data('id', $(this).data('id'))
-                            $('#modal-delete').modal('show')
-                        })
-                        $('.btn-edit').click(function() {
-                            const id = $(this).data('id');
-                            Swal.fire({
-                                title: 'Apakah Anda yakin?',
-                                text: 'Data akan dipulihkan.',
-                                icon: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Ya, Pulihkan!'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    restore(id);
-                                }
-                            });
-                        })
                         } else {
                             $('#loading').html(showNoData('Tidak ada data'))
                         }
-                        
+                        $('.btn-delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
+                        })   
                     }
                 })
             }
