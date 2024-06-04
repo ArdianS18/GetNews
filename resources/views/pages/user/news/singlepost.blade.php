@@ -1444,7 +1444,13 @@
         }
 
         function showMoreCommentsReply() {
-            for (var i = 0; i < comments.length; i++) {
+            let limit = 5;
+            for (var i = 1; i < comments.length; i++) {
+                --limit;
+                if (limit <= 0) {
+                    i += 5;
+                    return;
+                }
                 comments[i].style.display = 'flex';
             }
 
