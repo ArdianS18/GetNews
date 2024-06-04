@@ -34,12 +34,6 @@
         <div class="loader-section section-right"></div>
     </div>
 
-    <div id="formLoader" class="loader" style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5) center no-repeat;">
-        <img src="" alt="Loading..." style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    </div>
-
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
-        style="display: none; visibility: hidden"></iframe></noscript>
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">
         <div class="d-none d-lg-flex col-lg-7 p-0">
@@ -122,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn mt-5 d-grid w-100 waves-effect text-white waves-light" style="background-color: #175A95;">
+                        <button type="submit" class="btn mt-5 d-grid w-100 waves-effect register text-white waves-light" style="background-color: #175A95;">
                             Daftar
                         </button>
                     </form>
@@ -139,6 +133,10 @@
 <script src="{{ asset('assets/js/aos.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script>
+    $('.register').click(function(){
+        console.log(true);
+        $('.loader').show();
+    })
 
     $('#form-create').submit(function(e) {
         $('.preloader').show();

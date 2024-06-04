@@ -2,6 +2,30 @@
 <html lang="en">
 
 <head>
+ 
+
+
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <title>Register | GetMedia.Id</title>
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
+    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
+    <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
+    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style-login.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin-login.css') }}"
+        class="template-customizer-theme-css">
+    <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <style>
         .loader-wrapper {
             --line-width: 5px;
@@ -114,49 +138,18 @@
             }
         }
     </style>
-
-
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-
-    <title>Register | GetMedia.Id</title>
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 5">
-    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-    <meta name="csrf-token" content="y0lzh53YmoH0xFgY2vFjhD4S1TOiq6lE58zbW7ec">
-    <link rel="canonical" href="https://1.envato.market/vuexy_admin">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
-        rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('assets/css/style-login.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin-login.css') }}"
-        class="template-customizer-theme-css">
-    <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
 </head>
 
 
 
-<body style="background-color: #FFFFFF">
+<body id="load" style="background-color: #FFFFFF">
 
-    <div class="loader-wrapper">
+    <div class="loader-wrapper" style="z-index: 1000">
         <div class="loader"></div>
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
-
-    <div id="formLoader" class="loader"
-        style="display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5) center no-repeat;">
-        <img src="" alt="Loading..."
-            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    </div>
-
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0"
-            style="display: none; visibility: hidden"></iframe></noscript>
+   
     <div class="authentication-wrapper authentication-cover authentication-bg">
         <div class="authentication-inner row">
             <div class="d-none d-lg-flex col-lg-7 p-0">
@@ -250,7 +243,7 @@
                                 <span class="error-confirm-password"></span>
                             </div>
                         </div>
-                        <button type="submit" class="btn mt-5 d-grid w-100 waves-effect text-white waves-light"
+                        <button type="submit" class="btn mt-5 d-grid register w-100 waves-effect text-white waves-light"
                             style="background-color: #175A95;">
                             Daftar
                         </button>
@@ -329,7 +322,7 @@
                 $('#password-konfirm').addClass('is-invalid')
                 return
             }
-            $('.loader').show()
+            $('#load').removeClass('loaded').addClass('load')
             if (isSubmitting) {
                 return;
             }
@@ -342,7 +335,7 @@
                 dataType: 'JSON',
                 data: $(this).serialize(),
                 success: function(response) {
-                    $('.loader').hide()
+                    $('#load').removeClass('load').addClass('loaded')
 
                     Swal.fire({
                         icon: 'success',
@@ -357,7 +350,7 @@
                     isSubmitting = false;
                 },
                 error: function(response) {
-                    $('.loader').hide()
+                    $('#load').removeClass('load').addClass('loaded')
 
                     var response = response.responseJSON;
                     Swal.fire({
