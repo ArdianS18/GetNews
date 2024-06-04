@@ -18,6 +18,16 @@
             height: 100%;
             pointer-events: none;
         }
+
+        .btn-three {
+            color: var(--secondaryColor);
+            background-color: #ffffff;
+        }
+
+        .theme-dark .btn-three {
+            color: #ffffff;
+            background-color: #222222;
+        }
     </style>
 @endsection
 @section('content')
@@ -103,7 +113,7 @@
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $newss->news->photo) }}" alt="Image" height="100"
+                                    <img src="{{ asset('storage/' . $newss->news->photo) }}" alt="Image" height="120"
                                         width="100%" style="object-fit: cover" />
                                 </a>
                             </div>
@@ -171,8 +181,8 @@
                             <div class="news-card-img">
                                 <a
                                     href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $mid->photo) }}" class="img-responsive" alt="Image"
-                                        height="150" width="100%" />
+                                    <img src="{{ asset('storage/' . $mid->photo) }}" class="img-responsive" style="object-fit: cover;" alt="Image"
+                                        height="170" width="100%" />
                                 </a>
                                 <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
                                     class="news-cat">{{ $mid->newsCategories->random()->category->name }}</a>
@@ -237,7 +247,7 @@
                                 <a
                                     href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                     <img src="{{ asset('storage/' . $barus->news->photo) }}" class="img-responsive"
-                                        style="object-fit:cover;" width="100%" height="100" alt="Image" />
+                                        style="object-fit:cover;" width="100%" height="120" alt="Image" />
                                 </a>
                             </div>
                             <div class="news-card-info">
@@ -366,7 +376,7 @@
                                     @endif">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $populars[$i]->news->photo) }}"
-                                                class="img-responsive" alt="Image" width="100%" height="110"
+                                                class="img-responsive" alt="Image" width="160" height="140"
                                                 style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
@@ -396,7 +406,7 @@
                                     <div class="news-card-seven" >
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}" class="img-responsive"
-                                                alt="Image" width="100%" height="110"
+                                                alt="Image" width="160" height="140"
                                                 style="object-fit: cover" />
                                         </div>
                                         <div class="news-card-info">
@@ -664,7 +674,7 @@
                                             class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}"
                                                 href="{{ route('news.user', ['news' => $general->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 60, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 40, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -758,7 +768,7 @@
                                     <div class="news-card-info">
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}"
                                                 href="{{ route('news.user', ['news' => $post->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($post->name, $limit = 60, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($post->name, $limit = 45, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -811,13 +821,13 @@
                                     <div class="news-card-five">
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_latest->photo) }}"
-                                                class="img-responsive" alt="Image" width="100%" height="110"
+                                                class="img-responsive" alt="Image" width="100%" height="130"
                                                 style="object-fit: cover" />
                                             <a href="{{ route('categories.show.user', ['category' => $news_latest->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $news_latest->newsCategories[0]->category->name }}</a>
                                         </div>
                                         <div class="news-card-info">
-                                            <h3><a data-toggle="tooltip" data-placement="top"
+                                            <h3 class="mb-4"><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                                     {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 90, $end = '...') !!}
