@@ -157,7 +157,7 @@
 
                                                 <select id="category_id"
                                                     class="select2 form-control category @error('category') is-invalid @enderror"
-                                                    name="category[]" multiple="true" value="" aria-label="Default select example">
+                                                    name="category[]" multiple="true" aria-label="Default select example">
                                                     <option>pilih kategori</option>
                                                     @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}"

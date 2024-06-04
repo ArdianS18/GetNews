@@ -453,3 +453,5 @@ Route::get('allsub/{subslug}/{data}', [NewsController::class, 'showAllSubCategor
 
 Route::get('verifikasi/email/{id}', [RegisterController::class, 'verifikasi'])->name('verisikasi.account');
 Route::post('coin-add', [CoinController::class, 'store'])->name('coin.add');
+
+

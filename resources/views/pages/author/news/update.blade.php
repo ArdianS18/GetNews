@@ -116,7 +116,7 @@
 
                             </select>
                             @error('sub_category')
-                                <span class="invalid-feedback" role="alert" style="color: red">
+                                  <span class="invalid-feedback" role="alert" style="color: red">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -135,14 +135,13 @@
                     </div>
                     <div class="col-lg-12 mb-3">
                         <label class="form-label" for="password_confirmation">Tags</label>
-                        <select class="form-control  @error('tag') is-invalid @enderror select2 tags" name="tag[]" multiple="multiple" value="">
+                        <select class="form-control  @error('tag') is-invalid @enderror select2 tags" name="tag[]" multiple="multiple">
                             <option>pilih tags</option>
-
                             @foreach ($tags as $tag)
-                            <option value="{{ $tag->name }}" {{ $newsTags->pluck('tag_id')->contains($tag->id) ? 'selected' : '' }}>
-                              {{ $tag->name }}
-                            </option>
-                          @endforeach
+                                <option value="{{ $tag->name }}" {{ $newsTags->pluck('tag_id')->contains($tag->id) ? 'selected' : '' }}>
+                                {{ $tag->name }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('tags')
                             <span class="invalid-feedback" role="alert" style="color: red;">
@@ -192,9 +191,9 @@
             </button>
         </div>
         <div class="d-flex">
-            <button type="reset" class="btn btn-danger m-2">
+            <a href="/status-author" class="btn btn-danger m-2">
                 Batal
-            </button>
+            </a>
             @if ($news->status == "draft")
                 <button type="submit" class="btn btn-primary m-2" id="submitButton1">
                     Rilis & Update
@@ -312,28 +311,6 @@
     </script>
 
     <script>
-        // $('.category').change(function() {
-        //     var selectedCategories = $(this).val();
-        //     getSubCategory(selectedCategories);
-        // })
-
-        // function getSubCategory(ids) {
-        //     $('.sub-category').html('');
-        //     ids.forEach(function(id) {
-        //         $.ajax({
-        //             url: "sub-category-detail/" + id,
-        //             method: "GET",
-        //             dataType: "JSON",
-        //             success: function(response) {
-        //                 $.each(response.data, function(index, data) {
-        //                     $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-        //                         '</option>');
-        //                 });
-        //             }
-        //         });
-        //     });
-        // }
-
         $('.category').change(function() {
             getSubCategory($(this).val())
         })

@@ -161,10 +161,9 @@ class NewsController extends Controller
         $newsPhoto = $this->newsPhoto->get()->whereIn('news_id', $news);
 
         $tags = $this->tags->get();
-
         $newsCategories = $this->newsCategory->get()->whereIn('news_id', $news);
         $newsSubCategories = $this->newsSubCategory->get()->whereIn('news_id', $news);
-        $newsTags = $this->newsTag->get()->whereIn('news_id', $news);
+        $newsTags = $this->newsTag->getNewsTags($news);
 
         return view('pages.admin.news_admin.detail-news', compact('news','tags','newsCategories','newsSubCategories','subCategories','newsTags','categories','newsPhoto'));
     }

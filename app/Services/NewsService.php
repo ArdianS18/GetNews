@@ -100,7 +100,8 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             $data['tag'] = $newTags;
         }
 
-        $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $request->file('photo')) : null;
+        $img = $this->compressImage($request->photo);
+        $image = $request && $request->hasFile('photo') ? $this->upload(UploadDiskEnum::NEWS->value, $img) : null;
 
         $domQuestion = new \DOMDocument();
         libxml_use_internal_errors(true);
@@ -123,7 +124,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'upload_date' => $data['upload_date'] ?? null
         ];
     }
-    
+
     /**
      * Method updateDraft
      *
@@ -151,13 +152,27 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         $old_photo = $news->photo;
         $new_photo = "";
 
+        if ($request->hasFile('photo')) {
+
+            if (file_exists(public_path($old_photo))) {
+                unlink(public_path($old_photo));
+            }
+
+            $img = $this->compressImage($request->photo);
+            $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
+            $news->photo = $new_photo;
+        }
+
+        // $old_photo = $news->photo;
+        // $new_photo = "";
+
         // if ($request->hasFile('photo')) {
         // if ($request->file('photo')) {
         // $this->remove($old_photo);
         // } else {
-        $img = $this->compressImage($request->photo);
+        // $img = $this->compressImage($request->photo);
 
-        $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
+        // $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
         // }
         // }
 
@@ -173,7 +188,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         return [
             'user_id' => auth()->user()->id,
             'name' => $data['name'] ??  null,
-            'photo' => $old_photo ?: $new_photo ?? null,
+            'photo' => $new_photo ? $new_photo : $old_photo ?? null,
             'content' => $data['content'] ?: null,
             'slug' => Str::slug($data['name']),
             'category' => $data['category'] ?? null,
@@ -210,11 +225,16 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
 
         $old_photo = $news->photo;
         $new_photo = "";
+
         if ($request->hasFile('photo')) {
-            $this->remove($old_photo);
+
+            if (file_exists(public_path($old_photo))) {
+                unlink(public_path($old_photo));
+            }
+
             $img = $this->compressImage($request->photo);
-            
             $new_photo = $this->upload(UploadDiskEnum::NEWS->value, $img);
+            $news->photo = $new_photo;
         }
 
         $domQuestion = new \DOMDocument();
@@ -245,7 +265,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'sub_category' => $data['sub_category'],
         ];
     }
-    
+
     /**
      * Method updateByAdmin
      *
@@ -300,7 +320,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
             'sub_category' => $data['sub_category'],
         ];
     }
-    
+
     /**
      * Method processImages
      *
@@ -308,7 +328,7 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
      *
      * @return void
      */
-    
+
      private function processImages(\DOMDocument $dom)
     {
         $images = $dom->getElementsByTagName('img');
@@ -333,11 +353,11 @@ class NewsService implements ShouldHandleFileUpload, CustomUploadValidation
         }
     }
 
-    
+
     /**
      * Method compressImage
      *
-     * @param $file as string 
+     * @param $file as string
      *
      * @return UploadedFile
      */
