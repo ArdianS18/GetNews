@@ -634,8 +634,8 @@ class NewsController extends Controller
     }
 
     public function softDelete(News $news, NewsCategory $newsCategory, NewsSubCategory $newsSubCategory, NewsTag $newsTag, NewsHasLike $newsHasLike, NewsReject $newsReject, Comment $newsComment, NewsReport $newsReport, ModelsView $view ,Report $report) : JsonResponse {
-        $this->news->softDelete($news);
-        $newsId = $this->news->cleanupSoftDelete($news);
+        $newsId = $this->news->softDelete($news);
+        $this->news->cleanupSoftDelete($newsId);
 
         $newsCategory->where('news_id', $newsId)->delete();
         $newsSubCategory->where('news_id', $newsId)->delete();
