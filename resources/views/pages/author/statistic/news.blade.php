@@ -25,6 +25,12 @@
     .border-light-red {
         border-left: 2px solid #EF6E6E !important
     }
+    @media(max-width: 768px){
+        .img-responsive{
+            width: 100%;
+            height: 300px;
+        }
+    }
 </style>
 <link rel="stylesheet" href="{{ 'admin/dist/libs/prismjs/themes/prism-okaidia.min.css' }}">
 @endsection
@@ -173,7 +179,7 @@
                     <div class="">
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <img style="object-fit:cover;" width="100%" height="90" alt="" src="{{ asset('storage/' . $item->photo) }}">
+                                <img style="object-fit:cover;" class="img-responsive" width="143" height="90" alt="" src="{{ asset('storage/' . $item->photo) }}">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body p-2">

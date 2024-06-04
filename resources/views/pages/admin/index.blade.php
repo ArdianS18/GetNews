@@ -860,10 +860,6 @@
     chart.render();
 
 
-    var chart = new ApexCharts(document.querySelector("#chart-advertisement-premium"), options);
-    chart.render();
-
-
 
     var options = {
         color: "#adb5bd",
@@ -918,6 +914,8 @@
     };
 
     var chart = new ApexCharts(document.querySelector("#current-year"), options);
+    chart.render();
+    var chart = new ApexCharts(document.querySelector("#chart-advertisement-premium"), options);
     chart.render();
 </script>
 

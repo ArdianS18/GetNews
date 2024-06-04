@@ -936,7 +936,14 @@
                                 </div>
                                 @endif
                                 @empty
-                                <p>No comments available.</p>
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <img src="{{ asset('assets/img/data-no.png') }}" width="200" alt="">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <h4>Tidak ada Komentar</h4>
+                                </div>
                                 @endforelse
                             </div>
                             @if ($comments->count() > 5)
