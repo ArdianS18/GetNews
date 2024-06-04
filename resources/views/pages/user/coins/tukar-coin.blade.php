@@ -37,33 +37,33 @@
 
 <div class="card p-4">
     <h4><b>Tarik Uang</b></h4>
-    <h5 class="mt-4 fw-semibold mb-4">Pilih Nominal</h5>
+    <h5 class="mt-4 fw-semibold mb-4">Pilih Nominal : </h5>
     <div class="row">
         <div class="col-lg-6">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="card card-act p-4" onclick="selectCard(this)">
+                    <div class="card card-act border-1 p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h4>Rp.500</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card card-act p-4" onclick="selectCard(this)">
+                    <div class="card card-act border-1 p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h4>Rp.10.000</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card card-act p-4" onclick="selectCard(this)">
+                    <div class="card card-act border-1 p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center">
                             <h4>Rp.50.000</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="card card-act p-4" onclick="selectCard(this)">
+                    <div class="card card-act border-1 p-4" onclick="selectCard(this)">
                         <div class="d-flex justify-content-center ">
                             <h4>Rp.100.000</h4>
                         </div>
