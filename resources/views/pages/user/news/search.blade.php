@@ -132,6 +132,7 @@
                     <div class="col-lg-4">
                         <div class="sidebar">
                             <x-news-category :categories="$totalCategories" />
+
                             <x-news-populer :populars="$populars" />
                             <div class="sidebar-widget" style="height: 700px">
                                 <h3 class="sidebar-widget-title">iklan</h3>

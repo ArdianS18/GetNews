@@ -311,28 +311,6 @@
     </script>
 
     <script>
-        // $('.category').change(function() {
-        //     var selectedCategories = $(this).val();
-        //     getSubCategory(selectedCategories);
-        // })
-
-        // function getSubCategory(ids) {
-        //     $('.sub-category').html('');
-        //     ids.forEach(function(id) {
-        //         $.ajax({
-        //             url: "sub-category-detail/" + id,
-        //             method: "GET",
-        //             dataType: "JSON",
-        //             success: function(response) {
-        //                 $.each(response.data, function(index, data) {
-        //                     $('.sub-category').append('<option value="' + data.id + '">' + data.name +
-        //                         '</option>');
-        //                 });
-        //             }
-        //         });
-        //     });
-        // }
-
         $('.category').change(function() {
             getSubCategory($(this).val())
         })

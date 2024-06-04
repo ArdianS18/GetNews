@@ -108,8 +108,8 @@ class DashboardController extends Controller
         $subCategories = $this->subCategory->get();
         $trendings = $this->view->trending();
 
-        $news_left = $this->news->getByLeft();
-        $news_right = $this->news->getByRight();
+        $news_left = $this->view->getByLeft();
+        $news_right = $this->view->getByRight();
         $news_mid = $this->news->getByMid();
 
         $populars = $this->view->getByPopular('up');
