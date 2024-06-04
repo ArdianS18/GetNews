@@ -393,7 +393,7 @@
                                     @php
                                         $dateParts = date_parse($news_recent [$i]->upload_date);
                                     @endphp
-                                    <div class="news-card-seven" @if ($i > 6) style="display:none" @endif>
+                                    <div class="news-card-seven" @if ($i > 5) style="display:none" @endif>
                                         <div class="news-card-img">
                                             <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}" class="img-responsive"
                                                 alt="Image" width="100%" height="110"
