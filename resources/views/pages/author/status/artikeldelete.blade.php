@@ -33,23 +33,18 @@
 </head>
 
 @section('content')
-    <div class="card bg-light-warning shadow-sm position-relative overflow-hidden">
-        <div class="card-body px-4 py-4">
-            <div class="row align-items-center">
-                <div class="col-1">
-                    <div class="text-center">
-                        <img src="{{ asset('assets/img/Group 214.svg') }}" alt="" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-9">
-                    <h4 class="fw-semibold mb-8" style="color: #FFAE1F">Berita Dihapus</h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><p style="color: #FFAE1F">Berita yang dihapus akan hilang permanen secara otomatis setelah 30 hari</p></li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
+    <div class="alert alert-warning d-flex align-items-center p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 84 84" fill="none">
+            <circle cx="42" cy="42" r="40" stroke="#FFAE1F " stroke-width="4" />
+            <circle cx="42.1422" cy="59.5001" r="4.9" fill="#FFAE1F " />
+            <path
+                d="M36.7667 22.6095C36.6449 20.9852 37.93 19.6001 39.5589 19.6001L44.0975 19.6001C45.6988 19.6001 46.974 20.9406 46.894 22.5399L45.774 44.9399C45.6995 46.4301 44.4696 47.6001 42.9775 47.6001H41.2389C39.7737 47.6001 38.5563 46.4706 38.4467 45.0095L36.7667 22.6095Z"
+                fill="#FFAE1F " />
+        </svg>
+        <div class="d-flex flex-column ms-3">
+            <h5 class="text-warning" style="font-weight: 600;">Berita Dihapus</h5>
+            <h6 class="text-warning" style="font-weight: bold; font-size:18px;">Berita yang dihapus akan hilang permanen
+                secara otomatis setelah 30 hari</h6>
         </div>
     </div>
     <form class="d-flex gap-2">
@@ -68,152 +63,157 @@
 
     </div>
 
-    <div class="loading">
-        <div class="d-flex mt-2 justify-content-end">
-            <nav id="pagination">
-            </nav>
-        </div>
+    <div id="loading">
+    </div>
+    <div class="d-flex mt-2 justify-content-end">
+        <nav id="pagination">
+        </nav>
     </div>
 
 
     <x-delete-modal-component />
-@endsection
-@section('script')
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            @if (session('success'))
-                Swal.fire({
-                    title: 'Success!',
-                    text: '{{ session('success') }}',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            @endif
-
-            @if (session('draft'))
-                Swal.fire({
-                    title: 'Success Draft!',
-                    text: '{{ session('draft') }}',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                });
-            @endif
-        });
-    </script>
-
-    <script>
-        get(1)
-        let debounceTimer;
-
-        $('#search-name').keyup(function() {
-            clearTimeout(debounceTimer);
-
-            debounceTimer = setTimeout(function() {
-                get(1)
-            }, 500);
-        });
-
-        $('#status').change(function() {
-            get(1)
-        });
-
-        function get(page) {
-            $.ajax({
-                url: '{{ route('list.artikel.delete') }}?page='+page,
-                methode: 'GET',
-                dataType: 'JSON',
-                data: {
-                    name: $('#search-name').val(),
-                    status: $('#status').val()
-                },
-                beforeSend: function() {
-                    $('#data').html('')
-                    $('#loading').html(showLoading())
-                    $('#pagination').html('')
-                },
-                success: function(response) {
-                    if (response.data.data.length > 0) {
-                        $.each(response.data.data, function(index, data) {
-                            $('#data').append(cardNews(data))
-                        })
-                        $('#pagination').html(handlePaginate(response.data.paginate))
-                    } else {
-                        $('#loading').html(showNoData('Tidak ada data'))
-                    }
-                    $('.btn-delete').click(function() {
-                        $('#form-delete').data('id', $(this).data('id'))
-                        $('#modal-delete').modal('show')
-                    })
-                }
-            })
-        }
-
-        $('#form-delete').submit(function(e) {
-            $('.preloader').show()
-            e.preventDefault()
-            const id = $(this).data('id')
-            var url = "{{ route('profile.news.delete', ['news' => ':id']) }}";
-            url = url.replace(':id', id);
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('.preloader').fadeOut()
-                    get(1)
-                    $('#modal-delete').modal('hide')
+    @endsection
+    @section('script')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                @if (session('success'))
                     Swal.fire({
-                        title: 'Berhasil!',
+                        title: 'Success!',
+                        text: '{{ session('success') }}',
                         icon: 'success',
-                        text: response.message
-                    })
-                },
-                error: function(response) {
-                    $('.preloader').fadeOut()
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+
+                @if (session('draft'))
                     Swal.fire({
-                        title: 'Error!',
-                        icon: 'error',
-                        text: "Gagal menghapus data,Data sedang di gunakan"
-                    })
+                        title: 'Success Draft!',
+                        text: '{{ session('draft') }}',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                @endif
+            });
+        </script>
+
+        <script>
+            get(1)
+            let debounceTimer;
+
+            $('#search-name').keyup(function() {
+                clearTimeout(debounceTimer);
+
+                debounceTimer = setTimeout(function() {
+                    get(1)
+                }, 500);
+            });
+
+            $('#loading').html('ha')
+
+          
+            function get(page) {
+                $.ajax({
+                    url: '{{ route('list.artikel.delete') }}?page=' + page,
+                    methode: 'GET',
+                    dataType: 'JSON',
+                    data: {
+                        name: $('#search-name').val(),
+                        status: $('#status').val()
+                    },
+                    beforeSend: function() {
+                        $('#data').html('')
+                        $('#loading').html(showLoading())
+                        $('#pagination').html('')
+                    },
+                    success: function(response) {
+                        if (response.data.data.length > 0) {
+                            $.each(response.data.data, function(index, data) {
+                                $('#data').append(cardNews(data))
+                            })
+                            $('#pagination').html(handlePaginate(response.data.paginate))
+                            $('.btn-delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
+                        })
+                        $('.btn-edit').click(function() {
+                            const id = $(this).data('id');
+                            Swal.fire({
+                                title: 'Apakah Anda yakin?',
+                                text: 'Data akan dipulihkan.',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, Pulihkan!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    restore(id);
+                                }
+                            });
+                        })
+                        } else {
+                            $('#loading').html(showNoData('Tidak ada data'))
+                        }
+                        
+                    }
+                })
+            }
+
+            function restore(id) {
+                $('.preloader').show()
+                url = "{{ route('profile.news.restore', ['news' => ':slug']) }}"
+                url = url.replace(':slug', id)
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'JSON',
+                    success: function(response) {
+                        get(1)
+                        $('.preloader').hide()
+                        $('#modal-delete').modal('hide')
+                        Swal.fire({
+                            title: 'Berhasil!',
+                            icon: 'success',
+                            text: response.message
+                        })
+                    }
+                })
+            }
+
+            function limitString(str, maxLength) {
+                return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
+            }
+
+            function cardNews(data) {
+                let status, text;
+                if (data.status == 'active') {
+                    status = ' bg-light-success text-success',
+                        text = 'Aktif'
+                } else if (data.status == 'nonactive') {
+                    status = ' bg-light-danger text-danger'
+                    text = 'Tolak'
+                } else if (data.status == 'draft') {
+                    status = 'bg-light-secondary text-secondary'
+                    text = 'Draft'
+                } else {
+                    status = 'bg-light-warning fs-2 text-warning'
+                    text = 'Panding'
                 }
-            })
-        })
 
-        function limitString(str, maxLength) {
-            return str.length > maxLength ? str.substring(0, maxLength) + '...' : str;
-        }
+                if (data.status == 'active') {
+                    var detail =
+                        "{{ route('news.user', ['news' => ':slug', 'year' => ':year', 'month' => ':month', 'day' => ':day']) }}";
+                } else {
+                    var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
+                }
+                detail = detail.replace(':slug', data.slug);
+                detail = detail.replace(':year', data.upload_date);
+                detail = detail.replace(':month', data.upload_date);
+                detail = detail.replace(':day', data.upload_date);
+                var edit = "";
+                edit = edit.replace(':slug', data.id);
 
-        function cardNews(data) {
-            let status, text;
-            if (data.status == 'active') {
-                status = ' bg-light-success text-success',
-                    text = 'Aktif'
-            } else if (data.status == 'nonactive') {
-                status = ' bg-light-danger text-danger'
-                text = 'Tolak'
-            } else if (data.status == 'draft') {
-                status = 'bg-light-secondary text-secondary'
-                text = 'Draft'
-            } else {
-                status = 'bg-light-warning fs-2 text-warning'
-                text = 'Panding'
-            }
-
-            if (data.status == 'active') {
-                var detail = "{{ route('news.user', ['news' => ':slug', 'year'=> ':year', 'month'=> ':month','day'=> ':day']) }}";
-            } else {
-                var detail = "{{ route('detail.news', ['news' => ':slug']) }}";
-            }
-            detail = detail.replace(':slug', data.slug);
-            detail = detail.replace(':year', data.upload_date);
-            detail = detail.replace(':month', data.upload_date);
-            detail = detail.replace(':day', data.upload_date);
-            var edit = "{{ route('profile.news.edit', ['newsId' => ':slug']) }}";
-            edit = edit.replace(':slug', data.slug);
-
-            return `
+                return `
             <div class="card p-4 mt-4">
                 <div class="row">
                     <div class="col-lg-2">
@@ -232,9 +232,7 @@
 
                     <div class="col-md-12 col-lg-2 mt-3 mt-lg-0 ">
                         <div class="d-flex justify-content-end">
-                            <div class="text-md-right mt-md-0">
-                                <span class="badge fw-bold ${status} fs-5">${text}</span>
-                            </div>
+                        
                         </div>
 
                         <div class="mt-3 d-flex justify-content-end">
@@ -260,13 +258,9 @@
                                 </a>
                             </button>
 
-                            <a href="${edit}" class="btn btn-sm m-1"
-                                style="background-color: #FFD643;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="23" viewBox="0 0 512 512">
-                                    <path
-                                        d="M64 368v80h80l235.727-235.729-79.999-79.998L64 368zm377.602-217.602c8.531-8.531 8.531-21.334 0-29.865l-50.135-50.135c-8.531-8.531-21.334-8.531-29.865 0l-39.468 39.469 79.999 79.998 39.469-39.467z"
-                                        fill="#ffffff" />
-                                </svg>
+                            <a  class="btn btn-sm btn-edit m-1"
+                                style="background-color: #FFD643;" data-id="${data.id}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="white" d="M12 14q-.825 0-1.412-.587T10 12t.588-1.412T12 10t1.413.588T14 12t-.587 1.413T12 14m0 7q-3.475 0-6.025-2.287T3.05 13H5.1q.35 2.6 2.313 4.3T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H9v2H3V4h2v2.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21"/></svg>
                             </a>
                                 <button type="submit" class="btn btn-sm m-1 btn-delete" data-id=${data.id} style="background-color: #C94F4F;"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="18" height="23"
@@ -280,6 +274,6 @@
                 </div>
             </div>
             `
-        }
-    </script>
-@endsection
+            }
+        </script>
+    @endsection

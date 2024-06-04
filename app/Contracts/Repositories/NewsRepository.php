@@ -731,4 +731,28 @@ class NewsRepository extends BaseRepository implements NewsInterface
             ->where('user_id', $author->user_id)
             ->delete();
     }
+
+    public function softDelete($news): mixed
+    {
+        return $this->model->query()
+        ->findOrFail($news->id)
+        ->update(['delete_at'=> Carbon::now()]);
+    }
+
+    public function restore($news): mixed
+    {
+        return $this->model->query()
+        ->findOrFail($news->id)
+        ->update(['delete_at' => null]);
+    }
+
+    public function getDelete($id,Request $request,int $pagination = 10,$condition):LengthAwarePaginator{
+        return $this->model->query()
+        ->when($request->name, function ($search) use ($request) {
+            $search->where('name', 'LIKE', '%' . $request->name . '%');
+        })
+        ->where('user_id',$id)
+        ->whereNotNull('delete_at')
+        ->fastPaginate($pagination);
+    }
 }

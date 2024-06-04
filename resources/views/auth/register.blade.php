@@ -348,6 +348,10 @@
                         icon: 'success',
                         title: 'Berhasil!!',
                         text: 'Terimakasih telah mendaftar di GetMedia. Silahkan cek email anda untuk melakukan verifikasi email'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '{{ route('login') }}';
+                        }
                     });
 
                     isSubmitting = false;
