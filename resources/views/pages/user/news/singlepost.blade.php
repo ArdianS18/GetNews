@@ -1446,7 +1446,7 @@
             for (var i = 0; i < comments.length; i++) {
                 comments[i].style.display = 'flex';
             }
-            
+
             var showMoreButton = document.querySelector('.show-reply-more');
             showMoreButton.style.display = 'none';
         }
