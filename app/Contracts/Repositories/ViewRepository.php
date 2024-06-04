@@ -176,7 +176,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
         $endDate = Carbon::now()->toDateString();
 
         $subquery = DB::table('news_categories')
-            ->select('category_id', DB::raw('COUNT(*) as category_count'))
+            ->select('category_id')
             ->groupBy('category_id')
             ->orderByRaw('COUNT(*) DESC')
             ->skip(1)
@@ -185,7 +185,9 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->whereRelation('news.newsCategories', 'category_id', $subquery)
+            ->whereHas('news.newsCategories', function ($query) use ($subquery) {
+                $query->whereIn('category_id', $subquery);
+            })
             ->select('news_id', DB::raw('COUNT(*) as total'))
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
