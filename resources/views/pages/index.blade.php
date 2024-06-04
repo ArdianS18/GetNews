@@ -375,7 +375,7 @@
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $populars[$i]->news->name }}"
                                                     href="{{ route('news.user', ['news' => $populars[$i]->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($populars[$i]->news->name, $limit = 60, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($populars[$i]->news->name, $limit = 80, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -405,7 +405,7 @@
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_recent [$i]->name }}"
                                                     href="{{ route('news.user', ['news' => $news_recent [$i]->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_recent [$i]->name, $limit = 60, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_recent [$i]->name, $limit = 80, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -448,7 +448,7 @@
                             <h3 class="mb-4"><a data-toggle="tooltip" data-placement="top"
                                     title="{{ $pre->name }}"
                                     href="{{ route('news.user', ['news' => $pre->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    {!! Illuminate\Support\Str::limit($pre->name, $limit = 60, $end = '...') !!}</a>
+                                    {!! Illuminate\Support\Str::limit($pre->name, $limit = 80, $end = '...') !!}</a>
                             </h3>
                             <ul class="news-metainfo list-style mb-4">
                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -547,7 +547,7 @@
                                                 <a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $most->name }}"
                                                     href="{{ route('news.user', ['news' => $most->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($most->name, $limit = 80, $end = '...') !!}
                                                 </a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
@@ -567,7 +567,7 @@
                                         <h3>
                                             <a data-toggle="tooltip" data-placement="top" title="{{ $most->name }}"
                                                 href="{{ route('news.user', ['news' => $most->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($most->name, $limit = 47, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($most->name, $limit = 80, $end = '...') !!}
                                             </a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
@@ -614,7 +614,7 @@
                                         <h3>
                                             <a data-toggle="tooltip" data-placement="top" title="{{ $most2->name }}"
                                                 href="{{ route('news.user', ['news' => $most2->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($most2->name, $limit = 47, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($most2->name, $limit = 78, $end = '...') !!}
                                             </a>
                                         </h3>
                                         <ul class="news-metainfo list-style">
@@ -664,7 +664,7 @@
                                             class="news-cat">{{ $general->newsCategories[0]->category->name }}</a>
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $general->name }}"
                                                 href="{{ route('news.user', ['news' => $general->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 35, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($general->name, $limit = 60, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -758,7 +758,7 @@
                                     <div class="news-card-info">
                                         <h3><a data-toggle="tooltip" data-placement="top" title="{{ $post->name }}"
                                                 href="{{ route('news.user', ['news' => $post->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($post->name, $limit = 20, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($post->name, $limit = 60, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -820,7 +820,7 @@
                                             <h3><a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 60, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_latest->name, $limit = 90, $end = '...') !!}
                                                 </a></h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
@@ -855,7 +855,7 @@
                                                 <a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest2->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest2->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 80, $end = '...') !!}
                                                 </a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
@@ -881,7 +881,7 @@
                                                 <a data-toggle="tooltip" data-placement="top"
                                                     title="{{ $news_latest2->name }}"
                                                     href="{{ route('news.user', ['news' => $news_latest2->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 50, $end = '...') !!}
+                                                    {!! Illuminate\Support\Str::limit($news_latest2->name, $limit = 80, $end = '...') !!}
                                                 </a>
                                             </h3>
                                             <ul class="news-metainfo list-style">
