@@ -723,7 +723,7 @@
                                 @forelse ($comments as $index => $comment)
                                 @if ($comment->parent_id === null)
                                 <div>
-                                    <div class="row comments-item w-100" style="display: {{ $index < 5 ? 'flex' : 'none' }};">
+                                    <div class="row comment-item w-100" style="display: {{ $index < 5 ? 'flex' : 'none' }};">
                                         <div class="col-lg-1">
                                             <div class="comment-author-img">
                                                 <img src="{{ asset($comment->user->photo ? 'storage/' . $comment->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -1440,16 +1440,16 @@
         let index2 = 5;
 
         function showMoreComments() {
-            var comments1 = document.querySelectorAll('.comments-item');
+            var comments = document.querySelectorAll('.comment-item');
 
-            for (var i = index2; i < comments1.length; i++) {
+            for (var i = index2; i < comments.length; i++) {
                 --limit;
                 if (limit <= 0) {
                     index2 += 5;
                     limit = 5;
                     return;
                 }
-                comments1[i].style.display = 'flex';
+                comments[i].style.display = 'flex';
             }
 
             var showMoreButton = document.querySelector('.show-more');
