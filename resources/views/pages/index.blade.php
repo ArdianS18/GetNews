@@ -113,7 +113,7 @@
                                 <h3>
                                     <a data-toggle="tooltip" data-placement="top" title="{{ $newss->news->name }}"
                                         href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 40, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -153,7 +153,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
                                         href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 50, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 70, $end = '...') !!}
                                     </a>
                                 </h3>
 
@@ -180,7 +180,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
                                         href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 55, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 75, '...') !!}</p>
@@ -246,7 +246,7 @@
                                     class="news-cat">{{ $barus->news->newsCategories[0]->category->name }}</a>
                                 <h3><a
                                         href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 40, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
