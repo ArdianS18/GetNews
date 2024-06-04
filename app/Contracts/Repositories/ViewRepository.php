@@ -184,7 +184,6 @@ class ViewRepository extends BaseRepository implements ViewInterface
 
         $subquery = DB::table('categories')
             ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
-            ->withCount('newsCategories')
             ->orderByDesc('news_categories_count')
             ->skip(1)
             ->take(1)
