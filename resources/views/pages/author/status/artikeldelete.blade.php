@@ -64,10 +64,10 @@
     </div>
 
     <div id="loading">
-    </div>
-    <div class="d-flex mt-2 justify-content-end">
-        <nav id="pagination">
-        </nav>
+        <div class="d-flex mt-2 justify-content-center">
+            <nav id="pagination">
+            </nav>
+        </div>
     </div>
 
 
@@ -108,9 +108,6 @@
                 }, 500);
             });
 
-            $('#loading').html(showLoading())
-
-          
             function get(page) {
                 $.ajax({
                     url: '{{ route('list.artikel.delete') }}?page=' + page,
