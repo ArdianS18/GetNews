@@ -917,7 +917,7 @@
                                         </div>
                                         @endforeach
 
-                                        @if ($groupedReplies[$comment->id] > 5)
+                                        @if ($groupedReplies[$comment->id] > 1)
                                         <div class="show-more text-center mt-4">
                                             <div class="text-center left-content mt-3">
                                                 <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
