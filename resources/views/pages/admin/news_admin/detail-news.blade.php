@@ -155,7 +155,7 @@
                                             <div class="col-lg-12 mb-4">
                                                 <label class="form-label" for="password_confirmation">Kategori</label>
 
-                                                <select id="category_id"
+                                                <select id="category_id" readonly
                                                     class="select2 form-control category @error('category') is-invalid @enderror"
                                                     name="category[]" multiple="true" value="" aria-label="Default select example">
                                                     <option>pilih kategori</option>
