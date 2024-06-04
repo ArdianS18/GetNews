@@ -1,6 +1,6 @@
 @props(['recents'])
 
-<div class="sidebar-widget">
+<div class="sidebar-widget recent">
     <h3 class="sidebar-widget-title">Berita Terbaru</h3>
     <div class="pp-post-wrap">
         @for ($i = 0; $i < min(5, count($recents)); $i++)
