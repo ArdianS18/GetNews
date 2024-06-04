@@ -886,7 +886,7 @@
                                             </h3>
                                             <ul class="news-metainfo list-style">
                                                 <li><i class="fi fi-rr-calendar-minus"></i><a
-                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                                        href="javascript:void(0)">{{ \Carbon\Carbon::parse($news_latest2->created_at)->translatedFormat('d F Y') }}</a>
                                                 </li>
                                             </ul>
                                         </div>
