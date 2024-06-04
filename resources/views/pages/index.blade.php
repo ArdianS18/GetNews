@@ -186,7 +186,7 @@
                                 <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 75, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($newss->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
                                     <li><i class="fi fi-rr-eye"></i>{{ $mid->views_count }}</li>
                                 </ul>
