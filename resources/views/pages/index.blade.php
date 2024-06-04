@@ -87,7 +87,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $newss->name }}"
                                         href="{{ route('news.user', ['news' => $newss->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 60, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($newss->news->name, $limit = 100, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
@@ -220,7 +220,7 @@
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->news->name }}"
                                         href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 60, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 100, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
