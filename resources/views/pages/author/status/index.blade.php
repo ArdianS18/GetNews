@@ -75,7 +75,7 @@
     </div>
 
     <div class="loading">
-        <div class="d-flex mt-2 justify-content-end">
+        <div class="d-flex mt-2 justify-content-center">
             <nav id="pagination">
             </nav>
         </div>
