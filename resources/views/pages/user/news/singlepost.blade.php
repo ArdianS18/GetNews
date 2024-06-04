@@ -1445,33 +1445,19 @@
             var comments = document.querySelectorAll('.reply-item');
             var showMoreButton = document.querySelector('.show-reply-more');
 
-            if (showMoreButton.textContent === 'Show more') {
-                // Show more comments
-                for (var i = 0; i < comments.length; i++) {
+            for (var i = 0; i < 5 && i < comments.length; i++) {
                 comments[i].style.display = 'flex';
-                }
-                showMoreButton.textContent = 'Show less';
-            } else {
-                // Show less comments
-                for (var j = 5; j < comments.length; j++) {
-                comments[j].style.display = 'none';
-                }
-                showMoreButton.textContent = 'Show more';
             }
 
-            // for (var i = 0; i < 5 && i < comments.length; i++) {
-            //     comments[i].style.display = 'flex';
-            // }
+            for (var j = 5; j < comments.length; j++) {
+                comments[j].style.display = 'none';
+            }
 
-            // for (var j = 5; j < comments.length; j++) {
-            //     comments[j].style.display = 'none';
-            // }
-
-            // if (comments.length > 5) {
-            //     showMoreButton.style.display = 'inline-block';
-            // } else {
-            //     showMoreButton.style.display = 'none';
-            // }
+            if (comments.length > 5) {
+                showMoreButton.style.display = 'flex';
+            } else {
+                showMoreButton.style.display = 'none';
+            }
         }
 
     </script>
