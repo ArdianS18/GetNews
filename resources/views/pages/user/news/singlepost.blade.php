@@ -1441,33 +1441,14 @@
             showMoreButton.style.display = 'none';
         }
 
-        var visibleReplyCount = 5;
-
         function showMoreCommentsReply() {
             var comments = document.querySelectorAll('.reply-item');
-            
-            for (var i = 0; i < visibleReplyCount; i++) {
+            for (var i = 0; i < comments.length; i++) {
                 comments[i].style.display = 'flex';
             }
             
-            for (var j = visibleReplyCount; j < comments.length; j++) {
-                if (visibleReplyCount === comments.length) {
-                comments[j].style.display = 'none';
-                } else {
-                comments[j].style.display = 'flex';
-                }
-            }
-
-            count showMoreButton = document.querySelector('.show-reply-more');
-
-            if (visibleReplyCount === comments.length) {
-                showMoreButton.textContent = 'Show Less';
-                visibleReplyCount = 5;
-            } else {
-                showMoreButton.textContent = 'Show More';
-                visibleReplyCount += 5;
-            }
-            
+            var showMoreButton = document.querySelector('.show-reply-more');
+            showMoreButton.style.display = 'none';
         }
 
     </script>
