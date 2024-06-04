@@ -813,7 +813,7 @@
 
                                         @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
                                         <div>
-                                            <div class="row comment-item w-100 ms-5 mt-4">
+                                            <div class="row reply-item w-100 ms-5 mt-4" style="display: {{ $reply < 5 ? 'flex' : 'none' }};">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}" alt="Image" class="img-fluid" width="60" style="object-fit:cover; height: 60px;" />
@@ -871,17 +871,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-
                                                                     <div class="comment-text">
                                                                         <p>{{ $reply->content }}</p>
                                                                     </div>
-                                                                    {{-- <a href="javascript:void(0)" class="reply-btn mt-3" onclick="showReplyForm({{ $reply->id }})">Balas</a> --}}
-
-                                                                    {{-- @if ($comment->parent_id == null)
-                                                                        <a href="javascript:void(0)"
-                                                                            class="reply-btn mt-3"
-                                                                            onclick="showReplyForm({{ $comment->id }})">Balas</a>
-                                                                    @endif --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -924,6 +916,22 @@
                                             </div>
                                         </div>
                                         @endforeach
+
+                                        @if ($groupedReplies->count() > 5)
+                                        <div class="show-more text-center mt-4">
+                                            <div class="text-center left-content mt-3">
+                                                <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
+                                                    Selengkapnya
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @endif
+            
+
                                     </div>
                                 </div>
                                 @endif
@@ -1442,6 +1450,15 @@
 
         function showMoreComments() {
             var comments = document.querySelectorAll('.comment-item');
+            for (var i = 0; i < comments.length; i++) {
+                comments[i].style.display = 'flex';
+            }
+            var showMoreButton = document.querySelector('.show-more');
+            showMoreButton.style.display = 'none';
+        }
+
+        function showMoreCommentsReply() {
+            var comments = document.querySelectorAll('.reply-item');
             for (var i = 0; i < comments.length; i++) {
                 comments[i].style.display = 'flex';
             }
