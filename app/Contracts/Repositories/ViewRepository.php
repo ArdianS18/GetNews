@@ -187,7 +187,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->orderByDesc('news_categories_count')
             ->skip(1)
             ->take(1)
-            ->pluck('id');
+            ->pluck('categories.id');
 
             // ->get();
             // ->select('category_id')
