@@ -164,7 +164,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4)
+            ->take(3)
             ->get();
 
         return $popularLeft;
@@ -174,14 +174,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
     {
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
-
-        // return $this->model->query()
-        //     ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
-        //     ->withCount('newsCategories')
-        //     ->orderByDesc('news_categories_count')
-        //     ->take(7)
-        //     ->get();
-
+        
         $subquery = DB::table('news_categories')
             ->select('category_id')
             ->groupBy('category_id')
@@ -197,7 +190,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('news_id')
             ->orderBy('total', 'desc')
-            ->take(4)
+            ->take(3)
             ->get();
 
         return $popularLeft;
