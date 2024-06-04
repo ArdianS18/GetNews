@@ -389,7 +389,7 @@
 
                             </div>
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
-                                @for ($i = 0; $i < min(6, count($recents)); $i++)
+                                @for ($i = 0; $i < min(6, count($news_recent)); $i++)
                                 @php
                                         $dateParts = date_parse($news_recent [$i]->upload_date);
                                     @endphp
