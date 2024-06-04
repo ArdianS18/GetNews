@@ -16,6 +16,10 @@
             --bs-bg-opacity: 1;
             background-color: rgba(var(--bs-danger-rgb), var(--bs-bg-opacity)) !important;
         }
+
+        .navbar-area .navbar .navbar-nav .nav-item .dropdown-menu {
+            width: auto;
+        }
     </style>
 </head>
 <div class="navbar-area header-one mb-5" id="navbar">
