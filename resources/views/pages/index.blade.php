@@ -202,30 +202,30 @@
                 @php $counters= 0; @endphp
                 @foreach ($news_right as $barus)
                     @php
-                        $dateParts = date_parse($barus->upload_date);
+                        $dateParts = date_parse($barus->news->upload_date);
                     @endphp
                     @if ($counters < 1)
                         <div class="news-card-two">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive"
+                                    href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $barus->news->photo) }}" class="img-responsive"
                                         style="object-fit: cover;" alt="Image" height="250" width="100%" />
                                 </a>
-                                <a href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $barus->news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $barus->news->newsCategories[0]->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}"
-                                        href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->name, $limit = 60, $end = '...') !!}
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $barus->news->name }}"
+                                        href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 60, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i>
-                                        {{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}
+                                        {{ \Carbon\Carbon::parse($barus->news->created_at)->translatedFormat('d F Y') }}
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->total }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -233,25 +233,25 @@
                         <div class="news-card-three">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $barus->photo) }}" class="img-responsive"
+                                    href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $barus->news->photo) }}" class="img-responsive"
                                         style="object-fit:cover;" width="100%" height="100" alt="Image" />
                                 </a>
                             </div>
                             <div class="news-card-info">
-                                <a data-toggle="tooltip" data-placement="top" title="{{ $barus->name }}"
-                                    href="{{ route('categories.show.user', ['category' => $barus->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $barus->newsCategories[0]->category->name }}</a>
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $barus->news->name }}"
+                                    href="{{ route('categories.show.user', ['category' => $barus->news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $barus->news->newsCategories[0]->category->name }}</a>
                                 <h3><a
-                                        href="{{ route('news.user', ['news' => $barus->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($barus->name, $limit = 40, $end = '...') !!}
+                                        href="{{ route('news.user', ['news' => $barus->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        {!! Illuminate\Support\Str::limit($barus->news->name, $limit = 40, $end = '...') !!}
                                     </a>
                                 </h3>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($barus->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($barus->news->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $barus->total }}</li>
                                 </ul>
                             </div>
                         </div>
