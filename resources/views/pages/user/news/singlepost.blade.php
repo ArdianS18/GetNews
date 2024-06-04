@@ -939,7 +939,7 @@
                                 <p>No comments available.</p>
                                 @endforelse
                             </div>
-                            @if ($comments->count() > 5)
+                            @if (isset($comments) && count($comments) > 5)
                             <div class="show-more text-center mt-4">
                                 <div class="text-center left-content mt-3">
                                     <a style="color: var(--secondaryColor);" onclick="showMoreComments()">Lihat
