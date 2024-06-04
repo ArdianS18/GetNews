@@ -64,10 +64,12 @@
     </div>
 
     <div id="loading">
-        <div class="d-flex mt-2 justify-content-center">
-            <nav id="pagination">
-            </nav>
-        </div>
+
+    </div>
+    
+    <div class="d-flex mt-2 justify-content-center">
+        <nav id="pagination">
+        </nav>
     </div>
 
     <x-delete-modal-component />
