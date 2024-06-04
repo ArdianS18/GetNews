@@ -2,12 +2,6 @@
 
 <head>
     <style>
-        .recent {
-            z-index: 2;
-            position: sticky;
-            position: -webkit-sticky;
-            top: 88px;
-        }
 
         .theme-dark blockquote {
             border-left: 5px solid #ffffff;
