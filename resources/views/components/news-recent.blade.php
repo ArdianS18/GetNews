@@ -7,7 +7,7 @@
             @php
                 $dateParts = date_parse($recent->upload_date);
             @endphp
-            <div class="news-card-one" style="{{ $index <= 6 ? "block" : "none" }}">
+            <div class="news-card-one" style="display:{{ $index <= 6 ? "block" : "none" }}">
                 <div class="news-card-img">
                     <img src="{{ asset('storage/' . $recent->photo) }}" style="object-fit: cover"
                         alt="Image" width="100%" height="80">
