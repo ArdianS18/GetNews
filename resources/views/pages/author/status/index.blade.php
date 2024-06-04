@@ -159,7 +159,7 @@
             $('.preloader').show()
             e.preventDefault()
             const id = $(this).data('id')
-            var url = "{{ route('profile.news.delete', ['news' => ':id']) }}";
+            var url = "{{ route('profile.news.soft.delete', ['news' => ':id']) }}";
             url = url.replace(':id', id);
 
             $.ajax({

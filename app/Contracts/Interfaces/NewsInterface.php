@@ -14,6 +14,7 @@ use App\Contracts\Interfaces\Eloquent\UpdateInterface;
 use App\Contracts\Interfaces\Eloquent\UpdateOrCreateInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInInterface;
 use App\Contracts\Interfaces\Eloquent\WhereInterface;
+use App\Models\News;
 use Illuminate\Foundation\Mix;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -63,4 +64,7 @@ interface NewsInterface extends DeleteByAuthor, GetInterface, StoreInterface, Up
     public function newsSubCategorySearch($subCategory, mixed $query, mixed $data, $hal) : mixed;
 
     public function findUser(mixed $user_id) : mixed;
+    public function softDelete($news) : mixed;
+    public function restore($news) : mixed;
+    public function getDelete($id,Request $request,int $pagination = 10,$condition) : LengthAwarePaginator;
 }

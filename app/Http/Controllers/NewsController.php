@@ -42,6 +42,7 @@ use App\Models\NewsTag;
 use App\Models\Report;
 use App\Models\View as ModelsView;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class NewsController extends Controller
 {
@@ -632,6 +633,16 @@ class NewsController extends Controller
        //
     }
 
+    public function softDelete(News $news) : JsonResponse {
+        $this->news->softDelete($news);
+        return ResponseHelper::success(trans('alert.delete_success'));
+    }
+
+    public function restore(News $news) {
+        $this->news->restore($news);
+        return ResponseHelper::success(trans('alert.delete_success'));
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -692,14 +703,7 @@ class NewsController extends Controller
     {
         $id = auth()->user()->id;
         if ($request->has('page')) {
-            $news = $this->news->searchStatus($id, $request, 10, "true");
-            $data['paginate'] = [
-                'current_page' => $news->currentPage(),
-                'last_page' => $news->lastPage(),
-            ];
-            $data['data'] = NewsResource::collection($news);
-        } else {
-            $news = $this->news->searchStatus($id, $request, 10, "true");
+            $news = $this->news->getDelete($id, $request, 10, "true");
             $data['paginate'] = [
                 'current_page' => $news->currentPage(),
                 'last_page' => $news->lastPage(),

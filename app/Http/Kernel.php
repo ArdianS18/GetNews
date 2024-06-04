@@ -2,10 +2,12 @@
 
 namespace App\Http;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Jobs\DeleteOldSoftDeletedData;
+use Illuminate\Console\Scheduling\Schedule;
 use Spatie\Permission\Contracts\Permission;
-use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -44,7 +46,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -74,4 +76,9 @@ class Kernel extends HttpKernel
         'visitor' => \App\Http\Middleware\TrackVisitors::class,
         'check.banned' => \App\Http\Middleware\CheckBanned::class,
     ];
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->job(new DeleteOldSoftDeletedData)
+            ->hourly();
+    }
 }
