@@ -143,7 +143,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
         return $trendingNews;
     }
 
-     public function getByLeft(): mixed
+    public function getByLeft(): mixed
     {
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
@@ -156,6 +156,37 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->get()
             ->pluck('category_id');
 
+
+        $popularLeft = $this->model->query()
+            ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('news.newsCategories', 'category_id', $subquery)
+            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('news_id')
+            ->orderBy('total', 'desc')
+            ->take(4)
+            ->get();
+
+        return $popularLeft;
+    }
+
+    public function getByRight(): mixed
+    {
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
+
+        $subquery = DB::table('news_categories')
+            ->select('category_id', DB::raw('COUNT(*) as category_count'))
+            ->groupBy('category_id')
+            ->orderByRaw('COUNT(*) DESC')
+            ->skip(1)
+            ->take(1)
+            ->pluck('category_id');
+
+        $categoryName = DB::table('categories')
+            ->where('id', $subquery->first())
+            ->pluck('name')
+            ->first();
 
         $popularLeft = $this->model->query()
             ->whereRelation('news', 'status', NewsStatusEnum::ACTIVE->value)

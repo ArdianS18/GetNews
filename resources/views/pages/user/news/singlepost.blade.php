@@ -838,8 +838,8 @@
                                     </div>
 
                                     @foreach ($groupedReplies[$comment->id] ?? [] as $reply)
-                                        <div class="">
-                                            <div class="row comment-item w-100 ms-5 mt-4">
+                                        <div class="comment-item w-100 ms-5 mt-4" style="display: block">
+                                            <div class="row">
                                                 <div class="col-lg-1">
                                                     <div class="comment-author-img">
                                                         <img src="{{ asset($reply->user->photo ? 'storage/' . $reply->user->photo : 'default.png') }}"
