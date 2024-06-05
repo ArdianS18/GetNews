@@ -22,7 +22,7 @@
         }
     </style>
 </head>
-<div class="navbar-area header-one mb-5" id="navbar">
+<div class="navbar-area header-one mb-0" id="navbar">
     <div class="header-top">
         <div class="container-fluid">
             <div class="row align-items-center">
