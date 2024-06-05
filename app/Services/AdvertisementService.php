@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Base\Interfaces\uploads\CustomUploadValidation;
 use App\Base\Interfaces\uploads\ShouldHandleFileUpload;
+use App\Enums\AdvertisementStatusEnum;
 use App\Enums\UploadDiskEnum;
 use App\Helpers\ImageCompressing;
 use App\Http\Requests\AdvertisementRequest;

@@ -1027,7 +1027,7 @@
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <x-news-category :categories="$totalCategories" />
-                        <x-news-populer :populars="$populars" />
+                        
 
                         <div class="sidebar-widget" style="height: 700px">
                             <h3 class="sidebar-widget-title">iklan</h3>
@@ -1420,7 +1420,6 @@
         let comments;
         $(document).ready(function() {
         comments = document.querySelectorAll('.reply-item');
-            console.log(comments);
             $('.unpin').click(function() {
                 var commentId = $(this).data('id');
                 var form = $('<form>', {
