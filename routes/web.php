@@ -254,6 +254,10 @@ Route::middleware(['auth', 'role:author', 'verified','check.banned'])->group(fun
     Route::get('detail-news/{news}', [AuthorController::class, 'detailnewsauthor'])->name('detail.news');
     // Profile Author
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('author-profile', function(){
+        return view('pages.author.index');
+    });
+
     Route::get('profile-status', [ProfileController::class, 'profilestatus'])->name('profile-status.author');
     Route::post('create-news-draft', [NewsController::class, 'storeDraft'])->name('news.draft');
     Route::put('update-news-draft/{news}', [NewsController::class, 'updateDraft'])->name('news.update.draft');
