@@ -79,7 +79,7 @@
 
 @section('script')
 
-<script>
+<!-- <script>
     document.addEventListener('DOMContentLoaded', function () {
         @if (session('success'))
             Swal.fire({
@@ -99,7 +99,7 @@
             });
         @endif
     });
-</script>
+</script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-pzjw8V+VbWFr6J3QKZZxCpZ8F+3t4zH1t03eNV6zEYl5S+XnvLx6D5IT00jM2JpL" crossorigin="anonymous">

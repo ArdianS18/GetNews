@@ -65,6 +65,7 @@ interface NewsInterface extends DeleteByAuthor, GetInterface, StoreInterface, Up
 
     public function findUser(mixed $user_id) : mixed;
     public function softDelete($news) : mixed;
+    public function cleanupSoftDelete($news) : mixed;
     public function restore($news) : mixed;
     public function getDelete($id,Request $request,int $pagination = 10,$condition) : LengthAwarePaginator;
 }

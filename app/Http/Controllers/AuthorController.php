@@ -232,7 +232,7 @@ class AuthorController extends Controller
     {
         $data = $this->authorService->store($request, $user);
         $this->author->updateOrCreate($user->id,$data);
-        return back()->with('success', trans('alert.add_success'));
+        return back()->with('success', 'Berhasil mendaftar menjadi penulis.');
     }
 
     /**

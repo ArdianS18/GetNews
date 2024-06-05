@@ -212,6 +212,7 @@ Route::middleware(['auth', 'role:admin|superadmin'])->group(function () {
 Route::middleware(['auth', 'role:admin|author|superadmin|user','check.banned'])->group(function () {
     //update news ===>
     Route::put('update-news-profile/{news}', [ProfileController::class, 'updateberita'])->name('profile.berita.updated');
+    Route::post('delete-news-profile/{news}', [NewsController::class, 'destroy'])->name('profile.news.delete');
     Route::post('delete-news-soft-profile/{news}', [NewsController::class, 'softDelete'])->name('profile.news.soft.delete');
     Route::post('restore-news-soft-profile/{news}', [NewsController::class, 'restore'])->name('profile.news.restore');
 

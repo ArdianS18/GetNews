@@ -81,7 +81,7 @@
             <!-- Header Section -->
             <div style="text-align: center;">
                 <div style="cursor: auto; color: #1B3061; font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;">
-                    <img src="{{asset('Kop-Email.jpg')}}" style="width:638px" />
+                    <img src="{{asset('Kop-Email.jpg')}}" style="width:638px" class="w-100 h-100"/>
                 </div>
             </div>
             <!-- Content Section -->

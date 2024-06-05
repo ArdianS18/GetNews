@@ -125,8 +125,7 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="mb-4">
-                                                    <label for="exampleInputPassword1" class="form-label fw-semibold">No
-                                                        Telephone</label>
+                                                    <label for="exampleInputPassword1" class="form-label fw-semibold">Nomer Telepon</label>
                                                     <input type="text" class="form-control" id="exampleInputtext"
                                                         value="{{ auth()->user()->phone_number }}" name="phone_number">
                                                 </div>
@@ -140,7 +139,7 @@
                                             <div class="col-12">
                                                 <div class="">
                                                     <label for="exampleInputPassword1"
-                                                        class="form-label fw-semibold">Address</label>
+                                                        class="form-label fw-semibold">Alamat</label>
                                                     <textarea type="text" class="form-control" name="address" id="exampleInputtext"
                                                         placeholder="814 Howard Street, 120065, India" style="resize: none">{{ auth()->user()->address }}</textarea>
                                                 </div>

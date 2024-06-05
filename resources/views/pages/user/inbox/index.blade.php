@@ -32,7 +32,7 @@
                 <div class="card-body px-4 py-4">
                     <div class="row align-items-center">
                         <div class="col-9">
-                            <h4 class="fw-semibold mb-8">Inbox Application</h4>
+                            <h4 class="fw-semibold mb-8">Kotak Surat</h4>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a class="text-muted text-decoration-none"

@@ -60,7 +60,7 @@
                                 <div class="text-center">
                                     <i class="ti ti-coins fs-6 d-block mb-2"></i>
                                     <h5 class="mb-0 fw-semibold lh-1">{{ $coin }}</h5>
-                                    <p class="mb-0 fs-4">Coin</p>
+                                    <p class="mb-0 fs-4">Koin</p>
                                 </div>
 
                                 <a class="nav-link notify-badge nav-icon-hover" href="javascript:void(0)"

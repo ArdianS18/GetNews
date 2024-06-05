@@ -735,8 +735,17 @@ class NewsRepository extends BaseRepository implements NewsInterface
     public function softDelete($news): mixed
     {
         return $this->model->query()
-        ->findOrFail($news->id)
-        ->update(['delete_at'=> Carbon::now()]);
+            ->findOrFail($news->id)
+            ->update(['delete_at'=> Carbon::now()]);
+    }
+
+    public function cleanupSoftDelete($news): mixed
+    {
+        return $this->model->query()
+            ->findOrFail($news->id)
+            ->whereNotNull('delete_at')
+            ->where('delete_at', '>', Carbon::now()->subDays(30))
+            ->pluck('id');
     }
 
     public function restore($news): mixed

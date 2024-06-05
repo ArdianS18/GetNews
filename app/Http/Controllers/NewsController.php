@@ -191,7 +191,7 @@ class NewsController extends Controller
 
     public function usernews(Request $request,$year,$mounth,$day,$slug)
     {
-        $ip = $request->getClientIp();
+        $visitorId = $request->cookie('visitor_id');
 
         $news = $this->news->showWithSlug($slug);
         $newsId = $news->id;
@@ -199,7 +199,7 @@ class NewsController extends Controller
 
         $view = $this->view->store([
             'news_id' => $newsId,
-            'ip' => $ip,
+            'ip' => $visitorId,
         ]);
 
         $userLike = $this->newsHasLike->where($news->id);
@@ -230,8 +230,6 @@ class NewsController extends Controller
             $relatedNews = $this->news->get()->inRandomOrder()->first();
         }
 
-
-        $visitorId = $request->cookie('visitor_id');
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
