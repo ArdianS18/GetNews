@@ -36,7 +36,7 @@
             <div class="d-flex justify-content-between mt-4 ms-4 me-4">
                 <div class="d-flex justify-content-start gap-2">
 
-                    @if ($news->status === 'panding')
+                    {{-- @if ($news->status === 'panding')
                         <div>
                             @if ($news->status === "panding")
                             <div>
@@ -59,11 +59,11 @@
                                 style="background-color: #5D87FF;">Kembali</a>
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
 
                 <div class="d-flex gap-2">
-                    @if ($news->status === "active")
+                    {{-- @if ($news->status === "active")
                     <div class="">
                         <a href="{{ route('news.user',  ['news' => $news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}" class="btn btn-warning btn-lg px-3">Preview</a>
                     </div>
@@ -98,11 +98,11 @@
                                 </div>
                             </a>
                         </div>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
 
-                <form id="myForm" method="post" action="{{ route('profile.berita.updated', ['news' => $news->id]) }}" enctype="multipart/form-data">
+                <form id="myForm" method="post" enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <div class="container p-4">
@@ -159,12 +159,12 @@
                                                     class="select2 form-control category @error('category') is-invalid @enderror"
                                                     name="category[]" multiple="true" value="" aria-label="Default select example">
                                                     <option>pilih kategori</option>
-                                                    @foreach ($categories as $category)
+                                                    {{-- @foreach ($categories as $category)
                                                         <option value="{{ $category->id }}"
                                                             {{ $newsCategories->contains('category_id', $category->id) ? 'selected' : '' }}>
                                                             {{ $category->name }}
                                                         </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                                 @error('category')
                                                     <span class="invalid-feedback" role="alert" style="color: red">
@@ -180,12 +180,12 @@
                                                         class="form-control sub-category select2 @error('sub_category') is-invalid @enderror"
                                                         name="sub_category[]" multiple="true" value="" aria-label="Default select example">
                                                         <option>pilih sub kategori</option>
-                                                        @foreach ($subCategories as $subCategory)
+                                                        {{-- @foreach ($subCategories as $subCategory)
                                                             <option value="{{ $subCategory->id }}"
                                                                 {{ $newsSubCategories->contains('sub_category_id', $subCategory->id) ? 'selected' : '' }}>
                                                                 {{ $subCategory->name }}
                                                             </option>
-                                                        @endforeach
+                                                        @endforeach --}}
                                                     </select>
                                                     @error('sub_category')
                                                         <span class="invalid-feedback" role="alert" style="color: red">
@@ -210,11 +210,11 @@
 
                                                 <select class="form-control select2 tags" name="tags[]" multiple="multiple">
                                                     <option>pilih tags</option>
-                                                    @foreach ($tags as $tag)
+                                                    {{-- @foreach ($tags as $tag)
                                                         <option value="{{ $tag->name }}" {{ $newsTags->contains('tag_id', $tag->id) ? 'selected' : '' }}>
                                                             {{ $tag->name }}
                                                         </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                                 @error('tags')
                                                     <span class="invalid-feedback" role="alert" style="color: red;">
@@ -233,7 +233,7 @@
                                                 <div class="col-lg-12 mb-4">
                                                     <label class="form-label" for="nomor">Judul Berita</label>
                                                     <input type="text" id="name" name="name" placeholder="name"
-                                                        value="{{ $news->name }}" class="form-control @error('name') is-invalid @enderror">
+                                                        value="" class="form-control @error('name') is-invalid @enderror">
                                                     @error('name')
                                                         <span class="invalid-feedback" role="alert" style="color: red;">
                                                             <strong>{{ $message }}</strong>
@@ -242,7 +242,7 @@
                                                 </div>
                                                 <div class="col-lg-12 mb-4" style="height: auto;">
                                                     <label class="form-label" for="content">Isi Berita</label>
-                                                    <textarea id="content" name="content" placeholder="content" value="{{ $news->content }}" style="resize: none; height: 400;" class="form @error('content') is-invalid @enderror">{{ $news->content }}</textarea>
+                                                    <textarea id="content" name="content" placeholder="content" value="" style="resize: none; height: 400;" class="form @error('content') is-invalid @enderror">test</textarea>
                                                     @error('content')
                                                         <span class="invalid-feedback" role="alert" style="color: red;">
                                                             <strong>{{ $message }}</strong>
@@ -254,12 +254,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">         
+                                <div class="col-lg-12">
                                     <div class="card border shadow-none">
                                         <div class="card-header d-flex justify-content-center" style="background-color: #CCCCCC;">
                                             <h4>Rincian Pembayaran</h4>
                                         </div>
-                                        
+
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-lg-6 col-12 pe-5">
@@ -333,7 +333,7 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="{{ route('reject-news', ['news' => $news->id])}}" method="POST">
+                    <form method="POST">
                         @csrf
                         @method('patch')
                         <div class="container">
