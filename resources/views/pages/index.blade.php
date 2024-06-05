@@ -413,12 +413,12 @@
                                         </div>
                                     </div>
                                 @endfor
-
                             </div>
+                            
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
                                 @for ($i = 0; $i < min(6, count($news_recent)); $i++)
                                 @php
-                                        $dateParts = date_parse($news_recent [$i]->upload_date);
+                                        $dateParts = date_parse($news_recent[$i]->upload_date);
                                     @endphp
                                     <div class="news-card-seven" >
                                         <div class="news-card-info">
@@ -437,7 +437,7 @@
                                             </ul>
                                         </div>
                                         <div class="news-card-img">
-                                            <img src="{{ asset('storage/' . $news_recent [$i]->photo) }}"
+                                            <img src="{{ asset('storage/' . $news_recent[$i]->photo) }}"
                                                 alt="Image" width="100%" height="140"
                                                 style="object-fit: cover" />
                                         </div>
@@ -770,6 +770,7 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="sidebar-widget">
                         <h3 class="sidebar-widget-title">Postingan Popular</h3>
                         <div class="pp-post-wrap">
