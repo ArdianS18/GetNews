@@ -95,33 +95,35 @@
                     @forelse ($categories as $category)
                     <li class="nav-item">
                     <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
-                                <ul class="dropdown-menu">
+                        @if (count($subCategories->where('category_id', $category->id)) > 0)
+                            <ul class="dropdown-menu">
                                 <div class="d-flex">
                                         <li class="nav-item">
-                                        @foreach ($subCategories->where('category_id', $category->id) as $subCategory)
-                                        <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
+                                            @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
+                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
 
-                                        @if(($loop->iteration % 5) == 0)
-                                        </li>
-                                        <li class="nav-item">
-                                        @endif
-                                        @endforeach
+                                            @if(($loop->iteration % 5) == 0)
+                                            </li>
+                                            <li class="nav-item">
+                                            @endif
+
+                                            @empty
+
+                                            @endforelse
                                         </li>
                                 </div>
-                                </ul>
-                            </li>
+                            </ul>
+                        @endif
+                    </li>
                     @empty
                     <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
-
                     @endforelse
-
-
-
                     <!-- @foreach ($categories as $category)
                             <li class="nav-item">
                                 <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
 
                                 <ul class="dropdown-menu">
+
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                     <div class="d-flex">
                                          <li class="nav-item">
