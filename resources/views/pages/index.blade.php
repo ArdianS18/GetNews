@@ -205,7 +205,7 @@
                             </div>
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->news->name }}"
-                                        href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        href="{{ route('news.user', ['news' => $mid->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
                                         {!! Illuminate\Support\Str::limit($mid->news->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
