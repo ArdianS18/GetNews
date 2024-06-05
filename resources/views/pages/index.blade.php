@@ -170,22 +170,22 @@
                         <div class="news-card-four">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $mid->mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $mid->mid->photo) }}" class="img-responsive" alt="Image"
+                                    href="{{ route('news.user', ['news' => $mid->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $mid->news->photo) }}" class="img-responsive" alt="Image"
                                         width="100%" style="object-fit: cover" height="450" />
                                 </a>
                             </div>
 
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
-                                        href="{{ route('news.user', ['news' => $mid->mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->mid->name, $limit = 70, $end = '...') !!}
+                                        href="{{ route('news.user', ['news' => $mid->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        {!! Illuminate\Support\Str::limit($mid->news->name, $limit = 70, $end = '...') !!}
                                     </a>
                                 </h3>
 
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
-                                            <p>{{ \Carbon\Carbon::parse($mid->mid->created_at)->translatedFormat('d F Y') }}</p>
+                                            <p>{{ \Carbon\Carbon::parse($mid->news->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
                                     <li><i class="fi fi-rr-eye" style="margin-top: 2px;"></i>{{ $mid->total }}</li>
                                 </ul>
