@@ -95,7 +95,7 @@
                     @foreach ($categories as $category)
                     <li class="nav-item">
                     <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
-                            <ul class="dropdown-menu">
+                        <ul class="dropdown-menu">
                             <div class="d-flex">
                                     <li class="nav-item">
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
@@ -113,17 +113,15 @@
                                     @endforelse
                                     </li>
                             </div>
-                            </ul>
+                        </ul>
                         </li>
                     @endforeach
-
-
-
                     <!-- @foreach ($categories as $category)
                             <li class="nav-item">
                                 <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
 
                                 <ul class="dropdown-menu">
+
                                     @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                     <div class="d-flex">
                                          <li class="nav-item">

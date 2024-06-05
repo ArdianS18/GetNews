@@ -87,10 +87,10 @@
                     </div>
                 @endforelse
             </div>
-            
-            <div class="text-center item-center mt-4 d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
+
+            {{-- <div class="text-center item-center mt-4 d-flex justify-content-center" style="background-color:#F6F6F6; width:100%;height:200px;">
                 <h5 class="mt-5 text-dark">Iklan</h5>
-            </div>
+            </div> --}}
             <x-paginator :paginator="$newsByDate" />
         </div>
 
@@ -98,10 +98,10 @@
             <div class="sidebar">
                 <x-news-category :categories="$totalCategories" />
                 <x-news-populer :populars="$populars" />
-               
-                <div class="sidebar-widget" style="height: 700px">
+
+                {{-- <div class="sidebar-widget" style="height: 700px">
                     <h3 class="sidebar-widget-title">iklan</h3>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
