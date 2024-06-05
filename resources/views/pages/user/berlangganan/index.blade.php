@@ -16,14 +16,8 @@
     <!-- Core Css -->
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
     <link id="themeColors" rel="stylesheet" href="{{ asset('admin/dist/css/style.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('admin/dist/libs/prismjs/themes/prism-okaidia.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('admin/dist/libs/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/dist/libs/sweetalert2/dist/sweetalert2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/dist/css/app.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('admin/dist/libs/bootstrap-duallistbox/dist/bootstrap-duallistbox.min.css') }}">
     <style>
         .important {
             color: red;
@@ -33,7 +27,7 @@
 @endsection
 
 @section('content')
-<div class="ps-5 pe-5">
+<div class="ps-5 pe-5 mt-5">
 <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
     <div class="card-body px-4 py-4">
         <div class="row justify-content-between">

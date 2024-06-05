@@ -155,14 +155,15 @@
             <div class="tab-pane fade show active card shadow-sm" id="pills-profile" role="tabpanel"
                 aria-labelledby="pills-profile-tab" tabindex="0">
                 <div class="row p-4">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mb-4">
                         <div class="mb-4">
-                            <h3>Biodata</h3>
+                            <h4>Biodata</h4>
                         </div>
-                        
-                        <div class="mb-4">
-                            <a href="{{ route('profile.author.update') }}" class="btn btn-sm px-3 py-1 mt-2 text-white" type="button" style="background-color: #175A95;">Update Profile</a>>    
-                        </div>
+
+                    
+                        <a href="{{ route('profile.user.update') }}">
+                            <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
+                        </a>
                     </div>
 
                     <div class="col-md-12 col-lg-6 mb-4">
@@ -225,7 +226,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel{{ auth()->user()->id }}">Daftar Author</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <form method="post" action="{{ route('user.author', ['user' => auth()->user()->id]) }}"
                     enctype="multipart/form-data">
