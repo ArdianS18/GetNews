@@ -118,15 +118,18 @@
             <div class="author-box d-flex justify-content-center shadow-sm">
 
                 <form class="search-box-widget w-100">
-                    <input type="text" name="name" class="form-control search-chat py-2"
-                    placeholder="Search"/>
+                    <input type="text" name="name" class="form-control search-chat py-2" placeholder="Search" 
+                    @if ($search)
+                        value="{{ $search }}"
+                    @endif
+                    />
                     <button type="submit">
                       <i class="fi fi-rr-search"></i>
                     </button>
                   </form>
 
                 {{--  --}}
-                
+
                 {{-- <div class="author-img">
                 <img src="assets/img/author/single-author.jpg" alt="Image" />
                 </div>
@@ -167,7 +170,7 @@
                     </div>
                 </div>
                 </div> --}}
-            </div>            
+            </div>
         </div>
 
     </div>
@@ -175,7 +178,7 @@
 
 
     <div class="container-fluid pb-75 mt-5">
-        
+
         {{-- <div class="card shadow-sm position-relative overflow-hidden" style="background-color: #175A95;">
             <div class="card-body px-4">
                 <div class="row justify-content-between">
@@ -256,10 +259,10 @@
                                                     </form>
                                                 @endif
                                             @elseif (!Auth::check())
-                                            
+
                                                 <button type="button" class="btn btn-sm py-1 px-5 text-white not-login"
                                                     style="background-color: #175A95; border-radius: 8px;">Ikuti</button>
-                                            
+
                                             @else
                                                 @role('author')
                                                     <a href="{{ route('profile.index') }}" class="btn btn-sm btn-outline-secondary py-1 px-4"
@@ -269,7 +272,7 @@
                                                     <a href="{{ route('profile.user') }}" class="btn btn-sm btn-outline-secondary py-1 px-4"
                                                     style="border-radius: 8px;">Profile</a>
                                                 @endrole
-                                            
+
                                             @endif
 
                                             <div class="d-flex align-items-center justify-content-between mt-5"

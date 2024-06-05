@@ -98,24 +98,35 @@
                             @if (count($subCategories->where('category_id', $category->id)) > 0)
                                 <ul class="dropdown-menu">
                                     <div class="d-flex">
-                                            <li class="nav-item">
-                                                @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
+                                        <li class="nav-item">
+                                            @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
                                                 <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link" style="{{ request()->routeIs('subcategories.show.user') && request()->route('category') == $subCategory->category->slug && request()->route('subCategory') == $subCategory->slug  ? 'color: #E93314;' : '' }}">{{ $subCategory->name }}</a>
 
-                                        @if(($loop->iteration % 5) == 0)
-                                        </li>
-                                        <li class="nav-item">
-                                        @endif
+                                                @if(($loop->iteration % 5) == 0)
+                                                </li>
+                                                <li class="nav-item">
+                                                @endif
 
-                                        @empty
-                                        <div class="nav-link">
-                                            Data Kosong
-                                        </div>
-                                        @endforelse
+                                                @empty
+                                                <div class="nav-link">
+                                                    Data Kosong
+                                                </div>
+                                            @endforelse
                                         </li>
                                     </div>
                                 </ul>
+                            @else
+                                <ul class="dropdown-menu">
+                                    <div class="d-flex">
+                                        <div class="nav-item">
+                                            <p class="nav-link">
+                                                Kosong
+                                            </p>
+                                        </div>
+                                    </div>
+                                </ul>
                             @endif
+
                         </li>
                     @endforeach
                 </ul>
