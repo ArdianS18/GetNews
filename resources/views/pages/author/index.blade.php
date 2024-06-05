@@ -198,7 +198,6 @@
                                 <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-5">
                                     <form class="d-flex flex-column flex-sm-row gap-2">
                                         <div class="me-3">
-
                                             <div class="input-group">
                                                 <input type="text" name="search"
                                                     class="form-control search-chat py-2 px-5 ps-5" placeholder="Search">
@@ -220,7 +219,6 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                     </form>
 
                                 </div>
@@ -289,11 +287,9 @@
                                             </div>
                                         </div>
                                     @endforelse
-
                                 </div>
                                 <!-- End Row -->
                             </div>
-
                         </div>
 
                         <div class="tab-pane fade card p-4" id="pills-profile" role="tabpanel"
@@ -411,12 +407,10 @@
                             <div class="">
                                 <ul class="navbar-nav mx-auto">
                                     <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
-
                                         <a>
                                             <img src="{{ asset( $follower->user->photo ? 'storage/'. $follower->user->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
                                         </a>
                                     </div>
-
                                 </ul>
                             </div>
                         </div>
@@ -585,7 +579,7 @@
                                         <div class="position-relative d-flex">
                                             <div class="">
                                                 <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
-                                                value="{{ request('search') }}" width="470px" placeholder="Cari..">
+                                                value="{{ request('search') }}" style="width: 470px" placeholder="Cari..">
                                                 <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
                                             </div>
                                         </div>
@@ -597,7 +591,6 @@
                                         <div class="">
                                             <ul class="navbar-nav mx-auto">
                                                 <div class="news-card-img mb-2 ms-2" style="padding-right: 0px;">
-            
                                                     <a>
                                                         <img src="{{ asset( $follower->user->photo ? 'storage/'. $follower->user->photo : "default.png")  }}" alt="Image" width="45px" height="45px" style="border-radius: 50%; object-fit:cover;"/>
                                                     </a>
@@ -670,6 +663,17 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <form class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                                {{-- < class="d-flex"> --}}
+                                    <div class="position-relative d-flex">
+                                        <div class="">
+                                            <input type="text" name="search" id="search-name" class="form-control search-chat py-2 px-5 ps-5"
+                                            value="{{ request('search') }}" style="width: 470px" placeholder="Cari..">
+                                            <i class="ti ti-search position-absolute top-50 translate-middle-y fs-6 text-dark ms-3"></i>
+                                        </div>
+                                    </div>
+                                {{-- </> --}}
+                            </form>
                             <div class="row">
                                 @forelse ($follow_detail as $follow)
                                     @php
@@ -753,5 +757,4 @@
 
 @section('script')
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
-
 @endsection

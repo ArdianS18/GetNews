@@ -25,6 +25,7 @@ use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UserProfileRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\AuthorResource;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\NewsCategory;
@@ -82,19 +83,14 @@ class ProfileController extends Controller
 
     public function index(Request $request, User $user)
     {
-        $subCategories = $this->subCategory->get();
-        $category = $this->category->get();
         $news = $this->news->search($request);
 
         $news_panding = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "panding")->count();
         $news_active = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "active")->count();
         $news_reject = $this->news->getAll()->where('user_id', auth()->user()->id)->wherein('status', "nonactive")->count();
-
         $news_post = $this->news->getAll()->where('user_id', auth()->user()->id)->count();
-
         $followers = $this->followers->get()->where('author_id', auth()->user()->author->id)->count();
         $follower_detail = $this->followers->whereAuthor(auth()->user()->author->id);
-
         $following = $this->followers->get()->where('user_id', auth()->user()->id)->count();
         $follow_detail = $this->followers->whereUser(auth()->user()->id);
 
@@ -104,7 +100,7 @@ class ProfileController extends Controller
         $news_like = $this->newsHasLike->countLike($news_id);
 
         $authors = $this->author->get();
-        return view('pages.author.index', compact('follow_detail','follower_detail','news','subCategories', 'category', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like', 'following'));
+        return view('pages.author.index', compact('follow_detail','follower_detail','news', 'authors', 'news_panding', 'news_active', 'news_reject', 'news_post', 'followers', 'news_like', 'following'));
     }
 
     public function profilestatus()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,7 +25,7 @@ class AuthorResource extends JsonResource
             'photo' => $this->user->photo ? asset('storage/' . $this->user->photo) : asset('default.png'),
             'birth_date' => $this->user->birth_date ? $this->user->birth_date : "-",
             'address' => $this->user->address,
-            'cv' => $this->cv ? asset('storage/' . $this->cv): asset('')
+            'cv' => $this->cv ? asset('storage/' . $this->cv): asset(''),
         ];
     }
 }
