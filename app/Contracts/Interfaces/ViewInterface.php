@@ -19,6 +19,7 @@ interface ViewInterface extends DeleteByAuthor,GetInterface, StoreInterface, Upd
     public function getByLeft() : mixed;
     public function getByRight() : mixed;
     public function getByMid() : mixed;
+    public function newsCategory($category) : mixed;
 
     public function newsStatistic() : mixed;
 }

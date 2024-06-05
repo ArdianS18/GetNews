@@ -99,7 +99,7 @@ class ViewRepository extends BaseRepository implements ViewInterface
     }
 
     public function showCountView($newsId): mixed
-    {   
+    {
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
 
@@ -123,6 +123,24 @@ class ViewRepository extends BaseRepository implements ViewInterface
         ->get();
 
         return $trendingNews;
+    }
+
+    public function newsCategory($category): mixed
+    {
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
+
+        $category = $this->model->query()
+            ->whereRelation('news', 'status',NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('news.newsCategories', 'category_id', $category)
+            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('news_id')
+            ->orderBy('total', 'desc')
+            ->get()
+            ->take(1);
+
+        return $category;
     }
 
     public function getByPopular($data): mixed
