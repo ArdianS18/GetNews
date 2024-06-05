@@ -160,10 +160,7 @@
                             <h4>Biodata</h4>
                         </div>
 
-                    
-                        <a href="{{ route('profile.user.update') }}">
-                            <button class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile</button>
-                        </a>
+                        <a href="{{ route('profile.user.update') }}" class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile </a>
                     </div>
 
                     <div class="col-md-12 col-lg-6 mb-4">
