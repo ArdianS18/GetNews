@@ -752,7 +752,10 @@ class NewsRepository extends BaseRepository implements NewsInterface
     {
         return $this->model->query()
         ->findOrFail($news->id)
-        ->update(['delete_at' => null]);
+        ->update([
+            'delete_at' => null,
+            'status' => NewsStatusEnum::PANDING->value,
+        ]);
     }
 
     public function getDelete($id,Request $request,int $pagination = 10,$condition):LengthAwarePaginator{
