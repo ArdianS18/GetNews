@@ -89,8 +89,7 @@
                     <div class="modal-body">
                         <p>Apakah anda yakin akan menolak data ini? </p>
                         <div class="col-lg-12">
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
-                            <input type="text" name="recent" class="form-control">
+                            <textarea class="form-control" name="" id="" cols="30" rows="7"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
