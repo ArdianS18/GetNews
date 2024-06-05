@@ -322,8 +322,8 @@
                                                             class="img-responsive" width="100%" height="220"
                                                             style="object-fit: cover;" alt="Image" />
                                                     </a>
-                                                    <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
-                                                        class="news-cat">{{ $mid->newsCategories[0]->category->name }}</a>
+                                                    <a href="{{ route('categories.show.user', ['category' => $pick->newsCategories[0]->category->slug]) }}"
+                                                        class="news-cat">{{ $pick->newsCategories[0]->category->name }}</a>
                                                 </div>
                                                 <div class="news-card-info">
                                                     <div class="news-author">
