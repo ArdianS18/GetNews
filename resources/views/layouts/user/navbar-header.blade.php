@@ -92,7 +92,7 @@
                     </li>
 
 
-                    @foreach ($categories as $category)
+                    @forelse ($categories as $category)
                     <li class="nav-item">
                     <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
                                 <ul class="dropdown-menu">
@@ -110,8 +110,10 @@
                                 </div>
                                 </ul>
                             </li>
+                    @empty
+                    <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
 
-                            @endforeach
+                    @endforelse
 
 
 
