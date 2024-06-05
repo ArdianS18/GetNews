@@ -93,28 +93,29 @@
 
 
                     @foreach ($categories as $category)
-                    <li class="nav-item">
-                        <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link" style="{{ request()->routeIs('categories.show.user') && request()->route('category') == $category->slug ? 'color: #E93314;' : '' }}">{{ $category->name }}</a>
-                        @if (count($subCategories->where('category_id', $category->id)) > 0)
-                            <ul class="dropdown-menu">
-                                <div class="d-flex">
+                        <li class="nav-item">
+                            <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link" style="{{ request()->routeIs('categories.show.user') && request()->route('category') == $category->slug ? 'color: #E93314;' : '' }}">{{ $category->name }}</a>
+                            @if (count($subCategories->where('category_id', $category->id)) > 0)
+                                <ul class="dropdown-menu">
+                                    <div class="d-flex">
+                                            <li class="nav-item">
+                                                @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
+                                                <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link" style="{{ request()->routeIs('subcategories.show.user') && request()->route('category') == $subCategory->category->slug && request()->route('subCategory') == $subCategory->slug  ? 'color: #E93314;' : '' }}">{{ $subCategory->name }}</a>
+
+                                        @if(($loop->iteration % 5) == 0)
+                                        </li>
                                         <li class="nav-item">
-                                            @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
-                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link" style="{{ request()->routeIs('subcategories.show.user') && request()->route('category') == $subCategory->category->slug && request()->route('subCategory') == $subCategory->slug  ? 'color: #E93314;' : '' }}">{{ $subCategory->name }}</a>
+                                        @endif
 
-                                    @if(($loop->iteration % 5) == 0)
-                                    </li>
-                                    <li class="nav-item">
-                                    @endif
-
-                                    @empty
-                                    <div class="nav-link">
-                                        Data Kosong
+                                        @empty
+                                        <div class="nav-link">
+                                            Data Kosong
+                                        </div>
+                                        @endforelse
+                                        </li>
                                     </div>
-                                    @endforelse
-                                    </li>
-                            </div>
-                        </ul>
+                                </ul>
+                            @endif
                         </li>
                     @endforeach
                 </ul>
