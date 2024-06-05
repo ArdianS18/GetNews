@@ -2,12 +2,9 @@
 
 @section('style')
 <style>
-    .gradient-border {
-        border-width: 3px;
-        border-style: solid;
-        border-image: linear-gradient(to right, #DD1818, #175A95) 1;
-        border-radius: 15px;
-    }
+    .progress-bar {
+    background-image: linear-gradient(to right, #DD1818, #175A95);
+}
 </style>
 @endsection
 @section('content')
@@ -74,10 +71,10 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
-                   
+
                 </div>
 
                 <div class="card-body">
@@ -95,24 +92,26 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path fill="#888888" d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72"/><path fill="#888888" d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80"/></svg>
                             </span>
                             </h5>
-                            
+
                         </div>
                     </div>
-                        
+
                     <div class="text-center">
-                        
-                        <div class="mb-3 mt-4 gradient-border"></div>
+                        <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
+                            <div class="progress-bar" style="width: 60%; height: 6px; border-width: 3px;" role="progressbar"></div>
+                          </div>
+                        {{-- <div class="mb-3 mt-4 gradient-border"></div> --}}
                         <p>45 Terpakai dari 100 stok</p>
-                    </div> 
+                    </div>
 
                     <div class="text-center mt-4">
                         <h5>Masa Aktif</h5>
-                          
+
                         <div class=" mt-3">
                             <h5 style="color: #175A95;">12 Januari 2022 - 12 Desember 2022</h5>
-                        </div>         
-                    </div> 
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -140,10 +139,10 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
-                   
+
                 </div>
 
                 <div class="card-body">
@@ -161,24 +160,26 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path fill="#888888" d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72"/><path fill="#888888" d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80"/></svg>
                             </span>
                             </h5>
-                            
+
                         </div>
                     </div>
-                        
+
                     <div class="text-center">
-                        
-                        <div class="mb-3 mt-4 gradient-border"></div>
+                        <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
+                            <div class="progress-bar" style="width: 100%; height: 6px; border-width: 3px;" role="progressbar"></div>
+                          </div>
+                        {{-- <div class="mb-3 mt-4 gradient-border"></div> --}}
                         <p>45 Terpakai dari 100 stok</p>
-                    </div> 
+                    </div>
 
                     <div class="text-center mt-4">
                         <h5>Masa Aktif</h5>
-                          
+
                         <div class=" mt-3">
                             <h5 style="color: #175A95;">12 Januari 2022 - 12 Desember 2022</h5>
-                        </div>         
-                    </div> 
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -206,10 +207,10 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
-                   
+
                 </div>
 
                 <div class="card-body">
@@ -227,24 +228,26 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path fill="#888888" d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72"/><path fill="#888888" d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80"/></svg>
                             </span>
                             </h5>
-                            
+
                         </div>
                     </div>
-                        
+
                     <div class="text-center">
-                        
-                        <div class="mb-3 mt-4 gradient-border"></div>
+                        <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
+                            <div class="progress-bar" style="width: 90%; height: 6px; border-width: 3px;" role="progressbar"></div>
+                          </div>
+                        {{-- <div class="mb-3 mt-4 gradient-border"></div> --}}
                         <p>45 Terpakai dari 100 stok</p>
-                    </div> 
+                    </div>
 
                     <div class="text-center mt-4">
                         <h5>Masa Aktif</h5>
-                          
+
                         <div class=" mt-3">
                             <h5 style="color: #175A95;">12 Januari 2022 - 12 Desember 2022</h5>
-                        </div>         
-                    </div> 
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -272,10 +275,10 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
-                   
+
                 </div>
 
                 <div class="card-body">
@@ -293,24 +296,26 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path fill="#888888" d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72"/><path fill="#888888" d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80"/></svg>
                             </span>
                             </h5>
-                            
+
                         </div>
                     </div>
-                        
+
                     <div class="text-center">
-                        
-                        <div class="mb-3 mt-4 gradient-border"></div>
+                        <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
+                            <div class="progress-bar" style="width: 60%; height: 6px; border-width: 3px;" role="progressbar"></div>
+                          </div>
+                        {{-- <div class="mb-3 mt-4 gradient-border"></div> --}}
                         <p>45 Terpakai dari 100 stok</p>
-                    </div> 
+                    </div>
 
                     <div class="text-center mt-4">
                         <h5>Masa Aktif</h5>
-                          
+
                         <div class=" mt-3">
                             <h5 style="color: #175A95;">12 Januari 2022 - 12 Desember 2022</h5>
-                        </div>         
-                    </div> 
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -338,10 +343,10 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
-                   
+
                 </div>
 
                 <div class="card-body">
@@ -359,24 +364,26 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path fill="#888888" d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72"/><path fill="#888888" d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80"/></svg>
                             </span>
                             </h5>
-                            
+
                         </div>
                     </div>
-                        
+
                     <div class="text-center">
-                        
-                        <div class="mb-3 mt-4 gradient-border"></div>
+                        <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
+                            <div class="progress-bar" style="width: 60%; height: 6px; border-width: 3px;" role="progressbar"></div>
+                          </div>
+                        {{-- <div class="mb-3 mt-4 gradient-border"></div> --}}
                         <p>45 Terpakai dari 100 stok</p>
-                    </div> 
+                    </div>
 
                     <div class="text-center mt-4">
                         <h5>Masa Aktif</h5>
-                          
+
                         <div class=" mt-3">
                             <h5 style="color: #175A95;">12 Januari 2022 - 12 Desember 2022</h5>
-                        </div>         
-                    </div> 
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -404,10 +411,10 @@
                                 </ul>
                             </div>
                         </div>
-                    
+
 
                     </div>
-                   
+
                 </div>
 
                 <div class="card-body">
@@ -425,29 +432,36 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 512 512"><path fill="#888888" d="M408 480H184a72 72 0 0 1-72-72V184a72 72 0 0 1 72-72h224a72 72 0 0 1 72 72v224a72 72 0 0 1-72 72"/><path fill="#888888" d="M160 80h235.88A72.12 72.12 0 0 0 328 32H104a72 72 0 0 0-72 72v224a72.12 72.12 0 0 0 48 67.88V160a80 80 0 0 1 80-80"/></svg>
                             </span>
                             </h5>
-                            
+
                         </div>
                     </div>
-                        
+
                     <div class="text-center">
-                        
-                        <div class="mb-3 mt-4 gradient-border"></div>
+                        <div class="progress mb-3 mt-4" style="background-color: #D1D1D1;">
+                            <div class="progress-bar" style="width: 60%; height: 6px; border-width: 3px;" role="progressbar"></div>
+                          </div>
+                        {{-- <div class="mb-3 mt-4 gradient-border"></div> --}}
                         <p>45 Terpakai dari 100 stok</p>
-                    </div> 
+                    </div>
 
                     <div class="text-center mt-4">
                         <h5>Masa Aktif</h5>
-                          
+
                         <div class=" mt-3">
                             <h5 style="color: #175A95;">12 Januari 2022 - 12 Desember 2022</h5>
-                        </div>         
-                    </div> 
-                    
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="loading"></div>
+        <div class="d-flex mt-2 justify-content-end">
+            <nav id="pagination">
+            </nav>
+        </div>
 
 </div>
 
@@ -489,7 +503,7 @@
                             <ul class="error-text"></ul>
                         </div>
                     </div>
-                    
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-rounded btn-light-danger text-danger"
                             data-bs-dismiss="modal">Batal</button>
@@ -501,4 +515,52 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+            function get(page) {
+            $.ajax({
+                url: "{{ route('voucher.index') }}?page=" + page,
+                method: 'Get',
+                dataType: "JSON",
+                data: {
+                    question: $('#search-name').val()
+                },
+                beforeSend: function() {
+                    $('#data').html("")
+                    $('#loading').html(showLoading())
+                    $('#pagination').html('')
+                },
+                success: function(response) {
+                    var faq = response.data.data
+                    $('#loading').html("")
+                    if (response.data.data.length > 0) {
+                        $.each(response.data.data, function(index, data) {
+                            $('#data').append(rowFaq(index, data))
+                        })
+                        $('#pagination').html(handlePaginate(response.data.paginate))
+
+
+                        $('.btn-edit').click(function() {
+                            var faqId = $(this).data('id');
+                            var data = faq.find(faq => faq.id === faqId)
+
+                            setFormValues('form-update', data)
+                            $('#form-update').data('id', data['id'])
+                            $('#modal-update').modal('show')
+                        })
+
+                        $('.btn-delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
+                        })
+                    } else {
+                        $('#loading').html(showNoData('Tidak ada data'))
+                    }
+                }
+            })
+        }
+
+</script>
 @endsection
