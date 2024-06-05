@@ -302,7 +302,7 @@
                         <div class="row align-items-end mb-40">
                             <div class="col-md-6">
                                 <h2 class="section-title">Pilihan Editor
-                                    <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
+                                    {{-- <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /> --}}
                                 </h2>
                             </div>
                         </div>
@@ -456,7 +456,7 @@
         <div class="row align-items-end mb-40">
             <div class="col-md-6">
                 <h2 class="section-title">Artikel Premium
-                    <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" />
+                    {{-- <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /> --}}
                 </h2>
             </div>
         </div>
@@ -537,8 +537,9 @@
         <div class="container-fluid">
             <div class="row align-items-end mb-40">
                 <div class="col-md-7">
-                    <h2 class="section-title">Artikel Paling Popular<img class="section-title-img"
-                            src="assets/img/section-img.webp" alt="Image" /></h2>
+                    <h2 class="section-title">Artikel Paling Popular
+                        {{-- <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /> --}}
+                    </h2>
                 </div>
                 <div class="col-md-5 text-md-end">
                     <a href="/all-news-post" class="link-one">Lihat lainnya<i class="flaticon-right-arrow"></i></a>
@@ -667,8 +668,8 @@
                 <div class="left-content">
                     <div class="row align-items-end mb-40">
                         <div class="col-md-7">
-                            <h2 class="section-title">Berita Umum<img class="section-title-img"
-                                    src="assets/img/section-img.webp" alt="Image" /></h2>
+                            <h2 class="section-title">Berita Umum
+                                <img class="section-title-img" src="assets/img/section-img.webp" alt="Image" /></h2>
                         </div>
                         <div class="col-md-5 text-md-end">
                             <a href="/all-news-post" class="link-one">Lihat lainnya<i

@@ -96,14 +96,6 @@
 
         <div class="col-lg-4">
             <div class="sidebar">
-                <div class="sidebar-widget-two">
-                    <form class="search-box-widget">
-                        <input type="search" name="search" placeholder="Search" value="{{ $query }}">
-                        <button type="submit">
-                            <i class="fi fi-rr-search"></i>
-                        </button>
-                    </form>
-                </div>
                 <x-news-category :categories="$totalCategories" />
                 <x-news-populer :populars="$populars" />
                
