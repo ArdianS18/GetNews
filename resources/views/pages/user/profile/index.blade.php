@@ -155,12 +155,14 @@
             <div class="tab-pane fade show active card shadow-sm" id="pills-profile" role="tabpanel"
                 aria-labelledby="pills-profile-tab" tabindex="0">
                 <div class="row p-4">
-                    <div class="d-flex justify-content-between mb-4">
+                    <div class="d-flex justify-content-between">
                         <div class="mb-4">
-                            <h4>Biodata</h4>
+                            <h3>Biodata</h3>
                         </div>
-
-                        <a href="{{ route('profile.user.update') }}" class="btn btn-md px-4 py-1 text-white m-4" style="background-color: #175A95;">Edit profile </a>
+                        
+                        <div class="mb-4">
+                            <a href="{{ route('profile.author.update') }}" class="btn btn-sm px-3 py-1 mt-2 text-white" type="button" style="background-color: #175A95;">Edit profile</a>>    
+                        </div>
                     </div>
 
                     <div class="col-md-12 col-lg-6 mb-4">
