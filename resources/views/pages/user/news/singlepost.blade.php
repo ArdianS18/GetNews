@@ -19,7 +19,7 @@
             font-style: italic;
         }
 
-        .coin-container {   
+        .coin-container {
             position: fixed;
             left: 20px;
             bottom: 20px;
@@ -918,10 +918,10 @@
                                         @endforeach
 
                                         @if (isset($groupedReplies[$comment->id]) && count($groupedReplies[$comment->id]) > 5)
-                                        <div class="show-reply-more text-center mt-4">
-                                            <div class="text-center left-content mt-3">
-                                                <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat
-                                                    Selengkapnya
+                                        <div class="show-reply-more text-start mt-4">
+                                            <div class="text-start left-content mt-3">
+                                                <a style="color: var(--secondaryColor);" onclick="showMoreCommentsReply()">Lihat Balasan
+                                                    Lainnya
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         viewBox="0 0 24 24">
                                                         <path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
@@ -949,8 +949,8 @@
                             @if ($comments->count() > 5)
                             <div class="show-more text-center mt-4">
                                 <div class="text-center left-content mt-3">
-                                    <a style="color: var(--secondaryColor);" onclick="showMoreComments()">Lihat
-                                        Selengkapnya
+                                    <a style="color: var(--secondaryColor);" onclick="showMoreComments()">Lihat Komentar
+                                        Lainnya
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                             viewBox="0 0 24 24">
                                             <path fill="#E93314" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
