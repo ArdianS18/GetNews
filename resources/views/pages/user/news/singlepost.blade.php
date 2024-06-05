@@ -759,11 +759,13 @@
                                                         </div>
                                                         <div class="col-md-3 text-end">
                                                             <div class="comment">
-                                                                <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                                                @auth
+                                                                    <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                                                                         <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
-                                                                    </svg>
-                                                                </a>
+                                                                        </svg>
+                                                                    </a>
+                                                                @endauth
                                                                 @include('layouts.user.pin')
                                                             </div>
                                                         </div>
@@ -862,11 +864,13 @@
                                                                 </div>
                                                                 <div class="col-md-3 text-end">
                                                                     <div class="comment">
-                                                                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
-                                                                                <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
+                                                                        @auth
+                                                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                                                                                    <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="3" d="M12 12h.01v.01H12zm0-7h.01v.01H12zm0 14h.01v.01H12z" />
                                                                             </svg>
-                                                                        </a>
+                                                                            </a>
+                                                                        @endauth
                                                                         @include('layouts.user.pin')
                                                                     </div>
                                                                 </div>
@@ -1027,11 +1031,10 @@
                 <div class="col-lg-4">
                     <div class="sidebar">
                         <x-news-category :categories="$totalCategories" />
-                        
 
-                        <div class="sidebar-widget" style="height: 700px">
+                        {{-- <div class="sidebar-widget" style="height: 700px">
                             <h3 class="sidebar-widget-title">iklan</h3>
-                        </div>
+                        </div> --}}
                         <x-tag :tags="$tagPopulars" />
                         <x-news-recent :recents="$news_recents" />
                     </div>
