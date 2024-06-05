@@ -521,7 +521,7 @@
 <script>
             function get(page) {
             $.ajax({
-                url: "{{ route('voucher.index') }}?page=" + page,
+                url: "{{ route('voucher-pengiklanan') }}?page=" + page,
                 method: 'Get',
                 dataType: "JSON",
                 data: {
