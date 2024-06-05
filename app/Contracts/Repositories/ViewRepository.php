@@ -125,6 +125,39 @@ class ViewRepository extends BaseRepository implements ViewInterface
         return $trendingNews;
     }
 
+    public function newsCategorySearch($category, $query, mixed $data, $hal): mixed
+    {
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
+
+        $searchCategory = $this->model->query()
+            ->whereRelation('news','status', NewsStatusEnum::ACTIVE->value)
+            ->whereHas('news', function($q) use ($query){
+                $q->when($query, function ($search) use ($query) {
+                    $search->where('name', 'LIKE', '%' . $query . '%');
+                });
+            })
+            ->whereRelation('news.newsCategories', 'category_id', $category)
+            ->when($data === "terbaru", function ($query) {
+                $query->whereHas('news', function($q){
+                    $q->latest();
+                });
+            })
+            ->when($data === "trending", function ($query) {
+                $query->whereHas('news', function($q){
+                    $q->withCount('newsHasLikes');
+                    $q->orderByDesc('news_has_likes_count');
+                });
+            })
+            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('news_id')
+            ->orderBy('total', 'desc')
+            ->paginate($hal);
+
+        return $searchCategory;
+    }
+
     public function newsCategory($category): mixed
     {
         $startDate = Carbon::now()->subDays(10)->toDateString();
