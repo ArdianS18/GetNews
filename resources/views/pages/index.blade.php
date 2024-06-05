@@ -164,30 +164,30 @@
                 @php $counter= 0; @endphp
                 @foreach ($news_mid as $mid)
                     @php
-                        $dateParts = date_parse($mid->upload_date);
+                        $dateParts = date_parse($mid->news->upload_date);
                     @endphp
                     @if ($counter < 1)
                         <div class="news-card-four">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $mid->photo) }}" class="img-responsive" alt="Image"
+                                    href="{{ route('news.user', ['news' => $mid->mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $mid->mid->photo) }}" class="img-responsive" alt="Image"
                                         width="100%" style="object-fit: cover" height="450" />
                                 </a>
                             </div>
 
                             <div class="news-card-info">
                                 <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
-                                        href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 70, $end = '...') !!}
+                                        href="{{ route('news.user', ['news' => $mid->mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                        {!! Illuminate\Support\Str::limit($mid->mid->name, $limit = 70, $end = '...') !!}
                                     </a>
                                 </h3>
 
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
-                                            <p>{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</p>
+                                            <p>{{ \Carbon\Carbon::parse($mid->mid->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye" style="margin-top: 2px;"></i>{{ $mid->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye" style="margin-top: 2px;"></i>{{ $mid->total }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -196,25 +196,25 @@
                         <div class="news-card-five">
                             <div class="news-card-img">
                                 <a
-                                    href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $mid->photo) }}" class="img-responsive" style="object-fit: cover;" alt="Image"
+                                    href="{{ route('news.user', ['news' => $mid->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $mid->news->photo) }}" class="img-responsive" style="object-fit: cover;" alt="Image"
                                         height="170" width="100%" />
                                 </a>
-                                <a href="{{ route('categories.show.user', ['category' => $mid->newsCategories[0]->category->slug]) }}"
-                                    class="news-cat">{{ $mid->newsCategories->random()->category->name }}</a>
+                                <a href="{{ route('categories.show.user', ['category' => $mid->news->newsCategories[0]->category->slug]) }}"
+                                    class="news-cat">{{ $mid->news->newsCategories->random()->category->name }}</a>
                             </div>
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->name }}"
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $mid->news->name }}"
                                         href="{{ route('news.user', ['news' => $mid->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                        {!! Illuminate\Support\Str::limit($mid->name, $limit = 80, $end = '...') !!}
+                                        {!! Illuminate\Support\Str::limit($mid->news->name, $limit = 80, $end = '...') !!}
                                     </a>
                                 </h3>
-                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->content), 75, '...') !!}</p>
+                                <p>{!! Illuminate\Support\Str::limit(strip_tags($mid->news->content), 75, '...') !!}</p>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a
-                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($mid->created_at)->translatedFormat('d F Y') }}</a>
+                                            href="javascript:void(0)">{{ \Carbon\Carbon::parse($mid->news->created_at)->translatedFormat('d F Y') }}</a>
                                     </li>
-                                    <li><i class="fi fi-rr-eye"></i>{{ $mid->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye"></i>{{ $mid->total }}</li>
                                 </ul>
                             </div>
                         </div>

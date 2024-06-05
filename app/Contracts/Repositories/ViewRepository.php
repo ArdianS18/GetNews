@@ -98,9 +98,15 @@ class ViewRepository extends BaseRepository implements ViewInterface
             ->update($data);
     }
 
-    public function showCountView(): mixed
-    {
-        //
+    public function showCountView($newsId): mixed
+    {   
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
+
+        return $this->model->query()
+            ->where('news_id', $newsId)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->count();
     }
 
     public function trending(): mixed
@@ -170,17 +176,26 @@ class ViewRepository extends BaseRepository implements ViewInterface
         return $popularLeft;
     }
 
-    public function getByRight(): mixed
+    public function getByMid(): mixed
     {
         $startDate = Carbon::now()->subDays(10)->toDateString();
         $endDate = Carbon::now()->toDateString();
 
-        // return $this->model->query()
-        //     ->whereRelation('newsCategories.news', 'status', NewsStatusEnum::ACTIVE->value)
-        //     ->withCount('newsCategories')
-        //     ->orderByDesc('news_categories_count')
-        //     ->take(7)
-        //     ->get();
+        return $this->model->query()
+            ->whereRelation('news','status', NewsStatusEnum::ACTIVE->value)
+            ->whereRelation('news','is_primary', NewsStatusEnum::PUBLISHED->value)
+            ->select('news_id', DB::raw('COUNT(*) as total'))
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('news_id')
+            ->orderBy('total', 'desc')
+            ->take(3)
+            ->get();
+    }
+
+    public function getByRight(): mixed
+    {
+        $startDate = Carbon::now()->subDays(10)->toDateString();
+        $endDate = Carbon::now()->toDateString();
 
         $subquery = DB::table('news_categories')
             ->select('category_id')

@@ -194,7 +194,10 @@ class NewsController extends Controller
         $visitorId = $request->cookie('visitor_id');
 
         $news = $this->news->showWithSlug($slug);
+
         $newsId = $news->id;
+
+        $viewCount = $this->view->showCountView($newsId);
         $content = $news->content;
 
         $view = $this->view->store([
@@ -204,7 +207,6 @@ class NewsController extends Controller
 
         $userLike = $this->newsHasLike->where($news->id);
         $newsLike = $this->newsHasLike->countLikePost($newsId);
-
         $comments = $this->comment->whereIn($newsId);
 
         $subCategories = $this->subCategory->get();
@@ -223,7 +225,9 @@ class NewsController extends Controller
         $category_id = $this->newsCategories->get()->whereIn('news_id', $news)->pluck('category_id')->first();
         $newsCategories = $this->news->getById($category_id);
         $authors = $this->author->get();
+
         $tagPopulars = $this->tags->getByPopular();
+
         if ($this->news->findUser($news->user_id)) {
             $relatedNews = $this->news->findUser($news->user_id);
         }else{
@@ -233,14 +237,14 @@ class NewsController extends Controller
         if (!$visitorId) {
             $visitorId = Str::random(30);
             $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
-            return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews',
+            return response()->view('pages.user.news.singlepost', compact('users', 'viewCount','news','newsId','relatedNews',
                 'subCategories','categories','newsPhoto','comments', 'newsLike',
                 'likedByUser','tags','totalCategories','populars','news_recents',
                 'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);
         }
 
         $this->visitor->store(['visitor_id'=> $visitorId,'last_visit'=>now()]);
-        return response()->view('pages.user.news.singlepost', compact('users', 'news','newsId','relatedNews',
+        return response()->view('pages.user.news.singlepost', compact('users', 'viewCount','news','newsId','relatedNews',
             'subCategories','categories','newsPhoto','comments', 'newsLike',
             'likedByUser','tags','totalCategories','populars','news_recents',
             'newsCategories','authors','tagPopulars'))->cookie('visitor_id', $visitorId, 60 * 24 * 30);

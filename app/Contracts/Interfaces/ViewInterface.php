@@ -12,12 +12,13 @@ use Illuminate\Http\Request;
 
 interface ViewInterface extends DeleteByAuthor,GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
-    public function showCountView() : mixed;
+    public function showCountView($newsId) : mixed;
     public function trending() : mixed;
     public function where() : mixed;
     public function getByPopular($data) : mixed;
     public function getByLeft() : mixed;
     public function getByRight() : mixed;
+    public function getByMid() : mixed;
 
     public function newsStatistic() : mixed;
 }
