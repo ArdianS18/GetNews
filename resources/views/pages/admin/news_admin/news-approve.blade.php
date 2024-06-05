@@ -74,7 +74,38 @@
             </nav>
         </div>
 
-        <x-delete-modal-component />
+        {{-- <x-delete-modal-component /> --}}
+        <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <form id="form-delete" method="POST" class="modal-content">
+                    @csrf
+                    @method('post')
+                    <div class="modal-header d-flex align-items-center">
+                        <h4 class="modal-title" id="myModalLabel">
+                            Tolak Artikel
+                        </h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin akan menolak data ini? </p>
+                        <div class="col-lg-12">
+                            <textarea class="form-control" name="" id="" cols="30" rows="7"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-danger text-danger font-medium waves-effect"
+                            data-bs-dismiss="modal">
+                            Batal
+                        </button>
+                        <button type="submit" class="btn btn-light-danger text-secondery font-medium waves-effect"
+                            data-bs-dismiss="modal">
+                            Tolak
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 @endsection
 
 @section('script')
@@ -246,8 +277,7 @@
                 <td>${limitString(data.name, 25)}</td>
                 <td>${data.upload_date}</td>
                 <td>
-                    <button data-id="${data.id}" type="submit" data-bs-toggle="tooltip"
-                        title="Tolak" style="background-color: #EF6E6E"
+                    <button data-id="${data.id}" data-bs-toggle="tooltip" title="Tolak" type="submit" style="background-color: #EF6E6E"
                         class="btn btn-sm btn-delete text-white ms-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="#ffffff" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5q0-.425.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5q0 .425-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-7 11q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8q-.425 0-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8q-.425 0-.712.288T13 9v7q0 .425.288.713T14 17M7 6v13z"/></svg>
                     </button>
