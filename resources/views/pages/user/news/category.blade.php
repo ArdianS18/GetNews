@@ -30,24 +30,24 @@
 
                     @forelse ($popular as $news_popular)
                         @php
-                            $dateParts = date_parse($news_popular->upload_date);
+                            $dateParts = date_parse($news_popular->news->upload_date);
                         @endphp
                         <div class="news-card-four">
                             <div class="news-card-img">
-                                <a href="{{ route('news.user', ['news' => $news_popular->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
-                                    <img src="{{ asset('storage/' . $news_popular->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
+                                <a href="{{ route('news.user', ['news' => $news_popular->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day']]) }}">
+                                    <img src="{{ asset('storage/' . $news_popular->news->photo) }}" alt="Image" width="100%" style="object-fit: cover" height="450" />
                                 </a>
                             </div>
 
                             <div class="news-card-info">
-                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_popular->name }}" href="{{ route('news.user', ['news' => $news_popular->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
-                                        {!! ($news_popular->name) !!}
+                                <h3><a data-toggle="tooltip" data-placement="top" title="{{ $news_popular->news->name }}" href="{{ route('news.user', ['news' => $news_popular->news->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
+                                        {!! ($news_popular->news->name) !!}
                                     </a>
                                 <ul class="news-metainfo list-style">
                                     <li><i class="fi fi-rr-calendar-minus"></i><a href="javascript:void(0)">
-                                            <p>{{ \Carbon\Carbon::parse($news_popular->created_at)->translatedFormat('d F Y') }}</p>
+                                            <p>{{ \Carbon\Carbon::parse($news_popular->news->created_at)->translatedFormat('d F Y') }}</p>
                                         </a></li>
-                                    <li><i class="fi fi-rr-eye icon-eye"></i>{{ $news_popular->views_count }}</li>
+                                    <li><i class="fi fi-rr-eye icon-eye"></i>{{ $news_popular->total }}</li>
                                 </ul>
                             </div>
                         </div>
