@@ -226,7 +226,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel{{ auth()->user()->id }}">Daftar Author</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <form method="post" action="{{ route('user.author', ['user' => auth()->user()->id]) }}"
                     enctype="multipart/form-data">
