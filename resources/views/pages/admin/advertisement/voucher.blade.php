@@ -457,6 +457,11 @@
         </div>
     </div>
 
+    <div id="loading"></div>
+        <div class="d-flex mt-2 justify-content-end">
+            <nav id="pagination">
+            </nav>
+        </div>
 
 </div>
 
@@ -510,4 +515,52 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+            function get(page) {
+            $.ajax({
+                url: "{{ route('voucher.index') }}?page=" + page,
+                method: 'Get',
+                dataType: "JSON",
+                data: {
+                    question: $('#search-name').val()
+                },
+                beforeSend: function() {
+                    $('#data').html("")
+                    $('#loading').html(showLoading())
+                    $('#pagination').html('')
+                },
+                success: function(response) {
+                    var faq = response.data.data
+                    $('#loading').html("")
+                    if (response.data.data.length > 0) {
+                        $.each(response.data.data, function(index, data) {
+                            $('#data').append(rowFaq(index, data))
+                        })
+                        $('#pagination').html(handlePaginate(response.data.paginate))
+
+
+                        $('.btn-edit').click(function() {
+                            var faqId = $(this).data('id');
+                            var data = faq.find(faq => faq.id === faqId)
+
+                            setFormValues('form-update', data)
+                            $('#form-update').data('id', data['id'])
+                            $('#modal-update').modal('show')
+                        })
+
+                        $('.btn-delete').click(function() {
+                            $('#form-delete').data('id', $(this).data('id'))
+                            $('#modal-delete').modal('show')
+                        })
+                    } else {
+                        $('#loading').html(showNoData('Tidak ada data'))
+                    }
+                }
+            })
+        }
+
+</script>
 @endsection

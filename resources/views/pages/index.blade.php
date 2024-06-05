@@ -28,7 +28,7 @@
             color: #ffffff;
             background-color: #222222;
         }
-        
+
         .news-card-seven {
         flex-wrap: nowrap;
     }
@@ -74,7 +74,7 @@
                                         <h3><a data-toggle="tooltip" data-placement="top"
                                                 title="{{ $trending->news->name }}"
                                                 href="{{ route('news.user', ['news' => $trending->news->slug, 'year' => $dateParts['year'], 'month' => $dateParts['month'], 'day' => $dateParts['day']]) }}">
-                                                {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 40, $end = '...') !!}
+                                                {!! Illuminate\Support\Str::limit($trending->news->name, $limit = 60, $end = '...') !!}
                                             </a></h3>
                                         <ul class="news-metainfo list-style">
                                             <li><i class="fi fi-rr-eye"></i>
@@ -390,7 +390,7 @@
                                     <div class="news-card-seven @if ($i > 7)
                                         hide
                                     @endif">
-                                        
+
                                         <div class="news-card-info">
                                             <a href="{{ route('categories.show.user', ['category' => $populars[$i]->news->newsCategories[0]->category->slug]) }}"
                                                 class="news-cat">{{ $populars[$i]->news->newsCategories[0]->category->name }}</a>
@@ -414,7 +414,7 @@
                                     </div>
                                 @endfor
                             </div>
-                            
+
                             <div class="tab-pane fade" id="tab_11" role="tabpanel">
                                 @for ($i = 0; $i < min(6, count($news_recent)); $i++)
                                 @php

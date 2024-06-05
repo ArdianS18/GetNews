@@ -20,8 +20,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('url');
-            $table->string('photo');
-            $table->enum('status', ['pending', 'reject', 'accepted']);
+            $table->string('photo');    
             $table->timestamps();
         });
     }

@@ -117,10 +117,10 @@
                         @endforelse
                     </div>
 
-                    <div class="text-center item-center d-flex justify-content-center"
+                    {{-- <div class="text-center item-center d-flex justify-content-center"
                         style="background-color:#F6F6F6; width:100%;height:200px;">
                         <h5 class="mt-5">Iklan</h5>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-5 mt-5">
                         @if ($new_news != null)
@@ -250,9 +250,9 @@
                                     @endforelse
                                 </div>
                             </div>
-                            <div class="sidebar-widget" style="height: 700px">
+                            {{-- <div class="sidebar-widget" style="height: 700px">
                                 <h3 class="sidebar-widget-title">iklan</h3>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

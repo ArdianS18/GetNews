@@ -118,7 +118,6 @@ class AdvertisementRepository extends BaseRepository implements AdvertisementInt
     public function customPaginate2(Request $request, int $pagination = 10): LengthAwarePaginator
     {
         return $this->model->query()
-            ->where('status', AdvertisementStatusEnum::PENDING->value)
             ->when($request->name, function ($query) use ($request) {
                 $query->where('type', 'LIKE', '%' .  $request->name . '%');
             })

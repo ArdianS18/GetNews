@@ -64,8 +64,8 @@
                                     <input type="hidden" name="q" value="{{ $query }}">
                                     <div class="d-flex gap-2" style="height: 40px">
                                         <select class="form-select" name="opsi" style="width: 200px">
-                                            <option value="terbaru">Terbaru</option>
-                                            <option value="terlama">Terlama</option>
+                                            <option value="terbaru" {{ $opsi == 'terbaru' ? "selected" : ""}}>Terbaru</option>
+                                            <option value="terlama" {{ $opsi == 'terlama' ? "selected" : ""}}>Terlama</option>
                                         </select>
                                     </div>
                                     <div>
