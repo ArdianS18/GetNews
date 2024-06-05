@@ -239,6 +239,21 @@
         }
 
         function rowTag(index, data) {
+            let status, text;
+            // if (data.status == 'active') {
+            //     status = ' bg-light-success text-success',
+            //         text = 'Aktif'
+            // } else if (data.status == 'nonactive') {
+            //     status = ' bg-light-danger text-danger'
+            //     text = 'Tolak'
+            // } else if (data.status == 'draft') {
+            //     status = 'bg-light-secondary text-secondary'
+            //     text = 'Draft'
+            // } else {
+            //     status = 'bg-light-warning fs-2 text-warning'
+            //     text = 'Panding'
+            // }
+
             console.log(data);
             return `
             <tr>
