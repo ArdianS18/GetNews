@@ -117,38 +117,6 @@
                         </ul>
                         </li>
                     @endforeach
-                    <!-- @foreach ($categories as $category)
-                            <li class="nav-item">
-                                <a  href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="dropdown-toggle nav-link">{{ $category->name }}</a>
-
-                                <ul class="dropdown-menu">
-
-                                    @forelse ($subCategories->where('category_id', $category->id) as $subCategory)
-                                    <div class="d-flex">
-                                        <li class="nav-item">
-                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="{{ route('subcategories.show.user', ['category' => $subCategory->category->slug,'subCategory' => $subCategory->slug]) }}" class="nav-link">{{ $subCategory->name }}</a>
-                                        </li>
-
-                                    </div>
-
-
-                                    @empty
-                                        <li class="nav-item">
-                                            <a href="{{ route('categories.show.user', ['category' => $category->slug]) }}" class="nav-link">{{ $category->name }}</a>
-                                        </li>
-                                    @endforelse
-                                </ul>
-
-
-                            </li>
-
-
-                    @endforeach -->
-
                 </ul>
 
                 <div class="others-option d-flex mx-auto align-items-center" id="loginSection">
