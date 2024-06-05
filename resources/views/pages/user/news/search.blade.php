@@ -39,6 +39,10 @@
             border-color: var(--codColor);
             color: #ffffff;
         }
+
+        .theme-dark .btn-outline-primary {
+            color: #cccccc;
+        }
     </style>
 @endsection
 
