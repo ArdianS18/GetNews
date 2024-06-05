@@ -119,7 +119,7 @@
                                 <a href="{{ route('news.user', ['news' => $new->slug,'year'=> $dateParts['year'],'month'=>$dateParts['month'],'day'=> $dateParts['day'] ]) }}">
                                     <img src="{{ asset('storage/' . $new->photo) }}" alt="Image" height="140" width="100%" />
                                 </a>
-                                < <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
+                                <a data-toggle="tooltip" data-placement="top" title="{{ $category->name }}" href="{{ route('categories.show.user', ['category' => $category->slug]) }}"
                                     class="news-cat">{{$category->name }}</a>
                             </div>
                             <div class="news-card-info">
