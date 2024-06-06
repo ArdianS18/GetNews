@@ -29,6 +29,17 @@ class NewsRejectRepository extends BaseRepository implements NewsRejectInterface
         ->delete();
     }
 
+    public function count($data): mixed
+    {
+        return $this->model->query()
+            ->whereHas('news', function($query) {
+                $query->where('user_id', auth()->user()->id);
+            })
+            ->where('status', $data)
+            ->get()
+            ->count();
+    }
+
     public function deleteByAuthor(Author $author): mixed
     {
         return $this->model->query()

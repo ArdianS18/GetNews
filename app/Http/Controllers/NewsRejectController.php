@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Interfaces\NewsRejectInterface;
+use App\Enums\MessageStatusEnum;
+use App\Helpers\ResponseHelper;
 use App\Models\NewsReject;
 use GuzzleHttp\Psr7\Request;
 
@@ -14,6 +16,13 @@ class NewsRejectController extends Controller
     public function __construct(NewsRejectInterface $newsReject)
     {
         $this->newsReject = $newsReject;
+    }
+
+    public function read($newsreject)
+    {
+        $data['status'] = MessageStatusEnum::READ->value;
+        $this->newsReject->update($newsreject, $data);
+        return ResponseHelper::success(null, trans('alert.add_success'));
     }
 
     /**

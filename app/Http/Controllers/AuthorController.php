@@ -297,8 +297,10 @@ class AuthorController extends Controller
 
     public function inboxcount()
     {
+        $newsRejectCount = $this->newsReject->count('unread');
         $countMassage = $this->sendMessage->count('unread');
-        return response()->json(['count' => $countMassage]);
+        $total = $newsRejectCount + $countMassage;
+        return response()->json(['count' => $total]);
     }
 
     public function inboxcountreport()

@@ -13,4 +13,5 @@ use App\Contracts\Interfaces\Eloquent\WhereInterface;
 interface NewsRejectInterface extends DeleteByAuthor,GetInterface, StoreInterface, UpdateInterface, ShowInterface, DeleteInterface
 {
     public function where(mixed $id, $status) : mixed;
+    public function count($data) : mixed;
 }

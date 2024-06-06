@@ -144,7 +144,7 @@
                                                     <h6 class="text-dark">{{ $send->message }}</h6>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
-                                                            <p class="mb-0 fs-2 text-muted">{{ $send->created_at }}
+                                                            <p class="mb-0 fs-2 text-muted">{{ \Carbon\Carbon::parse($send->created_at)->translatedFormat('d F Y') }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -181,7 +181,7 @@
                                                     <h6 class="text-dark">{{ $newsReject->massage }}</h6>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
-                                                            <p class="mb-0 fs-2 text-muted">{{ $newsReject->created_at }}
+                                                            <p class="mb-0 fs-2 text-muted">{{ \Carbon\Carbon::parse($newsReject->created_at)->translatedFormat('d F Y') }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -207,7 +207,7 @@
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
                                                                 <p class="mb-0 fs-2 text-muted">
-                                                                    {{ $sendDelete->created_at }}</p>
+                                                                    {{ \Carbon\Carbon::parse($sendDelete->created_at)->translatedFormat('d F Y') }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -233,7 +233,7 @@
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
                                                                 <p class="mb-0 fs-2 text-muted">
-                                                                    {{ $reportDelete->created_at }}</p>
+                                                                    {{ \Carbon\Carbon::parse($reportDelete->created_at)->translatedFormat('d F Y') }}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -270,7 +270,7 @@
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
                                                             <p class="mb-0 fs-2 text-muted">
-                                                                {{ $newsDele->created_at }}</p>
+                                                                {{ \Carbon\Carbon::parse($newsDele->created_at)->translatedFormat('d F Y') }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -296,7 +296,7 @@
                                                         <h6 class="text-dark">{{ $report->message }}</h6>
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
-                                                                <p class="mb-0 fs-2 text-muted">{{ $report->created_at }}
+                                                                <p class="mb-0 fs-2 text-muted">{{ \Carbon\Carbon::parse($report->created_at)->translatedFormat('d F Y') }}
                                                                 </p>
                                                             </div>
                                                         </div>

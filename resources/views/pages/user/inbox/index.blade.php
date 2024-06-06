@@ -136,7 +136,7 @@
                                                     <h6 class="text-dark">{{ $send->message }}</h6>
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
-                                                            <p class="mb-0 fs-2 text-muted">{{ $send->created_at }}
+                                                            <p class="mb-0 fs-2 text-muted">{{ \Carbon\Carbon::parse($send->created_at)->translatedFormat('d F Y') }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -162,7 +162,7 @@
                                                         <div class="d-flex align-items-center justify-content-between">
                                                             <div class="d-flex align-items-center">
                                                                 <p class="mb-0 fs-2 text-muted">
-                                                                    {{ $sendDelete->created_at }}</p>
+                                                                    {{ \Carbon\Carbon::parse($sendDelete->created_at)->translatedFormat('d F Y') }}</p>
                                                             </div>
                                                         </div>
                                                     </div>

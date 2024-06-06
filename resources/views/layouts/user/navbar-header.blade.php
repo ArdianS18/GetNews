@@ -86,7 +86,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="/"  class="nav-link">
+                        <a href="/"  class="nav-link" style="{{ request()->routeIs('home') ? 'color: #E93314;' : '' }}">
                             Beranda
                         </a>
                     </li>
