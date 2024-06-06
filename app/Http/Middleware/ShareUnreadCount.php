@@ -40,7 +40,7 @@ class ShareUnreadCount
 
             $countContact = $this->contactUs->where('status', 'unread')->count();
             $countReport = $this->report->where('status', 'unread')->count();
-            $newsReject = $this->newsReject->whereRelation('news', 'user_id', auth()->user()->id)->count();
+            $newsReject = $this->newsReject->whereRelation('news', 'user_id', auth()->user()->id)->where('status', 'unread')->count();
 
 
             $countMessage = $this->sendMessage->where('email', auth()->user()->email)->where('status', 'unread')->count();
