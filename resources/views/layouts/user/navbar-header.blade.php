@@ -120,7 +120,7 @@
                                     <div class="d-flex">
                                         <div class="nav-item">
                                             <p class="nav-link">
-                                                Kosong
+                                               Data Kosong
                                             </p>
                                         </div>
                                     </div>
