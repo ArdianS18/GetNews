@@ -168,7 +168,7 @@
 
                                         @forelse ($newsRejects as $newsReject)
                                         <li class="contact">
-                                            <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('read.report', ['report' => $newsReject->id]) }}')"
+                                            <a href="javascript:void(0)" onclick="loadRouteContent(event, '{{ route('read.news.reject', ['newsreject' => $newsReject->id]) }}')"
                                                 class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light show-contact"
                                                 id="chat_user_{{ $newsReject->id }}" data-user-id="{{ $newsReject->user_id }}" data-chat-id="{{ $newsReject->id }}">
                                                 <div class="position-relative w-100 ms-2">
